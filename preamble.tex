@@ -1,0 +1,44 @@
+\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,xcolor}
+\usepackage[hyphens]{url}
+\usepackage[dvipdfmx]{hyperref}
+\definecolor{myblue}{HTML}{0000EE}
+\hypersetup{
+    %colorlinks=true,
+    %linkcolor=myblue,
+    hidelinks
+    }
+
+\newtheoremstyle{noperiod}
+  {}
+  {}
+  {\normalfont}
+  {}
+  {\bfseries}
+  { }
+  {.5em}
+  {}
+
+\theoremstyle{noperiod}
+\newtheorem{definition}{定義}[section]
+\newtheorem{proposition}[definition]{命題}
+\newtheorem{lemma}[definition]{補題}
+\newtheorem{theorem}[definition]{定理}
+\newtheorem{example}[definition]{例}
+\newtheorem{corollary}[definition]{系}
+\newtheorem{remark}[definition]{注意}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1 ]\ignorespaces
+}{
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+\renewcommand{\proofname}{\bfseries 証明}
+\renewcommand{\qedsymbol}{$\blacksquare$}
