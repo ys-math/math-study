@@ -1,11 +1,14 @@
 # 数学勉強ノート
-勉強した数学の内容をLaTeXを用いてまとめていきます。
-トピックごとにフォルダを分けています。
+勉強した数学の内容を$\LaTeX$を用いてまとめていきます。
+トピックごとにディレクトリを分けています。
 
-## フォルダ構造
+## ディレクトリ構造
 ```
 math-study/
 ├── group_theory/
+│   ├── main.tex
+│   └── ch01.tex
+├── differential_geometry/
 │   ├── main.tex
 │   └── ch01.tex
 └── category_theory/
