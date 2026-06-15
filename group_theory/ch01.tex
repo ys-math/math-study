@@ -1,1 +1,25 @@
 \section{群}
+\begin{definition}
+集合$M$と写像$\cdot \colon M \times M \to M$と$1 \in M$が次の条件を満たすとき組$(M, \cdot, 1)$は\textbf{モノイド}であるという.
+\def\labelenumi{(\theenumi)}
+\begin{enumerate}
+    \item $^{\forall}x,y,z \in M,\ (x \cdot y) \cdot z = x \cdot (y \cdot z)$
+    \item $^{\forall}x \in M,\ 1 \cdot x = x$
+\end{enumerate}
+更に$^{\forall}x,y \in M,\ x \cdot y = y \cdot x$も成り立つとき$(M, \cdot, 1)$は\textbf{可換モノイド}であるという.
+\hfill $\square$
+\end{definition}
+
+$(M, \cdot, 1)$がモノイドであるとは次の2つの図式が可換になるということである.
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJNIFxcdGltZXMgTSBcXHRpbWVzIE0iXSxbMSwxLCIgTSJdLFsxLDAsIk0gXFx0aW1lcyBNIl0sWzAsMSwiTSBcXHRpbWVzIE0iXSxbMiwwLCJNIl0sWzMsMSwiTSJdLFszLDAsIk0gXFx0aW1lcyBNIl0sWzAsMiwiXFxjZG90IFxcdGltZXMgXFx0ZXh0cm17aWR9X00iXSxbMiwxLCJcXGNkb3QiXSxbMCwzLCJcXHRleHRybXtpZH1fTSBcXHRpbWVzIFxcY2RvdCIsMl0sWzMsMSwiXFxjZG90Il0sWzYsNSwiXFxjZG90Il0sWzQsNiwiKDEsLSkiXSxbNCw1LCJcXHRleHRybXtpZH1fTSIsMl1d
+\[\begin{tikzcd}
+	{M \times M \times M} & {M \times M} & M & {M \times M} \\
+	{M \times M} & { M} && M
+	\arrow["{\cdot \times \textrm{id}_M}", from=1-1, to=1-2]
+	\arrow["{\textrm{id}_M \times \cdot}"', from=1-1, to=2-1]
+	\arrow["\cdot", from=1-2, to=2-2]
+	\arrow["{(1,-)}", from=1-3, to=1-4]
+	\arrow["{\textrm{id}_M}"', from=1-3, to=2-4]
+	\arrow["\cdot", from=1-4, to=2-4]
+	\arrow["\cdot", from=2-1, to=2-2]
+\end{tikzcd}\]
