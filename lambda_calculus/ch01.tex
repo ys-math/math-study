@@ -64,7 +64,7 @@ $M \in \Lambda$とし$x, z \in V, y \notin \textrm{Var}(M)$とする.\ $M \langl
 \end{definition}
 
 \begin{definition}
-$\Lambda$上の2項関係$\to_\alpha$を次のようにして定める.
+$\Lambda$上の2項関係$\to_\alpha \subset \Lambda \times \Lambda$を次のようにして定める.
 \begin{center}
     $\to_\alpha \coloneq \{(\lambda x.M, \lambda y.(M \langle x \mapsto y\rangle)) \mid x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)\}$
 \end{center}
@@ -74,4 +74,14 @@ $\to_\alpha$を\textbf{$\alpha$ステップ}($\alpha$-step)と呼ぶ.\ つまり
 \end{center}
 である.
 \hfill $\square$
+\end{definition}
+
+\begin{definition}
+$\equiv_\alpha \subset \Lambda \times \Lambda$を次の条件を満たす最小の$\lambda$上の2項関係とする.
+\begin{itemize}
+    \item $\to_\alpha \subset \equiv_\alpha$
+    \item $\equiv_\alpha$は同値関係
+    \item ${^{\forall}}z \in V, {^{\forall}}M,M',N \in \Lambda, (M \equiv_\alpha M' \implies (M N \equiv_\alpha M' N) \land (N M \equiv_\alpha N M') \land (\lambda z.M \equiv_\alpha \lambda z.M'))$
+\end{itemize}
+$\equiv_\alpha$を\textbf{$\alpha$変換}($\alpha$-conversion)という.
 \end{definition}
