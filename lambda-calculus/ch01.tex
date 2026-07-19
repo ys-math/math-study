@@ -2,11 +2,11 @@
 
 \begin{definition}
 $V$を可算集合とし$V$の元を変数と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
-\begin{enumerate}
+\begin{itemize}
     \item $V \subset \Lambda$
     \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
     \item ${^{\forall}}x \in V,\ {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
-\end{enumerate}
+\end{itemize}
 $\Lambda$の元を\textbf{$\lambda$項}と呼ぶ.
 \hfill $\square$
 \end{definition}
@@ -23,10 +23,21 @@ $M,N,P \in \Lambda$に対して$((M N) P)$を$M N P$と表記し$(\lambda x.(\la
 
 \begin{definition}
 $M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のようにして帰納的に定める.
-\begin{enumerate}
+\begin{itemize}
     \item $\textrm{FV}(x) = \{x\}$
     \item $\textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
     \item $\textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
-\end{enumerate}
+\end{itemize}
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$M, N \in \Lambda$に対して$M \lbrack x \coloneq N \rbrack \in \Lambda$を次のようにして帰納的に定める.
+\begin{itemize}
+    \item ${^{\forall}}x \in V, x \lbrack x \coloneq N \rbrack \equiv N$
+    \item ${^{\forall}}x,y \in V, x \neq y \implies y \lbrack x \coloneq N \rbrack \equiv y$
+    \item ${^{\forall}}P,Q \in \Lambda, (PQ) \lbrack x \coloneq N \rbrack \equiv (P \lbrack x \coloneq N \rbrack)(Q \lbrack x \coloneq N \rbrack)$
+    \item ${^{\forall}}P \in \Lambda, (\lambda x.P) \lbrack x \coloneq N \rbrack \equiv \lambda y.(P \lbrack x \coloneq N \rbrack)$
+\end{itemize}
 \hfill $\square$
 \end{definition}
