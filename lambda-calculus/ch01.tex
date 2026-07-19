@@ -5,7 +5,7 @@ $V$を可算集合とし$V$の元を\textbf{変数}(variable)と呼ぶことに�
 \begin{itemize}
     \item $V \subset \Lambda$
     \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
-    \item ${^{\forall}}x \in V,\ {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
+    \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
 \end{itemize}
 $\Lambda$の元を\textbf{$\lambda$項}($\lambda$-term)と呼ぶ.
 \hfill $\square$
@@ -48,6 +48,17 @@ $M, N \in \Lambda$に対して$M \lbrack x \coloneq N \rbrack \in \Lambda$を次
     \item ${^{\forall}}x,y \in V, x \neq y \implies y \lbrack x \coloneq N \rbrack \equiv y$
     \item ${^{\forall}}P,Q \in \Lambda, (PQ) \lbrack x \coloneq N \rbrack \equiv (P \lbrack x \coloneq N \rbrack)(Q \lbrack x \coloneq N \rbrack)$
     \item ${^{\forall}}P \in \Lambda, (\lambda x.P) \lbrack x \coloneq N \rbrack \equiv \lambda y.(P \lbrack x \coloneq N \rbrack)$
+\end{itemize}
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$M \in \Lambda$とし$x, z \in \textrm{Var}(M), y \notin \textrm{Var}(M)$とする.\ $M \langle x \mapsto y\rangle$を次のようにして帰納的に定める.
+\begin{itemize}
+    \item $x \langle x \mapsto y \rangle \equiv y$
+    \item $x \not\equiv z \implies z \langle x \mapsto y \rangle \equiv z$
+    \item ${^{\forall}} P, Q \in \Lambda, (PQ) \langle x \mapsto y \rangle \equiv (P \langle x \mapsto y \rangle)(Q \langle x \mapsto y \rangle)$
+    \item $z\not\equiv x \implies (\lambda z.P)\langle x \mapsto y\rangle \equiv \lambda z.\big(P\langle x \mapsto y\rangle\big)$
 \end{itemize}
 \hfill $\square$
 \end{definition}
