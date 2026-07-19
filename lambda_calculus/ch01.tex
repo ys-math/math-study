@@ -91,3 +91,11 @@ $\equiv_\alpha$を\textbf{$\alpha$変換}($\alpha$-conversion)という.
 $\lambda x.\lambda y.x \equiv_\alpha \lambda y.\lambda x.y$
 \hfill $\square$
 \end{example}
+
+\begin{definition}
+$\Lambda$上の2項関係$\to_\beta \subset \Lambda \times \Lambda$を次のようにして定める.
+\begin{center}
+    $\to_\beta \coloneq \{((\lambda x.M)N, M \lbrack x \coloneq N \rbrack) \mid x \in V, M, N \in \Lambda\}$
+\end{center}
+$\to_\beta$を\textbf{1ステップ$\beta$簡約}(one-step $\beta$-reduction)という.
+\end{definition}
