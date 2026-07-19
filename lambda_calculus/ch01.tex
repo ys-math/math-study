@@ -98,4 +98,26 @@ $\Lambda$上の2項関係$\to_\beta \subset \Lambda \times \Lambda$を次のよ�
     $\to_\beta \coloneq \{((\lambda x.M)N, M \lbrack x \coloneq N \rbrack) \mid x \in V, M, N \in \Lambda\}$
 \end{center}
 $\to_\beta$を\textbf{1ステップ$\beta$簡約}(one-step $\beta$-reduction)という.
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$\twoheadrightarrow_\beta \subset \Lambda \times \Lambda$を次の条件を満たす最小の$\lambda$上の2項関係とする.
+\begin{itemize}
+    \item $\to_\beta \subset \twoheadrightarrow_\beta$
+    \item $\twoheadleftarrow$は反射的かつ推移的.
+\end{itemize}
+
+$\twoheadrightarrow_\beta$を\textbf{$\beta$簡約}($\beta$-reduction)という.
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$=_\beta \subset \Lambda \times \Lambda$を次の条件を満たす最小の$\lambda$上の2項関係とする.
+\begin{itemize}
+    \item $\to_\beta \subset \twoheadrightarrow_\beta$
+    \item $\twoheadleftarrow$は同値関係.
+\end{itemize}
+$=_\beta$を\textbf{$\beta$変換}($\beta$-conversion)という.
+\hfill $\square$
 \end{definition}
