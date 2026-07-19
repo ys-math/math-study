@@ -53,12 +53,25 @@ $M, N \in \Lambda$に対して$M \lbrack x \coloneq N \rbrack \in \Lambda$を次
 \end{definition}
 
 \begin{definition}
-$M \in \Lambda$とし$x, z \in \textrm{Var}(M), y \notin \textrm{Var}(M)$とする.\ $M \langle x \mapsto y\rangle$を次のようにして帰納的に定める.
+$M \in \Lambda$とし$x, z \in V, y \notin \textrm{Var}(M)$とする.\ $M \langle x \mapsto y\rangle$を次のようにして帰納的に定める.
 \begin{itemize}
     \item $x \langle x \mapsto y \rangle \equiv y$
     \item $x \not\equiv z \implies z \langle x \mapsto y \rangle \equiv z$
     \item ${^{\forall}} P, Q \in \Lambda, (PQ) \langle x \mapsto y \rangle \equiv (P \langle x \mapsto y \rangle)(Q \langle x \mapsto y \rangle)$
     \item $z\not\equiv x \implies (\lambda z.P)\langle x \mapsto y\rangle \equiv \lambda z.\big(P\langle x \mapsto y\rangle\big)$
 \end{itemize}
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$\Lambda$上の2項関係$\to_\alpha$を次のようにして定める.
+\begin{center}
+    $\to_\alpha \coloneq \{(\lambda x.M, \lambda y.(M \langle x \mapsto y\rangle)) \mid x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)\}$
+\end{center}
+$\to_\alpha$を\textbf{$\alpha$ステップ}($\alpha$-step)と呼ぶ.\ つまり$x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)$に対して
+\begin{center}
+    $\lambda x.M \to_\alpha \lambda y.(M \langle x \mapsto y\rangle)$
+\end{center}
+である.
 \hfill $\square$
 \end{definition}
