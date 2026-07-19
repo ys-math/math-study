@@ -24,9 +24,9 @@ $M,N,P \in \Lambda$に対して$((M N) P)$を$M N P$と表記し$(\lambda x.(\la
 \begin{definition}
 $M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のようにして帰納的に定める.
 \begin{itemize}
-    \item $\textrm{FV}(x) = \{x\}$
-    \item $\textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
-    \item $\textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
+    \item ${^{\forall}}x \in V, \textrm{FV}(x) = \{x\}$
+    \item ${^{\forall}}M, N \in \Lambda, \textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
+    \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, \textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
 \end{itemize}
 \hfill $\square$
 \end{definition}
@@ -34,9 +34,9 @@ $M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のように�
 \begin{definition}
 $M \in \Lambda$の変数全体の集合$\textrm{Var}(M)$を次のようにして帰納的に定める.
 \begin{itemize}
-    \item $\textrm{Var}(x) = \{x\}$
-    \item $\textrm{Var}(M N) = \textrm{Var}(M) \cup \textrm{Var}(N)$
-    \item $\textrm{Var}(\lambda x.M) = \textrm{Var}(M) \cup \{x\}$
+    \item ${^{\forall}}x \in V, \textrm{Var}(x) = \{x\}$
+    \item ${^{\forall}}M, N \in \Lambda, \textrm{Var}(M N) = \textrm{Var}(M) \cup \textrm{Var}(N)$
+    \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, \textrm{Var}(\lambda x.M) = \textrm{Var}(M) \cup \{x\}$
 \end{itemize}
 \hfill $\square$
 \end{definition}
