@@ -127,14 +127,14 @@ $=_\beta$を\textbf{$\beta$変換}($\beta$-conversion)という.
 ${^{\forall}}M, N_1, N_2 \in \Lambda, ((M \twoheadrightarrow_\beta N_1 \land M \twoheadrightarrow_\beta N_2) \implies ({^{\exists}}N_3 \in \Lambda, N_1 \twoheadrightarrow_\beta N_3) \land (N_2 \twoheadrightarrow_\beta N_3))$
 \end{center}
 が成り立つ.
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJOXzEiXSxbMCwxLCJOXzIiXSxbMSwxLCJOXzMiXSxbMCwwLCJNIl0sWzMsMSwiXFxiZXRhIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiXFxiZXRhIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiXFxiZXRhIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzMsMCwiXFxiZXRhIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJOXzEiXSxbMCwxLCJOXzIiXSxbMSwxLCJOXzMiXSxbMCwwLCJNIl0sWzMsMSwiXFxiZXRhIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzEsMiwiXFxiZXRhIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn0sImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDIsIlxcYmV0YSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9LCJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMywwLCJcXGJldGEiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
 \[\begin{tikzcd}
 	M & {N_1} \\
 	{N_2} & {N_3}
 	\arrow["\beta", two heads, from=1-1, to=1-2]
 	\arrow["\beta"', two heads, from=1-1, to=2-1]
-	\arrow["\beta", two heads, from=1-2, to=2-2]
-	\arrow["\beta", two heads, from=2-1, to=2-2]
+	\arrow["\beta", dashed, two heads, from=1-2, to=2-2]
+	\arrow["\beta", dashed, two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
 \hfill $\square$
 \end{theorem}
