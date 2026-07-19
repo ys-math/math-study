@@ -1,17 +1,17 @@
 \section{$\lambda$計算}
 
 \begin{definition}
-$V$を可算集合とし$V$の元を変数と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
+$V$を可算集合とし$V$の元を\textbf{変数}(variable)と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
 \begin{itemize}
     \item $V \subset \Lambda$
     \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
     \item ${^{\forall}}x \in V,\ {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
 \end{itemize}
-$\Lambda$の元を\textbf{$\lambda$項}と呼ぶ.
+$\Lambda$の元を\textbf{$\lambda$項}($\lambda$-term)と呼ぶ.
 \hfill $\square$
 \end{definition}
 
-BNF記法を用いて$\lambda$項$e$は次のように定義できる.
+BNF記法を用いて$\lambda$項$e$は次のように定義できる.\ ただし$x$は変数である.
 \begin{center}
 $e ::= x \mid \lambda x. e \mid e e$
 \end{center}
@@ -27,6 +27,16 @@ $M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のように�
     \item $\textrm{FV}(x) = \{x\}$
     \item $\textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
     \item $\textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
+\end{itemize}
+\hfill $\square$
+\end{definition}
+
+\begin{definition}
+$M \in \Lambda$の変数全体の集合$\textrm{Var}(M)$を次のようにして帰納的に定める.
+\begin{itemize}
+    \item $\textrm{Var}(x) = \{x\}$
+    \item $\textrm{Var}(M N) = \textrm{Var}(M) \cup \textrm{Var}(N)$
+    \item $\textrm{Var}(\lambda x.M) = \textrm{Var}(M) \cup \{x\}$
 \end{itemize}
 \hfill $\square$
 \end{definition}
