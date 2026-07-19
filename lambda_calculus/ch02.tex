@@ -1,1 +1,11 @@
 \section{単純型付き$\lambda$計算}
+\begin{definition}
+$\mathbb{B}$を空でない集合とし$\mathbb{B}$の元を\textbf{基底型}(base type)と呼ぶことにする.\ $\mathbb{T}$を次の条件を満たす最小の集合とする.
+\begin{itemize}
+    \item $\mathbb{B} \subset \mathbb{T}$
+    \item ${^{\forall}}A,B \in \mathbb{T}, (A \to B) \in \mathbb{T}$
+\end{itemize}
+$\mathbb{T}$の元を\textbf{型}(type)という.
+BNF記法を用いて型は$A,B ::= \iota \mid (A \to B)$と定義できる.\ ただし$\iota \in \mathbb{B}$である.
+\hfill $\square$
+\end{definition}
