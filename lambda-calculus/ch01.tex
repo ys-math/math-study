@@ -20,3 +20,13 @@ $e ::= x \mid \lambda x. e \mid e e$
 $M,N,P \in \Lambda$に対して$((M N) P)$を$M N P$と表記し$(\lambda x.(\lambda y.M))$を$\lambda x. \lambda y.M$と表記する.
 \hfill $\square$
 \end{remark}
+
+\begin{definition}
+$M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のようにして帰納的に定める.
+\begin{enumerate}
+    \item $\textrm{FV}(x) = \{x\}$
+    \item $\textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
+    \item $\textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
+\end{enumerate}
+\hfill $\square$
+\end{definition}
