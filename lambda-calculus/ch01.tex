@@ -1,0 +1,17 @@
+\section{$\lambda$計算}
+
+\begin{definition}
+$V$を可算集合とし$V$の元を変数と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
+\begin{enumerate}
+    \item $V \subset \Lambda$
+    \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
+    \item ${^{\forall}}x \in V,\ {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
+\end{enumerate}
+$\Lambda$の元を\textbf{$\lambda$項}と呼ぶ.
+\hfill $\square$
+\end{definition}
+
+BNF記法を用いて$\lambda$項$e$は次のように定義できる.
+\begin{center}
+$e ::= x \mid \lambda x. e \mid e e$
+\end{center}
