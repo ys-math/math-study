@@ -35,6 +35,9 @@ Thumbs.db
 *.ist
 *.dvi
 *.xdv
+*.pdf
+
+latexmkrc
 
 # ── Editors ──────────────────────────────────────
 # VSCode
