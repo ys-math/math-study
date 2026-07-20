@@ -24,7 +24,7 @@ jobs:
         with:
           root_file: "*/main.tex"        # auto-matches every topic folder
           work_in_root_file_dir: true    # cd into each folder so \input resolves
-          pre_compile: "cp .latexmkrc ~/.latexmkrc"  # make the config visible in every folder
+          pre_compile: "cp $GITHUB_WORKSPACE/.latexmkrc ~/.latexmkrc"  # absolute path, works from any topic folder
 
       - name: Collect PDFs into the pdf/ folder, named by topic
         run: |
