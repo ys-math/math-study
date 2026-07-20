@@ -37,8 +37,6 @@ Thumbs.db
 *.xdv
 */main.pdf
 
-latexmkrc
-
 # ── Editors ──────────────────────────────────────
 # VSCode
 .vscode/
