@@ -19,6 +19,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: DEBUG - list repo root
+        run: ls -la
+
       - name: Compile every topic's main.tex (upLaTeX + dvipdfmx)
         uses: xu-cheng/latex-action@v4
         with:
