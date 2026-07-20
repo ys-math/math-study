@@ -7,7 +7,7 @@
 * [圏論](./pdf/category_theory.pdf)
 * [微分幾何学](./pdf/differential_geometory.pdf)
 * [群論](./pdf/group_theory.pdf)
-* [$\lambda$計算](./pdf/lambda_calculus.pdf)
+* [λ計算](./pdf/lambda_calculus.pdf)
 * [位相幾何学](./pdf/topology.pdf)
 
 ## ディレクトリ構造
