@@ -33,6 +33,7 @@ math-study/
 ├── topology/
 │   ├── ch01.tex
 │   └── main.tex
+├── LICENSE
 ├── README.md
 ├── colophon.tex
 └── preamble.tex
