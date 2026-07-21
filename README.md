@@ -34,6 +34,7 @@ math-study/
 │   ├── ch01.tex
 │   └── main.tex
 ├── README.md
+├── colophon.tex
 └── preamble.tex
 ```
 <!-- END TREE -->
