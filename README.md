@@ -11,21 +11,27 @@
 * [位相幾何学](./pdf/topology.pdf)
 
 ## ディレクトリ構造
+<!-- BEGIN TREE -->
 ```
 math-study/
 ├── category_theory/
-│   ├── main.tex
-│   └── ch01.tex
+│   ├── ch01.tex
+│   └── main.tex
 ├── differential_geometry/
-│   ├── main.tex
-│   └── ch01.tex
+│   ├── ch01.tex
+│   └── main.tex
 ├── group_theory/
-│   ├── main.tex
-│   └── ch01.tex
+│   ├── ch01.tex
+│   └── main.tex
 ├── lambda_calculus/
-│   ├── main.tex
-│   └── ch01.tex
-└── topology/
-    ├── main.tex
-    └── ch01.tex
+│   ├── ch01.tex
+│   ├── ch02.tex
+│   ├── ch03.tex
+│   └── main.tex
+├── topology/
+│   ├── ch01.tex
+│   └── main.tex
+├── README.md
+└── preamble.tex
 ```
+<!-- END TREE -->

@@ -1,0 +1,38 @@
+# .github/workflows/update-readme-tree.yml
+
+name: Update README tree
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write         # needed so the workflow can commit the README back
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Regenerate the directory tree in README.md
+        run: python scripts/generate_tree.py
+
+      - name: Commit the updated README back to the repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "No README changes to commit."
+          else
+            git commit -m "docs: update directory tree"
+            # build-pdf.yml may push concurrently; rebase before pushing, with retries.
+            for attempt in 1 2 3; do
+              git pull --rebase --autostash origin main && git push && break
+              echo "Push attempt $attempt failed; retrying..."
+              sleep 3
+            done
+          fi
