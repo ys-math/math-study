@@ -16,6 +16,42 @@ BNF記法を用いて$\lambda$項$e$は次のように定義できる.\ ただ�
 $e ::= x \mid \lambda x. e \mid e e$
 \end{center}
 
+\begin{center}
+\definecolor{sdgLine}{RGB}{57,70,86}
+\definecolor{sdgTermFill}{RGB}{238,243,251}
+\definecolor{sdgTermLine}{RGB}{58,103,168}
+\definecolor{sdgSpecFill}{RGB}{255,246,230}
+\definecolor{sdgSpecLine}{RGB}{184,134,11}
+\definecolor{sdgExcFill}{RGB}{253,236,235}
+\definecolor{sdgExcLine}{RGB}{176,65,58}
+\definecolor{sdgLabel}{RGB}{106,118,134}
+\adjustbox{max size={\linewidth}{\textheight}}{%
+\begin{tikzpicture}[x=1pt, y=1pt]
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (8,105) -- (8,91);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (8,98) -- (20,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (20,98) -- (40,98);
+  \draw[line width=1.2pt, draw=sdgTermLine, fill=sdgTermFill, rounded corners=12pt] (40,86) rectangle (69.4,110);
+  \node at (54.7,98) {$x$};
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (69.4,98) -- (147.8,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (147.8,98) -- (167.8,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (20,98) -- (30,98) -- (30,59) -- (40,59);
+  \draw[line width=1.2pt, draw=sdgTermLine, fill=sdgTermFill, rounded corners=12pt] (40,47) rectangle (106.4,71);
+  \node at (73.2,59) {$\lambda x.$};
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (106.4,59) -- (118.4,59);
+  \draw[line width=1.2pt, draw=sdgLine, fill=white, rounded corners=3pt] (118.4,47) rectangle (147.8,71);
+  \node at (133.1,59) {$e$};
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (147.8,59) -- (157.8,59) -- (157.8,98) -- (167.8,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (20,98) -- (30,98) -- (30,20) -- (40,20);
+  \draw[line width=1.2pt, draw=sdgLine, fill=white, rounded corners=3pt] (40,8) rectangle (84.2,32);
+  \node at (62.1,20) {$e e$};
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (84.2,20) -- (147.8,20);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (147.8,20) -- (157.8,20) -- (157.8,98) -- (167.8,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (167.8,98) -- (179.8,98);
+  \draw[line width=1.2pt, draw=sdgLine, rounded corners=10pt] (179.8,105) -- (179.8,91);
+\end{tikzpicture}%
+}
+\end{center}
+
 \begin{remark}
 $M,N,P \in \Lambda$に対して$((M N) P)$を$M N P$と表記し$(\lambda x.(\lambda y.M))$を$\lambda x. \lambda y.M$と表記する.
 \hfill $\square$
