@@ -12,8 +12,9 @@ Run from the repo root:  python scripts/generate_tree.py
 from __future__ import annotations
 
 import subprocess
-import sys
 from pathlib import Path
+
+from readme_block import update_readme
 
 ROOT_LABEL = "math-study/"
 BEGIN_MARKER = "<!-- BEGIN TREE -->"
@@ -79,32 +80,15 @@ def render(node: dict, prefix: str = "") -> list[str]:
     return lines
 
 
-def build_block() -> str:
+def build_body() -> str:
     paths = [p for p in tracked_files() if keep(p)]
     tree = build_tree(paths)
     body = "\n".join([ROOT_LABEL, *render(tree)])
-    return f"{BEGIN_MARKER}\n```\n{body}\n```\n{END_MARKER}"
+    return f"```\n{body}\n```"
 
 
 def main() -> int:
-    if not README.exists():
-        sys.exit("README.md not found; run from the repo root.")
-    text = README.read_text(encoding="utf-8")
-
-    start = text.find(BEGIN_MARKER)
-    end = text.find(END_MARKER)
-    if start == -1 or end == -1 or end < start:
-        sys.exit(
-            f"Could not find markers {BEGIN_MARKER!r} / {END_MARKER!r} in README.md."
-        )
-    end += len(END_MARKER)
-
-    new_text = text[:start] + build_block() + text[end:]
-    if new_text != text:
-        README.write_text(new_text, encoding="utf-8")
-        print("README.md tree updated.")
-    else:
-        print("README.md tree already up to date.")
+    update_readme(README, BEGIN_MARKER, END_MARKER, build_body(), "tree")
     return 0
 
 

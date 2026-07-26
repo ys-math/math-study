@@ -4,13 +4,15 @@
 
 各トピックのPDFは以下から閲覧できます。
 
+<!-- BEGIN PDF LINKS -->
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
 * [圏論](./pdf/category_theory.pdf)
-* [微分幾何学](./pdf/differential_geometory.pdf)
+* [微分幾何学](./pdf/differential_geometry.pdf)
 * [群論](./pdf/group_theory.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
 * [多様体論](./pdf/manifold.pdf)
 * [位相幾何学](./pdf/topology.pdf)
+<!-- END PDF LINKS -->
 
 ## ディレクトリ構造
 <!-- BEGIN TREE -->
@@ -37,7 +39,11 @@ math-study/
 │   ├── ch01.tex
 │   └── main.tex
 ├── scripts/
-│   └── generate_tree.py
+│   ├── generate_pdf_links.py
+│   ├── generate_tree.py
+│   ├── latex_unicode.py
+│   ├── readme_block.py
+│   └── test_latex_unicode.py
 ├── topology/
 │   ├── ch01.tex
 │   └── main.tex
