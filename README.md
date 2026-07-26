@@ -11,6 +11,7 @@
 * [群論](./pdf/group_theory.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
 * [多様体論](./pdf/manifold.pdf)
+* [シンプレクティック多様体](./pdf/symplectic_manifold.pdf)
 * [位相幾何学](./pdf/topology.pdf)
 <!-- END PDF LINKS -->
 
@@ -46,6 +47,9 @@ math-study/
 │   ├── readme_block.py
 │   ├── test_latex_unicode.py
 │   └── test_new_topic.py
+├── symplectic_manifold/
+│   ├── ch01.tex
+│   └── main.tex
 ├── topology/
 │   ├── ch01.tex
 │   └── main.tex
