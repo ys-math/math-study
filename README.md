@@ -42,8 +42,10 @@ math-study/
 │   ├── generate_pdf_links.py
 │   ├── generate_tree.py
 │   ├── latex_unicode.py
+│   ├── new_topic.py
 │   ├── readme_block.py
-│   └── test_latex_unicode.py
+│   ├── test_latex_unicode.py
+│   └── test_new_topic.py
 ├── topology/
 │   ├── ch01.tex
 │   └── main.tex
