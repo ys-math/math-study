@@ -54,6 +54,29 @@ math-study/
 ```
 <!-- END TREE -->
 
+## Adding a new topic
+Each topic is one top-level directory holding a `main.tex` and its chapters.
+To create one:
+
+```bash
+python scripts/new_topic.py sheaf_theory --title 層論
+```
+
+The directory name must be lowercase letters, digits and underscores; the title
+is the `\DocTitle`, which also becomes the link label in the PDF list above.
+
+1. Run the command above. It writes `sheaf_theory/main.tex` and an empty
+   `sheaf_theory/ch01.tex`, and prints the label the README will show.
+2. Write the mathematics in `ch01.tex`.
+3. Commit and push to `main`.
+4. CI takes it from there: `build-pdf.yml` compiles the topic and commits
+   `pdf/sheaf_theory.pdf`, and `update-readme.yml` regenerates the PDF list and
+   the directory tree above. Both sections are generated — edit the `.tex`
+   sources, not the lists.
+
+To add a chapter, create `ch02.tex` and add `\input{ch02.tex}` to that topic's
+`main.tex` by hand; nothing does this automatically.
+
 ## ライセンス
 Shield: [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
 
