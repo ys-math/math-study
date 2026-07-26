@@ -1,6 +1,6 @@
-# .github/workflows/update-readme-tree.yml
+# .github/workflows/update-readme.yml
 
-name: Update README tree
+name: Update README
 
 on:
   push:
@@ -17,8 +17,14 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Run the script tests
+        run: python -m unittest discover -s scripts -t scripts -p 'test_*.py'
+
       - name: Regenerate the directory tree in README.md
         run: python scripts/generate_tree.py
+
+      - name: Regenerate the PDF links in README.md
+        run: python scripts/generate_pdf_links.py
 
       - name: Commit the updated README back to the repo
         run: |
@@ -28,7 +34,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No README changes to commit."
           else
-            git commit -m "docs: update directory tree"
+            git commit -m "docs: update generated README sections"
             # build-pdf.yml may push concurrently; rebase before pushing, with retries.
             for attempt in 1 2 3; do
               git pull --rebase --autostash origin main && git push && break
