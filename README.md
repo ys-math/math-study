@@ -8,6 +8,7 @@
 * [微分幾何学](./pdf/differential_geometory.pdf)
 * [群論](./pdf/group_theory.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
+* [多様体論](./pdf/manifold.pdf)
 * [位相幾何学](./pdf/topology.pdf)
 
 ## ディレクトリ構造
