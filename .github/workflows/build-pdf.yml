@@ -105,7 +105,19 @@ jobs:
           git add pdf/
           if git diff --cached --quiet; then
             echo "No PDF changes to commit."
-          else
-            git commit -m "Update compiled PDFs"
-            git push
+            exit 0
           fi
+          git commit -m "Update compiled PDFs"
+          # update-readme.yml runs on the same push and finishes in seconds, while
+          # this job spends minutes in TeX Live; when a push gives both of them
+          # something to commit — a new topic adds a PDF *and* a README entry —
+          # it pushes first and this one is rejected. Rebase onto it and retry.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main && git push; then
+              exit 0
+            fi
+            echo "Push attempt $attempt failed; retrying..."
+            sleep 3
+          done
+          echo "Could not push the PDFs after 3 attempts." >&2
+          exit 1
