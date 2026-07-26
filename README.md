@@ -28,6 +28,9 @@ math-study/
 │   ├── ch02.tex
 │   ├── ch03.tex
 │   └── main.tex
+├── manifold/
+│   ├── ch01.tex
+│   └── main.tex
 ├── scripts/
 │   └── generate_tree.py
 ├── topology/
