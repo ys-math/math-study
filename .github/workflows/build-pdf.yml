@@ -18,20 +18,79 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # need history so we can diff against the pushed-from commit
 
-      - name: DEBUG - list repo root
-        run: ls -la
+      - name: Work out which topics actually need rebuilding
+        id: topics
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
 
-      - name: Compile every topic's main.tex (upLaTeX + dvipdfmx)
+          # Every topic folder is one that owns a main.tex.
+          ALL=()
+          for f in */main.tex; do ALL+=("$(dirname "$f")"); done
+
+          # Files that every topic depends on: touching one forces a full rebuild.
+          SHARED='preamble\.tex|colophon\.tex|\.latexmkrc|\.github/workflows/build-pdf\.yml'
+
+          rebuild_all=false
+          if [ "$EVENT" != "push" ]; then
+            echo "Not a push event -> rebuilding every topic."
+            rebuild_all=true
+          elif ! git rev-parse -q --verify "${BEFORE}^{commit}" >/dev/null 2>&1; then
+            echo "Base commit ${BEFORE} is unavailable (new branch or force push) -> rebuilding every topic."
+            rebuild_all=true
+          fi
+
+          selected=()
+          if [ "$rebuild_all" = true ]; then
+            selected=("${ALL[@]}")
+          else
+            changed="$(git diff --name-only "$BEFORE" "$SHA")"
+            echo "Changed files:"
+            printf '%s\n' "$changed" | sed 's/^/  /'
+
+            if printf '%s\n' "$changed" | grep -qxE "$SHARED"; then
+              echo "A shared file changed -> rebuilding every topic."
+              selected=("${ALL[@]}")
+            else
+              for topic in "${ALL[@]}"; do
+                if printf '%s\n' "$changed" | grep -qE "^${topic}/.*\.tex$"; then
+                  selected+=("$topic")
+                elif [ ! -f "pdf/${topic}.pdf" ]; then
+                  echo "pdf/${topic}.pdf is missing -> building ${topic} anyway."
+                  selected+=("$topic")
+                fi
+              done
+            fi
+          fi
+
+          echo "Topics to build: ${selected[*]:-(none)}"
+          {
+            echo "root_files<<EOF"
+            for topic in ${selected[@]+"${selected[@]}"}; do
+              echo "${topic}/main.tex"
+            done
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Compile the affected topics (upLaTeX + dvipdfmx)
+        if: steps.topics.outputs.root_files != ''
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: "*/main.tex"        # auto-matches every topic folder
+          root_file: ${{ steps.topics.outputs.root_files }}
           work_in_root_file_dir: true    # cd into each folder so \input resolves
           pre_compile: "cp $GITHUB_WORKSPACE/.latexmkrc ~/.latexmkrc"  # absolute path, works from any topic folder
           args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
 
-      - name: Collect PDFs into the pdf/ folder, named by topic
+      - name: Collect the freshly built PDFs into the pdf/ folder, named by topic
+        if: steps.topics.outputs.root_files != ''
         run: |
+          shopt -s nullglob
           mkdir -p pdf
           for file in */main.pdf; do
             topic="$(dirname "$file")"     # e.g. category_theory
@@ -39,6 +98,7 @@ jobs:
           done
 
       - name: Commit the PDFs back to the repo
+        if: steps.topics.outputs.root_files != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
