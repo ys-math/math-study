@@ -1,1 +1,14 @@
 \section{$K_0$}
+
+\begin{definition}
+$R$を環とし$P$を$R$加群とする.\ 任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は$R$上の\textbf{射影加群}であるという.
+% https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMSwyLCJmIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiZyJdLFswLDEsInteXFxleGlzdHN9aCIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	& P \\
+	M & N
+	\arrow["{{^\exists}h}"', dashed, from=1-2, to=2-1]
+	\arrow["g", from=1-2, to=2-2]
+	\arrow["f"', two heads, from=2-1, to=2-2]
+\end{tikzcd}\]
+\hfill $\square$
+\end{definition}
