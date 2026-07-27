@@ -228,6 +228,19 @@ directory — passing `-r` as well makes latexmk read it twice and warn.
 Aux files and `main.pdf` are gitignored; leave them, and do not run
 `latexmk -c`. The next build reuses them.
 
+### The local gate is necessary, not sufficient
+
+CI compiles in `ghcr.io/xu-cheng/texlive-alpine:latest` — **TeX Live 2026**,
+LaTeX2e 2026-06-01. A local install is whatever you last updated to. A preamble
+can compile cleanly on one and fail on the other, and this has already happened
+here: `\declaretheorem` with `sibling=` compiles under TeX Live 2025 and raises
+`Command \c@proposition already defined` under 2026.
+
+So a green local compile means "I did not break it in an obvious way", not "CI
+will pass". For `tex/preamble.tex`, `tex/colophon.tex` and `.latexmkrc`, the
+authoritative check is `validate.yml` on the PR — which is the strongest
+argument for those files being branch-only in the first place.
+
 ## Setup on a new clone
 
 ```bash
