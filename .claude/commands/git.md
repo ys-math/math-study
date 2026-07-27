@@ -1,6 +1,6 @@
 ---
 description: Sync, check, commit and push the working tree following the repo's git strategy
-argument-hint: [何をコミットするか]  (省略可 — diff から判断します)
+argument-hint: "[何をコミットするか]  (省略可 — diff から判断します)"
 allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 

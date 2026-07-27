@@ -1,6 +1,6 @@
 ---
 description: Review a topic's notes for mathematical correctness, typos and LaTeX health, and write a report
-argument-hint: [topic_slug ...]  (omit — I'll list the topics)
+argument-hint: "[topic_slug ...]  (omit — I'll list the topics)"
 allowed-tools: Read, Glob, Grep, Bash(latexmk:*), Bash(git rev-parse:*), Bash(date:*), Write(reviews/**)
 ---
 

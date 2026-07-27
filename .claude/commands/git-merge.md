@@ -1,6 +1,6 @@
 ---
 description: Inspect an open pull request, re-run its gates, then squash-merge it
-argument-hint: [PR番号]  (省略時は現在のブランチの PR)
+argument-hint: "[PR番号]  (省略時は現在のブランチの PR)"
 allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 
