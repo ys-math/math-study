@@ -30,12 +30,14 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Every topic folder is one that owns a main.tex.
+          # Every topic folder is one inside tex/ that owns a main.tex. ALL holds
+          # the bare topic names: the source lives at tex/<topic>/, the artifact
+          # at pdf/<topic>.pdf.
           ALL=()
-          for f in */main.tex; do ALL+=("$(dirname "$f")"); done
+          for f in tex/*/main.tex; do ALL+=("$(basename "$(dirname "$f")")"); done
 
           # Files that every topic depends on: touching one forces a full rebuild.
-          SHARED='preamble\.tex|colophon\.tex|\.latexmkrc|\.github/workflows/build-pdf\.yml'
+          SHARED='tex/preamble\.tex|tex/colophon\.tex|\.latexmkrc|\.github/workflows/build-pdf\.yml'
 
           rebuild_all=false
           if [ "$EVENT" != "push" ]; then
@@ -59,7 +61,7 @@ jobs:
               selected=("${ALL[@]}")
             else
               for topic in "${ALL[@]}"; do
-                if printf '%s\n' "$changed" | grep -qE "^${topic}/.*\.tex$"; then
+                if printf '%s\n' "$changed" | grep -qE "^tex/${topic}/.*\.tex$"; then
                   selected+=("$topic")
                 elif [ ! -f "pdf/${topic}.pdf" ]; then
                   echo "pdf/${topic}.pdf is missing -> building ${topic} anyway."
@@ -73,7 +75,7 @@ jobs:
           {
             echo "root_files<<EOF"
             for topic in ${selected[@]+"${selected[@]}"}; do
-              echo "${topic}/main.tex"
+              echo "tex/${topic}/main.tex"
             done
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
@@ -92,9 +94,9 @@ jobs:
         run: |
           shopt -s nullglob
           mkdir -p pdf
-          for file in */main.pdf; do
-            topic="$(dirname "$file")"     # e.g. category_theory
-            cp "$file" "pdf/${topic}.pdf"  # -> pdf/category_theory.pdf
+          for file in tex/*/main.pdf; do
+            topic="$(basename "$(dirname "$file")")"  # e.g. category_theory
+            cp "$file" "pdf/${topic}.pdf"             # -> pdf/category_theory.pdf
           done
 
       - name: Commit the PDFs back to the repo

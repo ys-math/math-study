@@ -4,7 +4,8 @@ argument-hint: <topic_slug> <タイトル>  (slug optional — I'll propose one)
 allowed-tools: Bash(python scripts/new_topic.py:*)
 ---
 
-Create a new topic in this repo by running `scripts/new_topic.py`.
+Create a new topic in this repo by running `scripts/new_topic.py`. Topics live
+in `tex/`; the script creates `tex/<topic>/` and must be run from the repo root.
 
 Arguments given: $ARGUMENTS
 

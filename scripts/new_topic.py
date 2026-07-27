@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""Create the directory for a new topic: <topic>/main.tex and <topic>/ch01.tex.
+r"""Create the directory for a new topic: tex/<topic>/main.tex and its ch01.tex.
 
 Every topic in this repo has the same two-file skeleton, and its main.tex is
 byte-identical to every other one apart from \DocTitle and the tail of
@@ -35,15 +35,21 @@ __all__ = ["InvalidTopic", "render_main", "validate_title", "validate_topic"]
 # Plain enough to be safe as a regex fragment, a filename and a URL segment.
 TOPIC_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 
-# Top-level names that are not topics and must never become one.
+# Every topic lives here, alongside the preamble and colophon they all \input.
+TEX_DIR = Path("tex")
+
+# Names that must never become a topic. "latex_out" is a build directory that
+# can appear inside tex/; "pdf" and "scripts" no longer sit next to the topics,
+# but a tex/pdf or tex/scripts would still read as a twin of the root one.
 RESERVED = frozenset({"pdf", "scripts", "latex_out"})
 
-REPO_TREE_URL = "https://github.com/ys-math/math-study/tree/main"
+REPO_TREE_URL = f"https://github.com/ys-math/math-study/tree/main/{TEX_DIR}"
 
 CHAPTER = "ch01.tex"
 
-# A file that only exists at the repo root, used to check where we are running.
-ROOT_MARKER = "preamble.tex"
+# A file that only exists at this path in the repo, used to check where we are
+# running.
+ROOT_MARKER = TEX_DIR / "preamble.tex"
 
 # Placeholders are @-delimited because LaTeX uses both {} and $, which rules out
 # str.format and string.Template. Keep the body byte-identical to the existing
@@ -77,10 +83,10 @@ class InvalidTopic(ValueError):
 
 
 def validate_topic(topic: str, taken: object = ()) -> None:
-    """Check `topic` as a directory name, given the `taken` top-level names.
+    """Check `topic` as a directory name, given the `taken` names in tex/.
 
-    `taken` is anything supporting `in`; pass the existing entries of the repo
-    root so an occupied name is refused before any file is written.
+    `taken` is anything supporting `in`; pass the existing entries of tex/ so an
+    occupied name is refused before any file is written.
     """
     if not TOPIC_PATTERN.match(topic):
         raise InvalidTopic(
@@ -114,8 +120,8 @@ def render_main(topic: str, title: str) -> str:
     )
 
 
-def top_level_names() -> list[str]:
-    return [path.name for path in Path().iterdir()]
+def tex_dir_names() -> list[str]:
+    return [path.name for path in TEX_DIR.iterdir()]
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -137,11 +143,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
 
-    if not Path(ROOT_MARKER).is_file():
+    if not ROOT_MARKER.is_file():
         sys.exit(f"{ROOT_MARKER} not found; run from the repo root.")
 
     try:
-        validate_topic(args.topic, top_level_names())
+        validate_topic(args.topic, tex_dir_names())
     except InvalidTopic as error:
         sys.exit(str(error))
 
@@ -153,15 +159,15 @@ def main() -> int:
             f"  -> add it to SYMBOLS in scripts/latex_unicode.py, or reword the title."
         )
 
-    directory = Path(args.topic)
+    directory = TEX_DIR / args.topic
     directory.mkdir()
     (directory / "main.tex").write_text(
         render_main(args.topic, args.title), encoding="utf-8"
     )
     (directory / CHAPTER).write_text("", encoding="utf-8")
 
-    print(f"Created {args.topic}/ (README label: {label})")
-    print(f"next: write {args.topic}/{CHAPTER}, then git add {args.topic}")
+    print(f"Created {directory}/ (README label: {label})")
+    print(f"next: write {directory / CHAPTER}, then git add {directory}")
     return 0
 
 

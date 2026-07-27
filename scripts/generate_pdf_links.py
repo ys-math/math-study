@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate the list of PDF links in README.md.
 
-One topic is one top-level directory owning a main.tex; its display name is the
+One topic is one directory in tex/ owning a main.tex; its display name is the
 `\\DocTitle` declared in that file, rendered to Markdown-safe text, and its link
 target is the artifact pdf/<topic>.pdf that .github/workflows/build-pdf.yml
 compiles. Idempotent: running it twice with no repo change leaves the file
@@ -28,24 +28,30 @@ BEGIN_MARKER = "<!-- BEGIN PDF LINKS -->"
 END_MARKER = "<!-- END PDF LINKS -->"
 README = Path("README.md")
 PDF_DIR = Path("pdf")
+TEX_DIR = Path("tex")
 TITLE_MACRO = r"\newcommand{\DocTitle}"
 
 
 def topic_files() -> list[Path]:
-    """Every git-tracked <topic>/main.tex, sorted by topic directory name.
+    """Every git-tracked tex/<topic>/main.tex, sorted by topic directory name.
 
     Uses git rather than a glob so an untracked local scratch directory cannot
     add a link.
     """
     out = subprocess.run(
-        ["git", "ls-files", "*/main.tex"],
+        ["git", "ls-files", f"{TEX_DIR}/*/main.tex"],
         check=True,
         capture_output=True,
         text=True,
     ).stdout
     paths = [Path(line) for line in out.splitlines() if line]
-    # Only top-level topic folders: "manifold/main.tex", not "a/b/main.tex".
-    return sorted((p for p in paths if len(p.parts) == 2), key=lambda p: p.parts[0])
+    # Topics are flat inside tex/: "tex/manifold/main.tex", not "tex/a/b/main.tex".
+    return sorted((p for p in paths if len(p.parts) == 3), key=topic_name)
+
+
+def topic_name(path: Path) -> str:
+    """The topic a tex/<topic>/main.tex belongs to; also its pdf/ basename."""
+    return path.parts[1]
 
 
 def extract_title(path: Path) -> str:
@@ -109,7 +115,7 @@ def warn_about_pdfs(topics: list[str]) -> None:
     for pdf in sorted(PDF_DIR.glob("*.pdf")):
         if pdf.stem not in known:
             print(
-                f"warning: {pdf} has no matching {pdf.stem}/main.tex; "
+                f"warning: {pdf} has no matching {TEX_DIR}/{pdf.stem}/main.tex; "
                 "it is an orphan and nothing links to it.",
                 file=sys.stderr,
             )
@@ -117,17 +123,17 @@ def warn_about_pdfs(topics: list[str]) -> None:
 
 def build_body(paths: list[Path]) -> str:
     return "\n".join(
-        f"* [{link_label(path)}](./{PDF_DIR}/{path.parts[0]}.pdf)" for path in paths
+        f"* [{link_label(path)}](./{PDF_DIR}/{topic_name(path)}.pdf)" for path in paths
     )
 
 
 def main() -> int:
     paths = topic_files()
     if not paths:
-        sys.exit("No */main.tex found; run from the repo root.")
+        sys.exit(f"No {TEX_DIR}/*/main.tex found; run from the repo root.")
 
     body = build_body(paths)
-    warn_about_pdfs([path.parts[0] for path in paths])
+    warn_about_pdfs([topic_name(path) for path in paths])
     update_readme(README, BEGIN_MARKER, END_MARKER, body, "PDF links")
     return 0
 

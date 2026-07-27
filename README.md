@@ -1,6 +1,6 @@
 # 数学勉強ノート
 勉強した数学の内容をLaTeXを用いてまとめていきます。
-トピックごとにディレクトリを分けています。
+LaTeXのソースは `tex/` にまとめ、トピックごとにディレクトリを分けています。
 
 各トピックのPDFは以下から閲覧できます。
 
@@ -19,26 +19,6 @@
 <!-- BEGIN TREE -->
 ```
 math-study/
-├── algebraic_k_theory/
-│   ├── ch01.tex
-│   └── main.tex
-├── category_theory/
-│   ├── ch01.tex
-│   └── main.tex
-├── differential_geometry/
-│   ├── ch01.tex
-│   └── main.tex
-├── group_theory/
-│   ├── ch01.tex
-│   └── main.tex
-├── lambda_calculus/
-│   ├── ch01.tex
-│   ├── ch02.tex
-│   ├── ch03.tex
-│   └── main.tex
-├── manifold/
-│   ├── ch01.tex
-│   └── main.tex
 ├── scripts/
 │   ├── generate_pdf_links.py
 │   ├── generate_tree.py
@@ -47,22 +27,44 @@ math-study/
 │   ├── readme_block.py
 │   ├── test_latex_unicode.py
 │   └── test_new_topic.py
-├── symplectic_manifold/
-│   ├── ch01.tex
-│   └── main.tex
-├── topology/
-│   ├── ch01.tex
-│   └── main.tex
+├── tex/
+│   ├── algebraic_k_theory/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── category_theory/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── differential_geometry/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── group_theory/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── lambda_calculus/
+│   │   ├── ch01.tex
+│   │   ├── ch02.tex
+│   │   ├── ch03.tex
+│   │   └── main.tex
+│   ├── manifold/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── symplectic_manifold/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── topology/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── colophon.tex
+│   └── preamble.tex
 ├── LICENSE
-├── README.md
-├── colophon.tex
-└── preamble.tex
+└── README.md
 ```
 <!-- END TREE -->
 
 ## Adding a new topic
-Each topic is one top-level directory holding a `main.tex` and its chapters.
-To create one:
+Each topic is one directory inside `tex/`, holding a `main.tex` and its
+chapters. The `preamble.tex` and `colophon.tex` every topic `\input`s sit
+alongside them in `tex/`. To create a topic:
 
 ```bash
 python scripts/new_topic.py sheaf_theory --title 層論
@@ -71,8 +73,9 @@ python scripts/new_topic.py sheaf_theory --title 層論
 The directory name must be lowercase letters, digits and underscores; the title
 is the `\DocTitle`, which also becomes the link label in the PDF list above.
 
-1. Run the command above. It writes `sheaf_theory/main.tex` and an empty
-   `sheaf_theory/ch01.tex`, and prints the label the README will show.
+1. Run the command above, from the repo root. It writes `tex/sheaf_theory/main.tex`
+   and an empty `tex/sheaf_theory/ch01.tex`, and prints the label the README will
+   show.
 2. Write the mathematics in `ch01.tex`.
 3. Commit and push to `main`.
 4. CI takes it from there: `build-pdf.yml` compiles the topic and commits

@@ -14,10 +14,11 @@ from latex_unicode import UnsupportedLatex
 from new_topic import InvalidTopic, render_main, validate_title, validate_topic
 
 ROOT = Path(__file__).resolve().parent.parent
+TEX = ROOT / "tex"
 
 
 def topic_names() -> list[str]:
-    return sorted(path.parent.name for path in ROOT.glob("*/main.tex"))
+    return sorted(path.parent.name for path in TEX.glob("*/main.tex"))
 
 
 class TestTemplateMatchesRepo(unittest.TestCase):
@@ -32,7 +33,7 @@ class TestTemplateMatchesRepo(unittest.TestCase):
     """
 
     def assert_reproduces(self, topic: str, title: str) -> None:
-        expected = (ROOT / topic / "main.tex").read_text(encoding="utf-8")
+        expected = (TEX / topic / "main.tex").read_text(encoding="utf-8")
         self.assertEqual(render_main(topic, title), expected)
 
     def test_plain_title(self):
@@ -51,7 +52,7 @@ class TestTemplateMatchesRepo(unittest.TestCase):
         source = render_main("sheaf_theory", "層論")
         self.assertIn(
             r"\newcommand{\TexRepo}{https://github.com/ys-math/math-study"
-            r"/tree/main/sheaf_theory}",
+            r"/tree/main/tex/sheaf_theory}",
             source,
         )
         self.assertIn(r"\newcommand{\DocTitle}{層論}", source)
