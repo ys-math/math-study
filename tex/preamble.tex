@@ -1,5 +1,11 @@
 \usepackage[dvipdfmx]{xcolor}
-\usepackage{amssymb,amsmath,amsfonts,amsthm,thmtools,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs, adjustbox}
+\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs, adjustbox}
+% keytheorems, not thmtools: thmtools 0.76 builds shared theorem counters with
+% its aliasctr package, which LaTeX 2026 broke — `sibling=` then fails with
+% "Command \c@proposition already defined". Fix is unreleased upstream
+% (muzimuzhi/thmtools#75). thmtools-compat keeps \declaretheorem unchanged;
+% loading both packages is a fatal error, so thmtools is gone from the line above.
+\usepackage[thmtools-compat]{keytheorems}
 \usepackage[hyphens]{url}
 \usepackage[dvipdfmx]{hyperref}
 \definecolor{myblue}{HTML}{0000EE}
@@ -19,10 +25,15 @@
   {.5em}
   {}
 
+% The three spacing keys are thmtools' defaults, restated because keytheorems
+% has different ones; without them every topic repaginates.
 \declaretheoremstyle[
   headfont=\normalfont\bfseries,
   bodyfont=\normalfont,
   headpunct={},
+  postheadspace={ },
+  spaceabove=3pt,
+  spacebelow=3pt,
   qed=$\square$
 ]{style_with_box}
 

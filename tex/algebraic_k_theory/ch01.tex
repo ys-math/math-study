@@ -1,4 +1,4 @@
-\section{$K_0$}
+\section{\texorpdfstring{$K_0$}{K_0}}
 
 \begin{definition}
 $R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は$R$上の\textbf{射影加群}(projective module)であるという.
@@ -30,8 +30,8 @@ $R$を環とし$P$を$R$加群とする.\ 次の(1)と(2)は同値.
 	& P \\
 	M & P
 	\arrow["{{^\exists}s}"', dashed, from=1-2, to=2-1]
-	\arrow["{\mathrm{id}_P}", from=1-2, to=2-2]
+	\arrow["{\id_P}", from=1-2, to=2-2]
 	\arrow["r"', two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
-(2)$\Rightarrow$(1): 任意の全射準同型$r \colon M \twoheadrightarrow P$に対してある準同型$s \colon P \to M$が存在して$r \circ s = \id_P$となると仮定する.\ $f \colon M \twoheadrightarrow N$を全射準同型とし$g \colon P \to N$を準同型とする.\ $E = \{(m,p) \in M \oplus P \mid f(m) = g(p)\}$とすると$E$は$M \oplus P$の部分$R$加群である.\ $\pi_2 \colon E \to P$を$\pi_2(m,p) = p$で定めると任意の$p \in P$に対して$g(p) \in N$であり$f \colon M \twoheadrightarrow N$は全射なので$f(m) = g(p)$となる$m \in M$が存在し$\pi_2(m,p) = p$となる.\ よって$\pi_2 \colon E \to P$は全射である.\ 仮定より$\pi_2 \circ s = \id_P$を満たす$s \colon P \to E$が存在する.\ $p \in P$に対して$s(p) = (m,p) \in E$となる$m \in M$が存在する.\ $\pi_1 \colon E \to M$を$\pi_1(m,p) = m$で定め$h = \pi_1 \circ s$とする.\ 任意の$p \in P$に対して$(h(p), p) \in E$なので$f(h(p)) = g(p)$なので$f \circ h = g$である.
+(2)$\Rightarrow$(1): 任意の全射準同型$r \colon M \twoheadrightarrow P$に対してある準同型$s \colon P \to M$が存在して$r \circ s = \id_P$となると仮定する.\ $f \colon M \twoheadrightarrow N$を全射準同型とし$g \colon P \to N$を準同型とする.\ $E = \{(m,p) \in M \oplus P \mid f(m) = g(p)\}$とすると$E$は$M \oplus P$の部分$R$加群である.\ $\pi_2 \colon E \to P$を$\pi_2(m,p) = p$で定めると任意の$p \in P$に対して$g(p) \in N$であり$f \colon M \twoheadrightarrow N$は全射なので$f(m) = g(p)$となる$m \in M$が存在し$\pi_2(m,p) = p$となる.\ よって$\pi_2 \colon E \to P$は全射である.\ 仮定より$\pi_2 \circ s = \id_P$を満たす$s \colon P \to E$が存在する.\ $p \in P$に対して$s(p) = (m,p) \in E$となる$m \in M$が存在する.\ $\pi_1 \colon E \to M$を$\pi_1(m,p) = m$で定め$h = \pi_1 \circ s$とする.\ 任意の$p \in P$に対して$(h(p), p) \in E$なので$f(h(p)) = g(p)$であり$f \circ h = g$である.
 \end{proof}
