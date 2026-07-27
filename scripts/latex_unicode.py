@@ -5,9 +5,10 @@ Used to turn a document's ``\\DocTitle`` into the link label of the PDF list in
 README.md, e.g. ``$\\lambda$計算`` -> ``λ計算``.
 
 Only the subset of LaTeX that shows up in a note title is supported: math
-delimiters, symbol commands, the blackboard/fraktur/script alphabets, and
+delimiters, symbol commands, the blackboard/fraktur/script alphabets,
 sub/superscripts (rendered as ``<sub>``/``<sup>``, which GitHub honours inside
-link labels). Anything else raises UnsupportedLatex rather than guessing, so a
+link labels), and ``\\texorpdfstring``, of which the TeX argument is the one
+rendered. Anything else raises UnsupportedLatex rather than guessing, so a
 malformed label can never reach README.md.
 """
 
@@ -332,6 +333,14 @@ TRANSPARENT = {
     r"\mbox",
 }
 
+# Commands taking two arguments, of which the first is kept and the second
+# dropped. \texorpdfstring{TeX}{PDF string} exists because hyperref cannot put
+# math in a bookmark; a Markdown label has no such limit, so it takes the TeX
+# argument and gets the sub/superscripts the plain-text one had to give up.
+FIRST_OF_TWO = {
+    r"\texorpdfstring",
+}
+
 
 def _command_at(source: str, index: int) -> tuple[str, int]:
     """Read the command starting at `source[index]` ('\\'); return it and the next index."""
@@ -434,6 +443,12 @@ def render(latex: str) -> str:
                 out.append(_restyle(argument, ALPHABETS[command], command))
             elif command in TRANSPARENT:
                 argument, index = _argument_at(latex, index, command)
+                out.append(render(argument))
+            elif command in FIRST_OF_TWO:
+                argument, index = _argument_at(latex, index, command)
+                # Read the discarded argument anyway, so a one-argument call is
+                # an error here rather than a surprise in the compiled PDF.
+                _, index = _argument_at(latex, index, command)
                 out.append(render(argument))
             else:
                 raise UnsupportedLatex(f"unsupported command '{command}'")

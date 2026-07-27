@@ -23,6 +23,32 @@ class TestRealTitles(unittest.TestCase):
         for title in ("圏論", "群論", "微分幾何学", "多様体論", "位相幾何学"):
             self.assertEqual(render(title), title)
 
+    def test_texorpdfstring_title(self):
+        self.assertEqual(
+            render(r"\texorpdfstring{代数的$K$理論}{代数的K理論}"), "代数的K理論"
+        )
+
+
+class TestTexOrPdfString(unittest.TestCase):
+    """The TeX argument is rendered; the plain-text one is dropped."""
+
+    def test_tex_argument_wins(self):
+        # The PDF string flattens the subscript; the label keeps it.
+        self.assertEqual(render(r"\texorpdfstring{$K_0$}{K_0}"), "K<sub>0</sub>")
+
+    def test_nested_in_a_larger_title(self):
+        self.assertEqual(
+            render(r"\texorpdfstring{$\mathbb{Z}$}{Z}上の$K$理論"), "ℤ上のK理論"
+        )
+
+    def test_discarded_argument_is_not_rendered(self):
+        # \# would be fine, but a bare # in the PDF string must not reach the label.
+        self.assertEqual(render(r"\texorpdfstring{$\pi$}{pi #1}"), "π")
+
+    def test_missing_second_argument_raises(self):
+        with self.assertRaises(UnsupportedLatex):
+            render(r"\texorpdfstring{$K$}")
+
 
 class TestScripts(unittest.TestCase):
     """^ and _ become inline HTML, which GitHub renders inside link labels."""
