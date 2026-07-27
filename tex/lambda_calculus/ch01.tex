@@ -8,7 +8,6 @@ $V$を可算集合とし$V$の元を\textbf{変数}(variable)と呼ぶことに�
     \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
 \end{itemize}
 $\Lambda$の元を\textbf{$\lambda$項}($\lambda$-term)と呼ぶ.
-\hfill $\square$
 \end{definition}
 
 BNF記法を用いて$\lambda$項$e$は次のように定義できる.\ ただし$x$は変数である.
@@ -54,7 +53,6 @@ $e ::= x \mid \lambda x. e \mid e e$
 
 \begin{remark}
 $M,N,P \in \Lambda$に対して$((M N) P)$を$M N P$と表記し$(\lambda x.(\lambda y.M))$を$\lambda x. \lambda y.M$と表記する.
-\hfill $\square$
 \end{remark}
 
 \begin{definition}
@@ -64,7 +62,6 @@ $M \in \Lambda$の自由変数全体の集合$\textrm{FV}(M)$を次のように�
     \item ${^{\forall}}M, N \in \Lambda, \textrm{FV}(M N) = \textrm{FV}(M) \cup \textrm{FV}(N)$
     \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, \textrm{FV}(\lambda x.M) = \textrm{FV}(M) \setminus \{x\}$
 \end{itemize}
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -74,7 +71,6 @@ $M \in \Lambda$の変数全体の集合$\textrm{Var}(M)$を次のようにして
     \item ${^{\forall}}M, N \in \Lambda, \textrm{Var}(M N) = \textrm{Var}(M) \cup \textrm{Var}(N)$
     \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, \textrm{Var}(\lambda x.M) = \textrm{Var}(M) \cup \{x\}$
 \end{itemize}
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -85,7 +81,6 @@ $M, N \in \Lambda$に対して$M \lbrack x \coloneq N \rbrack \in \Lambda$を次
     \item ${^{\forall}}P,Q \in \Lambda, (PQ) \lbrack x \coloneq N \rbrack \equiv (P \lbrack x \coloneq N \rbrack)(Q \lbrack x \coloneq N \rbrack)$
     \item ${^{\forall}}P \in \Lambda, (\lambda x.P) \lbrack x \coloneq N \rbrack \equiv \lambda y.(P \lbrack x \coloneq N \rbrack)$
 \end{itemize}
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -96,7 +91,6 @@ $M \in \Lambda$とし$x, z \in V, y \notin \textrm{Var}(M)$とする.\ $M \langl
     \item ${^{\forall}} P, Q \in \Lambda, (PQ) \langle x \mapsto y \rangle \equiv (P \langle x \mapsto y \rangle)(Q \langle x \mapsto y \rangle)$
     \item $z\not\equiv x \implies (\lambda z.P)\langle x \mapsto y\rangle \equiv \lambda z.\big(P\langle x \mapsto y\rangle\big)$
 \end{itemize}
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -109,7 +103,6 @@ $\to_\alpha$を\textbf{$\alpha$ステップ}($\alpha$-step)と呼ぶ.\ つまり
     $\lambda x.M \to_\alpha \lambda y.(M \langle x \mapsto y\rangle)$
 \end{center}
 である.
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -120,12 +113,10 @@ $\equiv_\alpha \subset \Lambda \times \Lambda$を次の条件を満たす最小�
     \item ${^{\forall}}z \in V, {^{\forall}}M,M',N \in \Lambda, (M \equiv_\alpha M' \implies (M N \equiv_\alpha M' N) \land (N M \equiv_\alpha N M') \land (\lambda z.M \equiv_\alpha \lambda z.M'))$
 \end{itemize}
 $\equiv_\alpha$を\textbf{$\alpha$変換}($\alpha$-conversion)という.
-\hfill $\square$
 \end{definition}
 
 \begin{example}
 $\lambda x.\lambda y.x \equiv_\alpha \lambda y.\lambda x.y$
-\hfill $\square$
 \end{example}
 
 \begin{definition}
@@ -134,7 +125,6 @@ $\Lambda$上の2項関係$\to_\beta \subset \Lambda \times \Lambda$を次のよ�
     $\to_\beta \coloneq \{((\lambda x.M)N, M \lbrack x \coloneq N \rbrack) \mid x \in V, M, N \in \Lambda\}$
 \end{center}
 $\to_\beta$を\textbf{1ステップ$\beta$簡約}(one-step $\beta$-reduction)という.
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -145,7 +135,6 @@ $\twoheadrightarrow_\beta \subset \Lambda \times \Lambda$を次の条件を満�
 \end{itemize}
 
 $\twoheadrightarrow_\beta$を\textbf{$\beta$簡約}($\beta$-reduction)という.
-\hfill $\square$
 \end{definition}
 
 \begin{definition}
@@ -155,7 +144,6 @@ $=_\beta \subset \Lambda \times \Lambda$を次の条件を満たす最小の$\la
     \item $=_\beta$は同値関係.
 \end{itemize}
 $=_\beta$を\textbf{$\beta$変換}($\beta$-conversion)という.
-\hfill $\square$
 \end{definition}
 
 \begin{theorem} (Church-Rosser)
@@ -172,5 +160,4 @@ ${^{\forall}}M, N_1, N_2 \in \Lambda, ((M \twoheadrightarrow_\beta N_1 \land M \
 	\arrow["\beta", dashed, two heads, from=1-2, to=2-2]
 	\arrow["\beta", dashed, two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
-\hfill $\square$
 \end{theorem}
