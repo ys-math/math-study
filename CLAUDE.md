@@ -81,10 +81,26 @@ finding only when the owner asks for that finding to be fixed.
 
 ## Git
 
-- Changes to `scripts/` or `.github/` go on a branch and through a PR — they can
-  break every later build, and CI only proves itself on `main`. Content and
-  topic changes commit straight to `main`.
-- Conventional commits in English: `feat`, `fix`, `docs`, `ci`, `refactor`,
+Full rules and their reasoning: `docs/git-strategy.md`. Use the `/git` and
+`/git-merge` slash commands, which implement it. The rules that matter most:
+
+- **Shared paths go on a branch and through a PR** — `scripts/`, `.github/`,
+  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`. They can break every
+  topic at once. Everything else, `tex/<topic>/**` included, commits straight
+  to `main`.
+- **Conventional commits in English**: `feat`, `fix`, `docs`, `ci`, `refactor`,
   `chore`, `test`. The scope is the topic directory name for content changes
-  (`feat(algebraic_k_theory): ...`) and omitted otherwise. The history also
-  contains `remove:` — do not continue it; use `chore:` or `refactor:`.
+  (`feat(algebraic_k_theory): ...`), the file stem for shared `.tex`
+  (`fix(preamble): ...`), and omitted otherwise. The history also contains
+  `remove:` — do not continue it; use `chore:` or `refactor:`.
+- **Never force-push and never rewrite pushed history.** Correct a bad commit
+  on `main` with a follow-up commit.
+- **Path-scoped `git add` only**, never `-A` or `.`; the working tree may hold
+  someone else's work in progress.
+- **`Co-Authored-By: Claude` on what Claude wrote** — `scripts/`, `.github/`,
+  `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex` — and never on
+  `tex/<topic>/**`.
+
+CI pushes to `main` after every push of yours, so `git pull --rebase` first.
+It cannot conflict: the bots only touch `pdf/*.pdf` and the generated `README.md`
+blocks.
