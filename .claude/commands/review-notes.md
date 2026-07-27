@@ -82,6 +82,21 @@ that is for calibration, not for smuggling in guesses.
 
 Ignore any previous `reviews/<topic>.md`; review fresh and overwrite it.
 
+### The report is Markdown, not LaTeX
+
+The report is read in a Markdown preview whose math renderer is KaTeX, which
+knows nothing about this repo's preamble. Two rules follow:
+
+- **All LaTeX source goes in a ```tex fence, never a blockquote and never
+  inline.** That covers both the quoted line and the replacement you propose in
+  **修正案** — a blockquoted or inline `.tex` line gets parsed as math and dies
+  on the first `\id` or `\labelenumi`.
+- **In your own prose, use KaTeX-safe primitives only.** Write
+  `$\mathrm{id}_P$` even where the note writes `$\id_P$`; the shared macros
+  (`\id`, `\ob`, `\mor`, `\dom`, `\cod`) are undefined in KaTeX and produce
+  `Undefined control sequence`. When the finding is *about* the macro, put the
+  macro name in a code span — `` `\id_P` `` — rather than in math.
+
 ## The report
 
 Japanese, at `reviews/<topic>.md`, overwritten each run. Findings grouped by
@@ -100,7 +115,9 @@ whole report so the user can say "1 と 4 を直して".
 
 ### 1. <一行の見出し> — ch01.tex:31  [確信度: 高]
 
-> <該当行をそのまま引用>
+```tex
+<該当行をそのまま引用>
+```
 
 <何が誤りで、なぜそうなのか>
 
