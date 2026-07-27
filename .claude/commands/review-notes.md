@@ -115,14 +115,14 @@ whole report so the user can say "1 と 4 を直して".
 
 | # | 分類 | 指摘 | 箇所 | 確信度 |
 |---|---|---|---|---|
-| 1 | 数学 | <一行の見出し> | ch01.tex:31 | 高 |
-| 2 | 誤字・記法 | <一行の見出し> | ch01.tex:38 | — |
+| 1 | 数学 | <一行の見出し> | [`ch01.tex:31`](../tex/<topic>/ch01.tex#L31) | 高 |
+| 2 | 誤字・記法 | <一行の見出し> | [`ch01.tex:38`](../tex/<topic>/ch01.tex#L38) | — |
 
 ## 数学的正しさ
 
 ### 1. <一行の見出し> — ch01.tex:31  [確信度: 高]
 
-`ch01.tex:31`
+[`ch01.tex:31`](../tex/<topic>/ch01.tex#L31)
 
 ```tex
 <該当行をそのまま引用>
@@ -147,11 +147,23 @@ whole report so the user can say "1 と 4 を直して".
 指摘なし
 ````
 
-Every fence carries the location it came from on the line directly above it, as
-a code span: `ch01.tex:31` for a single line, `ch01.tex:36-38` for a range,
-`ch01.tex:31` (修正案) for a proposed replacement, `main.log` for a compile-log
-excerpt. The heading names the location too, but a fence scrolled away from its
-heading has to stand on its own.
+Every fence carries the location it came from on the line directly above it. The
+heading names the location too, but a fence scrolled away from its heading has
+to stand on its own.
+
+Make that location a **link to the line**: the report sits in `reviews/`, so the
+path is relative — `[`` `ch01.tex:31` ``](../tex/<topic>/ch01.tex#L31)`. VS
+Code's Markdown preview resolves the `#L<n>` fragment and opens the file at that
+line, which is the difference between reading the report and fixing from it. Do
+the same in the 箇所 column of the 概要 table, and inline wherever the prose
+names another line (`ch01.tex:22`, `preamble.tex:47`). Keep the link text in
+backticks so it still reads as a path.
+
+Two exceptions, both because there is nothing to jump to: a **修正案** fence
+shows text that is not in the file yet, so its caption stays a plain code span
+`ch01.tex:31` (修正案); a compile-log excerpt is captioned
+`[`` `main.log` ``](../tex/<topic>/main.log)` with no line number, since the log
+is regenerated on every build and its line numbers do not survive.
 
 The 概要 table lists every finding in the same order and numbering as the
 sections below, so the report opens with something readable in ten seconds.
