@@ -103,7 +103,7 @@ Japanese, at `reviews/<topic>.md`, overwritten each run. Findings grouped by
 category, ordered by `file:line` within each, numbered continuously across the
 whole report so the user can say "1 と 4 を直して".
 
-```markdown
+````markdown
 # <DocTitle> レビュー
 
 - 対象: `tex/<topic>/` (ch01.tex, ch02.tex)
@@ -111,9 +111,18 @@ whole report so the user can say "1 と 4 を直して".
 - 日時: <date '+%Y-%m-%d %H:%M'>
 - 指摘: 数学 1件 / 誤字・記法 2件 / LaTeX 0件
 
+## 概要
+
+| # | 分類 | 指摘 | 箇所 | 確信度 |
+|---|---|---|---|---|
+| 1 | 数学 | <一行の見出し> | ch01.tex:31 | 高 |
+| 2 | 誤字・記法 | <一行の見出し> | ch01.tex:38 | — |
+
 ## 数学的正しさ
 
 ### 1. <一行の見出し> — ch01.tex:31  [確信度: 高]
+
+`ch01.tex:31`
 
 ```tex
 <該当行をそのまま引用>
@@ -121,7 +130,13 @@ whole report so the user can say "1 と 4 を直して".
 
 <何が誤りで、なぜそうなのか>
 
-**修正案**: <具体的にどう直すか>
+**修正案**: <説明>
+
+`ch01.tex:31` (修正案)
+
+```tex
+<修正後の行>
+```
 
 ## 誤字・記法
 
@@ -130,7 +145,17 @@ whole report so the user can say "1 と 4 を直して".
 ## LaTeX の健全性
 
 指摘なし
-```
+````
+
+Every fence carries the location it came from on the line directly above it, as
+a code span: `ch01.tex:31` for a single line, `ch01.tex:36-38` for a range,
+`ch01.tex:31` (修正案) for a proposed replacement, `main.log` for a compile-log
+excerpt. The heading names the location too, but a fence scrolled away from its
+heading has to stand on its own.
+
+The 概要 table lists every finding in the same order and numbering as the
+sections below, so the report opens with something readable in ten seconds.
+確信度 is `—` for 誤字・記法 and LaTeX findings, which do not carry one.
 
 When a category has no findings, keep the heading and write `指摘なし`. When
 nothing at all is found, still write the file — its existence is the proof that
