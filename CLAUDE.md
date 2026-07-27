@@ -63,6 +63,12 @@ up after you:
 3. On a rename, update `\TexRepo` inside the moved `main.tex`; it embeds the
    directory name.
 
+**Reviewing a topic's notes** — the `/review-notes` slash command. It reads a
+topic, compiles it, and writes `reviews/<topic>.md`; that directory is
+gitignored and the report is overwritten on every run, so never cite one as a
+record. The command is read-only with respect to `tex/` by design — act on a
+finding only when the owner asks for that finding to be fixed.
+
 ## Before pushing
 
 - Run the test suite before committing anything in `scripts/`; a failure in

@@ -37,6 +37,9 @@ Thumbs.db
 *.xdv
 **/main.pdf
 
+# ── Review reports (/review-notes) ───────────────
+reviews/
+
 # ── Python ───────────────────────────────────────
 __pycache__/
 *.py[cod]
