@@ -56,6 +56,7 @@ math-study/
 │   │   └── main.tex
 │   ├── colophon.tex
 │   └── preamble.tex
+├── CLAUDE.md
 ├── LICENSE
 └── README.md
 ```
