@@ -64,30 +64,32 @@ math-study/
 ```
 <!-- END TREE -->
 
-## Adding a new topic
-Each topic is one directory inside `tex/`, holding a `main.tex` and its
-chapters. The `preamble.tex` and `colophon.tex` every topic `\input`s sit
-alongside them in `tex/`. To create a topic:
+## Commands
+Run everything from the repo root.
 
-```bash
-python scripts/new_topic.py sheaf_theory --title 層論
-```
+| Command | What it does |
+| --- | --- |
+| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and an empty `ch01.tex`. `<topic>` is lowercase letters, digits and underscores; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
+| `cd tex/<topic> && latexmk -r ../../.latexmkrc main.tex` | Compiles the topic's PDF locally |
+| `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
+| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
 
-The directory name must be lowercase letters, digits and underscores; the title
-is the `\DocTitle`, which also becomes the link label in the PDF list above.
+Claude Code slash commands:
 
-1. Run the command above, from the repo root. It writes `tex/sheaf_theory/main.tex`
-   and an empty `tex/sheaf_theory/ch01.tex`, and prints the label the README will
-   show.
-2. Write the mathematics in `ch01.tex`.
-3. Commit and push to `main`.
-4. CI takes it from there: `build-pdf.yml` compiles the topic and commits
-   `pdf/sheaf_theory.pdf`, and `update-readme.yml` regenerates the PDF list and
-   the directory tree above. Both sections are generated — edit the `.tex`
-   sources, not the lists.
+| Command | What it does |
+| --- | --- |
+| `/new-topic <topic> <title>` | Creates a topic by running `new_topic.py` above |
+| `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, writing `reviews/<topic>.md` (gitignored, overwritten on every run) |
+| `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
+| `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |
 
 To add a chapter, create `ch02.tex` and add `\input{ch02.tex}` to that topic's
 `main.tex` by hand; nothing does this automatically.
+
+Once you push to `main`, CI takes over: `build-pdf.yml` commits
+`pdf/<topic>.pdf`, and `update-readme.yml` regenerates the PDF list and the
+directory tree above. Both are generated — edit the `.tex` sources, not the
+lists.
 
 ## ライセンス
 Shield: [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
