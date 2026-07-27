@@ -1,4 +1,4 @@
-\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,xcolor,ccicons,mathrsfs, adjustbox}
+\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,xcolor,ccicons,mathrsfs,adjustbox,thmtools}
 \usepackage[hyphens]{url}
 \usepackage[dvipdfmx]{hyperref}
 \definecolor{myblue}{HTML}{0000EE}
@@ -18,14 +18,20 @@
   {.5em}
   {}
 
-\theoremstyle{noperiod}
-\newtheorem{definition}{定義}[section]
-\newtheorem{proposition}[definition]{命題}
-\newtheorem{lemma}[definition]{補題}
-\newtheorem{theorem}[definition]{定理}
-\newtheorem{example}[definition]{例}
-\newtheorem{corollary}[definition]{系}
-\newtheorem{remark}[definition]{注意}
+\declaretheoremstyle[
+  headfont=\normalfont\bfseries,
+  bodyfont=\normalfont,
+  headpunct={},
+  qed=$\square$
+]{style_with_box}
+
+\declaretheorem[name=定義, style=style_with_box, within=section]{definition}
+\declaretheorem[name=命題, style=style_with_box, sibling=definition]{proposition}
+\declaretheorem[name=補題, style=style_with_box, sibling=definition]{lemma}
+\declaretheorem[name=定理, style=style_with_box, sibling=definition]{theorem}
+\declaretheorem[name=系,   style=style_with_box, sibling=definition]{corollary}
+\declaretheorem[name=注意, style=style_with_box, sibling=definition]{remark}
+\declaretheorem[name=例, style=style_with_box, sibling=definition]{example}
 
 \makeatletter
 \renewenvironment{proof}[1][\proofname]{\par
