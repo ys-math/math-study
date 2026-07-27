@@ -19,6 +19,8 @@ LaTeXのソースは `tex/` にまとめ、トピックごとにディレクト�
 <!-- BEGIN TREE -->
 ```
 math-study/
+├── docs/
+│   └── git-strategy.md
 ├── scripts/
 │   ├── generate_pdf_links.py
 │   ├── generate_tree.py
