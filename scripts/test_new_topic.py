@@ -42,7 +42,9 @@ class TestTemplateMatchesRepo(unittest.TestCase):
         self.assert_reproduces("manifold", "多様体論")
 
     def test_title_containing_math(self):
-        self.assert_reproduces("algebraic_k_theory", r"代数的$K$理論")
+        self.assert_reproduces(
+            "algebraic_k_theory", r"\texorpdfstring{代数的$K$理論}{代数的K理論}"
+        )
 
     def test_no_trailing_newline(self):
         # Matching the repo byte-for-byte includes its lack of a final newline.
@@ -101,6 +103,9 @@ class TestValidateTitle(unittest.TestCase):
     def test_returns_the_readme_label(self):
         self.assertEqual(validate_title("層論"), "層論")
         self.assertEqual(validate_title(r"代数的$K$理論"), "代数的K理論")
+        self.assertEqual(
+            validate_title(r"\texorpdfstring{代数的$K$理論}{代数的K理論}"), "代数的K理論"
+        )
 
     def test_rejects_unsupported_latex(self):
         # Anything latex_unicode refuses would break generate_pdf_links.py in CI.
