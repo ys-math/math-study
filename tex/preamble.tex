@@ -1,5 +1,5 @@
 \usepackage[dvipdfmx]{xcolor}
-\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs, adjustbox}
+\usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs,adjustbox}
 % keytheorems, not thmtools: thmtools 0.76 builds shared theorem counters with
 % its aliasctr package, which LaTeX 2026 broke — `sibling=` then fails with
 % "Command \c@proposition already defined". Fix is unreleased upstream
@@ -8,12 +8,23 @@
 \usepackage[thmtools-compat]{keytheorems}
 \usepackage[hyphens]{url}
 \usepackage[dvipdfmx]{hyperref}
+% cleveref after hyperref, as it requires.
+\usepackage{cleveref}
+
 \definecolor{myblue}{HTML}{0000EE}
 \hypersetup{
     %colorlinks=true,
     %linkcolor=myblue,
     hidelinks
     }
+
+\crefname{definition}{定義}{定義}
+\crefname{proposition}{命題}{命題}
+\crefname{lemma}{補題}{補題}
+\crefname{theorem}{定理}{定理}
+\crefname{corollary}{系}{系}
+\crefname{remark}{注意}{注意}
+\crefname{example}{例}{例}
 
 \newtheoremstyle{noperiod}
   {}
