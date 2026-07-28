@@ -82,7 +82,10 @@ the errors that matter are local slips, not misremembered theorems.
 low confidence. Math findings carry 確信度 (高/中/低) so the user can triage —
 that is for calibration, not for smuggling in guesses.
 
-Ignore any previous `reviews/<topic>.md`; review fresh and overwrite it.
+Ignore any previous `reviews/<topic>.md`; review fresh and overwrite it. Never
+carry anything over from it — including the state of its checkboxes (see 概要
+below). A finding the owner has already fixed will not be found again, so a
+carried-over tick could only ever sit next to a finding that is still there.
 
 ### The report is Markdown, not LaTeX
 
@@ -115,10 +118,10 @@ whole report so the user can say "1 と 4 を直して".
 
 ## 概要
 
-| # | 分類 | 指摘 | 箇所 | 確信度 |
-|---|---|---|---|---|
-| 1 | 数学 | <一行の見出し> | [`ch01.tex:31`](../tex/<topic>/ch01.tex#L31) | 高 |
-| 2 | 誤字・記法 | <一行の見出し> | [`ch01.tex:38`](../tex/<topic>/ch01.tex#L38) | — |
+- [ ] **1** 数学 — <一行の見出し>
+      [`ch01.tex:31`](../tex/<topic>/ch01.tex#L31) [確信度: 高]
+- [ ] **2** 誤字・記法 — <一行の見出し>
+      [`ch01.tex:38`](../tex/<topic>/ch01.tex#L38)
 
 ## 数学的正しさ
 
@@ -157,7 +160,7 @@ Make that location a **link to the line**: the report sits in `reviews/`, so the
 path is relative — `[`` `ch01.tex:31` ``](../tex/<topic>/ch01.tex#L31)`. VS
 Code's Markdown preview resolves the `#L<n>` fragment and opens the file at that
 line, which is the difference between reading the report and fixing from it. Do
-the same in the 箇所 column of the 概要 table, and inline wherever the prose
+the same for the location in each 概要 item, and inline wherever the prose
 names another line (`ch01.tex:22`, `preamble.tex:47`). Keep the link text in
 backticks so it still reads as a path.
 
@@ -167,13 +170,27 @@ shows text that is not in the file yet, so its caption stays a plain code span
 `[`` `main.log` ``](../tex/<topic>/main.log)` with no line number, since the log
 is regenerated on every build and its line numbers do not survive.
 
-The 概要 table lists every finding in the same order and numbering as the
-sections below, so the report opens with something readable in ten seconds.
-確信度 is `—` for 誤字・記法 and LaTeX findings, which do not carry one.
+The 概要 list carries every finding in the same order and numbering as the
+sections below, so the report opens with something readable in ten seconds. Each
+item is one bullet: the checkbox, the number in bold, the category, the one-line
+heading, then the linked location. `[確信度: 高/中/低]` closes the item for
+数学 findings only — 誤字・記法 and LaTeX findings do not carry one, so theirs
+simply ends at the location rather than trailing an empty `—`.
+
+The wrapped second line is a lazy continuation of the same bullet; it keeps the
+source inside 80 columns and collapses back to one line in the preview. The
+checkbox has to be a list item to render as a checkbox at all — that is why 概要
+is a list and not a table, and why the numbered `###` headings below carry no box
+of their own.
+
+**Always write every box unticked.** The boxes are the owner's own progress
+tracking, for ticking by hand while working through the report; nothing reads
+them back, and the overwrite rule above means a re-run resets them. `## ビルド失敗`
+gets no box: it is not a numbered finding and there is nothing to triage.
 
 When a category has no findings, keep the heading and write `指摘なし`. When
-nothing at all is found, still write the file — its existence is the proof that
-the review ran.
+nothing at all is found, still write the file — 概要 reads `指摘なし` in place of
+the list, and the file's existence is the proof that the review ran.
 
 ## Afterwards
 
