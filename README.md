@@ -8,7 +8,6 @@ LaTeXのソースは `tex/` にまとめ、トピックごとにディレクト�
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
 * [圏論](./pdf/category_theory.pdf)
 * [微分幾何学](./pdf/differential_geometry.pdf)
-* [群論](./pdf/group_theory.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
 * [多様体論](./pdf/manifold.pdf)
 * [シンプレクティック多様体](./pdf/symplectic_manifold.pdf)
@@ -37,9 +36,6 @@ math-study/
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── differential_geometry/
-│   │   ├── ch01.tex
-│   │   └── main.tex
-│   ├── group_theory/
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── lambda_calculus/
