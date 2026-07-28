@@ -15,6 +15,9 @@ wrong, and two of the mistakes are only caught much later:
 Both are checked here, before anything is written, and the rendered label is
 echoed so the README text is visible at creation time.
 
+The ch01.tex is not empty: it holds the CC BY-NC-ND SPDX header, because the
+repo's root LICENSE is MIT and an unmarked chapter would read as MIT.
+
 Nothing is staged, committed or regenerated: .github/workflows/update-readme.yml
 owns the generated README blocks and rewrites them on the next push.
 
@@ -46,6 +49,13 @@ RESERVED = frozenset({"pdf", "scripts", "latex_out"})
 REPO_TREE_URL = f"https://github.com/ys-math/math-study/tree/main/{TEX_DIR}"
 
 CHAPTER = "ch01.tex"
+
+# The repo's root LICENSE is the MIT one, so an unmarked file reads as MIT.
+# Chapters are the CC BY-NC-ND half and have to say so themselves; a chapter
+# created without this line is silently offered under the wrong licence. Only
+# ch01.tex passes through here — a ch02.tex added by hand needs the line copied
+# across (see the Licensing section of CLAUDE.md).
+CHAPTER_TEMPLATE = "% SPDX-License-Identifier: CC-BY-NC-ND-4.0\n\n"
 
 # A file that only exists at this path in the repo, used to check where we are
 # running.
@@ -164,7 +174,7 @@ def main() -> int:
     (directory / "main.tex").write_text(
         render_main(args.topic, args.title), encoding="utf-8"
     )
-    (directory / CHAPTER).write_text("", encoding="utf-8")
+    (directory / CHAPTER).write_text(CHAPTER_TEMPLATE, encoding="utf-8")
 
     print(f"Created {directory}/ (README label: {label})")
     print(f"next: write {directory / CHAPTER}, then git add {directory}")
