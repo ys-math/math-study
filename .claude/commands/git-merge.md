@@ -1,6 +1,6 @@
 ---
 description: Inspect an open pull request, re-run its gates, then squash-merge it
-argument-hint: "[PR番号]  (省略時は現在のブランチの PR)"
+argument-hint: "[PR number]  (omit — the current branch's PR)"
 allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 
@@ -16,6 +16,8 @@ Under this repo's strategy, PRs exist only for changes that can break every
 topic at once — `scripts/`, `.github/`, `.latexmkrc`, `tex/preamble.tex`,
 `tex/colophon.tex`. Every PR you are asked to merge is, by construction, one of
 the risky ones. Behave accordingly.
+
+All output is English.
 
 ## 1. Find the PR
 
@@ -87,12 +89,12 @@ reversible from here.
 
 ```
 PR #7  ci: validate pull requests before they land
-  ブランチ: ci/pr-validation (3 commits)
-  変更: .github/workflows/validate.yml, .github/workflows/build-pdf.yml
+  Branch: ci/pr-validation (3 commits)
+  Changes: .github/workflows/validate.yml, .github/workflows/build-pdf.yml
   CI: validate / tex OK, validate / scripts OK
-  ローカルゲート: .github/ のみ — ローカル実行なし
+  Local gates: .github/ only — nothing to run
 
-squash merge しますか?
+Squash merge?
 ```
 
 ## 6. Merge

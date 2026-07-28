@@ -50,6 +50,9 @@ cd tex/<topic> && latexmk -r ../../.latexmkrc main.tex   # -r: the root rc file
 
 ## Chores
 
+Each command in `.claude/commands/` declares its output language at the top.
+All of them are English except `/review-notes`, whose report is Japanese.
+
 **New topic** — `scripts/new_topic.py`, or the `/new-topic` slash command. Do
 not stage, commit or regenerate the README afterwards; CI owns that. Full
 walkthrough in `README.md`.

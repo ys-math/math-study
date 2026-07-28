@@ -1,6 +1,6 @@
 ---
 description: Create a new topic directory with main.tex and ch01.tex
-argument-hint: <topic_slug> <タイトル>  (slug optional — I'll propose one)
+argument-hint: "<topic_slug> <title>  (slug optional — I'll propose one)"
 allowed-tools: Bash(python scripts/new_topic.py:*)
 ---
 
@@ -9,10 +9,12 @@ in `tex/`; the script creates `tex/<topic>/` and must be run from the repo root.
 
 Arguments given: $ARGUMENTS
 
+All output is English.
+
 The script takes a directory name and the document title:
 
 ```bash
-python scripts/new_topic.py <topic> --title <タイトル>
+python scripts/new_topic.py <topic> --title <title>
 ```
 
 The directory name must match `^[a-z][a-z0-9_]*$` — it is interpolated into a

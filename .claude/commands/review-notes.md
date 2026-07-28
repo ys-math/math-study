@@ -14,6 +14,8 @@ Arguments given: $ARGUMENTS
 separate instruction from the user. `allowed-tools` above enforces that — the
 only writable path is `reviews/`.
 
+The report and its summary are Japanese.
+
 ## Picking the topics
 
 - **Slugs given** — review each one, in the order given.

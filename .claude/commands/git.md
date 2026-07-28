@@ -1,6 +1,6 @@
 ---
 description: Sync, check, commit and push the working tree following the repo's git strategy
-argument-hint: "[何をコミットするか]  (省略可 — diff から判断します)"
+argument-hint: "[what to commit]  (optional — inferred from the diff)"
 allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 
@@ -15,6 +15,8 @@ message comes from the diff.
 **This command cannot merge.** `gh pr merge` is absent from `allowed-tools`
 above, deliberately: opening a PR and merging it are separate decisions, and
 merging is `/git-merge`.
+
+All output is English.
 
 ## 1. Sync
 
@@ -111,16 +113,16 @@ The plan states, in this order:
 4. **Gate results** — one line, so a green run is visible rather than assumed.
 
 ```
-main に 2 コミット:
+2 commits on main:
 
   feat(manifold): add a definition of tangent spaces
     tex/manifold/ch01.tex
   chore(topology): fix a typo in the separation axioms
     tex/topology/ch02.tex
 
-ゲート: manifold OK (0.8s), topology OK (0.8s)
+Gates: manifold OK (0.8s), topology OK (0.8s)
 
-進めますか?
+Proceed?
 ```
 
 If the plan bundles two mathematical units into one commit because they share a
