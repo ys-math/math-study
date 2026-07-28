@@ -56,6 +56,7 @@ math-study/
 │   └── preamble.tex
 ├── CLAUDE.md
 ├── LICENSE
+├── LICENSE-CC-BY-NC-ND-4.0
 └── README.md
 ```
 <!-- END TREE -->
