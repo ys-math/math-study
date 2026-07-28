@@ -15,6 +15,23 @@ The prose in `tex/*/ch0N.tex` is authored by the repo owner. Edit it only when
 asked to, and never rewrite, reformat or "fix" it in passing while doing tooling
 work.
 
+## Licensing
+
+The repo is dual-licensed, and the boundary runs *through* `tex/`:
+`tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0, everything else — the
+shared `tex/preamble.tex`, `tex/colophon.tex` and the generated `tex/*/main.tex`
+included — is MIT.
+
+The root `LICENSE` is the MIT one, so an unmarked file reads as MIT by default.
+That makes the CC side the side that has to be marked:
+
+- **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
+  line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
+  by hand is on whoever adds it. Nothing in CI checks this — `validate.yml` only
+  runs on pull requests, and `tex/<topic>/**` never goes through one.
+- The path table under `## ライセンス` in `README.md` is authoritative, so a
+  missing header is untidy rather than a licensing hole. Keep the table right.
+
 ## Generated artifacts — never hand-edit
 
 - `pdf/*.pdf` is committed by `.github/workflows/build-pdf.yml`.

@@ -89,13 +89,29 @@ directory tree above. Both are generated — edit the `.tex` sources, not the
 lists.
 
 ## ライセンス
-Shield: [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
+[![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
 
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International License][cc-by-nc-nd].
+This repository is dual-licensed. The table below is authoritative: it matches
+on paths, so a file is covered whether or not it carries an SPDX header.
+
+| Path | License |
+| --- | --- |
+| `tex/*/ch*.tex`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
+| everything else | [MIT][mit] |
+
+The mathematics — the chapter sources and the PDFs built from them — is
+[Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International][cc-by-nc-nd].
+Everything that builds it is MIT: `scripts/`, `.github/`, `.latexmkrc`, and the
+shared `tex/preamble.tex`, `tex/colophon.tex` and every `tex/*/main.tex`, which
+`new_topic.py` generates. Reuse the build system freely.
+
+Full texts: [`LICENSE`](./LICENSE) (MIT) and
+[`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0).
 
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-image]][cc-by-nc-nd]
 
+[mit]: https://opensource.org/licenses/MIT
+[mit-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
 [cc-by-nc-nd]: http://creativecommons.org/licenses/by-nc-nd/4.0/
 [cc-by-nc-nd-image]: https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png
 [cc-by-nc-nd-shield]: https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg
