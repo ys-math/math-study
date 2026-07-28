@@ -79,6 +79,7 @@ Claude Code slash commands:
 | Command | What it does |
 | --- | --- |
 | `/new-topic <topic> <title>` | Creates a topic by running `new_topic.py` above |
+| `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf` and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
 | `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, writing `reviews/<topic>.md` (gitignored, overwritten on every run) |
 | `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |

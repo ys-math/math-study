@@ -54,14 +54,17 @@ cd tex/<topic> && latexmk -r ../../.latexmkrc main.tex   # -r: the root rc file
 not stage, commit or regenerate the README afterwards; CI owns that. Full
 walkthrough in `README.md`.
 
-**Deleting or renaming a topic** — nothing automates this, and CI will not clean
-up after you:
+**Deleting a topic** — the `/delete-topic` slash command. Unlike `/new-topic` it
+commits and pushes the removal itself: a deleted-but-uncommitted topic is the
+one state where the owner's prose is unrecoverable.
 
-1. Delete or `git mv` the `tex/<topic>/` directory.
+**Renaming a topic** — nothing automates this, and CI will not clean up after
+you:
+
+1. `git mv` the `tex/<topic>/` directory.
 2. `git rm pdf/<topic>.pdf` — the build only ever copies PDFs into `pdf/`, so an
    orphan lingers forever otherwise.
-3. On a rename, update `\TexRepo` inside the moved `main.tex`; it embeds the
-   directory name.
+3. Update `\TexRepo` inside the moved `main.tex`; it embeds the directory name.
 
 **Reviewing a topic's notes** — the `/review-notes` slash command. It reads a
 topic, compiles it, and writes `reviews/<topic>.md`; that directory is
