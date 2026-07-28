@@ -65,7 +65,7 @@ Run everything from the repo root.
 
 | Command | What it does |
 | --- | --- |
-| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and an empty `ch01.tex`. `<topic>` is lowercase letters, digits and underscores; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
+| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and a `ch01.tex` holding just its CC BY-NC-ND SPDX header. `<topic>` is lowercase letters, digits and underscores; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
 | `cd tex/<topic> && latexmk -r ../../.latexmkrc main.tex` | Compiles the topic's PDF locally |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
 | `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
@@ -81,7 +81,9 @@ Claude Code slash commands:
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |
 
 To add a chapter, create `ch02.tex` and add `\input{ch02.tex}` to that topic's
-`main.tex` by hand; nothing does this automatically.
+`main.tex` by hand; nothing does this automatically. Copy the
+`% SPDX-License-Identifier: CC-BY-NC-ND-4.0` line from `ch01.tex` while you are
+there — only the generated `ch01.tex` gets it for free.
 
 Once you push to `main`, CI takes over: `build-pdf.yml` commits
 `pdf/<topic>.pdf`, and `update-readme.yml` regenerates the PDF list and the

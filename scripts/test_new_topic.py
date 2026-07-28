@@ -11,7 +11,13 @@ import unittest
 from pathlib import Path
 
 from latex_unicode import UnsupportedLatex
-from new_topic import InvalidTopic, render_main, validate_title, validate_topic
+from new_topic import (
+    CHAPTER_TEMPLATE,
+    InvalidTopic,
+    render_main,
+    validate_title,
+    validate_topic,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 TEX = ROOT / "tex"
@@ -58,6 +64,31 @@ class TestTemplateMatchesRepo(unittest.TestCase):
             source,
         )
         self.assertIn(r"\newcommand{\DocTitle}{層論}", source)
+
+
+class TestChapterTemplate(unittest.TestCase):
+    r"""The created ch01.tex must declare the licence it is actually under.
+
+    The root LICENSE is MIT, so an unmarked chapter reads as MIT — the opposite
+    of what the prose is offered under. Nothing in CI catches a missing header:
+    validate.yml only runs on pull requests, and tex/<topic>/** goes straight to
+    main. The header being generated here is what keeps that from mattering.
+
+    The existing chapters are not asserted against: they are the repo owner's
+    files, and a drift guard over them would be the CI gate this repo chose not
+    to have.
+    """
+
+    def test_declares_the_notes_licence(self):
+        self.assertIn("SPDX-License-Identifier: CC-BY-NC-ND-4.0", CHAPTER_TEMPLATE)
+
+    def test_is_a_latex_comment(self):
+        # Anything else would typeset into the PDF on the first compile.
+        self.assertTrue(CHAPTER_TEMPLATE.startswith("%"))
+
+    def test_leaves_a_blank_line_to_write_after(self):
+        self.assertEqual(len(CHAPTER_TEMPLATE.strip().splitlines()), 1)
+        self.assertTrue(CHAPTER_TEMPLATE.endswith("\n\n"))
 
 
 class TestValidateTopic(unittest.TestCase):
