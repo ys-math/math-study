@@ -20,6 +20,7 @@ LaTeXのソースは `tex/` にまとめ、トピックごとにディレクト�
 ```
 math-study/
 ├── docs/
+│   ├── agent-system.md
 │   ├── git-strategy.md
 │   └── label-convention.md
 ├── scripts/
