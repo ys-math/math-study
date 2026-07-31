@@ -20,7 +20,8 @@ LaTeXのソースは `tex/` にまとめ、トピックごとにディレクト�
 ```
 math-study/
 ├── docs/
-│   └── git-strategy.md
+│   ├── git-strategy.md
+│   └── label-convention.md
 ├── scripts/
 │   ├── generate_pdf_links.py
 │   ├── generate_tree.py
