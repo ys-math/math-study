@@ -82,9 +82,15 @@ Claude Code slash commands:
 | --- | --- |
 | `/new-topic <topic> <title>` | Creates a topic by running `new_topic.py` above |
 | `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf` and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
+| `/label [topic ...]` | Proposes `\label{}` names for a topic's theorem environments per `docs/label-convention.md`, and applies the ones you pick |
 | `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, writing `reviews/<topic>.md` (gitignored, overwritten on every run) |
 | `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |
+| `/watch-ci [sha]` | Reports the CI runs for a commit and stops. Built to run under `/loop` |
+
+`docs/agent-system.md` maps the whole setup — these commands, the instruction
+files, the hooks that enforce the repo's rules, and how the CI cascade
+terminates.
 
 To add a chapter, create `ch02.tex` and add `\input{ch02.tex}` to that topic's
 `main.tex` by hand; nothing does this automatically. Copy the
