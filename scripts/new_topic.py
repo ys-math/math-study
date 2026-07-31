@@ -55,7 +55,15 @@ CHAPTER = "ch01.tex"
 # created without this line is silently offered under the wrong licence. Only
 # ch01.tex passes through here — a ch02.tex added by hand needs the line copied
 # across (see the Licensing section of CLAUDE.md).
-CHAPTER_TEMPLATE = "% SPDX-License-Identifier: CC-BY-NC-ND-4.0\n\n"
+#
+# The second line is for LaTeX Workshop, not for LaTeX. One workspace holds one
+# main.tex per topic, and the extension picks a single root file for the whole
+# window; when it picks another topic's, \cref{} in this chapter offers no
+# labels and ctrl-clicking one goes nowhere. The magic comment pins the root
+# per file and beats every other detection rule.
+CHAPTER_TEMPLATE = (
+    "% SPDX-License-Identifier: CC-BY-NC-ND-4.0\n% !TEX root = main.tex\n\n"
+)
 
 # A file that only exists at this path in the repo, used to check where we are
 # running.
