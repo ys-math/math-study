@@ -29,6 +29,7 @@ math-study/
 │   ├── latex_unicode.py
 │   ├── new_topic.py
 │   ├── readme_block.py
+│   ├── test_agent_docs.py
 │   ├── test_latex_unicode.py
 │   └── test_new_topic.py
 ├── tex/
