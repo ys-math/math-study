@@ -28,6 +28,10 @@ cmd=$(jq -r '.tool_input.command // empty' <<<"$input")
 # *starts* with git, so `grep 'git add -A' notes.txt` is not treated as a match.
 while IFS= read -r seg; do
   seg="${seg#"${seg%%[![:space:]]*}"}"
+  # Squeeze runs of whitespace to one space. Every pattern below is written with
+  # single spaces, so without this `git  clean -xdf` matches none of them and is
+  # waved through.
+  seg=$(tr -s '[:space:]' ' ' <<<"$seg")
   [[ $seg == git\ * ]] || continue
 
   case "$seg" in
@@ -42,10 +46,25 @@ while IFS= read -r seg; do
       fi
       ;;
     "git clean "*)
-      rest=$(sed -E 's/^git[[:space:]]+clean//' <<<"$seg")
-      paths=$(tr ' ' '\n' <<<"$rest" | grep -vE '^-|^$' || true)
-      if [ -z "$paths" ]; then
-        deny "git clean without an explicit pathspec would delete untracked files anywhere in the tree — including chapters that have never been committed. Name the paths, as .claude/commands/delete-topic.md does."
+      # Two things a plain "does any token not start with -" test gets wrong:
+      # -e takes a *separate* argument, which is not a pathspec however much it
+      # looks like one, and -n only prints. Both were live defects — `git clean
+      # -xdf -e main.pdf` was allowed, and `git clean -n` was refused.
+      dry=0; paths=0; skip=0
+      while IFS= read -r tok; do
+        [ -n "$tok" ] || continue
+        if [ "$skip" = 1 ]; then skip=0; continue; fi
+        case "$tok" in
+          -n|--dry-run) dry=1 ;;    # prints what it would remove; removes nothing
+          -e|--exclude) skip=1 ;;   # its argument is a pattern, not a path
+          --*)          ;;          # --exclude=<pattern> and every other long flag
+          -*n*)         dry=1 ;;    # bundled short flags: -ndx
+          -*)           ;;
+          *)            paths=1 ;;
+        esac
+      done < <(tr ' ' '\n' <<<"${seg#git clean}")
+      if [ "$dry" = 0 ] && [ "$paths" = 0 ]; then
+        deny "git clean without an explicit pathspec would delete untracked files anywhere in the tree — including chapters that have never been committed. Name the paths, as .claude/commands/delete-topic.md does, or pass -n to preview."
       fi
       ;;
   esac
