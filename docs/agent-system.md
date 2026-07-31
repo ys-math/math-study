@@ -45,16 +45,17 @@ Loaded **on demand**, by a command that names them:
 
 ## Commands
 
-Seven, in `.claude/commands/`. Each one's `description:` and `argument-hint:`
-frontmatter is authoritative for *what it does*; the table below carries only
-what the frontmatter cannot tell you — **what it is allowed to touch**, which is
-what you actually need when choosing between them.
+They live in `.claude/commands/`. Each one's `description:` and
+`argument-hint:` frontmatter is authoritative for *what it does*; the table
+below carries only what the frontmatter cannot tell you — **what it is allowed
+to touch**, which is what you actually need when choosing between them.
 
 | Command | Writes | Commits | Stops for confirmation | Output |
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/**` | no | always, before applying | English |
 | `/review-notes` | `reviews/**` only | no | no | **Japanese** |
+| `/audit` | `reviews/**` only | no | no | English |
 | `/git` | index, commits | yes, pushes | always, before any commit | English |
 | `/git-merge` | squash-merges a PR | yes | always | English |
 | `/delete-topic` | deletes a topic | **yes, itself** | always | English |
@@ -78,7 +79,7 @@ something, check that the frontmatter agrees — that is the half that holds.
 
 | Hook | Event | Refuses |
 | --- | --- | --- |
-| `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .`; force-push including `--force-with-lease`; `git clean` with no pathspec |
+| `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run |
 | `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `README.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
@@ -93,6 +94,35 @@ Two properties to preserve if you touch these:
   Permission rules prefix-match, so no rule can catch
   `git push origin main --force`. That single limitation decided which rules went
   where.
+
+### Keeping this map true
+
+Every table in this file enumerates something on disk, and a stale enumeration
+reads exactly like a correct one. `scripts/test_agent_docs.py` is what notices:
+it holds the command tables here and in `README.md` to `.claude/commands/`, the
+hook and workflow and `docs/` names to their directories, the hooks to being
+registered and executable, and every count written in digits to what it counts.
+
+It runs wherever the `scripts/` tests already run — `/git`'s gate and the
+`update-readme.yml` step — rather than in a checker somebody has to remember to
+invoke, which would have the failure mode it is guarding against. So a command
+added without a table row fails before the commit exists; if one somehow lands,
+the README bot stays red until it is fixed.
+
+Two conventions keep it able to see, and both are load-bearing:
+
+- **Counts go in digits, or go away.** "all 8 topics" is checked. "Seven, in
+  `.claude/commands/`" was not, and was wrong within a week — as was "the six
+  commands" in `CLAUDE.md`. Where a table already enumerates the things, do not
+  also say how many.
+- **Enumerations are tables**, keyed on the first column, so prose can name a
+  command freely — `/loop` is discussed below and is not a command in this repo.
+
+What no test can check is whether any of this is *true*, only whether the names
+line up. `/audit` is the judgment half: it reads for contradictions between
+files, claims the repo no longer satisfies, prose that disagrees with an
+`allowed-tools` line, steps that cannot fire, and procedures with no reachable
+exit. It runs the tests first and never re-derives what they decide.
 
 ## Automation
 
@@ -143,6 +173,10 @@ The routing question, in the order worth asking it:
 
 Most things belong at 2 or 3. `CLAUDE.md` is the expensive tier — it is paid on
 every session, including the ones it is irrelevant to.
+
+Whatever you add, add it to the tables above in the same commit — see
+`### Keeping this map true`. A map that is a commit behind is worse than no
+map, because it is still believed.
 
 When a fact ends up in more than one file, name one owner and make the others
 point at it. This repo once carried three different spellings of the local

@@ -90,7 +90,13 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | --- | --- |
 | `tex/<topic>/**` | `latexmk -cd -g tex/<topic>/main.tex` for each touched topic |
 | `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | the same, for all 8 topics |
-| `scripts/**` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
+| `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
+
+The doc paths are in that row because `scripts/test_agent_docs.py` checks them:
+it compares the command tables in `README.md` and `docs/agent-system.md`
+against `.claude/commands/`, and every count written in digits against what it
+counts. Adding a command without listing it fails here, before there is a
+commit to amend.
 
 `-g` is not optional: latexmk caches a previous failure and reports "Nothing to
 do" for a file that does not compile. A single topic takes about 0.8 s and all
@@ -110,7 +116,11 @@ The plan states, in this order:
 2. **The commits** — for each, the literal subject line and the exact paths it
    stages. One commit per (topic, type). Never split hunks within a file.
 3. **Anything unexplained** — files from step 4 that the user has not mentioned.
-4. **Gate results** — one line, so a green run is visible rather than assumed.
+4. **Documentation coupling** — only when the diff adds or removes a command, a
+   hook, a workflow or a `docs/` file: one line saying where the change was
+   written down, or that it was not. Step 5 catches a missing table row; it
+   cannot catch `docs/agent-system.md` describing a behaviour that changed.
+5. **Gate results** — one line, so a green run is visible rather than assumed.
 
 ```
 2 commits on main:

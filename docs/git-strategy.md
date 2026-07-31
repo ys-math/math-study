@@ -213,7 +213,12 @@ Before any commit, the relevant checks run locally:
 | --- | --- | --- |
 | `tex/<topic>/**` | compile that topic | ~0.8 s |
 | `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics | ~7 s |
-| `scripts/**` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
+| `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
+
+The documentation paths run the tests too, because `scripts/test_agent_docs.py`
+is one of them: it holds the command tables in `README.md` and
+`docs/agent-system.md` to what is actually in `.claude/commands/`, and every
+count written in digits — "all 8 topics", above — to what it counts.
 
 ```bash
 latexmk -cd -g tex/<topic>/main.tex

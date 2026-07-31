@@ -56,6 +56,12 @@ These are the changes that break silently, days later:
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
   rebuilds nothing, with a green CI run.
+- **Adding a command, hook, workflow or `docs/` file** means listing it in
+  `docs/agent-system.md` in the same commit — and a command in `README.md`'s
+  table as well. `scripts/test_agent_docs.py` compares those tables against the
+  directories and fails otherwise. It also checks every count written in
+  digits, which is why "all 8 topics" is spelled that way and why nothing says
+  how many commands there are: a table two lines below already does.
 
 ## Commands
 
@@ -76,8 +82,9 @@ your commit. Extend them when behaviour changes — a new `SYMBOLS` entry in
 
 ## Slash commands — only the surprises
 
-The six commands in `.claude/commands/` describe themselves; read the one you
-are running. What you would not guess from outside:
+The commands in `.claude/commands/` describe themselves; read the one you are
+running, and `docs/agent-system.md` for what they may touch. What you would not
+guess from outside:
 
 - **`/delete-topic` commits and pushes on its own** — every other command leaves
   the tree for `/git`. A deleted-but-uncommitted topic is the one state where
