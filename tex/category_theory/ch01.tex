@@ -1,17 +1,18 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
 
 \section{圏}
 \begin{definition}
 \textbf{圏}$\mathscr{C}$は以下のデータから成る.
 \begin{itemize}
-    \item \textbf{対象}の集まり$\ob(\mathscr{C})$.
-    \item \textbf{射}の集まり$\mor(\mathscr{C})$.\ 射は次を満たす.
+    \item \textbf{対象}の集まり$\Ob(\mathscr{C})$.
+    \item \textbf{射}の集まり$\Mor(\mathscr{C})$.\ 射は次を満たす.
     \begin{itemize}
-    \item 任意の$f \in \mor(\mathscr{C})$は\textbf{始域}$\dom(f) = a \in \ob(\mathscr{C})$と\textbf{終域}$\cod(f) = b \in \ob(\mathscr{C})$を持ち$f \colon a \to b$と表す.\ 始域が$a$,\ 終域が$b$であるような射の集まりを$\mor(a,b)$と書く.
-    \item 任意の$f, g \in \mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\textbf{合成}$g \circ f \in \mor(\mathscr{C})$が定まる.\ 合成は次を満たす.
+    \item 任意の$f \in \Mor(\mathscr{C})$は\textbf{始域}$\dom(f) = a \in \Ob(\mathscr{C})$と\textbf{終域}$\cod(f) = b \in \Ob(\mathscr{C})$を持ち$f \colon a \to b$と表す.\ 始域が$a$,\ 終域が$b$であるような射の集まりを$\Mor(a,b)$と書く.
+    \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\textbf{合成}$g \circ f \in \Mor(\mathscr{C})$が定まる.\ 合成は次を満たす.
         \begin{itemize}
-        \item 任意の$f,g,h \in \mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$.\ この条件を\textbf{結合律}という.
-        \item 任意の$x \in \ob(\mathscr{C})$に対して$\id_x \colon x \to x$が存在し任意の$f,g \in \mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = x$のとき$\id_x \circ f = f$かつ$g \circ \id_x = g$が成り立つ.\ $\id_x$を$x$の\textbf{恒等射}という.
+        \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$.\ この条件を\textbf{結合律}という.
+        \item 任意の$x \in \Ob(\mathscr{C})$に対して$\id_x \colon x \to x$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = x$のとき$\id_x \circ f = f$かつ$g \circ \id_x = g$が成り立つ.\ $\id_x$を$x$の\textbf{恒等射}という.
         \end{itemize}
     \end{itemize}
 \end{itemize}
