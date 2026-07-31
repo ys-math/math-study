@@ -85,6 +85,7 @@ Claude Code slash commands:
 | `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf` and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
 | `/label [topic ...]` | Proposes `\label{}` names for a topic's theorem environments per `docs/label-convention.md`, and applies the ones you pick |
 | `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, writing `reviews/<topic>.md` (gitignored, overwritten on every run) |
+| `/audit [file ...]` | The same, for the machinery rather than the mathematics: checks the commands, instructions and hooks for contradictions, stale claims and dead steps, writing `reviews/audit.md`. Never edits what it audits |
 | `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |
 | `/watch-ci [sha]` | Reports the CI runs for a commit and stops. Built to run under `/loop` |

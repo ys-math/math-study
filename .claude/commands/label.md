@@ -69,7 +69,7 @@ the row that it was a collision.
 
 Two of the rules are judgement calls: **which casing a definition takes**
 (structure / property / data), and **whether a statement has a genuinely
-established name**. Mark a row `[低]` when the call was close, `[中]` when it
+established name**. Mark a row `[Low]` when the call was close, `[Medium]` when it
 leaned one way. Leave the marker off entirely when the row is not in doubt.
 
 Do not hedge to be safe. A table where every row is marked tells the user
@@ -86,7 +86,7 @@ tex/algebraic_k_theory/ — 4 environments, 2 to name, 2 renames
  №  location      env         statement                          proposed
  1  ch01.tex:5    definition  R 加群 P が射影加群であること      def: IsProjective
                               (was: def: projective_module)
- 2  ch01.tex:18   lemma       短完全列の分裂条件 (1)-(4) の同値  lem: splitting_lemma  [中]
+ 2  ch01.tex:18   lemma       短完全列の分裂条件 (1)-(4) の同値  lem: splitting_lemma  [Medium]
  3  ch01.tex:42   proposition 射影加群の特徴づけ (1)-(3)         prop: projective_tfae
                               (was: prop: characterization of projective modules, 0 \cref sites)
 ```

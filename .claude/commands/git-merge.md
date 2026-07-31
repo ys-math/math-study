@@ -73,7 +73,7 @@ Then, by category:
 | PR touches | Gate |
 | --- | --- |
 | `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | `latexmk -cd -g` for all 8 topics |
-| `scripts/**` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
+| `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `.github/**` only | nothing local to run — say so explicitly |
 
 Any failure stops the merge and is reported verbatim.

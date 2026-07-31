@@ -1,7 +1,7 @@
 ---
 description: Report the state of the CI runs for a commit, then stop
 argument-hint: "[commit sha]  (omit — the current HEAD)"
-allowed-tools: Bash(git rev-parse:*), Bash(git log:*), Bash(gh run list:*), Bash(gh run view:*)
+allowed-tools: Bash(git rev-parse:*), Bash(git log:*), Bash(date:*), Bash(gh run list:*), Bash(gh run view:*)
 ---
 
 Report the GitHub Actions runs for one commit and stop.
@@ -57,6 +57,20 @@ A loop reads that line to decide whether to keep going.
   commit is not on the remote. Report the error verbatim. **A loop stops** — an
   error that repeats every iteration is not going to resolve itself, and a loop
   that keeps retrying it just prints the same failure forever.
+
+The zero-runs branch of `done` is the only one that needs a clock, and it is
+the one with no timestamp of its own to read — `gh run list` returned nothing.
+Get the two ends explicitly:
+
+```bash
+git log -1 --format=%cI <sha>
+date -u +%FT%TZ
+```
+
+That is what `Bash(date:*)` is in `allowed-tools` for. Without it this branch
+cannot be evaluated at all, and a commit that will never have runs — the state
+this file says to *expect* after every CI commit — reports `pending` forever,
+which under `/loop` means re-checking until the user stops it.
 
 ## 4. Report
 
