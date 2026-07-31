@@ -9,6 +9,11 @@ Your job in this repo is the Python tooling in `scripts/`, the CI in
 `.github/workflows/`, and repo chores. See `README.md` for the human-facing
 workflow and the script docstrings for design rationale.
 
+**This file carries only what you cannot find at the moment you need it** — the
+surprises, and the rules nothing enforces. Everything routine lives in the file
+that owns it (`docs/`, `.claude/commands/`); do not restate it here, because a
+second copy is a copy that drifts.
+
 ## The mathematics is not yours to write
 
 The prose in `tex/*/ch0N.tex` is authored by the repo owner. Edit it only when
@@ -17,28 +22,26 @@ work.
 
 ## Licensing
 
-The repo is dual-licensed, and the boundary runs *through* `tex/`:
-`tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0, everything else — the
-shared `tex/preamble.tex`, `tex/colophon.tex` and the generated `tex/*/main.tex`
-included — is MIT.
-
-The root `LICENSE` is the MIT one, so an unmarked file reads as MIT by default.
-That makes the CC side the side that has to be marked:
+`tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0; everything else is MIT —
+including the shared `tex/preamble.tex`, `tex/colophon.tex` and the generated
+`tex/*/main.tex`. The root `LICENSE` is the MIT one, so an unmarked file reads
+as MIT and the CC side is the one that has to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
-  by hand is on whoever adds it. Nothing in CI checks this — `validate.yml` only
-  runs on pull requests, and `tex/<topic>/**` never goes through one.
+  by hand is on whoever adds it. **Nothing in CI checks this** — `validate.yml`
+  runs only on pull requests, and `tex/<topic>/**` never goes through one.
 - The path table under `## ライセンス` in `README.md` is authoritative, so a
   missing header is untidy rather than a licensing hole. Keep the table right.
 
 ## Generated artifacts — never hand-edit
 
-- `pdf/*.pdf` is committed by `.github/workflows/build-pdf.yml`.
-- The two marker-delimited blocks in `README.md` (`<!-- BEGIN PDF LINKS -->`,
-  `<!-- BEGIN TREE -->`) are rewritten by `.github/workflows/update-readme.yml`.
+- `pdf/*.pdf` — committed by `.github/workflows/build-pdf.yml`.
+- The `<!-- BEGIN PDF LINKS -->` and `<!-- BEGIN TREE -->` blocks in `README.md`
+  — rewritten by `.github/workflows/update-readme.yml`. Prose outside the
+  markers is yours to edit.
 
-Change the `.tex` sources instead and let CI regenerate. Both generators read
+Change the `.tex` sources and let CI regenerate. Both generators read
 `git ls-files`, so a new topic is invisible to them until it is tracked.
 
 ## Coupling rules
@@ -56,80 +59,59 @@ These are the changes that break silently, days later:
 
 ## Commands
 
-Run the scripts from the repo root — they resolve `README.md` and `tex/`
+Run everything from the repo root — the scripts resolve `README.md` and `tex/`
 relative to the working directory.
 
 ```bash
 python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 python scripts/new_topic.py sheaf_theory --title 層論
-cd tex/<topic> && latexmk -r ../../.latexmkrc main.tex   # -r: the root rc file
+latexmk -cd -g tex/<topic>/main.tex   # flags: docs/git-strategy.md, ## Gates
 ```
 
-## Chores
+Gate before committing, per `docs/git-strategy.md` `## Gates`. One consequence
+that section omits: the `scripts/` tests also run as a step in
+`update-readme.yml`, so a failure there blocks the README regeneration, not just
+your commit. Extend them when behaviour changes — a new `SYMBOLS` entry in
+`scripts/latex_unicode.py`, any `MAIN_TEMPLATE` edit.
 
-Each command in `.claude/commands/` declares its output language at the top.
-All of them are English except `/review-notes`, whose report is Japanese.
+## Slash commands — only the surprises
 
-**New topic** — `scripts/new_topic.py`, or the `/new-topic` slash command. Do
-not stage, commit or regenerate the README afterwards; CI owns that. Full
-walkthrough in `README.md`.
+The six commands in `.claude/commands/` describe themselves; read the one you
+are running. What you would not guess from outside:
 
-**Deleting a topic** — the `/delete-topic` slash command. Unlike `/new-topic` it
-commits and pushes the removal itself: a deleted-but-uncommitted topic is the
-one state where the owner's prose is unrecoverable.
+- **`/delete-topic` commits and pushes on its own** — every other command leaves
+  the tree for `/git`. A deleted-but-uncommitted topic is the one state where
+  the owner's prose is unrecoverable.
+- **`/review-notes` never edits `tex/`**, and `reviews/` is gitignored and
+  overwritten every run: never cite a report as a record, and act on a finding
+  only when the owner asks for that finding to be fixed.
+- **`docs/label-convention.md` binds every `\label{}` you write**, whether or
+  not you got there through `/label`.
 
-**Renaming a topic** — nothing automates this, and CI will not clean up after
-you:
+**Renaming a topic is not automated, and CI will not clean up after you:**
 
 1. `git mv` the `tex/<topic>/` directory.
 2. `git rm pdf/<topic>.pdf` — the build only ever copies PDFs into `pdf/`, so an
    orphan lingers forever otherwise.
 3. Update `\TexRepo` inside the moved `main.tex`; it embeds the directory name.
 
-**Naming `\label{}`s** — the `/label` slash command, which proposes labels for a
-topic's theorem environments and applies the ones the owner picks. The naming
-rules live in `docs/label-convention.md` and bind any label you write, command or
-not: `<abbr>: <body>` with Lean 4 / mathlib naming inside. It only ever renames
-an existing label that violates those rules, never one it merely dislikes.
-
-**Reviewing a topic's notes** — the `/review-notes` slash command. It reads a
-topic, compiles it, and writes `reviews/<topic>.md`; that directory is
-gitignored and the report is overwritten on every run, so never cite one as a
-record. The command is read-only with respect to `tex/` by design — act on a
-finding only when the owner asks for that finding to be fixed.
-
-## Before pushing
-
-- Run the test suite before committing anything in `scripts/`; a failure in
-  `update-readme.yml` blocks the README regeneration. Extend the tests when
-  behaviour changes — new `SYMBOLS` entries in `scripts/latex_unicode.py`, any
-  `MAIN_TEMPLATE` edit.
-- Compile locally before pushing changes to `tex/preamble.tex`,
-  `tex/colophon.tex` or `.latexmkrc`. They force all topics to rebuild in CI, so
-  one mistake costs a full failed run.
-
 ## Git
 
-Full rules and their reasoning: `docs/git-strategy.md`. Use the `/git` and
-`/git-merge` slash commands, which implement it. The rules that matter most:
+`docs/git-strategy.md` is the specification and `/git` / `/git-merge` implement
+it — read it before doing anything by hand. What binds regardless:
 
 - **Shared paths go on a branch and through a PR** — `scripts/`, `.github/`,
   `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`. They can break every
-  topic at once. Everything else, `tex/<topic>/**` included, commits straight
-  to `main`.
-- **Conventional commits in English**: `feat`, `fix`, `docs`, `ci`, `refactor`,
-  `chore`, `test`. The scope is the topic directory name for content changes
-  (`feat(algebraic_k_theory): ...`), the file stem for shared `.tex`
-  (`fix(preamble): ...`), and omitted otherwise. The history also contains
-  `remove:` — do not continue it; use `chore:` or `refactor:`.
-- **Never force-push and never rewrite pushed history.** Correct a bad commit
-  on `main` with a follow-up commit.
+  topic at once. Everything else, `tex/<topic>/**` included, commits straight to
+  `main`.
 - **Path-scoped `git add` only**, never `-A` or `.`; the working tree may hold
   someone else's work in progress.
-- **`Co-Authored-By: Claude` on what Claude wrote** — `scripts/`, `.github/`,
-  `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex` — and never on
-  `tex/<topic>/**`.
+- **Never force-push and never rewrite pushed history.** Correct a bad commit on
+  `main` with a follow-up commit.
+- **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
+  `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex` — and
+  **never on `tex/<topic>/**`**.
 
-CI pushes to `main` after every push of yours, so `git pull --rebase` first.
-It cannot conflict: the bots only touch `pdf/*.pdf` and the generated `README.md`
+CI pushes to `main` after every push of yours, so `git pull --rebase` first. It
+cannot conflict: the bots only touch `pdf/*.pdf` and the generated `README.md`
 blocks.
