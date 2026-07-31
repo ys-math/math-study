@@ -86,6 +86,12 @@ you:
    orphan lingers forever otherwise.
 3. Update `\TexRepo` inside the moved `main.tex`; it embeds the directory name.
 
+**Naming `\label{}`s** — the `/label` slash command, which proposes labels for a
+topic's theorem environments and applies the ones the owner picks. The naming
+rules live in `docs/label-convention.md` and bind any label you write, command or
+not: `<abbr>: <body>` with Lean 4 / mathlib naming inside. It only ever renames
+an existing label that violates those rules, never one it merely dislikes.
+
 **Reviewing a topic's notes** — the `/review-notes` slash command. It reads a
 topic, compiles it, and writes `reviews/<topic>.md`; that directory is
 gitignored and the report is overwritten on every run, so never cite one as a
