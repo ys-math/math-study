@@ -86,8 +86,14 @@ class TestChapterTemplate(unittest.TestCase):
         # Anything else would typeset into the PDF on the first compile.
         self.assertTrue(CHAPTER_TEMPLATE.startswith("%"))
 
+    def test_pins_the_editor_root_file(self):
+        # Without it LaTeX Workshop may resolve the window's root file to
+        # another topic's main.tex, and label completion for \cref{} goes
+        # silently empty. The path is relative to the chapter's own directory.
+        self.assertIn("% !TEX root = main.tex", CHAPTER_TEMPLATE)
+
     def test_leaves_a_blank_line_to_write_after(self):
-        self.assertEqual(len(CHAPTER_TEMPLATE.strip().splitlines()), 1)
+        self.assertEqual(len(CHAPTER_TEMPLATE.strip().splitlines()), 2)
         self.assertTrue(CHAPTER_TEMPLATE.endswith("\n\n"))
 
 
