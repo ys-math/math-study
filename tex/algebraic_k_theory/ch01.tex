@@ -1,7 +1,10 @@
-\section{\texorpdfstring{$K_0$}{K_0}}
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
 
-\begin{definition}
-$R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は$R$上の\textbf{射影加群}(projective module)であるという.
+\section{\texorpdfstring{$K_0$}{K₀}}
+
+\begin{definition} \label{def: IsProjective}
+$R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は\textbf{射影$R$加群}(projective module)であるという.
 % https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMSwyLCJmIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiZyJdLFswLDEsInteXFxleGlzdHN9aCIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 \[\begin{tikzcd}
 	& P \\
@@ -13,18 +16,64 @@ $R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全
 
 \end{definition}
 
-射影加群の特徴づけを与える.
-\begin{proposition}
-$R$を環とし$P$を$R$加群とする.\ 次の(1)と(2)は同値.
+\begin{lemma} \label{lem: splitting_lemma}
+$R$を環とし$L,M,N$を$R$加群とする.\ $0 \longrightarrow L \stackrel{i}{\longrightarrow} M \stackrel{p}{\longrightarrow} N \longrightarrow 0$は短完全列であるとする.\ (1)-(4)は同値である.
 \def\labelenumi{(\theenumi)}
 \begin{enumerate}
-    \item $P$は$R$上の射影加群.
+	\item ある準同型$s \colon N \to M$が存在して$p \circ s = \id_N$となる.
+	\item ある準同型$r \colon M \to L$が存在して$r \circ i = \id_L$となる.
+	\item $i(L)$は$M$の直和因子.\ つまりある$M$の$R$部分加群$C$が存在して$M = i(L) \oplus C$となる.
+	\item 同型$\phi \colon M \stackrel{\sim}{\to} L \oplus N$が存在して$\phi \circ i = \iota_L$かつ$\pi_N \circ \phi = p$となる.\ ただし$\iota_L \colon L \hookrightarrow L \oplus N$と$\pi_N \colon L \oplus N \twoheadrightarrow N$はそれぞれ標準的な包含と標準的な射影.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)$\Rightarrow$(4): ある準同型$s \colon N \to M$が存在して$p \circ s = \id_N$となるとする.\ $\psi \colon L \oplus N \to M$を$\psi(l, n) \coloneq i(l) + s(n)$で定める.\ 任意の$m \in M$に対して$p(m - s(p(m))) = p(m) - p(m) = 0$となるので$m - s(p(m)) \in \ker(p) = \im(i)$となる.\ よって$m - s(p(m)) = i(l)$となる$l \in L$が存在する.\ したがって$m = \psi(l, p(m))$となるので$\psi$は全射である.
+
+$l \in L, n \in N$とし$i(l) + s(n) = 0$と仮定すると$p(i(l) + s(n)) = p(i(l)) + p(s(n)) = 0 + n = n$
+なので$p(0) = 0$と合わせて$n = 0$である.\ よって$i(l) + 0 = i(l) = 0$となり$i$は単射だから$l = 0$となる.\ したがって$(l, n) = (0, 0)$なので$\psi$は単射である.
+
+$\phi \coloneq \psi^{-1}$とし$l \in L, n \in N$とすると$\psi(\iota_N(l)) = \psi(l,0) = i(l) + s(0) = i(l)$なので$\psi \circ \iota_N = i$であり,\ また$p(\psi(l, n)) = p(i(l) + s(n)) = p(i(l)) + p(s(n)) = 0 + n = n = \pi_N(l,n)$なので$p \circ \psi = \pi_N$である.
+
+\vskip\baselineskip
+(2)$\Rightarrow$(4): ある準同型$r \colon M \to L$が存在して$r \circ i = \id_L$となるとする.\ $\phi \colon M \to L \oplus N$を$\phi(m) \coloneq (r(m), p(m))$で定める.\ $(l, n) \in L \oplus N$とすると$p$は全射なので$p(m) = n$となる$m \in M$が存在する.\ $m' \coloneq m + i(l - r(m))$とすると$p(m') = p(m) = n$となり$r(m') = r(m) + (l - r(m)) = l$となる.\ よって$\phi(m') = (l, n)$なので$\phi$は全射である.
+
+$m \in M$とし$(r(m), p(m)) = (0,0)$であると仮定する.\ $m \in \ker(p) = \im(i)$なので$i(l) = m$となる$l \in L$が存在する.\ $0 = r(m) = r(i(l)) = l$より$m = i(0) = 0$である.\ よって$\phi$は単射である.
+
+任意の$l \in L$に対して$\phi(i(l)) = (r(i(l)), p(i(l))) = (l, 0) = \iota_L(l)$であり,\ 任意の$m \in M$に対して$\pi_N(\phi(m)) = \pi_N(r(m), p(m)) = p(m)$なので$\phi \circ i = \iota_L$かつ$\pi_N \circ \phi = \pi_N$である.
+
+\vskip\baselineskip
+(4)$\Rightarrow$(1): $\iota_N \colon N \hookrightarrow L \oplus N$を標準的な包含とし$s \coloneq \phi^{-1} \circ \iota_N$とすると$p \circ s = (\pi_N \circ \phi) \circ (\phi^{-1} \circ \iota_N) = \pi_N \circ \iota_N = \id_N$である.
+
+\vskip\baselineskip
+(4)$\Rightarrow$(2): $\pi_L \colon L \oplus \hookrightarrow L$を標準的な包含とし$r \coloneq \pi_L \circ \phi$とすると$r \circ i = (\pi_L \circ \phi) \circ i = \pi_L \circ \iota_L = \id_L$である.
+
+\vskip\baselineskip
+(1)$\Rightarrow$(3): $s \coloneq \phi^{-1} \circ \iota_N$とする.\ (1)$\Rightarrow$(4)の証明より任意の$m \in M$に対してある$l \in L$が存在して$m = i(l) + s(p(m))$となったので$M = i(L) + s(N)$である.\ 任意の$l \in L, n \in N$に対して$i(l) = s(n) \implies p(i(l)) = p(s(n)) \implies 0 = n$なので$M = i(L) \oplus s(N)$である.
+
+\vskip\baselineskip
+(3)$\Rightarrow$(1): $M = i(L) \oplus C$となる$M$の$R$部分加群$C$が存在するとする.\ 制限$p \vert_{C} \colon C \to N$を考える.\ $N = p(M) = p(i(N)) + p(C) = p(C)$より$p \vert_{C}$は全射である.\ また$\ker(p \vert_{C}) = C \cap \ker(p) = C \cap \im(i) = C \cap i(N) = \{0\}$であるから$p \vert_{C}$は単射である.\ $\iota \colon C \hookrightarrow M$を包含とし$s \coloneq \iota \circ (p \vert_{C})^{-1}$とすると$s \colon N \to M$であり,\ 任意の$n \in N$に対して$p(s(n)) = p(i((p \vert_{C})^{-1}(n))) = p \vert_{C}((p \vert_{C})^{-1}(n)) = n$となり$p \circ s = \id_N$である.
+\end{proof}
+
+\begin{lemma} \label{lem: free_presentation_lemma}
+$R$を環,\ $P$を$R$加群とし$S \subset P$を$P$の生成元の集合とする.\ 準同型$\alpha \colon R^{(S)} \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定め$\kappa \colon \ker(\alpha) \hookrightarrow R^{(S)}$を包含とする.\ このとき$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
+\end{lemma}
+
+\begin{proof}
+自由加群の普遍性により$\alpha$はただ一つ存在する.\ $\alpha(R^{(S)})$は$S$を含む$P$の$R$部分加群なので$\alpha(R^{(S)}) = P$である.\ よって$\alpha$は全射である.\ $\kappa$は単射であり$\im(\kappa) = \ker(\alpha)$なので$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
+\end{proof}
+
+\begin{proposition} \label{prop: projective_iff_epi_splits}
+$R$を環とし$P$を$R$加群とする.\ 次の(1)-(2)は同値.
+\def\labelenumi{(\theenumi)}
+\begin{enumerate}
+    \item $P$は射影$R$加群.
     \item 任意の$R$加群$M$と任意の全射準同型$r \colon M \twoheadrightarrow P$に対してある準同型$s \colon P \to M$が存在して$r \circ s = \id_P$となる.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-(1)$\Rightarrow$(2): $P$を$R$上の射影加群とし$r \colon M \twoheadrightarrow P$を全射準同型とすると$\id_P \colon P \to P$は準同型なので次の図式を可換にする準同型$s \colon P \to M$が存在する.
+(1)$\Rightarrow$(2): $P$を射影$R$加群とし$r \colon M \twoheadrightarrow P$を全射準同型とすると$\id_P \colon P \to P$は準同型なので次の図式を可換にする準同型$s \colon P \to M$が存在する.
 % https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiTSJdLFsxLDEsIlAiXSxbMSwyLCJyIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiXFxtYXRocm17aWR9X1AiXSxbMCwxLCJ7XlxcZXhpc3RzfXMiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
 \[\begin{tikzcd}
 	& P \\
@@ -33,5 +82,80 @@ $R$を環とし$P$を$R$加群とする.\ 次の(1)と(2)は同値.
 	\arrow["{\id_P}", from=1-2, to=2-2]
 	\arrow["r"', two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
-(2)$\Rightarrow$(1): 任意の全射準同型$r \colon M \twoheadrightarrow P$に対してある準同型$s \colon P \to M$が存在して$r \circ s = \id_P$となると仮定する.\ $f \colon M \twoheadrightarrow N$を全射準同型とし$g \colon P \to N$を準同型とする.\ $E = \{(m,p) \in M \oplus P \mid f(m) = g(p)\}$とすると$E$は$M \oplus P$の部分$R$加群である.\ $\pi_2 \colon E \to P$を$\pi_2(m,p) = p$で定めると任意の$p \in P$に対して$g(p) \in N$であり$f \colon M \twoheadrightarrow N$は全射なので$f(m) = g(p)$となる$m \in M$が存在し$\pi_2(m,p) = p$となる.\ よって$\pi_2 \colon E \to P$は全射である.\ 仮定より$\pi_2 \circ s = \id_P$を満たす$s \colon P \to E$が存在する.\ $p \in P$に対して$s(p) = (m,p) \in E$となる$m \in M$が存在する.\ $\pi_1 \colon E \to M$を$\pi_1(m,p) = m$で定め$h = \pi_1 \circ s$とする.\ 任意の$p \in P$に対して$(h(p), p) \in E$なので$f(h(p)) = g(p)$であり$f \circ h = g$である.
+
+\vskip\baselineskip
+(2)$\Rightarrow$(1): 任意の全射準同型$r \colon M \twoheadrightarrow P$に対してある準同型$s \colon P \to M$が存在して$r \circ s = \id_P$となると仮定する.\ $f \colon M \twoheadrightarrow N$を全射準同型とし$g \colon P \to N$を準同型とする.\ $E = \{(m,p) \in M \oplus P \mid f(m) = g(p)\}$とすると$E$は$M \oplus P$の$R$部分加群である.\ $\pi_2 \colon E \to P$を$\pi_2(m,p) = p$で定めると任意の$p \in P$に対して$g(p) \in N$であり$f \colon M \twoheadrightarrow N$は全射なので$f(m) = g(p)$となる$m \in M$が存在し$\pi_2(m,p) = p$となる.\ よって$\pi_2 \colon E \to P$は全射である.\ 仮定より$\pi_2 \circ s = \id_P$を満たす$s \colon P \to E$が存在する.\ $p \in P$に対して$s(p) = (m,p) \in E$となる$m \in M$が存在する.\ $\pi_1 \colon E \to M$を$\pi_1(m,p) = m$で定め$h = \pi_1 \circ s$とする.\ 任意の$p \in P$に対して$(h(p), p) \in E$なので$f(h(p)) = g(p)$であり$f \circ h = g$である.
+\end{proof}
+
+\begin{lemma}$^{\textrm{AC}}$ \label{lem: projective_of_free}
+$R$を環とし$F$を$R$加群とすると次が成り立つ.
+\begin{center}
+$Fは自由R加群 \implies Fは射影R加群$
+\end{center}
+\end{lemma}
+
+\begin{proof}
+	$F$を自由$R$加群とし$(e_s)_{s \in S}$を$F$の基底とする.\ $M$を自由$R$加群として$r \colon M \twoheadrightarrow F$を全射準同型とする.\ 任意の$s \in S$に対して$r^{-1}(\{e_s\}) \neq \emptyset$なので選択公理により$(y_s)_{s \in S} \in \prod_{s \in S} r^{-1}(\{e_s\})$が存在する.\ よって自由加群の普遍性の存在性により準同型$s \colon F \to M$で$s(e_s) = y_s$を満たすものが存在する.\ $r \circ s(e_s) = r(y_s) = e_s = \id_F(e_s)$なので自由加群の普遍性の一意性により$r \circ s = \id_F$である.\ したがって\cref{prop: projective_iff_epi_splits}より$F$は射影$R$加群である.
+\end{proof}
+
+\begin{definition} \label{def: IsRetract}
+$R$を環とし$P,M$を$R$加群とする.\ ある準同型$r \colon M \to P$と$s \colon P \to M$が存在して$r \circ s = \id_P$となるとき$P$は$M$の\textbf{レトラクト}(retract)であるという.
+\end{definition}
+
+\begin{lemma} \label{lem: retract_iff_summand}
+$R$を環とし$P,M$を$R$加群とする.\ 次の(1)-(2)は同値.
+\def\labelenumi{(\theenumi)}
+\begin{enumerate}
+	\item $P$は$M$のレトラクト.
+    \item $P$は$M$の直和因子と同型.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1)$\Rightarrow$(2): 準同型$r \colon M \to P$と$s \colon P \to M$が存在して$r \circ s = \id_P$となるとする.\ $s$は単射なので$\pi \colon M \hookrightarrow M/s(p)$を商写像とすれば$0 \longrightarrow P \stackrel{s}{\longrightarrow} M \stackrel{\pi}{\longrightarrow} M/s(P) \longrightarrow 0$は短完全列である.\ \cref{lem: splitting_lemma}より$s(P)$は$M$の直和因子であり$s$は単射なので$P \cong s(P)$となる.\ よって$P$は$M$の直和因子と同型である.
+
+\vskip\baselineskip
+(2)$\Rightarrow$(1): ある$R$加群$N,N'$と同型$\theta \colon P \stackrel{\sim}{\to} N$が存在して$M = N \oplus N'$となるとする.\ $\iota \colon N \hookrightarrow M$と$\pi \colon M \twoheadleftarrow N$をそれぞれ標準的な包含と標準的な射影とすれば$\pi \circ \iota = \id_N$である.\ $s \coloneq \iota \circ \theta$とし$r \coloneq \theta^{-1} \circ \pi$とすれば$r \circ s = (\theta^{-1} \circ \pi) \circ (\iota \circ \theta) = \theta^{-1} \circ \theta = \id_P$となる.\ よって$P$は$M$のレトラクトである.
+\end{proof}
+
+\begin{lemma} \label{lem: projective_of_retract}
+$R$を環とし$G$を射影$R$加群とする.\ このとき$P$が$G$のレトラクトなら$P$は射影$R$加群である.
+\end{lemma}
+\begin{proof}
+$P$が$G$のレトラクトであるとするとある準同型$r \colon G \to P$と$s \colon P \to G$が存在して$r \circ s = \id_P$となる.\ $Q \coloneq \ker(r)$とし$M$を$R$加群,\ $\alpha \colon M \twoheadrightarrow P$を全射準同型とする.\ 準同型$\theta \colon M \oplus Q \to G$を$\theta(m,q) \coloneq s(\alpha(m)) + q$で定める.
+
+任意の$g \in G$に対して$r(g - s(r(g))) = r(g) - r(s(r(g))) = r(g) - r(g) = 0$となるので$g - s(r(g)) \in Q$である.\ $q \colon g - s(r(g))$とする.\ $\alpha$は全射なので$\alpha(m) = r(g)$となる$m \in M$が存在する.\ このとき$\theta(m, q) = s(\alpha(m)) + q = s(r(g)) + q = g$であるから$\theta$は全射である.
+
+$G$は射影$R$加群であり$\theta \colon M \oplus Q \to G$は全射なので$\theta \circ \sigma = \id_G$となる準同型$\sigma \colon G \to M \oplus Q$が存在する.
+
+$\pi_M \colon M \oplus Q \to M$を射影とし$\beta \coloneq \pi_M \circ \sigma \circ s$とする.\ $p \in P$として$\sigma(s(p)) = (m,q)$とすると$\beta(p) = \pi_M(\sigma(s(p))) = \pi_M(m, q) = m$である.\ $p = r(s(p)) = r(\theta(\sigma(s(p)))) = r(\theta(m,q)) = r(s(\alpha(m)) + q) = \alpha(m) + r(q) = \alpha(m)$より$\beta(\alpha(m)) = \beta(p) = m$なので$\beta \circ \alpha = \id_M$.\ したがって\cref{prop: projective_iff_epi_splits}より$P$は射影$R$加群である.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJHIl0sWzEsMCwiUCJdLFsxLDEsIk0iXSxbMCwxLCJNIFxcb3BsdXMgUSJdLFszLDIsIlxccGlfTSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFswLDMsIlxcdGhldGEiLDIseyJvZmZzZXQiOjEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFszLDAsIlxcc2lnbWEiLDIseyJvZmZzZXQiOjF9XSxbMCwxLCJyIiwyLHsib2Zmc2V0IjoxfV0sWzEsMCwicyIsMix7Im9mZnNldCI6MX1dLFsyLDEsIlxcYWxwaGEiLDIseyJvZmZzZXQiOjEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDIsIlxcYmV0YSIsMix7Im9mZnNldCI6MX1dXQ==
+\[\begin{tikzcd}
+	G & P \\
+	{M \oplus Q} & M
+	\arrow["r"', shift right, from=1-1, to=1-2]
+	\arrow["\theta"', shift right, two heads, from=1-1, to=2-1]
+	\arrow["s"', shift right, from=1-2, to=1-1]
+	\arrow["\beta"', shift right, from=1-2, to=2-2]
+	\arrow["\sigma"', shift right, from=2-1, to=1-1]
+	\arrow["{\pi_M}"', two heads, from=2-1, to=2-2]
+	\arrow["\alpha"', shift right, two heads, from=2-2, to=1-2]
+\end{tikzcd}\]
+\end{proof}
+
+\begin{proposition} \label{prop: projective_iff_free_summand}
+$R$を環とし$P$を$R$加群とする.\ 次の(1)-(2)は同値.
+\def\labelenumi{(\theenumi)}
+\begin{enumerate}
+    \item $P$は射影$R$加群.
+    \item 自由$R$加群$F$と$R$加群$M$が存在して$F \cong M \oplus P$となる.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1)$\Rightarrow$(2): $P$を射影$R$加群とする.\ $S \subset P$を$P$の生成元の集合とし$F \coloneq R^{(S)}$とする.\ 準同型$\alpha \colon F \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定めれば\cref{lem: free_presentation_lemma}より$\kappa \colon \ker(\alpha) \hookrightarrow F$を包含として短完全列$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} F \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$を得る.\ $\alpha \colon F \to P$は全射であり$P$は射影$R$加群なので\cref{prop: projective_iff_epi_splits} (1)$\Rightarrow$(2)より準同型$s \colon P \to F$で$\alpha \circ s = \id_P$を満たすものが存在する.\ したがって\cref{lem: splitting_lemma} (1)$\Rightarrow$(4)より同型$\phi \colon F \stackrel{\sim}{\to} \ker(\alpha) \oplus P$が存在する.
+
+\vskip\baselineskip
+(2)$\Rightarrow$(1): $P$は自由$R$加群$F$の直和因子であるとする.\ \cref{lem: retract_iff_summand}より$P$が自由$R$加群$F$の直和因子であることは$P$が$F$のレトラクトであることと同値.\ \cref{lem: projective_of_free}より自由$R$加群は射影$R$加群なので$F$は射影$R$加群であり\cref{lem: projective_of_retract}より射影$R$加群のレトラクトは射影$R$加群になるので射影$R$加群$F$のレトラクトである$P$は射影$R$加群となる.
 \end{proof}
