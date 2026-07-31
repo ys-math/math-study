@@ -69,11 +69,118 @@
 }
 \makeatother
 
-\newcommand{\ob}{\textrm{Ob}}
-\newcommand{\mor}{\textrm{Mor}}
-\newcommand{\dom}{\textrm{dom}}
-\newcommand{\cod}{\textrm{cod}}
-\newcommand{\id}{\textrm{id}}
+%%% ---- Algebra: maps and functors ----
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Res}{Res}       % restriction (induction's partner)
+\DeclareMathOperator{\res}{res}       % residue, if you want lowercase too
+
+%%% ---- Kernels, images, cokernels ----
+\renewcommand{\ker}{\operatorname{Ker}}  % \ker is predefined -> renew
+\DeclareMathOperator{\coker}{Coker}
+\DeclareMathOperator{\im}{Im}          % NOT \Im: that's Fraktur ℑ
+\DeclareMathOperator{\coim}{Coim}
+
+%%% ---- Linear algebra ----
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\trace}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\spann}{span}        % \span is a TeX primitive
+\DeclareMathOperator{\Mat}{Mat}
+
+%%% ---- Matrix / Lie groups ----
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\OO}{O}              % \O is Ø in text mode
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\UU}{U}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Lie}{Lie}
+
+%%% ---- Group theory ----
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Out}{Out}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\charac}{char}       % \char is a TeX primitive
+\DeclareMathOperator{\Cent}{Z}
+\DeclareMathOperator{\Norm}{N}
+
+%%% ---- Category theory ----
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator*{\colim}{colim}      % star: limits go under in display
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclareMathOperator*{\holim}{holim}
+
+%%% ---- Algebraic geometry / commutative algebra ----
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\Div}{Div}           % \div is ÷
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\hgt}{ht}     % height of a prime ideal
+\DeclareMathOperator{\depth}{depth}
+
+%%% ---- Topology / geometry ----
+\DeclareMathOperator{\interior}{int}      % \int is the integral sign
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\bd}{bd}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\area}{area}
+
+%%% ---- Analysis / vector calculus ----
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\divergence}{div}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%%% ---- Number theory / discrete ----
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Tr}{Tr}             % field trace
+\DeclareMathOperator{\Nm}{N}              % field norm
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Li}{Li}
+
+%%% ---- Probability / statistics ----
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Bias}{Bias}
 
 \renewcommand{\proofname}{\bfseries 証明}
 \renewcommand{\qedsymbol}{$\blacksquare$}
