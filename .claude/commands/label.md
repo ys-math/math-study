@@ -21,11 +21,9 @@ choose is one they will read a hundred times.
 
 ## Picking the topics
 
-Same rules as `/review-notes`:
-
 - **Slugs given** — handle each in order.
 - **No arguments** — list every topic as a numbered plain list, showing the slug,
-  the `\DocTitle` from its `main.tex`, and `(空)` where every chapter file is
+  the `\DocTitle` from its `main.tex`, and `(empty)` where every chapter file is
   empty. Stop and wait. Never default to all of them.
 - **Unknown slug** — say so, print the same list, stop.
 - **No environments at all** in the topic — say so and stop. Nothing to propose.
@@ -117,11 +115,15 @@ Only the rows the user named.
 If any row is a rename, **compile the topic before touching anything**:
 
 ```bash
-latexmk -cd -r .latexmkrc tex/<topic>/main.tex
+latexmk -cd -g tex/<topic>/main.tex
 ```
 
 That baseline is the only way to tell "this topic was already broken" from "I
-broke it". Report a pre-existing failure and ask whether to continue; do not
+broke it", and `-g` is what makes it one: without it latexmk answers "Nothing to
+do" from cache for a file that does not compile, and the baseline passes on a
+document that is already broken — the exact confusion it exists to prevent.
+`docs/git-strategy.md` (`## Gates`) is the single copy of this invocation; do not
+add `-r`. Report a pre-existing failure and ask whether to continue; do not
 silently proceed to edit a document that does not build.
 
 ### Verifying
