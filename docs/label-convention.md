@@ -175,7 +175,7 @@ grep -rn 'cref{<old label>}' tex/<topic>/
 before and after, and compile the topic afterwards:
 
 ```bash
-latexmk -cd -r .latexmkrc tex/<topic>/main.tex
+latexmk -cd -g tex/<topic>/main.tex
 ```
 
 **A label that already follows this document is never renamed for taste.** The

@@ -219,11 +219,27 @@ Before any commit, the relevant checks run locally:
 latexmk -cd -g tex/<topic>/main.tex
 ```
 
+**This is the single copy of that invocation.** `CLAUDE.md`, `README.md`,
+`docs/label-convention.md`, `/label` and `/review-notes` point here rather than
+restating it; six near-copies is how the repo ended up running three different
+recipes for one operation.
+
 `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g`
 forces a rebuild, which matters because latexmk caches a previous failure and
 will otherwise report "Nothing to do" on a file that does not compile. The
 `.latexmkrc` at the repo root is picked up automatically from the working
-directory — passing `-r` as well makes latexmk read it twice and warn.
+directory. Passing `-r .latexmkrc` as well does *not* read it twice — latexmk
+recognises the repeat and skips it — but it does print
+
+```
+Latexmk: A user -r option asked me to process an rc file an extra time.
+   Name of file = '.latexmkrc'
+   Abs. path = '/…/math-study/.latexmkrc'
+  I'll not process it
+```
+
+at the top of the run. Harmless, but it is noise in the one place a gate is
+supposed to be reading carefully, so leave `-r` off.
 
 Aux files and `main.pdf` are gitignored; leave them, and do not run
 `latexmk -c`. The next build reuses them.

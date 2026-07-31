@@ -43,11 +43,15 @@ Read in this order, always:
 Then compile the topic, from the repo root:
 
 ```bash
-latexmk -cd -r .latexmkrc tex/<topic>/main.tex
+latexmk -cd -g tex/<topic>/main.tex
 ```
 
-`-cd` makes latexmk enter the topic directory so `\input{../preamble.tex}`
-resolves; there is no need to `cd` yourself. Aux files and `main.pdf` are
+`-cd` makes latexmk enter the topic directory, so there is no need to `cd`
+yourself. `-g` is load-bearing *here* in particular: without it latexmk reports
+"Nothing to do" from cache for a file that does not compile, and a broken topic
+would come back as an empty `LaTeX の健全性` section — a clean bill of health for
+a document that does not build. `docs/git-strategy.md` (`## Gates`) is the single
+copy of this invocation; do not add `-r`. Aux files and `main.pdf` are
 gitignored — leave them, do not run `latexmk -c`. A compile failure does not
 abort the review: write the report anyway, with a `## ビルド失敗` section first
 quoting the `-file-line-error` lines, then the rest of the findings.
