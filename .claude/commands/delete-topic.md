@@ -1,11 +1,12 @@
 ---
-description: Delete a topic — its tex/ directory, its PDF and its local artifacts — and commit the removal
+description: Delete a topic — its tex/ directory, its PDF, its review issues and its local artifacts — and commit the removal
 argument-hint: "<topic_slug>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git commit:*), Bash(git push:*)
+allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git commit:*), Bash(git push:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label delete:*)
 ---
 
-Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, and the local artifacts that
-neither git nor CI will clean up. Then commit and push the removal.
+Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, its open review issues, and
+the local artifacts that neither git nor CI will clean up. Then commit and push
+the removal.
 
 Arguments given: $ARGUMENTS
 
@@ -14,6 +15,10 @@ Nothing else in the repo names a topic: `build-pdf.yml` enumerates
 leaves the README on its own after the push — but `pdf/<topic>.pdf` is only ever
 written to, never pruned, and an orphan there lingers forever. That is the whole
 reason this command exists.
+
+The same is true off-disk. `topic:<topic>` issues and the label itself outlive
+the files, and an issue about a chapter that no longer exists can be neither
+fixed nor found. `docs/issue-convention.md` `## Deletion` is the specification.
 
 **This command deletes one topic per invocation.** If several slugs are given,
 say so and stop.
@@ -57,6 +62,7 @@ git ls-files tex/<topic> pdf/<topic>.pdf
 wc -l tex/<topic>/*.tex
 git log --oneline -n 1 -- tex/<topic>
 git status --porcelain tex/<topic>
+gh issue list --label "topic:<topic>" --state open --json number,title
 ```
 
 Read the `\DocTitle` out of `main.tex` — the survey must show what the topic is
@@ -93,7 +99,10 @@ Delete topology (位相幾何学)?
   tex/topology/ch01.tex       242 lines
   pdf/topology.pdf            (tracked)
   tex/topology/               ignored build artifacts (main.aux, main.pdf, latex_out/)
-  reviews/topology.md         local review report
+  issues/topology.md          local worklist
+
+  open issues: #21 #22 #23 #24   → closed
+  label topic:topology           → deleted
 
   last commit: a1b2c3d feat(topology): add the separation axioms
 
@@ -115,20 +124,35 @@ deciding, not in the report afterwards.
 
 ```bash
 git rm -r tex/<topic> pdf/<topic>.pdf
-git clean -xdf tex/<topic> reviews/<topic>.md
+git clean -xdf tex/<topic> issues/<topic>.md
 git commit -m "chore: remove the <topic> topic"
 git push origin main
 ```
 
 `git rm` only removes tracked files, so it leaves the directory standing, full
 of ignored build junk. `git clean -xdf` sweeps that and the now-empty directory,
-and the stale `reviews/<topic>.md` with it — a report about notes that no longer
+and the stale `issues/<topic>.md` with it — a worklist for notes that no longer
 exist. Both paths are pathspecs: a pathspec matching nothing is a silent no-op,
-so a topic with no review report and no build artifacts needs no special case.
+so a topic with no worklist and no build artifacts needs no special case.
 
 Use `git clean`, never `rm`. `Bash(rm:*)` is absent from `allowed-tools` above,
 deliberately — nothing in this command should be able to delete a path git has
 not been told about.
+
+Then the issues, **after** the push and only if it succeeded:
+
+```bash
+gh issue close <n> --comment "Topic removed in <sha>."
+gh label delete "topic:<topic>" --yes
+```
+
+Order matters. The commit is the thing that can fail — a rejected push leaves
+the topic in place, and issues closed before it would be closed against files
+that still exist. Deleting the label last keeps the closed issues findable right
+up to the moment there is nothing left to find.
+
+A topic with no issues skips both commands; `gh label delete` on a label that
+was never created is an error, not a no-op.
 
 The commit scope is omitted rather than `chore(<topic>):`, because after this
 commit the directory that scope names does not exist. One commit, both paths.
@@ -144,7 +168,9 @@ history in a follow-up commit, not by rewriting the one that removed it.
 
 ## 7. Report
 
-Print `git log --oneline -n 1` and the recovery command again.
+Print `git log --oneline -n 1`, the issues closed, and the recovery command
+again. Note that recovery restores the files only — reopening the issues is
+`gh issue reopen`, and the label would have to be recreated.
 
 Then say what CI will do: `update-readme.yml` drops the topic from the PDF list
 and rebuilds the tree, a commit that arrives in seconds. `build-pdf.yml` fires

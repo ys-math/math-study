@@ -98,6 +98,29 @@ sources changed`).
 the diff is noise; a body explaining why a workaround exists is the reason the
 commit is worth reading in a year.
 
+**Trailers** — `Closes #N` for a review finding this commit fixes, then
+`Co-Authored-By` where it applies. Both go at the end, one per line, after a
+blank line.
+
+### Closing review issues
+
+`/review-notes` files its findings as GitHub issues, and the commit that fixes
+one is what closes it:
+
+```
+fix(galois_theory): 補題 1.2 の証明を埋める
+
+Closes #12
+```
+
+`main` is where content commits land, so the trailer takes effect on the push.
+On a branch it does nothing until the PR merges — correct, and no special case.
+
+`/git` proposes the trailer by matching the topic's open issues against the
+diff, and shows it in the plan you confirm; it never adds one you have not seen.
+`docs/issue-convention.md` owns the rest, including what an issue looks like and
+why nothing closes one automatically at review time.
+
 ### Granularity
 
 One commit per (topic, type). A change spanning `manifold` and `topology` is
@@ -200,8 +223,9 @@ before it those changes were the only ones with no CI at all.
 
 The split is enforced by `allowed-tools`, not by instructions: `gh pr merge` is
 absent from `/git`'s tool list, so it cannot merge however it reads the
-situation. This mirrors `/review-notes`, which is locked to `Write(reviews/**)`
-so that it cannot edit the notes it reviews.
+situation. This mirrors `/review-notes`, which carries no write tool at all and
+no `gh issue close`, so it can neither edit the notes it reviews nor decide a
+finding is fixed.
 
 Both stop for confirmation before doing anything irreversible. Both run the
 gates *before* a commit exists, so a failure leaves nothing to undo.

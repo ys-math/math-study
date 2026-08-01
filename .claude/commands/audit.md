@@ -9,8 +9,8 @@ Audit the machinery that tells Claude what to do — `CLAUDE.md`, `docs/*.md`,
 `.github/workflows/*.yml`, and the prose in `README.md` outside the generated
 markers — and write a report to `.claude/audits/audit.md`. That directory is
 gitignored: the report is scaffolding, not a record. It sits inside `.claude/`
-because what it describes does; `reviews/` belongs to `/review-notes` and the
-mathematics.
+because what it describes does; the mathematics belongs to `/review-notes`,
+which files its findings as GitHub issues rather than writing a report at all.
 
 Arguments given: $ARGUMENTS
 

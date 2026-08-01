@@ -83,9 +83,10 @@ Claude Code slash commands:
 | Command | What it does |
 | --- | --- |
 | `/new-topic <topic> <title>` | Creates a topic by running `new_topic.py` above |
-| `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf` and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
+| `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf`, its open review issues and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
 | `/label [topic ...]` | Proposes `\label{}` names for a topic's theorem environments per `docs/label-convention.md`, and applies the ones you pick |
-| `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, writing `reviews/<topic>.md` (gitignored, overwritten on every run) |
+| `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, then files the findings you pick as GitHub issues per `docs/issue-convention.md`. Skips what an open issue already covers; closes nothing |
+| `/issues [topic ...]` | Renders a topic's open review issues as `issues/<topic>.md` (gitignored, overwritten on every run) with links that open your working copy at the line |
 | `/audit [file ...]` | The same, for the machinery rather than the mathematics: checks the commands, instructions and hooks for contradictions, stale claims and dead steps, writing `.claude/audits/audit.md` (gitignored, overwritten on every run). Then applies the fixes you name — and only those, leaving the commit to `/git` |
 | `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |

@@ -89,11 +89,16 @@ guess from outside:
 - **`/delete-topic` commits and pushes on its own** — every other command leaves
   the tree for `/git`. A deleted-but-uncommitted topic is the one state where
   the owner's prose is unrecoverable.
-- **`/review-notes` never edits `tex/`**, and `reviews/` is gitignored and
-  overwritten every run: never cite a report as a record, and act on a finding
-  only when the owner asks for that finding to be fixed.
-- **`docs/label-convention.md` binds every `\label{}` you write**, whether or
-  not you got there through `/label`.
+- **`/review-notes` never edits `tex/`** — it has no write tool — and it files
+  findings as GitHub issues rather than a report. Act on one only when the owner
+  asks for that finding to be fixed.
+- **The open issues are the record, `issues/` is not.** `/issues` renders a
+  local worklist that is gitignored and overwritten every run; a finding lives
+  and dies on GitHub. Never cite the worklist as evidence a finding is still
+  open — regenerate it, or ask `gh`.
+- **`docs/issue-convention.md` binds every issue you file**, and
+  **`docs/label-convention.md` binds every `\label{}` you write**, whether or
+  not you got there through `/review-notes` or `/label`.
 
 **Renaming a topic is not automated, and CI will not clean up after you:**
 

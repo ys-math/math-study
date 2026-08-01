@@ -37,8 +37,10 @@ Thumbs.db
 *.xdv
 **/main.pdf
 
-# ── Review reports (/review-notes) ───────────────
-reviews/
+# ── Issue worklists (/issues) ────────────────────
+# A rendering of the open GitHub issues, not the record. Regenerated, never read
+# back — see docs/issue-convention.md.
+issues/
 
 # ── Audit reports (/audit) ───────────────────────
 # The only untracked thing under .claude/; everything else there is committed.

@@ -8,6 +8,7 @@
       "Bash(git branch *)", "Bash(git fetch *)",
       "Bash(gh pr view *)", "Bash(gh pr diff *)", "Bash(gh pr checks *)",
       "Bash(gh pr list *)", "Bash(gh run list *)",
+      "Bash(gh issue list *)", "Bash(gh issue view *)", "Bash(gh label list *)",
       "Bash(grep *)", "Bash(wc *)", "Bash(ls *)", "Bash(head *)", "Bash(find *)"
     ],
     "deny": ["Write(./pdf/**)", "Edit(./pdf/**)"]

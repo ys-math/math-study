@@ -1,7 +1,7 @@
 ---
 description: Sync, check, commit and push the working tree following the repo's git strategy
 argument-hint: "[what to commit]  (optional — inferred from the diff)"
-allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(latexmk:*), Bash(python -m unittest:*)
+allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(gh issue list:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 
 Commit and push the working tree according to `docs/git-strategy.md`. Read that
@@ -81,6 +81,25 @@ The signal is a file whose change is unrelated to `$ARGUMENTS` and to the rest
 of the diff. When in doubt, ask; a commit is easy to make and impossible to
 unmake once pushed.
 
+### Review issues this commit closes
+
+For each touched `tex/<topic>/`:
+
+```bash
+gh issue list --label "topic:<topic>" --state open --json number,title,body
+```
+
+Match them against the diff and propose a `Closes #N` trailer on the commit that
+fixes each. `docs/issue-convention.md` `## Closing` is the specification.
+
+**Propose, never assume.** The trailer appears in the plan at step 6 and the
+user strikes it out or adds to it before anything is committed. A wrong `Closes`
+shuts a live defect the moment the push lands, and reopening it does not undo
+having stopped looking at it.
+
+Skip the lookup entirely when no `tex/<topic>/` path is in the diff. Shared
+files, `docs/` and `.claude/` changes do not fix review findings.
+
 ## 5. Gate
 
 Run the checks the change earns, **before** any commit exists, so a failure
@@ -113,8 +132,9 @@ The plan states, in this order:
 
 1. **Routing** — `main`, or a branch named `<type>/<kebab-slug>`, and which
    classification forced it.
-2. **The commits** — for each, the literal subject line and the exact paths it
-   stages. One commit per (topic, type). Never split hunks within a file.
+2. **The commits** — for each, the literal subject line, the exact paths it
+   stages, and any proposed `Closes #N`. One commit per (topic, type). Never
+   split hunks within a file.
 3. **Anything unexplained** — files from step 4 that the user has not mentioned.
 4. **Documentation coupling** — only when the diff adds or removes a command, a
    hook, a workflow or a `docs/` file: one line saying where the change was
@@ -127,13 +147,19 @@ The plan states, in this order:
 
   feat(manifold): add a definition of tangent spaces
     tex/manifold/ch01.tex
-  chore(topology): fix a typo in the separation axioms
+  fix(topology): 補題 1.2 の証明を埋める
     tex/topology/ch02.tex
+    Closes #12
+    other open: #13 #15 (no match in this diff)
 
 Gates: manifold OK (0.8s), topology OK (0.8s)
 
 Proceed?
 ```
+
+Name the topic's other open issues under the commit, as above. "I found nothing
+matching #13" and "I never looked" are indistinguishable otherwise, and the
+second is the one worth catching.
 
 If the plan bundles two mathematical units into one commit because they share a
 file, say so on that commit's line. The user may want to commit the first
@@ -155,6 +181,10 @@ Commit messages follow `docs/git-strategy.md`: conventional, English,
 imperative, ≤ 72 characters, no trailing period. Scope is the topic directory
 for content, the file stem for shared `.tex`, omitted otherwise.
 
+Add the `Closes #N` trailers the user approved at step 6, one per line, above
+any `Co-Authored-By`. They only take effect on `main` — a commit on a branch
+closes nothing until the PR merges, which is correct and needs no special case.
+
 Add `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — with your own
 model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`,
 `tex/colophon.tex`. **Never on `tex/<topic>/**`**: that mathematics is the repo
@@ -169,7 +199,9 @@ corrected by a follow-up commit.
 ## 8. Report
 
 Print the resulting `git log --oneline -n <count>` and the PR URL if one was
-opened.
+opened. Name any issues a pushed commit closed, and say that `/issues` needs
+re-running if the user is working from a local worklist — nothing refreshes it
+on its own.
 
 Then note what CI will do: a push touching `**.tex` triggers `build-pdf.yml`,
 which commits `chore(ci): update compiled PDFs` back to `main` a couple of

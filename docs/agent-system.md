@@ -41,6 +41,10 @@ Loaded **on demand**, by a command that names them:
   the canonical `latexmk` invocation. `/git` and `/git-merge` execute it.
 - **`docs/label-convention.md`** — `\label{}` naming. `/label` executes it, and
   it binds any label written by hand too.
+- **`docs/issue-convention.md`** — what a review finding looks like as a GitHub
+  issue: labels, title, body, deduplication, closing. `/review-notes` files
+  them, `/git` closes them, `/delete-topic` cleans them up and `/issues` renders
+  them locally — four commands, one specification.
 - **`docs/agent-system.md`** — this file.
 
 ## Commands
@@ -54,19 +58,27 @@ to touch**, which is what you actually need when choosing between them.
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/**` | no | always, before applying | English |
-| `/review-notes` | `reviews/**` only | no | no | **Japanese** |
+| `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
+| `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
 | `/audit` | `.claude/audits/**`, then the files it audits | no | always, before applying a fix | English |
 | `/git` | index, commits | yes, pushes | always, before any commit | English |
 | `/git-merge` | squash-merges a PR | yes | always | English |
-| `/delete-topic` | deletes a topic | **yes, itself** | always | English |
+| `/delete-topic` | deletes a topic, closes its issues | **yes, itself** | always | English |
 | `/watch-ci` | nothing | no | no | English |
 
 Worth knowing without looking them up:
 
-- **`/delete-topic` commits and pushes on its own.** Every other command leaves
-  the working tree for `/git`.
-- **`/review-notes` never edits `tex/`** — its `allowed-tools` makes `reviews/`
-  the only writable path — and its report is overwritten every run.
+- **`/delete-topic` commits and pushes on its own**, and is now the one command
+  that also *closes* issues. Every other command leaves the working tree
+  for `/git`.
+- **`/review-notes` never edits `tex/`** — it has no write tool at all, which is
+  a stronger boundary than the `Write(reviews/**)` it used to be locked to. It
+  files findings as GitHub issues and cannot close one: `gh issue close` is
+  absent from its `allowed-tools`, so an undetected finding is reported to the
+  user rather than acted on.
+- **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
+  gitignored and overwritten, a view of the open issues with links that resolve
+  in your working copy. GitHub is the record; regenerate rather than trust it.
 - **`/audit` does edit what it audits**, in a second phase the user has to ask
   for by naming findings from the report. It is the one command whose
   `allowed-tools` reaches `.claude/`, `docs/`, `.github/` and `CLAUDE.md`, so it
