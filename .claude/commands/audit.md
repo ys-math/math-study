@@ -161,7 +161,7 @@ what is on disk today.
 ````markdown
 # Agent system audit
 
-- Scope: `CLAUDE.md`, `docs/` (3), `.claude/commands/` (8), hooks, workflows
+- Scope: `CLAUDE.md`, `docs/` (<n>), `.claude/commands/` (<n>), hooks, workflows
 - Commit: <git rev-parse --short HEAD>
 - Date: <date '+%Y-%m-%d %H:%M'>
 - Mechanical: <n> tests, 0 failures

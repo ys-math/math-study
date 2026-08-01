@@ -1,7 +1,7 @@
 ---
 description: Delete a topic — its tex/ directory, its PDF, its review issues and its local artifacts — and commit the removal
 argument-hint: "<topic_slug>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git commit:*), Bash(git push:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label delete:*)
+allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git commit:*), Bash(git push:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label list:*), Bash(gh label delete:*)
 ---
 
 Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, its open review issues, and
@@ -151,8 +151,10 @@ the topic in place, and issues closed before it would be closed against files
 that still exist. Deleting the label last keeps the closed issues findable right
 up to the moment there is nothing left to find.
 
-A topic with no issues skips both commands; `gh label delete` on a label that
-was never created is an error, not a no-op.
+Skip `gh issue close` when the survey found no open issues. Delete the label
+independently of that — a topic whose findings were all fixed and closed still
+has one — but only when it exists: `gh label delete` on a missing label is an
+error, not a no-op.
 
 The commit scope is omitted rather than `chore(<topic>):`, because after this
 commit the directory that scope names does not exist. One commit, both paths.

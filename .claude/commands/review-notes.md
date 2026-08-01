@@ -1,7 +1,7 @@
 ---
 description: Review a topic's notes for mathematical correctness, typos and LaTeX health, and file the findings as GitHub issues
 argument-hint: "[topic_slug ...]  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Bash(latexmk:*), Bash(git rev-parse:*), Bash(git status:*), Bash(date:*), Bash(gh issue list:*), Bash(gh issue create:*), Bash(gh label list:*), Bash(gh label create:*)
+allowed-tools: Read, Glob, Grep, Bash(latexmk:*), Bash(git rev-parse:*), Bash(git status:*), Bash(gh issue list:*), Bash(gh issue create:*), Bash(gh label create:*)
 ---
 
 Review the notes of one or more topics and file each finding as a GitHub issue.
