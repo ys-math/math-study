@@ -55,18 +55,24 @@ to touch**, which is what you actually need when choosing between them.
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/**` | no | always, before applying | English |
 | `/review-notes` | `reviews/**` only | no | no | **Japanese** |
-| `/audit` | `reviews/**` only | no | no | English |
+| `/audit` | `.claude/audits/**`, then the files it audits | no | always, before applying a fix | English |
 | `/git` | index, commits | yes, pushes | always, before any commit | English |
 | `/git-merge` | squash-merges a PR | yes | always | English |
 | `/delete-topic` | deletes a topic | **yes, itself** | always | English |
 | `/watch-ci` | nothing | no | no | English |
 
-Two of these are worth knowing without looking them up:
+Worth knowing without looking them up:
 
 - **`/delete-topic` commits and pushes on its own.** Every other command leaves
   the working tree for `/git`.
 - **`/review-notes` never edits `tex/`** — its `allowed-tools` makes `reviews/`
   the only writable path — and its report is overwritten every run.
+- **`/audit` does edit what it audits**, in a second phase the user has to ask
+  for by naming findings from the report. It is the one command whose
+  `allowed-tools` reaches `.claude/`, `docs/`, `.github/` and `CLAUDE.md`, so it
+  is the one that can break the machinery in this table. What holds is the
+  gate, not the capability: it writes the report first, and applies only what
+  the report argued for.
 
 Each command's `allowed-tools` line is a real capability boundary, not
 documentation. `/git-merge` cannot commit; `/delete-topic` cannot `rm`;
@@ -121,8 +127,14 @@ Two conventions keep it able to see, and both are load-bearing:
 What no test can check is whether any of this is *true*, only whether the names
 line up. `/audit` is the judgment half: it reads for contradictions between
 files, claims the repo no longer satisfies, prose that disagrees with an
-`allowed-tools` line, steps that cannot fire, and procedures with no reachable
-exit. It runs the tests first and never re-derives what they decide.
+`allowed-tools` line, steps that cannot fire, procedures with no reachable exit,
+and hooks that do not refuse what they claim to. It runs the tests first and
+never re-derives what they decide.
+
+It then repairs what you tell it to, which is why the tests are its gate on the
+way out as well as in: a fix that renames a command, deletes a document or
+changes a count in digits breaks one of the enumerations above, and the run that
+made the change is the one that has to notice.
 
 ## Automation
 

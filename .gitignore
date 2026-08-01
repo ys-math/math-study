@@ -40,6 +40,10 @@ Thumbs.db
 # ── Review reports (/review-notes) ───────────────
 reviews/
 
+# ── Audit reports (/audit) ───────────────────────
+# The only untracked thing under .claude/; everything else there is committed.
+.claude/audits/
+
 # ── Python ───────────────────────────────────────
 __pycache__/
 *.py[cod]
