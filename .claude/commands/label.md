@@ -135,7 +135,7 @@ After the edits, in this order:
    catches the actual failure mode.
 2. **Compile** — the same `latexmk` line. Read the log for undefined references
    and missing labels. Suppress Overfull/Underfull `\hbox` warnings; Japanese in
-   `jsarticle` emits them constantly and they bury everything else.
+   `jlreq` emits them constantly and they bury everything else.
 
 Aux files and `main.pdf` are gitignored — leave them, do not run `latexmk -c`.
 

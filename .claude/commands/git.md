@@ -118,8 +118,8 @@ counts. Adding a command without listing it fails here, before there is a
 commit to amend.
 
 `-g` is not optional: latexmk caches a previous failure and reports "Nothing to
-do" for a file that does not compile. A single topic takes about 0.8 s and all
-8 about 7 s, so there is never a reason to skip this.
+do" for a file that does not compile. A single topic takes about 1.5 s and all
+8 about 12 s, so there is never a reason to skip this.
 
 Aux files and `main.pdf` are gitignored. Leave them; do not run `latexmk -c`.
 
