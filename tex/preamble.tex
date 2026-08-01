@@ -1,4 +1,4 @@
-\usepackage[dvipdfmx]{xcolor}
+\usepackage{xcolor}
 \usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs,adjustbox}
 % keytheorems, not thmtools: thmtools 0.76 builds shared theorem counters with
 % its aliasctr package, which LaTeX 2026 broke — `sibling=` then fails with
@@ -7,7 +7,7 @@
 % loading both packages is a fatal error, so thmtools is gone from the line above.
 \usepackage[thmtools-compat]{keytheorems}
 \usepackage[hyphens]{url}
-\usepackage[dvipdfmx]{hyperref}
+\usepackage{hyperref}
 % cleveref after hyperref, as it requires.
 \usepackage{cleveref}
 
@@ -17,6 +17,14 @@
     %linkcolor=myblue,
     hidelinks
     }
+% \DocTitle is defined by main.tex *after* this file is \input, so the metadata
+% has to wait until it exists. pdflang is deliberately absent: hyperref's luatex
+% driver does not emit /Lang, and the \DocumentMetadata route that would is
+% fatal here — it sends keytheorems into an infinite loop at \declaretheorem.
+\AtBeginDocument{\hypersetup{
+    pdftitle={\DocTitle},
+    pdfauthor={\DocAuthor}
+    }}
 
 \crefname{definition}{定義}{定義}
 \crefname{proposition}{命題}{命題}
@@ -188,4 +196,5 @@
 \newcommand{\GitHub}{https://github.com/ys-math}
 \newcommand{\DocAuthor}{@ys-math}
 \newcommand{\DocRepo}{https://github.com/ys-math/math-study.git}
-\newcommand{\DocCompiler}{uplatex + dvipdfmx}
+\newcommand{\DocCompiler}{LuaLaTeX}
+\newcommand{\DocClass}{jlreq}

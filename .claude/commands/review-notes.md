@@ -93,7 +93,7 @@ Three categories, and nothing else. Each maps to a `review:` label:
   preamble macro exists.
 - **LaTeX の健全性** → `review:latex` — grounded in the compile log: undefined
   control sequences, undefined references, missing labels. **Suppress
-  Overfull/Underfull \hbox warnings** — Japanese text in `jsarticle` emits them
+  Overfull/Underfull \hbox warnings** — Japanese text in `jlreq` emits them
   constantly and they bury everything else.
 
 Do **not** comment on exposition, motivation, missing examples, or chapter

@@ -72,7 +72,7 @@ ROOT_MARKER = TEX_DIR / "preamble.tex"
 # Placeholders are @-delimited because LaTeX uses both {} and $, which rules out
 # str.format and string.Template. Keep the body byte-identical to the existing
 # topics: no trailing newline after \end{document}.
-MAIN_TEMPLATE = r"""\documentclass[uplatex,dvipdfmx]{jsarticle}
+MAIN_TEMPLATE = r"""\documentclass{jlreq}
 
 \input{../preamble.tex}
 

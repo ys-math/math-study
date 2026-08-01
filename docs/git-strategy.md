@@ -58,7 +58,7 @@ say so when `/git` shows you the plan.
 
 **When `main` is red, a shared-file fix goes directly to `main`,** skipping the
 branch — but only after compiling all 8 topics locally. A full local compile
-takes about 7 seconds; waiting for a PR round trip while the published PDFs
+takes about 12 seconds; waiting for a PR round trip while the published PDFs
 rot does not pay for itself.
 
 This is the one exception, and it is narrow: `main` must already be failing.
@@ -236,8 +236,8 @@ Before any commit, the relevant checks run locally:
 
 | Changed | Gate | Cost |
 | --- | --- | --- |
-| `tex/<topic>/**` | compile that topic | ~0.8 s |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics | ~7 s |
+| `tex/<topic>/**` | compile that topic | ~1.5 s |
+| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics | ~12 s |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`

@@ -44,10 +44,10 @@ jobs:
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Compile every topic (upLaTeX + dvipdfmx)
+      - name: Compile every topic (LuaLaTeX)
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.topics.outputs.root_files }}
           work_in_root_file_dir: true    # cd into each folder so \input resolves
           pre_compile: "cp $GITHUB_WORKSPACE/.latexmkrc ~/.latexmkrc"  # absolute path, works from any topic folder
-          args: -pdfdvi -file-line-error -halt-on-error -interaction=nonstopmode
+          args: -pdflua -file-line-error -halt-on-error -interaction=nonstopmode
