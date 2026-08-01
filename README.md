@@ -22,6 +22,7 @@ math-study/
 ├── docs/
 │   ├── agent-system.md
 │   ├── git-strategy.md
+│   ├── issue-convention.md
 │   └── label-convention.md
 ├── scripts/
 │   ├── generate_pdf_links.py
