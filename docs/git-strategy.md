@@ -35,6 +35,7 @@ keep a change that can break every topic away from `main` until it is proven.
 | `.latexmkrc` | branch + PR | Build configuration for every topic. |
 | `tex/preamble.tex` | branch + PR | `\input` by all 8 topics. |
 | `tex/colophon.tex` | branch + PR | `\input` by all 8 topics. |
+| everything else | straight to `main` | Blast radius is nothing that builds. |
 
 The rule is a lookup, not a judgment call. That is deliberate: `/git` evaluates
 it from `git status --porcelain`, and a rule phrased as "use judgment about the
