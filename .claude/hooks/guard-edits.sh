@@ -11,8 +11,7 @@ cwd=$(jq -r '.cwd // empty' <<<"$input")
 rel="${path#"$cwd"/}"
 
 # 1. Chapter files need the CC BY-NC-ND header on line 1. new_topic.py stamps
-#    ch01.tex; ch02.tex onward is hand-made, and validate.yml never sees
-#    tex/<topic>/** because it only runs on pull requests.
+#    ch01.tex; ch02.tex onward is hand-made, and no CI step checks the header.
 if [[ $rel == tex/*/ch*.tex ]]; then
   if ! head -n 1 "$path" | grep -q 'SPDX-License-Identifier: CC-BY-NC-ND-4.0'; then
     block "$rel is missing its licence header. The root LICENSE is the MIT one, so an unmarked chapter reads as MIT by default. Add as line 1:

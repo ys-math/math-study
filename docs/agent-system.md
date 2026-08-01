@@ -159,8 +159,9 @@ Three workflows in `.github/workflows/`:
 | `validate.yml` | `pull_request` | compiles all 8 topics, runs the script tests |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only
-thing that needs them — they set its polling interval, and they are re-observed
-there rather than remembered here.
+thing that needs them — they set its polling interval. `/watch-ci` reads them
+but has no write tool, so nothing updates that table on its own: re-measure it
+by hand whenever the build changes.
 
 `validate.yml` runs only on pull requests, and `tex/<topic>/**` never goes
 through one — which is why the licence header is enforced by a hook instead.

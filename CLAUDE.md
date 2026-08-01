@@ -29,8 +29,8 @@ as MIT and the CC side is the one that has to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
-  by hand is on whoever adds it. **Nothing in CI checks this** — `validate.yml`
-  runs only on pull requests, and `tex/<topic>/**` never goes through one.
+  by hand is on whoever adds it. **Nothing in CI checks this** — no workflow
+  step looks at the header, whether or not the file reaches a pull request.
 - The path table under `## ライセンス` in `README.md` is authoritative, so a
   missing header is untidy rather than a licensing hole. Keep the table right.
 
