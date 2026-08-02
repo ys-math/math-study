@@ -53,6 +53,10 @@ Loaded **on demand**, by a command that names them:
   shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
   the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
   `/delete-topic` and `/git` each depend on one part of it.
+- **`docs/repo-structure.md`** — the companion map: the two halves of the repo,
+  the three things that join them, and what deliberately does not. Nothing
+  executes it; read it when a change would couple `tex/` and `lean/` more
+  tightly than a shared name.
 - **`docs/agent-system.md`** — this file.
 
 ## Commands

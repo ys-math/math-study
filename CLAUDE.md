@@ -9,6 +9,11 @@ the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and two blocks of
 formalising those notes. **`docs/lean-convention.md` owns everything about it**
 and is not summarised here — read it before touching `lean/`.
 
+The two halves share no build dependency, on purpose. **Read
+`docs/repo-structure.md` before writing anything that couples them** — a script
+that extracts one from the other, a `\leanref` macro, a coverage check. Each of
+those was declined for a reason recorded there.
+
 Your job in this repo is the Python tooling in `scripts/`, the CI in
 `.github/workflows/`, and repo chores. See `README.md` for the human-facing
 workflow and the script docstrings for design rationale.
