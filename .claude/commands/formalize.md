@@ -11,9 +11,11 @@ Arguments given: $ARGUMENTS
 
 All output is English.
 
-**The rules are in `docs/lean-convention.md`, and the naming rules it defers to
-are in `docs/label-convention.md`. Read both first, every run.** They are the
-single copies; nothing below restates them. This file is the workflow.
+**The rules are in three documents, and they are the single copies; nothing
+below restates them.** Read all three first, every run:
+`docs/lean-convention.md` for how `lean/` works, `docs/naming-convention.md` for
+what the file is called, and `docs/label-convention.md` for what a declaration
+is called. This file is the workflow.
 
 ## The boundary
 
@@ -50,11 +52,13 @@ is nothing to mirror until the theorems are labelled. Say so and suggest
 Always the whole topic, and always the existing Lean file:
 
 1. `docs/lean-convention.md` — the shape, the shared name, `sorry`, the header.
-2. `docs/label-convention.md` — what the label bodies mean, since the body is
+2. `docs/naming-convention.md` — the slug-to-module transformation, so the file
+   you write to is the one `/delete-topic` will later look for.
+3. `docs/label-convention.md` — what the label bodies mean, since the body is
    the declaration name.
-3. Every `tex/<topic>/ch*.tex` — the labelled environments and their statements.
-4. `lean/Math/Study/<Topic>.lean` if it exists — what is already mirrored.
-5. `lean/Math.lean` — whether the module is already imported.
+4. Every `tex/<topic>/ch*.tex` — the labelled environments and their statements.
+5. `lean/Math/Study/<Topic>.lean` if it exists — what is already mirrored.
+6. `lean/Math.lean` — whether the module is already imported.
 
 Read the *statement*, not just the label. The label names the result; the Lean
 declaration has to say it, and that needs the hypotheses, which live in the

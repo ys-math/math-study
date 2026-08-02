@@ -122,9 +122,11 @@ guess from outside:
 - **`/formalize` writes statements, never proofs**, and cannot commit. It is the
   fence above turned into an `allowed-tools` line as far as one can go.
 - **`docs/issue-convention.md` binds every issue you file**,
-  **`docs/label-convention.md` binds every `\label{}` you write**, and
-  **`docs/lean-convention.md` binds every `.lean` file** — whether or not you got
-  there through `/review-notes`, `/label` or `/formalize`.
+  **`docs/label-convention.md` binds every `\label{}` you write**,
+  **`docs/lean-convention.md` binds every `.lean` file**, and
+  **`docs/naming-convention.md` binds every path you create or rename**, in both
+  halves of the repo — whether or not you got there through `/review-notes`,
+  `/label` or `/formalize`.
 
 **A `\label{}` is now two names, not one.** The label body doubles as the Lean
 declaration name that formalises it, so renaming one is a rename of the

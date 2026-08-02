@@ -72,9 +72,9 @@ git status --porcelain tex/<topic>
 gh issue list --label "topic:<topic>" --state open --json number,title
 ```
 
-`<Topic>` is the slug in `UpperCamelCase` — `algebraic_k_theory` →
-`AlgebraicKTheory`, per `docs/lean-convention.md`. Most topics have no mirror;
-that is not a refusal, it just drops the two Lean lines from everything below.
+`<Topic>` is the slug transformed as `docs/naming-convention.md` specifies —
+`algebraic_k_theory` → `AlgebraicKTheory`. Most topics have no mirror; that is
+not a refusal, it just drops the two Lean lines from everything below.
 
 Read the `\DocTitle` out of `main.tex` — the survey must show what the topic is
 called, not just its slug. A slug is easy to mistype and hard to recognise.

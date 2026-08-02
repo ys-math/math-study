@@ -86,7 +86,7 @@ Run everything from the repo root.
 
 | Command | What it does |
 | --- | --- |
-| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and a `ch01.tex` holding just its CC BY-NC-ND SPDX header. `<topic>` is lowercase letters, digits and underscores; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
+| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and a `ch01.tex` holding just its CC BY-NC-ND SPDX header. The slug form is in `docs/naming-convention.md` and the script enforces it; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
 | `latexmk -cd -g tex/<topic>/main.tex` | Compiles the topic's PDF locally. `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g` forces a rebuild past latexmk's cache. See `docs/git-strategy.md`, `## Gates` |
 | `lake --dir=lean build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. See `docs/lean-convention.md` |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |

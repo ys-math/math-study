@@ -30,11 +30,11 @@ lean/
 not one flat namespace. A `Learn/` file is worked through once and then frozen;
 a `Study/` file grows for as long as the topic it mirrors does.
 
-Module names are `UpperCamelCase`, as everywhere in Lean and Mathlib, even
-though the `tex/` topic slugs they mirror are lowercase:
-`tex/algebraic_k_theory/` ↔ `Math/Study/AlgebraicKTheory.lean`. Casing carries
-meaning in Lean — it is what `docs/label-convention.md` already borrows — and a
-lowercase namespace would be the one identifier here whose casing says nothing.
+**`docs/naming-convention.md` owns what the files are called** — the
+`UpperCamelCase` rule, the `C<NN><ChapterTitle>` form for curriculum files, and
+the slug-to-module transformation that makes `tex/algebraic_k_theory/` into
+`Math/Study/AlgebraicKTheory.lean`. It covers both halves of the repo in one
+place, which is the point of it; this document does not restate any of it.
 
 **`Math.lean` is maintained by hand.** A file with no `import` line there still
 works in your editor and is still invisible to `lake build`, so CI reports the

@@ -45,6 +45,10 @@ Loaded **on demand**, by a command that names them:
   issue: labels, title, body, deduplication, closing. `/review-notes` files
   them, `/git` closes them, `/delete-topic` cleans them up and `/issues` renders
   them locally — four commands, one specification.
+- **`docs/naming-convention.md`** — what every file and directory is called, in
+  both halves of the repo: topic slugs, chapter files, Lean modules, and what
+  else has to move when one of them is renamed. The only naming rule enforced in
+  code is the topic slug, in `scripts/new_topic.py`.
 - **`docs/lean-convention.md`** — everything under `lean/`: the layout, the
   shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
   the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
