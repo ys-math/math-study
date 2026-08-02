@@ -17,14 +17,31 @@
     %linkcolor=myblue,
     hidelinks
     }
-% \DocTitle is defined by main.tex *after* this file is \input, so the metadata
-% has to wait until it exists. pdflang is deliberately absent: hyperref's luatex
-% driver does not emit /Lang, and the \DocumentMetadata route that would is
-% fatal here — it sends keytheorems into an infinite loop at \declaretheorem.
-\AtBeginDocument{\hypersetup{
-    pdftitle={\DocTitle},
-    pdfauthor={\DocAuthor}
-    }}
+% \DocSlug is the topic's folder name, taken from the last segment of \TexRepo
+% — the one place a main.tex writes the directory it lives in. It is the PDF
+% metadata title, so a viewer's window title and a file manager's Title column
+% read "algebraic_k_theory", matching pdf/<topic>.pdf, rather than the typeset
+% \DocTitle. \str_set:Ne makes every character catcode 12, which is what keeps
+% the underscore in a name like galois_theory from being read as a subscript.
+%
+% \TexRepo, like \DocTitle, is defined by main.tex *after* this file is
+% \input, so both the split and the metadata have to wait until it exists.
+% pdflang is deliberately absent: hyperref's luatex driver does not emit /Lang,
+% and the \DocumentMetadata route that would is fatal here — it sends
+% keytheorems into an infinite loop at \declaretheorem.
+\ExplSyntaxOn
+\tl_new:N \g_mathstudy_slug_tl
+\newcommand{\DocSlug}{\g_mathstudy_slug_tl}
+\AtBeginDocument{
+    \seq_set_split:Nne \l_tmpa_seq { / } { \TexRepo }
+    \str_set:Ne \l_tmpa_str { \seq_item:Nn \l_tmpa_seq { -1 } }
+    \tl_gset_eq:NN \g_mathstudy_slug_tl \l_tmpa_str
+    \hypersetup{
+        pdftitle = { \DocSlug },
+        pdfauthor = { \DocAuthor }
+        }
+    }
+\ExplSyntaxOff
 
 \crefname{definition}{定義}{定義}
 \crefname{proposition}{命題}{命題}
