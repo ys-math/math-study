@@ -27,7 +27,9 @@ math-study/
 │   ├── git-strategy.md
 │   ├── issue-convention.md
 │   ├── label-convention.md
-│   └── lean-convention.md
+│   ├── lean-convention.md
+│   ├── naming-convention.md
+│   └── repo-structure.md
 ├── lean/
 │   ├── Math/
 │   ├── Math.lean
