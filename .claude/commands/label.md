@@ -1,7 +1,7 @@
 ---
 description: Propose \label{} names for a topic's theorem environments, then apply the ones you pick
 argument-hint: "[topic_slug ...]  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Edit(tex/**), Bash(latexmk:*), Bash(grep:*)
+allowed-tools: Read, Glob, Grep, Edit(tex/**), Edit(lean/Math/Study/**), Bash(latexmk:*), Bash(lake:*), Bash(grep:*)
 ---
 
 Propose a `\label{}` for every unlabelled theorem environment in a topic, show
@@ -41,11 +41,17 @@ label defined in `ch01.tex` — a rename that does not see it breaks the build.
 3. The topic's `main.tex` — which chapters are `\input`, in what order.
 4. Every `ch0N.tex` in that order.
 
+5. `lean/Math/Study/<Topic>.lean`, if it exists — the label body doubles as the
+   Lean declaration name that formalises it, so a rename has a consumer outside
+   `tex/` entirely. `docs/lean-convention.md` `## The shared name` is the rule.
+
 Collect, before proposing anything:
 
 - every environment and whether it already has a label
 - every existing label, as the uniqueness set
 - every `\cref{}` site, keyed by the label it names
+- every Lean declaration whose name equals a label body, found with
+  `grep -rn '<body>' lean/Math/Study/`
 
 ## What to propose
 
@@ -94,7 +100,9 @@ tex/algebraic_k_theory/ — 4 environments, 2 to name, 2 renames
 Each row carries: number, `file:line`, environment, a short excerpt so the user
 can tell which statement it is, and the proposed label. A rename adds a second
 line with the old label and how many `\cref` sites move with it — that count is
-the blast radius, and the user is entitled to see it before saying yes.
+the blast radius, and the user is entitled to see it before saying yes. Say
+`+ lean` on that line when a Lean declaration carries the old body too; it moves
+in the same edit, and it is the one site `grep` over `tex/` will not show you.
 
 The excerpt is Japanese, because the notes are. Everything else is English.
 
@@ -109,8 +117,11 @@ Only the rows the user named.
 
 - **New label** — insert on the `\begin{env}` line, one space after it, as the
   convention specifies.
-- **Rename** — change the `\label{}` and every `\cref{}` site naming it, in the
-  same batch of edits. Never one without the other.
+- **Rename** — change the `\label{}`, every `\cref{}` site naming it, and the
+  Lean declaration carrying the same body, in the same batch of edits. Never one
+  without the others. Renaming a declaration is the only edit this command may
+  make under `lean/`; it never writes a statement or a proof, which is
+  `/formalize`'s job and the owner's respectively.
 
 If any row is a rename, **compile the topic before touching anything**:
 
@@ -131,11 +142,15 @@ silently proceed to edit a document that does not build.
 After the edits, in this order:
 
 1. **Static gate** — for each renamed label, `grep -rn 'cref{<old>}' tex/<topic>/`
-   returns nothing; no two labels in the topic are equal. This is instant and
-   catches the actual failure mode.
+   returns nothing, and `grep -rn '<old body>' lean/Math/Study/` returns nothing;
+   no two labels in the topic are equal. This is instant and catches the actual
+   failure mode.
 2. **Compile** — the same `latexmk` line. Read the log for undefined references
    and missing labels. Suppress Overfull/Underfull `\hbox` warnings; Japanese in
    `jlreq` emits them constantly and they bury everything else.
+3. **Build Lean**, only if a declaration was renamed — the invocation is in
+   `docs/git-strategy.md` `## Gates`. A rename that misses a use site fails
+   outright here, unlike the LaTeX side where it prints `??` and carries on.
 
 Aux files and `main.pdf` are gitignored — leave them, do not run `latexmk -c`.
 

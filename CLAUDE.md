@@ -5,6 +5,10 @@ Mathematics study notes written in LaTeX. One topic is one directory under
 the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and two blocks of
 `README.md` are build artifacts, not sources.
 
+`lean/` is the other half: a Lake package where the owner learns Lean 4 by
+formalising those notes. **`docs/lean-convention.md` owns everything about it**
+and is not summarised here — read it before touching `lean/`.
+
 Your job in this repo is the Python tooling in `scripts/`, the CI in
 `.github/workflows/`, and repo chores. See `README.md` for the human-facing
 workflow and the script docstrings for design rationale.
@@ -20,17 +24,31 @@ The prose in `tex/*/ch0N.tex` is authored by the repo owner. Edit it only when
 asked to, and never rewrite, reformat or "fix" it in passing while doing tooling
 work.
 
+The same fence runs through `lean/`, in a different place: **statements yes,
+proofs never.** You may write the header, the imports and
+`theorem foo : ... := by sorry`; everything after `by` is the owner's, and
+`Math/Learn/**` is theirs entirely. Naming a Mathlib lemma that would close a
+goal is help; typing the tactic block is taking the exercise away. Nothing
+enforces this — no hook can tell a statement from a proof — which is exactly why
+it is here.
+
 ## Licensing
 
-`tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0; everything else is MIT —
-including the shared `tex/preamble.tex`, `tex/colophon.tex` and the generated
-`tex/*/main.tex`. The root `LICENSE` is the MIT one, so an unmarked file reads
-as MIT and the CC side is the one that has to be marked:
+Three licences. `tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0; `lean/**`
+is Apache 2.0; everything else is MIT — including the shared
+`tex/preamble.tex`, `tex/colophon.tex` and the generated `tex/*/main.tex`. The
+root `LICENSE` is the MIT one, so an unmarked file reads as MIT and the other
+two are the ones that have to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
   by hand is on whoever adds it. **Nothing in CI checks this** — no workflow
   step looks at the header, whether or not the file reaches a pull request.
+- **A new `.lean` file needs the Apache header**, whose text is in
+  `docs/lean-convention.md`. This one *is* checked, by `guard-edits.sh`. Note it
+  names `LICENSE-APACHE-2.0`, not `LICENSE` as Mathlib's own wording does — the
+  root `LICENSE` here is the MIT text, so copying Mathlib's header verbatim
+  points at the wrong licence.
 - The path table under `## ライセンス` in `README.md` is authoritative, so a
   missing header is untidy rather than a licensing hole. Keep the table right.
 
@@ -56,6 +74,10 @@ These are the changes that break silently, days later:
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
   rebuilds nothing, with a green CI run.
+- **Adding a `.lean` file** means adding its `import` to `lean/Math.lean` in the
+  same commit. Lake builds what the root module reaches, so an unimported file
+  compiles in your editor, is skipped by `lake build`, and rots behind a green
+  CI run. Nothing checks this.
 - **Adding a command, hook, workflow or `docs/` file** means listing it in
   `docs/agent-system.md` in the same commit — and a command in `README.md`'s
   table as well. `scripts/test_agent_docs.py` compares those tables against the
@@ -72,6 +94,7 @@ relative to the working directory.
 python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 python scripts/new_topic.py sheaf_theory --title 層論
 latexmk -cd -g tex/<topic>/main.tex   # flags: docs/git-strategy.md, ## Gates
+lake --dir=lean build                 # same section owns this one
 ```
 
 Gate before committing, per `docs/git-strategy.md` `## Gates`. One consequence
@@ -96,9 +119,18 @@ guess from outside:
   local worklist that is gitignored and overwritten every run; a finding lives
   and dies on GitHub. Never cite the worklist as evidence a finding is still
   open — regenerate it, or ask `gh`.
-- **`docs/issue-convention.md` binds every issue you file**, and
-  **`docs/label-convention.md` binds every `\label{}` you write**, whether or
-  not you got there through `/review-notes` or `/label`.
+- **`/formalize` writes statements, never proofs**, and cannot commit. It is the
+  fence above turned into an `allowed-tools` line as far as one can go.
+- **`docs/issue-convention.md` binds every issue you file**,
+  **`docs/label-convention.md` binds every `\label{}` you write**, and
+  **`docs/lean-convention.md` binds every `.lean` file** — whether or not you got
+  there through `/review-notes`, `/label` or `/formalize`.
+
+**A `\label{}` is now two names, not one.** The label body doubles as the Lean
+declaration name that formalises it, so renaming one is a rename of the
+`\label{}`, every `\cref{}` site *and* the declaration in `lean/Math/Study/`.
+`docs/lean-convention.md` `## The shared name` has the rule, including when the
+two deliberately diverge.
 
 **Renaming a topic is not automated, and CI will not clean up after you:**
 
@@ -106,6 +138,9 @@ guess from outside:
 2. `git rm pdf/<topic>.pdf` — the build only ever copies PDFs into `pdf/`, so an
    orphan lingers forever otherwise.
 3. Update `\TexRepo` inside the moved `main.tex`; it embeds the directory name.
+4. `git mv` the mirror at `lean/Math/Study/<Topic>.lean` if it exists, and fix
+   its `import` in `lean/Math.lean`. A stale import fails `lake build` outright,
+   so this one at least tells you.
 
 ## Git
 
@@ -113,16 +148,19 @@ guess from outside:
 it — read it before doing anything by hand. What binds regardless:
 
 - **Shared paths go on a branch and through a PR** — `scripts/`, `.github/`,
-  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`. They can break every
-  topic at once. Everything else, `tex/<topic>/**` included, commits straight to
-  `main`.
+  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`, and `lean/`'s build
+  configuration (`lakefile.toml`, `lean-toolchain`, `lake-manifest.json`). They
+  can break every topic, or every proof, at once. Everything else —
+  `tex/<topic>/**` and `lean/Math/**` included — commits straight to `main`.
 - **Path-scoped `git add` only**, never `-A` or `.`; the working tree may hold
   someone else's work in progress.
 - **Never force-push and never rewrite pushed history.** Correct a bad commit on
   `main` with a follow-up commit.
 - **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
-  `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex` — and
-  **never on `tex/<topic>/**`**.
+  `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex`, and
+  `lean/`'s build configuration — and **never on `tex/<topic>/**` or
+  `lean/Math/**`**. A statement `/formalize` typed is still the owner's
+  mathematics, only transported; the proof under it will be theirs outright.
 
 CI pushes to `main` after every push of yours, so `git pull --rebase` first. It
 cannot conflict: the bots only touch `pdf/*.pdf` and the generated `README.md`

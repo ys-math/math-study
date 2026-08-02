@@ -28,6 +28,7 @@ keep a change that can break every topic away from `main` until it is proven.
 | Path | Where it goes | Why |
 | --- | --- | --- |
 | `tex/<topic>/**` | straight to `main` | Blast radius is one document. |
+| `lean/Math/**` | straight to `main` | Blast radius is one module. |
 | `README.md`, `CLAUDE.md`, `docs/**` | straight to `main` | Prose; nothing compiles it. |
 | `.claude/**` | straight to `main` | Changes how Claude behaves, not what builds. |
 | `scripts/**` | branch + PR | A break here silently stops the README from regenerating. |
@@ -35,6 +36,7 @@ keep a change that can break every topic away from `main` until it is proven.
 | `.latexmkrc` | branch + PR | Build configuration for every topic. |
 | `tex/preamble.tex` | branch + PR | `\input` by all 8 topics. |
 | `tex/colophon.tex` | branch + PR | `\input` by all 8 topics. |
+| `lean/lakefile.toml`, `lean/lean-toolchain`, `lean/lake-manifest.json` | branch + PR | A bad Mathlib bump breaks every proof at once. |
 | everything else | straight to `main` | Blast radius is nothing that builds. |
 
 The rule is a lookup, not a judgment call. That is deliberate: `/git` evaluates
@@ -209,10 +211,14 @@ Merging them would mean either running TeX Live on every push, or losing tree
 updates on commits that touch no `.tex` file — such as the one that added this
 document.
 
-A third workflow, `validate.yml`, runs on `pull_request`: it compiles all 8
-topics and runs the script tests, and commits nothing. It exists because
-branches are reserved for exactly the changes that can break every topic, and
-before it those changes were the only ones with no CI at all.
+The other two commit nothing, so they stay out of that entirely. `validate.yml`
+runs on `pull_request`: it compiles all 8 topics and runs the script tests. It
+exists because branches are reserved for exactly the changes that can break
+every topic, and before it those changes were the only ones with no CI at all.
+`lean.yml` runs on both a push to `main` and a pull request, filtered to
+`lean/**` — Lean is the only half of the repo whose sources go straight to
+`main` while its build configuration goes through a branch, so it is the only
+one that needs watching on both paths.
 
 ## The commands
 
@@ -239,6 +245,7 @@ Before any commit, the relevant checks run locally:
 | `tex/<topic>/**` | compile that topic | ~1.5 s |
 | `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics | ~12 s |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
+| `lean/**` | build the Lean library | ~3 s warm |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`
 is one of them: it holds the command tables in `README.md` and
@@ -273,6 +280,24 @@ supposed to be reading carefully, so leave `-r` off.
 
 Aux files and `main.pdf` are gitignored; leave them, and do not run
 `latexmk -c`. The next build reuses them.
+
+```bash
+lake --dir=lean build
+```
+
+**This is the single copy of that invocation**, on the same terms as the one
+above; `CLAUDE.md`, `README.md`, `docs/lean-convention.md` and `/formalize`
+point here rather than restating it.
+
+`--dir=lean` is the `-cd` of this half: the Lake package is `lean/`, not the
+repo root, and everything in this repo runs from the repo root. There is no `-g`
+equivalent and none is wanted — Lean's incremental build is trustworthy, which
+is what keeps this gate at three seconds instead of an hour.
+
+The build is green with `sorry` in it, deliberately; `docs/lean-convention.md`
+owns that rule and the rest of what lives under `lean/`. `lean/.lake/` is
+gitignored and holds Mathlib — several gigabytes. Leave it, exactly as with the
+aux files: `lake clean` costs an afternoon to undo.
 
 ### The local gate is necessary, not sufficient
 

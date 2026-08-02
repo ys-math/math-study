@@ -1,0 +1,52 @@
+# .github/workflows/lean.yml
+
+name: Lean
+
+# Both triggers, one workflow. Lean is the only part of this repo that needs
+# checking on both paths: lean/Math/** commits straight to main like a chapter
+# does, while lean/lakefile.toml, lean/lean-toolchain and lean/lake-manifest.json
+# go through a pull request, because a bad Mathlib bump breaks every proof at
+# once (docs/git-strategy.md). Putting the pull_request half in validate.yml
+# instead would mean a second copy of the Mathlib cache setup, and a second copy
+# is what this repo keeps getting bitten by.
+#
+# It commits nothing, so — unlike build-pdf.yml and update-readme.yml — it
+# cannot take part in the push cascade at all.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lean/**"
+      - ".github/workflows/lean.yml"   # retest when the build config changes
+  pull_request:
+    paths:
+      - "lean/**"
+      - ".github/workflows/lean.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read          # this workflow only reads; it never pushes
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # lean-action installs the toolchain named in lean/lean-toolchain, runs
+      # `lake exe cache get` to pull Mathlib's prebuilt oleans, then `lake build`.
+      # The cache is not an optimisation: compiling Mathlib from source takes
+      # hours, and the cache only ever hits because lakefile.toml pins a real
+      # Mathlib release tag rather than tracking master.
+      #
+      # No --wfail. `sorry` is allowed on main and Lean reports it as a warning,
+      # so the build is green on anything short of an elaboration error — see
+      # docs/lean-convention.md. There is no test or lint driver to run.
+      - name: Build the Lean library
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean
+          use-mathlib-cache: "true"
+          test: "false"
+          lint: "false"

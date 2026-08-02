@@ -1,12 +1,12 @@
 ---
-description: Delete a topic — its tex/ directory, its PDF, its review issues and its local artifacts — and commit the removal
+description: Delete a topic — its tex/ directory, its PDF, its Lean mirror, its review issues and its local artifacts — and commit the removal
 argument-hint: "<topic_slug>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git commit:*), Bash(git push:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label list:*), Bash(gh label delete:*)
+allowed-tools: Read, Glob, Grep, Edit(lean/Math.lean), Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(lake:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label list:*), Bash(gh label delete:*)
 ---
 
-Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, its open review issues, and
-the local artifacts that neither git nor CI will clean up. Then commit and push
-the removal.
+Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, its Lean mirror, its open
+review issues, and the local artifacts that neither git nor CI will clean up.
+Then commit and push the removal.
 
 Arguments given: $ARGUMENTS
 
@@ -15,6 +15,12 @@ Nothing else in the repo names a topic: `build-pdf.yml` enumerates
 leaves the README on its own after the push — but `pdf/<topic>.pdf` is only ever
 written to, never pruned, and an orphan there lingers forever. That is the whole
 reason this command exists.
+
+The Lean mirror is the same shape of problem with a louder failure. If
+`lean/Math/Study/<Topic>.lean` exists, `lean/Math.lean` imports it, and removing
+the file without removing the import breaks `lake build` for **every** proof in
+the repo — a topic deletion that reds `main` for a reason nobody will connect to
+it. Both go in the same commit.
 
 The same is true off-disk. `topic:<topic>` issues and the label itself outlive
 the files, and an issue about a chapter that no longer exists can be neither
@@ -58,12 +64,17 @@ turns the final `git push` into a rejection *after* the destructive step.
 Gather, for the chosen topic:
 
 ```bash
-git ls-files tex/<topic> pdf/<topic>.pdf
+git ls-files tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic>.lean
 wc -l tex/<topic>/*.tex
+grep -n "Math.Study.<Topic>" lean/Math.lean
 git log --oneline -n 1 -- tex/<topic>
 git status --porcelain tex/<topic>
 gh issue list --label "topic:<topic>" --state open --json number,title
 ```
+
+`<Topic>` is the slug in `UpperCamelCase` — `algebraic_k_theory` →
+`AlgebraicKTheory`, per `docs/lean-convention.md`. Most topics have no mirror;
+that is not a refusal, it just drops the two Lean lines from everything below.
 
 Read the `\DocTitle` out of `main.tex` — the survey must show what the topic is
 called, not just its slug. A slug is easy to mistype and hard to recognise.
@@ -98,6 +109,8 @@ Delete topology (位相幾何学)?
   tex/topology/main.tex        18 lines
   tex/topology/ch01.tex       242 lines
   pdf/topology.pdf            (tracked)
+  lean/Math/Study/Topology.lean   31 lines, 6 declarations (4 sorry)
+  lean/Math.lean               import Math.Study.Topology  → removed
   tex/topology/               ignored build artifacts (main.aux, main.pdf, latex_out/)
   issues/topology.md          local worklist
 
@@ -123,8 +136,10 @@ deciding, not in the report afterwards.
 ## 6. Execute
 
 ```bash
-git rm -r tex/<topic> pdf/<topic>.pdf
+git rm -r tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic>.lean
 git clean -xdf tex/<topic> issues/<topic>.md
+# delete the `import Math.Study.<Topic>` line from lean/Math.lean, then:
+git add lean/Math.lean
 git commit -m "chore: remove the <topic> topic"
 git push origin main
 ```
@@ -133,7 +148,16 @@ git push origin main
 of ignored build junk. `git clean -xdf` sweeps that and the now-empty directory,
 and the stale `issues/<topic>.md` with it — a worklist for notes that no longer
 exist. Both paths are pathspecs: a pathspec matching nothing is a silent no-op,
-so a topic with no worklist and no build artifacts needs no special case.
+so a topic with no worklist and no build artifacts needs no special case. The
+same is true of the Lean path in the `git rm` line — but only when it was never
+tracked. Include it only if the survey found it, because `git rm` aborts
+wholesale on a path it cannot match, exactly as with the PDF.
+
+The import line is the one deletion git cannot do for you, and it must be in
+this commit: `lean/Math.lean` importing a file that no longer exists fails
+`lake build` for every proof in the repo. Build before committing — the
+invocation is in `docs/git-strategy.md` `## Gates` — whenever a mirror was
+removed.
 
 Use `git clean`, never `rm`. `Bash(rm:*)` is absent from `allowed-tools` above,
 deliberately — nothing in this command should be able to delete a path git has

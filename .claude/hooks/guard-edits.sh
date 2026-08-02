@@ -22,7 +22,27 @@ See CLAUDE.md, ## Licensing."
   fi
 fi
 
-# 2. Losing a README marker does not fail any build — the generator simply stops
+# 2. Lean files need the Apache header. Same hole as the chapters above and the
+#    same reason it has to be a hook: lean/Math/** commits straight to main, so
+#    no pull request ever reads one, and the root LICENSE is the MIT one. The
+#    header is Mathlib's, except that it names LICENSE-APACHE-2.0 — this repo's
+#    LICENSE is not the Apache text, so Mathlib's wording would misdirect.
+#    .lake/ is excluded: it holds Mathlib's own sources, which carry their own.
+if [[ $rel == lean/*.lean && $rel != lean/.lake/* ]]; then
+  if ! head -n 5 "$path" | grep -q 'Released under Apache 2.0 license'; then
+    block "$rel is missing its licence header. The root LICENSE is the MIT one, so an unmarked Lean file reads as MIT by default while everything it imports is Apache 2.0. Add as lines 1-5:
+
+/-
+Copyright (c) <year> @ys-math. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE-APACHE-2.0.
+Authors: @ys-math
+-/
+
+See docs/lean-convention.md."
+  fi
+fi
+
+# 3. Losing a README marker does not fail any build — the generator simply stops
 #    finding its block and the README quietly freezes.
 if [[ $rel == README.md ]]; then
   for m in "BEGIN PDF LINKS" "END PDF LINKS" "BEGIN TREE" "END TREE"; do

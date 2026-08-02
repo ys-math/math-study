@@ -1,0 +1,18 @@
+# The Lean half of this repo. One package, one library: `Math`, split into
+# `Math/Learn/` (working through a curriculum) and `Math/Study/` (formalising
+# the notes in tex/). See docs/lean-convention.md.
+#
+# Mathlib is pinned to a release tag rather than master, so `lake exe cache get`
+# always hits and proofs do not break under you between sittings. Bumping it
+# means editing the rev here *and* lean-toolchain to the same version, on a
+# branch — see docs/git-strategy.md.
+name = "math"
+defaultTargets = ["Math"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.32.2"
+
+[[lean_lib]]
+name = "Math"
