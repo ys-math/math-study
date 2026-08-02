@@ -195,7 +195,34 @@ writing the tactic block into the file.
 
 `Math/Learn/**` is the owner's alone. Those files exist to be struggled with.
 
-This is a layer-2 rule, in `docs/agent-system.md`'s terms: advisory, not
-mechanical. No hook can tell a statement from a proof. `/formalize` narrows it
-where it can — its `allowed-tools` reach only `lean/Math/Study/**` — but the
-rule itself is kept, not enforced.
+### What holds it
+
+`.claude/hooks/guard-edits.sh` refuses a Write or Edit under
+`lean/Math/Study/**` whose tactic blocks are not exactly `sorry`. It reads only
+the text that call wrote — `.content` for Write, `.new_string` for Edit — never
+the file on disk, so proofs the owner already typed there are never what trips
+it. A whole-file overwrite of those proofs *is* caught, which is the point.
+
+Two gaps, both deliberate, neither an invitation:
+
+- **The test is syntactic.** Every `by` must be followed by `sorry`; a term-mode
+  proof would pass. Closing that would mean refusing ordinary `def`s, which
+  `/formalize` needs when a notion has no Mathlib counterpart.
+- **`Math/Learn/**` is unguarded.** The rule there is that Claude should not be
+  writing at all, which is a different rule, and a hook broad enough to enforce
+  it would block asking for help with an exercise.
+
+### What nothing holds
+
+**Never repair a statement while translating it.** If the Lean needs a
+hypothesis the prose omits, that is a finding about the notes — report it, do not
+add it.
+
+No hook can see this one. Adding the missing assumption yields Lean that
+typechecks and proves, notes that stay wrong, and a shared name certifying the
+two agree; the build passes, `sorry` is honest, CI is green, and the defect is
+now carved into a verified artifact. Mirroring the statement as written fails
+loudly instead, which is the entire reason to formalise your own notes.
+
+This is the layer-2 half, in `docs/agent-system.md`'s terms, and it is the one
+worth reading twice.

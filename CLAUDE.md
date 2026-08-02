@@ -33,9 +33,18 @@ The same fence runs through `lean/`, in a different place: **statements yes,
 proofs never.** You may write the header, the imports and
 `theorem foo : ... := by sorry`; everything after `by` is the owner's, and
 `Math/Learn/**` is theirs entirely. Naming a Mathlib lemma that would close a
-goal is help; typing the tactic block is taking the exercise away. Nothing
-enforces this — no hook can tell a statement from a proof — which is exactly why
-it is here.
+goal is help; typing the tactic block is taking the exercise away.
+
+`guard-edits.sh` enforces this under `lean/Math/Study/**` — every tactic block
+must be exactly `sorry` — but only there, and only syntactically. `Math/Learn/**`
+is unguarded, and a term-mode proof would pass. Both gaps are real; neither is
+permission.
+
+And the rule the hook cannot reach at all: **never repair a statement while
+translating it.** A hypothesis the prose omits is a finding about the notes, not
+something to add in passing — adding it produces Lean that proves, notes that
+stay wrong, and a shared name certifying they agree. That one reads green
+everywhere.
 
 ## Licensing
 

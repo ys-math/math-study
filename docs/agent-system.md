@@ -92,10 +92,12 @@ Worth knowing without looking them up:
 - **`/formalize` writes statements and never a proof.** Half of that is a
   capability: its `allowed-tools` reach `lean/Math/Study/**` and the import list
   in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. The
-  other half is not enforceable, because no tool boundary can tell a statement
-  from a proof, and it is the half that matters: every declaration ends
-  `:= by sorry` because the owner is learning Lean. See
-  `docs/lean-convention.md`, `## What Claude may write here`.
+  other half is `guard-edits.sh`, which refuses a write under
+  `lean/Math/Study/**` whose tactic blocks are not exactly `sorry` — so this is
+  the one command whose central rule is mechanical rather than kept. What stays
+  advisory is narrower and worse: never repair an understated statement while
+  translating it. See `docs/lean-convention.md`,
+  `## What Claude may write here`.
 - **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
   gitignored and overwritten, a view of the open issues with links that resolve
   in your working copy. GitHub is the record; regenerate rather than trust it.
@@ -118,7 +120,7 @@ something, check that the frontmatter agrees — that is the half that holds.
 | Hook | Event | Refuses |
 | --- | --- | --- |
 | `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run |
-| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a `README.md` with a generator marker destroyed |
+| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
 read-only commands through without a prompt.
