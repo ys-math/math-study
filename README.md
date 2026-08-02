@@ -127,6 +127,7 @@ in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
 math-study/
 ├── docs/
 │   ├── images/
+│   │   ├── routing-rule.svg
 │   │   └── working-loop.svg
 │   ├── agent-system.md
 │   ├── git-strategy.md
@@ -135,6 +136,7 @@ math-study/
 │   ├── lean-convention.md
 │   ├── naming-convention.md
 │   ├── repo-structure.md
+│   ├── routing-rule.ebnf
 │   └── working-loop.ebnf
 ├── lean/
 │   ├── Math/

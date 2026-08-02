@@ -1,0 +1,22 @@
+(* Which route a change takes to main.
+
+   Source for docs/images/routing-rule.svg, embedded in docs/git-strategy.md.
+   Rendered with https://ys-math.github.io/syntax-diagram-generator/ — paste
+   this file in, choose EBNF (ISO/IEC 14977), set Fit to Wrap, export the SVG.
+
+   The diagram shows the *shape* of the rule; the table beside it is the
+   lookup. Deliberately so — which paths are shared changes when a new shared
+   file appears, and a picture that enumerated them would go stale in a way
+   nothing could see. The three routes do not change.
+
+   Note the hotfix branch has no pull request in it, and that this is the only
+   way a shared path reaches main directly. It is guarded by "main is red", not
+   by confidence. *)
+
+landing =
+    ( ? a shared path ? ,
+        ( ? main is green ? , ? branch ? , "/git" , ? open a pull request ? ,
+          "/git-merge"
+        | ? main is red ? , ? compile every topic locally ? , "/git" )
+    | ? any other path ? , "/git" ) ,
+    [ "/watch-ci" ] ;

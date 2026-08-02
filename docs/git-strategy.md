@@ -25,6 +25,17 @@ intent — the notes are written to be read, not staged for a release.
 Branches are short-lived, single-purpose, and exist for exactly one reason: to
 keep a change that can break every topic away from `main` until it is proven.
 
+There are three routes to `main`, and the shape of the choice is the same every
+time:
+
+![The routing rule](./images/routing-rule.svg)
+
+The diagram is the shape; the table below is the lookup. It stays that way on
+purpose — which paths count as shared changes whenever a new shared file
+appears, and a picture that enumerated them would go stale in a way nothing
+could see. The three routes do not change. The grammar is
+`docs/routing-rule.ebnf`.
+
 | Path | Where it goes | Why |
 | --- | --- | --- |
 | `tex/<topic>/**` | straight to `main` | Blast radius is one document. |
