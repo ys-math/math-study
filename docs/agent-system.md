@@ -45,6 +45,18 @@ Loaded **on demand**, by a command that names them:
   issue: labels, title, body, deduplication, closing. `/review-notes` files
   them, `/git` closes them, `/delete-topic` cleans them up and `/issues` renders
   them locally — four commands, one specification.
+- **`docs/naming-convention.md`** — what every file and directory is called, in
+  both halves of the repo: topic slugs, chapter files, Lean modules, and what
+  else has to move when one of them is renamed. The only naming rule enforced in
+  code is the topic slug, in `scripts/new_topic.py`.
+- **`docs/lean-convention.md`** — everything under `lean/`: the layout, the
+  shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
+  the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
+  `/delete-topic` and `/git` each depend on one part of it.
+- **`docs/repo-structure.md`** — the companion map: the two halves of the repo,
+  the three things that join them, and what deliberately does not. Nothing
+  executes it; read it when a change would couple `tex/` and `lean/` more
+  tightly than a shared name.
 - **`docs/agent-system.md`** — this file.
 
 ## Commands
@@ -58,6 +70,7 @@ to touch**, which is what you actually need when choosing between them.
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/**` | no | always, before applying | English |
+| `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
 | `/audit` | `.claude/audits/**`, then the files it audits | no | always, before applying a fix | English |
@@ -76,6 +89,13 @@ Worth knowing without looking them up:
   files findings as GitHub issues and cannot close one: `gh issue close` is
   absent from its `allowed-tools`, so an undetected finding is reported to the
   user rather than acted on.
+- **`/formalize` writes statements and never a proof.** Half of that is a
+  capability: its `allowed-tools` reach `lean/Math/Study/**` and the import list
+  in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. The
+  other half is not enforceable, because no tool boundary can tell a statement
+  from a proof, and it is the half that matters: every declaration ends
+  `:= by sorry` because the owner is learning Lean. See
+  `docs/lean-convention.md`, `## What Claude may write here`.
 - **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
   gitignored and overwritten, a view of the open issues with links that resolve
   in your working copy. GitHub is the record; regenerate rather than trust it.
@@ -98,7 +118,7 @@ something, check that the frontmatter agrees — that is the half that holds.
 | Hook | Event | Refuses |
 | --- | --- | --- |
 | `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run |
-| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `README.md` with a generator marker destroyed |
+| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a `README.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
 read-only commands through without a prompt.
@@ -150,13 +170,14 @@ made the change is the one that has to notice.
 
 ## Automation
 
-Three workflows in `.github/workflows/`:
+The workflows in `.github/workflows/`:
 
 | Workflow | Trigger | Does |
 | --- | --- | --- |
 | `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` | compiles affected topics, commits `pdf/*.pdf` |
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the README blocks, commits |
 | `validate.yml` | `pull_request` | compiles all 8 topics, runs the script tests |
+| `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` | builds the Lean library through `lake` |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only
 thing that needs them — they set its polling interval. `/watch-ci` reads them
@@ -164,12 +185,18 @@ but has no write tool, so nothing updates that table on its own: re-measure it
 by hand whenever the build changes.
 
 `validate.yml` runs only on pull requests, and `tex/<topic>/**` never goes
-through one — which is why the licence header is enforced by a hook instead.
+through one — which is why the licence header is enforced by a hook instead. The
+same holds for `lean/Math/**`, and `lean.yml` does not rescue it: the workflow
+runs on the push, so it sees a missing Apache header only after the commit
+exists. Hence the second rule in `guard-edits.sh`.
+
+`lean.yml` is the one workflow with both triggers, because `lean/` is the one
+place a source path and its build configuration take different routes to `main`.
 
 ### Why the push cascade terminates
 
-Both workflows push to `main`, so both could retrigger CI forever. They don't,
-by two different mechanisms, and both are worth preserving:
+Two of the workflows push to `main`, so both could retrigger CI forever. They
+don't, by two different mechanisms, and both are worth preserving:
 
 - **`build-pdf.yml` writes what it does not watch.** It commits `pdf/*.pdf`,
   which matches neither of its path filters. It cannot trigger itself.
@@ -180,6 +207,9 @@ by two different mechanisms, and both are worth preserving:
 
 Both also retry a rebase three times, because the fast workflow pushes while the
 slow one is still in TeX Live.
+
+`validate.yml` and `lean.yml` commit nothing at all, so neither can enter the
+cascade in the first place.
 
 `/watch-ci` reports the result and stops; it is built to run under `/loop` and
 ends every run with a `watch-ci: done|pending|unknown` line for a loop to read.

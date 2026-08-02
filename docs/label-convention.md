@@ -8,6 +8,11 @@ inside the braces.
 The day-to-day version is the `/label` command, which implements this document;
 read on when you are naming a label by hand, or when you want the reasoning.
 
+**Names of files and directories are `docs/naming-convention.md`**, not this
+document. The two meet at one point: a label body doubles as the name of the
+Lean declaration formalising it, and that declaration lives in a file whose name
+the other document fixes.
+
 Two facts drive the whole thing:
 
 - **A label is read out of context.** You type `\cref{` in `ch03.tex` and pick

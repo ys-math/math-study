@@ -37,6 +37,12 @@ Thumbs.db
 *.xdv
 **/main.pdf
 
+# ── Lean build directory ─────────────────────────
+# lake's build output and the Mathlib checkout it pulls in — several gigabytes,
+# all of it reproducible from lakefile.toml, lean-toolchain and
+# lake-manifest.json, which are tracked. See docs/lean-convention.md.
+lean/.lake/
+
 # ── Issue worklists (/issues) ────────────────────
 # A rendering of the open GitHub issues, not the record. Regenerated, never read
 # back — see docs/issue-convention.md.
