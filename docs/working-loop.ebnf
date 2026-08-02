@@ -1,0 +1,26 @@
+(* The working loop, as a grammar.
+
+   Source for docs/images/working-loop.svg. Rendered with
+   https://ys-math.github.io/syntax-diagram-generator/ — paste this file in,
+   choose EBNF (ISO/IEC 14977), set Fit to Wrap, and export the SVG.
+
+   One rule on purpose: the generator draws one diagram per rule, and a sitting
+   in this repo is one picture, not eight. The named sub-steps live in the boxes
+   rather than in rules of their own.
+
+   Quoted terminals are slash commands and are checked — scripts/test_agent_docs.py
+   fails if this file names a command that .claude/commands/ does not have. The
+   check runs one way only: a command may exist without appearing here.
+   /delete-topic is deliberately absent, being an exit rather than a step.
+
+   Special sequences (? … ?) are the parts that are not a command: writing,
+   fixing, proving. They are where most of the time actually goes. *)
+
+session =
+    { "/new-topic"
+    | ? write a chapter ? , [ "/label" ]
+    | "/review-notes" , [ "/issues" ] , { ? fix a finding ? }
+    | "/formalize" , { ? replace a sorry ? }
+    | ? edit the machinery ? , [ "/audit" ]
+    } ,
+    "/git" , [ "/watch-ci" ] , [ "/git-merge" ] ;

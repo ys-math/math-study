@@ -122,9 +122,17 @@ than left to look obvious.
 | --- | --- |
 | licence texts | `LICENSE` (MIT, the default), `LICENSE-CC-BY-NC-ND-4.0`, `LICENSE-APACHE-2.0` |
 | documents | `docs/<kebab-case>.md` |
+| a document's source data | `docs/<kebab-case>.<ext>`, the stem being what it describes (`docs/working-loop.ebnf`) |
+| images | `docs/images/<kebab-case>.<ext>`, the stem matching the source it was rendered from |
 | commands | `.claude/commands/<kebab-case>.md`, the stem being the slash command |
 | hooks | `.claude/hooks/<kebab-case>.sh` |
 | workflows | `.github/workflows/<kebab-case>.yml` |
+
+A rendered image shares its source's stem so the pair is one lookup apart:
+`docs/working-loop.ebnf` renders to `docs/images/working-loop.svg`, and a
+renamed grammar is an image renamed in the same commit. Nothing checks the
+stems match — `scripts/test_agent_docs.py` checks only that the SVG exists and
+that `README.md` still points at it.
 
 A licence file other than `LICENSE` is named for the licence it holds, in the
 SPDX identifier's own spelling, so that a header saying

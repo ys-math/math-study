@@ -29,6 +29,13 @@ Claude — in `tex/` at the prose, in `lean/` at the `by`.
 
 Neither half; both halves depend on it. All of it is MIT.
 
+**"Supporting" is a claim about dependency, not about worth.** `README.md`
+frames the same directories as one of three learning tracks, and both framings
+are true on different axes: nothing here is the point of the repo *to build*,
+and all of it is the point of the repo *to learn*. That is also why this third
+changes more often than either half — note-making keeps asking it for something
+it does not yet do.
+
 | directory | serves | owned by |
 | --- | --- | --- |
 | `scripts/` | the README's generated blocks, topic creation, and the drift tests that hold every enumeration in `docs/` and `README.md` to what is on disk | script docstrings |

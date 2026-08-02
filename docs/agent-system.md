@@ -59,6 +59,12 @@ Loaded **on demand**, by a command that names them:
   tightly than a shared name.
 - **`docs/agent-system.md`** — this file.
 
+One file in `docs/` specifies nothing: **`docs/working-loop.ebnf`** is data, not
+prose — the grammar behind the working-loop diagram in `README.md`, rendered to
+`docs/images/working-loop.svg`. It is the one place a command list appears
+outside a markdown table, so `scripts/test_agent_docs.py` reads it directly and
+fails if it names a command that `.claude/commands/` does not have.
+
 ## Commands
 
 They live in `.claude/commands/`. Each one's `description:` and
