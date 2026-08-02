@@ -24,14 +24,6 @@ README = Path("README.md")
 # Top-level directories pruned entirely from the tree.
 PRUNED_DIRS = {"pdf", ".github"}
 
-# Directories rendered as one collapsed entry, contents and all. The Lean
-# library gains a file per proof session and would turn this tree into a file
-# listing; the tree exists to orient a reader, and lean/'s build files — which
-# stay visible, being outside the collapsed prefix — already say what kind of
-# thing is inside. Prefixes are matched whole-segment, so a sibling named
-# lean/Mathlib would not be swallowed by "lean/Math".
-COLLAPSED_DIRS = ("lean/Math",)
-
 
 def tracked_files() -> list[str]:
     out = subprocess.run(
@@ -55,32 +47,17 @@ def keep(path: str) -> bool:
     return True
 
 
-def collapse(path: str) -> tuple[str, bool]:
-    """Return what to render for `path`, and whether it was collapsed.
-
-    A path inside a COLLAPSED_DIRS prefix renders as the prefix itself; anything
-    else renders as itself. The prefix is only ever matched with the separator
-    attached, so it never matches the collapsed directory's own siblings.
-    """
-    for prefix in COLLAPSED_DIRS:
-        if path.startswith(prefix + "/"):
-            return prefix, True
-    return path, False
-
-
 def build_tree(paths: list[str]) -> dict:
     """Nested dict; a file maps to None, a directory maps to a sub-dict."""
     tree: dict = {}
     for path in paths:
-        rendered, collapsed = collapse(path)
         node = tree
-        parts = rendered.split("/")
+        parts = path.split("/")
         for part in parts[:-1]:
             node = node.setdefault(part, {})
-        # Leaf. A collapsed prefix is a directory with nothing under it, so it
-        # maps to an empty dict and render() gives it a trailing slash and no
-        # children; anything else is a file. Don't clobber a dir sharing the name.
-        node.setdefault(parts[-1], {} if collapsed else None)
+        # Leaf, and setdefault rather than assignment so a directory already
+        # recorded under this name is not clobbered by a file of the same name.
+        node.setdefault(parts[-1], None)
     return tree
 
 
