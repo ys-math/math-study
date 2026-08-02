@@ -57,8 +57,12 @@ __pycache__/
 *.py[cod]
 
 # ── Editors ──────────────────────────────────────
-# VSCode
-.vscode/
+# VSCode — settings are per-machine, but extensions.json is the one file
+# meant to be shared: it is how a fresh clone learns what to install.
+# Note `.vscode/*` and not `.vscode/`: git does not descend into an excluded
+# directory, so a negation under one can never fire.
+.vscode/*
+!.vscode/extensions.json
 
 # Vim
 *.swp

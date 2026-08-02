@@ -1,0 +1,10 @@
+{
+  // Renders the ```mermaid block in docs/agent-system.md inside VS Code's
+  // markdown preview (⇧⌘V). GitHub renders it server-side already; this is
+  // what lets you see the CI cascade diagram while editing it.
+  //
+  // The railroad diagrams need nothing here — they are committed SVGs, and
+  // regenerating one means re-running the grammar through
+  // https://ys-math.github.io/syntax-diagram-generator/
+  "recommendations": ["bierner.markdown-mermaid"]
+}
