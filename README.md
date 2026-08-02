@@ -126,8 +126,8 @@ on line 1 — `docs/lean-convention.md` has the text.
 Once you push to `main`, CI takes over: `build-pdf.yml` commits
 `pdf/<topic>.pdf`, `update-readme.yml` regenerates the PDF list and the
 directory tree above, and `lean.yml` builds `lean/` if you touched it. The lists
-are generated — edit the `.tex` sources, not them. The tree deliberately shows
-`lean/Math/` collapsed: it would otherwise grow a line per proof.
+are generated — edit the `.tex` sources, not them. The tree lists `lean/Math/`
+in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
 
 ## ライセンス
 [![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]
