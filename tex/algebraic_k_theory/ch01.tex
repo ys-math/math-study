@@ -5,13 +5,13 @@
 
 \begin{definition} \label{def: IsProjective}
 $R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は\textbf{射影$R$加群}(projective module)であるという.
-% https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMSwyLCJmIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiZyJdLFswLDEsInteXFxleGlzdHN9aCIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+% https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiXntcXGZvcmFsbH1NIl0sWzEsMSwiXntcXGZvcmFsbH1OIl0sWzEsMiwiXntcXGZvcmFsbH1mIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiZyJdLFswLDEsInteXFxleGlzdHN9aCIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 \[\begin{tikzcd}
 	& P \\
-	M & N
+	{^{\forall}M} & {^{\forall}N}
 	\arrow["{{^\exists}h}"', dashed, from=1-2, to=2-1]
 	\arrow["g", from=1-2, to=2-2]
-	\arrow["f"', two heads, from=2-1, to=2-2]
+	\arrow["{^{\forall}f}"', two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
 
 \end{definition}
@@ -97,13 +97,13 @@ $F$は自由$R$加群 $\implies$ $F$は射影$R$加群
 \begin{proof}
 $F$を自由$R$加群とし$(e_s)_{s \in S}$を$F$の基底とする.\ $M$を$R$加群として$\alpha \colon M \twoheadrightarrow F$を全射準同型とする.\ 任意の$s \in S$に対して$\alpha^{-1}(\{e_s\}) \neq \emptyset$なので選択公理により$(y_s)_{s \in S} \in \prod_{s \in S} \alpha^{-1}(\{e_s\})$が存在する.\ よって自由加群の普遍性の存在性により準同型$\beta \colon F \to M$で$\beta(e_s) = y_s$を満たすものが存在する.\ $\alpha \circ \beta(e_s) = \alpha(y_s) = e_s = \id_F(e_s)$なので自由加群の普遍性の一意性により$\alpha \circ \beta = \id_F$である.\ したがって\cref{prop: projective_iff_epi_splits}より$F$は射影$R$加群である.
 
-% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiRiJdLFsxLDEsIk0iXSxbMCwxLCIoZV9zKV97cyBcXGluIFN9Il0sWzAsMiwiKHlfcylfe3MgXFxpbiBTfSIsMl0sWzEsMiwiXFxiZXRhIiwyLHsib2Zmc2V0IjoxLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwxLCJcXGFscGhhIiwyLHsib2Zmc2V0IjoxLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiRiJdLFsxLDEsIk0iXSxbMCwxLCIoZV9zKV97cyBcXGluIFN9Il0sWzAsMiwiKHlfcylfe3MgXFxpbiBTfSIsMl0sWzEsMiwiXntcXGV4aXN0c31cXGJldGEiLDIseyJvZmZzZXQiOjEsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsyLDEsIlxcYWxwaGEiLDIseyJvZmZzZXQiOjEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dXQ==
 \[\begin{tikzcd}
 	S & F \\
 	& M
 	\arrow["{(e_s)_{s \in S}}", from=1-1, to=1-2]
 	\arrow["{(y_s)_{s \in S}}"', from=1-1, to=2-2]
-	\arrow["\beta"', shift right, dashed, from=1-2, to=2-2]
+	\arrow["{^{\exists}\beta}"', shift right, dashed, from=1-2, to=2-2]
 	\arrow["\alpha"', shift right, two heads, from=2-2, to=1-2]
 \end{tikzcd}\]
 \end{proof}
@@ -169,3 +169,26 @@ $R$を環とし$P$を$R$加群とする.\ 次の(1)-(2)は同値.
 \vskip\baselineskip
 (2)$\Rightarrow$(1): $P$は自由$R$加群$F$の直和因子と同型であるとする.\ \cref{lem: retract_iff_summand}より$P$が自由$R$加群$F$の直和因子と同型であることは$P$が$F$のレトラクトであることと同値.\ \cref{lem: projective_of_free}より自由$R$加群は射影$R$加群なので$F$は射影$R$加群であり\cref{lem: projective_of_retract}より射影$R$加群のレトラクトは射影$R$加群になるので射影$R$加群$F$のレトラクトである$P$は射影$R$加群となる.
 \end{proof}
+
+\begin{proposition} \label{prop: proj_comm_monoid}
+$R$を環として$\Proj(R) \coloneq \{[P] \mid [P]は有限生成射影R加群の同型類\}$とする.\ $[R],[Q] \in \Proj(R)$に対して$[R] + [Q] \coloneq [R \oplus Q]$で定めると$(\Proj(R), +, [\{0\}])$は可換モノイドになる.
+\end{proposition}
+
+\begin{proof}
+$P,P'$を有限生成射影R加群とすると\cref{prop: projective_iff_free_summand}よりある自由加群$F,F'$と$R$加群$M,M'$が存在して$F \cong M \oplus P, F' \cong M' \oplus P'$となる.\ $F \oplus F'$は自由加群であり$F \oplus F' \cong (M \oplus P) \oplus (M' \oplus P') \cong (M \oplus M') \oplus (P \oplus P')$であるから\cref{prop: projective_iff_free_summand}より$P \oplus P'	$も射影$R$加群であり$P \oplus P'$は有限生成なので$[P] + [P'] = [P \oplus P'] \in \Proj(R)$である.
+
+$P \oplus \{0\} = P$なので$[P] + [\{0\}] = [P]$である.
+\end{proof}
+
+\begin{definition} \label{def: grothendieckGroup}
+$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon G \to H$に対して群準同型$\theta \colon G \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMSwiXntcXGZvcmFsbH1IIl0sWzEsMCwiRyJdLFswLDIsIlxccGhpIl0sWzIsMSwiXntcXGV4aXN0cyAhfVxcdGhldGEiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwxLCJee1xcZm9yYWxsfVxccHNpIiwyXV0=
+\[\begin{tikzcd}
+	S & G \\
+	& {^{\forall}H}
+	\arrow["\phi", from=1-1, to=1-2]
+	\arrow["{^{\forall}\psi}"', from=1-1, to=2-2]
+	\arrow["{^{\exists !}\theta}", dashed, from=1-2, to=2-2]
+\end{tikzcd}\]
+\end{definition}
