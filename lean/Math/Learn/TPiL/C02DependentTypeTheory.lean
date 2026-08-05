@@ -96,3 +96,133 @@ def g (s : String) : Bool := s.length > 0
 #check fun (α β γ : Type) (g : β → γ) (f : α → β) (x : α)=> g (f x)
 
 end s3
+
+namespace s4
+
+def double (n : Nat) : Nat := n + n
+#eval double 3
+
+def double' : Nat → Nat := fun x => x + x
+#eval double' 3
+
+def doTwice (f : Nat → Nat) (x : Nat) : Nat := f (f x)
+
+#eval doTwice double 3
+
+def compose (α β γ : Type) (g : β → γ) (f : α → β) (x : α) : γ := g (f x)
+def square (x : Nat) : Nat := x * x
+#eval compose Nat Nat Nat double square 3
+
+end s4
+
+namespace s5
+
+#check let y := 2 + 2; y * y
+#eval let y := 2 + 2; y * y
+
+def twice_double (x : Nat) : Nat :=
+  let y := x + x; y * y
+
+#eval twice_double 2
+
+def foo := let a := Nat; fun x : a => x + 2
+/- def bar := (fun a => fun x : a => x + 2) Nat -/
+
+end s5
+
+namespace s6
+
+variable (α β γ : Type)
+
+def compose (g : β → γ) (f : α → β) (x : α) : γ :=
+  g (f x)
+
+#print compose
+end s6
+
+namespace s7
+
+  namespace Foo
+    def a : Nat := 5
+    def f (x : Nat) : Nat := x + 7
+
+    def fa : Nat := f a
+    def ffa : Nat := f (f a)
+
+    #check a  #check f  #check fa  #check ffa  #check Foo.fa
+
+  end Foo
+
+  -- #check a  -- error
+  -- #check f  -- error
+  #check Foo.a#check Foo.f#check Foo.fa#check Foo.ffa
+
+  open Foo
+
+  #check a#check f#check fa#check Foo.fa
+
+open List
+#check nil
+
+open Nat
+#check succ
+
+end s7
+
+namespace s8
+
+def cons (α : Type) (a : α) (as : List α) : List α := List.cons a as
+
+#check cons Nat
+#check cons
+
+#check @List.cons
+#check List.cons
+
+section s1
+variable (α : Type) (β : α → Type)
+
+#check Σ a : α, β a
+end s1
+
+universe u v
+
+def f (α : Type u) (β : α → Type v) (a : α) (b : β a) : (a : α) × β a := ⟨a, b⟩
+
+def g (α : Type u) (β : α → Type v) (a : α) (b : β a) : Σ a : α, β a := Sigma.mk a b
+
+def h1 (x : Nat) : Nat := (f Type (fun α => α) Nat x).2
+
+#eval h1 5
+
+end s8
+
+namespace s9
+
+#check List
+
+universe u
+def Lst (α : Type u) : Type u := List α
+def Lst.cons (α : Type u) (a : α) (as : Lst α) : Lst α := List.cons a as
+def Lst.nil (α : Type u) : Lst α := List.nil
+def Lst.append (α : Type u) (as bs : Lst α) : Lst α := List.append as bs
+
+def as : Lst Nat := Lst.nil Nat
+def bs : Lst Nat := Lst.cons Nat 5 (Lst.nil Nat)
+
+#check Lst.append Nat as bs
+#check Lst.append _ as bs
+
+def ident {α : Type u} (x : α) := x
+#check (ident)
+#check ident 1
+#check ident "Hello"
+#check ident true
+#check @ident
+#check ident
+#check @id
+
+#check (List.nil)
+#check (id)
+
+end s9
