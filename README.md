@@ -144,7 +144,8 @@ math-study/
 │   │       ├── MIL/
 │   │       │   └── C02Basics.lean
 │   │       └── TPiL/
-│   │           └── C02DependentTypeTheory.lean
+│   │           ├── C02DependentTypeTheory.lean
+│   │           └── C03PropositionsAndProofs.lean
 │   ├── Math.lean
 │   ├── lake-manifest.json
 │   ├── lakefile.toml
