@@ -1,7 +1,7 @@
 ---
 description: Sync, check, commit and push the working tree following the repo's git strategy
 argument-hint: "[what to commit]  (optional — inferred from the diff)"
-allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(gh issue list:*), Bash(latexmk:*), Bash(python -m unittest:*)
+allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(gh issue list:*), Bash(latexmk:*), Bash(lake:*), Bash(python -m unittest:*)
 ---
 
 Commit and push the working tree according to `docs/git-strategy.md`. Read that
@@ -63,7 +63,8 @@ Sort every changed path into two buckets, per the table in
 `docs/git-strategy.md`:
 
 - **SHARED** — `scripts/**`, `.github/**`, `.latexmkrc`, `tex/preamble.tex`,
-  `tex/colophon.tex`. Requires a branch and a PR.
+  `tex/colophon.tex`, `lean/lakefile.toml`, `lean/lean-toolchain`,
+  `lean/lake-manifest.json`. Requires a branch and a PR.
 - **CONTENT** — everything else: `tex/<topic>/**`, `README.md` prose,
   `CLAUDE.md`, `docs/**`, `.claude/**`. Goes straight to `main`.
 
@@ -110,6 +111,7 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | `tex/<topic>/**` | `latexmk -cd -g tex/<topic>/main.tex` for each touched topic |
 | `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | the same, for all 8 topics |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
+| `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 
 The doc paths are in that row because `scripts/test_agent_docs.py` checks them:
 it compares the command tables in `README.md` and `docs/agent-system.md`
@@ -187,7 +189,8 @@ closes nothing until the PR merges, which is correct and needs no special case.
 
 Add `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — with your own
 model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`,
-`tex/colophon.tex`. **Never on `tex/<topic>/**`**: that mathematics is the repo
+`tex/colophon.tex`, and `lean/`'s build configuration. **Never on
+`tex/<topic>/**` or `lean/Math/**`**: that mathematics is the repo
 owner's and this command only transported it.
 
 ### Never

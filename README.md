@@ -47,7 +47,7 @@ Nothing here has a lockfile, so this is the list.
 | A TeX Live distribution with LuaLaTeX and `latexmk` | building any PDF | `.latexmkrc` sets `$pdf_mode = 4`, so LuaLaTeX writes the PDF with no DVI step |
 | Python 3 | `scripts/` | Standard library only — there is no `requirements.txt` and nothing to install |
 | [`elan`](https://github.com/leanprover/elan) | `lean/` | It reads `lean/lean-toolchain` and fetches the pinned `leanprover/lean4:v4.32.2` itself |
-| [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/issues`, `/git-merge`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
+| [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/issues`, `/formalize`, `/git`, `/git-merge`, `/delete-topic`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
 
 Run `lake --dir=lean exe cache get` before your first `lake --dir=lean build`.
 Mathlib is pinned to a release tag rather than `master` precisely so that the

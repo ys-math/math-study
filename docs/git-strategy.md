@@ -150,10 +150,11 @@ shape for free.
 ### Attribution
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
-whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, and the shared
-build files `tex/preamble.tex` and `tex/colophon.tex`.
+whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, the shared
+build files `tex/preamble.tex` and `tex/colophon.tex`, and `lean/`'s build
+configuration.
 
-It never goes on `tex/<topic>/**`. The mathematics is the repo owner's, and
+It never goes on `tex/<topic>/**` or `lean/Math/**`. The mathematics is the repo owner's, and
 `/git` frequently commits prose that Claude only transported. A trailer there
 would be false.
 
@@ -267,10 +268,12 @@ count written in digits — "all 8 topics", above — to what it counts.
 latexmk -cd -g tex/<topic>/main.tex
 ```
 
-**This is the single copy of that invocation.** `CLAUDE.md`, `README.md`,
-`docs/label-convention.md`, `/label` and `/review-notes` point here rather than
-restating it; six near-copies is how the repo ended up running three different
-recipes for one operation.
+**This is the authoritative spelling of that invocation.** `CLAUDE.md`,
+`README.md`, `docs/label-convention.md`, `/git`, `/git-merge`, `/label` and
+`/review-notes` each print it too, where a command has to run it; every one of
+those is a verbatim copy of this line and changes with it. Change this line
+without them and the repo is back to running three different recipes for one
+operation, which is how it ended up here.
 
 `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g`
 forces a rebuild, which matters because latexmk caches a previous failure and
@@ -296,9 +299,10 @@ Aux files and `main.pdf` are gitignored; leave them, and do not run
 lake --dir=lean build
 ```
 
-**This is the single copy of that invocation**, on the same terms as the one
-above; `CLAUDE.md`, `README.md`, `docs/lean-convention.md` and `/formalize`
-point here rather than restating it.
+**This is the authoritative spelling of that invocation**, on the same terms as
+the one above; `CLAUDE.md` and `README.md` print it verbatim and change with it,
+while `docs/lean-convention.md` and `/formalize` point here rather than
+restating it.
 
 `--dir=lean` is the `-cd` of this half: the Lake package is `lean/`, not the
 repo root, and everything in this repo runs from the repo root. There is no `-g`
