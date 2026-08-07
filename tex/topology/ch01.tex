@@ -1,3 +1,17 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
+\section{ホモトピー}
+
+\begin{definition}
+$X, Y$を位相空間とし$f, g \in C(X, Y)$とする.\ $I = [0,1]$として$H \in C(X \times I, Y)$が次の条件を満たすとき$H$は$f$から$g$への\textbf{ホモトピー}(homotopy)であるという.
+\begin{center}
+    $^{\forall}x \in X, (H(x, 0) = f(x) \; \land \; H(x, 1) = g(x))$
+\end{center}
+\end{definition}
+
+\begin{remark}
+$t \in I$に対して$H_t : X \to Y$を$H_t(x) \coloneq H(x, t)$で定めると$H_t$は連続でありホモトピーは連続写像の族$(H_t)_{t \in I}$を定める.\ しかし連続写像の族$(H_t)_{t \in I}$は$H : X \times I \to Y$の連続性を保証しない.
+
+$X$が局所コンパクトかつハウスドルフ(locally compact Hausdorff)であり$C(X, Y)$にコンパクト開位相(compact-open topology)が備わっているとき対応$H \mapsto (t \mapsto H_t)$は$C(X \times I, Y) \to C(I, C(X, Y))$の全単射である.\ したがってホモトピーは$f, g \in C(X, Y)$のとき$f$と$g$の間の道として考えられる.
+\end{remark}
