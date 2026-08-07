@@ -153,3 +153,104 @@ theorem and_swap' : p ∧ q ↔ q ∧ p :=
 example (h : p ∧ q) : q ∧ p := (and_swap p q).mp h
 
 end s3
+
+namespace s4
+
+variable (p q : Prop)
+
+example (h : p ∧ q) : q ∧ p :=
+  have hp : p := h.left
+  have hq : q := h.right
+  show q ∧ p from And.intro hq hp
+
+example (h : p ∧ q) : q ∧ p :=
+  have hp : p := h.left
+  suffices hq : q from And.intro hq hp
+  show q from And.right h
+
+end s4
+
+namespace s5
+
+open Classical
+
+
+/-
+排中律
+em p が型p ∨ ¬pを持つのでp ∨ ¬pは真の命題となる
+-/
+variable (p q : Prop)
+#check em p
+
+/-
+二重否定
+-/
+
+theorem dne {p : Prop} (h : ¬¬p) : p :=
+  Or.elim (em p)
+    (fun hp : p => hp)
+    (fun hnp : ¬p => absurd hnp h)
+
+example (h : ¬¬p) : p :=
+  byCases
+    (fun h1 : p => h1)
+    (fun h1 : ¬p => absurd h1 h)
+
+example (h : ¬¬p) : p :=
+  byContradiction
+    (fun h1 : ¬p =>
+    show False from absurd h1 h)
+
+example (h : ¬¬p) : p :=
+  byContradiction
+    (fun h1 : ¬p =>
+    show False from h h1)
+
+example (h : ¬(p ∧ q)) : ¬p ∨ ¬q :=
+  Or.elim (em p)
+    (fun hp : p => Or.inr (show ¬q from fun hq : q => h ⟨hp, hq⟩))
+    (fun hnp : ¬p => Or.inl hnp)
+
+end s5
+
+namespace s7
+
+variable (p q r : Prop)
+
+-- commutativity of ∧ and ∨
+example : p ∧ q ↔ q ∧ p :=
+  Iff.intro
+    (fun h : p ∧ q => And.intro (And.right h) (And.left h))
+    (fun h : q ∧ p => And.intro (And.right h) (And.left h))
+
+example : p ∨ q ↔ q ∨ p :=
+  Iff.intro
+    (fun h : p ∨ q =>
+      Or.elim h (fun hp : p => Or.inr hp) (fun hq : q => Or.inl hq))
+    (fun h : q ∨ p =>
+      Or.elim h (fun hq : q => Or.inr hq) (fun hp : p => Or.inl hp))
+
+-- associativity of ∧ and ∨
+example : (p ∧ q) ∧ r ↔ p ∧ (q ∧ r) :=
+  Iff.intro
+    (fun h : (p ∧ q) ∧ r => ⟨h.1.1, ⟨h.1.2, h.2⟩⟩)
+    (fun h : p ∧ (q ∧ r) => ⟨⟨h.1, h.2.1⟩, h.2.2⟩)
+
+example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) :=
+  Iff.intro
+    (fun hpqr : (p ∨ q) ∨ r =>
+      Or.elim hpqr
+        (fun hpq : p ∨ q =>
+          Or.elim hpq
+          (fun hp : p => Or.intro_left (q ∨ r) hp)
+          (fun hq : q => Or.intro_right p (Or.intro_left r hq)))
+        (fun hr : r => Or.intro_right p (Or.intro_right q hr)))
+    (fun hpqr : p ∨ (q ∨ r) =>
+      Or.elim hpqr
+        (fun hp : p => Or.intro_left r (Or.intro_left q hp))
+        (fun hqr : q ∨ r =>
+          Or.elim hqr
+          (fun hq : q => Or.intro_left r (Or.intro_right p hq))
+          (fun hr : r => Or.intro_right (p ∨ q) hr)))
+
+end s7
