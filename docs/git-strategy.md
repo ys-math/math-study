@@ -269,7 +269,7 @@ latexmk -cd -g tex/<topic>/main.tex
 ```
 
 **This is the authoritative spelling of that invocation.** `CLAUDE.md`,
-`README.md`, `docs/label-convention.md`, `/git`, `/git-merge`, `/label` and
+`README.md`, `docs/label-convention.md`, `/git`, `/label` and
 `/review-notes` each print it too, where a command has to run it; every one of
 those is a verbatim copy of this line and changes with it. Change this line
 without them and the repo is back to running three different recipes for one

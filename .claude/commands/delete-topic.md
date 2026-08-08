@@ -29,8 +29,7 @@ fixed nor found. `docs/issue-convention.md` `## Deletion` is the specification.
 **This command deletes one topic per invocation.** If several slugs are given,
 say so and stop.
 
-**It cannot rename.** Renaming is still the manual recipe in `CLAUDE.md`:
-`git mv`, `git rm` the stale PDF, and fix `\TexRepo` inside the moved `main.tex`.
+**It cannot rename.** Renaming is still the manual recipe in `CLAUDE.md`.
 
 All output is English.
 

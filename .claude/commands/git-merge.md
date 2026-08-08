@@ -73,7 +73,7 @@ Then, by category:
 
 | PR touches | Gate |
 | --- | --- |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | `latexmk -cd -g` for all 8 topics |
+| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics — `docs/git-strategy.md` `## Gates` |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 | `.github/**` only | nothing local to run — say so explicitly |

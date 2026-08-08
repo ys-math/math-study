@@ -69,6 +69,12 @@ In this order, because each layer makes claims about the ones after it:
    printf '{"tool_name":"Bash","tool_input":{"command":"git clean -xdf -e main.pdf"}}' \
      | .claude/hooks/guard-bash.sh
    ```
+
+   `guard-edits.sh` needs one thing more: it exits at its `[ -f "$path" ]` guard
+   unless `file_path` names a file that exists, so stdin alone reports every
+   case as allowed — including a proof written into `lean/Math/Study/`. Write a
+   fixture under `.claude/audits/fixtures/<rel path>` and pass that directory as
+   `cwd`; then its rules are entered.
 6. `.github/workflows/*.yml` — what happens with nobody watching.
 
 ## What to report

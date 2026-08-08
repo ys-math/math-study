@@ -81,7 +81,7 @@ to touch**, which is what you actually need when choosing between them.
 | Command | Writes | Commits | Stops for confirmation | Output |
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
-| `/label` | `tex/**` | no | always, before applying | English |
+| `/label` | `tex/**`, `lean/Math/Study/**` | no | always, before applying | English |
 | `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
@@ -135,7 +135,7 @@ something, check that the frontmatter agrees — that is the half that holds.
 | `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
-read-only commands through without a prompt.
+routine commands through without a prompt.
 
 Two properties to preserve if you touch these:
 
