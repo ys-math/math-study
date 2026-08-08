@@ -1,0 +1,41 @@
+(* The /audit workflow, as a grammar.
+
+   Source for docs/images/audit-workflow.svg, embedded in
+   docs/agent-system.md. Rendered with
+   https://ys-math.github.io/syntax-diagram-generator/ — paste this file in,
+   choose EBNF (ISO/IEC 14977), set Fit to Wrap, and export the SVG.
+
+   One rule, as in the other two grammars: the generator draws one diagram per
+   rule, and the point of this picture is that a run is a single path with two
+   places it can stop.
+
+   The two optionals nest rather than sit side by side, and that nesting is the
+   whole subject. Naming findings buys a plan; only "Y" buys an edit. A run that
+   stops at either gate has still written the report, which is why the report
+   sits outside both.
+
+   "Y" is the one quoted terminal in this repo that is not a slash command. It
+   is quoted because it is literal: the gate is satisfied by that keystroke and
+   by nothing that has to be interpreted. scripts/test_agent_docs.py matches
+   quoted terminals beginning with a slash, so it checks "/audit" and "/git"
+   here and passes over "Y".
+
+   Special sequences (? … ?) are the steps that are not a command: reading,
+   judging, fixing, rolling back. The rollback is drawn as the second branch
+   rather than an exception, because a failed check ends one fix and not the
+   run. *)
+
+audit =
+    "/audit" ,
+    ? run the script tests ? ,
+    ? read every layer ? ,
+    ? write the report ? ,
+    ? print the index ? ,
+    [ ? name the findings to fix ? ,
+      ? print the execution plan ? ,
+      [ "Y" ,
+        { ? apply one fix ? ,
+          ( ? tests and hooks green ? | ? git restore that fix ? ) } ,
+        ? tick what was applied ? ,
+        ? reprint the index ? ] ] ,
+    [ "/git" ] ;

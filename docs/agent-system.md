@@ -59,10 +59,12 @@ Loaded **on demand**, by a command that names them:
   tightly than a shared name.
 - **`docs/agent-system.md`** — this file.
 
-Two files in `docs/` specify nothing, being data rather than prose:
-**`docs/working-loop.ebnf`**, the grammar behind the working-loop diagram in
-`README.md`, and **`docs/routing-rule.ebnf`**, behind the routing diagram in
-`docs/git-strategy.md`. Each renders to `docs/images/<same stem>.svg`.
+The grammars in `docs/` specify nothing, being data rather than prose:
+**`docs/working-loop.ebnf`**, behind the working-loop diagram in `README.md`;
+**`docs/routing-rule.ebnf`**, behind the routing diagram in
+`docs/git-strategy.md`; and **`docs/audit-workflow.ebnf`**, behind the diagram
+of `/audit`'s two gates under `### Keeping this map true`. Each renders to
+`docs/images/<same stem>.svg`.
 
 They are the places a command list appears outside a markdown table, so
 `scripts/test_agent_docs.py` reads them directly and fails if one names a
@@ -181,6 +183,13 @@ It then repairs what you tell it to, which is why the tests are its gate on the
 way out as well as in: a fix that renames a command, deletes a document or
 changes a count in digits breaks one of the enumerations above, and the run that
 made the change is the one that has to notice.
+
+![The /audit workflow](./images/audit-workflow.svg)
+
+The two optionals nest, and that is the part worth seeing: naming findings from
+the index buys an execution plan, and only a literal `Y` against that plan buys
+an edit. A run that stops at either gate has still written its report.
+`docs/audit-workflow.ebnf` is the source.
 
 ## Automation
 
