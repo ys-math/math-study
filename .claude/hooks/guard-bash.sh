@@ -67,6 +67,14 @@ while IFS= read -r seg; do
         deny "git clean without an explicit pathspec would delete untracked files anywhere in the tree — including chapters that have never been committed. Name the paths, as .claude/commands/delete-topic.md does, or pass -n to preview."
       fi
       ;;
+    "git restore "*)
+      # `git restore .` and `git restore :/` discard every uncommitted change
+      # in the tree — the same harm as `git clean` with no pathspec. /audit's
+      # rollback step is the only place this repo runs restore at all.
+      if grep -qE '(^|[[:space:]])(\.|:/)([[:space:]]|$)' <<<"${seg#git restore}"; then
+        deny "git restore . / git restore :/ would discard every uncommitted change in the tree, including work another session has not committed. Name the paths you edited instead — .claude/commands/audit.md, ## If a check fails, roll back."
+      fi
+      ;;
   esac
 done < <(printf '%s\n' "$cmd" | sed -E 's/(&&|\|\||[;|])/\n/g')
 
