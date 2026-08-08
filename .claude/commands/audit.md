@@ -1,7 +1,7 @@
 ---
 description: Audit the commands, instructions and hooks for contradictions, stale claims and dead steps
 argument-hint: "[file ...]  (omit — audits the whole system)"
-allowed-tools: Read, Glob, Grep, Bash(python -m unittest:*), Bash(git rev-parse:*), Bash(git diff:*), Bash(date:*), Bash(printf:*), Bash(.claude/hooks/guard-bash.sh:*), Bash(.claude/hooks/guard-edits.sh:*), Write(.claude/audits/**), Edit(.claude/audits/**), Edit(CLAUDE.md), Edit(README.md), Edit(docs/**), Edit(.claude/commands/**), Edit(.claude/settings.json), Edit(.claude/hooks/**), Edit(.github/workflows/**)
+allowed-tools: Read, Glob, Grep, Bash(python -m unittest:*), Bash(git rev-parse:*), Bash(git diff:*), Bash(git restore:*), Bash(date:*), Bash(printf:*), Bash(.claude/hooks/guard-bash.sh:*), Bash(.claude/hooks/guard-edits.sh:*), Write(.claude/audits/**), Edit(.claude/audits/**), Edit(CLAUDE.md), Edit(README.md), Edit(docs/**), Edit(.claude/commands/**), Edit(.claude/settings.json), Edit(.claude/hooks/**), Edit(.github/workflows/**)
 ---
 
 Audit the machinery that tells Claude what to do — `CLAUDE.md`, `docs/*.md`,
@@ -20,12 +20,13 @@ everything.
 
 All output is English.
 
-**This command runs in two phases, and the second one is yours to authorise.**
-Sections 1–3 read and report, exactly as they always have. Section 4 applies
-fixes — but only the ones you name, after the report exists, in reply to the
-index printed at the end of section 3. **Never edit anything before that
-reply**, not even a defect so obvious it seems free: a fix applied before the
-report is a fix you were never shown.
+**This command runs in two phases, and the second one is yours to authorise
+twice.** Sections 1–3 read and report, exactly as they always have. Section 4
+applies fixes — but only the ones you name, after the report exists, and then
+only after you have seen the exact edits written out and typed `Y`. **Never edit
+anything before that second reply**, not even a defect so obvious it seems free:
+a fix applied before the report is a fix you were never shown, and a fix applied
+before the plan is one you were never shown the size of.
 
 **It never audits `tex/**` or `scripts/**`.** The mathematics belongs to the
 repo owner and to `/review-notes`; a note that contradicts itself is not this
@@ -145,11 +146,12 @@ prose only a human edits, so a second unattended run reproduced the first
 exactly. Section 4 removes that argument — an audit that repairs what it finds
 *does* change its own inputs, and repeated runs converge on zero findings.
 
-The gate is what keeps it out of a loop now. Section 4 waits for the user to
-name the findings, so an unattended run either stalls there having done
-nothing, or — worse, if it reads the gate as a formality — edits the owner's
-instruction files with nobody watching. Convergence to a fixed point is not a
-reason to get there unsupervised.
+The gates are what keep it out of a loop now. Section 3 waits twice — once for
+the user to name the findings, once for a literal `Y` against the plan — so an
+unattended run either stalls there having done nothing, or — worse, if it reads
+either gate as a formality — edits the owner's instruction files with nobody
+watching. Convergence to a fixed point is not a reason to get there
+unsupervised.
 
 Run it after the system changes, not on a schedule. There is deliberately no
 `audit: ...` line for a loop to read.
@@ -234,7 +236,7 @@ the absences are the part a reader trusts. Write every checkbox unticked: at the
 time the report is written nothing has been fixed, and a re-run resets them.
 Section 4 is the only thing that ever ticks one.
 
-## 3. Print the index, then ask
+## 3. Print the index, then ask — twice
 
 Print a compact index to the chat — the path, the counts, one line per finding.
 Not the report; it is in a file precisely so it does not fill the scrollback.
@@ -259,21 +261,64 @@ Then **stop and wait**. Silence is not consent, and neither is a report full of
 High-confidence findings. If the answer names nothing, stop for good: the report
 is on disk and nothing else was touched.
 
+### The second gate: the execution plan
+
+**A reply naming findings buys a plan, not a write.** Whatever form it takes —
+numbers, `all`, "yes, fix them all", "go ahead" — the next thing you produce is
+the plan, never an edit. The user chose from one-line summaries; what they have
+not yet seen is how much of the file those summaries move.
+
+Before writing it, `git diff` the files the named findings touch. `git restore`
+is the rollback in section 4 and it discards **everything** uncommitted in a
+path, not just your edit — so a file that already carries someone else's
+work in progress is a file you cannot roll back cleanly. Say so in the plan and
+leave that finding out of it.
+
+The plan is concrete where the report was argumentative: one entry per finding,
+the file, the line the edit lands on, and a diff-like before/after of the lines
+that change — no prose the report already carries.
+
+```
+Execution plan — <n> findings, <n> files
+
+<n>. <file>:<line>  [<category>]
+   - <the line as it stands>
+   + <the line as it will read>
+
+Files touched: <path>, <path>
+Apply? [Y/N]
+```
+
+The checks section 4 makes before applying — the quoted text still matches, the
+line has not moved, the repair does not need `scripts/` or `tex/` — belong here,
+not after the `Y`. A finding that fails one is listed with the reason, marked
+not applicable, and left out of the count.
+
+Then **halt**. Nothing reaches disk until the user types `Y`. `N`, silence, a
+question, a "sounds good", or anything else you would have to interpret is not
+`Y`: edit nothing and stop. If the reply changes the plan instead — drop one, fix
+another differently — that is a new plan and a new `[Y/N]`, not a licence to
+start.
+
 ## 4. Applying the fixes
 
-Only what the user named, and only the **Fix** the report already argued for.
+Only what the `Y` approved, and only the **Fix** the report already argued for.
+The plan is now the contract: an edit the plan did not show is an edit nobody
+authorised, however obviously right it looks with the file open.
 
 **Apply the fix as written, or stop and say why.** The report is what the user
 read before choosing; a fix that has quietly become something else is a change
-they did not agree to. If applying one shows the reasoning was wrong — the line
-moved, the quoted text does not match, two fixes contradict each other, the
-repair turns out to need `scripts/` or `tex/` — apply nothing for that finding,
-say so, and carry on with the rest.
+they did not agree to. Most of this is caught at plan time, but if applying one
+still shows the reasoning was wrong — the quoted text does not match after all,
+two fixes contradict each other — apply nothing for that finding, say so, and
+carry on with the rest.
 
-**Edit the lines the finding quotes, and nothing else.** No reformatting, no
-rewrapping a paragraph you touched one word in, no improving a sentence nearby.
-These files are the owner's prose on the same terms as the mathematics: a diff
-that is bigger than the finding is one the user cannot check against the report.
+**Edit the lines the finding quotes, and nothing else.** Not the indentation of
+the lines around them. Not the wrapping of a paragraph you touched one word in.
+Not a typo, a broken link or a grammatical slip in the sentence next door — even
+one you would file as a finding on the next run. File it on the next run. These
+files are the owner's prose on the same terms as the mathematics: a diff bigger
+than the finding is a diff the user cannot check against the plan they approved.
 Where the fix is *"replace the copy with a pointer"*, deleting is the change —
 do not also rewrite what you point at.
 
@@ -302,8 +347,25 @@ Not optional, and not "the tests probably still pass":
 3. `git diff` over what you touched, read against the report. Anything in the
    diff that no finding asked for is yours to revert.
 
-If a check fails, revert that fix rather than patching on top of it, and report
-the failure with the finding it came from.
+### If a check fails, roll back
+
+A failure of check 1 or 2 ends that fix. Discard it:
+
+```bash
+git restore <the files that fix touched>
+```
+
+**Restore first; do not diagnose, and do not try again.** No adjusting the edit
+and re-running, no second edit to satisfy the test, no widening the fix until it
+passes. The report argued for one change, the plan showed it, and it did not
+hold — that is a finding for the next run, not a problem to solve here. If the
+fix spanned several files, restore all of them: half a fix on disk is a state no
+report describes and no `git diff` reader expects.
+
+Then report the failure with the finding it came from, quoting what the check
+printed, and **stop for that finding.** Finish the other approved findings,
+reprint the index, and wait. Re-attempting a reverted fix takes a new
+instruction from the user.
 
 ### Recording it
 
