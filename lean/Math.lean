@@ -6,6 +6,7 @@ Authors: @ys-math
 import Math.Learn.MIL.C02Basics
 import Math.Learn.TPiL.C02DependentTypeTheory
 import Math.Learn.TPiL.C03PropositionsAndProofs
+import Math.Learn.TPiL.C04QuantifiersAndEquality
 
 /-!
 # Math
