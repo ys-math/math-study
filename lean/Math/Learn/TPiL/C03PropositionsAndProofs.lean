@@ -253,4 +253,13 @@ example : (p ∨ q) ∨ r ↔ p ∨ (q ∨ r) :=
           (fun hq : q => Or.intro_left r (Or.intro_right p hq))
           (fun hr : r => Or.intro_right (p ∨ q) hr)))
 
+-- distributivity
+example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) :=
+  Iff.intro
+    (fun hpqr : p ∧ (q ∨ r) =>
+      Or.elim hpqr.2 (fun hq : q => Or.intro_left (p ∧ r) ⟨hpqr.1, hq⟩) (fun hr : r => Or.intro_right (p ∧ q) ⟨hpqr.1, hr⟩))
+    (fun hpqpr : (p ∧ q) ∨ (p ∧ r) =>
+      ⟨Or.elim hpqpr (fun hpq : p ∧ q => hpq.1) (fun hpr : p ∧ r => hpr.1), Or.elim hpqpr (fun hpq : p ∧ q => Or.intro_left r hpq.2) (fun hpr : p ∧ r => Or.intro_right q hpr.2)⟩)
+
+
 end s7
