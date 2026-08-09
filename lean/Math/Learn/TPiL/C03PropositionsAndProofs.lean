@@ -261,5 +261,18 @@ example : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) :=
     (fun hpqpr : (p ∧ q) ∨ (p ∧ r) =>
       ⟨Or.elim hpqpr (fun hpq : p ∧ q => hpq.1) (fun hpr : p ∧ r => hpr.1), Or.elim hpqpr (fun hpq : p ∧ q => Or.intro_left r hpq.2) (fun hpr : p ∧ r => Or.intro_right q hpr.2)⟩)
 
+example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) :=
+  Iff.intro
+    (fun hpqr : p ∨ (q ∧ r) =>
+      Or.elim hpqr
+        (fun hp : p => ⟨Or.intro_left q hp, Or.intro_left r hp⟩)
+        (fun hqr : q ∧ r => ⟨Or.intro_right p hqr.1, Or.intro_right p hqr.2⟩))
+    (fun hpqpr : (p ∨ q) ∧ (p ∨ r) =>
+      Or.elim hpqpr.1
+        (fun hp : p => Or.intro_left (q ∧ r) hp)
+        (fun hq : q =>
+          Or.elim hpqpr.2
+            (fun hp : p => Or.intro_left (q ∧ r) hp)
+            (fun hr : r => Or.intro_right p ⟨hq, hr⟩)))
 
 end s7
