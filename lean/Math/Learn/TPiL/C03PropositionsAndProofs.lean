@@ -275,4 +275,42 @@ example : p ∨ (q ∧ r) ↔ (p ∨ q) ∧ (p ∨ r) :=
             (fun hp : p => Or.intro_left (q ∧ r) hp)
             (fun hr : r => Or.intro_right p ⟨hq, hr⟩)))
 
+-- other properties
+
+example : (p → (q → r)) ↔ (p ∧ q → r) :=
+  Iff.intro
+    (fun hpqr : p → (q → r) => (fun hpq : p ∧ q => (hpqr hpq.1) hpq.2))
+    (fun hpqr : p ∧ q → r => (fun hp : p => (fun hq : q => hpqr ⟨hp, hq⟩)))
+
+example : ((p ∨ q) → r) ↔ (p → r) ∧ (q → r) :=
+  Iff.intro
+    (fun hpqr : (p ∨ q) → r =>
+      ⟨(fun hp : p => hpqr (Or.intro_left q hp)), (fun hq : q => hpqr (Or.intro_right p hq))⟩)
+    (fun hprqr : (p → r) ∧ (q → r) =>
+      (fun hpq : p ∨ q =>
+        Or.elim hpq (fun hp : p => hprqr.1 hp) (fun hq : q => hprqr.2 hq)))
+
+example : ¬(p ∨ q) ↔ ¬p ∧ ¬q := sorry
+example : ¬p ∨ ¬q → ¬(p ∧ q) := sorry
+example : ¬(p ∧ ¬p) := sorry
+example : p ∧ ¬q → ¬(p → q) := sorry
+example : ¬p → (p → q) := sorry
+example : (¬p ∨ q) → (p → q) := sorry
+example : p ∨ False ↔ p := sorry
+example : p ∧ False ↔ False := sorry
+example : (p → q) → (¬q → ¬p) := sorry
+
+open Classical
+
+variable (p q r : Prop)
+
+example : (p → q ∨ r) → ((p → q) ∨ (p → r)) := sorry
+example : ¬(p ∧ q) → ¬p ∨ ¬q := sorry
+example : ¬(p → q) → p ∧ ¬q := sorry
+example : (p → q) → (¬p ∨ q) := sorry
+example : (¬q → ¬p) → (p → q) := sorry
+example : p ∨ ¬p := sorry
+example : (((p → q) → p) → p) := sorry
+
+
 end s7
