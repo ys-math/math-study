@@ -44,6 +44,26 @@ end s1
 
 namespace s2
 
+#check Eq.refl
+#check Eq.symm
+#check Eq.trans
 
+universe u
+
+#check @Eq.refl.{u}
+#check @Eq.symm.{u}
+#check @Eq.trans.{u}
+
+variable (α : Type) (a b c d : α)
+variable (hab : a = b) (hcb : c = b) (hcd : c = d)
+
+example : a = d :=
+  Eq.trans (Eq.trans hab (Eq.symm hcb)) hcd
+
+variable {α β : Type}
+
+example (f : α → β) (a : α) : (fun x => f x) a = f a := Eq.refl _
+example (a : α) (b : β) : (a, b).1 = a := rfl
+example : 2 + 3 = 5 := Eq.refl _
 
 end s2
