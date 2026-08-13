@@ -83,3 +83,22 @@ example : f a = g a := congrFun h₂ a
 example : f a = g b := congr h₂ h₁
 
 end s2
+
+namespace s3
+
+variable (a b c d e : Nat)
+
+theorem T
+    (h1 : a = b)
+    (h2 : b = c + 1)
+    (h3 : c = d)
+    (h4 : e = 1 + d) :
+    a = e :=
+  calc
+    a = b      := h1
+    _ = c + 1  := h2
+    _ = d + 1  := congrArg Nat.succ h3
+    _ = 1 + d  := Nat.add_comm d 1
+    _ = e      := Eq.symm h4
+
+end s3
