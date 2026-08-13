@@ -1,7 +1,7 @@
 ---
 description: Render a topic's open review issues as a local worklist you can fix from
 argument-hint: "[topic_slug ...]  (omit — every topic with open issues)"
-allowed-tools: Read, Glob, Grep, Bash(gh issue list:*), Bash(git rev-parse:*), Bash(date:*), Write(issues/**)
+allowed-tools: Read, Glob, Grep, Bash(gh issue list:*), Bash(git rev-parse:*), Bash(date:*), Write(issues/**), Edit(issues/**)
 ---
 
 Fetch the open review issues and write them to `issues/<topic>.md`, with links

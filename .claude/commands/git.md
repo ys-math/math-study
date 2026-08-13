@@ -1,7 +1,7 @@
 ---
 description: Sync, check, commit and push the working tree following the repo's git strategy
 argument-hint: "[what to commit]  (optional — inferred from the diff)"
-allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh run list:*), Bash(gh issue list:*), Bash(latexmk:*), Bash(lake:*), Bash(python -m unittest:*)
+allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(git rev-parse:*), Bash(git rev-list:*), Bash(gh pr create:*), Bash(gh issue list:*), Bash(latexmk:*), Bash(lake:*), Bash(python -m unittest:*)
 ---
 
 Commit and push the working tree according to `docs/git-strategy.md`. Read that

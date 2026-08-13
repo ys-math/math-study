@@ -11,7 +11,7 @@
       "Bash(gh issue list *)", "Bash(gh issue view *)", "Bash(gh label list *)",
       "Bash(grep *)", "Bash(wc *)", "Bash(ls *)", "Bash(head *)", "Bash(find *)"
     ],
-    "deny": ["Write(./pdf/**)", "Edit(./pdf/**)"]
+    "deny": ["Edit(./pdf/**)"]
   },
   "hooks": {
     "PreToolUse": [
