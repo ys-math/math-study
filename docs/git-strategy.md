@@ -263,6 +263,10 @@ The documentation paths run the tests too, because `scripts/test_agent_docs.py`
 is one of them: it holds the command tables in `README.md` and
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
 count written in digits — "all 8 topics", above — to what it counts.
+**This is the authoritative spelling of that invocation**, on the same terms as
+the two below: `CLAUDE.md`, `README.md`, `/git`, `/git-merge` and `/audit` print
+it verbatim and change with it, and `validate.yml` and `update-readme.yml` hold
+the literal string because they execute it.
 
 ```bash
 latexmk -cd -g tex/<topic>/main.tex

@@ -122,10 +122,12 @@ Worth knowing without looking them up:
   gate, not the capability: it writes the report first, and applies only what
   the report argued for.
 
-Each command's `allowed-tools` line is a real capability boundary, not
-documentation. `/git-merge` cannot commit; `/delete-topic` cannot `rm`;
-`/watch-ci` cannot write at all. When a command's prose says it "cannot" do
-something, check that the frontmatter agrees — that is the half that holds.
+Each command's `allowed-tools` line pre-approves those tools for the turn that
+invokes it; it does not restrict what else Claude may call, and the grant
+clears with your next message. `disallowed-tools` is the field that removes a
+tool, and no command here uses one. So a command's "cannot" holds only where a
+hook or a `permissions` rule carries it — everywhere else it is prose, on the
+same terms as the rest of this file.
 
 ## Enforcement
 

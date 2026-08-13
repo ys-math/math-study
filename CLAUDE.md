@@ -56,7 +56,7 @@ two are the ones that have to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
-  by hand is on whoever adds it. **Nothing in CI checks this** — no workflow
+  by hand is on whoever adds it. **Only `guard-edits.sh` checks this** — no workflow
   step looks at the header, whether or not the file reaches a pull request.
 - **A new `.lean` file needs the Apache header**, whose text is in
   `docs/lean-convention.md`. This one *is* checked, by `guard-edits.sh`. Note it

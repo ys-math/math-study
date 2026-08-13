@@ -203,6 +203,10 @@ the text that call wrote — `.content` for Write, `.new_string` for Edit — ne
 the file on disk, so proofs the owner already typed there are never what trips
 it. A whole-file overwrite of those proofs *is* caught, which is the point.
 
+It is a `PostToolUse` hook, so the write has already landed when it blocks: the
+message goes back to Claude, and removing what was written is Claude's next
+action rather than the hook's.
+
 Two gaps, both deliberate, neither an invitation:
 
 - **The test is syntactic.** Every `by` must be followed by `sorry`; a term-mode
