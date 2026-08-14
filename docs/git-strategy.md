@@ -300,7 +300,7 @@ Aux files and `main.pdf` are gitignored; leave them, and do not run
 `latexmk -c`. The next build reuses them.
 
 ```bash
-lake --dir=lean build
+cd lean && lake build
 ```
 
 **This is the authoritative spelling of that invocation**, on the same terms as
@@ -308,10 +308,28 @@ the one above; `CLAUDE.md` and `README.md` print it verbatim and change with it,
 while `docs/lean-convention.md` and `/formalize` point here rather than
 restating it.
 
-`--dir=lean` is the `-cd` of this half: the Lake package is `lean/`, not the
-repo root, and everything in this repo runs from the repo root. There is no `-g`
-equivalent and none is wanted — Lean's incremental build is trustworthy, which
-is what keeps this gate at three seconds instead of an hour.
+**It is `cd lean`, not `lake --dir=lean`, and the difference is not cosmetic.**
+`--dir` tells Lake where the package is, but `lake` and `lean` are elan shims,
+and **elan chooses the toolchain from the working directory** — it looks for a
+`lean-toolchain` there and in its ancestors, never at `--dir`. The repo root has
+no `lean-toolchain`, so from the root elan falls back to its default `stable`
+and compiles the revisions pinned in `lake-manifest.json` with whatever Lean is
+current. That is not hypothetical: it is why `lake --dir=lean build` failed here
+with ten errors inside Batteries, Qq, ProofWidgets and Mathlib core, none of
+them anything to do with the file being gated, while `cd lean` — which puts
+`lean/lean-toolchain` on the search path — built the same tree green.
+
+So a failure in this gate that names an upstream package is the toolchain, not
+your proof. Check `lean --version` from inside `lean/` against
+`lean/lean-toolchain` before believing it.
+
+`lean.yml` is immune and needs no equivalent fix: `lean-action` takes
+`lake-package-directory: lean` and installs the toolchain named there, and a
+fresh runner has no stray default to fall back to. This is a local-gate problem
+only.
+
+There is no `-g` equivalent and none is wanted — Lean's incremental build is
+trustworthy, which is what keeps this gate at three seconds instead of an hour.
 
 The build is green with `sorry` in it, deliberately; `docs/lean-convention.md`
 owns that rule and the rest of what lives under `lean/`. `lean/.lake/` is

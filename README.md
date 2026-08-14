@@ -49,7 +49,7 @@ Nothing here has a lockfile, so this is the list.
 | [`elan`](https://github.com/leanprover/elan) | `lean/` | It reads `lean/lean-toolchain` and fetches the pinned `leanprover/lean4:v4.32.2` itself |
 | [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/issues`, `/formalize`, `/git`, `/git-merge`, `/delete-topic`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
 
-Run `lake --dir=lean exe cache get` before your first `lake --dir=lean build`.
+Run `cd lean && lake exe cache get` before your first `cd lean && lake build`.
 Mathlib is pinned to a release tag rather than `master` precisely so that the
 prebuilt cache always hits — without it you compile Mathlib from source, which
 takes hours instead of seconds.
@@ -82,7 +82,7 @@ Run everything from the repo root.
 | --- | --- |
 | `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and a `ch01.tex` holding just its CC BY-NC-ND SPDX header. The slug form is in `docs/naming-convention.md` and the script enforces it; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
 | `latexmk -cd -g tex/<topic>/main.tex` | Compiles the topic's PDF locally. `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g` forces a rebuild past latexmk's cache. See `docs/git-strategy.md`, `## Gates` |
-| `lake --dir=lean build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. See `docs/lean-convention.md` |
+| `cd lean && lake build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. `cd`, not `lake --dir=lean`: elan reads the toolchain from the working directory, so from the repo root it silently uses the wrong Lean. See `docs/git-strategy.md`, `## Gates` |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
 | `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
 

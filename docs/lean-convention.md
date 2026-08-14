@@ -149,8 +149,13 @@ bad thing to fight while learning the basics.
 1. Read the new tag's `lean-toolchain`:
    `gh api "repos/leanprover-community/mathlib4/contents/lean-toolchain?ref=<tag>" -q .content | base64 -d`
 2. Write that into `lean/lean-toolchain` and the tag into `lakefile.toml`'s `rev`.
-3. `lake --dir=lean update` — rewrites `lake-manifest.json`.
-4. `lake --dir=lean exe cache get`, then the gate, and fix what the bump broke.
+3. `cd lean && lake update` — rewrites `lake-manifest.json`.
+4. `cd lean && lake exe cache get`, then the gate, and fix what the bump broke.
+
+Both from inside `lean/`, for the reason `docs/git-strategy.md` `## Gates`
+gives: elan picks the toolchain from the working directory, and running these
+from the repo root resolves the *old* default rather than the `lean-toolchain`
+you just wrote in step 2 — which is exactly the file a bump changes.
 
 All three files are branch-and-PR paths (`docs/git-strategy.md`), so this lands
 through a pull request that `lean.yml` checks. Deprecations are the usual

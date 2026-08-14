@@ -108,7 +108,7 @@ relative to the working directory.
 python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 python scripts/new_topic.py sheaf_theory --title 層論
 latexmk -cd -g tex/<topic>/main.tex   # flags: docs/git-strategy.md, ## Gates
-lake --dir=lean build                 # same section owns this one
+cd lean && lake build                 # same section owns this one
 ```
 
 Gate before committing, per `docs/git-strategy.md` `## Gates`. One consequence
