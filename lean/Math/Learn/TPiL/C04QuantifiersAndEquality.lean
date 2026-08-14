@@ -134,3 +134,46 @@ example : (∃ x : Nat, x = x) = Exists (fun x : Nat => x = x) := rfl
 #print Exists
 
 end s3
+
+namespace s4
+
+example : ∃ x : Nat, x > 0 :=
+  have h : 1 > 0 := Nat.zero_lt_succ 0
+  Exists.intro 1 h
+
+#check @Exists.intro
+
+example : ∃ x : Nat, x > 0 :=
+  have h : 1 > 0 := Nat.zero_lt_succ 0
+  ⟨1, h⟩
+
+example (x : Nat) (h : x > 0) : ∃ y, y < x :=
+  ⟨0, h⟩
+
+example (x y z : Nat) (hxy : x < y) (hyz : y < z) : ∃ w, x < w ∧ w < z :=
+  ⟨y, hxy, hyz⟩
+
+variable (g : Nat → Nat → Nat)
+
+theorem gex1 (hg : g 0 0 = 0) : ∃ x, g x x = x := ⟨0, hg⟩
+theorem gex2 (hg : g 0 0 = 0) : ∃ x, g x 0 = x := ⟨0, hg⟩
+theorem gex3 (hg : g 0 0 = 0) : ∃ x, g 0 0 = x := ⟨0, hg⟩
+theorem gex4 (hg : g 0 0 = 0) : ∃ x, g x x = 0 := ⟨0, hg⟩
+
+set_option pp.explicit true  -- display implicit arguments
+
+#print gex1
+#print gex2
+#print gex3
+#print gex4
+
+variable (α : Type) (p q : α → Prop)
+
+example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
+  Exists.elim h
+    (fun w =>
+     fun hw : p w ∧ q w =>
+     show ∃ x, q x ∧ p x from ⟨w, hw.right, hw.left⟩)
+
+
+end s4
