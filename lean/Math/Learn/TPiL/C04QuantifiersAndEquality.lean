@@ -101,4 +101,36 @@ theorem T
     _ = 1 + d  := Nat.add_comm d 1
     _ = e      := Eq.symm h4
 
+theorem T'
+  (h1 : a = b)
+  (h2 : b = c + 1)
+  (h3 : c = d)
+  (h4 : e = 1 + d) :
+  a = e :=
+calc
+  a = b := by rw [h1]
+  _ = c + 1 := by rw [h2]
+  _ = d + 1 := by rw [h3]
+  _ = 1 + d := by rw [Nat.add_comm]
+  _ = e := by rw [h4]
+
+def divides (x y : Nat) : Prop :=
+  ∃ k, k*x = y
+
+theorem divides_trans (h₁ : divides x y) (h₂ : divides y z) : divides x z :=
+  let ⟨k₁, d₁⟩ := h₁
+  let ⟨k₂, d₂⟩ := h₂
+  ⟨k₁ * k₂, by rw [Nat.mul_comm k₁ k₂, Nat.mul_assoc, d₁, d₂]⟩
+
+set_option pp.notation false in
+#check ∃ x : Nat, x = x   -- Exists fun x => x = x
+
+set_option pp.notation false in
+#check ∀ x : Nat, x = x   -- still ∀ (x : Nat), x = x  (no constant appears)
+
+example : (∀ x : Nat, x = x) = ((x : Nat) → x = x) := rfl
+example : (∃ x : Nat, x = x) = Exists (fun x : Nat => x = x) := rfl
+
+#print Exists
+
 end s3
