@@ -36,7 +36,7 @@ while IFS= read -r seg; do
 
   case "$seg" in
     "git add "*)
-      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*A[a-zA-Z]*|--all|\.)([[:space:]]|$)' <<<"${seg#git add}"; then
+      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*A[a-zA-Z]*|--all|\.|:/)([[:space:]]|$)' <<<"${seg#git add}"; then
         deny "git add -A / git add . is forbidden in this repo: the working tree may hold another session's work in progress. Stage explicit paths instead — docs/git-strategy.md, ## Never."
       fi
       ;;

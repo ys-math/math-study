@@ -1,15 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(latexmk *)",
-      "Bash(python -m unittest *)",
-      "Bash(git status *)", "Bash(git diff *)", "Bash(git log *)",
-      "Bash(git show *)", "Bash(git ls-files *)", "Bash(git rev-parse *)",
-      "Bash(git branch *)", "Bash(git fetch *)",
-      "Bash(gh pr view *)", "Bash(gh pr diff *)", "Bash(gh pr checks *)",
-      "Bash(gh pr list *)", "Bash(gh run list *)",
-      "Bash(gh issue list *)", "Bash(gh issue view *)", "Bash(gh label list *)",
-      "Bash(grep *)", "Bash(wc *)", "Bash(ls *)", "Bash(head *)", "Bash(find *)"
+      "Bash(latexmk:*)",
+      "Bash(python -m unittest:*)",
+      "Bash(cd lean && lake build)",
+      "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)",
+      "Bash(git show:*)", "Bash(git ls-files:*)", "Bash(git rev-parse:*)",
+      "Bash(git branch:*)", "Bash(git fetch:*)",
+      "Bash(gh pr view:*)", "Bash(gh pr diff:*)", "Bash(gh pr checks:*)",
+      "Bash(gh pr list:*)", "Bash(gh run list:*)",
+      "Bash(gh issue list:*)", "Bash(gh issue view:*)", "Bash(gh label list:*)",
+      "Bash(grep:*)", "Bash(wc:*)", "Bash(ls:*)", "Bash(head:*)", "Bash(find:*)"
     ],
     "deny": ["Edit(./pdf/**)"]
   },
