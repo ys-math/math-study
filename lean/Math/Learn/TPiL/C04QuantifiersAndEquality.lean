@@ -175,5 +175,86 @@ example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
      fun hw : p w ∧ q w =>
      show ∃ x, q x ∧ p x from ⟨w, hw.right, hw.left⟩)
 
+variable (α : Type) (p q : α → Prop)
+
+example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
+  match h with
+  | ⟨w, hw⟩ => ⟨w, hw.right, hw.left⟩
+
+example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
+  match h with
+  | ⟨w, hpw, hqw⟩ => ⟨w, hqw, hpw⟩
+
+example (h : ∃ x, p x ∧ q x) : ∃ x, q x ∧ p x :=
+  let ⟨w, hpw, hqw⟩ := h
+  ⟨w, hqw, hpw⟩
+
+example : (h : ∃ x, p x ∧ q x) → ∃ x, q x ∧ p x :=
+  fun ⟨w, hpw, hqw⟩ => ⟨w, hqw, hpw⟩
+
+def IsEven (a : Nat) := ∃ b, a = 2 * b
+
+theorem even_plus_even (h1 : IsEven a) (h2 : IsEven b) : IsEven (a + b) :=
+  Exists.elim h1 (fun w1 (hw1 : a = 2 * w1) =>
+  Exists.elim h2 (fun w2 (hw2 : b = 2 * w2) =>
+    Exists.intro (w1 + w2)
+      (calc a + b
+        _ = 2 * w1 + 2 * w2 := by rw [hw1, hw2]
+        _ = 2 * (w1 + w2) := by rw [Nat.mul_add])))
+
+theorem even_plus_even' (h1 : IsEven a) (h2 : IsEven b) :
+    IsEven (a + b) :=
+  match h1, h2 with
+  | ⟨w1, hw1⟩, ⟨w2, hw2⟩ =>
+    ⟨w1 + w2, by rw [hw1, hw2, Nat.mul_add]⟩
+
+open Classical
+variable (p : α → Prop)
+
+example (h : ¬ ∀ x, ¬ p x) : ∃ x, p x :=
+  byContradiction
+    (fun h1 : ¬ ∃ x, p x =>
+      have h2 : ∀ x, ¬ p x :=
+        fun x =>
+        fun h3 : p x =>
+        have h4 : ∃ x, p x := ⟨x, h3⟩
+        show False from h1 h4
+      show False from h h2)
+
+open Classical
+
+variable (α : Type) (p q : α → Prop)
+variable (r : Prop)
+
+set_option linter.unusedVariables false in
+example : (∃ x : α, r) → r :=
+  fun ⟨w, hw⟩ => hw
+
+set_option linter.unusedVariables false in
+example (a : α) : r → (∃ x : α, r) :=
+  fun hr => ⟨a, hr⟩
+
+example : (∃ x, p x ∧ r) ↔ (∃ x, p x) ∧ r :=
+  Iff.intro
+    (fun ⟨w, hpw, hr⟩ => ⟨⟨w, hpw⟩, hr⟩)
+    (fun ⟨⟨w, hpw⟩, hr⟩ => ⟨w, hpw, hr⟩)
+
+example : (∃ x, p x ∨ q x) ↔ (∃ x, p x) ∨ (∃ x, q x) :=
+  Iff.intro
+    (fun h => h.elim fun w hw =>
+      hw.elim (fun hp => Or.inl ⟨w, hp⟩) (fun hq => Or.inr ⟨w, hq⟩))
+    (fun h => h.elim
+      (fun hp => hp.elim fun w hw => ⟨w, Or.inl hw⟩)
+      (fun hq => hq.elim fun w hw => ⟨w, Or.inr hw⟩))
+
+example : (∀ x, p x) ↔ ¬ (∃ x, ¬ p x) := sorry
+example : (∃ x, p x) ↔ ¬ (∀ x, ¬ p x) := sorry
+example : (¬ ∃ x, p x) ↔ (∀ x, ¬ p x) := sorry
+example : (¬ ∀ x, p x) ↔ (∃ x, ¬ p x) := sorry
+
+example : (∀ x, p x → r) ↔ (∃ x, p x) → r := sorry
+example (a : α) : (∃ x, p x → r) ↔ (∀ x, p x) → r := sorry
+example (a : α) : (∃ x, r → p x) ↔ (r → ∃ x, p x) := sorry
+
 
 end s4
