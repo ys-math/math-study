@@ -247,7 +247,11 @@ example : (∃ x, p x ∨ q x) ↔ (∃ x, p x) ∨ (∃ x, q x) :=
       (fun hp => hp.elim fun w hw => ⟨w, Or.inl hw⟩)
       (fun hq => hq.elim fun w hw => ⟨w, Or.inr hw⟩))
 
-example : (∀ x, p x) ↔ ¬ (∃ x, ¬ p x) := sorry
+example : (∀ x, p x) ↔ ¬ (∃ x, ¬ p x) :=
+  Iff.intro
+    (fun h he => he.elim fun w hw => hw (h w))
+    (fun h x => byContradiction fun hnp => h ⟨x, hnp⟩)
+
 example : (∃ x, p x) ↔ ¬ (∀ x, ¬ p x) := sorry
 example : (¬ ∃ x, p x) ↔ (∀ x, ¬ p x) := sorry
 example : (¬ ∀ x, p x) ↔ (∃ x, ¬ p x) := sorry
