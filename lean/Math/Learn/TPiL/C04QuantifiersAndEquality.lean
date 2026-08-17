@@ -252,13 +252,43 @@ example : (∀ x, p x) ↔ ¬ (∃ x, ¬ p x) :=
     (fun h he => he.elim fun w hw => hw (h w))
     (fun h x => byContradiction fun hnp => h ⟨x, hnp⟩)
 
-example : (∃ x, p x) ↔ ¬ (∀ x, ¬ p x) := sorry
-example : (¬ ∃ x, p x) ↔ (∀ x, ¬ p x) := sorry
-example : (¬ ∀ x, p x) ↔ (∃ x, ¬ p x) := sorry
+#print byContradiction
 
-example : (∀ x, p x → r) ↔ (∃ x, p x) → r := sorry
-example (a : α) : (∃ x, p x → r) ↔ (∀ x, p x) → r := sorry
-example (a : α) : (∃ x, r → p x) ↔ (r → ∃ x, p x) := sorry
+example : (∃ x, p x) ↔ ¬ (∀ x, ¬ p x) :=
+  Iff.intro
+    (fun h hall => h.elim fun w hw => hall w hw)
+    (fun h => byContradiction fun hne => h fun x hx => hne ⟨x, hx⟩)
+
+open Classical in
+example : (¬ ∃ x, p x) ↔ (∀ x, ¬ p x) :=
+  ⟨fun h x hx => h ⟨x, hx⟩,
+   fun h he => he.elim fun w hw => h w hw⟩
+
+open Classical in
+example : (¬ ∀ x, p x) ↔ (∃ x, ¬ p x) :=
+  ⟨fun h => byContradiction fun hne =>
+      h fun x => byContradiction fun hnp => hne ⟨x, hnp⟩,
+   fun h hall => h.elim fun w hw => hw (hall w)⟩
+
+example : (∀ x, p x → r) ↔ (∃ x, p x) → r :=
+  ⟨fun h he => he.elim fun w hw => h w hw,
+   fun h x hx => h ⟨x, hx⟩⟩
+
+open Classical in
+example (a : α) : (∃ x, p x → r) ↔ (∀ x, p x) → r :=
+  ⟨fun h hall => h.elim fun w hw => hw (hall w),
+   fun h => (em (∀ x, p x)).elim
+      (fun hall => ⟨a, fun _ => h hall⟩)
+      (fun hnall => byContradiction fun hne =>
+         hnall fun x => byContradiction fun hnp =>
+           hne ⟨x, fun hx => absurd hx hnp⟩)⟩
+
+open Classical in
+example (a : α) : (∃ x, r → p x) ↔ (r → ∃ x, p x) :=
+  ⟨fun h hr => h.elim fun w hw => ⟨w, hw hr⟩,
+   fun h => (em r).elim
+      (fun hr => (h hr).elim fun w hw => ⟨w, fun _ => hw⟩)
+      (fun hnr => ⟨a, fun hr => absurd hr hnr⟩)⟩
 
 
 end s4
