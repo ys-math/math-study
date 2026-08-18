@@ -148,7 +148,8 @@ math-study/
 │   │       └── TPiL/
 │   │           ├── C02DependentTypeTheory.lean
 │   │           ├── C03PropositionsAndProofs.lean
-│   │           └── C04QuantifiersAndEquality.lean
+│   │           ├── C04QuantifiersAndEquality.lean
+│   │           └── C05Tactics.lean
 │   ├── Math.lean
 │   ├── lake-manifest.json
 │   ├── lakefile.toml
