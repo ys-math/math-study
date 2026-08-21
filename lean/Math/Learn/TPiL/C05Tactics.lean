@@ -279,3 +279,28 @@ example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
       constructor ; assumption ; apply Or.inl ; assumption
 
 end s3
+
+namespace s4
+
+example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := by
+  intro h
+  exact
+    have hp : p := h.left
+    have hqr : q ∨ r := h.right
+    show (p ∧ q) ∨ (p ∧ r) by
+      cases hqr with
+      | inl hq => exact Or.inl ⟨hp, hq⟩
+      | inr hr => exact Or.inr ⟨hp, hr⟩
+
+example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
+  apply Iff.intro
+  . intro h
+    cases h.right with
+    | inl hq => exact Or.inl ⟨h.left, hq⟩
+    | inr hr => exact Or.inr ⟨h.left, hr⟩
+  . intro h
+    cases h with
+    | inl hpq => exact ⟨hpq.left, Or.inl hpq.right⟩
+    | inr hpr => exact ⟨hpr.left, Or.inr hpr.right⟩
+
+end s4
