@@ -303,4 +303,110 @@ example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
     | inl hpq => exact ⟨hpq.left, Or.inl hpq.right⟩
     | inr hpr => exact ⟨hpr.left, Or.inr hpr.right⟩
 
+example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
+  apply Iff.intro
+  · intro h
+    cases h.right with
+    | inl hq =>
+      exact Or.inl ⟨h.left, hq⟩
+    | inr hr =>
+      exact Or.inr ⟨h.left, hr⟩
+  · intro h
+    cases h with
+    | inl hpq =>
+      exact ⟨hpq.left, Or.inl hpq.right⟩
+    | inr hpr =>
+      exact ⟨hpr.left, Or.inr hpr.right⟩
+
+example (n : Nat) : n + 1 = Nat.succ n := by
+  show Nat.succ n = Nat.succ n
+  rfl
+
+example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := by
+  intro ⟨hp, hqr⟩
+  cases hqr with
+  | inl hq =>
+    have hpq : p ∧ q := And.intro hp hq
+    apply Or.inl
+    exact hpq
+  | inr hr =>
+    have hpr : p ∧ r := And.intro hp hr
+    apply Or.inr
+    exact hpr
+
+example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := by
+  intro ⟨hp, hqr⟩
+  cases hqr with
+  | inl hq =>
+    have : p ∧ q := And.intro hp hq
+    apply Or.inl
+    exact this
+  | inr hr =>
+    have : p ∧ r := And.intro hp hr
+    apply Or.inr
+    exact this
+
+example : ∃ x, x + 2 = 8 := by
+  let a : Nat := 3 * 2
+  exists a
+
+example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := by
+  apply Iff.intro
+  { intro h;
+    cases h.right;
+    { show (p ∧ q) ∨ (p ∧ r);
+      exact Or.inl ⟨h.left, ‹q›⟩ }
+    { show (p ∧ q) ∨ (p ∧ r);
+      exact Or.inr ⟨h.left, ‹r›⟩ } }
+  { intro h;
+    cases h;
+    { show p ∧ (q ∨ r);
+      rename_i hpq;
+      exact ⟨hpq.left, Or.inl hpq.right⟩ }
+    { show p ∧ (q ∨ r);
+      rename_i hpr;
+      exact ⟨hpr.left, Or.inr hpr.right⟩ } }
+
 end s4
+
+namespace s5
+
+example (p q : Prop) (hp : p) : p ∨ q := by
+  apply Or.inl ; assumption
+
+example (p q : Prop) (hp : p) (hq : q) : p ∧ q :=
+  by constructor <;> assumption
+
+example (p q : Prop) (hp : p) : p ∨ q := by
+  first | apply Or.inl; assumption | apply Or.inr; assumption
+
+example (p q : Prop) (hq : q) : p ∨ q := by
+  first | apply Or.inl; assumption | apply Or.inr; assumption
+
+example (p q r : Prop) (hp : p) : p ∨ q ∨ r := by
+  repeat (first | apply Or.inl; assumption | apply Or.inr | assumption)
+
+example (p q r : Prop) (hq : q) : p ∨ q ∨ r := by
+  repeat (first | apply Or.inl; assumption | apply Or.inr | assumption)
+
+example (p q r : Prop) (hr : r) : p ∨ q ∨ r := by
+  repeat (first | apply Or.inl; assumption | apply Or.inr | assumption)
+
+example (p q r : Prop) (hp : p) (hq : q) (hr : r) : p ∧ q ∧ r := by
+  constructor <;> (try constructor) <;> assumption
+
+example (p q r : Prop) (hp : p) (hq : q) (hr : r) : p ∧ q ∧ r := by
+  constructor
+  all_goals (try constructor)
+  all_goals assumption
+
+example (p q r : Prop) (hp : p) (hq : q) (hr : r) :
+      p ∧ ((p ∧ q) ∧ r) ∧ (q ∧ r ∧ p) := by
+  repeat (any_goals constructor)
+  all_goals assumption
+
+example (p q r : Prop) (hp : p) (hq : q) (hr : r) :
+      p ∧ ((p ∧ q) ∧ r) ∧ (q ∧ r ∧ p) := by
+  repeat (any_goals (first | constructor | assumption))
+
+end s5
