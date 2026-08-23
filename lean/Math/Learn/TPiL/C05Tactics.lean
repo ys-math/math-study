@@ -437,3 +437,53 @@ example {α} (n : Nat) (h : n = 0) (t : Tuple α n) : Tuple α 0 := by
   exact t
 
 end s6
+
+namespace s7
+
+example (x y z : Nat) : (x + 0) * (0 + y * 1 + z * 0) = x * y := by
+  simp
+
+example (x y z : Nat) (p : Nat → Prop) (h : p (x * y)) : p ((x + 0) * (0 + y * 1 + z * 0)) :=
+  by simp ; assumption
+
+open List
+
+example (xs : List Nat) : reverse (xs ++ [1, 2, 3]) = [3, 2, 1] ++ reverse xs := by
+  simp
+
+example (xs ys : List α) : length (reverse (xs ++ ys)) = length xs + length  ys := by
+  simp [Nat.add_comm]
+
+example (x y z : Nat) (p : Nat → Prop)
+  (h : p ((x + 0) * (0 + y * 1 + z * 0))) : p (x * y) := by
+  simp at h ; assumption
+
+attribute [local simp] Nat.mul_comm Nat.mul_assoc Nat.mul_left_comm
+attribute [local simp] Nat.add_assoc Nat.add_comm Nat.add_left_comm
+
+example (w x y z : Nat) (p : Nat → Prop)
+        (h : p (x * y + z * w * x)) : p (x * w * z + y * x) := by
+  simp at *; assumption
+
+example (x y z : Nat) (p : Nat → Prop)
+        (h₁ : p (1 * x + y)) (h₂ : p (x * z * 1))
+        : p (y + 0 + x) ∧ p (z * x) := by
+  simp at * <;> constructor <;> assumption
+
+variable (k : Nat) (f : Nat → Nat)
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := by
+  simp [h₁, h₂]
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := by
+  simp [*]
+
+set_option linter.unusedVariables false
+set_option linter.unusedVariables false
+example (u w x x' y y' z : Nat) (p : Nat → Prop)
+        (h₁ : x + 0 = x') (h₂ : y + 0 = y')
+        : x + y + 0 = x' + y' := by
+  simp at *
+  simp [*]
+
+end s7
