@@ -204,14 +204,58 @@ $P, Q$を環$R$上の冪等行列とする.\ このとき$R^N P \cong R^N Q$で�
 \begin{proof}
 ある$U \in \GL(N, R)$が存在して$UPU^{-1} = Q$となるとする.\ $\phi \colon R^N Q \to R^N P$を$\phi(x) \coloneq xU$として定めると$x \in R^N Q$は$x = yQ$と$y \in R^N$を用いて表せるから$\phi(x) = xU = yQU = yUP \in R^NP$であるので$\phi$はwell-definedである.\ $\phi$は行列を作用させる写像なので準同型であり$\psi \colon R^N P \to R^N Q$を$\psi(x) = xU^{-1}$として定めれば$\psi$は$\phi$の逆写像である.\ よって$R^N Q \cong R^N P$である.
 
-同型$\alpha \colon R^N Q \to R^P$が存在するとする.\ $x \in R^N$とすると$x = xP + x(1 - P)$となるり$x \in R^NP \cap R^N(1 - P)$とすると$x = uP \and x = v(1 - P)$と$u,v \in R^N$を用いて表せる.\ $P$は冪等行列なので$xP = uP^2 = uP = x$かつ$xP = v(1 - P)P = v(P - P^2) = v(P - P) = 0$となり$x = 0$となる.\ したがって$R^N = R^N P \oplus R^N (1 - P)$と直和分解できる.\ 同様に$R^N = R^N Q \oplus R^N (1 - Q)$となる.\ ここで
+$P$を$n \times n$行列とし$Q$を$m \times m$行列とする.\ 同型$\alpha \colon R^n Q \to R^m P$が存在するとする.\ $x \in R^N$とすると$x = xP + x(1 - P)$となるり$x \in R^nP \cap R^n(1 - P)$とすると$x = uP \and x = v(1 - P)$と$u,v \in R^N$を用いて表せる.\ $P$は冪等行列なので$xP = uP^2 = uP = x$かつ$xP = v(1 - P)P = v(P - P^2) = v(P - P) = 0$となり$x = 0$となる.\ したがって$R^n = R^n P \oplus R^n (1 - P)$と直和分解できる.\ 同様に$R^m = R^m Q \oplus R^m (1 - Q)$となる.\ ここで
 \begin{center}
 $a(x) =
 \begin{cases}
-  \alpha(x) \quad & x \in R^N P\\
-  0 \quad & x \in R^N (1 - P)
+  \alpha(x) \quad & x \in R^n P\\
+  0 \quad & x \in R^n (1 - P)
 \end{cases}
 $
 \end{center}
 
+\begin{center}
+$b(x) =
+\begin{cases}
+  \alpha^{-1}(x) \quad & x \in R^n Q\\
+  0 \quad & x \in R^n (1 - Q)
+\end{cases}
+$
+\end{center}
+と定めると$a \colon R^n \to R^m$と$b \colon R^m \to R^n$はそれぞれ準同型であり行列$A,B$をそれぞれ$a(x) = xA, b(x) = xB$を満たすものとすると$AB = P, BA = Q, A = PA = AQ, B = QB = BP$である.\ $N \coloneq n + m$とし$N \times N$行列$U$を次のようにして定める.
+\begin{center}
+$
+\begin{pmatrix}
+   1 - P & 0 \\
+   0 & 1 - Q
+\end{pmatrix}
+$
+\end{center}
+すると
+\begin{center}
+$
+U^2 =
+\begin{pmatrix}
+   1 & 0 \\
+   0 & 1
+\end{pmatrix}
+$
+\end{center}
+となり$U = U^{-1}$である.\
+$\begin{pmatrix}
+   P & 0 \\
+   0 & 0
+\end{pmatrix}$
+を$N \times N$行列とすると$U
+\begin{pmatrix}
+   P & 0 \\
+   0 & 0
+\end{pmatrix}
+U^{-1} =
+\begin{pmatrix}
+   0 & 0 \\
+   0 & q
+\end{pmatrix}
+$
+となり$P \oplus 0$と$0 \oplus Q$は共役である.\ $0 \oplus Q$は$Q \oplus 0$と共役なので$P \oplus 0$は$Q \oplus 0$と$\GL(N,R)$において共役.
 \end{proof}
