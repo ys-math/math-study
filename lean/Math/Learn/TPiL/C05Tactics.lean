@@ -486,4 +486,16 @@ example (u w x x' y y' z : Nat) (p : Nat → Prop)
   simp at *
   simp [*]
 
+def mk_symm (xs : List α) :=
+  xs ++ xs.reverse
+
+theorem reverse_mk_symm (xs : List α) : (mk_symm xs).reverse = mk_symm xs := by
+  simp [mk_symm]
+
+example (xs ys : List Nat) : (xs ++ mk_symm ys).reverse  = mk_symm ys ++ xs.reverse := by
+  simp [reverse_mk_symm]
+
+example (xs ys : List Nat) (p : List Nat → Prop) (h : p (xs ++ mk_symm ys).reverse) : p (mk_symm ys ++ xs.reverse) := by
+  simp [reverse_mk_symm] at h ; assumption
+
 end s7
