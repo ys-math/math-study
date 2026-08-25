@@ -33,7 +33,7 @@ $R$を環とし$L,M,N$を$R$加群とする.\ $0 \longrightarrow L \stackrel{i}{
 $l \in L, n \in N$とし$i(l) + s(n) = 0$と仮定すると$p(i(l) + s(n)) = p(i(l)) + p(s(n)) = 0 + n = n$
 なので$p(0) = 0$と合わせて$n = 0$である.\ よって$i(l) + 0 = i(l) = 0$となり$i$は単射だから$l = 0$となる.\ したがって$(l, n) = (0, 0)$なので$\psi$は単射である.
 
-$\phi \coloneq \psi^{-1}$とし$l \in L, n \in N$とすると$\psi(\iota_L(l)) = \psi(l,0) = i(l) + s(0) = i(l)$なので$\psi \circ \iota_L = i$であり,\ また$p(\psi(l, n)) = p(i(l) + s(n)) = p(i(l)) + p(s(n)) = 0 + n = n = \pi_N(l,n)$なので$p \circ \psi = \pi_N$である.
+$\phi \coloneq \psi^{-1}$とし$l \in L, n \in N$とすると$\psi(\iota_L(l)) = \psi(l,0) = i(l) + s(0) = i(l)$なので$\psi \circ \iota_L = i$であり,\ また$p(\psi(l, n)) = p(i(l) + s(n)) = p(i(l)) + p(s(n)) = 0 + n = n = \pi_N(l,n)$なので$p \circ \psi = \pi_N$である.\ 2つの式に両辺$\phi$を合成することで$\iota_L = \phi \circ i$かつ$p = \pi_N \circ \phi$を得る.
 
 \vskip\baselineskip
 (2)$\Rightarrow$(4): ある準同型$r \colon M \to L$が存在して$r \circ i = \id_L$となるとする.\ $\phi \colon M \to L \oplus N$を$\phi(m) \coloneq (r(m), p(m))$で定める.\ $(l, n) \in L \oplus N$とすると$p$は全射なので$p(m) = n$となる$m \in M$が存在する.\ $m' \coloneq m + i(l - r(m))$とすると$p(m') = p(m) = n$となり$r(m') = r(m) + (l - r(m)) = l$となる.\ よって$\phi(m') = (l, n)$なので$\phi$は全射である.
@@ -54,6 +54,20 @@ $m \in M$とし$(r(m), p(m)) = (0,0)$であると仮定する.\ $m \in \ker(p) =
 \vskip\baselineskip
 (3)$\Rightarrow$(1): $M = i(L) \oplus C$となる$M$の$R$部分加群$C$が存在するとする.\ 制限$p \vert_{C} \colon C \to N$を考える.\ $N = p(M) = p(i(L)) + p(C) = p(C)$より$p \vert_{C}$は全射である.\ また$\ker(p \vert_{C}) = C \cap \ker(p) = C \cap \im(i) = C \cap i(L) = \{0\}$であるから$p \vert_{C}$は単射である.\ $\iota \colon C \hookrightarrow M$を包含とし$s \coloneq \iota \circ (p \vert_{C})^{-1}$とすると$s \colon N \to M$であり,\ 任意の$n \in N$に対して$p(s(n)) = p(\iota((p \vert_{C})^{-1}(n))) = p \vert_{C}((p \vert_{C})^{-1}(n)) = n$となり$p \circ s = \id_N$である.
 \end{proof}
+
+\begin{definition}
+$R$を環とし$S$を集合とする.\ $R$を$R$加群とみなし$R^{(S)} \coloneq \bigoplus_{s \in S} R$と定める.\ $s \in S$に対して$e_s \in R^{(S)}$を
+\begin{center}
+$e_s(t) =
+\begin{cases}
+  1 \quad & t = s\\
+  0 \quad & t \neq s
+\end{cases}
+$
+\end{center}
+\vspace{1em}
+で定める.\ $(e_s)_{s \in S}$を$R^{(S)}$の\textbf{標準基底}(standard basis)という.\ $R$加群$F$に対してある集合$S$と同型$\phi \colon R^{(S)} \stackrel{\sim}{\to} F$が存在するとき$F$は\textbf{自由$R$加群}(free module)であるといい$(\phi(e_s))_{s \in S}$を$F$の\textbf{基底}(basis)という.
+\end{definition}
 
 \begin{lemma} \label{lem: free_presentation_lemma}
 $R$を環,\ $P$を$R$加群とし$S \subset P$を$P$の生成元の集合とする.\ 準同型$\alpha \colon R^{(S)} \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定め$\kappa \colon \ker(\alpha) \hookrightarrow R^{(S)}$を包含とする.\ このとき$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
@@ -79,7 +93,7 @@ $R$を環とし$P$を$R$加群とする.\ 次の(1)-(2)は同値.
 	& P \\
 	M & P
 	\arrow["s"', from=1-2, to=2-1]
-	\arrow["{\mathrm{id}_P}", from=1-2, to=2-2]
+	\arrow["{\id_P}", from=1-2, to=2-2]
 	\arrow["r"', two heads, from=2-1, to=2-2]
 \end{tikzcd}\]
 
@@ -171,17 +185,19 @@ $R$を環とし$P$を$R$加群とする.\ 次の(1)-(2)は同値.
 \end{proof}
 
 \begin{proposition} \label{prop: proj_comm_monoid}
-$R$を環として$\Proj(R) \coloneq \{[P] \mid [P]は有限生成射影R加群の同型類\}$とする.\ $[R],[Q] \in \Proj(R)$に対して$[R] + [Q] \coloneq [R \oplus Q]$で定めると$(\Proj(R), +, [\{0\}])$は可換モノイドになる.
+$R$を環として$\Proj(R) \coloneq \{[P] \mid \text{$[P]$は有限生成射影$R$加群の同型類}\}$とする.\ $[P],[Q] \in \Proj(R)$に対して$[P] + [Q] \coloneq [P \oplus Q]$で定めると$(\Proj(R), +, [\{0\}])$は可換モノイドになる.
 \end{proposition}
 
 \begin{proof}
-$P,P'$を有限生成射影R加群とすると\cref{prop: projective_iff_free_summand}よりある自由加群$F,F'$と$R$加群$M,M'$が存在して$F \cong M \oplus P, F' \cong M' \oplus P'$となる.\ $F \oplus F'$は自由加群であり$F \oplus F' \cong (M \oplus P) \oplus (M' \oplus P') \cong (M \oplus M') \oplus (P \oplus P')$であるから\cref{prop: projective_iff_free_summand}より$P \oplus P'	$も射影$R$加群であり$P \oplus P'$は有限生成なので$[P] + [P'] = [P \oplus P'] \in \Proj(R)$である.
+$P,P'$を有限生成射影$R$加群とすると\cref{prop: projective_iff_free_summand}よりある自由加群$F,F'$と$R$加群$M,M'$が存在して$F \cong M \oplus P, F' \cong M' \oplus P'$となる.\ $F \oplus F'$は自由加群であり$F \oplus F' \cong (M \oplus P) \oplus (M' \oplus P') \cong (M \oplus M') \oplus (P \oplus P')$であるから\cref{prop: projective_iff_free_summand}より$P \oplus P'	$も射影$R$加群であり$P \oplus P'$は有限生成なので$[P] + [P'] = [P \oplus P'] \in \Proj(R)$である.
+
+$P \cong P_1, P' \cong P_1'$ならば$P \oplus P' \cong P_1 \oplus P_1'$なので$+$はwell-definedである.\ また同型$(P \oplus P') \oplus P'' \cong P \oplus (P' \oplus P'')$と$P \oplus P' \cong P' \oplus P$が成り立つので$+$は結合的かつ可換である.
 
 $P \oplus \{0\} = P$なので$[P] + [\{0\}] = [P]$である.
 \end{proof}
 
 \begin{definition} \label{def: grothendieckGroup}
-$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon G \to H$に対して群準同型$\theta \colon G \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
+$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon G \to H$に対して群準同型$\theta \colon S \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
 
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMSwiSCJdLFsxLDAsIkciXSxbMCwyLCJcXHBoaSJdLFsyLDEsIlxcdGhldGEiXSxbMCwxLCJcXHBzaSIsMl1d
 \[\begin{tikzcd}
@@ -198,13 +214,13 @@ $S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準�
 \end{definition}
 
 \begin{lemma}
-$P, Q$を環$R$上の冪等行列とする.\ このとき$R^N P \cong R^N Q$であることと$P, Q$それぞれの右下に$0$を追加することで$N \times N$行列に拡大したときそれらが$\GL(N, R)$上共役となることは同値である.
+$n, m$を正整数とし$P$を環$R$上の$n \times n$冪等行列,\ $Q$を$m \times m$冪等行列とする.\ $N \coloneq n + m$とし$P, Q$それぞれの右下に$0$を追加して$N \times N$行列$P \oplus 0, Q \oplus 0$に拡大する.\ このとき$R^n P \cong R^m Q$であることと$P \oplus 0$と$Q \oplus 0$が$\GL(N, R)$において共役となることは同値である.
 \end{lemma}
 
 \begin{proof}
 ある$U \in \GL(N, R)$が存在して$UPU^{-1} = Q$となるとする.\ $\phi \colon R^N Q \to R^N P$を$\phi(x) \coloneq xU$として定めると$x \in R^N Q$は$x = yQ$と$y \in R^N$を用いて表せるから$\phi(x) = xU = yQU = yUP \in R^NP$であるので$\phi$はwell-definedである.\ $\phi$は行列を作用させる写像なので準同型であり$\psi \colon R^N P \to R^N Q$を$\psi(x) = xU^{-1}$として定めれば$\psi$は$\phi$の逆写像である.\ よって$R^N Q \cong R^N P$である.
 
-$P$を$n \times n$行列とし$Q$を$m \times m$行列とする.\ 同型$\alpha \colon R^n Q \to R^m P$が存在するとする.\ $x \in R^N$とすると$x = xP + x(1 - P)$となるり$x \in R^nP \cap R^n(1 - P)$とすると$x = uP \and x = v(1 - P)$と$u,v \in R^N$を用いて表せる.\ $P$は冪等行列なので$xP = uP^2 = uP = x$かつ$xP = v(1 - P)P = v(P - P^2) = v(P - P) = 0$となり$x = 0$となる.\ したがって$R^n = R^n P \oplus R^n (1 - P)$と直和分解できる.\ 同様に$R^m = R^m Q \oplus R^m (1 - Q)$となる.\ ここで
+$P$を$n \times n$行列とし$Q$を$m \times m$行列とする.\ 同型$\alpha \colon R^n P \to R^m Q$が存在するとする.\ $x \in R^n$とすると$x = xP + x(1 - P)$となり$x \in R^nP \cap R^n(1 - P)$とすると$x = uP, x = v(1 - P)$と$u,v \in R^n$を用いて表せる.\ $P$は冪等行列なので$xP = uP^2 = uP = x$かつ$xP = v(1 - P)P = v(P - P^2) = v(P - P) = 0$となり$x = 0$となる.\ したがって$R^n = R^n P \oplus R^n (1 - P)$と直和分解できる.\ 同様に$R^m = R^m Q \oplus R^m (1 - Q)$となる.\ ここで
 \begin{center}
 $a(x) =
 \begin{cases}
@@ -217,17 +233,17 @@ $
 \begin{center}
 $b(x) =
 \begin{cases}
-  \alpha^{-1}(x) \quad & x \in R^n Q\\
-  0 \quad & x \in R^n (1 - Q)
+  \alpha^{-1}(x) \quad & x \in R^m Q\\
+  0 \quad & x \in R^m (1 - Q)
 \end{cases}
 $
 \end{center}
 と定めると$a \colon R^n \to R^m$と$b \colon R^m \to R^n$はそれぞれ準同型であり行列$A,B$をそれぞれ$a(x) = xA, b(x) = xB$を満たすものとすると$AB = P, BA = Q, A = PA = AQ, B = QB = BP$である.\ $N \coloneq n + m$とし$N \times N$行列$U$を次のようにして定める.
 \begin{center}
-$
+$U \coloneq
 \begin{pmatrix}
-   1 - P & 0 \\
-   0 & 1 - Q
+   1 - P & A \\
+   B & 1 - Q
 \end{pmatrix}
 $
 \end{center}
@@ -254,7 +270,7 @@ $\begin{pmatrix}
 U^{-1} =
 \begin{pmatrix}
    0 & 0 \\
-   0 & q
+   0 & Q
 \end{pmatrix}
 $
 となり$P \oplus 0$と$0 \oplus Q$は共役である.\ $0 \oplus Q$は$Q \oplus 0$と共役なので$P \oplus 0$は$Q \oplus 0$と$\GL(N,R)$において共役.
