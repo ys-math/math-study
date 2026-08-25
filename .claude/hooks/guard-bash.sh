@@ -34,6 +34,22 @@ while IFS= read -r seg; do
   seg=$(tr -s '[:space:]' ' ' <<<"$seg")
   [[ $seg == git\ * ]] || continue
 
+  # Drop git's global options so the subcommand is back at position two. Every
+  # arm below matches a literal "git <verb> ", so without this `git -C . push
+  # --force` matches none of them and is waved through.
+  rest="${seg#git }"
+  while :; do
+    case "$rest" in
+      -C\ *|-c\ *|--git-dir\ *|--work-tree\ *|--namespace\ *)
+        rest="${rest#* }"      # the option
+        rest="${rest#* }" ;;   # its argument
+      --*=*\ *)
+        rest="${rest#* }" ;;   # --git-dir=<path>, --work-tree=<path>, …
+      *) break ;;
+    esac
+  done
+  seg="git $rest"
+
   case "$seg" in
     "git add "*)
       if grep -qE '(^|[[:space:]])(-[a-zA-Z]*A[a-zA-Z]*|--all|\.|:/)([[:space:]]|$)' <<<"${seg#git add}"; then
