@@ -500,31 +500,36 @@ example (xs ys : List Nat) (p : List Nat → Prop) (h : p (xs ++ mk_symm ys).rev
 
 end s7
 
-namespace c05s8
+namespace s9
 
-def f (x y z : Nat) : Nat :=
-  match x, y, z with
-  | 5, _, _ => y
-  | _, 5, _ => y
-  | _, _, 5 => y
-  | _, _, _ => 1
+-- Define a new tactic notation
+syntax "triv" : tactic
 
-example (x y z : Nat) : x ≠ 5 → y ≠ 5 → z ≠ 5 → z = w → f x y w = 1 := by
-  intros
-  simp [f]
-  split
-  · contradiction
-  · contradiction
-  · contradiction
-  · rfl
+macro_rules
+  | `(tactic| triv) => `(tactic| assumption)
 
-def g (xs ys : List Nat) : Nat :=
-  match xs, ys with
-  | [a, b], _ => a+b+1
-  | _, [b, _] => b+1
-  | _, _      => 1
+example (h : p) : p := by
+  triv
 
-example (xs ys : List Nat) (h : g xs ys = 0) : False := by
-  simp [g] at h; split at h <;> simp +arith at h
+-- You cannot prove the following theorem using `triv`
+-- example (x : α) : x = x := by
+--  triv
 
-end c05s8
+-- Let's extend `triv`. The tactic interpreter
+-- tries all possible macro extensions for `triv` until one succeeds
+macro_rules
+  | `(tactic| triv) => `(tactic| rfl)
+
+example (x : α) : x = x := by
+  triv
+
+example (x : α) (h : p) : x = x ∧ p := by
+  apply And.intro <;> triv
+
+-- We now add a (recursive) extension
+macro_rules | `(tactic| triv) => `(tactic| apply And.intro <;> triv)
+
+example (x : α) (h : p) : x = x ∧ p := by
+  triv
+
+end s9
