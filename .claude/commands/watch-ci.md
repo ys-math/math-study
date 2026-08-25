@@ -28,9 +28,10 @@ command needs from it:
 | `Build PDFs` | a push touching `**.tex` or `.latexmkrc` | 1m45s–2m20s |
 | `Lean` | a push touching `lean/**` | not measured yet — assume minutes |
 
-A push touching no `.tex` and no `lean/**` starts only `Update README`. **All
-three are expected to be absent on a commit that CI itself made** — the bots'
-own commits do not always start a new run, and a missing run is not a failure.
+A push touching no `.tex`, no `.latexmkrc` and no `lean/**` starts only
+`Update README`. **All three are expected to be absent on a commit that CI
+itself made** — the bots' own commits do not always start a new run, and a
+missing run is not a failure.
 
 ## 1. The commit
 

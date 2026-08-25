@@ -239,11 +239,11 @@ one that needs watching on both paths.
 | `/git` | sync, gate, propose a plan, then commit, push, open a PR | merge |
 | `/git-merge` | inspect a PR, re-run the gates, then squash-merge and clean up | commit new work |
 
-The split is enforced by `allowed-tools`, not by instructions: `gh pr merge` is
-absent from `/git`'s tool list, so it cannot merge however it reads the
-situation. This mirrors `/review-notes`, which carries no write tool at all and
-no `gh issue close`, so it can neither edit the notes it reviews nor decide a
-finding is fixed.
+The split is a rule these two commands keep, not something the frontmatter
+enforces: `docs/agent-system.md` `## Commands` says what an `allowed-tools`
+line does and does not do. This mirrors `/review-notes`, which carries no
+write tool at all and no `gh issue close`, so it can neither edit the notes
+it reviews nor decide a finding is fixed.
 
 Both stop for confirmation before doing anything irreversible. Both run the
 gates *before* a commit exists, so a failure leaves nothing to undo.

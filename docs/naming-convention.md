@@ -130,9 +130,10 @@ than left to look obvious.
 
 A rendered image shares its source's stem so the pair is one lookup apart:
 `docs/working-loop.ebnf` renders to `docs/images/working-loop.svg`, and a
-renamed grammar is an image renamed in the same commit. Nothing checks the
-stems match — `scripts/test_agent_docs.py` checks only that the SVG exists and
-that `README.md` still points at it.
+renamed grammar is an image renamed in the same commit. The pairing is checked:
+`scripts/test_agent_docs.py` derives the SVG's name from the grammar's and fails
+if it is missing. Which document embeds it is not checked, only that some
+document does — so the embedding file has to be found and updated by hand.
 
 A licence file other than `LICENSE` is named for the licence it holds, in the
 SPDX identifier's own spelling, so that a header saying

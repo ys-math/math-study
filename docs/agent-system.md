@@ -83,7 +83,7 @@ to touch**, which is what you actually need when choosing between them.
 | Command | Writes | Commits | Stops for confirmation | Output |
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
-| `/label` | `tex/**`, `lean/Math/Study/**` | no | always, before applying | English |
+| `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
 | `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
@@ -104,9 +104,10 @@ Worth knowing without looking them up:
   absent from its `allowed-tools`, so an undetected finding is reported to the
   user rather than acted on.
 - **`/formalize` writes statements and never a proof.** Half of that is a
-  capability: its `allowed-tools` reach `lean/Math/Study/**` and the import list
-  in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. The
-  other half is `guard-edits.sh`, which refuses a write under
+  declaration: its `allowed-tools` name `lean/Math/Study/**` and the import list
+  in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. That
+  is the reach it intends, not a bound on it; the paragraph below this table
+  says why. The other half is `guard-edits.sh`, which refuses a write under
   `lean/Math/Study/**` whose tactic blocks are not exactly `sorry` — so this is
   the one command whose central rule is mechanical rather than kept. What stays
   advisory is narrower and worse: never repair an understated statement while
