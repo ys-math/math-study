@@ -52,7 +52,7 @@ while IFS= read -r seg; do
 
   case "$seg" in
     "git add "*)
-      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*A[a-zA-Z]*|--all|\.|:/)([[:space:]]|$)' <<<"${seg#git add}"; then
+      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*A[a-zA-Z]*|--all|\.|\./|:/)([[:space:]]|$)' <<<"${seg#git add}"; then
         deny "git add -A / git add . is forbidden in this repo: the working tree may hold another session's work in progress. Stage explicit paths instead — docs/git-strategy.md, ## Never."
       fi
       ;;
@@ -87,7 +87,7 @@ while IFS= read -r seg; do
       # `git restore .` and `git restore :/` discard every uncommitted change
       # in the tree — the same harm as `git clean` with no pathspec. /audit's
       # rollback step is the only place this repo runs restore at all.
-      if grep -qE '(^|[[:space:]])(\.|:/)([[:space:]]|$)' <<<"${seg#git restore}"; then
+      if grep -qE '(^|[[:space:]])(\.|\./|:/)([[:space:]]|$)' <<<"${seg#git restore}"; then
         deny "git restore . / git restore :/ would discard every uncommitted change in the tree, including work another session has not committed. Name the paths you edited instead — .claude/commands/audit.md, ## If a check fails, roll back."
       fi
       ;;

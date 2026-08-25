@@ -181,8 +181,9 @@ An ambiguous match goes to the confirmation gate as a question. You decide.
 longer detects is listed with a `gh issue close` hint and left alone. A finding
 can go undetected because this run missed it, not because you fixed it, and a
 command that closes on that evidence loses real defects quietly. `gh issue
-close` is absent from `/review-notes`'s `allowed-tools`, so this holds whatever
-the model decides.
+close` is absent from `/review-notes`'s `allowed-tools`, and the omission is
+deliberate — though it is a rule the command keeps rather than one the
+frontmatter enforces (`docs/agent-system.md` `## Commands`).
 
 ## Closing
 

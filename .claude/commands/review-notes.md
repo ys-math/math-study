@@ -194,7 +194,8 @@ Run /issues galois_theory to regenerate the local worklist.
 **Report the undetected issues; never close them.** A finding can go undetected
 because this run missed it, not because it was fixed, and closing on that
 evidence loses a real defect with no trace. The `gh issue close` hint is for the
-user to run. `allowed-tools` is what makes this hold rather than the paragraph.
+user to run. This is a rule the command keeps — `docs/agent-system.md`
+`## Commands` says what an `allowed-tools` line does and does not do.
 
 The `/issues` pointer matters because nothing else refreshes the worklist — this
 command cannot write it, and a stale `issues/<topic>.md` is the one thing that

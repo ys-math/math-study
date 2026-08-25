@@ -81,7 +81,7 @@ statement it names would carve that defect into a Lean declaration and give it a
 name asserting the two agree.
 
 Match each finding against the labels being mirrored — `docs/issue-convention.md`
-`## Location` is how an issue says where it is. A row a finding names is marked
+`### Location, and the dirty tree` is how an issue says where it is. A row a finding names is marked
 `[blocked #N]` in the table and **is not offered**. Say why in one clause, and
 point at the issue.
 

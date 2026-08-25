@@ -150,7 +150,7 @@ shape for free.
 ### Attribution
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
-whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, the shared
+whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`, the shared
 build files `tex/preamble.tex` and `tex/colophon.tex`, and `lean/`'s build
 configuration.
 
@@ -265,8 +265,9 @@ is one of them: it holds the command tables in `README.md` and
 count written in digits — "all 8 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as
 the two below: `CLAUDE.md`, `README.md`, `/git`, `/git-merge` and `/audit` print
-it verbatim and change with it, and `validate.yml` and `update-readme.yml` hold
-the literal string because they execute it.
+it verbatim and change with it, and `validate.yml`, `update-readme.yml` and the
+`scripts/test_*.py` docstrings hold the literal string because they execute or
+document it.
 
 ```bash
 latexmk -cd -g tex/<topic>/main.tex
@@ -305,8 +306,9 @@ cd lean && lake build
 
 **This is the authoritative spelling of that invocation**, on the same terms as
 the one above; `CLAUDE.md` and `README.md` print it verbatim and change with it,
-while `docs/lean-convention.md` and `/formalize` point here rather than
-restating it.
+and `.claude/settings.json` holds it as an exact-match permission rule, so a
+change here that misses it turns the Lean gate into a permission prompt.
+`docs/lean-convention.md` and `/formalize` point here rather than restating it.
 
 **It is `cd lean`, not `lake --dir=lean`, and the difference is not cosmetic.**
 `--dir` tells Lake where the package is, but `lake` and `lean` are elan shims,

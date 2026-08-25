@@ -188,7 +188,7 @@ any `Co-Authored-By`. They only take effect on `main` — a commit on a branch
 closes nothing until the PR merges, which is correct and needs no special case.
 
 Add `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — with your own
-model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`,
+model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`, `tex/preamble.tex`,
 `tex/colophon.tex`, and `lean/`'s build configuration. **Never on
 `tex/<topic>/**` or `lean/Math/**`**: that mathematics is the repo
 owner's and this command only transported it.

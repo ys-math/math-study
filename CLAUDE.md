@@ -174,7 +174,8 @@ it — read it before doing anything by hand. What binds regardless:
 - **Never force-push and never rewrite pushed history.** Correct a bad commit on
   `main` with a follow-up commit.
 - **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
-  `.github/`, `docs/`, `.claude/`, `tex/preamble.tex`, `tex/colophon.tex`, and
+  `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`,
+  `tex/preamble.tex`, `tex/colophon.tex`, and
   `lean/`'s build configuration — and **never on `tex/<topic>/**` or
   `lean/Math/**`**. A statement `/formalize` typed is still the owner's
   mathematics, only transported; the proof under it will be theirs outright.
