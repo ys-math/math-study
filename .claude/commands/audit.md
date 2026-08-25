@@ -114,7 +114,7 @@ The instructions are the owner's prose, on the same terms as the mathematics.
 
 **Quote the line and name what breaks.** A finding is `file:line`, the text,
 and the concrete wrong action an agent takes because of it — "an agent reading
-`git.md:92` will compile 8 topics when there are 9". "These two sections feel
+`git.md:112` will compile 8 topics when there are 9". "These two sections feel
 inconsistent" is not a finding; drop it rather than file it weakly.
 
 **Divergence is not automatically drift.** Three commands list the repo's
