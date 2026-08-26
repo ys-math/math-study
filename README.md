@@ -134,6 +134,7 @@ math-study/
 │   │   └── working-loop.svg
 │   ├── agent-system.md
 │   ├── audit-workflow.ebnf
+│   ├── bib-convention.md
 │   ├── git-strategy.md
 │   ├── issue-convention.md
 │   ├── label-convention.md
