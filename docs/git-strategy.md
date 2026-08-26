@@ -264,21 +264,21 @@ is one of them: it holds the command tables in `README.md` and
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
 count written in digits — "all 8 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as
-the two below: `CLAUDE.md`, `README.md`, `/git`, `/git-merge` and `/audit` print
-it verbatim and change with it, and `validate.yml`, `update-readme.yml` and the
-`scripts/test_*.py` docstrings hold the literal string because they execute or
-document it.
+the two below: `CLAUDE.md`, `README.md`, `/bib`, `/git`, `/git-merge` and
+`/audit` print it verbatim and change with it, and `validate.yml`,
+`update-readme.yml` and the `scripts/test_*.py` docstrings hold the literal
+string because they execute or document it.
 
 ```bash
 latexmk -cd -g tex/<topic>/main.tex
 ```
 
 **This is the authoritative spelling of that invocation.** `CLAUDE.md`,
-`README.md`, `docs/label-convention.md`, `/git`, `/label` and
-`/review-notes` each print it too, where a command has to run it; every one of
-those is a verbatim copy of this line and changes with it. Change this line
-without them and the repo is back to running three different recipes for one
-operation, which is how it ended up here.
+`README.md`, `docs/label-convention.md`, `/bib`, `/git`, `/label`,
+`/review-notes` and `/tutor` each print it too, where a command has to run it;
+every one of those is a verbatim copy of this line and changes with it. Change
+this line without them and the repo is back to running three different recipes
+for one operation, which is how it ended up here.
 
 `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g`
 forces a rebuild, which matters because latexmk caches a previous failure and
@@ -305,10 +305,12 @@ cd lean && lake build
 ```
 
 **This is the authoritative spelling of that invocation**, on the same terms as
-the one above; `CLAUDE.md` and `README.md` print it verbatim and change with it,
-and `.claude/settings.json` holds it as an exact-match permission rule, so a
-change here that misses it turns the Lean gate into a permission prompt.
-`docs/lean-convention.md` and `/formalize` point here rather than restating it.
+the one above; `CLAUDE.md`, `README.md` and `/tutor` print it verbatim and
+change with it, and `.claude/settings.json` holds it as an exact-match
+permission rule — as does the `allowed-tools` line of every command that runs
+the gate — so a change here that misses one turns the Lean gate into a
+permission prompt. `docs/lean-convention.md` and `/formalize` point here rather
+than restating it.
 
 **It is `cd lean`, not `lake --dir=lean`, and the difference is not cosmetic.**
 `--dir` tells Lake where the package is, but `lake` and `lean` are elan shims,

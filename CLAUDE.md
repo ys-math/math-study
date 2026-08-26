@@ -48,11 +48,11 @@ everywhere.
 
 ## Licensing
 
-Three licences. `tex/*/ch*.tex` and `pdf/*.pdf` are CC BY-NC-ND 4.0; `lean/**`
-is Apache 2.0; everything else is MIT — including the shared
-`tex/preamble.tex`, `tex/colophon.tex` and the generated `tex/*/main.tex`. The
-root `LICENSE` is the MIT one, so an unmarked file reads as MIT and the other
-two are the ones that have to be marked:
+Three licences. `tex/*/ch*.tex`, `tex/*/bibliography.tex` and `pdf/*.pdf` are CC
+BY-NC-ND 4.0; `lean/**` is Apache 2.0; everything else is MIT — including the
+shared `tex/preamble.tex`, `tex/colophon.tex` and the generated
+`tex/*/main.tex`. The root `LICENSE` is the MIT one, so an unmarked file reads
+as MIT and the other two are the ones that have to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added

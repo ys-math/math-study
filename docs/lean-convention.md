@@ -2,8 +2,7 @@
 
 The `lean/` half of this repo is a Lake package where the owner learns Lean 4 by
 writing proofs. This document is the single copy of the rules that govern it:
-`/formalize`, `/label`, `/delete-topic` and `/git` all point here and none of
-them restate it.
+`/formalize`, `/label` and `/tutor` all point here and none of them restate it.
 
 The prose half — `tex/` — is notes about mathematics. This half is mathematics
 the kernel has checked. They are deliberately not the same artifact, and the

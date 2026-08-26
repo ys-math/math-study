@@ -106,3 +106,4 @@ the thing to argue about, not the thing to assume.
 | What goes inside a `\label{}`? | `docs/label-convention.md` |
 | How does `lean/` work? | `docs/lean-convention.md` |
 | What does a review finding look like? | `docs/issue-convention.md` |
+| What does a `\bibitem{}` look like? | `docs/bib-convention.md` |
