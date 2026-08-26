@@ -55,7 +55,7 @@ $m \in M$とし$(r(m), p(m)) = (0,0)$であると仮定する.\ $m \in \ker(p) =
 (3)$\Rightarrow$(1): $M = i(L) \oplus C$となる$M$の$R$部分加群$C$が存在するとする.\ 制限$p \vert_{C} \colon C \to N$を考える.\ $N = p(M) = p(i(L)) + p(C) = p(C)$より$p \vert_{C}$は全射である.\ また$\ker(p \vert_{C}) = C \cap \ker(p) = C \cap \im(i) = C \cap i(L) = \{0\}$であるから$p \vert_{C}$は単射である.\ $\iota \colon C \hookrightarrow M$を包含とし$s \coloneq \iota \circ (p \vert_{C})^{-1}$とすると$s \colon N \to M$であり,\ 任意の$n \in N$に対して$p(s(n)) = p(\iota((p \vert_{C})^{-1}(n))) = p \vert_{C}((p \vert_{C})^{-1}(n)) = n$となり$p \circ s = \id_N$である.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: IsFree}
 $R$を環とし$S$を集合とする.\ $R$を$R$加群とみなし$R^{(S)} \coloneq \bigoplus_{s \in S} R$と定める.\ $s \in S$に対して$e_s \in R^{(S)}$を
 \begin{center}
 $e_s(t) =
@@ -209,12 +209,12 @@ $S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準�
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: k0}
 環$R$に対して$K_0(R) \coloneq G(\Proj(R))$とする.
 \end{definition}
 
-\begin{lemma}
-$n, m$を正整数とし$P$を環$R$上の$n \times n$冪等行列,\ $Q$を$m \times m$冪等行列とする.\ $N \coloneq n + m$とし$P, Q$それぞれの右下に$0$を追加して$N \times N$行列$P \oplus 0, Q \oplus 0$に拡大する.\ このとき$R^n P \cong R^m Q$であることと$P \oplus 0$と$Q \oplus 0$が$\GL(N, R)$において共役となることは同値である.
+\begin{lemma} \label{lem: idempotent_iso_iff_conjugate}
+$n, m$を自然数とし$P$を環$R$上の$n \times n$冪等行列,\ $Q$を$m \times m$冪等行列とする.\ $N \coloneq n + m$とし$P, Q$それぞれの右下に$0$を追加して$N \times N$行列$P \oplus 0, Q \oplus 0$に拡大する.\ このとき$R^n P \cong R^m Q$であることと$P \oplus 0$と$Q \oplus 0$が$\GL(N, R)$において共役となることは同値である.
 \end{lemma}
 
 \begin{proof}
@@ -274,4 +274,20 @@ U^{-1} =
 \end{pmatrix}
 $
 となり$P \oplus 0$と$0 \oplus Q$は共役である.\ $0 \oplus Q$は$Q \oplus 0$と共役なので$P \oplus 0$は$Q \oplus 0$と$\GL(N,R)$において共役.
+\end{proof}
+
+\begin{definition} \label{def: stableGL}
+$R$を環とし$\mathrm{M}(n,R)$を$R$上の$n \times n$行列全体の集合,\ $\GL(n, R)$を$R$上の正則な$n \times n$行列全体の集合とする.\ 特に$\GL(n, R)$は行列の積により群となる.\ 自然数$m \le n$に対して$\iota_{mn} \colon \mathrm{M}(m, R) \hookrightarrow \mathrm{M}(n, R)$を$\iota_{mn}(A) \coloneq A \oplus 0_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \mathrm{M}(R) \coloneq \varinjlim \mathrm{M}(n, R)$と定める.\ 同様にして$\GL(R) \coloneq \varinjlim \GL(n, R)$と定める.
+\end{definition}
+
+\begin{theorem} \label{thm: k0_idempotent_orbits}
+$R$を環とする.\ $\mathrm{Idem}(R)$上の同値関係$\sim$を$P, Q \in \mathrm{Idem}(R)$に対して$P \sim Q \Leftrightarrow {^{\exists}U} \in \GL(R), P = UQU^{-1}$で定める.\ $\mathrm{Idem}(R)/\GL(R) \coloneq \mathrm{Idem}(R)/\sim$とし$P \in \mathrm{Idem}(R)$に対する同値類を$[P] \in \mathrm{Idem}(R)/\GL(R)$とする.\ このとき$\Phi \colon \mathrm{Idem}(R)/\GL(R) \to \Proj(R)$を$\Phi([P]) \coloneq [\im(P)]$で定めると$\Phi$は全単射である.
+
+$\mathrm{Idem}(R)/\GL(R)$上の二項演算を$[P] + [Q] \coloneq [P \oplus Q]$で定めると$(\mathrm{Idem}(R)/\GL(R), +, [0])$は可換モノイドとなる.\ そして$K_0(R)$は可換モノイド$\mathrm{Idem}(R)/\GL(R)$のグロタンディーク群と同型である.
+\end{theorem}
+\begin{proof}
+$\mathcal{O} \coloneq \mathrm{Idem}(R)/\GL(R)$とする.\ 冪等行列の像は有限生成射影加群なので\cref{lem: idempotent_iso_iff_conjugate}により$[\im(P)] = [\im(Q)] \iff \im(P) \cong \im(Q) \iff [P] = [Q]$であるから$\Phi \colon \mathcal{O} \to \Proj(R)$はwell-defineかつ単射である.\ $P$を有限生成射影$R$加群とするとある$R$加群$Q$が存在して$R^n \cong P \oplus Q$となる.\ $P$への射影$\pi_P \colon R^n \to R^n$の表現行列$p$は冪等行列であるから$p \in \mathrm{Idem}(R)$である.\ $\Phi([p]) = [\im(p)] = [P]$なので$\Phi$は全射である.
+
+$\mathcal{O}$上の二項演算$[P] + [Q] = [P \oplus Q]$に対して$\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\im(P \oplus Q)] = [\im(P) \oplus \im(Q)] = [\im(P)] + [\im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\ したがって$K_0(R)$は$\mathcal(O)$のグロタンディーク群と同型である.
+
 \end{proof}
