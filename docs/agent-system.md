@@ -41,6 +41,10 @@ Loaded **on demand**, by a command that names them:
   the canonical `latexmk` invocation. `/git` and `/git-merge` execute it.
 - **`docs/label-convention.md`** — `\label{}` naming. `/label` executes it, and
   it binds any label written by hand too.
+- **`docs/bib-convention.md`** — the citation key and the shape of a `\bibitem`,
+  in a `thebibliography` written by hand: there is no `.bib` file and no BibTeX.
+  `/bib` executes it, and it binds any entry added by hand too. The file's name
+  and where `main.tex` `\input`s it belong to `docs/naming-convention.md`.
 - **`docs/issue-convention.md`** — what a review finding looks like as a GitHub
   issue: labels, title, body, deduplication, closing. `/review-notes` files
   them, `/git` closes them, `/delete-topic` cleans them up and `/issues` renders
@@ -84,6 +88,7 @@ to touch**, which is what you actually need when choosing between them.
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
+| `/bib` | `tex/*/bibliography.tex`, `tex/*/main.tex` | no | always, before writing | **Entries verbatim, English structure** |
 | `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
@@ -114,6 +119,15 @@ Worth knowing without looking them up:
   advisory is narrower and worse: never repair an understated statement while
   translating it. See `docs/lean-convention.md`,
   `## What Claude may write here`.
+- **`/bib` can leave the test suite red, and that is the design.**
+  `scripts/test_new_topic.py` asserts `MAIN_TEMPLATE` reproduces certain topics'
+  `main.tex` byte for byte, so wiring a `bibliography.tex` into one of them
+  breaks it — which is the guard noticing a topic has grown past the skeleton,
+  exactly as its docstring says it should. `/bib` runs the suite, reports the
+  failure and stops there: `Edit(scripts/**)` is absent from its
+  `allowed-tools`, and clearing the guard is a shared-path change, so it takes a
+  branch and a pull request. Without that report the next `/git` fails its gate
+  on an error that looks unrelated to adding a reference.
 - **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
   gitignored and overwritten, a view of the open issues with links that resolve
   in your working copy. GitHub is the record; regenerate rather than trust it.

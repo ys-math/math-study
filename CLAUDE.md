@@ -82,9 +82,12 @@ These are the changes that break silently, days later:
 
 - **Editing the topic skeleton** means editing `MAIN_TEMPLATE` in
   `scripts/new_topic.py` *and* every existing `tex/*/main.tex` in the same
-  commit. `scripts/test_new_topic.py` asserts the template reproduces four of
-  them byte for byte — `topology`, `category_theory`, `manifold` and
-  `algebraic_k_theory` — so a partial update passes; check the rest by hand.
+  commit. `scripts/test_new_topic.py` asserts the template reproduces 3 of them
+  byte for byte — `topology`, `category_theory` and `manifold` — so a partial
+  update passes; check the rest by hand. A topic drops out of that list when its
+  `main.tex` grows past the skeleton, which is what `lambda_calculus` and
+  `algebraic_k_theory` have already done and what `/bib` does to a topic when it
+  wires in a `bibliography.tex`.
 - **Adding a shared `.tex` that all topics `\input`** means adding it to the
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
@@ -138,10 +141,11 @@ guess from outside:
   fence above turned into an `allowed-tools` line as far as one can go.
 - **`docs/issue-convention.md` binds every issue you file**,
   **`docs/label-convention.md` binds every `\label{}` you write**,
+  **`docs/bib-convention.md` binds every `\bibitem{}` you write**,
   **`docs/lean-convention.md` binds every `.lean` file**, and
   **`docs/naming-convention.md` binds every path you create or rename**, in both
   halves of the repo — whether or not you got there through `/review-notes`,
-  `/label` or `/formalize`.
+  `/label`, `/bib` or `/formalize`.
 
 **A `\label{}` is now two names, not one.** The label body doubles as the Lean
 declaration name that formalises it, so renaming one is a rename of the
