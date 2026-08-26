@@ -169,6 +169,7 @@ math-study/
 │   └── test_new_topic.py
 ├── tex/
 │   ├── algebraic_k_theory/
+│   │   ├── bibliography.tex
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── category_theory/
