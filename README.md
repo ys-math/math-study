@@ -212,7 +212,7 @@ on paths, so a file is covered whether or not it carries a header.
 
 | Path | License |
 | --- | --- |
-| `tex/*/ch*.tex`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
+| `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
 | `lean/**` | [Apache 2.0][apache] |
 | everything else | [MIT][mit] |
 
