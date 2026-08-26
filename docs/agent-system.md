@@ -85,6 +85,7 @@ to touch**, which is what you actually need when choosing between them.
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
 | `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
+| `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
 | `/audit` | `.claude/audits/**`, then the files it audits | no | always, before applying a fix | English |
@@ -116,6 +117,14 @@ Worth knowing without looking them up:
 - **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
   gitignored and overwritten, a view of the open issues with links that resolve
   in your working copy. GitHub is the record; regenerate rather than trust it.
+- **`/tutor` is the only command that mechanically cannot write.** Its
+  `disallowed-tools` removes `Write` and `Edit`, so the rule that the user types
+  the mathematics is enforced rather than asked for — the one place in this
+  table where that is true of a *command* rather than a hook. It reads `tex/`,
+  `lean/`, the topic's open issues and the conventions, runs `latexmk` and
+  `lake build` to see real errors, and answers in full. Defects it notices are
+  reported and handed to `/review-notes`; `gh issue create` is absent from its
+  `allowed-tools` so that `docs/issue-convention.md` keeps one filing channel.
 - **`/audit` does edit what it audits**, in a second phase the user has to ask
   for by naming findings from the report. It is the one command whose
   `allowed-tools` reaches `.claude/`, `docs/`, `.github/` and `CLAUDE.md`, so it
@@ -126,9 +135,9 @@ Worth knowing without looking them up:
 Each command's `allowed-tools` line pre-approves those tools for the turn that
 invokes it; it does not restrict what else Claude may call, and the grant
 clears with your next message. `disallowed-tools` is the field that removes a
-tool, and no command here uses one. So a command's "cannot" holds only where a
-hook or a `permissions` rule carries it — everywhere else it is prose, on the
-same terms as the rest of this file.
+tool, and `/tutor` is the only command here that uses one. So every other
+command's "cannot" holds only where a hook or a `permissions` rule carries it —
+everywhere else it is prose, on the same terms as the rest of this file.
 
 ## Enforcement
 

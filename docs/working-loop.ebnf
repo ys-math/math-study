@@ -13,6 +13,11 @@
    check runs one way only: a command may exist without appearing here.
    /delete-topic is deliberately absent, being an exit rather than a step.
 
+   /tutor is absent for the same reason as /delete-topic, from the other end: it
+   is an interruption rather than a step. It can happen inside any of the boxes
+   below, it advances none of them, and it leaves nothing behind — a session
+   that ran it ten times has the same shape as one that never did.
+
    Special sequences (? … ?) are the parts that are not a command: writing,
    fixing, proving. They are where most of the time actually goes. *)
 
