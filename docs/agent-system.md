@@ -146,7 +146,7 @@ everywhere else it is prose, on the same terms as the rest of this file.
 | Hook | Event | Refuses |
 | --- | --- | --- |
 | `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .` / `git add ./`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run; `git restore` whose pathspec is `.`, `./` or `:/` |
-| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` with a generator marker destroyed |
+| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` or `tex/*/bibliography.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
 routine commands through without a prompt.

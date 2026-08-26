@@ -34,8 +34,14 @@ class TestTemplateMatchesRepo(unittest.TestCase):
     preamble path, the colophon), a hand-edited topic and a generated one would
     silently diverge, and these are the tests that say so.
 
-    lambda_calculus is deliberately not covered — it \input{}s three chapters,
-    which is what a topic grows into, not what it is created as.
+    Two topics are deliberately not covered, for the same reason: their
+    main.tex has grown past the skeleton, which is what a topic grows into and
+    not what it is created as. lambda_calculus \input{}s three chapters;
+    algebraic_k_theory \input{}s a bibliography.tex alongside its chapter.
+
+    algebraic_k_theory was the only topic whose \DocTitle contains math, so
+    dropping it from the byte-identity guard would have left \texorpdfstring
+    untested. test_title_containing_math covers that path directly instead.
     """
 
     def assert_reproduces(self, topic: str, title: str) -> None:
@@ -48,8 +54,15 @@ class TestTemplateMatchesRepo(unittest.TestCase):
         self.assert_reproduces("manifold", "多様体論")
 
     def test_title_containing_math(self):
-        self.assert_reproduces(
-            "algebraic_k_theory", r"\texorpdfstring{代数的$K$理論}{代数的K理論}"
+        # Not asserted against a topic in the repo: algebraic_k_theory is the
+        # only one with such a title and its main.tex has outgrown the
+        # skeleton. The braces and $ here are exactly what rules out
+        # str.format and string.Template, so the placeholder has to survive
+        # them verbatim.
+        title = r"\texorpdfstring{代数的$K$理論}{代数的K理論}"
+        self.assertIn(
+            r"\newcommand{\DocTitle}{" + title + "}",
+            render_main("algebraic_k_theory", title),
         )
 
     def test_no_trailing_newline(self):
