@@ -1,7 +1,7 @@
 ---
 description: Propose \label{} names for a topic's theorem environments, then apply the ones you pick
 argument-hint: "[topic_slug ...]  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Edit(tex/*/ch*.tex), Edit(lean/Math/Study/**), Bash(latexmk:*), Bash(lake:*), Bash(grep:*)
+allowed-tools: Read, Glob, Grep, Edit(tex/*/ch*.tex), Edit(lean/Math/Study/**), Bash(latexmk:*), Bash(cd lean && lake build), Bash(grep:*)
 ---
 
 Propose a `\label{}` for every unlabelled theorem environment in a topic, show

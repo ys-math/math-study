@@ -1,7 +1,7 @@
 ---
 description: Delete a topic — its tex/ directory, its PDF, its Lean mirror, its review issues and its local artifacts — and commit the removal
 argument-hint: "<topic_slug>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Edit(lean/Math.lean), Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(lake:*), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label list:*), Bash(gh label delete:*)
+allowed-tools: Read, Glob, Grep, Edit(lean/Math.lean), Bash(git status:*), Bash(git branch:*), Bash(git rev-parse:*), Bash(git fetch:*), Bash(git pull:*), Bash(git log:*), Bash(git ls-files:*), Bash(git diff:*), Bash(wc:*), Bash(git rm:*), Bash(git clean:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(cd lean && lake build), Bash(gh issue list:*), Bash(gh issue close:*), Bash(gh label list:*), Bash(gh label delete:*)
 ---
 
 Delete one topic: `tex/<topic>/`, `pdf/<topic>.pdf`, its Lean mirror, its open

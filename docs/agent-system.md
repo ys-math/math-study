@@ -88,7 +88,7 @@ to touch**, which is what you actually need when choosing between them.
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
 | `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
-| `/bib` | `tex/*/bibliography.tex`, `tex/*/main.tex` | no | always, before writing | **Entries verbatim, English structure** |
+| `/bib` | `tex/*/bibliography.tex`, `tex/*/main.tex`, `docs/bib-convention.md` | no | always, before writing | **Entries verbatim, English structure** |
 | `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |

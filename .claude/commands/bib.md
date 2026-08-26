@@ -1,7 +1,7 @@
 ---
 description: Add a reference to a topic's bibliography.tex, creating the file and wiring it into main.tex if it has none
 argument-hint: "<topic_slug> <citation>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Bash(latexmk:*), Bash(python -m unittest:*), Bash(grep:*)
+allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Edit(docs/bib-convention.md), Bash(latexmk:*), Bash(python -m unittest:*), Bash(grep:*)
 ---
 
 File a reference into a topic's `tex/<topic>/bibliography.tex`, creating that

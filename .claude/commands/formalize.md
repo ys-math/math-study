@@ -1,7 +1,7 @@
 ---
 description: Mirror a topic's labelled theorems into lean/Math/Study/ as Lean statements with sorry proofs
 argument-hint: "<topic_slug> [label ...]  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Write(lean/Math/Study/**), Edit(lean/Math/Study/**), Edit(lean/Math.lean), Bash(lake:*), Bash(grep:*), Bash(git ls-files:*), Bash(gh issue list:*)
+allowed-tools: Read, Glob, Grep, Write(lean/Math/Study/**), Edit(lean/Math/Study/**), Edit(lean/Math.lean), Bash(cd lean && lake build), Bash(grep:*), Bash(git ls-files:*), Bash(gh issue list:*)
 ---
 
 Translate a topic's labelled theorem environments into Lean statements in

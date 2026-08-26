@@ -1,7 +1,7 @@
 ---
 description: Inspect an open pull request, re-run its gates, then squash-merge it
 argument-hint: "[PR number]  (omit — the current branch's PR)"
-allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(lake:*), Bash(python -m unittest:*)
+allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(cd lean && lake build), Bash(python -m unittest:*)
 ---
 
 Merge a pull request following `docs/git-strategy.md`. Read that file first.
