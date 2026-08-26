@@ -7,6 +7,7 @@ on:
     paths:
       - "**.tex"
       - ".latexmkrc"      # rebuild if the build config changes too
+      - ".github/workflows/build-pdf.yml"
   workflow_dispatch:
 
 permissions:
