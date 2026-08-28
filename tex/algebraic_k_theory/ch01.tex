@@ -279,7 +279,7 @@ $
 \begin{definition} \label{def: stableGL}
 $R$を環とし$\mathrm{M}(n,R)$を$R$上の$n \times n$行列全体の集合,\ $\GL(n, R)$を$R$上の正則な$n \times n$行列全体の集合とする.\ 特に$\GL(n, R)$は行列の積により群となる.\ 自然数$m \le n$に対して$\iota_{mn} \colon \mathrm{M}(m, R) \hookrightarrow \mathrm{M}(n, R)$を$\iota_{mn}(A) \coloneq A \oplus 0_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \mathrm{M}(R) \coloneq \varinjlim \mathrm{M}(n, R)$と定める.
 
-自然数$m \le n$に対して$\iota'_{mn} \colon \GL(m, R) \hookrightarrow \GL(n, R)$を$\iota'_{mn}(A) \coloneq A \oplus 1_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \GL(R) \coloneq \varinjlim \GL(n, R)$と定める.
+自然数$m \le n$に対して$\iota'_{mn} \colon \GL(m, R) \hookrightarrow \GL(n, R)$を$\iota'_{mn}(A) \coloneq A \oplus 1_{n - m}$で定めると$(\GL(n,R), \iota'_{mn})$は帰納系となる.\ このとき$\displaystyle \GL(R) \coloneq \varinjlim \GL(n, R)$と定める.
 \end{definition}
 
 \begin{theorem} \label{thm: k0_idempotent_orbits}
@@ -291,5 +291,17 @@ $\mathrm{Idem}(R)/\GL(R)$上の二項演算を$[P] + [Q] \coloneq [P \oplus Q]$�
 $\mathcal{O} \coloneq \mathrm{Idem}(R)/\GL(R)$とする.\ 冪等行列の像は有限生成射影加群なので\cref{lem: idempotent_iso_iff_conjugate}により$[\im(P)] = [\im(Q)] \iff \im(P) \cong \im(Q) \iff [P] = [Q]$であるから$\Phi \colon \mathcal{O} \to \Proj(R)$はwell-defineかつ単射である.\ $P$を有限生成射影$R$加群とするとある$R$加群$Q$が存在して$R^n \cong P \oplus Q$となる.\ $P$への射影$\pi_P \colon R^n \to R^n$の表現行列$p$は冪等行列であるから$p \in \mathrm{Idem}(R)$である.\ $\Phi([p]) = [\im(p)] = [P]$なので$\Phi$は全射である.
 
 $P \sim P', Q \sim Q'$とすると$UPU^{-1} = P', VQV^{-1} = Q'$となる$U, V \in \GL(R)$が存在する.\ $(U \oplus V)(P \oplus Q)(U \oplus V)^{-1} = P' \oplus Q'$となるので$[P] + [Q] = [P \oplus Q] = [P' \oplus Q'] = [P'] + [Q']$となり$+$はwell-definedである.\ $\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\im(P \oplus Q)] = [\im(P) \oplus \im(Q)] = [\im(P)] + [\im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\ したがって$K_0(R)$は$\mathcal{O}$のグロタンディーク群と同型である.
+\end{proof}
 
+\begin{lemma}
+$(I, \ge)$を有向集合とし$J$を$I$の共終集合とする.\ $(X_i, f_{ij})$を帰納系とする.\ このとき全単射$\Phi \colon \varinjlim_{j \in J} X_j \to \varinjlim_{i \in I} X_i$が存在する.
+\end{lemma}
+\begin{proof}
+$[x]_J \in \varinjlim_{j \in J} X_j$に対して$\Phi([x]_J) \coloneq [x]_I$と定める.\ $x_1 \in X_{j_1}, x_2 \in X_{j_2}$とし$[x_1]_J = [x_2]_J$と仮定する.\ $f_{j_1 k}(x_1) = f_{j_2 k}(x_2)$となる$k \in J \subset I$が存在し$[x_1]_I = [x_2]_I$となる.\ ゆえに$\Phi$はwell-definedである.
+\end{proof}
+
+\begin{theorem} (\textbf{Morita invariance})
+$R$を環とし$n \in \mathbb{N} \setminus \{0\}$とする.\ このとき$K_0(R) \cong K_0(\mathrm{M}_n(R))$である.\ ただし$\mathrm{M}_n(R) \coloneq \mathrm{M}(n,R)$である.
+\end{theorem}
+\begin{proof}
 \end{proof}
