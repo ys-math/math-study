@@ -109,7 +109,7 @@ $F$は自由$R$加群 $\implies$ $F$は射影$R$加群
 \end{lemma}
 
 \begin{proof}
-$F$を自由$R$加群とし$(e_s)_{s \in S}$を$F$の基底とする.\ $M$を$R$加群として$\alpha \colon M \twoheadrightarrow F$を全射準同型とする.\ 任意の$s \in S$に対して$\alpha^{-1}(\{e_s\}) \neq \emptyset$なので選択公理により$(y_s)_{s \in S} \in \prod_{s \in S} \alpha^{-1}(\{e_s\})$が存在する.\ よって自由加群の普遍性の存在性により準同型$\beta \colon F \to M$で$\beta(e_s) = y_s$を満たすものが存在する.\ $\alpha \circ \beta(e_s) = \alpha(y_s) = e_s = \id_F(e_s)$なので自由加群の普遍性の一意性により$\alpha \circ \beta = \id_F$である.\ したがって\cref{prop: projective_iff_epi_splits}より$F$は射影$R$加群である.
+$F$を自由$R$加群とし$(b_s)_{s \in S}$を$F$の基底とする.\ $M$を$R$加群として$\alpha \colon M \twoheadrightarrow F$を全射準同型とする.\ 任意の$s \in S$に対して$\alpha^{-1}(\{b_s\}) \neq \emptyset$なので選択公理により$(y_s)_{s \in S} \in \prod_{s \in S} \alpha^{-1}(\{b_s\})$が存在する.\ よって自由加群の普遍性の存在性により準同型$\beta \colon F \to M$で$\beta(e_s) = y_s$を満たすものが存在する.\ $\alpha \circ \beta(b_s) = \alpha(y_s) = e_s = \id_F(b_s)$なので自由加群の普遍性の一意性により$\alpha \circ \beta = \id_F$である.\ したがって\cref{prop: projective_iff_epi_splits}より$F$は射影$R$加群である.
 
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMCwiRiJdLFsxLDEsIk0iXSxbMCwxLCIoZV9zKV97cyBcXGluIFN9Il0sWzAsMiwiKHlfcylfe3MgXFxpbiBTfSIsMl0sWzEsMiwiXFxiZXRhIiwyLHsib2Zmc2V0IjoxfV0sWzIsMSwiXFxhbHBoYSIsMix7Im9mZnNldCI6MSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV1d
 \[\begin{tikzcd}
@@ -197,7 +197,7 @@ $P \oplus \{0\} = P$なので$[P] + [\{0\}] = [P]$である.
 \end{proof}
 
 \begin{definition} \label{def: grothendieckGroup}
-$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon G \to H$に対して群準同型$\theta \colon S \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
+$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon S \to H$に対して群準同型$\theta \colon G \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
 
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMSwiSCJdLFsxLDAsIkciXSxbMCwyLCJcXHBoaSJdLFsyLDEsIlxcdGhldGEiXSxbMCwxLCJcXHBzaSIsMl1d
 \[\begin{tikzcd}
@@ -218,7 +218,7 @@ $n, m$を自然数とし$P$を環$R$上の$n \times n$冪等行列,\ $Q$を$m \t
 \end{lemma}
 
 \begin{proof}
-ある$U \in \GL(N, R)$が存在して$UPU^{-1} = Q$となるとする.\ $\phi \colon R^N Q \to R^N P$を$\phi(x) \coloneq xU$として定めると$x \in R^N Q$は$x = yQ$と$y \in R^N$を用いて表せるから$\phi(x) = xU = yQU = yUP \in R^NP$であるので$\phi$はwell-definedである.\ $\phi$は行列を作用させる写像なので準同型であり$\psi \colon R^N P \to R^N Q$を$\psi(x) = xU^{-1}$として定めれば$\psi$は$\phi$の逆写像である.\ よって$R^N Q \cong R^N P$である.
+ある$U \in \GL(N, R)$が存在して$U(P \oplus 0)U^{-1} = Q \oplus 0$となるとする.\ $\phi \colon R^N (Q \oplus 0) \to R^N (P \oplus 0)$を$\phi(x) \coloneq xU$として定めると$x \in R^N Q$は$x = yQ$と$y \in R^N$を用いて表せるから$\phi(x) = xU = yQU = yUP \in R^NP$であるので$\phi$はwell-definedである.\ $\phi$は行列を作用させる写像なので準同型であり$\psi \colon R^N P \to R^N Q$を$\psi(x) = xU^{-1}$として定めれば$\psi$は$\phi$の逆写像である.\ よって$R^N Q \cong R^N P$である.
 
 $P$を$n \times n$行列とし$Q$を$m \times m$行列とする.\ 同型$\alpha \colon R^n P \to R^m Q$が存在するとする.\ $x \in R^n$とすると$x = xP + x(1 - P)$となり$x \in R^nP \cap R^n(1 - P)$とすると$x = uP, x = v(1 - P)$と$u,v \in R^n$を用いて表せる.\ $P$は冪等行列なので$xP = uP^2 = uP = x$かつ$xP = v(1 - P)P = v(P - P^2) = v(P - P) = 0$となり$x = 0$となる.\ したがって$R^n = R^n P \oplus R^n (1 - P)$と直和分解できる.\ 同様に$R^m = R^m Q \oplus R^m (1 - Q)$となる.\ ここで
 \begin{center}
@@ -277,17 +277,19 @@ $
 \end{proof}
 
 \begin{definition} \label{def: stableGL}
-$R$を環とし$\mathrm{M}(n,R)$を$R$上の$n \times n$行列全体の集合,\ $\GL(n, R)$を$R$上の正則な$n \times n$行列全体の集合とする.\ 特に$\GL(n, R)$は行列の積により群となる.\ 自然数$m \le n$に対して$\iota_{mn} \colon \mathrm{M}(m, R) \hookrightarrow \mathrm{M}(n, R)$を$\iota_{mn}(A) \coloneq A \oplus 0_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \mathrm{M}(R) \coloneq \varinjlim \mathrm{M}(n, R)$と定める.\ 同様にして$\GL(R) \coloneq \varinjlim \GL(n, R)$と定める.
+$R$を環とし$\mathrm{M}(n,R)$を$R$上の$n \times n$行列全体の集合,\ $\GL(n, R)$を$R$上の正則な$n \times n$行列全体の集合とする.\ 特に$\GL(n, R)$は行列の積により群となる.\ 自然数$m \le n$に対して$\iota_{mn} \colon \mathrm{M}(m, R) \hookrightarrow \mathrm{M}(n, R)$を$\iota_{mn}(A) \coloneq A \oplus 0_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \mathrm{M}(R) \coloneq \varinjlim \mathrm{M}(n, R)$と定める.
+
+自然数$m \le n$に対して$\iota'_{mn} \colon \GL(m, R) \hookrightarrow \GL(n, R)$を$\iota'_{mn}(A) \coloneq A \oplus 1_{n - m}$で定めると$(\mathrm{M}(n,R), \iota_{mn})$は帰納系となる.\ このとき$\displaystyle \GL(R) \coloneq \varinjlim \GL(n, R)$と定める.
 \end{definition}
 
 \begin{theorem} \label{thm: k0_idempotent_orbits}
-$R$を環とする.\ $\mathrm{Idem}(R)$上の同値関係$\sim$を$P, Q \in \mathrm{Idem}(R)$に対して$P \sim Q \Leftrightarrow {^{\exists}U} \in \GL(R), P = UQU^{-1}$で定める.\ $\mathrm{Idem}(R)/\GL(R) \coloneq \mathrm{Idem}(R)/\sim$とし$P \in \mathrm{Idem}(R)$に対する同値類を$[P] \in \mathrm{Idem}(R)/\GL(R)$とする.\ このとき$\Phi \colon \mathrm{Idem}(R)/\GL(R) \to \Proj(R)$を$\Phi([P]) \coloneq [\im(P)]$で定めると$\Phi$は全単射である.
+$R$を環とし$\mathrm{Idem}(R) \colon \{P \in \mathrm{M}(R) \mid P^2 = P\}$とする.\ $\mathrm{Idem}(R)$上の同値関係$\sim$を$P, Q \in \mathrm{Idem}(R)$に対して$P \sim Q \Leftrightarrow {^{\exists}U} \in \GL(R), P = UQU^{-1}$で定める.\ $\mathrm{Idem}(R)/\GL(R) \coloneq \mathrm{Idem}(R)/\sim$とし$P \in \mathrm{Idem}(R)$に対する同値類を$[P] \in \mathrm{Idem}(R)/\GL(R)$とする.\ このとき$\Phi \colon \mathrm{Idem}(R)/\GL(R) \to \Proj(R)$を$\Phi([P]) \coloneq [\im(P)]$で定めると$\Phi$は全単射である.
 
 $\mathrm{Idem}(R)/\GL(R)$上の二項演算を$[P] + [Q] \coloneq [P \oplus Q]$で定めると$(\mathrm{Idem}(R)/\GL(R), +, [0])$は可換モノイドとなる.\ そして$K_0(R)$は可換モノイド$\mathrm{Idem}(R)/\GL(R)$のグロタンディーク群と同型である.
 \end{theorem}
 \begin{proof}
 $\mathcal{O} \coloneq \mathrm{Idem}(R)/\GL(R)$とする.\ 冪等行列の像は有限生成射影加群なので\cref{lem: idempotent_iso_iff_conjugate}により$[\im(P)] = [\im(Q)] \iff \im(P) \cong \im(Q) \iff [P] = [Q]$であるから$\Phi \colon \mathcal{O} \to \Proj(R)$はwell-defineかつ単射である.\ $P$を有限生成射影$R$加群とするとある$R$加群$Q$が存在して$R^n \cong P \oplus Q$となる.\ $P$への射影$\pi_P \colon R^n \to R^n$の表現行列$p$は冪等行列であるから$p \in \mathrm{Idem}(R)$である.\ $\Phi([p]) = [\im(p)] = [P]$なので$\Phi$は全射である.
 
-$\mathcal{O}$上の二項演算$[P] + [Q] = [P \oplus Q]$に対して$\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\im(P \oplus Q)] = [\im(P) \oplus \im(Q)] = [\im(P)] + [\im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\ したがって$K_0(R)$は$\mathcal(O)$のグロタンディーク群と同型である.
+$P \sim P', Q \sim Q'$とすると$UPU^{-1} = P', VQV^{-1} = Q'$となる$U, V \in \GL(R)$が存在する.\ $(U \oplus V)(P \oplus Q)(U \oplus V)^{-1} = P' \oplus Q'$となるので$[P] + [Q] = [P \oplus Q] = [P' \oplus Q'] = [P'] + [Q']$となり$+$はwell-definedである.\ $\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\im(P \oplus Q)] = [\im(P) \oplus \im(Q)] = [\im(P)] + [\im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\ したがって$K_0(R)$は$\mathcal{O}$のグロタンディーク群と同型である.
 
 \end{proof}
