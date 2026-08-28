@@ -63,7 +63,7 @@ as MIT and the other two are the ones that have to be marked:
   names `LICENSE-APACHE-2.0`, not `LICENSE` as Mathlib's own wording does — the
   root `LICENSE` here is the MIT text, so copying Mathlib's header verbatim
   points at the wrong licence.
-- The path table under `## ライセンス` in `README.md` is authoritative, so a
+- The path table under `## License` in `README.md` is authoritative, so a
   missing header is untidy rather than a licensing hole. Keep the table right.
 
 ## Generated artifacts — never hand-edit

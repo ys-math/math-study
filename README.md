@@ -123,7 +123,7 @@ directory tree below, and `lean.yml` builds `lean/` if you touched it. The lists
 are generated — edit the `.tex` sources, not them. The tree lists `lean/Math/`
 in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
 
-## ディレクトリ構造
+## Directory structure
 <!-- BEGIN TREE -->
 ```
 math-study/
@@ -207,7 +207,7 @@ math-study/
 ```
 <!-- END TREE -->
 
-## ライセンス
+## License
 [![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]
 
 This repository is triple-licensed. The table below is authoritative: it matches
