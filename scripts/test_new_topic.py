@@ -34,10 +34,11 @@ class TestTemplateMatchesRepo(unittest.TestCase):
     preamble path, the colophon), a hand-edited topic and a generated one would
     silently diverge, and these are the tests that say so.
 
-    Two topics are deliberately not covered, for the same reason: their
+    Three topics are deliberately not covered, for the same reason: their
     main.tex has grown past the skeleton, which is what a topic grows into and
     not what it is created as. lambda_calculus \input{}s three chapters;
-    algebraic_k_theory \input{}s a bibliography.tex alongside its chapter.
+    algebraic_k_theory \input{}s a bibliography.tex alongside its chapter;
+    category_theory \input{}s two.
 
     algebraic_k_theory was the only topic whose \DocTitle contains math, so
     dropping it from the byte-identity guard would have left \texorpdfstring
@@ -50,7 +51,6 @@ class TestTemplateMatchesRepo(unittest.TestCase):
 
     def test_plain_title(self):
         self.assert_reproduces("topology", "位相幾何学")
-        self.assert_reproduces("category_theory", "圏論")
         self.assert_reproduces("manifold", "多様体論")
 
     def test_title_containing_math(self):
