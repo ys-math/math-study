@@ -176,6 +176,7 @@ math-study/
 │   │   └── main.tex
 │   ├── category_theory/
 │   │   ├── ch01.tex
+│   │   ├── ch02.tex
 │   │   └── main.tex
 │   ├── differential_geometry/
 │   │   ├── ch01.tex
