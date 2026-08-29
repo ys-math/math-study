@@ -11,8 +11,8 @@
     \item 任意の$f \in \Mor(\mathscr{C})$は\textbf{始域}(domain)$\dom(f) = A \in \Ob(\mathscr{C})$と\textbf{終域}(codomain)$\cod(f) = B \in \Ob(\mathscr{C})$を持ち$f \colon A \to B$と表す.\ 始域が$A$,\ 終域が$B$であるような射の集まりを$\Mor_\mathscr{C}(A,B)$と書く.
     \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\textbf{合成}(composition)$g \circ f \in \Mor(\mathscr{C})$が定まる.\ 合成は次を満たす.
         \begin{itemize}
-        \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\ この条件を\textbf{結合律}(assoiativity)という.
-        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_x \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_x \circ f = f$かつ$g \circ \id_x = g$が成り立つ.\ $\id_X$を$x$の\textbf{恒等射}(identity)という.
+        \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\ この条件を\textbf{結合律}(associativity)という.
+        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_X \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_X \circ f = f$かつ$g \circ \id_X = g$が成り立つ.\ $\id_X$を$X$の\textbf{恒等射}(identity)という.
         \end{itemize}
     \end{itemize}
 \end{itemize}
@@ -26,7 +26,7 @@
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\textbf{共変関手}(covariant functor)であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
 \begin{itemize}
     \item 任意の$A \in \Ob(\mathscr{C})$に対して$F(A) \in \Ob(\mathscr{D})$である.
-    \item 任意の$f \in \Mor(\mathscr{C})$に対して$F(f) \in \Mor(F(\dom(f)), F(\cod(f)))$であり以下が成り立つ
+    \item 任意の$f \in \Mor(\mathscr{C})$に対して$F(f) \in \Mor_\mathscr{D}(F(\dom(f)), F(\cod(f)))$であり以下が成り立つ
     \begin{itemize}
     \item 任意の$X \in \Ob(\mathscr{C})$に対して$F(\id_X) = \id_{F(X)}$である.
     \item 任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) \implies F(g \circ f) = F(g) \circ F(f)$
@@ -45,20 +45,20 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\m
 \end{definition}
 
 \begin{example} \label{ex: hom_functor}
-$X \in \Ob(\mathbf{Set})$に対して$h^A(X) = \Mor(A, X)$で定め$f \in \Mor(\mathbf{Set})$に対して$h^A(f) \colon h^A(\dom(f)) \to h^A(\cod(f))$を$h^A(f)(g) \coloneq f \circ g$で定めると$h^A \colon \mathbf{Set} \to \mathbf{Set}$は共変関手である.
+$X \in \Ob(\mathbf{Set})$に対して$h^A(X) = \Mor_\mathbf{Set}(A, X)$で定め$f \in \Mor(\mathbf{Set})$に対して$h^A(f) \colon h^A(\dom(f)) \to h^A(\cod(f))$を$h^A(f)(g) \coloneq f \circ g$で定めると$h^A \colon \mathbf{Set} \to \mathbf{Set}$は共変関手である.
 \end{example}
 
 \begin{definition} \label{def: NaturalTransformation}
-$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\mathscr{D}$の射の族$\eta = (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\textbf{自然変換}(natural transformation)であるという.\ 特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が全単射であるとき$\eta$は$F$から$G$への\textbf{自然同型}(natural isomorphism)であるといい$\eta \colon F \Rightarrow G$と書く.\ $F$から$G$への自然変換全体の集まりを$\mathrm{Nat}(F, G)$と書く.
+$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\mathscr{D}$の射の族$\eta = (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\textbf{自然変換}(natural transformation)であるという.\ 特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が全単射であるとき$\eta$は$F$から$G$への\textbf{自然同型}(natural isomorphism)であるといい$\eta \colon F \Rightarrow G$と書く.\ $F$から$G$への自然変換全体の集まりを$\Nat(F, G)$と書く.
 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGKFxcbWF0aHJte2RvbX0oZikpIl0sWzEsMCwiRyhcXG1hdGhybXtkb219KGYpKSJdLFswLDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMSwxLCJHKFxcbWF0aHJte2NvZH0oZikpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiRihmKSIsMl0sWzIsMywiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzEsMywiRyhmKSJdXQ==
 \[\begin{tikzcd}
-	{F(\mathrm{dom}(f))} & {G(\mathrm{dom}(f))} \\
-	{F(\mathrm{cod}(f))} & {G(\mathrm{cod}(f))}
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	{F(\dom(f))} & {G(\dom(f))} \\
+	{F(\cod(f))} & {G(\cod(f))}
+	\arrow["{\eta_{\dom(f)}}", from=1-1, to=1-2]
 	\arrow["{F(f)}"', from=1-1, to=2-1]
 	\arrow["{G(f)}", from=1-2, to=2-2]
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=2-1, to=2-2]
+	\arrow["{\eta_{\dom(f)}}", from=2-1, to=2-2]
 \end{tikzcd}\]
 
 
