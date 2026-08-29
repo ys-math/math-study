@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
+
+\section{米田の補題}
+
+\begin{definition} \label{def: IsSmall}
+$\mathscr{C}$を圏とする.\ $\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\Mor(\mathscr{C}) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\textbf{小さい圏}(small category),\ または\textbf{小圏}であるという.
+
+任意の$A, B \in \mathscr{C}$に対して$\Mor_\mathscr{C}(A, B) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\textbf{局所的に小さい圏}(locally small category),\ または\textbf{局所小圏}であるという.
+\end{definition}
+
+\begin{theorem} \label{thm: yoneda_lemma} (\textbf{Yoneda lemma})
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^{A}, F) \cong F(A)$となる.
+\end{theorem}
+\begin{proof}
+写像$\phi \colon \Nat(h^{A}, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$\psi(x)_X(f \colon A \to X) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^{A}, F)$を定める.\
+
+$\eta \in \Nat(h^{A}, F)$とする.\ $X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(\phi(\eta))_X(f) = F(f)(\eta_A(\id_A))$である.\ ここで$\eta$は自然変換だから次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJoXkEoQSkiXSxbMSwwLCJGKEEpIl0sWzAsMSwiaF5BKFgpIl0sWzEsMSwiRihYKSJdLFswLDEsIlxcZXRhX0EiXSxbMiwzLCJcXGV0YV9YIl0sWzAsMiwiaF5BKGYpIiwyXSxbMSwzLCJGKGYpIl1d
+\[\begin{tikzcd}
+	{h^A(A)} & {F(A)} \\
+	{h^A(X)} & {F(X)}
+	\arrow["{\eta_A}", from=1-1, to=1-2]
+	\arrow["{h^A(f)}"', from=1-1, to=2-1]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+	\arrow["{\eta_X}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+よって$F(f)(\eta_A(\id_A)) = \eta_X(h^A(f)(\id_A)) = \eta_X(f \circ \id_A) = \eta_X(f)$となるので$\psi(\phi(\eta)) = \eta$となり$\psi \circ \phi = \id_{\Nat(h^A, F)}$である.
+
+$x \in F(A)$とする.\ $\phi(\psi(x)) = \psi(x)_A(\id_A) = F(\id_A)(x) = \id_{F(A)}(x) = x$なので$\phi \circ \psi = \id_{F(A)}$である.
+
+以上により$\phi$と$\psi$は互いに逆写像であり$\Nat(h^A, F) \cong F(A)$となる.
+\end{proof}
+
+\begin{definition} \label{def: IsRepresentable}
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to Set$を共変関手とする.\ ある$A \in \Ob(\mathscr{C})$と自然同型$\alpha \colon h^A \Rightarrow F$が存在するとき$F$は\textbf{表現可能関手}(representable functor)であるという.
+\end{definition}
+
+\begin{definition} \label{def: IsUniversalElement}
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to Set$を共変関手とする.\ 次が成り立つとき$u \in F(A)$は$F$の\textbf{普遍元}(universal element)であるという.
+\begin{center}
+${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$
+\end{center}
+\end{definition}
+
+\begin{proposition} \label{prop: natural_iso_iff_universal_element}
+$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C}), u \in F(A)$とする.\ $\psi \colon F(A) \to \Nat(h^A, F)$を\cref{thm: yoneda_lemma}の証明で定めたものとすると次が成り立つ.
+\begin{center}
+$\psi(u) \colon h^A \to F$が自然同型$\iff$$u$は$F$の普遍元
+\end{center}
+\end{proposition}
+\begin{proof}
+$\psi(u)$が自然同型であるとき任意の$X \in \Ob(\mathscr{C})$に対して$\psi(u)(X)$は全単射である.\ $B \in \Ob(\mathscr{C}), x \in F(B)$とする.\ $f \coloneq \psi(u)_B^{-1}(x)$とすると$F(f)(x) = \psi(u)_B(f) = \psi(u)_B(\psi(u)_B^{-1}(x)) = x$となり$\psi(u)_B$は全単射なのでこのような$f$はただ一つだから$u$は$F$の普遍元である.
+
+$u$が$F$の普遍元であるとき任意の$B \in \Ob(\mathscr{C}), x \in F(B)$に対して$F(f)(u) = x$を満たす$f \in \Mor_\mathscr{C}(A, B)$がただ一つ存在する.\ $B \in \Ob(\mathscr{C})$に対して$g_B \colon F(B) \to h^A(B)$を$g_B(x) \coloneq f$と定めれば$\psi_B(u)(g_B(x)) = \psi_B(u)(f) = F(f)(u) = x$であり$g_B(\psi_B(u)(f)) = g_B(F(f)(u)) = f$となり$\psi_B(u)$は全単射である.
+\end{proof}
