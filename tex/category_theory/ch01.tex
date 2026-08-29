@@ -26,10 +26,10 @@
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\textbf{共変関手}(covariant functor)であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
 \begin{itemize}
     \item 任意の$A \in \Ob(\mathscr{C})$に対して$F(A) \in \Ob(\mathscr{D})$である.
-    \item 任意の$f \in \Mor(\mathscr{C})$に対して$F(f) \in \Mor_\mathscr{D}(F(\dom(f)), F(\cod(f)))$であり以下が成り立つ
+    \item 任意の$f \in \Mor(\mathscr{C})$に対して$F(f) \in \Mor_\mathscr{D}(F(\dom(f)), F(\cod(f)))$であり以下が成り立つ.
     \begin{itemize}
     \item 任意の$X \in \Ob(\mathscr{C})$に対して$F(\id_X) = \id_{F(X)}$である.
-    \item 任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) \implies F(g \circ f) = F(g) \circ F(f)$
+    \item 任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) \implies F(g \circ f) = F(g) \circ F(f)$.
     \end{itemize}
 \end{itemize}
 % https://q.uiver.app/#q=WzAsNSxbMCwyXSxbMCwxLCJCIl0sWzAsMCwiQSJdLFsxLDAsIkYoQSkiXSxbMSwxLCJGKEIpIl0sWzIsMSwiZiIsMl0sWzMsNCwiRihmKSJdLFs1LDYsIkYiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MzAsInRhcmdldCI6MzB9LCJsZXZlbCI6MSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==

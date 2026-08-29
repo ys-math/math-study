@@ -4,10 +4,10 @@
 \section{米田の補題}
 
 \begin{theorem} \label{thm: yoneda_lemma} (\textbf{Yoneda lemma})
-$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^{A}, F) \cong F(A)$となる.
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^A, F) \cong F(A)$となる.
 \end{theorem}
 \begin{proof}
-写像$\phi \colon \Nat(h^{A}, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_X(f \colon A \to X) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^{A}, F)$を定める.\ 実際$X, Y \in \Ob(\mathscr{C})$と$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
+写像$\phi \colon \Nat(h^A, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_X(f) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^A, F)$を定める.\ 実際$X, Y \in \Ob(\mathscr{C})$と$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJoXkEoWCkiXSxbMSwwLCJGKFgpIl0sWzAsMSwiaF5BKFkpIl0sWzEsMSwiRihZKSJdLFswLDEsIlxccHNpKHgpX1giXSxbMSwzLCJGKGcpIl0sWzAsMiwiaF5BKGcpIiwyXSxbMiwzLCJcXHBzaSh4KV9ZIl1d
 \[\begin{tikzcd}
 	{h^A(X)} & {F(X)} \\
@@ -18,7 +18,7 @@ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共�
 	\arrow["{\psi(x)_Y}", from=2-1, to=2-2]
 \end{tikzcd}\]
 
-$\eta \in \Nat(h^{A}, F)$とする.\ $X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(\phi(\eta))_X(f) = F(f)(\eta_A(\id_A))$である.\ ここで$\eta$は自然変換だから次の図式が可換になる.
+$\eta \in \Nat(h^A, F)$とする.\ $X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(\phi(\eta))_X(f) = F(f)(\eta_A(\id_A))$である.\ ここで$\eta$は自然変換だから次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJoXkEoQSkiXSxbMSwwLCJGKEEpIl0sWzAsMSwiaF5BKFgpIl0sWzEsMSwiRihYKSJdLFswLDEsIlxcZXRhX0EiXSxbMiwzLCJcXGV0YV9YIl0sWzAsMiwiaF5BKGYpIiwyXSxbMSwzLCJGKGYpIl1d
 \[\begin{tikzcd}
 	{h^A(A)} & {F(A)} \\
@@ -57,6 +57,7 @@ $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変�
 $\psi(u) \colon h^A \Rightarrow F$が自然同型$\iff$$u$は$F$の普遍元
 \end{center}
 \end{proposition}
+
 \begin{proof}
 $\psi(u)$が自然同型であるとき任意の$X \in \Ob(\mathscr{C})$に対して$\psi(u)_X$は全単射である.\ $B \in \Ob(\mathscr{C}), x \in F(B)$とする.\ $f \coloneq \psi(u)_B^{-1}(x)$とすると$F(f)(u) = \psi(u)_B(f) = \psi(u)_B(\psi(u)_B^{-1}(x)) = x$となり$\psi(u)_B$は全単射なのでこのような$f$はただ一つだから$u$は$F$の普遍元である.
 
