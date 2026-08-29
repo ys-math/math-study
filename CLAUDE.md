@@ -82,11 +82,11 @@ These are the changes that break silently, days later:
 
 - **Editing the topic skeleton** means editing `MAIN_TEMPLATE` in
   `scripts/new_topic.py` *and* every existing `tex/*/main.tex` in the same
-  commit. `scripts/test_new_topic.py` asserts the template reproduces 3 of them
-  byte for byte — `topology`, `category_theory` and `manifold` — so a partial
-  update passes; check the rest by hand. A topic drops out of that list when its
-  `main.tex` grows past the skeleton, which is what `lambda_calculus` and
-  `algebraic_k_theory` have already done and what `/bib` does to a topic when it
+  commit. `scripts/test_new_topic.py` asserts the template reproduces 2 of them
+  byte for byte — `topology` and `manifold` — so a partial update passes; check
+  the rest by hand. A topic drops out of that list when its `main.tex` grows
+  past the skeleton, which is what `lambda_calculus`, `algebraic_k_theory` and
+  `category_theory` have already done and what `/bib` does to a topic when it
   wires in a `bibliography.tex`.
 - **Adding a shared `.tex` that all topics `\input`** means adding it to the
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
