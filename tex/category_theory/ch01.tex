@@ -12,7 +12,7 @@
     \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\textbf{合成}(composition)$g \circ f \in \Mor(\mathscr{C})$が定まる.\ 合成は次を満たす.
         \begin{itemize}
         \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\ この条件を\textbf{結合律}(associativity)という.
-        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_X \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_X \circ f = f$かつ$g \circ \id_X = g$が成り立つ.\ $\id_X$を$X$の\textbf{恒等射}(identity)という.\ 
+        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_X \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_X \circ f = f$かつ$g \circ \id_X = g$が成り立つ.\ $\id_X$を$X$の\textbf{恒等射}(identity)という.
         \end{itemize}
     \end{itemize}
 \end{itemize}
@@ -54,21 +54,21 @@ $\mathscr{C}$を圏とする.\ $\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\M
 $\mathscr{C}$を局所小圏とし$A \in \Ob(\mathscr{C})$とする.\ $X \in \Ob(\mathscr{C})$に対して$h^A(X) \coloneq \Mor_\mathscr{C}(A, X)$とし$f \in \Mor(\mathscr{C})$に対して$h^A(f) \colon h^A(\dom(f)) \to h^A(\cod(f))$を$h^A(f)(g) \coloneq f \circ g$で定めると$h^A \colon \mathscr{C} \to \mathbf{Set}$は共変関手となる.
 \end{example}
 
-\begin{definition}
+\begin{definition} \label{def: IsIsomorphism}
 $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ $g \in \Mor(\mathscr{C})$が存在して$\dom(f) = \cod(g)$かつ$\cod(f) = \dom(g)$ならば$f \circ g = \id_{\dom(g)}, g \circ f = \id_{\dom(f)}$となるとき$f$は\textbf{同型射}(isomorphism)であるという.
 \end{definition}
 
 \begin{definition} \label{def: NaturalTransformation}
-$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\mathscr{D}$の射の族$\eta = (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\textbf{自然変換}(natural transformation)であるという.\ 特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が同型射であるとき$\eta$は$F$から$G$への\textbf{自然同型}(natural isomorphism)であるといい$\eta \colon F \Rightarrow G$と書く.\ $F$から$G$への自然変換全体の集まりを$\Nat(F, G)$と書く.
+$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\mathscr{D}$の射の族$\eta = (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\textbf{自然変換}(natural transformation)であるといい$\eta \colon F \Rightarrow G$と書く.\ 特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が同型射であるとき$\eta$は$F$から$G$への\textbf{自然同型}(natural isomorphism)であるという.\ $F$から$G$への自然変換全体の集まりを$\Nat(F, G)$と書く.
 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGKFxcbWF0aHJte2RvbX0oZikpIl0sWzEsMCwiRyhcXG1hdGhybXtkb219KGYpKSJdLFswLDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMSwxLCJHKFxcbWF0aHJte2NvZH0oZikpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiRihmKSIsMl0sWzIsMywiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9Il0sWzEsMywiRyhmKSJdXQ==
 \[\begin{tikzcd}
-	{F(\mathrm{dom}(f))} & {G(\mathrm{dom}(f))} \\
-	{F(\mathrm{cod}(f))} & {G(\mathrm{cod}(f))}
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	{F(\dom(f))} & {G(\dom(f))} \\
+	{F(\cod(f))} & {G(\cod(f))}
+	\arrow["{\eta_{\dom(f)}}", from=1-1, to=1-2]
 	\arrow["{F(f)}"', from=1-1, to=2-1]
 	\arrow["{G(f)}", from=1-2, to=2-2]
-	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-1, to=2-2]
+	\arrow["{\eta_{\cod(f)}}", from=2-1, to=2-2]
 \end{tikzcd}\]
 
 
