@@ -7,7 +7,7 @@
 $\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^{A}, F) \cong F(A)$となる.
 \end{theorem}
 \begin{proof}
-写像$\phi \colon \Nat(h^{A}, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$\psi(x)_X(f \colon A \to X) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^{A}, F)$を定める.\ 実際$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
+写像$\phi \colon \Nat(h^{A}, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_X(f \colon A \to X) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^{A}, F)$を定める.\ 実際$X, Y \in \Ob(\mathscr{C})$と$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJoXkEoWCkiXSxbMSwwLCJGKFgpIl0sWzAsMSwiaF5BKFkpIl0sWzEsMSwiRihZKSJdLFswLDEsIlxccHNpKHgpX1giXSxbMSwzLCJGKGcpIl0sWzAsMiwiaF5BKGcpIiwyXSxbMiwzLCJcXHBzaSh4KV9ZIl1d
 \[\begin{tikzcd}
 	{h^A(X)} & {F(X)} \\
@@ -46,6 +46,10 @@ $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変�
 ${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$
 \end{center}
 \end{definition}
+
+\begin{remark} \label{rem: set_iso_is_bijection}
+$\mathbf{Set}$の射$f$が同型射であることと$f$が全単射であることは同値である.
+\end{remark}
 
 \begin{proposition} \label{prop: natural_iso_iff_universal_element}
 $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C}), u \in F(A)$とする.\ $\psi \colon F(A) \to \Nat(h^A, F)$を\cref{thm: yoneda_lemma}の証明で定めたものとすると次が成り立つ.
