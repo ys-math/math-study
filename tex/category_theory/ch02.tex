@@ -1,7 +1,7 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{米田の補題}
+\section{米田の補題と普遍性}
 
 \begin{theorem} \label{thm: yoneda_lemma} (\textbf{Yoneda lemma})
 $\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^A, F) \cong F(A)$となる.
@@ -37,11 +37,11 @@ $x \in F(A)$とする.\ $\phi(\psi(x)) = \psi(x)_A(\id_A) = F(\id_A)(x) = \id_{F
 \end{proof}
 
 \begin{definition} \label{def: IsRepresentable}
-$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ ある$A \in \Ob(\mathscr{C})$と自然同型$\alpha \colon h^A \Rightarrow F$が存在するとき$F$は\textbf{表現可能関手}(representable functor)であるという.
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ ある$A \in \Ob(\mathscr{C})$と自然同型$\alpha \colon h^A \Rightarrow F$が存在するとき$F$は\textbf{表現可能関手}(representable functor)であるという.\ またこのとき組$(A, \alpha)$は$F$の\textbf{表現}(representation)であるという.
 \end{definition}
 
 \begin{definition} \label{def: IsUniversalElement}
-$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C})$とする.\ 次が成り立つとき$u \in F(A)$は$F$の\textbf{普遍元}(universal element)であるという.
+$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C})$とする.\ 次が成り立つとき$u \in F(A)$は$F$の\textbf{普遍元}(universal element)であるという.\ $u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は\textbf{普遍対}(universal pair)であるという.
 \begin{center}
 ${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$
 \end{center}
@@ -63,3 +63,7 @@ $\psi(u)$が自然同型であるとき任意の$X \in \Ob(\mathscr{C})$に対�
 
 $u$が$F$の普遍元であるとき任意の$B \in \Ob(\mathscr{C}), x \in F(B)$に対して$F(f)(u) = x$を満たす$f \in \Mor_\mathscr{C}(A, B)$がただ一つ存在する.\ $B \in \Ob(\mathscr{C})$に対して$g_B \colon F(B) \to h^A(B)$を$g_B(x) \coloneq f$と定めれば$\psi(u)_B(g_B(x)) = \psi(u)_B(f) = F(f)(u) = x$であり$g_B(\psi(u)_B(f)) = g_B(F(f)(u)) = f$となり$\psi(u)_B$は全単射である.
 \end{proof}
+
+\begin{definition}
+
+\end{definition}
