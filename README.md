@@ -175,8 +175,10 @@ math-study/
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── category_theory/
+│   │   ├── bibliography.tex
 │   │   ├── ch01.tex
 │   │   ├── ch02.tex
+│   │   ├── ch03.tex
 │   │   └── main.tex
 │   ├── differential_geometry/
 │   │   ├── ch01.tex
