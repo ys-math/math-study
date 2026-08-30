@@ -1,12 +1,13 @@
 # Issue convention
 
 GitHub issues are where a review finding lives from the moment it is found to
-the moment it is fixed. `/review-notes` files them, `/git` closes them, and
-`/delete-topic` cleans them up; `/issues` renders the open ones as a local file
-you can fix from.
+the moment it is fixed — or to the moment it turns out never to have been true.
+`/review-notes` files them, `/git` closes them, `/verify-issues` checks whether
+they hold and closes the ones that do not, and `/delete-topic` cleans them up;
+`/issues` renders the open ones as a local file you can fix from.
 
-**This is the single copy.** Those four commands point here and restate none of
-it — the shape of an issue is one fact, and a fact written in four places is a
+**This is the single copy.** Those five commands point here and restate none of
+it — the shape of an issue is one fact, and a fact written in five places is a
 fact that will disagree with itself.
 
 It replaced a local `reviews/<topic>.md` that was gitignored and overwritten on
@@ -117,6 +118,12 @@ $\blacksquare$ だけになり、証明済みの補題として読めてしま�
   Omit the whole block when there is nothing concrete to propose; never file a
   fence with a guess in it.
 
+**A body written by a command goes through a quoted heredoc.** `/review-notes`
+and `/verify-issues` have no write tool, so `--body-file` is unavailable to
+them and the text reaches `gh` through the shell. Quote the delimiter —
+`<<'EOF'`, never `<<EOF` — or the shell expands `$\blacksquare$`, `\begin` and
+every backslash in the fenced `.tex`, which is most of what a body is.
+
 ### Location, and the dirty tree
 
 **Location is a blob permalink pinned to the reviewed SHA**, not a branch URL.
@@ -185,7 +192,163 @@ close` is absent from `/review-notes`'s `allowed-tools`, and the omission is
 deliberate — though it is a rule the command keeps rather than one the
 frontmatter enforces (`docs/agent-system.md` `## Commands`).
 
+### A rejected finding must not come back
+
+`/review-notes` reviews fresh, by design. So a finding `/verify-issues` rejected
+and closed will be re-derived by the next run, in the same way and for the same
+reason, and re-filed — and verifying it again would close it again, forever.
+
+So the fetch in `/review-notes` step 1 is **not** `--state open` alone. It also
+reads the closed issues whose `stateReason` is `NOT_PLANNED`, which is exactly
+the set `/verify-issues` rejected:
+
+```bash
+gh issue list --label "topic:<topic>" --state closed \
+  --json number,title,body,stateReason --limit 100
+```
+
+A finding that matches one of those is a fourth class beside `new`, `#N` and
+`same as #N?`:
+
+```
+  4 math   命題 3.5 の始対象性               → previously rejected #86
+```
+
+**It is shown, not dropped.** It defaults to not being filed, and the gate is
+where you say otherwise. A rejection is a judgement and judgements are wrong
+sometimes; silently suppressing a finding because a past run disbelieved it is
+the same failure as silently closing one because a past run missed it, and this
+file refuses that two paragraphs above.
+
+## Verification
+
+`/verify-issues` asks of an already-filed finding the one question `/review-notes`
+could not ask of its own output: **is this true?** A review that reads fresh and
+files what it finds will sometimes file something it invented, and nothing
+downstream catches it — `/git` only ever sees the issues you chose to fix, and
+`/issues` renders whatever is open without judging it.
+
+### Four verdicts
+
+| Verdict | What it means | What happens to the issue |
+| --- | --- | --- |
+| `upheld` | the claim holds against the sources | nothing |
+| `upheld (body wrong)` | the defect is real, the body misdescribes it | the body is edited |
+| `rejected` | the claim does not hold, and never did | closed, `--reason "not planned"` |
+| `fixed` | the claim held when filed; the defect is gone | closed, reason `completed` |
+| `unsure` | neither can be shown | nothing, and it is reported as a question |
+
+`upheld (body wrong)` is a note on `upheld`, not a fifth verdict: the finding
+survives either way, and only the body moves.
+
+### Every verdict names a line
+
+**`upheld` costs exactly what `rejected` costs.** Both must name a `file:line`
+that settles them and say why in one sentence. Upholding by nodding along and
+rejecting by asserting are the same error, and there is no verdict for "I read
+it and it seemed fine" — that is `unsure`, which changes nothing.
+
+The asymmetry worth knowing is in the consequences, not the burden. A wrongly
+upheld finding stays open and wastes your time; a wrongly rejected one is closed
+with a comment saying the mathematics was never wrong, and the defect goes back
+into the notes with nothing left pointing at it. When the two verdicts look
+equally supported, the answer is `unsure`.
+
+This is the mirror of the rule `/review-notes` already keeps — *a finding must
+name the specific line that fails* — pointed the other way.
+
+### What separates `rejected` from `fixed`
+
+One thing, and it is not a judgement:
+
+```bash
+git diff <the issue's **Commit**> -- tex/<topic>/
+```
+
+- The cited region is **unchanged** since that SHA and the claim does not hold →
+  it never held. `rejected`.
+- The cited region **changed** → the claim may well have held when it was filed.
+  `fixed`, whatever it looks like now.
+
+**A single SHA, not `<sha>..HEAD`.** The two-dot form compares commits and
+ignores the working tree, so a defect you fixed an hour ago and have not
+committed reads as unchanged — and the finding is closed as a hallucination with
+your own correction sitting on disk beside it. That is the one mistake in this
+section that writes a falsehood into the permanent record.
+
+**A `fixed` verdict on a dirty topic is reported, never acted on.** The fix is in
+no commit, `## Closing` gives that moment to `/git`, and closing it early leaves
+`/git` proposing a `Closes` trailer for an issue that is already shut.
+
+### The closing comment
+
+One shape for both closes; the prose says which it is.
+
+````markdown
+**Verified**: `ca20f91`
+**Evidence**: `ch03.tex:33`
+
+```tex
+$(B,x)$を$\mathscr{C}$の任意の対象と射の組とする.
+```
+
+指摘は「証明が $(B,x)$ を固定したまま始対象性と同値だとしている」というものだが、
+`ch03.tex:33` は $(B,x)$ を任意に取っており、以降の議論もその一般性を保っている。
+この指摘は成り立たない。
+````
+
+- **Verified** — the short SHA the verification read, or `` `ch03.tex:33`
+  (uncommitted) `` when the topic was dirty, exactly as `**Location**` degrades.
+- **Evidence** — the `file:line` that settles it. The same one shown at the gate.
+- **The `tex` fence** — that line, quoted exactly, for the same reason the body's
+  fence exists: it survives the file moving and it is legible in `gh issue view`.
+- **The explanation** — Japanese, and it must engage the finding's own claim
+  rather than restate the conclusion. A comment that says only 「この指摘は誤り
+  です」 is not a reason and cannot be argued with six months later.
+
+**Never close without one.** The comment is the whole of what makes a wrong
+rejection recoverable: the issue is one click from reopening, and the comment is
+the only thing that tells you it should be.
+
+### The edited body
+
+When only the body is wrong, the body is rewritten to `## Body` above, with
+three things re-pinned to the SHA the verification read:
+
+- **Commit** — the new SHA.
+- **Location** — the permalink rebuilt on it, or `(uncommitted)` per
+  `### Location, and the dirty tree`.
+- **The `tex` fence** — re-quoted from the file *at that SHA*.
+
+All three or none. A corrected fence under a stale `**Commit**` is a body that
+contradicts itself, which is worse than the error it replaced — the original at
+least described some version of the file truthfully.
+
+The title is left alone unless it is the thing that is wrong. GitHub's *edited*
+marker is the record that this happened; nothing is added to the body to say so.
+
+### There is no verdict label
+
+A third label axis would have to be created on demand, filtered against, and
+kept in step with the two real ones — to record a distinction GitHub already
+models. `stateReason` is a structured, English, queryable field that means
+precisely "closed, but not because it was done":
+
+```bash
+gh issue list --label "topic:<topic>" --state closed \
+  --json number,title,stateReason
+```
+
+That is how the hallucination rate gets counted, and how `/review-notes` knows
+not to re-file what was rejected (`### A rejected finding must not come back`).
+The Japanese comment says why; this says which.
+
 ## Closing
+
+A finding that stands has two exits, and they are not interchangeable.
+`/git` closes it when its fix is committed; `/verify-issues` closes one that
+was never true, which has no fix and never will. This section is the first;
+`## Verification` above is the second.
 
 `/git` closes issues, at the moment the fix is committed.
 

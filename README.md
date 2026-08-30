@@ -47,7 +47,7 @@ Nothing here has a lockfile, so this is the list.
 | A TeX Live distribution with LuaLaTeX and `latexmk` | building any PDF | `.latexmkrc` sets `$pdf_mode = 4`, so LuaLaTeX writes the PDF with no DVI step |
 | Python 3 | `scripts/` | Standard library only — there is no `requirements.txt` and nothing to install |
 | [`elan`](https://github.com/leanprover/elan) | `lean/` | It reads `lean/lean-toolchain` and fetches the pinned `leanprover/lean4:v4.32.2` itself |
-| [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/issues`, `/tutor`, `/formalize`, `/git`, `/git-merge`, `/delete-topic`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
+| [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/verify-issues`, `/issues`, `/tutor`, `/formalize`, `/git`, `/git-merge`, `/delete-topic`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
 
 Run `cd lean && lake exe cache get` before your first `cd lean && lake build`.
 Mathlib is pinned to a release tag rather than `master` precisely so that the
@@ -71,9 +71,9 @@ The grammar is `docs/working-loop.ebnf`, rendered with
 Edit the grammar, re-render, and commit both.
 `scripts/test_agent_docs.py` fails if it names a command that does not exist.
 
-One command is deliberately not on the diagram: `/delete-topic` is an exit
-rather than a step, and it is the only command that commits and pushes on its
-own.
+Two commands are deliberately not on the diagram: `/delete-topic` is an exit
+rather than a step, and `/tutor` is an interruption rather than one.
+`/delete-topic` is also the only command that commits and pushes on its own.
 
 ## Commands
 Run everything from the repo root.
@@ -98,6 +98,7 @@ Claude Code slash commands:
 | `/tutor <question>` | Answers a question about the mathematics, the LaTeX or the Lean, grounded in the passage it is about: finds the anchor and says where it is reading, asks at most two clarifying questions, then answers in full. It cannot write — `disallowed-tools` removes `Write` and `Edit` — so every fix is yours to type |
 | `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, then files the findings you pick as GitHub issues per `docs/issue-convention.md`. Skips what an open issue already covers; closes nothing |
 | `/issues [topic ...]` | Renders a topic's open review issues as `issues/<topic>.md` (gitignored, overwritten on every run) with links that open your working copy at the line |
+| `/verify-issues [topic \| #N ...]` | Checks whether a topic's open review issues are actually true, re-reading the sources before the issue's own reasoning. Closes the ones that are not — `--reason "not planned"`, with the refuting line in the comment — fixes a body that misdescribes a real defect, and leaves everything else alone |
 | `/audit [file ...]` | The same, for the machinery rather than the mathematics: checks the commands, instructions and hooks for contradictions, stale claims and dead steps, writing `.claude/audits/audit.md` (gitignored, overwritten on every run). Then applies the fixes you name — and only those, leaving the commit to `/git` |
 | `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
 | `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |

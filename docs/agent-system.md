@@ -46,9 +46,10 @@ Loaded **on demand**, by a command that names them:
   `/bib` executes it, and it binds any entry added by hand too. The file's name
   and where `main.tex` `\input`s it belong to `docs/naming-convention.md`.
 - **`docs/issue-convention.md`** — what a review finding looks like as a GitHub
-  issue: labels, title, body, deduplication, closing. `/review-notes` files
-  them, `/git` closes them, `/delete-topic` cleans them up and `/issues` renders
-  them locally — four commands, one specification.
+  issue: labels, title, body, deduplication, verification, closing.
+  `/review-notes` files them, `/git` closes them, `/verify-issues` closes the
+  ones that turn out never to have been true, `/delete-topic` cleans them up
+  and `/issues` renders them locally — five commands, one specification.
 - **`docs/naming-convention.md`** — what every file and directory is called, in
   both halves of the repo: topic slugs, chapter files, Lean modules, and what
   else has to move when one of them is renamed. The only naming rule enforced in
@@ -93,6 +94,7 @@ to touch**, which is what you actually need when choosing between them.
 | `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
+| `/verify-issues` | GitHub issues — closes and edits them | no | always, before acting | **Japanese verdicts, English structure** |
 | `/audit` | `.claude/audits/**`, then the files it audits | no | always, before applying a fix | English |
 | `/git` | index, commits | yes, pushes | always, before any commit | English |
 | `/git-merge` | squash-merges a PR | yes | always | English |
@@ -101,14 +103,20 @@ to touch**, which is what you actually need when choosing between them.
 
 Worth knowing without looking them up:
 
-- **`/delete-topic` commits and pushes on its own**, and is now the one command
-  that also *closes* issues. Every other command leaves the working tree
-  for `/git`.
+- **`/delete-topic` commits and pushes on its own.** Every other command
+  leaves the working tree for `/git`.
 - **`/review-notes` never edits `tex/`** — it has no write tool at all, which is
   a stronger boundary than the `Write(reviews/**)` it used to be locked to. It
   files findings as GitHub issues and cannot close one: `gh issue close` is
   absent from its `allowed-tools`, so an undetected finding is reported to the
   user rather than acted on.
+- **`/verify-issues` is the only command that closes an issue nobody fixed.**
+  It has no write tool either — it cannot touch `tex/` or `issues/` — but it
+  does hold `gh issue close` and `gh issue edit`, which `/review-notes`
+  deliberately does not. The difference is what the two close on: `/review-notes`
+  would be closing on *absence* of evidence, which loses real defects silently,
+  and `/verify-issues` closes on *presence* of counter-evidence it must name.
+  `docs/issue-convention.md` `## Verification` is the specification.
 - **`/formalize` writes statements and never a proof.** Half of that is a
   declaration: its `allowed-tools` name `lean/Math/Study/**` and the import list
   in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. That

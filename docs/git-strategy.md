@@ -275,7 +275,8 @@ latexmk -cd -g tex/<topic>/main.tex
 
 **This is the authoritative spelling of that invocation.** `CLAUDE.md`,
 `README.md`, `docs/label-convention.md`, `/bib`, `/git`, `/label`,
-`/review-notes` and `/tutor` each print it too, where a command has to run it;
+`/review-notes`, `/tutor` and `/verify-issues` each print it too, where a
+command has to run it;
 every one of those is a verbatim copy of this line and changes with it. Change
 this line without them and the repo is back to running three different recipes
 for one operation, which is how it ended up here.

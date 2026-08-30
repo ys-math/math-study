@@ -33,10 +33,12 @@ English structure, Japanese mathematics, per `docs/issue-convention.md`
 
 ## 1. Look before you review
 
-Two lookups, both before reading a single line of mathematics.
+Three lookups, all before reading a single line of mathematics.
 
 ```bash
 gh issue list --label "topic:<topic>" --state open --json number,title,body
+gh issue list --label "topic:<topic>" --state closed \
+  --json number,title,body,stateReason --limit 100
 git status --porcelain tex/<topic>
 ```
 
@@ -44,7 +46,15 @@ The first is what stops a re-run duplicating every finding you have not fixed
 yet. Read the bodies, not just the titles — matching is a judgement about
 whether it is the same defect, and the wording will differ.
 
-The second decides whether the issues can carry permalinks. If anything under
+The second is narrower than it looks: **only the closed issues whose
+`stateReason` is `NOT_PLANNED` matter**, and those are exactly the findings
+`/verify-issues` rejected as untrue. Discard the rest — a finding closed as
+`completed` was fixed, and if this review finds it again it has come back and
+wants filing. `docs/issue-convention.md` `### A rejected finding must not come
+back` says why the lookup exists at all: without it, this command re-derives a
+rejected finding fresh, files it again, and the two commands loop.
+
+The third decides whether the issues can carry permalinks. If anything under
 `tex/<topic>/` is modified or untracked, the content you are about to review is
 in no commit, and `docs/issue-convention.md` `### Location, and the dirty tree`
 says what to do. Say so at the gate in step 4, do not silently drop the links.
@@ -111,20 +121,26 @@ the errors that matter are local slips, not misremembered theorems.
 low confidence. `review:math` findings carry a confidence so the user can
 triage — that is for calibration, not for smuggling in guesses.
 
-**Review fresh.** The open issues from step 1 tell you what is already tracked;
-they are not a starting point for the reading. Re-derive every finding from the
-sources, then match. A finding you only "found" because an issue described it is
-not a finding.
+**Review fresh.** The issues from step 1 — open and rejected alike — tell you
+what is already tracked and what was already disbelieved; they are not a
+starting point for the reading. Re-derive every finding from the sources, then
+match. A finding you only "found" because an issue described it is not a
+finding, and a finding you *declined to make* because a rejection said so is not
+a review.
 
 ## 3. Match against what is open
 
-Classify every finding as one of three, per `docs/issue-convention.md`
+Classify every finding as one of four, per `docs/issue-convention.md`
 `## Deduplication`:
 
 - **new** — nothing open covers it. It gets filed.
 - **`#N`** — an open issue is the same defect. Nothing is filed; it is already
   tracked.
 - **same as `#N`?** — you are not sure. It goes to the user at the gate.
+- **previously rejected `#N`** — a closed `NOT_PLANNED` issue is the same
+  defect. It is shown at the gate and **defaults to not being filed**; it is not
+  dropped. A rejection is a judgement and can be wrong, and the user is the one
+  who overrides it.
 
 Then the mirror: every open issue that this run did **not** re-find. Collect
 them for step 5; do not act on them.
@@ -138,17 +154,19 @@ galois_theory (ガロア理論) — commit af549ea
 
 ⚠ tex/galois_theory/ch01.tex is uncommitted — issues will carry no permalink
 
-Found 7 (new 5 / existing 2)
+Found 8 (new 5 / existing 2 / rejected 1)
 
   1  math   補題 1.2 の証明が空のまま閉じている        [High]   new
   2  math   命題 1.4 に (3)⇒(1) がない                [High]   #12
   3  math   系 1.5 の index が 1 ずれている            [Medium] new
-  4  typo   ラベル lem: free_presentaion の綴り誤り              same as #14?
-  5  typo   「R 部分加群」と「部分 R 加群」の表記ゆれ            new
-  6  typo   R^{(S)} と e_s が定義されずに使われている            new
-  7  latex  \texorpdfstring の PDF 文字列に _ が残る              new
+  4  math   命題 3.5 の始対象性                        [Low]    previously rejected #86
+  5  typo   ラベル lem: free_presentaion の綴り誤り              same as #14?
+  6  typo   「R 部分加群」と「部分 R 加群」の表記ゆれ            new
+  7  typo   R^{(S)} と e_s が定義されずに使われている            new
+  8  latex  \texorpdfstring の PDF 文字列に _ が残る              new
 
 Which should I file? (all / numbers / none)
+`all` means the 5 new ones; #86 was rejected before, so name it to re-file it.
 ```
 
 Number the findings continuously across all three categories, ordered by
@@ -172,10 +190,8 @@ EOF
 )" --label "topic:<topic>,review:math"
 ```
 
-The body goes through a quoted heredoc because this command has no write tool
-and therefore cannot use `--body-file`. Quote the delimiter (`<<'EOF'`) or the
-shell will expand `$\blacksquare$`, `\begin` and every backslash in the fenced
-`.tex` — which is most of what the body is.
+The body goes through a quoted heredoc: `docs/issue-convention.md` `## Body`
+owns why, and why the delimiter is `<<'EOF'`.
 
 File one topic's issues before moving to the next topic's review.
 
