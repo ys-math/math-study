@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
+
+\section{極限}
+
+\begin{definition}
+$\mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colon \mathscr{C} \to \mathscr{C}$を$X \in \Ob(\mathscr{C}),\ f \in \Mor(\mathscr{C})$に対して$C(X) \coloneq A,\ C(f) \coloneq \id_A$と定める.\ このとき$C$を\textbf{定数関手}(constant functor)と呼ぶ.
+\end{definition}
+
+\begin{definition}
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \mathscr{C}$とし$C_A \colon \mathscr{C} \to \mathscr{C}$を定数関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
+\end{definition}
+
+\begin{definition}
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ 関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
+\begin{itemize}
+    \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
+    \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とする. $\theta \colon C_{\dom(f)} \Rightarrow F$を$X \in \mathscr{C}$に対して$\theta_X \coloneq f \circ \eta_X$で定める.\ $\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \theta)$とする.
+\end{itemize}
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGYpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMSwwLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9IiwyXSxbMSwyLCJGKGYpIiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShmKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZil9IiwwLHsiY3VydmUiOi0xfV1d
+\[\begin{tikzcd}
+	& {\mathrm{cod}(f)} & \\
+	& {\mathrm{dom}(f)} \\
+	{F(\mathrm{dom}(f))} && {F(\mathrm{cod}(f))}
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{\theta_{\mathrm{dom}(f)}}"', curve={height=6pt}, from=1-2, to=3-1]
+	\arrow["{\theta_{\mathrm{cod}(f)}}", curve={height=-6pt}, from=1-2, to=3-3]
+	\arrow["{\eta_{\mathrm{dom}(f)}}", from=2-2, to=3-1]
+	\arrow["{\eta_{\mathrm{cod}(f)}}"', from=2-2, to=3-3]
+	\arrow["{F(f)}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+この関手を\textbf{錐関手}(cone functor)という.
+\end{definition}
+
+\begin{definition}
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$\displaystyle \varinjlim_{J}F$を$F$の\textbf{極限}(limit)という.
+\end{definition}
