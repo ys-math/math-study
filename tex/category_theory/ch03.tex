@@ -4,15 +4,15 @@
 \section{要素の圏}
 
 \begin{definition}
-$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ $A \in \mathscr{C}, x \in F(A)$としたとき対象を$(A, x)$,\ 射$(A, x) \to (B, y)$を$\mathscr{C}$の射$f \colon A \to B$で$F(f)(x) = y$を満たすものとすることで圏$\displaystyle \int_{\mathscr{C}} F$が定まる.\ これを$F$の\textbf{要素の圏}(category of elements)という.
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ $A \in \Ob(\mathscr{C}), x \in F(A)$としたとき対象を$(A, x)$,\ 射$(A, x) \to (B, y)$を$\mathscr{C}$の射$f \colon A \to B$で$F(f)(x) = y$を満たすものとすることで圏$\displaystyle \int_{\mathscr{C}} F$が定まる.\ これを$F$の\textbf{要素の圏}(category of elements)という.
 \end{definition}
 
 \begin{definition}
-$\mathscr{C}$を圏とする.\ $I \in \Ob(\mathscr{C})$は任意の$X \in \Ob(\mathscr{C})$に対してただ1つ$f \in \Mor_\mathscr{C}(I,X)$が存在するとき\textbf{始対象}(initial object)であるという. 
+$\mathscr{C}$を圏とする.\ $I \in \Ob(\mathscr{C})$は任意の$X \in \Ob(\mathscr{C})$に対してただ一つ$f \in \Mor_\mathscr{C}(I,X)$が存在するとき\textbf{始対象}(initial object)であるという.
 \end{definition}
 
 \begin{definition}
-$\mathscr{C}$を圏とする.\ $T \in \Ob(\mathscr{C})$は任意の$X \in \Ob(\mathscr{C})$に対してただ1つ$f \in \Mor_\mathscr{C}(X, T)$が存在するとき\textbf{終対象}(terminal object)であるという. 
+$\mathscr{C}$を圏とする.\ $T \in \Ob(\mathscr{C})$は任意の$X \in \Ob(\mathscr{C})$に対してただ一つ$f \in \Mor_\mathscr{C}(X, T)$が存在するとき\textbf{終対象}(terminal object)であるという.
 \end{definition}
 
 \begin{definition}
@@ -27,5 +27,5 @@ $(A, u)$は$F$の普遍対$\iff$$(A,u)$は$\displaystyle \int_\mathscr{C} F$の�
 \end{proposition}
 
 \begin{proof}
-$(B,x) \in {\displaystyle \int_\mathscr{C}} F$とする.\ $\Mor_{\int_\mathscr{C} F}((A, u), (B, x)) = \{f \in \Mor_\mathscr{C}(A, B) \mid F(f)(u) = x\}$であり$(A, u)$が始対象であることと$\Mor_{\int_\mathscr{C} F}((A, u), (B, x))$がシングルトンであることは同値である.\ そして$\Mor_{\int_\mathscr{C} F}((A, u), (B, x))$がシングルトンであることは\cref{def: IsUniversalElement}の(\ast)と同値である.
+$(B,x) \in \Ob({\displaystyle \int_\mathscr{C}} F)$とする.\ $\Mor_{\int_\mathscr{C} F}((A, u), (B, x)) = \{f \in \Mor_\mathscr{C}(A, B) \mid F(f)(u) = x\}$であり$(A, u)$が始対象であることと$\Mor_{\int_\mathscr{C} F}((A, u), (B, x))$がシングルトンであることは同値である.\ そして$\Mor_{\int_\mathscr{C} F}((A, u), (B, x))$がシングルトンであることは\cref{def: IsUniversalElement}の(\ast)と同値である.
 \end{proof}
