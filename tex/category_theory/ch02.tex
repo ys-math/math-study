@@ -36,15 +36,24 @@ $x \in F(A)$とする.\ $\phi(\psi(x)) = \psi(x)_A(\id_A) = F(\id_A)(x) = \id_{F
 以上により$\phi$と$\psi$は互いに逆写像であり$\Nat(h^A, F) \cong F(A)$となる.
 \end{proof}
 
+\begin{definition} \label{def: Representation}
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ $A \in \Ob(\mathscr{C})$と自然同型$\alpha \colon h^A \Rightarrow F$の組$(A, \alpha)$を$F$の\textbf{表現}(representation)という.
+\end{definition}
+
 \begin{definition} \label{def: IsRepresentable}
-$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ ある$A \in \Ob(\mathscr{C})$と自然同型$\alpha \colon h^A \Rightarrow F$が存在するとき$F$は\textbf{表現可能関手}(representable functor)であるという.\ またこのとき組$(A, \alpha)$は$F$の\textbf{表現}(representation)であるという.
+$\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ $F$の表現が存在するとき$F$は\textbf{表現可能関手}(representable functor)であるという.
 \end{definition}
 
 \begin{definition} \label{def: IsUniversalElement}
-$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C})$とする.\ 次が成り立つとき$u \in F(A)$は$F$の\textbf{普遍元}(universal element)であるという.\ $u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は\textbf{普遍対}(universal pair)であるという.
+$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C})$とする.\ 次が成り立つとき$u \in F(A)$は$F$の\textbf{普遍元}(universal element)であるという.
 \begin{center}
-${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$
+${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$\qquad(\ast)
 \end{center}
+$u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は\textbf{普遍対}(universal pair)であるという.
+\end{definition}
+
+\begin{definition} \label{def: UniversalProperty}
+\cref{def: IsUniversalElement}の(\ast)を\textbf{普遍性}(universal property)と呼ぶ.
 \end{definition}
 
 \begin{remark} \label{rem: set_iso_is_bijection}
@@ -54,7 +63,7 @@ $\mathbf{Set}$の射$f$が同型射であることと$f$が全単射であるこ
 \begin{proposition} \label{prop: natural_iso_iff_universal_element}
 $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C}), u \in F(A)$とする.\ $\psi \colon F(A) \to \Nat(h^A, F)$を\cref{thm: yoneda_lemma}の証明で定めたものとすると次が成り立つ.
 \begin{center}
-$\psi(u) \colon h^A \Rightarrow F$が自然同型$\iff$$u$は$F$の普遍元
+$(A, \psi(u))$は$F$の表現$\iff$$(A, u)$は$F$の普遍対
 \end{center}
 \end{proposition}
 
@@ -63,7 +72,3 @@ $\psi(u)$が自然同型であるとき任意の$X \in \Ob(\mathscr{C})$に対�
 
 $u$が$F$の普遍元であるとき任意の$B \in \Ob(\mathscr{C}), x \in F(B)$に対して$F(f)(u) = x$を満たす$f \in \Mor_\mathscr{C}(A, B)$がただ一つ存在する.\ $B \in \Ob(\mathscr{C})$に対して$g_B \colon F(B) \to h^A(B)$を$g_B(x) \coloneq f$と定めれば$\psi(u)_B(g_B(x)) = \psi(u)_B(f) = F(f)(u) = x$であり$g_B(\psi(u)_B(f)) = g_B(F(f)(u)) = f$となり$\psi(u)_B$は全単射である.
 \end{proof}
-
-\begin{definition}
-
-\end{definition}
