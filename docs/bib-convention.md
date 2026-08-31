@@ -331,6 +331,9 @@ It reads structure, and only structure:
 - lines 1 and 2 end in a comma, line 3 in a full stop
 - line 2 opens with one of `\textit{`, ` `` `, `『`, `「` — which is what catches
   a straight `"` finding its way back in
+- a title containing kana or kanji is not wrapped in `\textit{}` or `` `` `` —
+  the failure that is otherwise invisible, since the source looks right and only
+  the PDF is missing the emphasis
 - entries are in case-insensitive alphabetical order by key body
 - `thebibliography`'s argument is wide enough for the number of entries
 
