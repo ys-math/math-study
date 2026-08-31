@@ -9,6 +9,20 @@ $\mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colo
 
 \begin{definition}
 $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{C} \to \mathscr{C}$を定数関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJDX0EoXFxtYXRocm17ZG9tfShmKSkiXSxbMSwwLCJGKFxcbWF0aHJte2RvbShmKX0pIl0sWzEsMSwiRihcXG1hdGhybXtjb2R9KGYpKSJdLFswLDEsIkNfQShcXG1hdGhybXtjb2R9KGYpKSJdLFszLDAsIkEiXSxbMywxLCJBIl0sWzQsMCwiRihcXG1hdGhybXtkb20oZil9KSJdLFs0LDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMCwxLCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbMywyLCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMSwyLCJGKGYpIl0sWzAsMywiQ19BKGYpIiwyXSxbNCw1LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDcsIkYoZikiXSxbNCw2LCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbNSw3LCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMTAsMTIsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0IjozMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	{C_A(\mathrm{dom}(f))} & {F(\mathrm{dom(f)})} && A & {F(\mathrm{dom(f)})} \\
+	{C_A(\mathrm{cod}(f))} & {F(\mathrm{cod}(f))} && A & {F(\mathrm{cod}(f))}
+	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	\arrow["{C_A(f)}"', from=1-1, to=2-1]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{F(f)}", from=1-2, to=2-2]
+	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-4, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, equals, nfold, from=1-4, to=2-4]
+	\arrow["{F(f)}", from=1-5, to=2-5]
+	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-1, to=2-2]
+	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-4, to=2-5]
+	\arrow[between={0.4}{0.7}, Rightarrow, nfold, 2tail reversed, from=0, to=1]
+\end{tikzcd}\]
 \end{definition}
 
 \begin{definition}
@@ -17,17 +31,17 @@ $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を�
     \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
     \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とする. $\theta \colon C_{\dom(f)} \Rightarrow F$を$X \in \Ob(\mathscr{C})$に対して$\theta_X \coloneq \eta_X \circ f$で定める.\ $\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \theta)$とする.
 \end{itemize}
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGYpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9IiwyXSxbMSwyLCJGKGYpIiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShmKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZil9IiwwLHsiY3VydmUiOi0xfV1d
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGcpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShnKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9IiwyXSxbMSwyLCJGKGcpIiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShmKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZil9IiwwLHsiY3VydmUiOi0xfV1d
 \[\begin{tikzcd}
 	& {\mathrm{dom}(f)} & \\
 	& {\mathrm{cod}(f)} \\
-	{F(\mathrm{dom}(f))} && {F(\mathrm{cod}(f))}
+	{F(\mathrm{dom}(g))} && {F(\mathrm{cod}(g))}
 	\arrow["f", from=1-2, to=2-2]
 	\arrow["{\theta_{\mathrm{dom}(f)}}"', curve={height=6pt}, from=1-2, to=3-1]
 	\arrow["{\theta_{\mathrm{cod}(f)}}", curve={height=-6pt}, from=1-2, to=3-3]
 	\arrow["{\eta_{\mathrm{dom}(f)}}", from=2-2, to=3-1]
 	\arrow["{\eta_{\mathrm{cod}(f)}}"', from=2-2, to=3-3]
-	\arrow["{F(f)}"', from=3-1, to=3-3]
+	\arrow["{F(g)}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 この関手を\textbf{錐関手}(cone functor)という.
 \end{definition}
