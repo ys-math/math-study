@@ -173,6 +173,13 @@ everywhere else it is prose, on the same terms as the rest of this file.
 Permissions additionally deny writes to `pdf/**` and allow about twenty
 routine commands through without a prompt.
 
+Not everything enforced is a hook. `scripts/check_bibliography.py` holds every
+`tex/*/bibliography.tex` to `docs/bib-convention.md`, and runs through
+`scripts/test_check_bibliography.py` rather than at the tool call — which is the
+point: the divergence it was written for arrived in a hand edit inside a chapter
+commit, where no `PreToolUse` hook was ever going to see it. A hook guards what
+Claude writes; the suite guards what the repo contains.
+
 Two properties to preserve if you touch these:
 
 - **Hooks must be executable.** A non-executable hook fails at invocation, not at

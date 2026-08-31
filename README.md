@@ -84,6 +84,7 @@ Run everything from the repo root.
 | `latexmk -cd -g tex/<topic>/main.tex` | Compiles the topic's PDF locally. `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g` forces a rebuild past latexmk's cache. See `docs/git-strategy.md`, `## Gates` |
 | `cd lean && lake build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. `cd`, not `lake --dir=lean`: elan reads the toolchain from the working directory, so from the repo root it silently uses the wrong Lean. See `docs/git-strategy.md`, `## Gates` |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
+| `python scripts/check_bibliography.py [<topic>]` | Checks `tex/*/bibliography.tex` against `docs/bib-convention.md` — the SPDX header, the key shape, the three-line grammar, the title markup, the ordering and the label width. Structure only: it cannot tell whether a year or a publisher is right |
 | `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
 
 Claude Code slash commands:
