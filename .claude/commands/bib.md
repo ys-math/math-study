@@ -1,7 +1,7 @@
 ---
 description: Add a reference to a topic's bibliography.tex, creating the file and wiring it into main.tex if it has none
 argument-hint: "<topic_slug> <citation>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Edit(docs/bib-convention.md), Bash(latexmk:*), Bash(python -m unittest:*), Bash(grep:*)
+allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Edit(docs/bib-convention.md), Bash(latexmk:*), Bash(python -m unittest:*), Bash(python scripts/check_bibliography.py:*), Bash(grep:*)
 ---
 
 File a reference into a topic's `tex/<topic>/bibliography.tex`, creating that
@@ -62,8 +62,9 @@ Show, and then stop:
 - the rendered `\bibitem`, **byte for byte as it will be written**
 - the key, and — if it carries a year — that it was a collision, naming the key
   it collided with
-- which shape was used (book, article, or one being proposed under the
-  convention's fallback)
+- which kind it is (book, journal article, arXiv preprint, web resource, or
+  one whose locator is being proposed under the convention's fallback), and
+  which line-2 markup that gives it
 - where it lands in the list, by the entry it follows
 - every structural change: creating `bibliography.tex`, inserting the `\input`
   into `main.tex`, widening `{9}` to `{99}`
@@ -79,11 +80,14 @@ looks — which of `J.`/`Jonathan` the author gets, whether "Graduate Texts in
 Mathematics 147" is a series or part of the title, whether the thing is a book
 or an article, whether the key collides. Those are the decisions worth showing.
 
-If the citation is of a kind the convention fixes no shape for, say so, propose
-a shape, and say in the proposal that accepting it also writes that shape into
-`docs/bib-convention.md`. That is the convention's own fallback rule and it is
-not optional — a shape approved and not recorded means the next entry of the
-kind gets a different one, with nothing to report the divergence.
+If the citation is of a kind the convention fixes no locator for, build lines 1
+and 2 from the grammar — those it settles for every kind, and they need no
+approval — then propose **line 3 only**, and say in the proposal that accepting
+it also writes that locator into `docs/bib-convention.md`. That is the
+convention's own fallback rule and it is not optional: a locator approved and
+not recorded means the next entry of the kind gets a different one, with nothing
+to report the divergence. The place-of-publication field that was present in one
+book entry and absent from another is what that looks like when it happens.
 
 ## Already there
 
@@ -174,9 +178,17 @@ request.
 
 After the edits, in this order:
 
-1. **Static** — the new key appears exactly once in the topic; the file's line 1
-   is the SPDX header; `thebibliography`'s argument is wide enough for the
-   number of entries.
+1. **Structure** — run the checker on the topic:
+
+   ```bash
+   python scripts/check_bibliography.py <topic>
+   ```
+
+   It reads the SPDX header, the key shape, the three-line grammar, the line-2
+   markup, the ordering and the `{9}` width, so none of those need checking by
+   eye. What it does not read is whether the key appears exactly once in the
+   topic — check that yourself, and remember the checker is silent about every
+   factual field in the entry.
 2. **Compile** — the same `latexmk` line. Suppress Overfull/Underfull `\hbox`
    warnings; Japanese in `jlreq` emits them constantly and they bury everything
    else.
@@ -196,11 +208,11 @@ result, and the suite result when it ran.
 tex/algebraic_k_theory/bibliography.tex — added bib: Milnor (2 entries)
 
   J. Milnor,
-  "On manifolds homeomorphic to the 7-sphere",
+  ``On manifolds homeomorphic to the 7-sphere'',
   \textit{Annals of Mathematics} \textbf{64} (1956), 399--405.
 
   placed after bib: Rosenberg  ·  main.tex unchanged
-  latexmk: OK
+  check_bibliography: OK  ·  latexmk: OK
 
 Cite it with \cite{bib: Milnor}.
 ```
