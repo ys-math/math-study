@@ -1,5 +1,18 @@
 \usepackage{xcolor}
 \usepackage{amssymb,amsmath,amsfonts,amsthm,setspace,graphicx,mathtools,quiver,tikz-cd,tikz,ccicons,mathrsfs,adjustbox}
+% nfold is loaded here rather than left to quiver, which loads it too. That is
+% not redundancy: quiver only grew the \usetikzlibrary{nfold} line recently
+% (quiver 2026/07/27 has it), and the TeX Live snapshot in
+% ghcr.io/xu-cheng/texlive-alpine:latest still ships a release that does not.
+% So ch04.tex's `nfold' arrow key resolved locally and failed in CI with
+% "I do not know the key '/tikz/nfold'" — pointing at the chapter, four files
+% away from the missing load, with nothing naming quiver at all.
+%
+% Depending on it here makes the requirement ours and version-independent. The
+% failure also changes shape for the better: a missing tikz-nfold now halts in
+% the preamble naming the library, instead of surfacing wherever an arrow
+% happens to use it.
+\usetikzlibrary{nfold}
 % keytheorems, not thmtools: thmtools 0.76 builds shared theorem counters with
 % its aliasctr package, which LaTeX 2026 broke — `sibling=` then fails with
 % "Command \c@proposition already defined". Fix is unreleased upstream
