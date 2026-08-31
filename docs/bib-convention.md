@@ -68,7 +68,7 @@ part of a reference changed rather than reflowing the whole entry.
 
 `\textit{}` marks **the published container** — the thing you would look up in a
 catalogue. For a book that is the book; for an article it is the journal, never
-the article's own title. That single rule is what keeps the two shapes below
+the article's own title. That single rule is what keeps the shapes below
 consistent with each other.
 
 ### A book
@@ -97,6 +97,31 @@ The article title is upright and quoted; without the quotes it runs into the
 journal name with nothing to separate them. Volume bold, year parenthesised,
 page range with an en-dash (`--`).
 
+### An arXiv preprint
+
+```tex
+\bibitem{bib: Leinster}
+T. Leinster,
+"Basic Category Theory",
+preprint, arXiv:1612.09375 [math.CT], 2025.
+```
+
+Title upright and quoted, exactly as an article's is, and **no `\textit{}`
+anywhere**. The italic marks a published container and a preprint has none, so
+italicising the title would claim a container that does not exist.
+
+The arXiv identifier stands where the journal, volume and pages stand, because
+it is what you look the thing up by: `arXiv:`, the number, the primary class in
+brackets, then the year of the version cited.
+
+**No `\url{}`.** `arXiv:1612.09375` already resolves, and a URL beside it
+duplicates the identifier while adding an element neither shape above has. The
+`url` field of a pasted BibTeX entry is dropped, not transcribed.
+
+**A preprint since published takes the published shape instead**, with its
+publisher or journal and that year. The shape follows the object you mean to
+cite, not the file you happened to paste.
+
 ### Japanese-language works
 
 Japanese takes the Japanese shape. 『』 marks the container and 「」 the article,
@@ -123,10 +148,10 @@ bookshop — it optimises for a reader who is not here.
 
 ### Anything else
 
-Book and article are the two shapes fixed above. A preprint, a web resource, a
-chapter in a collected volume — none has a shape yet, on purpose: there is no
-entry of any of those kinds in the repo, and inventing one now would be guessing
-at a format before there is anything to format.
+Book, article and preprint are the three shapes fixed above. A web resource, a
+chapter in a collected volume, a lecture-note set — none has a shape yet, on
+purpose: there is no entry of any of those kinds in the repo, and inventing one
+now would be guessing at a format before there is anything to format.
 
 The rule for meeting one is therefore explicit, because the failure mode
 otherwise is silent: **propose a shape, get it approved, and write it into this
