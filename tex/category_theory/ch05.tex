@@ -3,5 +3,31 @@
 
 \section{随伴}
 \begin{definition}
-$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 任意の$A \in \mathscr{C},\ B \in \mathscr{D}$に対して$\Mor_{\mathscr{D}}(F(A), B) \cong \Mor_{\mathscr{C}}(A, G(B))$となるとき$F \dashv G$と書き$F$は$G$の\textbf{左随伴}(left adjoint),\ もしくは$G$は$F$の\textbf{右随伴}(right adjoint)であるという.
+$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{D}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
+
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxtYXRocm17Y29kfShmKSJdLFsxLDAsIkcoRihcXG1hdGhybXtkb219KGYpKSkiXSxbMSwxLCJHKEYoXFxtYXRocm17Y29kfShmKSkpIl0sWzMsMCwiRihHKFxcbWF0aHJte2RvbX0oZykpKSJdLFszLDEsIkYoRyhcXG1hdGhybXtjb2R9KGcpKSkiXSxbNCwwLCJcXG1hdGhybXtkb219KGcpIl0sWzQsMSwiXFxtYXRocm17Y29kfShnKSJdLFswLDIsIlxcZXRhX3tcXG1hdGhybXtkb219KGYpfSJdLFsxLDMsIlxcZXRhX3tcXG1hdGhybXtjb2R9KGYpfSJdLFsyLDMsIkcoRihmKSkiXSxbMCwxLCJmIiwyXSxbNCw2LCJcXHZhcmVwc2lsb25fe1xcbWF0aHJte2RvbX0oZyl9Il0sWzUsNywiXFx2YXJlcHNpbG9uX3tcXG1hdGhybXtjb2R9KGcpfSJdLFs0LDUsIkYoRyhnKSkiLDJdLFs2LDcsImciXV0=
+\[\begin{tikzcd}
+	{\mathrm{dom}(f)} & {G(F(\mathrm{dom}(f)))} && {F(G(\mathrm{dom}(g)))} & {\mathrm{dom}(g)} \\
+	{\mathrm{cod}(f)} & {G(F(\mathrm{cod}(f)))} && {F(G(\mathrm{cod}(g)))} & {\mathrm{cod}(g)}
+	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{G(F(f))}", from=1-2, to=2-2]
+	\arrow["{\varepsilon_{\mathrm{dom}(g)}}", from=1-4, to=1-5]
+	\arrow["{F(G(g))}"', from=1-4, to=2-4]
+	\arrow["g", from=1-5, to=2-5]
+	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-1, to=2-2]
+	\arrow["{\varepsilon_{\mathrm{cod}(g)}}", from=2-4, to=2-5]
+\end{tikzcd}\]
+
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJGKEEpIl0sWzEsMCwiRihHKEYoQSkpKSJdLFsyLDAsIkYoQSkiXSxbMCwxLCJHKEIpIl0sWzEsMSwiRyhGKEcoQikpKSJdLFsyLDEsIkcoQikiXSxbMCwxLCJGKFxcZXRhX0EpIiwyXSxbMSwyLCJcXHZhcmVwc2lsb25fe0YoQSl9IiwyXSxbMCwyLCJcXG1hdGhybXtpZH1fe0YoQSl9IiwwLHsiY3VydmUiOi0zfV0sWzMsNCwiXFxldGFfe0coQil9Il0sWzQsNSwiRyhcXHZhcmVwc2lsb25fe0J9KSJdLFszLDUsIlxcbWF0aHJte2lkfV97RyhCKX0iLDIseyJjdXJ2ZSI6M31dXQ==
+\[\begin{tikzcd}
+	{F(A)} & {F(G(F(A)))} & {F(A)} \\
+	{G(B)} & {G(F(G(B)))} & {G(B)}
+	\arrow["{F(\eta_A)}"', from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_{F(A)}}", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["{\varepsilon_{F(A)}}"', from=1-2, to=1-3]
+	\arrow["{\eta_{G(B)}}", from=2-1, to=2-2]
+	\arrow["{\mathrm{id}_{G(B)}}"', curve={height=18pt}, from=2-1, to=2-3]
+	\arrow["{G(\varepsilon_{B})}", from=2-2, to=2-3]
+\end{tikzcd}\]
 \end{definition}
