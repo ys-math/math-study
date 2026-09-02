@@ -4,7 +4,7 @@
 \section{極限}
 
 \begin{definition}
-$\mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colon \mathscr{C} \to \mathscr{C}$を$X \in \Ob(\mathscr{C}),\ f \in \Mor(\mathscr{C})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定数関手}(constant functor)と呼ぶ.
+$\mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colon \mathscr{C} \to \mathscr{C}$を$X \in \Ob(\mathscr{C}),\ f \in \Mor(\mathscr{C})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定関手}(constant functor)と呼ぶ.
 \end{definition}
 
 \begin{definition}
@@ -49,4 +49,12 @@ $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を�
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition}
 $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$\displaystyle \varprojlim_{\mathscr{J}}F$を$F$の\textbf{極限}(limit)という.
+\end{definition}
+
+\begin{definition}
+$\mathscr{J},\ \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を図式とする.\ $\mathscr{J}$が小圏であるとき$F$は\textbf{小さい}(small)図式であるという.
+\end{definition}
+
+\begin{definition}
+圏$\mathscr{C}$はすべての小さい図式$F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は\textbf{完備}(complete)であるという.
 \end{definition}
