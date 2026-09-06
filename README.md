@@ -8,6 +8,7 @@
 <!-- BEGIN PDF LINKS -->
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
 * [圏論](./pdf/category_theory.pdf)
+* [可換環論](./pdf/commutative_ring_theory.pdf)
 * [微分幾何学](./pdf/differential_geometry.pdf)
 * [ガロア理論](./pdf/galois_theory.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
@@ -185,6 +186,10 @@ math-study/
 │   │   ├── ch03.tex
 │   │   ├── ch04.tex
 │   │   ├── ch05.tex
+│   │   └── main.tex
+│   ├── commutative_ring_theory/
+│   │   ├── bibliography.tex
+│   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── differential_geometry/
 │   │   ├── ch01.tex
