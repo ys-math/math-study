@@ -28,7 +28,8 @@ way, and this command copies them rather than rephrasing them.
 - **Slugs given** — render each one, in the order given, even if it has no open
   issues (an empty worklist is a fact worth seeing).
 - **No arguments** — every topic that has at least one open issue. Say which
-  topics were skipped for having none; do not write empty files for all 8.
+  topics were skipped for having none; do not write empty files for all
+  9 topics.
 - **Unknown slug** — say so, list the topics, and stop.
 
 ## 1. Fetch
