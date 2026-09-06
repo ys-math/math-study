@@ -1,3 +1,25 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
+\section{加群}
+\begin{definition}
+$(R, +_R, \cdot_R)$を環とし$(M, +_M)$をアーベル群とする.\ $(-)\cdot \colon R \to \Map(M, M)$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\textbf{加群}(R-module)という.
+\def\labelenumi{(\theenumi)\hspace{.5\zw}}
+\begin{enumerate}
+    \item 任意の$r \in R$に対して$r \cdot \in \Map(M,M)$は群準同型.
+    \item $1_R \cdot \in \Map(M,M)$は恒等写像.
+    \item 任意の$r, s \in R$に対して$(r \cdot) \circ (s \cdot) = (r \cdot_R s) \cdot$である.\ つまり下の1つ目の図式が可換になる.
+    \item 任意の$r, s \in R$に対して$+_M \circ ((r \cdot) \times (s \cdot)) = (r +_R s) \cdot$である.\ つまり下の2つ目の図式が可換になる.
+\end{enumerate}
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJNIl0sWzEsMCwiTSJdLFsxLDEsIk0iXSxbMywwLCJNIl0sWzQsMCwiTSBcXHRpbWVzIE0iXSxbNCwxLCJNIl0sWzAsMSwic1xcY2RvdCJdLFsxLDIsInJcXGNkb3QiXSxbMCwyLCIociBcXGNkb3RfUiBzKSBcXGNkb3QiLDJdLFszLDQsIihyXFxjZG90KVxcdGltZXMoc1xcY2RvdCkiXSxbNCw1LCIrX00iXSxbMyw1LCIociArX1IgcylcXGNkb3QiLDJdXQ==
+\[\begin{tikzcd}
+	M & M && M & {M \times M} \\
+	& M &&& M
+	\arrow["{s\cdot}", from=1-1, to=1-2]
+	\arrow["{(r \cdot_R s) \cdot}"', from=1-1, to=2-2]
+	\arrow["{r\cdot}", from=1-2, to=2-2]
+	\arrow["{(r\cdot)\times(s\cdot)}", from=1-4, to=1-5]
+	\arrow["{(r +_R s)\cdot}"', from=1-4, to=2-5]
+	\arrow["{+_M}", from=1-5, to=2-5]
+\end{tikzcd}\]
+\end{definition}
