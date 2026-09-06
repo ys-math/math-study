@@ -3,15 +3,15 @@
 
 \section{加群}
 \begin{definition}
-$(R, +_R, \cdot_R)$を環とし$(M, +_M)$をアーベル群とする.\ $(-)\cdot \colon R \to \Map(M, M)$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\textbf{加群}(R-module)という.
+$(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \colon R \times M \to M$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\textbf{加群}($R$-module)という.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
 \begin{enumerate}
     \item 任意の$r \in R$に対して$r \cdot \in \Map(M,M)$は群準同型.
     \item $1_R \cdot \in \Map(M,M)$は恒等写像.
     \item 任意の$r, s \in R$に対して$(r \cdot) \circ (s \cdot) = (r \cdot_R s) \cdot$である.\ つまり下の1つ目の図式が可換になる.
-    \item 任意の$r, s \in R$に対して$+_M \circ ((r \cdot) \times (s \cdot)) = (r +_R s) \cdot$である.\ つまり下の2つ目の図式が可換になる.
+    \item 任意の$r, s \in R$に対して$+ \circ ((r \cdot) \times (s \cdot)) = (r +_R s) \cdot$である.\ つまり下の2つ目の図式が可換になる.
 \end{enumerate}
-% https://q.uiver.app/#q=WzAsNixbMCwwLCJNIl0sWzEsMCwiTSJdLFsxLDEsIk0iXSxbMywwLCJNIl0sWzQsMCwiTSBcXHRpbWVzIE0iXSxbNCwxLCJNIl0sWzAsMSwic1xcY2RvdCJdLFsxLDIsInJcXGNkb3QiXSxbMCwyLCIociBcXGNkb3RfUiBzKSBcXGNkb3QiLDJdLFszLDQsIihyXFxjZG90KVxcdGltZXMoc1xcY2RvdCkiXSxbNCw1LCIrX00iXSxbMyw1LCIociArX1IgcylcXGNkb3QiLDJdXQ==
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJNIl0sWzEsMCwiTSJdLFsxLDEsIk0iXSxbMywwLCJNIl0sWzQsMCwiTSBcXHRpbWVzIE0iXSxbNCwxLCJNIl0sWzAsMSwic1xcY2RvdCJdLFsxLDIsInJcXGNkb3QiXSxbMCwyLCIociBcXGNkb3RfUiBzKSBcXGNkb3QiLDJdLFszLDQsIihyXFxjZG90KVxcdGltZXMoc1xcY2RvdCkiXSxbNCw1LCIrIl0sWzMsNSwiKHIgK19SIHMpXFxjZG90IiwyXV0=
 \[\begin{tikzcd}
 	M & M && M & {M \times M} \\
 	& M &&& M
@@ -20,6 +20,68 @@ $(R, +_R, \cdot_R)$を環とし$(M, +_M)$をアーベル群とする.\ $(-)\cdot
 	\arrow["{r\cdot}", from=1-2, to=2-2]
 	\arrow["{(r\cdot)\times(s\cdot)}", from=1-4, to=1-5]
 	\arrow["{(r +_R s)\cdot}"', from=1-4, to=2-5]
-	\arrow["{+_M}", from=1-5, to=2-5]
+	\arrow["{+}", from=1-5, to=2-5]
 \end{tikzcd}\]
 \end{definition}
+
+\begin{definition}
+$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加群とする.\ 写像$f \colon M \to N$が次を満たすとき$f$は$R$\textbf{線形写像}($R$-linear map)であるという.
+\def\labelenumi{(\theenumi)\hspace{.5\zw}}
+\begin{enumerate}
+    \item $f \colon M \to N$は群準同型.\ つまり下の1つ目の図式が可換になる.
+    \item 任意の$r \in R$に対して$f \circ (r \cdot_M) = (r \cdot_N) \circ f$である.\ つまり下の2つ目の図式が可換になる.
+\end{enumerate}
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJNIFxcdGltZXMgTSJdLFsxLDAsIk4gXFx0aW1lcyBOIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMywwLCJNIl0sWzQsMCwiTiJdLFszLDEsIk0iXSxbNCwxLCJOIl0sWzAsMSwiZiBcXHRpbWVzIGYiXSxbMCwyLCIrX00iLDJdLFsxLDMsIitfTiJdLFsyLDMsImYiXSxbNCw1LCJmIl0sWzYsNywiZiJdLFs0LDYsInJcXGNkb3RfTSIsMl0sWzUsNywiclxcY2RvdF9OIl1d
+\[\begin{tikzcd}
+	{M \times M} & {N \times N} && M & N \\
+	M & N && M & N
+	\arrow["{f \times f}", from=1-1, to=1-2]
+	\arrow["{+_M}"', from=1-1, to=2-1]
+	\arrow["{+_N}", from=1-2, to=2-2]
+	\arrow["f", from=1-4, to=1-5]
+	\arrow["{r\cdot_M}"', from=1-4, to=2-4]
+	\arrow["{r\cdot_N}", from=1-5, to=2-5]
+	\arrow["f", from=2-1, to=2-2]
+	\arrow["f", from=2-4, to=2-5]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition}
+$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M)$を$R$加群とする.\ $N \subset M$とし$\iota_N \colon N \hookrightarrow M$を包含写像とする.\ $+_M(N \times N) \subset N$かつ$\cdot_M(R \times M) \subset M$が成り立つとする.\ $+ \colon N \times N \to N$を次の図式を可換にするただ一つの写像とする.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJOIFxcdGltZXMgTiJdLFsxLDAsIk4iXSxbMCwxLCJNIFxcdGltZXMgTSJdLFsxLDEsIk0iXSxbMiwzLCIrX00iXSxbMCwyLCJcXGlvdGEgXFx0aW1lcyBcXGlvdGEiLDJdLFswLDEsIisiXSxbMSwzLCJcXGlvdGEiXV0=
+\[\begin{tikzcd}
+	{N \times N} & N \\
+	{M \times M} & M
+	\arrow["{+}", from=1-1, to=1-2]
+	\arrow["{\iota \times \iota}"', from=1-1, to=2-1]
+	\arrow["\iota", from=1-2, to=2-2]
+	\arrow["{+_M}", from=2-1, to=2-2]
+\end{tikzcd}\]
+$\cdot \colon R \times M \to M$を次の図式を可換にするただ一つの写像とする.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJSIFxcdGltZXMgTSJdLFsxLDAsIk0iXSxbMCwxLCJSIFxcdGltZXMgTiJdLFsxLDEsIk4iXSxbMCwxLCJcXGNkb3RfTSJdLFsxLDMsIlxcaW90YSJdLFswLDIsIlxcbWF0aHJte2lkfV9SIFxcdGltZXMgXFxpb3RhIiwyXSxbMiwzLCJcXGNkb3QiXV0=
+\[\begin{tikzcd}
+	{R \times M} & M \\
+	{R \times N} & N
+	\arrow["{\cdot_M}", from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_R \times \iota}"', from=1-1, to=2-1]
+	\arrow["\iota", from=1-2, to=2-2]
+	\arrow["\cdot", from=2-1, to=2-2]
+\end{tikzcd}\]
+このとき$(N, +, \cdot)$を$M$の\textbf{部分$R$加群}(sub $R$-module)という.
+\end{definition}
+
+\begin{example}
+$(R, +_R, \cdot_R)$を環とすると$(R, +_R, \cdot_R)$は$R$加群となる.
+\end{example}
+
+\begin{remark}
+以降,\ 環$(R, +_R, \cdot_R)$を$R$.\ $R$部分加群$(M, +_M, \cdot_M)$を$M$と書くこともある.
+\end{remark}
+
+\begin{definition}
+$R$を環とする.\ $R$加群$R$の部分$R$加群を$R$の\textbf{イデアル}(ideal)という.
+\end{definition}
+
+\begin{example}
+
+\end{example}
