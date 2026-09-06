@@ -1,7 +1,7 @@
 ---
 description: Add a reference to a topic's bibliography.tex, creating the file and wiring it into main.tex if it has none
 argument-hint: "<topic_slug> <citation>  (omit — I'll list the topics)"
-allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Edit(docs/bib-convention.md), Bash(latexmk:*), Bash(python -m unittest:*), Bash(python scripts/check_bibliography.py:*), Bash(grep:*)
+allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibliography.tex), Edit(tex/*/main.tex), Edit(docs/bib-convention.md), Bash(latexmk:*), Bash(python -m unittest:*), Bash(python scripts/check_bibliography.py:*), Bash(grep:*), Bash(date:*), WebFetch(domain:ndlsearch.ndl.go.jp), WebFetch(domain:openlibrary.org), WebFetch(domain:api.crossref.org), WebFetch(domain:export.arxiv.org)
 ---
 
 File a reference into a topic's `tex/<topic>/bibliography.tex`, creating that
@@ -16,13 +16,18 @@ All output is English. **Entries are shown verbatim** — see `## The proposal`.
 the single copy; nothing below restates the key shape, the entry shapes or the
 ordering. This file is the workflow.
 
-**This command does not look anything up.** There is no `WebSearch` or
-`WebFetch` in `allowed-tools`, and no command in this repo has one. The
-citation comes from the user, in the arguments. A citation is a factual claim
-about a physical object — the series number, the publisher, the year — and a
-wrong one does not look wrong: it produces a well-formed `\bibitem` naming a
-book that reads as real. If the arguments do not carry enough to build an
-entry, ask for the missing fields; never fill them in.
+**This command reads catalogue records, never pages.** `allowed-tools` pins
+`WebFetch` to a fixed set of catalogue hosts and carries no `WebSearch`, so an
+ISBN, a DOI or an arXiv id can be resolved against the body that issues it and
+nothing else is reachable. That
+distinction is the whole of the design. A record is re-queryable and somebody
+else is accountable for it; a page that merely mentions the book is prose, and a
+field lifted out of prose is a guess wearing a citation's clothes. A citation is
+a factual claim about a physical object — the series number, the publisher, the
+year — and a wrong one does not look wrong: it produces a well-formed `\bibitem`
+naming a book that reads as real. So a record proposes and the user disposes;
+`## Looking it up` is the whole procedure. If neither the arguments nor a record
+carries a required field, ask for it; never fill it in.
 
 **This command never edits `tex/*/ch*.tex`.** `Edit(tex/*/ch*.tex)` is absent
 from `allowed-tools`. It does not insert `\cite{}` and does not offer to:
@@ -55,6 +60,116 @@ A file that exists but is not `\input` is a real state and a silent one: it
 compiles fine and appears nowhere. Say so if you find it, and treat the run as
 a create for the `main.tex` half.
 
+## Looking it up
+
+**Check `## Already there` first.** A reference the topic already holds needs no
+record, and the duplicate check reads only files. Ordering it before the query
+is not about the network round trip; it is that a duplicate must produce the
+same refusal whether or not a catalogue happened to answer.
+
+**When to query.** An identifier always queries — it is one exact call, so
+checking the user's own fields against a record costs nothing beyond it. A
+missing required field queries. A complete citation carrying no identifier does
+**not**: verifying it would mean a title search and a candidate list for an
+entry the user already considers finished. Say which happened in the report —
+"filed from your text alone; no identifier to check it against" — because an
+entry nobody checked and an entry that checked clean must not read the same.
+
+| given | host | query |
+| --- | --- | --- |
+| ISBN beginning `4-` or `978-4-` | `ndlsearch.ndl.go.jp` | `/api/opensearch?isbn=<isbn>` |
+| any other ISBN | `openlibrary.org` | `/isbn/<isbn>.json` |
+| DOI | `api.crossref.org` | `/works/<doi>` |
+| arXiv id | `export.arxiv.org` | `/api/query?id_list=<id>` |
+| title, Japanese | `ndlsearch.ndl.go.jp` | `/api/opensearch?any=<title and author>&cnt=5` |
+| title, Latin script | `api.crossref.org` | `/works?query.bibliographic=<title and author>&rows=5` |
+
+**A URL is mined for an identifier, never fetched.** `arxiv.org/abs/1612.09375`
+is an arXiv id, `doi.org/10.2307/1969983` is a DOI, and a publisher page with an
+ISBN in its path is an ISBN. A URL carrying none of those is not a lookup at
+all: it is a web resource, whose site name and page title come from the user
+exactly as before. Only the access date is yours to supply — `date +%F`, said in
+the proposal to be the run date, and overridden if the user read the page
+earlier. None of the four hosts can serve an arbitrary page, so this is a rule
+the `allowed-tools` line already enforces; it is written here so the refusal is
+explained rather than mysterious.
+
+**A title query proposes candidates and stops.** Show up to five, with the
+fields that tell them apart — year, publisher, edition, identifier — and let the
+user pick before anything is rendered as a `\bibitem`. Never auto-select, not
+even on an exact title match: what that gets wrong is editions, and this repo
+already contains the example, since `『復刊 可換環論』` (2000) and `『可換環論』`
+(1980) are the same author, title and publisher. A ranked first hit is a guess
+with a rank on it. `query.bibliographic=Basic Category Theory Leinster` returns
+the Cambridge monograph first, which is a different object from the arXiv
+preprint `tex/category_theory` actually cites.
+
+**One source per proposal.** Every field on screen should trace to one query.
+An absent *optional* field — a series — is omitted and named as absent, so the
+user can tell "this book has no series" from "that record did not say". An
+absent *required* one is asked for. Cross-checking a second catalogue is
+**offered, never done silently**: an entry quietly assembled from two records is
+one that no single record supports, and it may describe two different printings.
+
+**Conflicts do not overwrite.** Where a record contradicts a field the user
+typed, the proposed entry keeps the user's bytes and the report carries the
+disagreement, naming both values and the host — "you gave 1995; openlibrary.org
+gives 1996 for that ISBN. Not changed. Say which." A record is evidence, not a
+verdict, and the entry is the user's claim to make.
+
+**Failure degrades to the old behaviour.** Zero results, a 404, or a host that
+does not answer is reported as exactly that, and then the missing fields are
+asked for. Never proceed on a partial record as though it were whole, and never
+substitute another host for a failed one without saying so.
+
+### What each record actually returns
+
+None of the following is guessable from the API's documentation, and each was
+observed against a reference this repo already cites.
+
+- **NDL matches the ISBN string its record carries.** A pre-2007 Japanese book
+  holds only an ISBN-10, so `isbn=9784320016582` returns zero results for
+  `『復刊 可換環論』` while `isbn=4-320-01658-0` returns it. Hyphens are
+  tolerated; the wrong length is not. On zero results, try the other form before
+  reporting nothing found. Do not trust the record's own `dcndl:ISBN13` field to
+  be an ISBN-13 — for that book it repeats the ISBN-10.
+- **NDL's `dc:creator` carries life dates**: `松村, 英之, 1930-1995`. Line 1 is
+  `松村英之` — the dates and the comma go, and so does the 著 that a cover or
+  another record may append. `docs/bib-convention.md` `### Line 1` has the rule.
+- **NDL has no media-type filter that this repo has verified.** Do not invent
+  one; an unknown parameter is silently folded into the query text and returns
+  nothing. Narrow a Japanese title search by putting the author in `any=`.
+- **Crossref's `page` may be the first page alone.** `10.2307/1969983` returns
+  `"page": "399"` for the paper whose range is 399–405. A page range is required
+  by the article shape, so ask for it; never file a single page as a range.
+- **Crossref gives the journal's formal name and the publisher's
+  capitalisation** — `The Annals of Mathematics`, `On Manifolds Homeomorphic to
+  the 7-Sphere`, where `tex/category_theory`'s sibling entry uses the usual name
+  and sentence case. Both are proposals to show, never corrections to apply.
+- **Do not put an email address in the request.** Crossref's polite pool asks
+  for a `mailto`; the anonymous pool answers, and the owner's address is not
+  this repo's to hand to a third party.
+- **OpenLibrary's `authors` are keys, not names.** `/isbn/<isbn>.json` gives
+  `{"key": "/authors/OL321218A"}`, and the name needs a second fetch to
+  `/authors/OL321218A.json` — which answers `Rosenberg, J.`, already initialised
+  and in the wrong order for line 1.
+- **OpenLibrary's `series` arrives split and lowercased**:
+  `["Graduate texts in mathematics ;", "147"]`. Joining it is mechanical; the
+  capitalisation the entry wants is editorial, so show the raw value beside it.
+- **OpenLibrary's `publish_date` is the printing that record describes.** For
+  the ISBN of `bib: Rosenberg` it says `1996`, where the entry says 1994. That
+  is a conflict to report, never a year to correct.
+- **`publish_places` is returned and dropped** — `["New York"]` for that same
+  book. `docs/bib-convention.md` `#### A book` says why.
+- **arXiv's year is `<updated>`, not `<published>`.** The convention cites the
+  version you read: `1612.09375v2` is `<updated>2025-08-26`, published 2016. The
+  class is `<arxiv:primary_category>`, not the first `<category>` — they happen
+  to agree for that paper and need not.
+- **An `<arxiv:journal_ref>` means the preprint shape is wrong.** The convention
+  says a preprint since published takes the book or article shape instead, and
+  that element is how you find out. Report it and let the user choose the shape;
+  do not switch shapes on your own.
+
 ## The proposal
 
 Show, and then stop:
@@ -68,12 +183,37 @@ Show, and then stop:
 - where it lands in the list, by the entry it follows
 - every structural change: creating `bibliography.tex`, inserting the `\input`
   into `main.tex`, widening `{9}` to `{99}`
+- when a record was read: the host, the identifier queried, each raw field used
+  and the transform applied to it — see below
 
 **Verbatim means verbatim.** Do not tidy 松本幸夫 into "Y. Matsumoto", do not
 normalise `$K$-Theory`, do not fix the user's capitalisation. The user approves
 what the preview shows, so the preview and the write must be the same bytes; a
 helpful adjustment between the two means approving one thing and filing
 another.
+
+**Verbatim binds the user's bytes; a record's fields are transformed by
+definition.** The two rules never meet, because they never apply to the same
+string. Nothing the user typed is adjusted. Everything a record supplies is:
+`{"given": "John", "family": "Milnor"}` is not a line 1, and neither is
+`Rosenberg, J.` or `松村, 英之, 1930-1995`. What keeps that honest is showing
+each transform next to its input, so what the user approves is the change and
+not merely its result:
+
+```
+\bibitem{bib: 松村}
+松村英之,
+『復刊 可換環論』,
+共立出版, 2000.
+
+  ndlsearch.ndl.go.jp — isbn=4-320-01658-0
+    dc:creator      「松村, 英之, 1930-1995」 → line 1, life dates dropped
+    dc:title        「可換環論」               → line 2, 『』 added
+    dc:publisher    「共立出版」               → line 3
+    dcterms:issued  「2000.9」                 → line 3, year only
+    ! no series field in this record
+    ! you gave 『復刊 可換環論』; the record says 『可換環論』. Kept yours.
+```
 
 **Never write on the first turn.** There is more judgement in an append than it
 looks — which of `J.`/`Jonathan` the author gets, whether "Graduate Texts in
@@ -202,7 +342,10 @@ Aux files and `main.pdf` are gitignored — leave them, do not run `latexmk -c`.
 ## Afterwards
 
 Report compactly: the entry, the key, the structural changes, the compile
-result, and the suite result when it ran.
+result, the suite result when it ran, and **where the fields came from** — the
+host and identifier, or the plain statement that nothing was checked against a
+record. An unverified entry and a verified one must not read the same three
+weeks later.
 
 ```
 tex/algebraic_k_theory/bibliography.tex — added bib: Milnor (2 entries)
@@ -212,6 +355,7 @@ tex/algebraic_k_theory/bibliography.tex — added bib: Milnor (2 entries)
   \textit{Annals of Mathematics} \textbf{64} (1956), 399--405.
 
   placed after bib: Rosenberg  ·  main.tex unchanged
+  fields from api.crossref.org, doi=10.2307/1969983; pages yours
   check_bibliography: OK  ·  latexmk: OK
 
 Cite it with \cite{bib: Milnor}.

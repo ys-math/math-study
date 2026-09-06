@@ -66,6 +66,11 @@ is that a proposed key can be approved at a glance.
 universally known by more than one — `bib: EilenbergSteenrod`. "Universally
 known" is the test, not "has two authors".
 
+**A Japanese name gives its family name alone** — `bib: 松村` for 松村英之. Line
+1 spells such a name in full and the key does not, which is the same split as
+`J. Rosenberg` and `bib: Rosenberg`: the key is a family name in every script,
+and it is the part carrying the given name that differs.
+
 **A web resource collides on a title word, not the year.** Its key body is the
 site or project name — `bib: nLab`, `bib: Stacks` — and the year rule above
 fails for it outright: two nLab pages read on the same afternoon both want
@@ -111,6 +116,15 @@ J. Rosenberg,
 S. Eilenberg and N. Steenrod,
 M. Hovey, J. Palmieri and N. Strickland,
 ```
+
+**A Japanese name is written in full**, family name first and unspaced:
+松村英之 — not 松村 英之, not H. Matsumura, and not `Matsumura, Hideyuki`.
+Initialising is a Latin-script habit that does not transfer, since a given name
+in kanji does not reduce to a letter, and the romanised form cannot be looked up
+in a Japanese catalogue for the same reason `### Line 2` does not romanise
+titles. A catalogue's decorations are not part of the name: NDL answers
+`松村, 英之, 1930-1995` and a cover reads `松村英之 著`; the entry carries
+neither the life dates nor the 著.
 
 **No `et al.`** A topic here carries a handful of references, the author lists
 are short, and a truncation rule is a threshold to remember and a judgement for
@@ -171,12 +185,14 @@ Graduate Texts in Mathematics 147, Springer-Verlag, 1994.
 
 Series and number, publisher, year.
 
-**No place of publication.** It is the field most often unknown or ambiguous —
-Springer alone prints Berlin, New York and Cham on comparable volumes — and
-`/bib` cannot look anything up, so requiring it means either blocking on the
-user for a datum they rarely have to hand, or inviting a guess. A guessed place
-produces a well-formed entry that reads as real, which is the failure this
-document exists to prevent.
+**No place of publication.** Springer alone prints Berlin, New York and Cham on
+comparable volumes, so the field is less unknown than not single-valued: a
+catalogue answers with whichever printing the record in front of it describes,
+and OpenLibrary returns `publish_places: ["New York"]` for the ISBN of the entry
+above. Carrying it would have the entry assert one printing while the publisher,
+series and year describe the work — and it is not what anyone looks a book up
+by. `/bib` reads the field and drops it, which is why this rule survived that
+command learning to read catalogues at all.
 
 #### A journal article
 
@@ -344,5 +360,20 @@ visible to a script, and an entry that is wrong in every one of those ways
 passes cleanly. A citation is a factual claim about a physical object, and the
 checker's guarantee stops at the shape of the sentence making it.
 
-That is also why `/bib` has no `WebSearch` and no `WebFetch`: the facts come
-from you.
+`/bib` can read a catalogue record — an ISBN, a DOI or an arXiv id resolved
+against the body that issues it — and that moves the boundary without moving the
+responsibility. A record is evidence: it is re-queryable, somebody else is
+accountable for it, and it is worth strictly more than a field typed from
+memory. It is still not a verdict. Records disagree about the year of a
+reprint, give a journal's formal name where the entry wants its usual one, and
+answer with whichever printing they happen to describe; none of them knows which
+of two editions you read. So the lookup proposes and you approve, which is the
+rule this document always had, now with better evidence under it.
+
+What has not changed is the checker. A field fetched from a catalogue and a
+field invented out of nothing pass `check_bibliography.py` identically, and the
+approval above is the only thing standing between them.
+
+There is no `WebSearch` anywhere in this repo, and `/bib`'s `WebFetch` hosts are
+pinned in its `allowed-tools`. Reading a record is not the same act as reading a
+page that mentions the book, and only the first is in scope.

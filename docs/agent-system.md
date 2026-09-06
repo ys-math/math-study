@@ -136,6 +136,16 @@ Worth knowing without looking them up:
   `allowed-tools`, and clearing the guard is a shared-path change, so it takes a
   branch and a pull request. Without that report the next `/git` fails its gate
   on an error that looks unrelated to adding a reference.
+- **`/bib` is the only command that reaches the network.** Its `allowed-tools`
+  pins `WebFetch` to `ndlsearch.ndl.go.jp`, `openlibrary.org`,
+  `api.crossref.org` and `export.arxiv.org`, and there is no `WebSearch` in this
+  repo at all. The distinction those hosts encode is the point: it resolves an
+  ISBN, DOI or arXiv id against the catalogue that issues it, and cannot fetch a
+  page that merely mentions the book. What comes back is proposed with the raw
+  field and the transform beside it, approved like anything else, and never
+  allowed to overwrite a field the user typed — a conflict is reported instead.
+  `docs/bib-convention.md` `## What is checked` is why that approval matters: a
+  fetched field and an invented one pass `check_bibliography.py` identically.
 - **`/issues` writes the only local artifact left** — `issues/<topic>.md`,
   gitignored and overwritten, a view of the open issues with links that resolve
   in your working copy. GitHub is the record; regenerate rather than trust it.
