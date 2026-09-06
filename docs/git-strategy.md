@@ -45,8 +45,8 @@ could see. The three routes do not change. The grammar is
 | `scripts/**` | branch + PR | A break here silently stops the README from regenerating. |
 | `.github/**` | branch + PR | A break here is only observable on `main`. |
 | `.latexmkrc` | branch + PR | Build configuration for every topic. |
-| `tex/preamble.tex` | branch + PR | `\input` by all 8 topics. |
-| `tex/colophon.tex` | branch + PR | `\input` by all 8 topics. |
+| `tex/preamble.tex` | branch + PR | `\input` by all 9 topics. |
+| `tex/colophon.tex` | branch + PR | `\input` by all 9 topics. |
 | `lean/lakefile.toml`, `lean/lean-toolchain`, `lean/lake-manifest.json` | branch + PR | A bad Mathlib bump breaks every proof at once. |
 | everything else | straight to `main` | Blast radius is nothing that builds. |
 
@@ -70,7 +70,7 @@ say so when `/git` shows you the plan.
 ### Hotfix clause
 
 **When `main` is red, a shared-file fix goes directly to `main`,** skipping the
-branch — but only after compiling all 8 topics locally. A full local compile
+branch — but only after compiling all 9 topics locally. A full local compile
 takes about 12 seconds; waiting for a PR round trip while the published PDFs
 rot does not pay for itself.
 
@@ -224,7 +224,7 @@ updates on commits that touch no `.tex` file — such as the one that added this
 document.
 
 The other two commit nothing, so they stay out of that entirely. `validate.yml`
-runs on `pull_request`: it compiles all 8 topics and runs the script tests. It
+runs on `pull_request`: it compiles all 9 topics and runs the script tests. It
 exists because branches are reserved for exactly the changes that can break
 every topic, and before it those changes were the only ones with no CI at all.
 `lean.yml` runs on both a push to `main` and a pull request, filtered to
@@ -255,14 +255,14 @@ Before any commit, the relevant checks run locally:
 | Changed | Gate | Cost |
 | --- | --- | --- |
 | `tex/<topic>/**` | compile that topic | ~1.5 s |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 8 topics | ~12 s |
+| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 9 topics | ~12 s |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
 | `lean/**` | build the Lean library | ~3 s warm |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`
 is one of them: it holds the command tables in `README.md` and
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
-count written in digits — "all 8 topics", above — to what it counts.
+count written in digits — "all 9 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as
 the two below: `CLAUDE.md`, `README.md`, `/bib`, `/git`, `/git-merge` and
 `/audit` print it verbatim and change with it, and `validate.yml`,

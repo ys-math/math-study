@@ -109,7 +109,7 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | Changed | Gate |
 | --- | --- |
 | `tex/<topic>/**` | `latexmk -cd -g tex/<topic>/main.tex` for each touched topic |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | the same, for all 8 topics |
+| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | the same, for all 9 topics |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 

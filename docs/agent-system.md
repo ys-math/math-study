@@ -206,7 +206,7 @@ the README bot stays red until it is fixed.
 
 Two conventions keep it able to see, and both are load-bearing:
 
-- **Counts go in digits, or go away.** "all 8 topics" is checked. "Seven, in
+- **Counts go in digits, or go away.** "all 9 topics" is checked. "Seven, in
   `.claude/commands/`" was not, and was wrong within a week — as was "the six
   commands" in `CLAUDE.md`. Where a table already enumerates the things, do not
   also say how many.
@@ -240,7 +240,7 @@ The workflows in `.github/workflows/`:
 | --- | --- | --- |
 | `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` | compiles affected topics, commits `pdf/*.pdf` |
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the README blocks, commits |
-| `validate.yml` | `pull_request` | compiles all 8 topics, runs the script tests |
+| `validate.yml` | `pull_request` | compiles all 9 topics, runs the script tests |
 | `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` | builds the Lean library through `lake` |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only

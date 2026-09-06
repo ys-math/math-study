@@ -100,7 +100,7 @@ These are the changes that break silently, days later:
   `docs/agent-system.md` in the same commit — and a command in `README.md`'s
   table as well. `scripts/test_agent_docs.py` compares those tables against the
   directories and fails otherwise. It also checks every count written in
-  digits, which is why "all 8 topics" is spelled that way and why nothing says
+  digits, which is why "all 9 topics" is spelled that way and why nothing says
   how many commands there are: a table two lines below already does.
 
 ## Commands
