@@ -2,6 +2,10 @@
 % !TEX root = main.tex
 
 \section{加群}
+\begin{remark}
+以降,\ 環はすべて乗法単位元を持つ可換環とする.
+\end{remark}
+
 \begin{definition} \label{def: Module}
 $(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \colon R \times M \to M$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\textbf{加群}($R$-module)という.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
@@ -94,6 +98,10 @@ $R$を零環でない環とし$I$を$R$のイデアルとする.\ $I \neq R$の�
 $R$を環とし$\mathfrak{p}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{p}$が整域であるとき$\mathfrak{p}$は$R$の\textbf{素イデアル}(prime ideal)であるという.
 \end{definition}
 
+\begin{definition}
+$R$を環とする.\ $R$の素イデアル全体の集合を$\Spec(R)$と書く.
+\end{definition}
+
 \begin{definition} \label{def: IsMaximal}
 $R$を環とし$\mathfrak{m}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{m}$が体であるとき$\mathfrak{m}$は$R$の\textbf{極大イデアル}(maximal ideal)であるという.
 \end{definition}
@@ -116,4 +124,19 @@ $R$を環とし$M$を有限生成$R$加群とする.\ $I$を$R$のイデアル�
 \end{theorem}
 \begin{proof}
 \cref{lem: determinant_trick}において$\phi \coloneq \id_M$とすると$\id_M(M) = M$なので$\id(M) \subset IM$であるから$a_i \in I^i$が存在して$(\id_M)^n + a_1(\id_M)^{n-1} + \cdots + a_{n-1}(\id_M) + a_n = 0$となる.\ これは$(1 + a_1 + \cdots + a_n)(\id_M) = 0$と同値である.\ $a \coloneq a_1 + \cdots a_n$とすると$a \in I$であるから$1 + a \in 1 + I$である.\ $x \coloneq 1 + a$とすれば任意の$m \in M$に対して$xm = 0$なので$xM = 0$である.
+\end{proof}
+
+\begin{definition}
+$R$を環とし$I$を$R$のイデアルとする.\ $\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\ これを$I$の\textbf{根基}(radical)という.
+\end{definition}
+
+\begin{proposition}
+$R$を環とし$I$を$R$のイデアルとすると次が成り立つ.
+\begin{center}
+    $\displaystyle \sqrt{I} = \bigcap_{I \subset \mathfrak{p} \in \Spec(R)} \mathfrak{p}$
+\end{center}
+\end{proposition}
+
+\begin{proof}
+
 \end{proof}
