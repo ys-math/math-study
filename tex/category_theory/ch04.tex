@@ -48,7 +48,7 @@ $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を�
 
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition}
-$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$\displaystyle \varprojlim_{\mathscr{J}}F$を$F$の\textbf{極限}(limit)という.
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\textbf{極限}(limit)という.
 \end{definition}
 
 \begin{definition}
@@ -57,4 +57,20 @@ $\mathscr{J},\ \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を
 
 \begin{definition}
 圏$\mathscr{C}$はすべての小さい図式$F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は\textbf{完備}(complete)であるという.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq L_F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) (L_G, \pi_G)$がただ1つ存在する.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tMX0Z9Il0sWzAsMSwiQ197TF9HfSJdLFsxLDAsIkYiXSxbMSwxLCJHIl0sWzAsMiwiXFxwaV9GIiwwLHsibGV2ZWwiOjJ9XSxbMCwxLCJcXERlbHRhKHUpIiwyLHsibGV2ZWwiOjJ9XSxbMSwzLCJcXHBpX0ciLDAseyJsZXZlbCI6Mn1dLFsyLDMsIlxcZXRhIiwwLHsibGV2ZWwiOjJ9XV0=
+\[\begin{tikzcd}
+	{C_{L_F}} & F \\
+	{C_{L_G}} & G
+	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\Delta(u)}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["\eta", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{\pi_G}", Rightarrow, nfold, from=2-1, to=2-2]
+\end{tikzcd}\]
+$\displaystyle \varprojlim_{\mathscr{J}}\eta \coloneq u$で定める.
+すると共変関手$\displaystyle \varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$が定まる.
 \end{definition}
