@@ -65,7 +65,7 @@ Read in this order, always:
 
 1. `tex/preamble.tex` — the theorem environments (`definition`, `proposition`,
    `lemma`, `theorem`, `example`, `corollary`, `remark`) and the shared macros
-   (`\ob`, `\mor`, `\dom`, `\cod`, `\id`) live here. Without this you cannot
+   (`\Ob`, `\Mor`, `\dom`, `\cod`, `\id`) live here. Without this you cannot
    tell a real notation inconsistency from a house convention, and you will
    file `\mathrm{id}` vs `\id` findings backwards.
 2. The topic's `main.tex` — which chapters are `\input`, and in what order.

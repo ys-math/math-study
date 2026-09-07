@@ -85,9 +85,9 @@ These are the changes that break silently, days later:
   commit. `scripts/test_new_topic.py` asserts the template reproduces 2 of them
   byte for byte — `topology` and `manifold` — so a partial update passes; check
   the rest by hand. A topic drops out of that list when its `main.tex` grows
-  past the skeleton, which is what `lambda_calculus`, `algebraic_k_theory` and
-  `category_theory` have already done and what `/bib` does to a topic when it
-  wires in a `bibliography.tex`.
+  past the skeleton, which is what `lambda_calculus`, `algebraic_k_theory`,
+  `category_theory` and `commutative_ring_theory` have already done and what
+  `/bib` does to a topic when it wires in a `bibliography.tex`.
 - **Adding a shared `.tex` that all topics `\input`** means adding it to the
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
@@ -102,6 +102,13 @@ These are the changes that break silently, days later:
   directories and fails otherwise. It also checks every count written in
   digits, which is why "all 9 topics" is spelled that way and why nothing says
   how many commands there are: a table two lines below already does.
+- **Adding or deleting a topic** means updating every `<n> topics` count in the
+  prose in the same commit — they sit in `CLAUDE.md`, `docs/` and
+  `.claude/commands/`. `scripts/test_agent_docs.py` holds every one of them to
+  the number of `tex/*/main.tex` on disk, and that failure lands in
+  `update-readme.yml` rather than in your gate: the README bot stays red, so a
+  new topic never reaches the generated blocks and a deleted one never leaves
+  them. `/delete-topic` pushes on its own and may not edit any of those files.
 
 ## Commands
 

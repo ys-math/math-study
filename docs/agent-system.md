@@ -248,10 +248,10 @@ The workflows in `.github/workflows/`:
 
 | Workflow | Trigger | Does |
 | --- | --- | --- |
-| `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` | compiles affected topics, commits `pdf/*.pdf` |
+| `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` or its own file | compiles affected topics, commits `pdf/*.pdf` |
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the README blocks, commits |
 | `validate.yml` | `pull_request` | compiles all 9 topics, runs the script tests |
-| `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` | builds the Lean library through `lake` |
+| `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` or its own file | builds the Lean library through `lake` |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only
 thing that needs them — they set its polling interval. `/watch-ci` reads them

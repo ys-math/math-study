@@ -166,5 +166,8 @@ each rename costs:
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
 | a command file | the tables in `README.md` and `docs/agent-system.md` | the same test fails |
 
-Only two of these are caught mechanically, and both are caught by
-`test_agent_docs.py`. The rest are caught by having read this table.
+Two of these are caught by `test_agent_docs.py`, the `docs/` file and the
+command file; a renamed Lean module by `lake build`, which fails outright on a
+stale `import`, and a renamed topic slug by the same build but only for its
+Lean half. The orphan PDF, the broken `\TexRepo` and a renamed chapter file
+are caught by nothing but having read this table.

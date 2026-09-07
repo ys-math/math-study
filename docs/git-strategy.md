@@ -4,7 +4,7 @@ This repo is one person's mathematics notes plus the Python and CI that build
 them. There is no release train, no reviewer, and no second contributor, so the
 strategy optimises for the two things that actually bite here:
 
-- **A shared file breaks eight documents at once.** `tex/preamble.tex` is
+- **A shared file breaks all 9 topics at once.** `tex/preamble.tex` is
   `\input` by every topic; a missing `\usepackage` in it fails all of them, and
   the failure surfaces minutes later in CI rather than on your screen.
 - **CI writes to the branch you work on.** Every push to `main` triggers

@@ -197,10 +197,13 @@ Print `git log --oneline -n 1`, the issues closed, and the recovery command
 again. Note that recovery restores the files only — reopening the issues is
 `gh issue reopen`, and the label would have to be recreated.
 
-Then say what CI will do: `update-readme.yml` drops the topic from the PDF list
-and rebuilds the tree, a commit that arrives in seconds. `build-pdf.yml` fires
+Then say what CI will do. `update-readme.yml` runs the script tests before it
+regenerates anything, and `scripts/test_agent_docs.py` fails until every
+`<n> topics` count in the prose matches the new total — so the README goes on
+listing this topic, and linking a PDF that is gone, until those counts are
+updated and committed. This command may not do it: `Edit(lean/Math.lean)` is
+its only write. Name it as the user's next step. `build-pdf.yml` fires
 too — the deleted `.tex` files match its path filter — but it selects no topics
-to build and exits without committing. The next `/git` rebases over the README
-commit automatically, so the user need do nothing.
+to build and exits without committing.
 
 Do not poll `gh run list`. Mention it and finish.

@@ -122,6 +122,7 @@ git pull --rebase --autostash origin main
 Print `git log --oneline -3` and confirm the branch was deleted both locally
 and on the remote.
 
-If the merge touched `**.tex` or `.latexmkrc`, `build-pdf.yml` is now
-rebuilding every topic and will commit `chore(ci): update compiled PDFs` in a
-few minutes. Say so and finish — do not poll `gh run list` waiting for it.
+If the merge touched a path in `build-pdf.yml`'s filter — `docs/agent-system.md`
+`## Automation` has them, and one of them is that workflow's own file — it is
+now rebuilding every topic and will commit `chore(ci): update compiled PDFs` in
+a few minutes. Say so and finish — do not poll `gh run list` waiting for it.
