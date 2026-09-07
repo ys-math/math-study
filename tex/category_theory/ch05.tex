@@ -3,7 +3,7 @@
 
 \section{随伴}
 \begin{definition}
-$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{D}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
+$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{G}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
 
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxtYXRocm17Y29kfShmKSJdLFsxLDAsIkcoRihcXG1hdGhybXtkb219KGYpKSkiXSxbMSwxLCJHKEYoXFxtYXRocm17Y29kfShmKSkpIl0sWzMsMCwiRihHKFxcbWF0aHJte2RvbX0oZykpKSJdLFszLDEsIkYoRyhcXG1hdGhybXtjb2R9KGcpKSkiXSxbNCwwLCJcXG1hdGhybXtkb219KGcpIl0sWzQsMSwiXFxtYXRocm17Y29kfShnKSJdLFswLDIsIlxcZXRhX3tcXG1hdGhybXtkb219KGYpfSJdLFsxLDMsIlxcZXRhX3tcXG1hdGhybXtjb2R9KGYpfSJdLFsyLDMsIkcoRihmKSkiXSxbMCwxLCJmIiwyXSxbNCw2LCJcXHZhcmVwc2lsb25fe1xcbWF0aHJte2RvbX0oZyl9Il0sWzUsNywiXFx2YXJlcHNpbG9uX3tcXG1hdGhybXtjb2R9KGcpfSJdLFs0LDUsIkYoRyhnKSkiLDJdLFs2LDcsImciXV0=
 \[\begin{tikzcd}
@@ -33,6 +33,25 @@ $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{
 \end{definition}
 
 \begin{definition}
+$\mathscr{C}, \mathscr{D}$を圏とする.\ \textbf{積圏}(product category)$\mathscr{C} \times \mathscr{D}$は$A \in \Ob(\mathscr{C}), B \in \Ob(\mathscr{D})$の組$(A, B)$を対象とし$f \in \Mor(\mathscr{C}), g \in \Mor(\mathscr{D})$の組$(f, g)$を射とする.\ 合成は$(f_2, g_2) \circ (f_1, g_1) \coloneq (f_2 \circ f_1, g_2 \circ g_1)$で定める.\ 恒等射は$\id_{(A,B)} \coloneq (\id_A, \id_B)$で定める.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}, \mathscr{D}, \mathscr{E}$を圏とする.\ $\mathscr{E}^{\mathscr{C} \times \mathscr{D}}$の対象を\textbf{双関手}(bifunctor)と呼ぶ.
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}, G \colon \mathscr{D} \to \mathscr{C}$を関手とする.\ $\Mor_\mathscr{D}(F(-), -) \colon \mathscr{C}^{\op} \times \mathscr{D} \to \mathbf{Set}, \Mor_\mathscr{C}(-, G(-)) \colon \mathscr{C}^{\op} \times \mathscr{D} \to \mathbf{Set}$を双関手とする.\ このとき次が成り立つ.
+\begin{center}
+	自然同型$\Phi \colon \Mor_\mathscr{D}(F(-), -) \Rightarrow \Mor_\mathscr{C}(-, G(-))$が存在$\iff$$F \dashv G$
+\end{center}
+\end{proposition}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
 $\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
@@ -48,7 +67,7 @@ $\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \t
 \begin{proof}
 任意の$F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}}F$が存在するとする.\ $\displaystyle (L,\pi) \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $A \in \mathscr{C}$と$F \in \mathscr{C}^{\mathscr{J}}$に対して$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$は定関手$C_A$から$F$への自然変換全体の集合であり写像$\phi \colon \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \to \Cone(A,F)$を$\phi(\eta) \coloneq (A, \eta)$と定め写像$\psi \colon \Cone(A,F) \to \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$を$\psi(A, \eta) \coloneq \eta$と定めれば$\phi$と$\psi$は互いに逆写像となり$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \cong \Cone(A,F)$である.\ 
 
-$\Phi_A \colon \Mor_{\mathscr{C}}(A, L) \to \Cone(A, F)$を$\Phi_A(h) \coloneq \pi \circ \Delta(h)$で定める.\ 任意の$\alpha \in \Cone(A, F)$に対して$\displaystyle (A, \alpha) \in \int_{\mathscr{C}^{\op}} \Cone(-, F)$である.\ $(L, \pi)$は$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象なので射$h \colon A \to L$が存在する.\ $\Delta(h) \colon C_A \Rightarrow C_L$と$\pi \colon C_L \Rightarrow F$の合成$\pi \circ \Delta(h) \colon C_A \Rightarrow F$は下の図式が可換になることから$\alpha$と等しい.
+$\Phi_A \colon \Mor_{\mathscr{C}}(A, L) \to \Cone(A, F)$を$\Phi_A(h) \coloneq (A, \pi \circ \Delta(h))$で定める.\ 任意の$(A, \alpha) \in \Cone(A, F)$に対して$\displaystyle (A, (A, \alpha)) \in \int_{\mathscr{C}^{\op}} \Cone(-, F)$である.\ $(L, (L, \pi))$は$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象なので射$h \colon (A, (A, \alpha)) \to (L, (L, \pi))$がただ1つ存在する.\ $\Delta(h) \colon C_A \Rightarrow C_L$と$\pi \colon C_L \Rightarrow F$の合成$\pi \circ \Delta(h) \colon C_A \Rightarrow F$は下の図式が可換になることから$\alpha$と等しい.\ つまり$\Phi_A(h) = (A, \alpha)$となる$h$がただ一つ存在するので$\Phi_A$は全単射である.
 
 % https://q.uiver.app/#q=WzAsMTAsWzUsMCwiQ19MKFgpIl0sWzYsMCwiRihYKSJdLFs1LDEsIkNfTChZKSJdLFs2LDEsIkYoWSkiXSxbNCwwLCJDX0EoWCkiXSxbNCwxLCJDX0EoWSkiXSxbMCwwLCJBIl0sWzEsMCwiTCJdLFsyLDAsIkYoWCkiXSxbMiwxLCJGKFkpIl0sWzAsMSwiXFxwaV9YIl0sWzIsMywiXFxwaV9ZIl0sWzAsMiwiQ19MKGYpIiwxXSxbMSwzLCJGKGYpIl0sWzQsMCwiXFxEZWx0YShoKV9YIl0sWzUsMiwiXFxEZWx0YShoKV9ZIl0sWzQsNSwiQ19BKGYpIiwyXSxbNCwxLCJcXGFscGhhX1giLDAseyJjdXJ2ZSI6LTR9XSxbNSwzLCJcXGFscGhhX1kiLDAseyJjdXJ2ZSI6NH1dLFs2LDcsImgiXSxbNyw4LCJcXHBpX1giXSxbOCw5LCJGKGYpIl0sWzcsOSwiXFxwaV9ZIiwyXSxbNiw4LCJcXGFscGhhX1giLDAseyJjdXJ2ZSI6LTN9XSxbNiw5LCJcXGFscGhhX1kiLDIseyJjdXJ2ZSI6Mn1dLFsyMSwxNiwiIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjQwfSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiYXJyb3doZWFkIn19fV1d
 \[\begin{tikzcd}
@@ -71,4 +90,18 @@ $\Phi_A \colon \Mor_{\mathscr{C}}(A, L) \to \Cone(A, F)$を$\Phi_A(h) \coloneq \
 	\arrow["{\pi_Y}", from=2-6, to=2-7]
 	\arrow[between={0.3}{0.6}, Rightarrow, nfold, 2tail reversed, from=0, to=1]
 \end{tikzcd}\]
+
+任意の$f \in \Mor_{\mathscr{C}}(A, B)$と$h \in \Mor_{\mathscr{C}}(B, L)$に対して$\Phi_A(h \circ f) = (A, \pi \circ \Delta(h \circ f)) = (A, \pi \circ \Delta(h) \circ \Delta(f)) = \Cone(f, F)(B, \pi \circ \Delta(h)) = \Cone(f, F)(\Phi_B(h))$なので次の図式が可換になる.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEIsIEwpIl0sWzEsMCwiXFxtYXRocm17Q29uZX0oQixGKSJdLFsxLDEsIlxcbWF0aHJte0NvbmV9KEEsRikiXSxbMCwxLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEEsIEwpIl0sWzEsMiwiXFxtYXRocm17Q29uZX0oZixGKSJdLFswLDMsIi0gXFxjaXJjIGYiLDJdLFswLDEsIlxcUGhpX0IiXSxbMywyLCJcXFBoaV9BIl1d
+\[\begin{tikzcd}
+	{\mathrm{Mor}_{\mathscr{C}}(B, L)} & {\mathrm{Cone}(B,F)} \\
+	{\mathrm{Mor}_{\mathscr{C}}(A, L)} & {\mathrm{Cone}(A,F)}
+	\arrow["{\Phi_B}", from=1-1, to=1-2]
+	\arrow["{- \circ f}"', from=1-1, to=2-1]
+	\arrow["{\mathrm{Cone}(f,F)}", from=1-2, to=2-2]
+	\arrow["{\Phi_A}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+したがって$\Phi \colon \Mor_{\mathscr{C}}(-,L) \Rightarrow \Cone(-,F)$は自然同型である.\ ゆえに$\Mor_{\mathscr{C}}(-,L) \cong \Cone(-,F) \cong \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(-), F)$
 \end{proof}
