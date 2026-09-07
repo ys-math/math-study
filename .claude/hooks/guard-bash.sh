@@ -57,7 +57,7 @@ while IFS= read -r seg; do
       fi
       ;;
     "git push "*)
-      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*f[a-zA-Z]*|--force|--force-with-lease)([[:space:]=]|$)' <<<"$seg"; then
+      if grep -qE '(^|[[:space:]])(-[a-zA-Z]*f[a-zA-Z]*|--force|--force-with-lease|\+[^[:space:]]+)([[:space:]=]|$)' <<<"$seg"; then
         deny "Force-pushing is forbidden in this repo, --force-with-lease included. A bad commit on main is corrected by a follow-up commit — docs/git-strategy.md, ## Never."
       fi
       ;;
