@@ -81,10 +81,10 @@ fi
 # 4. Losing a README marker does not fail any build — the generator simply stops
 #    finding its block and the README quietly freezes.
 if [[ $rel == README.md ]]; then
-  for m in "BEGIN PDF LINKS" "END PDF LINKS" "BEGIN TREE" "END TREE"; do
+  for m in "BEGIN PDF LINKS" "END PDF LINKS" "BEGIN TEXT METER" "END TEXT METER" "BEGIN TREE" "END TREE"; do
     n=$(grep -c -- "<!-- $m -->" "$path" || true)
     if [ "$n" -ne 1 ]; then
-      block "README.md must contain exactly one <!-- $m --> marker; found $n. generate_pdf_links.py and generate_tree.py locate their blocks by these markers, and update-readme.yml will silently stop updating the README without them. See CLAUDE.md, ## Generated artifacts."
+      block "README.md must contain exactly one <!-- $m --> marker; found $n. generate_pdf_links.py, generate_text_meter.py and generate_tree.py locate their blocks by these markers, and update-readme.yml will silently stop updating the README without them. See CLAUDE.md, ## Generated artifacts."
     fi
   done
 fi
