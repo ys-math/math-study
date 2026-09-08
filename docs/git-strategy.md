@@ -218,7 +218,8 @@ Both conform to the convention above, so `git log --oneline` is uniformly
 scannable even though you wrote none of them.
 
 They cannot be merged into a single commit: `build-pdf.yml` is path-filtered to
-`**.tex` and `.latexmkrc`, while `update-readme.yml` runs on *every* push.
+`**.tex`, `.latexmkrc` and its own file, while `update-readme.yml` runs on
+*every* push.
 Merging them would mean either running TeX Live on every push, or losing tree
 updates on commits that touch no `.tex` file — such as the one that added this
 document.

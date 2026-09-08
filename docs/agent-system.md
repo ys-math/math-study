@@ -294,9 +294,9 @@ and both are worth preserving:
 - **`build-pdf.yml` writes what it does not watch.** It commits `pdf/*.pdf`,
   which matches neither of its path filters. It cannot trigger itself.
 - **`update-readme.yml` converges.** It has no path filter, so it *does* trigger
-  itself — but its output is a pure function of `git ls-files`, so the second run
-  produces identical bytes, `git diff --cached --quiet` succeeds, and it commits
-  nothing. The cascade dies at the fixed point.
+  itself — but its output is a pure function of the committed tree, so the
+  second run produces identical bytes, `git diff --cached --quiet` succeeds, and
+  it commits nothing. The cascade dies at the fixed point.
 
 Both also retry a rebase three times, because the fast workflow pushes while the
 slow one is still in TeX Live.

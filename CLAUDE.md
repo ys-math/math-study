@@ -2,7 +2,7 @@
 
 Mathematics study notes written in LaTeX. One topic is one directory under
 `tex/`, holding a `main.tex` and its `ch0N.tex` chapters; every topic `\input`s
-the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and two blocks of
+the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and three blocks of
 `README.md` are build artifacts, not sources.
 
 `lean/` is the other half: a Lake package where the owner learns Lean 4 by
@@ -69,11 +69,12 @@ as MIT and the other two are the ones that have to be marked:
 ## Generated artifacts — never hand-edit
 
 - `pdf/*.pdf` — committed by `.github/workflows/build-pdf.yml`.
-- The `<!-- BEGIN PDF LINKS -->` and `<!-- BEGIN TREE -->` blocks in `README.md`
-  — rewritten by `.github/workflows/update-readme.yml`. Prose outside the
-  markers is yours to edit.
+- The `<!-- BEGIN PDF LINKS -->`, `<!-- BEGIN TEXT METER -->` and
+  `<!-- BEGIN TREE -->` blocks in `README.md` — rewritten by
+  `.github/workflows/update-readme.yml`. Prose outside the markers is yours to
+  edit.
 
-Change the `.tex` sources and let CI regenerate. Both generators read
+Change the `.tex` sources and let CI regenerate. All three generators read
 `git ls-files`, so a new topic is invisible to them until it is tracked.
 
 ## Coupling rules
