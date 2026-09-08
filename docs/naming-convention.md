@@ -40,7 +40,9 @@ places that each want something different:
 twin of something that already exists.
 
 The slug is a name, not a description. It never carries a number, a date or an
-ordering — nothing in the repo lists topics in any order but alphabetical.
+ordering — no ordering a slug could encode. The one size-ordered list, the text
+meter in `README.md`, computes its order from the contents of `ch*.tex` and
+never reads the name; every list a reader navigates by is alphabetical.
 
 ## Inside a topic
 
