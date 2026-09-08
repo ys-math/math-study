@@ -185,12 +185,14 @@ math-study/
 ├── scripts/
 │   ├── check_bibliography.py
 │   ├── generate_pdf_links.py
+│   ├── generate_text_meter.py
 │   ├── generate_tree.py
 │   ├── latex_unicode.py
 │   ├── new_topic.py
 │   ├── readme_block.py
 │   ├── test_agent_docs.py
 │   ├── test_check_bibliography.py
+│   ├── test_generate_text_meter.py
 │   ├── test_generate_tree.py
 │   ├── test_latex_unicode.py
 │   └── test_new_topic.py
