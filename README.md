@@ -17,6 +17,25 @@
 * [位相幾何学](./pdf/topology.pdf)
 <!-- END PDF LINKS -->
 
+各トピックに書かれた文章量の割合です。
+章のソース `tex/*/ch*.tex` の文字数で, コメント行は数えていません。
+
+<!-- BEGIN TEXT METER -->
+```
+category_theory          ███████▏░░░░░░░░░░░░   35.4%  19,030
+algebraic_k_theory       ██████▋░░░░░░░░░░░░░   33.1%  17,813
+lambda_calculus          ███▊░░░░░░░░░░░░░░░░   18.6%  10,025
+commutative_ring_theory  ██▏░░░░░░░░░░░░░░░░░   10.3%   5,565
+topology                 ▎░░░░░░░░░░░░░░░░░░░    1.3%     689
+manifold                 ▎░░░░░░░░░░░░░░░░░░░    1.0%     558
+galois_theory            ▏░░░░░░░░░░░░░░░░░░░    0.2%     109
+differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%       0
+symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%       0
+                                                       ------
+total                                                  53,789
+```
+<!-- END TEXT METER -->
+
 ## Three learning tracks
 
 Note-making is the axis; three things are being learned along it. Each track has
@@ -86,7 +105,7 @@ Run everything from the repo root.
 | `cd lean && lake build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. `cd`, not `lake --dir=lean`: elan reads the toolchain from the working directory, so from the repo root it silently uses the wrong Lean. See `docs/git-strategy.md`, `## Gates` |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
 | `python scripts/check_bibliography.py [<topic>]` | Checks `tex/*/bibliography.tex` against `docs/bib-convention.md` — the SPDX header, the key shape, the three-line grammar, the title markup, the ordering and the label width. Structure only: it cannot tell whether a year or a publisher is right |
-| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
+| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py`<br>`python scripts/generate_text_meter.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
 
 Claude Code slash commands:
 
@@ -121,10 +140,11 @@ a module nobody imports is invisible to `lake build`. It needs the Apache header
 on line 1 — `docs/lean-convention.md` has the text.
 
 Once you push to `main`, CI takes over: `build-pdf.yml` commits
-`pdf/<topic>.pdf`, `update-readme.yml` regenerates the PDF list and the
-directory tree below, and `lean.yml` builds `lean/` if you touched it. The lists
-are generated — edit the `.tex` sources, not them. The tree lists `lean/Math/`
-in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
+`pdf/<topic>.pdf`, `update-readme.yml` regenerates the PDF list, the text meter
+and the directory tree below, and `lean.yml` builds `lean/` if you touched it.
+The lists are generated — edit the `.tex` sources, not them. The tree lists
+`lean/Math/` in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows
+up in it.
 
 ## Directory structure
 <!-- BEGIN TREE -->

@@ -26,6 +26,9 @@ jobs:
       - name: Regenerate the PDF links in README.md
         run: python scripts/generate_pdf_links.py
 
+      - name: Regenerate the text meter in README.md
+        run: python scripts/generate_text_meter.py
+
       - name: Commit the updated README back to the repo
         run: |
           git config user.name "github-actions[bot]"
