@@ -22,7 +22,7 @@
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          ███████▊░░░░░░░░░░░░   38.5%  21,758
+category_theory          ███████▊░░░░░░░░░░░░   38.5%  21,771
 algebraic_k_theory       ██████▎░░░░░░░░░░░░░   31.5%  17,813
 lambda_calculus          ███▌░░░░░░░░░░░░░░░░   17.7%  10,025
 commutative_ring_theory  ██░░░░░░░░░░░░░░░░░░    9.8%   5,565
@@ -32,7 +32,7 @@ galois_theory            ▏░░░░░░░░░░░░░░░░░�
 differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%       0
 symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%       0
                                                        ------
-total                                                  56,517
+total                                                  56,530
 ```
 <!-- END TEXT METER -->
 
@@ -208,6 +208,7 @@ math-study/
 │   │   ├── ch03.tex
 │   │   ├── ch04.tex
 │   │   ├── ch05.tex
+│   │   ├── ch06.tex
 │   │   └── main.tex
 │   ├── commutative_ring_theory/
 │   │   ├── bibliography.tex
