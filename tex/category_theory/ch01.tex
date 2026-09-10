@@ -82,6 +82,7 @@ $F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\ma
 
 \begin{definition} \label{def: FunctorCategory}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を共変関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\ $\eta \colon F \Rightarrow G$と$\theta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C})$に対して$(\theta \circ \eta)_X \coloneq \theta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\ これを\textbf{関手圏}(functor category)という.
+\end{definition}
 
 \begin{definition}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{C} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\ これを\textbf{評価関手}(evaluation functor)という.
@@ -99,4 +100,3 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共�
 	\arrow["{\theta_X}", from=1-5, to=2-5]
 	\arrow["{\mathrm{ev}_X}"{pos=0.4}, between={0.2}{0.6}, maps to, from=0, to=1]
 \end{tikzcd}\]
-\end{definition}
