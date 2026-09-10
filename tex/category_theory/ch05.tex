@@ -7,16 +7,16 @@ $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{
 
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxtYXRocm17Y29kfShmKSJdLFsxLDAsIkcoRihcXG1hdGhybXtkb219KGYpKSkiXSxbMSwxLCJHKEYoXFxtYXRocm17Y29kfShmKSkpIl0sWzMsMCwiRihHKFxcbWF0aHJte2RvbX0oZykpKSJdLFszLDEsIkYoRyhcXG1hdGhybXtjb2R9KGcpKSkiXSxbNCwwLCJcXG1hdGhybXtkb219KGcpIl0sWzQsMSwiXFxtYXRocm17Y29kfShnKSJdLFswLDIsIlxcZXRhX3tcXG1hdGhybXtkb219KGYpfSJdLFsxLDMsIlxcZXRhX3tcXG1hdGhybXtjb2R9KGYpfSJdLFsyLDMsIkcoRihmKSkiXSxbMCwxLCJmIiwyXSxbNCw2LCJcXHZhcmVwc2lsb25fe1xcbWF0aHJte2RvbX0oZyl9Il0sWzUsNywiXFx2YXJlcHNpbG9uX3tcXG1hdGhybXtjb2R9KGcpfSJdLFs0LDUsIkYoRyhnKSkiLDJdLFs2LDcsImciXV0=
 \[\begin{tikzcd}
-	{\mathrm{dom}(f)} & {G(F(\mathrm{dom}(f)))} && {F(G(\mathrm{dom}(g)))} & {\mathrm{dom}(g)} \\
-	{\mathrm{cod}(f)} & {G(F(\mathrm{cod}(f)))} && {F(G(\mathrm{cod}(g)))} & {\mathrm{cod}(g)}
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	{\dom(f)} & {G(F(\dom(f)))} && {F(G(\dom(g)))} & {\dom(g)} \\
+	{\cod(f)} & {G(F(\cod(f)))} && {F(G(\cod(g)))} & {\cod(g)}
+	\arrow["{\eta_{\dom(f)}}", from=1-1, to=1-2]
 	\arrow["f"', from=1-1, to=2-1]
 	\arrow["{G(F(f))}", from=1-2, to=2-2]
-	\arrow["{\varepsilon_{\mathrm{dom}(g)}}", from=1-4, to=1-5]
+	\arrow["{\varepsilon_{\dom(g)}}", from=1-4, to=1-5]
 	\arrow["{F(G(g))}"', from=1-4, to=2-4]
 	\arrow["g", from=1-5, to=2-5]
-	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-1, to=2-2]
-	\arrow["{\varepsilon_{\mathrm{cod}(g)}}", from=2-4, to=2-5]
+	\arrow["{\eta_{\cod(f)}}", from=2-1, to=2-2]
+	\arrow["{\varepsilon_{\cod(g)}}", from=2-4, to=2-5]
 \end{tikzcd}\]
 
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJGKEEpIl0sWzEsMCwiRihHKEYoQSkpKSJdLFsyLDAsIkYoQSkiXSxbMCwxLCJHKEIpIl0sWzEsMSwiRyhGKEcoQikpKSJdLFsyLDEsIkcoQikiXSxbMCwxLCJGKFxcZXRhX0EpIiwyXSxbMSwyLCJcXHZhcmVwc2lsb25fe0YoQSl9IiwyXSxbMCwyLCJcXG1hdGhybXtpZH1fe0YoQSl9IiwwLHsiY3VydmUiOi0zfV0sWzMsNCwiXFxldGFfe0coQil9Il0sWzQsNSwiRyhcXHZhcmVwc2lsb25fe0J9KSJdLFszLDUsIlxcbWF0aHJte2lkfV97RyhCKX0iLDIseyJjdXJ2ZSI6M31dXQ==
@@ -24,10 +24,10 @@ $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{
 	{F(A)} & {F(G(F(A)))} & {F(A)} \\
 	{G(B)} & {G(F(G(B)))} & {G(B)}
 	\arrow["{F(\eta_A)}"', from=1-1, to=1-2]
-	\arrow["{\mathrm{id}_{F(A)}}", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow["{\id_{F(A)}}", curve={height=-18pt}, from=1-1, to=1-3]
 	\arrow["{\varepsilon_{F(A)}}"', from=1-2, to=1-3]
 	\arrow["{\eta_{G(B)}}", from=2-1, to=2-2]
-	\arrow["{\mathrm{id}_{G(B)}}"', curve={height=18pt}, from=2-1, to=2-3]
+	\arrow["{\id_{G(B)}}"', curve={height=18pt}, from=2-1, to=2-3]
 	\arrow["{G(\varepsilon_{B})}", from=2-2, to=2-3]
 \end{tikzcd}\]
 \end{definition}
@@ -55,9 +55,26 @@ $\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathsc
 $\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
-    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J = f$で定める.
+    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J \coloneq f$で定める.
 \end{itemize}
 これを\textbf{定図式関手}(constant diagram functor)という.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \to (L_G, (L_G, \pi_G))$がただ1つ存在する.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX1GfSJdLFswLDEsIkNfe1xcdmFycHJvamxpbV97XFxtYXRoc2Nye0p9fUd9Il0sWzEsMCwiRiJdLFsxLDEsIkciXSxbMCwyLCJcXHBpX0YiLDAseyJsZXZlbCI6Mn1dLFswLDEsIlxcRGVsdGEodSkiLDIseyJsZXZlbCI6Mn1dLFsxLDMsIlxccGlfRyIsMCx7ImxldmVsIjoyfV0sWzIsMywiXFxldGEiLDAseyJsZXZlbCI6Mn1dXQ==
+\[\begin{tikzcd}
+	{C_{\varprojlim_{\mathscr{J}}F}} & F \\
+	{C_{\varprojlim_{\mathscr{J}}G}} & G
+	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\Delta(u)}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["\eta", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{\pi_G}", Rightarrow, nfold, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+$\displaystyle \varprojlim_{\mathscr{J}}\eta \coloneq u$で定める.
+すると共変関手$\displaystyle \varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$が定まる.
 \end{definition}
 
 \begin{proposition}
@@ -65,9 +82,9 @@ $\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \t
 \end{proposition}
 
 \begin{proof}
-任意の$F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}}F$が存在するとする.\ $\displaystyle (L,\pi) \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $A \in \mathscr{C}$と$F \in \mathscr{C}^{\mathscr{J}}$に対して$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$は定関手$C_A$から$F$への自然変換全体の集合であり写像$\phi \colon \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \to \Cone(A,F)$を$\phi(\eta) \coloneq (A, \eta)$と定め写像$\psi \colon \Cone(A,F) \to \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$を$\psi(A, \eta) \coloneq \eta$と定めれば$\phi$と$\psi$は互いに逆写像となり$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \cong \Cone(A,F)$である.\ 
+任意の$F \in \mathscr{C}^{\mathscr{J}}$に対して$ \varprojlim_{\mathscr{J}}F$が存在するとする.\ $ (\varprojlim_{\mathscr{J}}F,\pi_F) \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $A \in \Ob(\mathscr{C})$と$F \in \mathscr{C}^{\mathscr{J}}$に対して$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$は定関手$C_A$から$F$への自然変換全体の集合であり写像$\phi \colon \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \to \Cone(A,F)$を$\phi(\eta) \coloneq (A, \eta)$と定め写像$\psi \colon \Cone(A,F) \to \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F)$を$\psi(A, \eta) \coloneq \eta$と定めれば$\phi$と$\psi$は互いに逆写像となり$\Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(A), F) \cong \Cone(A,F)$である.
 
-$\Phi_A \colon \Mor_{\mathscr{C}}(A, L) \to \Cone(A, F)$を$\Phi_A(h) \coloneq (A, \pi \circ \Delta(h))$で定める.\ 任意の$(A, \alpha) \in \Cone(A, F)$に対して$\displaystyle (A, (A, \alpha)) \in \int_{\mathscr{C}^{\op}} \Cone(-, F)$である.\ $(L, (L, \pi))$は$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象なので射$h \colon (A, (A, \alpha)) \to (L, (L, \pi))$がただ1つ存在する.\ $\Delta(h) \colon C_A \Rightarrow C_L$と$\pi \colon C_L \Rightarrow F$の合成$\pi \circ \Delta(h) \colon C_A \Rightarrow F$は下の図式が可換になることから$\alpha$と等しい.\ つまり$\Phi_A(h) = (A, \alpha)$となる$h$がただ一つ存在するので$\Phi_A$は全単射である.
+$\Phi_A \colon \Mor_{\mathscr{C}}(A, \varprojlim_{\mathscr{J}}F) \to \Cone(A, F)$を$\Phi_A(h) \coloneq (A, \pi \circ \Delta(h))$で定める.\ 任意の$(A, \alpha) \in \Cone(A, F)$に対して$\displaystyle (A, (A, \alpha)) \in \int_{\mathscr{C}^{\op}} \Cone(-, F)$である.\ $(\varprojlim_{\mathscr{J}}F, (\varprojlim_{\mathscr{J}}F, \pi_F))$は$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象なので射$h \colon (A, (A, \alpha)) \to (\varprojlim_{\mathscr{J}}F, (\varprojlim_{\mathscr{J}}F, \pi_F))$がただ1つ存在する.\ $\Delta(h) \colon C_A \Rightarrow C_L$と$\pi_F \colon C_L \Rightarrow F$の合成$\pi_F \circ \Delta(h) \colon C_A \Rightarrow F$は下の図式が可換になることから$\alpha$と等しい.\ つまり$\Phi_A(h) = (A, \alpha)$となる$h$がただ1つ存在するので$\Phi_A$は全単射である.
 
 % https://q.uiver.app/#q=WzAsMTAsWzUsMCwiQ19MKFgpIl0sWzYsMCwiRihYKSJdLFs1LDEsIkNfTChZKSJdLFs2LDEsIkYoWSkiXSxbNCwwLCJDX0EoWCkiXSxbNCwxLCJDX0EoWSkiXSxbMCwwLCJBIl0sWzEsMCwiTCJdLFsyLDAsIkYoWCkiXSxbMiwxLCJGKFkpIl0sWzAsMSwiXFxwaV9YIl0sWzIsMywiXFxwaV9ZIl0sWzAsMiwiQ19MKGYpIiwxXSxbMSwzLCJGKGYpIl0sWzQsMCwiXFxEZWx0YShoKV9YIl0sWzUsMiwiXFxEZWx0YShoKV9ZIl0sWzQsNSwiQ19BKGYpIiwyXSxbNCwxLCJcXGFscGhhX1giLDAseyJjdXJ2ZSI6LTR9XSxbNSwzLCJcXGFscGhhX1kiLDAseyJjdXJ2ZSI6NH1dLFs2LDcsImgiXSxbNyw4LCJcXHBpX1giXSxbOCw5LCJGKGYpIl0sWzcsOSwiXFxwaV9ZIiwyXSxbNiw4LCJcXGFscGhhX1giLDAseyJjdXJ2ZSI6LTN9XSxbNiw5LCJcXGFscGhhX1kiLDIseyJjdXJ2ZSI6Mn1dLFsyMSwxNiwiIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjQwfSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiYXJyb3doZWFkIn19fV1d
 \[\begin{tikzcd}
@@ -93,15 +110,18 @@ $\Phi_A \colon \Mor_{\mathscr{C}}(A, L) \to \Cone(A, F)$を$\Phi_A(h) \coloneq (
 
 任意の$f \in \Mor_{\mathscr{C}}(A, B)$と$h \in \Mor_{\mathscr{C}}(B, L)$に対して$\Phi_A(h \circ f) = (A, \pi \circ \Delta(h \circ f)) = (A, \pi \circ \Delta(h) \circ \Delta(f)) = \Cone(f, F)(B, \pi \circ \Delta(h)) = \Cone(f, F)(\Phi_B(h))$なので次の図式が可換になる.
 
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEIsIEwpIl0sWzEsMCwiXFxtYXRocm17Q29uZX0oQixGKSJdLFsxLDEsIlxcbWF0aHJte0NvbmV9KEEsRikiXSxbMCwxLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEEsIEwpIl0sWzEsMiwiXFxtYXRocm17Q29uZX0oZixGKSJdLFswLDMsIi0gXFxjaXJjIGYiLDJdLFswLDEsIlxcUGhpX0IiXSxbMywyLCJcXFBoaV9BIl1d
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEIsIFxcdmFycHJvamxpbV97XFxtYXRoc2Nye0p9fUYpIl0sWzEsMCwiXFxtYXRocm17Q29uZX0oQixGKSJdLFsxLDEsIlxcbWF0aHJte0NvbmV9KEEsRikiXSxbMCwxLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KEEsIFxcdmFycHJvamxpbV97XFxtYXRoc2Nye0p9fUYpIl0sWzEsMiwiXFxtYXRocm17Q29uZX0oZixGKSJdLFswLDMsIi0gXFxjaXJjIGYiLDJdLFswLDEsIlxcUGhpX0IiXSxbMywyLCJcXFBoaV9BIl1d
 \[\begin{tikzcd}
-	{\mathrm{Mor}_{\mathscr{C}}(B, L)} & {\mathrm{Cone}(B,F)} \\
-	{\mathrm{Mor}_{\mathscr{C}}(A, L)} & {\mathrm{Cone}(A,F)}
+	{\Mor_{\mathscr{C}}(B, \varprojlim_{\mathscr{J}}F)} & {\Cone(B,F)} \\
+	{\Mor_{\mathscr{C}}(A, \varprojlim_{\mathscr{J}}F)} & {\Cone(A,F)}
 	\arrow["{\Phi_B}", from=1-1, to=1-2]
 	\arrow["{- \circ f}"', from=1-1, to=2-1]
-	\arrow["{\mathrm{Cone}(f,F)}", from=1-2, to=2-2]
+	\arrow["{\Cone(f,F)}", from=1-2, to=2-2]
 	\arrow["{\Phi_A}", from=2-1, to=2-2]
 \end{tikzcd}\]
 
-したがって$\Phi \colon \Mor_{\mathscr{C}}(-,L) \Rightarrow \Cone(-,F)$は自然同型である.\ ゆえに$\Mor_{\mathscr{C}}(-,L) \cong \Cone(-,F) \cong \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(-), F)$
+したがって$\Phi \colon \Mor_{\mathscr{C}}(-,\varprojlim_{\mathscr{J}}F) \Rightarrow \Cone(-,F)$は自然同型である.\ ゆえに$\Mor_{\mathscr{C}}(-,\varprojlim_{\mathscr{J}}F) \cong \Cone(-,F) \cong \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(-), F)$.
+
+自然同型$\Phi \colon \Mor_{\mathscr{C}}(-,\varprojlim_{\mathscr{J}}F) \Rightarrow \Mor_{\mathscr{C}^{\mathscr{J}}}(\Delta(-), F)$が存在すると仮定する.\ 米田の補題により全単射$\phi \colon \Nat(\Mor_{\mathscr{C}}(-, \varprojlim_{\mathscr{J}}F), \Cone(-, F)) \to \Cone(\varprojlim_{\mathscr{J}}F, F)$で$\phi(\alpha) = \alpha_{\varprojlim_{\mathscr{J}}F}(\id_{\varprojlim_{\mathscr{J}}F})$となるものが存在する.\ $\Phi \in \Nat(\Mor_{\mathscr{C}}(-, \varprojlim_{\mathscr{J}}F), \Cone(-, F))$なので$\pi \coloneq \phi(\Phi)$とする.\ 任意の$(A, (A, \alpha)) \in {\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)}$に対して$\Phi_A(h) = \alpha$となる$h \in \Mor_{\mathscr{C}}(A, {\varprojlim_{\mathscr{J}}F})$がただ1つ存在する.\ $\Phi$は自然変換なので$\alpha = \Phi_A(h) = \Cone(h, F)(\varprojlim_{\mathscr{J}}F, \pi) = (\varprojlim_{\mathscr{J}}F, \pi \circ \Delta(h))$が成り立つ.\ よって$h$は$\alpha = \pi \circ \Delta(h)$を満たす$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$のただ1つの射$(A, (A, \alpha)) \to (\varprojlim_{\mathscr{J}}F, (\varprojlim_{\mathscr{J}}F, \pi))$なので$(\varprojlim_{\mathscr{J}}F, (\varprojlim_{\mathscr{J}}F, \pi))$は$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象である.
+
 \end{proof}

@@ -4,43 +4,43 @@
 \section{極限}
 
 \begin{definition}
-$\mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colon \mathscr{C} \to \mathscr{C}$を$X \in \Ob(\mathscr{C}),\ f \in \Mor(\mathscr{C})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定関手}(constant functor)と呼ぶ.
+$\mathscr{J}, \mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として関手$C_A \colon \mathscr{J} \to \mathscr{C}$を$X \in \Ob(\mathscr{J}),\ f \in \Mor(\mathscr{J})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定関手}(constant functor)と呼ぶ.
 \end{definition}
 
 \begin{definition}
-$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{C} \to \mathscr{C}$を定数関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{J} \to \mathscr{C}$を定関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJDX0EoXFxtYXRocm17ZG9tfShmKSkiXSxbMSwwLCJGKFxcbWF0aHJte2RvbShmKX0pIl0sWzEsMSwiRihcXG1hdGhybXtjb2R9KGYpKSJdLFswLDEsIkNfQShcXG1hdGhybXtjb2R9KGYpKSJdLFszLDAsIkEiXSxbMywxLCJBIl0sWzQsMCwiRihcXG1hdGhybXtkb20oZil9KSJdLFs0LDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMCwxLCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbMywyLCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMSwyLCJGKGYpIl0sWzAsMywiQ19BKGYpIiwyXSxbNCw1LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDcsIkYoZikiXSxbNCw2LCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbNSw3LCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMTAsMTIsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0IjozMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dXQ==
 \[\begin{tikzcd}
-	{C_A(\mathrm{dom}(f))} & {F(\mathrm{dom(f)})} && A & {F(\mathrm{dom(f)})} \\
-	{C_A(\mathrm{cod}(f))} & {F(\mathrm{cod}(f))} && A & {F(\mathrm{cod}(f))}
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-1, to=1-2]
+	{C_A(\dom(f))} & {F(\dom(f))} && A & {F(\dom(f))} \\
+	{C_A(\cod(f))} & {F(\cod(f))} && A & {F(\cod(f))}
+	\arrow["{\eta_{\dom(f)}}", from=1-1, to=1-2]
 	\arrow["{C_A(f)}"', from=1-1, to=2-1]
 	\arrow[""{name=0, anchor=center, inner sep=0}, "{F(f)}", from=1-2, to=2-2]
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=1-4, to=1-5]
+	\arrow["{\eta_{\dom(f)}}", from=1-4, to=1-5]
 	\arrow[""{name=1, anchor=center, inner sep=0}, equals, nfold, from=1-4, to=2-4]
 	\arrow["{F(f)}", from=1-5, to=2-5]
-	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-1, to=2-2]
-	\arrow["{\eta_{\mathrm{cod}(f)}}", from=2-4, to=2-5]
+	\arrow["{\eta_{\cod(f)}}", from=2-1, to=2-2]
+	\arrow["{\eta_{\cod(f)}}", from=2-4, to=2-5]
 	\arrow[between={0.4}{0.7}, Rightarrow, nfold, 2tail reversed, from=0, to=1]
 \end{tikzcd}\]
 \end{definition}
 
 \begin{definition}
-$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ 関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ 関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
-    \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とする. $\theta \colon C_{\dom(f)} \Rightarrow F$を$X \in \Ob(\mathscr{C})$に対して$\theta_X \coloneq \eta_X \circ f$で定める.\ $\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \theta)$とする.
+    \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とする.\ $\theta \colon C_{\dom(f)} \Rightarrow F$を$X \in \Ob(\mathscr{J})$に対して$\theta_X \coloneq \eta_X \circ f$で定める.\ $\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \theta)$とする.\ つまり$g \in \mathscr{J}$に対して次の図式が可換になる.
 \end{itemize}
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGcpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShnKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9IiwyXSxbMSwyLCJGKGcpIiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShmKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZil9IiwwLHsiY3VydmUiOi0xfV1d
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGcpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShnKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZyl9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZyl9IiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShnKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZyl9IiwwLHsiY3VydmUiOi0xfV0sWzEsMiwiRihnKSIsMl1d
 \[\begin{tikzcd}
 	& {\mathrm{dom}(f)} & \\
 	& {\mathrm{cod}(f)} \\
 	{F(\mathrm{dom}(g))} && {F(\mathrm{cod}(g))}
 	\arrow["f", from=1-2, to=2-2]
-	\arrow["{\theta_{\mathrm{dom}(f)}}"', curve={height=6pt}, from=1-2, to=3-1]
-	\arrow["{\theta_{\mathrm{cod}(f)}}", curve={height=-6pt}, from=1-2, to=3-3]
-	\arrow["{\eta_{\mathrm{dom}(f)}}", from=2-2, to=3-1]
-	\arrow["{\eta_{\mathrm{cod}(f)}}"', from=2-2, to=3-3]
+	\arrow["{\theta_{\mathrm{dom}(g)}}"', curve={height=6pt}, from=1-2, to=3-1]
+	\arrow["{\theta_{\mathrm{cod}(g)}}", curve={height=-6pt}, from=1-2, to=3-3]
+	\arrow["{\eta_{\mathrm{dom}(g)}}", from=2-2, to=3-1]
+	\arrow["{\eta_{\mathrm{cod}(g)}}"', from=2-2, to=3-3]
 	\arrow["{F(g)}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 この関手を\textbf{錐関手}(cone functor)という.
@@ -48,7 +48,7 @@ $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を�
 
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition}
-$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\textbf{極限}(limit)という.
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\textbf{極限}(limit)という.
 \end{definition}
 
 \begin{definition}
@@ -57,20 +57,4 @@ $\mathscr{J},\ \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を
 
 \begin{definition}
 圏$\mathscr{C}$はすべての小さい図式$F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は\textbf{完備}(complete)であるという.
-\end{definition}
-
-\begin{definition}
-$\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq L_F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) (L_G, \pi_G)$がただ1つ存在する.
-
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tMX0Z9Il0sWzAsMSwiQ197TF9HfSJdLFsxLDAsIkYiXSxbMSwxLCJHIl0sWzAsMiwiXFxwaV9GIiwwLHsibGV2ZWwiOjJ9XSxbMCwxLCJcXERlbHRhKHUpIiwyLHsibGV2ZWwiOjJ9XSxbMSwzLCJcXHBpX0ciLDAseyJsZXZlbCI6Mn1dLFsyLDMsIlxcZXRhIiwwLHsibGV2ZWwiOjJ9XV0=
-\[\begin{tikzcd}
-	{C_{L_F}} & F \\
-	{C_{L_G}} & G
-	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
-	\arrow["{\Delta(u)}"', Rightarrow, nfold, from=1-1, to=2-1]
-	\arrow["\eta", Rightarrow, nfold, from=1-2, to=2-2]
-	\arrow["{\pi_G}", Rightarrow, nfold, from=2-1, to=2-2]
-\end{tikzcd}\]
-$\displaystyle \varprojlim_{\mathscr{J}}\eta \coloneq u$で定める.
-すると共変関手$\displaystyle \varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$が定まる.
 \end{definition}
