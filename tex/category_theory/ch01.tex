@@ -8,7 +8,7 @@
     \item \textbf{対象}の集まり$\Ob(\mathscr{C})$.
     \item \textbf{射}の集まり$\Mor(\mathscr{C})$.\ 射は次を満たす.
     \begin{itemize}
-    \item 任意の$f \in \Mor(\mathscr{C})$は\textbf{始域}(domain)$\dom(f) = A \in \Ob(\mathscr{C})$と\textbf{終域}(codomain)$\cod(f) = B \in \Ob(\mathscr{C})$を持ち$f \colon A \to B$と表す.\ 始域が$A$,\ 終域が$B$であるような射の集まりを$\Mor_\mathscr{C}(A,B)$と書く.
+    \item 任意の$f \in \Mor(\mathscr{C})$は\textbf{始域}(domain)$\dom(f) \eqcolon A \in \Ob(\mathscr{C})$と\textbf{終域}(codomain)$\cod(f) \eqcolon B \in \Ob(\mathscr{C})$を持ち$f \colon A \to B$と表す.\ 始域が$A$,\ 終域が$B$であるような射の集まりを$\Mor_\mathscr{C}(A,B)$と書く.
     \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\textbf{合成}(composition)$g \circ f \in \Mor(\mathscr{C})$が定まり$\dom(g \circ f) = \dom(f)$,\ $\cod(g \circ f) = \cod(g)$である.\ 合成は次を満たす.
         \begin{itemize}
         \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\ この条件を\textbf{結合律}(associativity)という.
@@ -19,8 +19,12 @@
 \end{definition}
 
 \begin{example} \label{ex: set_is_category}
-対象を集合,\ 射を写像とすることで圏$\mathbf{Set}$が定まる.
+対象を集合,\ 射を写像,\ 射の合成を写像の合成とすることで圏$\mathbf{Set}$が定まる.
 \end{example}
+
+\begin{definition} \label{def: OppositeCategory}
+$\mathscr{C}$を圏とする.\ 対象を$\Ob(\mathscr{C})$とし$A, B \in \Ob(\mathscr{C})$に対して$\Mor_{\mathscr{C}^{\op}}(A, B) \coloneq \Mor_\mathscr{C}(B, A)$とする.\ $f \in \Mor_{\mathscr{C}^{\op}}(A, B)$と$g \in \Mor_{\mathscr{C}^{\op}}(B, C)$の$\mathscr{C}^{\op}$における合成$g \circ^{\op} f$を$\mathscr{C}$における合成$f \circ g \in \Mor_\mathscr{C}(C, A)$とすることで圏$\mathscr{C}^{\op}$が定まる.\ これを$\mathscr{C}$の\textbf{反対圏}(opposite category)という.
+\end{definition}
 
 \begin{definition} \label{def: Functor}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\textbf{共変関手}(covariant functor)であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
@@ -42,6 +46,10 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\m
 	\arrow["F", between={0.3}{0.7}, maps to, from=0, to=1]
 \end{tikzcd}\]
 
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}, \mathscr{D}$を圏とする.\ 共変関手$F \colon \mathscr{C}^{\op} \to \mathscr{D}$を\textbf{反変関手}(contravariant functor)$F \colon \mathscr{C} \to \mathscr{D}$という.
 \end{definition}
 
 \begin{definition} \label{def: IsSmall}
@@ -73,5 +81,5 @@ $F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\ma
 \end{definition}
 
 \begin{definition} \label{def: FunctorCategory}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とすることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\ これを\textbf{関手圏}(functor category)という.
+$\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\ $\eta \colon F \Rightarrow G$と$\zeta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C}^{\mathscr{D}})$に対して$(\zeta \circ \eta)_X \coloneq \zeta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C}^{\mathscr{D}})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\ これを\textbf{関手圏}(functor category)という.
 \end{definition}
