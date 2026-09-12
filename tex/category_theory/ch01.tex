@@ -52,6 +52,10 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\m
 $\mathscr{C}, \mathscr{D}$を圏とする.\ 共変関手$F \colon \mathscr{C}^{\op} \to \mathscr{D}$を\textbf{反変関手}(contravariant functor)$F \colon \mathscr{C} \to \mathscr{D}$という.
 \end{definition}
 
+\begin{definition}
+$\mathscr{J}, \mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として共変関手$C_A \colon \mathscr{J} \to \mathscr{C}$を$X \in \Ob(\mathscr{J}),\ f \in \Mor(\mathscr{J})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定関手}(constant functor)と呼ぶ.
+\end{definition}
+
 \begin{definition} \label{def: IsSmall}
 $\mathscr{C}$を圏とする.\ $\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\Mor(\mathscr{C}) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\textbf{小さい圏}(small category),\ または\textbf{小圏}であるという.
 
@@ -63,7 +67,7 @@ $\mathscr{C}$を局所小圏とし$A \in \Ob(\mathscr{C})$とする.\ $X \in \Ob
 \end{example}
 
 \begin{definition} \label{def: IsIsomorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ $g \in \Mor(\mathscr{C})$が存在して$\dom(f) = \cod(g)$かつ$\cod(f) = \dom(g)$となるとする.\ $f \circ g = \id_{\dom(g)}$かつ$g \circ f = \id_{\dom(f)}$となるとき$f$は\textbf{同型射}(isomorphism)であるという.
+$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ $g \in \Mor(\mathscr{C})$が存在して$\dom(f) = \cod(g)$かつ$\cod(f) = \dom(g)$となるとする.\ $f \circ g = \id_{\dom(g)}$かつ$g \circ f = \id_{\dom(f)}$となるとき$f$は\textbf{同型射}(isomorphism)であるという.\ $A,B \in \mathscr{C}$に対して同型射$f \colon A \to B$が存在するとき$A$と$B$は\textbf{同型}(isomorphic)であるといい$A \cong B$と書く.
 \end{definition}
 
 \begin{definition} \label{def: NaturalTransformation}
@@ -85,7 +89,7 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を共変関手$F \colon \math
 \end{definition}
 
 \begin{definition}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{C} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\ これを\textbf{評価関手}(evaluation functor)という.
+$\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{\mathscr{C}} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\ これを\textbf{評価関手}(evaluation functor)という.
 \end{definition}
 
 % https://q.uiver.app/#q=WzAsNixbMywwLCJGKFgpIl0sWzQsMCwiRyhYKSJdLFs0LDEsIkgoWCkiXSxbMCwwLCJGIl0sWzEsMCwiRyJdLFsxLDEsIkgiXSxbMCwxLCJcXGV0YV9YIl0sWzEsMiwiXFx0aGV0YV9YIl0sWzAsMiwiKFxcdGhldGEgXFxjaXJjIFxcZXRhKV9YIiwyXSxbNCw1LCJcXHRoZXRhIiwwLHsibGV2ZWwiOjJ9XSxbMyw1LCJcXHRoZXRhIFxcY2lyYyBcXGV0YSIsMix7ImxldmVsIjoyfV0sWzMsNCwiXFxldGEiLDAseyJsZXZlbCI6Mn1dLFs5LDgsIlxcbWF0aHJte2V2fV9YIiwwLHsibGFiZWxfcG9zaXRpb24iOjQwLCJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6NDB9LCJsZXZlbCI6MSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==

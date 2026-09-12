@@ -3,11 +3,15 @@
 
 \section{米田の補題と普遍性}
 
+\begin{remark} \label{rem: set_iso_is_bijection}
+$\mathbf{Set}$の射$f$が同型射であることと$f$が全単射であることは同値である.
+\end{remark}
+
 \begin{theorem} \label{thm: yoneda_lemma} (\textbf{Yoneda lemma})
 $\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\ 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^A, F) \cong F(A)$となる.
 \end{theorem}
 \begin{proof}
-写像$\phi \colon \Nat(h^A, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x)$を$X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_X(f) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^A, F)$を定める.\ 実際$X, Y \in \Ob(\mathscr{C})$と$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
+写像$\phi \colon \Nat(h^A, F) \to F(A)$を$\phi(\eta) \coloneq \eta_A(\id_A)$として定める.\ $x \in F(A)$に対して自然変換$\psi(x) \colon h^A \Rightarrow F$を$X \in \Ob(\mathscr{C})$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_X(f) \coloneq F(f)(x)$で定め写像$\psi \colon F(A) \to \Nat(h^A, F)$を定める.\ 実際$X, Y \in \Ob(\mathscr{C})$と$g \in \Mor_\mathscr{C}(X, Y)$と$f \in \Mor_\mathscr{C}(A, X)$に対して$\psi(x)_Y(h^A(g)(f)) = F(g \circ f)(x) = F(g)(F(f)(x)) = F(g)(\psi(x)_X(f))$となり次の図式が可換になるので$\psi(x)$は自然変換である.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJoXkEoWCkiXSxbMSwwLCJGKFgpIl0sWzAsMSwiaF5BKFkpIl0sWzEsMSwiRihZKSJdLFswLDEsIlxccHNpKHgpX1giXSxbMSwzLCJGKGcpIl0sWzAsMiwiaF5BKGcpIiwyXSxbMiwzLCJcXHBzaSh4KV9ZIl1d
 \[\begin{tikzcd}
 	{h^A(X)} & {F(X)} \\
@@ -49,16 +53,22 @@ $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変�
 \begin{center}
 ${^{\forall}B} \in \Ob(\mathscr{C}), {^{\forall}x} \in F(B), {^{\exists!}f} \in \Mor_\mathscr{C}(A, B), F(f)(u) = x$\qquad(\ast)
 \end{center}
-$u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は\textbf{普遍対}(universal pair)であるという.
+$u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は$F$の\textbf{普遍対}(universal pair)であるという.
 \end{definition}
 
 \begin{definition} \label{def: UniversalProperty}
 \cref{def: IsUniversalElement}の(\ast)を\textbf{普遍性}(universal property)と呼ぶ.
 \end{definition}
 
-\begin{remark} \label{rem: set_iso_is_bijection}
-$\mathbf{Set}$の射$f$が同型射であることと$f$が全単射であることは同値である.
-\end{remark}
+\begin{example}
+$\ast \in \mathbf{Set}$とし$C_{\{\ast\}} \colon \mathbf{Set}^{\op} \to \mathbf{Set}$を定関手とし$T \in \Ob(\mathbf{Set}^{\op})$をシングルトンとする.\ このとき$(T, \ast)$は$C_{\ast}$の普遍対である.
+\end{example}
+
+\begin{proof}
+任意の$B \in \Ob(\mathbf{Set})$に対して$C_{\{\ast\}}(B)$はシングルトン$\{\ast\}$である.\ 任意の$x \in \{\ast\}$に対して$x = \ast$である.\ また任意の$f \in \Mor_{\mathbf{Set}^{\op}}(T, B)$に対して$C_{\{\ast\}}(f) = \id_{\{\ast\}}$なので$C_{\{\ast\}}(f)(\ast) = \ast = x$が成り立つ.\ $|\Mor_{\mathbf{Set}^{\op}}(T, B)| = 1$なので$(T, \ast)$は$C_{\{\ast\}}$の普遍対である.
+\end{proof}
+
+%任意の$x \in \{*\}$に対して$P(x)$ $\iff$ $x \in \{*\}$がただ1つ存在して$P(x)$
 
 \begin{proposition} \label{prop: natural_iso_iff_universal_element}
 $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $A \in \Ob(\mathscr{C}), u \in F(A)$とする.\ $\psi \colon F(A) \to \Nat(h^A, F)$を\cref{thm: yoneda_lemma}の証明で定めたものとすると次が成り立つ.
@@ -71,4 +81,50 @@ $(A, \psi(u))$は$F$の表現$\iff$$(A, u)$は$F$の普遍対
 $\psi(u)$が自然同型であるとき\cref{rem: set_iso_is_bijection}より任意の$X \in \Ob(\mathscr{C})$に対して$\psi(u)_X$は全単射である.\ $B \in \Ob(\mathscr{C}), x \in F(B)$とする.\ $f \coloneq \psi(u)_B^{-1}(x)$とすると$F(f)(u) = \psi(u)_B(f) = \psi(u)_B(\psi(u)_B^{-1}(x)) = x$となり$\psi(u)_B$は$f$はただ1つだから$u$は$F$の普遍元である.
 
 $u$が$F$の普遍元であるとき任意の$B \in \Ob(\mathscr{C}), x \in F(B)$に対して$F(f)(u) = x$を満たす$f \in \Mor_\mathscr{C}(A, B)$がただ1つ存在する.\ そこで$B \in \Ob(\mathscr{C})$に対して$g_B \colon F(B) \to h^A(B)$を$x \in F(B)$に対して$F(f)(u) = x$を満たすただ1つの$f$を$g_B(x)$とすることで定める.\ このとき$x \in F(B)$に対して$\psi(u)_B(g_B(x)) = F(g_B(x))(u) = x$である.\ また$g_B(\psi(u)_B(f)) = g_B(F(f)(u)) = f$となり$\psi(u)_B$は全単射である.\ よって\cref{rem: set_iso_is_bijection}より任意の$B \in \mathscr{C}$に対して$\psi(u)_B$は同型射だから$\psi(u)$は自然同型である.
+\end{proof}
+
+\begin{definition}
+$\mathscr{C}, \mathscr{D}$を圏,\ $F \colon \mathscr{C} \to \mathscr{D}$を共変関手,\ $X \in \Ob(\mathscr{D})$とする.\ $A \in \Ob(\mathscr{C})$とし$u \in \Mor_{\mathscr{D}}$とする.\ 任意の$B \in \Ob(\mathscr{C})$と$g \in \Mor_{\mathscr{D}}(X, F(B))$に対して$f \in \Mor_{\mathscr{C}}(A,B)$がただ1つ存在して次の図式が可換になるとき組$(A, u)$は$X$から$F$への\textbf{普遍射}(universal morphism)であるという.
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzEsMCwiRihBKSJdLFsxLDEsIkYoQikiXSxbMSwyLCJGKGYpIl0sWzAsMiwiZyIsMl0sWzAsMSwidSJdXQ==
+\[\begin{tikzcd}
+	X & {F(A)} \\
+	& {F(B)}
+	\arrow["u", from=1-1, to=1-2]
+	\arrow["g"', from=1-1, to=2-2]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $\{\ast\} \in \Ob(\mathbf{Set})$をシングルトンとする.\ $A \in \Ob(\mathscr{C}), u \in F(A)$に対して写像$\bar{u} \colon \{\ast\} \to F(A)$を$\bar{u}(\ast) \coloneq u$で定める.\ このとき次が成り立つ.
+\begin{center}
+	$(A, u)$は$F$の普遍対$\iff$$(A, \bar{u})$は$\{\ast\}$から$F$の普遍射
+\end{center}
+\end{proposition}
+\begin{proof}
+$(A, u)$を$F$の普遍対とする.\ 任意の$B \in \Ob(\mathscr{C})$と$g \in \Mor_{\mathbf{Set}}(\{\ast\}, F(B))$に対して$x \coloneq g(\ast)$とすると$\bar{u}(\ast) = u$であり$\bar{x} = g$である.\ ここで$(A, u)$は$F$の普遍対なので$f \in \Mor_{\mathscr{C}}(A, B)$がただ1つ存在して$F(f)(\bar{u}(\ast)) = \bar{x}(\ast)$が成り立つ.\ つまり次の図式を可換にする$f \in \Mor_{\mathscr{C}}(A, B)$がただ1つ存在する.
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHtcXGFzdFxcfSJdLFsxLDAsIkYoQSkiXSxbMSwxLCJGKEIpIl0sWzEsMiwiRihmKSJdLFswLDEsIlxcYmFye3V9Il0sWzAsMiwiZyIsMl1d
+\[\begin{tikzcd}
+	{\{\ast\}} & {F(A)} \\
+	& {F(B)}
+	\arrow["{\bar{u}}", from=1-1, to=1-2]
+	\arrow["g"', from=1-1, to=2-2]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+\end{tikzcd}\]
+
+したがって$(A, \bar{u})$は$\{\ast\}$から$F$への普遍射である.
+
+$(A, \bar{u})$を$\{\ast\}$から$F$への普遍射とする.\ このとき任意の$B \in \mathscr{C}$と$x \in F(B)$に対して次の図式を可換にする$f \in \Mor_{\mathscr{C}}(A, B)$がただ1つ存在する.
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHtcXGFzdFxcfSJdLFsxLDAsIkYoQSkiXSxbMSwxLCJGKEIpIl0sWzEsMiwiRihmKSJdLFswLDEsIlxcYmFye3V9Il0sWzAsMiwiXFxiYXJ7eH0iLDJdXQ==
+\[\begin{tikzcd}
+	{\{\ast\}} & {F(A)} \\
+	& {F(B)}
+	\arrow["{\bar{u}}", from=1-1, to=1-2]
+	\arrow["{\bar{x}}"', from=1-1, to=2-2]
+	\arrow["{F(f)}", from=1-2, to=2-2]
+\end{tikzcd}\]
+
+上の図式が可換$\iff F(f)(\bar{u}(\ast)) = \bar{x}(\ast) \iff F(f)(u) = x$なので$(A, u)$は$F$の普遍対である.
 \end{proof}
