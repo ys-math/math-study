@@ -60,7 +60,7 @@ $u \in F(A)$が$F$の普遍元であるとき組$(A, u)$は$F$の\textbf{普遍�
 \cref{def: IsUniversalElement}の(\ast)を\textbf{普遍性}(universal property)と呼ぶ.
 \end{definition}
 
-\begin{example}
+\begin{example} \label{ex: singleton_is_universal_pair}
 $\ast \in \mathbf{Set}$とし$C_{\{\ast\}} \colon \mathbf{Set}^{\op} \to \mathbf{Set}$を定関手とし$T \in \Ob(\mathbf{Set}^{\op})$をシングルトンとする.\ このとき$(T, \ast)$は$C_{\ast}$の普遍対である.
 \end{example}
 
@@ -83,7 +83,7 @@ $\psi(u)$が自然同型であるとき\cref{rem: set_iso_is_bijection}より任
 $u$が$F$の普遍元であるとき任意の$B \in \Ob(\mathscr{C}), x \in F(B)$に対して$F(f)(u) = x$を満たす$f \in \Mor_\mathscr{C}(A, B)$がただ1つ存在する.\ そこで$B \in \Ob(\mathscr{C})$に対して$g_B \colon F(B) \to h^A(B)$を$x \in F(B)$に対して$F(f)(u) = x$を満たすただ1つの$f$を$g_B(x)$とすることで定める.\ このとき$x \in F(B)$に対して$\psi(u)_B(g_B(x)) = F(g_B(x))(u) = x$である.\ また$g_B(\psi(u)_B(f)) = g_B(F(f)(u)) = f$となり$\psi(u)_B$は全単射である.\ よって\cref{rem: set_iso_is_bijection}より任意の$B \in \mathscr{C}$に対して$\psi(u)_B$は同型射だから$\psi(u)$は自然同型である.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: IsUniversalMorphism}
 $\mathscr{C}, \mathscr{D}$を圏,\ $F \colon \mathscr{C} \to \mathscr{D}$を共変関手,\ $X \in \Ob(\mathscr{D})$とする.\ $A \in \Ob(\mathscr{C})$とし$u \in \Mor_{\mathscr{D}}$とする.\ 任意の$B \in \Ob(\mathscr{C})$と$g \in \Mor_{\mathscr{D}}(X, F(B))$に対して$f \in \Mor_{\mathscr{C}}(A,B)$がただ1つ存在して次の図式が可換になるとき組$(A, u)$は$X$から$F$への\textbf{普遍射}(universal morphism)であるという.
 
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzEsMCwiRihBKSJdLFsxLDEsIkYoQikiXSxbMSwyLCJGKGYpIl0sWzAsMiwiZyIsMl0sWzAsMSwidSJdXQ==
@@ -96,7 +96,7 @@ $\mathscr{C}, \mathscr{D}$を圏,\ $F \colon \mathscr{C} \to \mathscr{D}$を共�
 \end{tikzcd}\]
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: universal_pair_iff_universal_morphism}
 $\mathscr{C}$を局所小圏,\ $F \colon \mathscr{C} \to \mathbf{Set}$を共変関手,\ $\{\ast\} \in \Ob(\mathbf{Set})$をシングルトンとする.\ $A \in \Ob(\mathscr{C}), u \in F(A)$に対して写像$\bar{u} \colon \{\ast\} \to F(A)$を$\bar{u}(\ast) \coloneq u$で定める.\ このとき次が成り立つ.
 \begin{center}
 	$(A, u)$は$F$の普遍対$\iff$$(A, \bar{u})$は$\{\ast\}$から$F$の普遍射
