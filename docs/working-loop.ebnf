@@ -23,8 +23,9 @@
 
 session =
     { "/new-topic"
-    | ? write a chapter ? , [ "/label" ]
-    | "/review-notes" , [ "/issues" ] , { ? fix a finding ? }
+    | ? write a chapter ? , { "/bib" } , [ "/label" ]
+    | "/review-notes" , [ "/verify-issues" ] , [ "/issues" ] ,
+      { ? fix a finding ? }
     | "/formalize" , { ? replace a sorry ? }
     | ? edit the machinery ? , [ "/audit" ]
     } ,
