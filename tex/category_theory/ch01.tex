@@ -48,12 +48,21 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\m
 
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: ContravariantFunctor}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ 共変関手$F \colon \mathscr{C}^{\op} \to \mathscr{D}$を\textbf{反変関手}(contravariant functor)$F \colon \mathscr{C} \to \mathscr{D}$という.
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: constantFunctor}
 $\mathscr{J}, \mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として共変関手$C_A \colon \mathscr{J} \to \mathscr{C}$を$X \in \Ob(\mathscr{J}),\ f \in \Mor(\mathscr{J})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\textbf{定関手}(constant functor)と呼ぶ.
+\end{definition}
+
+\begin{definition} \label{def: constantDiagramFunctor}
+$\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
+\begin{itemize}
+    \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
+    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J \coloneq f$で定める.
+\end{itemize}
+これを\textbf{定図式関手}(constant diagram functor)という.
 \end{definition}
 
 \begin{definition} \label{def: IsSmall}
@@ -88,7 +97,7 @@ $F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\ma
 $\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を共変関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\ $\eta \colon F \Rightarrow G$と$\theta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C})$に対して$(\theta \circ \eta)_X \coloneq \theta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\ これを\textbf{関手圏}(functor category)という.
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: evaluationFunctor}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{\mathscr{C}} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\ これを\textbf{評価関手}(evaluation functor)という.
 \end{definition}
 

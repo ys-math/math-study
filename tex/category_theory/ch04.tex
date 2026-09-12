@@ -3,7 +3,7 @@
 
 \section{極限}
 
-\begin{definition}
+\begin{definition} \label{def: Cone}
 $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{J} \to \mathscr{C}$を定関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJDX0EoXFxtYXRocm17ZG9tfShmKSkiXSxbMSwwLCJGKFxcbWF0aHJte2RvbShmKX0pIl0sWzEsMSwiRihcXG1hdGhybXtjb2R9KGYpKSJdLFswLDEsIkNfQShcXG1hdGhybXtjb2R9KGYpKSJdLFszLDAsIkEiXSxbMywxLCJBIl0sWzQsMCwiRihcXG1hdGhybXtkb20oZil9KSJdLFs0LDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMCwxLCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbMywyLCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMSwyLCJGKGYpIl0sWzAsMywiQ19BKGYpIiwyXSxbNCw1LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDcsIkYoZikiXSxbNCw2LCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbNSw3LCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMTAsMTIsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0IjozMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dXQ==
 \[\begin{tikzcd}
@@ -21,20 +21,24 @@ $\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を�
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition}
+\begin{remark} \label{rem: functor_category_is_locally_small}
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とすると関手圏$\mathscr{C}^{\mathscr{J}}$は局所小圏である.
+\end{remark}
+
+\begin{definition} \label{def: coneFunctor}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ 関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
-    \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とする.\ $\theta \colon C_{\dom(f)} \Rightarrow F$を$X \in \Ob(\mathscr{J})$に対して$\theta_X \coloneq \eta_X \circ f$で定める.\ $\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \theta)$とする.\ つまり$g \in \mathscr{J}$に対して次の図式が可換になる.
+    \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とし$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を定図式関手とする.\ このとき$\Cone(f, F)(\cod(f), \eta) \coloneq (\dom(f), \eta \circ \Delta(f))$と定める.\ つまり$g \in \mathscr{J}$に対して次の図式が可換になる.
 \end{itemize}
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGcpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShnKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZyl9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZyl9IiwyXSxbMywwLCJmIl0sWzMsMSwiXFx0aGV0YV97XFxtYXRocm17ZG9tfShnKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIlxcdGhldGFfe1xcbWF0aHJte2NvZH0oZyl9IiwwLHsiY3VydmUiOi0xfV0sWzEsMiwiRihnKSIsMl1d
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtjb2R9KGYpIl0sWzAsMiwiRihcXG1hdGhybXtkb219KGcpKSJdLFsyLDIsIkYoXFxtYXRocm17Y29kfShnKSkiXSxbMSwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZyl9Il0sWzAsMiwiXFxldGFfe1xcbWF0aHJte2NvZH0oZyl9IiwyXSxbMywwLCJmIl0sWzMsMSwiKFxcZXRhIFxcY2lyYyBcXERlbHRhKGYpKV97XFxtYXRocm17ZG9tfShnKX0iLDIseyJjdXJ2ZSI6MX1dLFszLDIsIihcXGV0YSBcXGNpcmMgXFxEZWx0YShmKSlfe1xcbWF0aHJte2NvZH0oZyl9IiwwLHsiY3VydmUiOi0xfV0sWzEsMiwiRihnKSIsMl1d
 \[\begin{tikzcd}
 	& {\mathrm{dom}(f)} & \\
 	& {\mathrm{cod}(f)} \\
 	{F(\mathrm{dom}(g))} && {F(\mathrm{cod}(g))}
 	\arrow["f", from=1-2, to=2-2]
-	\arrow["{\theta_{\mathrm{dom}(g)}}"', curve={height=6pt}, from=1-2, to=3-1]
-	\arrow["{\theta_{\mathrm{cod}(g)}}", curve={height=-6pt}, from=1-2, to=3-3]
+	\arrow["{(\eta \circ \Delta(f))_{\mathrm{dom}(g)}}"', curve={height=6pt}, from=1-2, to=3-1]
+	\arrow["{(\eta \circ \Delta(f))_{\mathrm{cod}(g)}}", curve={height=-6pt}, from=1-2, to=3-3]
 	\arrow["{\eta_{\mathrm{dom}(g)}}", from=2-2, to=3-1]
 	\arrow["{\eta_{\mathrm{cod}(g)}}"', from=2-2, to=3-3]
 	\arrow["{F(g)}"', from=3-1, to=3-3]
@@ -43,14 +47,74 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J}
 \end{definition}
 
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
-\begin{definition}
+\begin{definition} \label{def: limit}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\textbf{極限}(limit)という.
 \end{definition}
 
-\begin{definition}
-$\mathscr{J},\ \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を図式とする.\ $\mathscr{J}$が小圏であるとき$F$は\textbf{小さい}(small)図式であるという.
+\begin{definition} \label{def: IsJComplete}
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は$\mathscr{J}$\textbf{完備}($\mathscr{J}$-complete)であるという.
 \end{definition}
 
-\begin{definition}
-圏$\mathscr{C}$はすべての小さい図式$F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は\textbf{完備}(complete)であるという.
+\begin{definition} \label{def: limitFunctor}
+$\mathscr{J}$を小圏とし$\mathscr{C}$を$\mathscr{J}$完備な局所小圏とする.\ 共変関手$\varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$を次のようにして定める.
+\begin{itemize}
+	\item $F \in \Ob(\mathscr{C}^{\mathscr{J}})$に対して$(L_F, (L_F, \pi_F))$を$F$の極限としたとき$\varprojlim_{\mathscr{J}}(F) \coloneq L_F$とする.
+	\item $F, G \in \Ob(\mathscr{C}^{\mathscr{J}})$とし$(L_G, (L_G, \pi_G))$を$G$の極限としたとき$\eta \in \Mor_{\mathscr{C}^{\mathscr{J}}}(F, G)$に対して$(L_F, \eta \circ \pi_F) \in \Cone(L_F, G)$なのでただ1つの射$f \colon (L_F, (L_F, \eta \circ \pi_F)) \to (L_G, (L_G, \pi_G))$が存在する.\ そこで$\varprojlim_{\mathscr{J}}(\eta) \coloneq f$として定める.
+\end{itemize}
+
+$\varprojlim_{\mathscr{J}}$は共変関手になる.\ 実際$F,G,H \in \Ob(\mathscr{C}^{\mathscr{J}})$と$\eta \colon F \Rightarrow G,\ \theta \colon G \Rightarrow H$に対して$(L_F, (L_F, \eta \circ \pi_F)) \in {\displaystyle \int_{\mathscr{C}^{\op}}\Cone(-,F)}$かつ$(L_G, (L_G, \theta \circ \pi_G)) \in {\displaystyle \int_{\mathscr{C}^{\op}}\Cone(-,G)}$であり$\varprojlim_{\mathscr{J}}(\eta) \colon L_F \to L_G$と$\varprojlim_{\mathscr{J}}(\theta) \colon L_G \to L_H$は次の等式を満たす.
+\vspace{0.5em}
+\begin{center}
+$\Cone(\varprojlim_{\mathscr{J}}(\eta), F)(L_G, \pi_G) = (L_F, \eta \circ \pi_F)$
+
+$\Cone(\varprojlim_{\mathscr{J}}(\theta), G)(L_H, \pi_H) = (L_G, \theta \circ \pi_G)$
+\end{center}
+\vspace{0.5em}
+また錐関手の定義(\cref{def: coneFunctor})から次の等式が成り立つ.
+\vspace{0.5em}
+\begin{center}
+$\Cone(\varprojlim_{\mathscr{J}}(\eta), F)(L_G, \pi_G) = (L_F, \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)))$
+
+$\Cone(\varprojlim_{\mathscr{J}}(\theta), G)(L_H, \pi_H) = (L_G, \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)))$
+\end{center}
+\vspace{0.5em}
+したがって次の図式が可換になる.
+
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJDX3tMX0Z9Il0sWzAsMSwiQ197TF9HfSJdLFsxLDAsIkYiXSxbMSwxLCJHIl0sWzAsMiwiQ197TF9IfSJdLFsxLDIsIkgiXSxbMCwyLCJcXHBpX0YiLDAseyJsZXZlbCI6Mn1dLFsyLDMsIlxcZXRhIiwwLHsibGV2ZWwiOjJ9XSxbMSwzLCJcXHBpX0ciLDAseyJsZXZlbCI6Mn1dLFswLDEsIlxcRGVsdGEoXFx2YXJwcm9qbGltX3tcXG1hdGhzY3J7Sn19KFxcZXRhKSkiLDIseyJsZXZlbCI6Mn1dLFs0LDUsIlxccGlfSCIsMCx7ImxldmVsIjoyfV0sWzEsNCwiXFxEZWx0YShcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX0oXFx0aGV0YSkpIiwyLHsibGV2ZWwiOjJ9XSxbMyw1LCJcXHRoZXRhIiwwLHsibGV2ZWwiOjJ9XV0=
+\[\begin{tikzcd}
+	{C_{L_F}} & F \\
+	{C_{L_G}} & G \\
+	{C_{L_H}} & H
+	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\Delta(\varprojlim_{\mathscr{J}}(\eta))}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["\eta", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{\pi_G}", Rightarrow, nfold, from=2-1, to=2-2]
+	\arrow["{\Delta(\varprojlim_{\mathscr{J}}(\theta))}"', Rightarrow, nfold, from=2-1, to=3-1]
+	\arrow["\theta", Rightarrow, nfold, from=2-2, to=3-2]
+	\arrow["{\pi_H}", Rightarrow, nfold, from=3-1, to=3-2]
+\end{tikzcd}\]
+
+$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$は共変関手なので$\pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta) \circ \varprojlim_{\mathscr{J}}(\eta)) = \pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)) \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)) = \theta \circ \pi_G \varprojlim_{\mathscr{J}}(\eta) = (\theta \circ \eta) \circ \pi_F$となる.\ $\varprojlim_{\mathscr{J}}(\theta \circ \eta)$は次の図式を満たすただ1つの射$(L_F, (L_F, (\theta \circ \eta) \circ\pi_F)) \to (L_H, (L_H, \pi_H))$である.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tMX0Z9Il0sWzEsMCwiRiJdLFswLDEsIkNfe0xfSH0iXSxbMSwxLCJIIl0sWzEsMywiXFx0aGV0YSBcXGNpcmMgXFxldGEiLDAseyJsZXZlbCI6Mn1dLFsyLDMsIlxccGlfSCIsMCx7ImxldmVsIjoyfV0sWzAsMiwiXFxEZWx0YShcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX0oXFx0aGV0YSBcXGNpcmMgXFxldGEpKSIsMix7ImxldmVsIjoyfV0sWzAsMSwiXFxwaV9GIiwwLHsibGV2ZWwiOjJ9XV0=
+\[\begin{tikzcd}
+	{C_{L_F}} & F \\
+	{C_{L_H}} & H
+	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\Delta(\varprojlim_{\mathscr{J}}(\theta \circ \eta))}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["{\theta \circ \eta}", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{\pi_H}", Rightarrow, nfold, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+したがって$\varprojlim_{\mathscr{J}}(\theta) \circ \varprojlim_{\mathscr{J}}(\eta) = \varprojlim_{\mathscr{J}}(\theta \circ \eta)$である.
+
+$\varprojlim_{\mathscr{J}}(\id_{F}) \colon L_F \to L_F$は次の等式を満たすただ1つの射である.
+\begin{center}
+	$\pi_F \circ \Delta(\varprojlim_{\mathscr{J}}(\id_{F})) = \id_F \circ \pi_F = \pi_F$
+\end{center}
+また$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$は共変関手なので次の等式も成り立つ.
+\begin{center}
+	$\pi_F \circ \Delta(\id_{L_F}) = \pi_F \circ \id_{\Delta(L_F)} = \pi_F$
+\end{center}
+したがって一意性により$\varprojlim_{\mathscr{J}}(\id_{F}) = \id_{L_F} = \id_{\varprojlim_{\mathscr{J}}(F)}$となる.
 \end{definition}

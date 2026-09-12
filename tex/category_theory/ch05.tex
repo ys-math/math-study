@@ -2,7 +2,7 @@
 % !TEX root = main.tex
 
 \section{随伴}
-\begin{definition}
+\begin{definition} \label{def: Adjunction}
 $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{G}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
 
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxtYXRocm17Y29kfShmKSJdLFsxLDAsIkcoRihcXG1hdGhybXtkb219KGYpKSkiXSxbMSwxLCJHKEYoXFxtYXRocm17Y29kfShmKSkpIl0sWzMsMCwiRihHKFxcbWF0aHJte2RvbX0oZykpKSJdLFszLDEsIkYoRyhcXG1hdGhybXtjb2R9KGcpKSkiXSxbNCwwLCJcXG1hdGhybXtkb219KGcpIl0sWzQsMSwiXFxtYXRocm17Y29kfShnKSJdLFswLDIsIlxcZXRhX3tcXG1hdGhybXtkb219KGYpfSJdLFsxLDMsIlxcZXRhX3tcXG1hdGhybXtjb2R9KGYpfSJdLFsyLDMsIkcoRihmKSkiXSxbMCwxLCJmIiwyXSxbNCw2LCJcXHZhcmVwc2lsb25fe1xcbWF0aHJte2RvbX0oZyl9Il0sWzUsNywiXFx2YXJlcHNpbG9uX3tcXG1hdGhybXtjb2R9KGcpfSJdLFs0LDUsIkYoRyhnKSkiLDJdLFs2LDcsImciXV0=
@@ -32,15 +32,15 @@ $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: ProductCategory}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ \textbf{積圏}(product category)$\mathscr{C} \times \mathscr{D}$は$A \in \Ob(\mathscr{C}), B \in \Ob(\mathscr{D})$の組$(A, B)$を対象とし$f \in \Mor(\mathscr{C}), g \in \Mor(\mathscr{D})$の組$(f, g)$を射とする.\ 合成は$(f_2, g_2) \circ (f_1, g_1) \coloneq (f_2 \circ f_1, g_2 \circ g_1)$で定める.\ 恒等射は$\id_{(A,B)} \coloneq (\id_A, \id_B)$で定める.
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: Bifunctor}
 $\mathscr{C}, \mathscr{D}, \mathscr{E}$を圏とする.\ $\mathscr{E}^{\mathscr{C} \times \mathscr{D}}$の対象を\textbf{双関手}(bifunctor)と呼ぶ.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: adjunction_iff_hom_natural_iso}
 $\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}, G \colon \mathscr{D} \to \mathscr{C}$を関手とする.\ $\Mor_\mathscr{D}(F(-), -) \colon \mathscr{C}^{\op} \times \mathscr{D} \to \mathbf{Set}, \Mor_\mathscr{C}(-, G(-)) \colon \mathscr{C}^{\op} \times \mathscr{D} \to \mathbf{Set}$を双関手とする.\ このとき次が成り立つ.
 \begin{center}
 	自然同型$\Phi \colon \Mor_\mathscr{D}(F(-), -) \Rightarrow \Mor_\mathscr{C}(-, G(-))$が存在$\iff$$F \dashv G$が存在
@@ -50,15 +50,6 @@ $\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathsc
 \begin{proof}
 
 \end{proof}
-
-\begin{definition}
-$\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
-\begin{itemize}
-    \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
-    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J \coloneq f$で定める.
-\end{itemize}
-これを\textbf{定図式関手}(constant diagram functor)という.
-\end{definition}
 
 \begin{definition}
 $\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \to (L_G, (L_G, \pi_G))$がただ1つ存在する.
@@ -77,7 +68,7 @@ $\displaystyle \varprojlim_{\mathscr{J}}\eta \coloneq u$で定める.
 すると共変関手$\displaystyle \varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$が定まる.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: complete_iff_constant_diagram_has_right_adjoint}
 圏$\mathscr{C}$が小圏$\mathscr{J}$を形とする極限を持つことと定図式関手$\Delta$が右随伴関手を持つことは同値である.
 \end{proposition}
 
