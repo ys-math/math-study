@@ -130,6 +130,16 @@ $R$を環とし$M$を有限生成$R$加群とする.\ $I$を$R$のイデアル�
 $R$を環とし$I$を$R$のイデアルとする.\ $\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\ これを$I$の\textbf{根基}(radical)という.
 \end{definition}
 
+\begin{lemma}
+$R$を環,\ $S \subset R$を積閉集合,\ $I$を$R$のイデアルとする.\ このとき次が成り立つ.
+\begin{center}
+	$S \cap I = \emptyset \implies I \subset {^{\exists} \mathfrak{p}} \in \Spec(R),\  S \cap \mathfrak{p} = \emptyset$
+\end{center}
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
 \begin{proposition}
 $R$を環とし$I$を$R$のイデアルとすると次が成り立つ.
 \begin{center}
@@ -138,5 +148,7 @@ $R$を環とし$I$を$R$のイデアルとすると次が成り立つ.
 \end{proposition}
 
 \begin{proof}
+$x \in \sqrt{I}$とするとある$n \in \mathbb{N} \setminus 1$が存在して$x^n \in I$となる.\ 任意の$I \subset \mathfrak{p} \in \Spec(R)$に対して$x^n \in \mathfrak{p}$となるが$\mathfrak{p}$は素イデアルなので$x \in \mathfrak{p}$となるので$x \in \bigcap_{I \subset \mathfrak{p} \in \Spec(R)} \mathfrak{p}$である.
 
+$x \not\in \sqrt{I}$とすると$S_x \coloneq \{x^n \mid n \in \mathbb{N}\}$としたとき$S_x \cap I = \emptyset$なので$I \subset \mathfrak{p}$かつ$S_x \cap \mathfrak{p} = \emptyset$を満たす$\mathfrak{p} \in \Spec(R)$が存在する.
 \end{proof}
