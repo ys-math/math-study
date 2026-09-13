@@ -64,6 +64,71 @@ $\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathsc
 \end{proposition}
 
 \begin{proof}
+自然同型$\Phi \colon \Mor_\mathscr{D}(F(-), -) \Rightarrow \Mor_\mathscr{C}(-, G(-))$が存在するとする.\ 任意の$X \in \mathscr{C},\ Y \in \mathscr{D}$に対して$\eta_X \coloneq \Phi_{(X, F(X))}(\id_{F(X)}),\ \varepsilon_Y \coloneq \Phi^{-1}_{(G(Y), Y)}(\id_{G(Y)})$とする.
+
+$X,X' \in \Ob(\mathscr{C}),\ Y,Y' \in \Ob(\mathscr{D}),\ u \in \Mor_{\mathscr{C}}(X', X),\ v \in \Mor_{\mathscr{D}}(Y, Y'),\ f \in \Mor_{\mathscr{D}}(F(X), Y),\ g \in \Mor_{\mathscr{C}}(X, G(Y))$とする.\ このとき$\Mor_{\mathscr{D}}(F(u), v)(f) = v \circ f \circ F(u)$かつ$\Mor_{\mathscr{C}}(u, G(v))(g) \coloneq G(v) \circ g \circ u$である.\ $\Phi$は自然同型なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7RH19KEYoWCksWSkiXSxbMSwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KFgsRyhZKSkiXSxbMCwxLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7RH19KEYoWCcpLFknKSJdLFsxLDEsIlxcbWF0aHJte01vcn1fe1xcbWF0aHNjcntDfX0oWCcsRyhZJykpIl0sWzAsMiwidiBcXGNpcmMgKC0pIFxcY2lyYyBGKHUpIiwyXSxbMCwxLCJcXFBoaV97KFgsIFkpfSIsMCx7Im9mZnNldCI6LTF9XSxbMSwzLCJHKHYpIFxcY2lyYyAoLSkgXFxjaXJjIHUiXSxbMiwzLCJcXFBoaV97KFgnLCBZJyl9IiwwLHsib2Zmc2V0IjotMX1dLFsxLDAsIlxcUGhpXnstMX1feyhYLCBZKX0iLDAseyJvZmZzZXQiOi0xfV0sWzMsMiwiXFxQaGleey0xfV97KFgnLCBZJyl9IiwwLHsib2Zmc2V0IjotMX1dXQ==
+\[\begin{tikzcd}
+	{\mathrm{Mor}_{\mathscr{D}}(F(X),Y)} & {\mathrm{Mor}_{\mathscr{C}}(X,G(Y))} \\
+	{\mathrm{Mor}_{\mathscr{D}}(F(X'),Y')} & {\mathrm{Mor}_{\mathscr{C}}(X',G(Y'))}
+	\arrow["{\Phi_{(X, Y)}}", shift left, from=1-1, to=1-2]
+	\arrow["{v \circ (-) \circ F(u)}"', from=1-1, to=2-1]
+	\arrow["{\Phi^{-1}_{(X, Y)}}", shift left, from=1-2, to=1-1]
+	\arrow["{G(v) \circ (-) \circ u}", from=1-2, to=2-2]
+	\arrow["{\Phi_{(X', Y')}}", shift left, from=2-1, to=2-2]
+	\arrow["{\Phi^{-1}_{(X', Y')}}", shift left, from=2-2, to=2-1]
+\end{tikzcd}\]
+
+したがって上の可換図式により任意の$X, X' \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(X, X')$に対して次の図式が可換になるので$\Phi_{(X,F(X'))}(F(f)) = \Phi_{(X,F(X'))}(\id_{F(X')} \circ \id_F(X') \circ F(f)) = G(\id_{F(X')}) \circ \Phi_{(X,F(X'))}(\id_{F(X')}) \circ f = \Phi_{(X,F(X'))}(\id_{F(X')}) \circ f = \eta_{X'} \circ f$が成り立つ.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7RH19KEYoWCcpLEYoWCcpKSJdLFsxLDAsIlxcbWF0aHJte01vcn1fe1xcbWF0aHNjcntDfX0oWCcsR0YoWCcpKSJdLFswLDEsIlxcbWF0aHJte01vcn1fe1xcbWF0aHNjcntEfX0oRihYKSxGKFgnKSkiXSxbMSwxLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KFgsR0YoWCcpKSJdLFswLDIsIlxcbWF0aHJte2lkfV97RihYJyl9IFxcY2lyYyAoLSkgXFxjaXJjIEYoZikiLDJdLFswLDEsIlxcUGhpX3soWCcsIEYoWCcpKX0iXSxbMSwzLCJHKFxcbWF0aHJte2lkfV97RihYJyl9KSBcXGNpcmMgKC0pIFxcY2lyYyBmIl0sWzIsMywiXFxQaGlfeyhYLCBGKFgnKSl9Il1d
+\[\begin{tikzcd}
+	{\mathrm{Mor}_{\mathscr{D}}(F(X'),F(X'))} & {\mathrm{Mor}_{\mathscr{C}}(X',GF(X'))} \\
+	{\mathrm{Mor}_{\mathscr{D}}(F(X),F(X'))} & {\mathrm{Mor}_{\mathscr{C}}(X,GF(X'))}
+	\arrow["{\Phi_{(X', F(X'))}}", from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_{F(X')} \circ (-) \circ F(f)}"', from=1-1, to=2-1]
+	\arrow["{G(\mathrm{id}_{F(X')}) \circ (-) \circ f}", from=1-2, to=2-2]
+	\arrow["{\Phi_{(X, F(X'))}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+また次の図式も任意の$X, X' \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(X, X')$に対して可換になるので$\Phi_{(X,F(X'))}(F(f)) = \Phi_{(X,F(X'))}(F(f) \circ \id_{F(X)} \circ F(\id_X)) = G(F(f)) \circ \Phi_{(X,F(X))}(\id_{F(X)}) \circ \id_X = G(F(f)) \circ \Phi_{(X,F(X))}(\id_{F(X)}) = G(F(f)) \circ \eta_X$が成り立つ.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7RH19KEYoWCksRihYKSkiXSxbMSwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7Q319KFgsR0YoWCkpIl0sWzAsMSwiXFxtYXRocm17TW9yfV97XFxtYXRoc2Nye0R9fShGKFgpLEYoWCcpKSJdLFsxLDEsIlxcbWF0aHJte01vcn1fe1xcbWF0aHNjcntDfX0oWCcsR0YoWCcpKSJdLFswLDIsIkYoZikgXFxjaXJjICgtKSBcXGNpcmMgRihcXG1hdGhybXtpZH1fWCkiLDJdLFswLDEsIlxcUGhpX3soWCwgRihYKSl9Il0sWzEsMywiRyhGKGYpKSBcXGNpcmMgKC0pIFxcY2lyYyBcXG1hdGhybXtpZH1fWCJdLFsyLDMsIlxcUGhpX3soWCwgRihYJykpfSJdXQ==
+\[\begin{tikzcd}
+	{\mathrm{Mor}_{\mathscr{D}}(F(X),F(X))} & {\mathrm{Mor}_{\mathscr{C}}(X,GF(X))} \\
+	{\mathrm{Mor}_{\mathscr{D}}(F(X),F(X'))} & {\mathrm{Mor}_{\mathscr{C}}(X',GF(X'))}
+	\arrow["{\Phi_{(X, F(X))}}", from=1-1, to=1-2]
+	\arrow["{F(f) \circ (-) \circ F(\mathrm{id}_X)}"', from=1-1, to=2-1]
+	\arrow["{G(F(f)) \circ (-) \circ \mathrm{id}_X}", from=1-2, to=2-2]
+	\arrow["{\Phi_{(X, F(X'))}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+ゆえに$\eta_{X'} \circ f = G(F(f)) \circ \eta_X$が成り立ち次の図式が可換になるので$\eta \coloneq (\eta_X)_{X \in \Ob(\mathscr{C})}$は自然変換である.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMCwiR0YoWCkiXSxbMSwxLCJHRihYJykiXSxbMCwxLCJYJyJdLFswLDEsIlxcZXRhX1giXSxbMywyLCJcXGV0YV97WCd9Il0sWzAsMywiZiIsMl0sWzEsMiwiR0YoZikiXV0=
+\[\begin{tikzcd}
+	X & {GF(X)} \\
+	{X'} & {GF(X')}
+	\arrow["{\eta_X}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{GF(f)}", from=1-2, to=2-2]
+	\arrow["{\eta_{X'}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+
+$\varepsilon$が自然変換であることも同様にして示せる.
+
+次の図式も任意の$X \in \Ob(\mathscr{C})$に対して可換になるので$\id_{F(X)} = \Phi^{-1}_{(X, F(X))}(\Phi_{(X, F(X))}(\id_{F(X)})) = \Phi^{-1}_{(X, F(X))}(\eta_X) = \Phi^{-1}_{(X, F(X))}(G(\id_{F(X)}) \circ \id_{GF(X)} \circ \eta_X) = \id_{F(X)} \circ \Phi^{-1}_{(GF(X), F(X))}(\id_{GF(X)}) \circ F(\eta_X) = \varepsilon_{F(X)} \circ F(\eta_X)$が成り立つ.\ つまり$\id_F = \varepsilon F \circ F \eta$である.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhybXtNb3J9X3tcXG1hdGhzY3J7RH19KEZHRihYKSxGKFgpKSJdLFsxLDAsIlxcbWF0aHJte01vcn1fe1xcbWF0aHNjcntDfX0oR0YoWCksR0YoWCkpIl0sWzAsMSwiXFxtYXRocm17TW9yfV97XFxtYXRoc2Nye0R9fShGKFgpLEYoWCkpIl0sWzEsMSwiXFxtYXRocm17TW9yfV97XFxtYXRoc2Nye0N9fShYLEdGKFgpKSJdLFswLDIsIlxcbWF0aHJte2lkfV97RihYKX0gXFxjaXJjICgtKSBcXGNpcmMgRihcXGV0YV9YKSIsMl0sWzEsMywiRyhcXG1hdGhybXtpZH1fe0YoWCl9KSBcXGNpcmMgKC0pIFxcY2lyYyBcXGV0YV9YIl0sWzEsMCwiXFxQaGleey0xfV97KEdGKFgpLCBGKFgpKX0iLDJdLFszLDIsIlxcUGhpXnstMX1feyhYLCBGKFgpKX0iLDJdXQ==
+\[\begin{tikzcd}
+	{\mathrm{Mor}_{\mathscr{D}}(FGF(X),F(X))} & {\mathrm{Mor}_{\mathscr{C}}(GF(X),GF(X))} \\
+	{\mathrm{Mor}_{\mathscr{D}}(F(X),F(X))} & {\mathrm{Mor}_{\mathscr{C}}(X,GF(X))}
+	\arrow["{\mathrm{id}_{F(X)} \circ (-) \circ F(\eta_X)}"', from=1-1, to=2-1]
+	\arrow["{\Phi^{-1}_{(GF(X), F(X))}}"', from=1-2, to=1-1]
+	\arrow["{G(\mathrm{id}_{F(X)}) \circ (-) \circ \eta_X}", from=1-2, to=2-2]
+	\arrow["{\Phi^{-1}_{(X, F(X))}}"', from=2-2, to=2-1]
+\end{tikzcd}\]
+
+同様にして$\id_G = G \varepsilon \circ \eta G$が示せるので$(\eta, \varepsilon)$は随伴である.\ したがって随伴$F \dashv G$が存在する.
+
+$F \dashv G$が存在するとする.\ $(\eta, \varepsilon) \coloneq F \dashv G$とすると$\varepsilon F \circ F \eta = \id_F$かつ$G \varepsilon \circ \eta G = \id_G$が成り立つ.\ $X \in \mathscr{C},\ Y \in \mathscr{D}$に対して$\Phi_{(X,Y)} \colon \Mor_{\mathscr{D}}(F(X), Y) \to \Mor_{\mathscr{C}}(X, G(Y))$を$\Phi(f) \coloneq G(f) \circ \eta_X$で定め$\Psi_{(X,Y)} \colon \Mor_{\mathscr{C}}(X, G(Y)) \to \Mor_{\mathscr{D}}(F(X), Y)$を$\Psi_{(X,Y)}(g) \coloneq \varepsilon_Y \circ F(g)$で定める.
 
 \end{proof}
 
