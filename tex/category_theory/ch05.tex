@@ -2,12 +2,22 @@
 % !TEX root = main.tex
 
 \section{随伴}
-\begin{definition}
+\begin{definition} \label{def: compositeFunctor}
 $\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{E}$を共変関手とする.\ このとき\textbf{合成関手}(composite functor)$GF \colon \mathscr{C} \to \mathscr{D}$が次のようにして定まる.
 \begin{itemize}
-	\item 
+	\item $A \in \Ob(\mathscr{C})$に対して$GF(A) \coloneq G(F(A))$とする.
+	\item $f \in \Mor(\mathscr{C})$に対して$GF(f) \coloneq G(F(f))$とする.
 \end{itemize}
 \end{definition}
+
+\begin{definition} \label{def: leftWhiskering}
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{D}^{\mathscr{C}}$,\ $H \in \mathscr{E}^{\mathscr{D}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$H\eta \colon HF \Rightarrow HG$を$X \in \mathscr{C}$に対して$(H\eta)_X \coloneq H(\eta_X)$として定める.\ $H \eta$を$H$による$\eta$への\textbf{左ヒゲ結合}(left whiskering)という.
+\end{definition}
+
+\begin{definition} \label{def: rightWhiskering}
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{E}^{\mathscr{D}}$,\ $H \in \mathscr{D}^{\mathscr{C}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$\eta	H \colon FH \Rightarrow GH$を$X \in \mathscr{C}$に対して$(\eta H)_X \coloneq \eta_{H(X)}$として定める.\ $\eta H$を$H$による$\eta$への\textbf{右ヒゲ結合}(right whiskering)という.
+\end{definition}
+
 \begin{definition} \label{def: Adjunction}
 $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{G}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
 
@@ -57,7 +67,7 @@ $\mathscr{C}, \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathsc
 
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: Adjunction.limitFunctor}
 $\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \to (L_G, (L_G, \pi_G))$がただ1つ存在する.
 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX1GfSJdLFswLDEsIkNfe1xcdmFycHJvamxpbV97XFxtYXRoc2Nye0p9fUd9Il0sWzEsMCwiRiJdLFsxLDEsIkciXSxbMCwyLCJcXHBpX0YiLDAseyJsZXZlbCI6Mn1dLFswLDEsIlxcRGVsdGEodSkiLDIseyJsZXZlbCI6Mn1dLFsxLDMsIlxccGlfRyIsMCx7ImxldmVsIjoyfV0sWzIsMywiXFxldGEiLDAseyJsZXZlbCI6Mn1dXQ==
