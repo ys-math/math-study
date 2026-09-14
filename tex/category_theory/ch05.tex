@@ -128,29 +128,52 @@ $\varepsilon$が自然変換であることも同様にして示せる.
 
 同様にして$\id_G = G \varepsilon \circ \eta G$が示せるので$(\eta, \varepsilon)$は随伴である.\ したがって随伴$F \dashv G$が存在する.
 
-$F \dashv G$が存在するとする.\ $(\eta, \varepsilon) \coloneq F \dashv G$とすると$\varepsilon F \circ F \eta = \id_F$かつ$G \varepsilon \circ \eta G = \id_G$が成り立つ.\ $X \in \mathscr{C},\ Y \in \mathscr{D}$に対して$\Phi_{(X,Y)} \colon \Mor_{\mathscr{D}}(F(X), Y) \to \Mor_{\mathscr{C}}(X, G(Y))$を$\Phi(f) \coloneq G(f) \circ \eta_X$で定め$\Psi_{(X,Y)} \colon \Mor_{\mathscr{C}}(X, G(Y)) \to \Mor_{\mathscr{D}}(F(X), Y)$を$\Psi_{(X,Y)}(g) \coloneq \varepsilon_Y \circ F(g)$で定める.
+$F \dashv G$が存在するとする.\ $(\eta, \varepsilon) \coloneq F \dashv G$とすると$\eta \colon \id_{\mathscr{C}} \Rightarrow GF,\ \varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$であり$\varepsilon F \circ F \eta = \id_F$かつ$G \varepsilon \circ \eta G = \id_G$が成り立つ.\ $X \in \mathscr{C},\ Y \in \mathscr{D}$に対して$\Phi_{(X,Y)} \colon \Mor_{\mathscr{D}}(F(X), Y) \to \Mor_{\mathscr{C}}(X, G(Y))$を$\Phi_{(X,Y)}(f) \coloneq G(f) \circ \eta_X$で定め$\Psi_{(X,Y)} \colon \Mor_{\mathscr{C}}(X, G(Y)) \to \Mor_{\mathscr{D}}(F(X), Y)$を$\Psi_{(X,Y)}(g) \coloneq \varepsilon_Y \circ F(g)$で定める.
+
+任意の$f \in \Mor_{\mathscr{D}}(F(X), Y)$に対して$\Psi_{(X,Y)}(\Phi_{(X,Y)}(f)) = \Psi_{(X,Y)}(G(f) \circ \eta_X) = \varepsilon_Y \circ F(G(f) \circ \eta_X) = \varepsilon_Y \circ FG(f) \circ (F \eta)_X$となる.\ $\varepsilon$は自然変換なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGR0YoWCkiXSxbMSwwLCJGKFgpIl0sWzEsMSwiWSJdLFswLDEsIkZHKFkpIl0sWzAsMSwiXFx2YXJlcHNpbG9uX3tGKFgpfSJdLFszLDIsIlxcdmFyZXBzaWxvbl97WX0iXSxbMSwyLCJmIl0sWzAsMywiRkcoZikiLDJdXQ==
+\[\begin{tikzcd}
+	{FGF(X)} & {F(X)} \\
+	{FG(Y)} & Y
+	\arrow["{\varepsilon_{F(X)}}", from=1-1, to=1-2]
+	\arrow["{FG(f)}"', from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{\varepsilon_{Y}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+したがって$\varepsilon_Y \circ FG(f) \circ (F \eta)_X = f \circ \varepsilon_{F(X)} \circ (F \eta)_X = f \circ (\id_F)_X = f$となる.
+
+任意の$g \in \Mor_{\mathscr{C}}(X, G(Y))$に対して$\Phi_{(X,Y)}(\Psi_{(X,Y)}(g)) = \Phi_{(X,Y)}(\varepsilon_Y \circ F(g)) = G(\varepsilon_Y \circ F(g)) \circ \eta_X = G \varepsilon_Y \circ GF(g) \circ \eta_X$となる.\ $\eta$は自然変換なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzAsMSwiRyhZKSJdLFsxLDAsIkdGKFgpIl0sWzEsMSwiR0ZHKFkpIl0sWzAsMSwiZyIsMl0sWzAsMiwiXFxldGFfWCJdLFsyLDMsIkdGKGcpIl0sWzEsMywiXFxldGFfe0coWSl9Il1d
+\[\begin{tikzcd}
+	X & {GF(X)} \\
+	{G(Y)} & {GFG(Y)}
+	\arrow["{\eta_X}", from=1-1, to=1-2]
+	\arrow["g"', from=1-1, to=2-1]
+	\arrow["{GF(g)}", from=1-2, to=2-2]
+	\arrow["{\eta_{G(Y)}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+したがって$(G \varepsilon)_Y \circ GF(g) \circ \eta_X = (G \varepsilon)_Y \circ (\eta G)_Y \circ g = (\id_G)_Y \circ g = g$となる.
+
+以上により$\Phi_{(X,Y)}$と$\Psi_{(X,Y)}$は互いに逆写像である.
+
+任意の$X,X' \in \mathscr{C},\ Y, Y' \in \mathscr{D}$と任意の$u \in \Mor_{\mathscr{C}}(X', X),\ v \in \Mor_{\mathscr{D}}(Y, Y'),\ f \in \Mor_{\mathscr{D}}(F(X), Y)$に対して$\Phi_{(X',Y')}(v \circ f \circ F(u)) = G(v \circ f \circ F(u)) \circ \eta_{X'} = G(v) \circ G(f) \circ GF(u) \circ \eta_{X'}$となる.\ $\eta$は自然変換なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlgiXSxbMSwwLCJHRihYJykiXSxbMSwxLCJHRihYKSJdLFsyLDMsIkdGKHUpIl0sWzAsMSwidSIsMl0sWzAsMiwiXFxldGFfe1gnfSJdLFsxLDMsIlxcZXRhX1giXV0=
+\[\begin{tikzcd}
+	{X'} & {GF(X')} \\
+	X & {GF(X)}
+	\arrow["{\eta_{X'}}", from=1-1, to=1-2]
+	\arrow["u"', from=1-1, to=2-1]
+	\arrow["{GF(u)}", from=1-2, to=2-2]
+	\arrow["{\eta_X}", from=2-1, to=2-2]
+\end{tikzcd}\]
+よって$G(v) \circ G(f) \circ GF(u) \circ \eta_{X'} = G(v) \circ G(f) \circ \eta_X \circ u = G(v) \circ \Phi_{(X, Y)}(f) \circ u$である.
+
+以上より$\Phi \colon \Mor_{\mathscr{D}}(F(-), -) \Rightarrow \Mor_{\mathscr{C}}(-, G(-))$は自然同型である.
 
 \end{proof}
 
-\begin{definition} \label{def: Adjunction.limitFunctor}
-$\mathscr{C}, \mathscr{J}$を圏とする.\ $F \in \mathscr{C}^{\mathscr{J}}$に対して$\displaystyle \varprojlim_{\mathscr{J}} F \coloneq \varprojlim_{\mathscr{J}}F$とする.\ $\eta \in \Mor(\mathscr{C}^{\mathscr{J}})$に対して$\displaystyle (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \in \int_{\mathscr{C}^{\op}} \Cone(-, G)$である.\ 次の図式を可換にする射$u \colon (L_{\dom(\eta)}, (L_{\dom(\eta)}, \eta \circ \pi_{\dom(\eta)})) \to (L_G, (L_G, \pi_G))$がただ1つ存在する.
-
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX1GfSJdLFswLDEsIkNfe1xcdmFycHJvamxpbV97XFxtYXRoc2Nye0p9fUd9Il0sWzEsMCwiRiJdLFsxLDEsIkciXSxbMCwyLCJcXHBpX0YiLDAseyJsZXZlbCI6Mn1dLFswLDEsIlxcRGVsdGEodSkiLDIseyJsZXZlbCI6Mn1dLFsxLDMsIlxccGlfRyIsMCx7ImxldmVsIjoyfV0sWzIsMywiXFxldGEiLDAseyJsZXZlbCI6Mn1dXQ==
-\[\begin{tikzcd}
-	{C_{\varprojlim_{\mathscr{J}}F}} & F \\
-	{C_{\varprojlim_{\mathscr{J}}G}} & G
-	\arrow["{\pi_F}", Rightarrow, nfold, from=1-1, to=1-2]
-	\arrow["{\Delta(u)}"', Rightarrow, nfold, from=1-1, to=2-1]
-	\arrow["\eta", Rightarrow, nfold, from=1-2, to=2-2]
-	\arrow["{\pi_G}", Rightarrow, nfold, from=2-1, to=2-2]
-\end{tikzcd}\]
-
-$\displaystyle \varprojlim_{\mathscr{J}}\eta \coloneq u$で定める.
-すると共変関手$\displaystyle \varprojlim_{\mathscr{J}} \colon \mathscr{C}^{\mathscr{J}} \to \mathscr{C}$が定まる.
-\end{definition}
-
 \begin{proposition} \label{prop: complete_iff_constant_diagram_has_right_adjoint}
-圏$\mathscr{C}$が小圏$\mathscr{J}$を形とする極限を持つことと定図式関手$\Delta$が右随伴関手を持つことは同値である.
+局所小圏$\mathscr{C}$が小圏$\mathscr{J}$を形とする極限を持つことと定図式関手$\Delta \colon \mathscr{C}^{\mathscr{D}} \to \mathscr{C}$が右随伴関手を持つことは同値である.
 \end{proposition}
 
 \begin{proof}
