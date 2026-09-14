@@ -2,3 +2,74 @@
 % !TEX root = main.tex
 
 \section{モナド}
+
+\begin{definition} \label{def: Endofunctor}
+$\mathscr{C}$を圏とする.\ 共変関手$F \colon \mathscr{C} \to \mathscr{C}$を\textbf{自己関手}(endofunctor)と呼ぶ.
+\end{definition}
+
+\begin{definition} \label{def: EndofunctorCategory}
+$\mathscr{C}$を圏とする.\ $\End(\mathscr{C}) \coloneq \mathscr{C}^{\mathscr{C}}$としこれを\textbf{自己関手圏}(cateogory of endofunctors)という.
+\end{definition}
+
+\begin{definition} \label{def: Monad}
+$\mathscr{C}$を圏とし$T \in \End(\mathscr{C})$とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow T$と$\mu \colon T^2 \Rightarrow T$が次の2つの図式を可換にするとする.
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJUXjMiXSxbMSwwLCJUXjIiXSxbMCwxLCJUXjIiXSxbMSwxLCJUIl0sWzMsMCwiVCJdLFs0LDAsIlReMiJdLFs0LDEsIlQiXSxbMywxLCJUXjIiXSxbMCwxLCJUXFxtdSIsMCx7ImxldmVsIjoyfV0sWzAsMiwiXFxtdSBUIiwyLHsibGV2ZWwiOjJ9XSxbMiwzLCJcXG11IiwyLHsibGV2ZWwiOjJ9XSxbMSwzLCJcXG11IiwwLHsibGV2ZWwiOjJ9XSxbNSw2LCJcXG11IiwwLHsibGV2ZWwiOjJ9XSxbNyw2LCJcXG11IiwyLHsibGV2ZWwiOjJ9XSxbNCw1LCJcXGV0YSBUIiwwLHsibGV2ZWwiOjJ9XSxbNCw3LCJUIFxcZXRhIiwyLHsibGV2ZWwiOjJ9XSxbNCw2LCJcXG1hdGhybXtpZH1fVCIsMSx7ImxldmVsIjoyfV1d
+\[\begin{tikzcd}
+	{T^3} & {T^2} && T & {T^2} \\
+	{T^2} & T && {T^2} & T
+	\arrow["{T\mu}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\mu T}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["\mu", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{\eta T}", Rightarrow, nfold, from=1-4, to=1-5]
+	\arrow["{T \eta}"', Rightarrow, nfold, from=1-4, to=2-4]
+	\arrow["{\mathrm{id}_T}"{description}, Rightarrow, nfold, from=1-4, to=2-5]
+	\arrow["\mu", Rightarrow, nfold, from=1-5, to=2-5]
+	\arrow["\mu"', Rightarrow, nfold, from=2-1, to=2-2]
+	\arrow["\mu"', Rightarrow, nfold, from=2-4, to=2-5]
+\end{tikzcd}\]
+このとき組$(T, \eta, \mu)$を$\mathscr{C}$上の\textbf{モナド}(monad)といい$\eta$を\textbf{単位元}(unit),\ $\mu$を\textbf{乗法}(multiplication)と呼ぶ.
+\end{definition}
+
+\begin{proposition} \label{prop: monad_of_adjunction}
+$\mathscr{C}, \mathscr{D}$を圏とし$F \in \mathscr{D}^{\mathscr{C}},\ U \in \mathscr{C}^{\mathscr{D}}$とする.\ 随伴$F \dashv U$が存在するとき$(\eta, \varepsilon) \coloneq F \dashv U$とすると$(UF, \eta, U \varepsilon F)$は$\mathscr{C}$上のモナドになる.
+\end{proposition}
+\begin{proof}
+$\varepsilon F \circ F \eta = \id_F$より$U \varepsilon F \circ UF \eta = \id_{UF}$が成り立ち$U \varepsilon \circ \eta U = \id_U$より$U \varepsilon F \circ \eta UF = \id_{UF}$が成り立つので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVRiJdLFsxLDEsIlVGIl0sWzEsMCwiVUZVRiJdLFswLDEsIlVGVUYiXSxbMCwxLCJcXG1hdGhybXtpZH1fe1VGfSIsMSx7ImxldmVsIjoyfV0sWzAsMiwiVUYgXFxldGEiLDAseyJsZXZlbCI6Mn1dLFsyLDEsIlUgXFx2YXJlcHNpbG9uIEYiLDAseyJsZXZlbCI6Mn1dLFswLDMsIlxcZXRhIFVGIiwyLHsibGV2ZWwiOjJ9XSxbMywxLCJVIFxcdmFyZXBzaWxvbiBGIiwyLHsibGV2ZWwiOjJ9XV0=
+\[\begin{tikzcd}
+	UF & UFUF \\
+	UFUF & UF
+	\arrow["{UF \eta}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{\eta UF}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["{\mathrm{id}_{UF}}"{description}, Rightarrow, nfold, from=1-1, to=2-2]
+	\arrow["{U \varepsilon F}", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{U \varepsilon F}"', Rightarrow, nfold, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+$((U \varepsilon F) \circ (U \varepsilon FUF))_X = (U \varepsilon F)_X \circ (U \varepsilon FUF)_X = U(\varepsilon_{F(X)}) \circ U(\varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)})$である.\ また$((U \varepsilon F) \circ (UFU \varepsilon F))_X = (U \varepsilon F)_X \circ (UFU \varepsilon F)_X = U(\varepsilon_{F(X)}) \circ UFU(\varepsilon_{F(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\ $\varepsilon$は自然変換なので任意の$f \in \Mor_{\mathscr{D}}(FUF(X), F(X))$に対して次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJGVUYoWCkiXSxbMSwxLCJGKFgpIl0sWzAsMCwiRlUoRlVGKFgpKSJdLFswLDEsIkZVKEYoWCkpIl0sWzAsMSwiZiJdLFsyLDMsIkZVKGYpIiwyXSxbMiwwLCJcXHZhcmVwc2lsb25fe0ZVRihYKX0iXSxbMywxLCJcXHZhcmVwc2lsb25fe0YoWCl9Il1d
+\[\begin{tikzcd}
+	{FU(FUF(X))} & {FUF(X)} \\
+	{FU(F(X))} & {F(X)}
+	\arrow["{\varepsilon_{FUF(X)}}", from=1-1, to=1-2]
+	\arrow["{FU(f)}"', from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{\varepsilon_{F(X)}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+$\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)} = \varepsilon_{F(X)} \circ FU(\varepsilon_{F(X)})$が成り立ち$U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\ よって次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJVRlVGVUYiXSxbMSwwLCJVRlVGIl0sWzEsMSwiVUYiXSxbMCwxLCJVRlVGIl0sWzAsMSwiVSBcXHZhcmVwc2lsb24gRlVGIiwwLHsibGV2ZWwiOjJ9XSxbMSwyLCJVIFxcdmFyZXBzaWxvbiBGIiwwLHsibGV2ZWwiOjJ9XSxbMywyLCJVIFxcdmFyZXBzaWxvbiBGIiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJVRlUgXFx2YXJlcHNpbG9uIEYiLDIseyJsZXZlbCI6Mn1dXQ==
+\[\begin{tikzcd}
+	UFUFUF & UFUF \\
+	UFUF & UF
+	\arrow["{U \varepsilon FUF}", Rightarrow, nfold, from=1-1, to=1-2]
+	\arrow["{UFU \varepsilon F}"', Rightarrow, nfold, from=1-1, to=2-1]
+	\arrow["{U \varepsilon F}", Rightarrow, nfold, from=1-2, to=2-2]
+	\arrow["{U \varepsilon F}", Rightarrow, nfold, from=2-1, to=2-2]
+\end{tikzcd}\]
+
+したがって$(UF, \eta, U \varepsilon F)$は$\mathscr{C}$上のモナドである.
+\end{proof}
+
+\begin{definition}
+\cref{prop: monad_of_adjunction}におけるモナド$(UF, \eta, U \varepsilon F)$を随伴$F \dashv U$によって生成されるモナドという.
+\end{definition}
