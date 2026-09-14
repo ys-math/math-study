@@ -73,3 +73,33 @@ $\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{
 \begin{definition}
 \cref{prop: monad_of_adjunction}におけるモナド$(UF, \eta, U \varepsilon F)$を随伴$F \dashv U$によって生成されるモナドという.
 \end{definition}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}^T$を次のようにして定める.
+\begin{itemize}
+	\item 対象を$A \in \mathscr{C},\ a \in \Mor_{\mathscr{C}}(T(A), A)$の組$(A, a)$で次の図式を可換にするものとする.
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJBIl0sWzEsMCwiVChBKSJdLFsxLDEsIkEiXSxbMywwLCJUXjIoQSkiXSxbNCwwLCJUKEEpIl0sWzQsMSwiQSJdLFszLDEsIlQoQSkiXSxbMCwxLCJcXGV0YV9BIl0sWzEsMiwiYSJdLFswLDIsIlxcbWF0aHJte2lkfV9BIiwyXSxbMyw0LCJcXG11X0EiXSxbNCw1LCJhIl0sWzMsNiwiVChhKSIsMl0sWzYsNSwiYSIsMl1d
+\[\begin{tikzcd}
+	A & {T(A)} && {T^2(A)} & {T(A)} \\
+	& A && {T(A)} & A
+	\arrow["{\eta_A}", from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_A}"', from=1-1, to=2-2]
+	\arrow["a", from=1-2, to=2-2]
+	\arrow["{\mu_A}", from=1-4, to=1-5]
+	\arrow["{T(a)}"', from=1-4, to=2-4]
+	\arrow["a", from=1-5, to=2-5]
+	\arrow["a"', from=2-4, to=2-5]
+\end{tikzcd}\]
+	\item 射$f \colon (A, a) \to (B, b)$は$\mathscr{C}$の射$f \colon A \to B$で次の図式を可換にするものとする.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUKEEpIl0sWzEsMCwiVChCKSJdLFswLDEsIkEiXSxbMSwxLCJCIl0sWzAsMSwiVChmKSJdLFsyLDMsImYiXSxbMCwyLCJhIiwyXSxbMSwzLCJiIl1d
+\[\begin{tikzcd}
+	{T(A)} & {T(B)} \\
+	A & B
+	\arrow["{T(f)}", from=1-1, to=1-2]
+	\arrow["a"', from=1-1, to=2-1]
+	\arrow["b", from=1-2, to=2-2]
+	\arrow["f", from=2-1, to=2-2]
+\end{tikzcd}\]
+\end{itemize}
+この圏を$T$の\textbf{アイレンベルグムーア圏}(Eilenberg-Moore cateogry)または\textbf{$T$代数}($T$-algebra)の圏という.
+\end{definition}
