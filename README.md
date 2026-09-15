@@ -36,28 +36,6 @@ total                                                  81,814
 ```
 <!-- END TEXT METER -->
 
-## Three learning tracks
-
-Note-making is the axis; three things are being learned along it. Each track has
-its own toolchain, its own gate and its own CI, and none of them can break
-another.
-
-| Track | Where | What it is |
-| --- | --- | --- |
-| LaTeX | `tex/` | One topic per directory — a `main.tex` and its `ch0N.tex` chapters, every one `\input`ing the shared `tex/preamble.tex`. LuaLaTeX builds each into a PDF |
-| Lean | `lean/` | A Lake package pinned to a Mathlib release. `Math/Learn/` works through a curriculum; `Math/Study/` mirrors the notes' theorems as statements. `docs/lean-convention.md` owns it |
-| Workflow | `scripts/`, `.claude/`, `.github/`, `docs/` | The Python tooling, the slash commands and hooks, the CI, and the conventions they enforce. This track is a subject, not scaffolding — it changes when note-making asks it to |
-
-`Math/Study/` is still empty; the mirrors get written as topics settle enough to
-be worth formalising.
-
-The first two halves **share no build dependency, on purpose**: `lake build`
-never reads `tex/`, `latexmk` never reads `lean/`, and nothing generates one
-from the other. They are joined by a convention — a `\label{}` body and the Lean
-declaration formalising it are the same string — and by nothing else.
-**`docs/repo-structure.md` is the map**, including the couplings that were
-considered and declined; read it before writing anything that joins the two.
-
 ## Prerequisites
 
 Nothing here has a lockfile, so this is the list.
