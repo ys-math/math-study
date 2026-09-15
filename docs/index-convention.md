@@ -1,6 +1,6 @@
 # Index convention
 
-Every topic's PDF ends in a 索引, and every entry in it comes from one mark in
+Every topic's PDF carries a 索引, and every entry in it comes from one mark in
 the prose. This document fixes **which mark**, **what a reading looks like**,
 and **what goes in the index at all**.
 
@@ -12,6 +12,28 @@ document is read by whoever is writing the chapter — which is the repo owner.
 macros, `tex/index.ist` is the upmendex style file, and `.latexmkrc` names the
 program; each carries its reasoning as a comment. `docs/git-strategy.md` decides
 which of them takes a branch, and all of them do.
+
+## Where it sits
+
+`main.tex` carries one bare `\printindex`, after the last chapter and **before**
+`bibliography.tex` where the topic has one:
+
+```tex
+\input{ch07.tex}
+
+\printindex
+
+\newpage
+\input{bibliography.tex}
+
+\newpage
+\input{../colophon.tex}
+```
+
+It is the one line there with no `\newpage` in front of it, and that is not an
+omission: the page break lives in `tex/index.ist`'s `preamble`, along with the
+table-of-contents line, so that both appear only when the topic actually has an
+index. A `\newpage` here would give a topic with no terms a blank page.
 
 ## The three macros
 
@@ -65,7 +87,7 @@ it is instead an error on the line being written.
   printed in (`letter_head 2` in `tex/index.ist`). `ー` is allowed —
   `べくとるくうかん` needs none, but a term built on a katakana loan may.
 - **A term carrying mathematics is read as it is spoken.**
-  `$\lambda$項` is `らむだこう`, `$C^{\infty}$級多様体` is `しーむげんたようたい`.
+  `$\lambda$項` is `らむだこう`, `$C^{\infty}$級多様体` is `しーむげんきゅうたようたい`.
   The reading is the sound, so the mathematics in the headword is simply read
   aloud; nothing about `$` reaches the sort key.
 - **The reading is checked for script, never for correctness.**
