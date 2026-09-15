@@ -51,7 +51,7 @@
     \tl_gset_eq:NN \g_mathstudy_slug_tl \l_tmpa_str
     \hypersetup{
         pdftitle = { \DocSlug },
-        pdfauthor = { \DocAuthor }
+        pdfauthor = { \DocAuthorName }
         }
     }
 \ExplSyntaxOff
@@ -228,7 +228,12 @@
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \newcommand{\GitHub}{https://github.com/ys-math}
-\newcommand{\DocAuthor}{@ys-math}
+% \DocAuthorName is the bare text; \DocAuthor is the same name wrapped in a
+% link to \GitHub, and is what \author{} and the colophon print. The two are
+% separate because the PDF's /Author metadata (\hypersetup above) must stay
+% plain text — an \href there would be typeset into the metadata string.
+\newcommand{\DocAuthorName}{ys-math}
+\newcommand{\DocAuthor}{\href{\GitHub}{\DocAuthorName}}
 \newcommand{\DocRepo}{https://github.com/ys-math/math-study.git}
 \newcommand{\DocCompiler}{LuaLaTeX}
 \newcommand{\DocClass}{jlreq}
