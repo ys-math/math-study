@@ -269,8 +269,8 @@ use. Every `.lean` file carries the header, which names
 MIT text.
 
 Everything that builds it is MIT: `scripts/`, `.github/`, `.latexmkrc`, and the
-shared `tex/preamble.tex`, `tex/colophon.tex` and every `tex/*/main.tex`, which
-`new_topic.py` generates. Reuse the build system freely.
+shared `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist` and every
+`tex/*/main.tex`, which `new_topic.py` generates. Reuse the build system freely.
 
 Full texts: [`LICENSE`](./LICENSE) (MIT),
 [`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0) and

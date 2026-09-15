@@ -65,13 +65,13 @@ Sort every changed path into two buckets, per the table in
 `docs/git-strategy.md`:
 
 - **SHARED** — `scripts/**`, `.github/**`, `.latexmkrc`, `tex/preamble.tex`,
-  `tex/colophon.tex`, `lean/lakefile.toml`, `lean/lean-toolchain`,
-  `lean/lake-manifest.json`. Requires a branch and a PR.
+  `tex/colophon.tex`, `tex/index.ist`, `lean/lakefile.toml`,
+  `lean/lean-toolchain`, `lean/lake-manifest.json`. Requires a branch and a PR.
 - **CONTENT** — everything else: `tex/<topic>/**`, `README.md` prose,
   `CLAUDE.md`, `docs/**`, `.claude/**`. Goes straight to `main`.
 
-`tex/preamble.tex` and `tex/colophon.tex` are SHARED despite living under
-`tex/`; `tex/<topic>/**` is CONTENT however many topics it spans.
+`tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist` are SHARED despite
+living under `tex/`; `tex/<topic>/**` is CONTENT however many topics it spans.
 
 ### Changes the user did not ask about
 
@@ -111,7 +111,7 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | Changed | Gate |
 | --- | --- |
 | `tex/<topic>/**` | `latexmk -cd -g tex/<topic>/main.tex` for each touched topic |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | the same, for all 9 topics |
+| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | the same, for all 9 topics |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 
@@ -191,7 +191,7 @@ closes nothing until the PR merges, which is correct and needs no special case.
 
 Add `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — with your own
 model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`, `tex/preamble.tex`,
-`tex/colophon.tex`, and `lean/`'s build configuration. **Never on
+`tex/colophon.tex`, `tex/index.ist`, and `lean/`'s build configuration. **Never on
 `tex/<topic>/**` or `lean/Math/**`**: that mathematics is the repo
 owner's and this command only transported it.
 

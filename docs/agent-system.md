@@ -50,6 +50,11 @@ Loaded **on demand**, by a command that names them:
   `/review-notes` files them, `/git` closes them, `/verify-issues` closes the
   ones that turn out never to have been true, `/delete-topic` cleans them up
   and `/issues` renders them locally — five commands, one specification.
+- **`docs/index-convention.md`** — which of `\term`, `\termja` and `\termen`
+  marks a defined term, what a reading looks like, and what reaches the 索引.
+  No command implements it: a term is written in the same keystroke as the
+  definition it introduces, so the document is read by whoever writes the
+  chapter. `scripts/test_index_markup.py` checks the mechanical half.
 - **`docs/naming-convention.md`** — what every file and directory is called, in
   both halves of the repo: topic slugs, chapter files, Lean modules, and what
   else has to move when one of them is renamed. The only naming rule enforced in
