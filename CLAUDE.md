@@ -89,10 +89,13 @@ These are the changes that break silently, days later:
   past the skeleton, which is what `lambda_calculus`, `algebraic_k_theory`,
   `category_theory` and `commutative_ring_theory` have already done and what
   `/bib` does to a topic when it wires in a `bibliography.tex`.
-- **Adding a shared `.tex` that all topics `\input`** means adding it to the
+- **Adding a shared file that all topics depend on** means adding it to the
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
-  rebuilds nothing, with a green CI run.
+  rebuilds nothing, with a green CI run. **A shared file that is not a `.tex`
+  needs a second entry**, in that workflow's `paths:` filter — `**.tex` does not
+  reach it, so without it the workflow does not run at all. `tex/index.ist`, the
+  index's upmendex style file, is the one that exists and is in both.
 - **Adding a `.lean` file** means adding its `import` to `lean/Math.lean` in the
   same commit. Lake builds what the root module reaches, so an unimported file
   compiles in your editor, is skipped by `lake build`, and rots behind a green
@@ -150,6 +153,7 @@ guess from outside:
 - **`docs/issue-convention.md` binds every issue you file**,
   **`docs/label-convention.md` binds every `\label{}` you write**,
   **`docs/bib-convention.md` binds every `\bibitem{}` you write**,
+  **`docs/index-convention.md` binds every `\term{}` you write**,
   **`docs/lean-convention.md` binds every `.lean` file**, and
   **`docs/naming-convention.md` binds every path you create or rename**, in both
   halves of the repo — whether or not you got there through `/review-notes`,
@@ -177,8 +181,8 @@ two deliberately diverge.
 it — read it before doing anything by hand. What binds regardless:
 
 - **Shared paths go on a branch and through a PR** — `scripts/`, `.github/`,
-  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`, and `lean/`'s build
-  configuration (`lakefile.toml`, `lean-toolchain`, `lake-manifest.json`). They
+  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, and
+  `lean/`'s build configuration (`lakefile.toml`, `lean-toolchain`, `lake-manifest.json`). They
   can break every topic, or every proof, at once. Everything else —
   `tex/<topic>/**` and `lean/Math/**` included — commits straight to `main`.
 - **Path-scoped `git add` only**, never `-A` or `.`; the working tree may hold
@@ -187,7 +191,7 @@ it — read it before doing anything by hand. What binds regardless:
   `main` with a follow-up commit.
 - **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
   `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`,
-  `tex/preamble.tex`, `tex/colophon.tex`, and
+  `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, and
   `lean/`'s build configuration — and **never on `tex/<topic>/**` or
   `lean/Math/**`**. A statement `/formalize` typed is still the owner's
   mathematics, only transported; the proof under it will be theirs outright.

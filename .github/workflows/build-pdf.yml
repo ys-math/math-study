@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - "**.tex"
+      - "tex/index.ist"   # the index style file is shared and is not a .tex
       - ".latexmkrc"      # rebuild if the build config changes too
       - ".github/workflows/build-pdf.yml"
   workflow_dispatch:
@@ -38,7 +39,11 @@ jobs:
           for f in tex/*/main.tex; do ALL+=("$(basename "$(dirname "$f")")"); done
 
           # Files that every topic depends on: touching one forces a full rebuild.
-          SHARED='tex/preamble\.tex|tex/colophon\.tex|\.latexmkrc|\.github/workflows/build-pdf\.yml'
+          # tex/index.ist is here and in the paths filter above for the same
+          # reason it is easy to forget in both: it is shared but is not a .tex,
+          # so "**.tex" does not reach it and a change to it would otherwise
+          # rebuild nothing at all, with a green run to say so.
+          SHARED='tex/preamble\.tex|tex/colophon\.tex|tex/index\.ist|\.latexmkrc|\.github/workflows/build-pdf\.yml'
 
           rebuild_all=false
           if [ "$EVENT" != "push" ]; then

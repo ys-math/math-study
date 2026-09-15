@@ -4,7 +4,7 @@
 \section{極限}
 
 \begin{definition} \label{def: Cone}
-$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\textbf{形}(shape)$\mathscr{J}$の\textbf{図式}(diagram)と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{J} \to \mathscr{C}$を定関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\textbf{頂点}(apex)とする$F$への\textbf{錐}(cone)という.
+$\mathscr{J}, \mathscr{C}$を圏とし$F \colon \mathscr{J} \to \mathscr{C}$を関手とする.\ $F$を\term{かたち}{形}{shape}$\mathscr{J}$の\term{ずしき}{図式}{diagram}と呼ぶ.\ $A \in \Ob(\mathscr{C})$とし$C_A \colon \mathscr{J} \to \mathscr{C}$を定関手とする.\ $A$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A, \eta)$を$A$を\term{ちょうてん}{頂点}{apex}とする$F$への\term{すい}{錐}{cone}という.
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJDX0EoXFxtYXRocm17ZG9tfShmKSkiXSxbMSwwLCJGKFxcbWF0aHJte2RvbShmKX0pIl0sWzEsMSwiRihcXG1hdGhybXtjb2R9KGYpKSJdLFswLDEsIkNfQShcXG1hdGhybXtjb2R9KGYpKSJdLFszLDAsIkEiXSxbMywxLCJBIl0sWzQsMCwiRihcXG1hdGhybXtkb20oZil9KSJdLFs0LDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMCwxLCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbMywyLCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMSwyLCJGKGYpIl0sWzAsMywiQ19BKGYpIiwyXSxbNCw1LCIiLDAseyJsZXZlbCI6Miwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDcsIkYoZikiXSxbNCw2LCJcXGV0YV97XFxtYXRocm17ZG9tfShmKX0iXSxbNSw3LCJcXGV0YV97XFxtYXRocm17Y29kfShmKX0iXSxbMTAsMTIsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjo0MCwidGFyZ2V0IjozMH0sInN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dXQ==
 \[\begin{tikzcd}
 	{C_A(\dom(f))} & {F(\dom(f))} && A & {F(\dom(f))} \\
@@ -43,16 +43,16 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J}
 	\arrow["{\eta_{\mathrm{cod}(g)}}"', from=2-2, to=3-3]
 	\arrow["{F(g)}"', from=3-1, to=3-3]
 \end{tikzcd}\]
-この関手を\textbf{錐関手}(cone functor)という.
+この関手を\term{すいかんしゅ}{錐関手}{cone functor}という.
 \end{definition}
 
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition} \label{def: limit}
-$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\textbf{極限}(limit)という.
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\term{きょくげん}{極限}{limit}という.
 \end{definition}
 
 \begin{definition} \label{def: IsJComplete}
-$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は$\mathscr{J}$\textbf{完備}($\mathscr{J}$-complete)であるという.
+$\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\ $F \colon \mathscr{J} \to \mathscr{C}$が極限を持つとき$\mathscr{C}$は$\mathscr{J}$\term[J-complete]{かんび}{完備}{$\mathscr{J}$-complete}であるという.
 \end{definition}
 
 \begin{definition} \label{def: limitFunctor}

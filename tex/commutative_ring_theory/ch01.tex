@@ -7,7 +7,7 @@
 \end{remark}
 
 \begin{definition} \label{def: Module}
-$(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \colon R \times M \to M$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\textbf{加群}($R$-module)という.
+$(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \colon R \times M \to M$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\term[R-module]{かぐん}{加群}{$R$-module}という.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
 \begin{enumerate}
     \item 任意の$r \in R$に対して$r \cdot \in \Map(M,M)$は群準同型.
@@ -29,7 +29,7 @@ $(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \col
 \end{definition}
 
 \begin{definition} \label{def: IsLinearMap}
-$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加群とする.\ 写像$f \colon M \to N$が次を満たすとき$f$は$R$\textbf{線形写像}($R$-linear map)であるという.
+$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加群とする.\ 写像$f \colon M \to N$が次を満たすとき$f$は$R$\term[R-linear map]{せんけいしゃぞう}{線形写像}{$R$-linear map}であるという.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
 \begin{enumerate}
     \item $f \colon M \to N$は群準同型.\ つまり下の1つ目の図式が可換になる.
@@ -71,7 +71,7 @@ $\cdot \colon R \times M \to M$を次の図式を可換にするただ一つの�
 	\arrow["\iota", from=1-2, to=2-2]
 	\arrow["\cdot", from=2-1, to=2-2]
 \end{tikzcd}\]
-このとき$(N, +, \cdot)$を$M$の\textbf{部分$R$加群}(sub $R$-module)という.
+このとき$(N, +, \cdot)$を$M$の\term[sub R-module]{ぶぶんあーるかぐん}{部分$R$加群}{sub $R$-module}という.
 \end{definition}
 
 \begin{example} \label{ex: ring_is_module}
@@ -83,7 +83,7 @@ $(R, +_R, \cdot_R)$を環とすると$(R, +_R, \cdot_R)$は$R$加群となる.
 \end{remark}
 
 \begin{definition} \label{def: Ideal}
-$R$を環とする.\ $R$加群$R$の部分$R$加群を$R$の\textbf{イデアル}(ideal)という.
+$R$を環とする.\ $R$加群$R$の部分$R$加群を$R$の\term{いである}{イデアル}{ideal}という.
 \end{definition}
 
 \begin{example} \label{ex: ring_is_ideal}
@@ -91,11 +91,11 @@ $R$は$R$のイデアルである.
 \end{example}
 
 \begin{definition} \label{def: IsProper}
-$R$を零環でない環とし$I$を$R$のイデアルとする.\ $I \neq R$のとき$I$は\textbf{真のイデアル}(proper ideal)であるという.
+$R$を零環でない環とし$I$を$R$のイデアルとする.\ $I \neq R$のとき$I$は\term{しんのいである}{真のイデアル}{proper ideal}であるという.
 \end{definition}
 
 \begin{definition} \label{def: IsPrime}
-$R$を環とし$\mathfrak{p}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{p}$が整域であるとき$\mathfrak{p}$は$R$の\textbf{素イデアル}(prime ideal)であるという.
+$R$を環とし$\mathfrak{p}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{p}$が整域であるとき$\mathfrak{p}$は$R$の\term{そいである}{素イデアル}{prime ideal}であるという.
 \end{definition}
 
 \begin{definition}
@@ -103,7 +103,7 @@ $R$を環とする.\ $R$の素イデアル全体の集合を$\Spec(R)$と書く.
 \end{definition}
 
 \begin{definition} \label{def: IsMaximal}
-$R$を環とし$\mathfrak{m}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{m}$が体であるとき$\mathfrak{m}$は$R$の\textbf{極大イデアル}(maximal ideal)であるという.
+$R$を環とし$\mathfrak{m}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{m}$が体であるとき$\mathfrak{m}$は$R$の\term{きょくだいいである}{極大イデアル}{maximal ideal}であるという.
 \end{definition}
 
 \begin{lemma} \label{lem: determinant_trick}
@@ -116,7 +116,7 @@ $R$を環とし$M$を有限生成$R$加群とする.\ $\phi \in \Hom_R(M, M)$と
 $M = Rx_1 + \cdots + Rx_n$とする.\ $\phi(x_i) \in \phi(M) \subset IM$より$\phi(x_i) = \sigma_{j=1}^n c_{ij}x_j$となる$a_{ij} \in I$が存在する.\ $\sigma_{j=1}^n (\delta_{ij} \phi - c_{ij})x_j = 0$となる.\ $R$上の自己準同型環の可換な部分環$R[\phi]$に成分をもつ$n \times n$行列$A$を$A_{ij} \coloneq \delta_{ij} \phi - c_{ij}$で定める.\ $A(x_i)_{1 \le i \le n} = 0$であるが$\tilde{A}$を$A$の余因子行列とすると$\tilde{A}A = (\det A)E_n$となる.\ $(\det A)E_n (x_i)_{1 \le i \le n} = \tilde{A}A (x_i)_{1 \le i \le n} = \tilde{A} 0 = 0$となるので任意の$1 \le i \le n$に対して$(\det A) x_i = 0$となる.\ よって自己準同型として$\det A = 0$となる.\ $C \coloneq (c_{ij})_{1 \le i,j \le n}$とすると$\det A = \det (\phi E_n - C)$であるため$\phi^n + a_1\phi^{n-1} + \cdots + a_{n-1}\phi + a_n = 0$となる$a_i \in I^i$が存在する.
 \end{proof}
 
-\begin{theorem}(\textbf{Nakayama's lemma}) \label{thm: nakayama_lemma}
+\begin{theorem}(\termen{Nakayama's lemma}) \label{thm: nakayama_lemma}
 $R$を環とし$M$を有限生成$R$加群とする.\ $I$を$R$のイデアルとすると次が成り立つ.
 \begin{center}
     $IM = M \implies {^{\exists}x} \in 1 + I,\ xM = 0$
@@ -127,7 +127,7 @@ $R$を環とし$M$を有限生成$R$加群とする.\ $I$を$R$のイデアル�
 \end{proof}
 
 \begin{definition}
-$R$を環とし$I$を$R$のイデアルとする.\ $\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\ これを$I$の\textbf{根基}(radical)という.
+$R$を環とし$I$を$R$のイデアルとする.\ $\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\ これを$I$の\term{こんき}{根基}{radical}という.
 \end{definition}
 
 \begin{lemma}

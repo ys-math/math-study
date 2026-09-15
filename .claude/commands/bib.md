@@ -5,8 +5,8 @@ allowed-tools: Read, Glob, Grep, Write(tex/*/bibliography.tex), Edit(tex/*/bibli
 ---
 
 File a reference into a topic's `tex/<topic>/bibliography.tex`, creating that
-file and `\input`ing it from `main.tex` before the colophon when the topic has
-none yet.
+file and `\input`ing it from `main.tex` between `\printindex` and the colophon
+when the topic has none yet.
 
 Arguments given: $ARGUMENTS
 
@@ -272,7 +272,8 @@ in a way that looks nothing like its cause.
   gives, licence header included. `.claude/hooks/guard-edits.sh` blocks the
   write without it, so a missing header is a blocked tool call, not a silent
   hole.
-- **Wiring** — insert into `main.tex`, before the colophon:
+- **Wiring** — insert into `main.tex`, after `\printindex` and before the
+  colophon:
 
   ```tex
   \newpage
@@ -281,7 +282,9 @@ in a way that looks nothing like its cause.
 
   Match `tex/algebraic_k_theory/main.tex` exactly: the blank line, the
   `\newpage`, the `\input`, then the blank line and `\newpage` that already
-  precede `\input{../colophon.tex}`.
+  precede `\input{../colophon.tex}`. `\printindex` carries its own page break
+  from `tex/index.ist`, which is why it is the one line there with no
+  `\newpage` of its own — do not add one.
 
 ## The skeleton guard
 

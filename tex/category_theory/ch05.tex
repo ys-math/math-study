@@ -3,7 +3,7 @@
 
 \section{随伴}
 \begin{definition} \label{def: compositeFunctor}
-$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{E}$を共変関手とする.\ このとき\textbf{合成関手}(composite functor)$GF \colon \mathscr{C} \to \mathscr{D}$が次のようにして定まる.
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{E}$を共変関手とする.\ このとき\term{ごうせいかんしゅ}{合成関手}{composite functor}$GF \colon \mathscr{C} \to \mathscr{D}$が次のようにして定まる.
 \begin{itemize}
 	\item $A \in \Ob(\mathscr{C})$に対して$GF(A) \coloneq G(F(A))$とする.
 	\item $f \in \Mor(\mathscr{C})$に対して$GF(f) \coloneq G(F(f))$とする.
@@ -11,15 +11,15 @@ $\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とする.\ $F \colon \mathscr{C}
 \end{definition}
 
 \begin{definition} \label{def: leftWhiskering}
-$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{D}^{\mathscr{C}}$,\ $H \in \mathscr{E}^{\mathscr{D}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$H\eta \colon HF \Rightarrow HG$を$X \in \mathscr{C}$に対して$(H\eta)_X \coloneq H(\eta_X)$として定める.\ $H \eta$を$H$による$\eta$への\textbf{左ヒゲ結合}(left whiskering)という.
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{D}^{\mathscr{C}}$,\ $H \in \mathscr{E}^{\mathscr{D}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$H\eta \colon HF \Rightarrow HG$を$X \in \mathscr{C}$に対して$(H\eta)_X \coloneq H(\eta_X)$として定める.\ $H \eta$を$H$による$\eta$への\term{ひだりひげけつごう}{左ヒゲ結合}{left whiskering}という.
 \end{definition}
 
 \begin{definition} \label{def: rightWhiskering}
-$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{E}^{\mathscr{D}}$,\ $H \in \mathscr{D}^{\mathscr{C}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$\eta	H \colon FH \Rightarrow GH$を$X \in \mathscr{C}$に対して$(\eta H)_X \coloneq \eta_{H(X)}$として定める.\ $\eta H$を$H$による$\eta$への\textbf{右ヒゲ結合}(right whiskering)という.
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏,\ $F,\ G \in \mathscr{E}^{\mathscr{D}}$,\ $H \in \mathscr{D}^{\mathscr{C}}$,\ $\eta \colon F \rightarrow G$とする.\ 自然変換$\eta	H \colon FH \Rightarrow GH$を$X \in \mathscr{C}$に対して$(\eta H)_X \coloneq \eta_{H(X)}$として定める.\ $\eta H$を$H$による$\eta$への\term{みぎひげけつごう}{右ヒゲ結合}{right whiskering}という.
 \end{definition}
 
 \begin{definition} \label{def: Adjunction}
-$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{G}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\textbf{随伴}(adjunction)という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\textbf{左随伴}(left adjoint),\ $G$は$F$の\textbf{右随伴}(right adjoint)であるといい$\eta$を\textbf{単位}(unit),\ $\varepsilon$を\textbf{余単位}(counit)という.
+$\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{D}$と$G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と自然変換$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$で$\varepsilon F \circ F \eta = \id_{F}$かつ$G \varepsilon \circ \eta G = \id_{G}$を満たすものが存在するとき$F \dashv G \coloneq (\eta, \varepsilon)$としこれを\term{ずいはん}{随伴}{adjunction}という.\ 随伴$F \dashv G$が存在するとき$F$は$G$の\term{ひだりずいはん}{左随伴}{left adjoint},\ $G$は$F$の\term{みぎずいはん}{右随伴}{right adjoint}であるといい$\eta$を\term{たんい}{単位}{unit},\ $\varepsilon$を\term{よたんい}{余単位}{counit}という.
 
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXG1hdGhybXtkb219KGYpIl0sWzAsMSwiXFxtYXRocm17Y29kfShmKSJdLFsxLDAsIkcoRihcXG1hdGhybXtkb219KGYpKSkiXSxbMSwxLCJHKEYoXFxtYXRocm17Y29kfShmKSkpIl0sWzMsMCwiRihHKFxcbWF0aHJte2RvbX0oZykpKSJdLFszLDEsIkYoRyhcXG1hdGhybXtjb2R9KGcpKSkiXSxbNCwwLCJcXG1hdGhybXtkb219KGcpIl0sWzQsMSwiXFxtYXRocm17Y29kfShnKSJdLFswLDIsIlxcZXRhX3tcXG1hdGhybXtkb219KGYpfSJdLFsxLDMsIlxcZXRhX3tcXG1hdGhybXtjb2R9KGYpfSJdLFsyLDMsIkcoRihmKSkiXSxbMCwxLCJmIiwyXSxbNCw2LCJcXHZhcmVwc2lsb25fe1xcbWF0aHJte2RvbX0oZyl9Il0sWzUsNywiXFx2YXJlcHNpbG9uX3tcXG1hdGhybXtjb2R9KGcpfSJdLFs0LDUsIkYoRyhnKSkiLDJdLFs2LDcsImciXV0=
 \[\begin{tikzcd}
@@ -49,11 +49,11 @@ $\mathscr{C},\ \mathscr{D}$を圏とする.\ $F \colon \mathscr{C} \to \mathscr{
 \end{definition}
 
 \begin{definition} \label{def: ProductCategory}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ \textbf{積圏}(product category)$\mathscr{C} \times \mathscr{D}$は$A \in \Ob(\mathscr{C}), B \in \Ob(\mathscr{D})$の組$(A, B)$を対象とし$f \in \Mor(\mathscr{C}), g \in \Mor(\mathscr{D})$の組$(f, g)$を射とする.\ 合成は$(f_2, g_2) \circ (f_1, g_1) \coloneq (f_2 \circ f_1, g_2 \circ g_1)$で定める.\ 恒等射は$\id_{(A,B)} \coloneq (\id_A, \id_B)$で定める.
+$\mathscr{C}, \mathscr{D}$を圏とする.\ \term{せきけん}{積圏}{product category}$\mathscr{C} \times \mathscr{D}$は$A \in \Ob(\mathscr{C}), B \in \Ob(\mathscr{D})$の組$(A, B)$を対象とし$f \in \Mor(\mathscr{C}), g \in \Mor(\mathscr{D})$の組$(f, g)$を射とする.\ 合成は$(f_2, g_2) \circ (f_1, g_1) \coloneq (f_2 \circ f_1, g_2 \circ g_1)$で定める.\ 恒等射は$\id_{(A,B)} \coloneq (\id_A, \id_B)$で定める.
 \end{definition}
 
 \begin{definition} \label{def: Bifunctor}
-$\mathscr{C}, \mathscr{D}, \mathscr{E}$を圏とする.\ $\mathscr{E}^{\mathscr{C} \times \mathscr{D}}$の対象を\textbf{双関手}(bifunctor)と呼ぶ.
+$\mathscr{C}, \mathscr{D}, \mathscr{E}$を圏とする.\ $\mathscr{E}^{\mathscr{C} \times \mathscr{D}}$の対象を\term{そうかんしゅ}{双関手}{bifunctor}と呼ぶ.
 \end{definition}
 
 \begin{proposition} \label{prop: adjunction_iff_hom_natural_iso}

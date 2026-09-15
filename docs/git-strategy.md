@@ -47,6 +47,7 @@ could see. The three routes do not change. The grammar is
 | `.latexmkrc` | branch + PR | Build configuration for every topic. |
 | `tex/preamble.tex` | branch + PR | `\input` by all 9 topics. |
 | `tex/colophon.tex` | branch + PR | `\input` by all 9 topics. |
+| `tex/index.ist` | branch + PR | The index style file every topic's 索引 is built with. |
 | `lean/lakefile.toml`, `lean/lean-toolchain`, `lean/lake-manifest.json` | branch + PR | A bad Mathlib bump breaks every proof at once. |
 | everything else | straight to `main` | Blast radius is nothing that builds. |
 
@@ -151,8 +152,8 @@ shape for free.
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
 whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`, the shared
-build files `tex/preamble.tex` and `tex/colophon.tex`, and `lean/`'s build
-configuration.
+build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, and
+`lean/`'s build configuration.
 
 It never goes on `tex/<topic>/**` or `lean/Math/**`. The mathematics is the repo owner's, and
 `/git` frequently commits prose that Claude only transported. A trailer there
@@ -256,7 +257,7 @@ Before any commit, the relevant checks run locally:
 | Changed | Gate | Cost |
 | --- | --- | --- |
 | `tex/<topic>/**` | compile that topic | ~1.5 s |
-| `tex/preamble.tex`, `tex/colophon.tex`, `.latexmkrc` | compile all 9 topics | ~12 s |
+| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 9 topics | ~12 s |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
 | `lean/**` | build the Lean library | ~3 s warm |
 
@@ -351,7 +352,8 @@ here: `\declaretheorem` with `sibling=` compiles under TeX Live 2025 and raises
 `Command \c@proposition already defined` under 2026.
 
 So a green local compile means "I did not break it in an obvious way", not "CI
-will pass". For `tex/preamble.tex`, `tex/colophon.tex` and `.latexmkrc`, the
+will pass". For `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist` and
+`.latexmkrc`, the
 authoritative check is `validate.yml` on the PR — which is the strongest
 argument for those files being branch-only in the first place.
 

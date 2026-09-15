@@ -33,6 +33,11 @@ Thumbs.db
 *.acr
 *.alg
 *.ist
+# ...but tex/index.ist is a source file, not a generated one: it is the upmendex
+# style file every topic's 索引 is built with, and *.ist is above because some
+# LaTeX packages generate one. Without this line the build works locally and
+# fails in CI, where the file was never checked out.
+!tex/index.ist
 *.dvi
 *.xdv
 **/main.pdf

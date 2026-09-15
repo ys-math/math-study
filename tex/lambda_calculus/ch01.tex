@@ -4,13 +4,13 @@
 \section{$\lambda$計算}
 
 \begin{definition}
-$V$を可算集合とし$V$の元を\textbf{変数}(variable)と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
+$V$を可算集合とし$V$の元を\term{へんすう}{変数}{variable}と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
 \begin{itemize}
     \item $V \subset \Lambda$
     \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
     \item ${^{\forall}}x \in V, {^{\forall}}M \in \Lambda, (\lambda x.M) \in \Lambda$
 \end{itemize}
-$\Lambda$の元を\textbf{$\lambda$項}($\lambda$-term)と呼ぶ.
+$\Lambda$の元を\term[lambda-term]{らむだこう}{$\lambda$項}{$\lambda$-term}と呼ぶ.
 \end{definition}
 
 BNF記法を用いて$\lambda$項$e$は次のように定義できる.\ ただし$x$は変数である.
@@ -101,7 +101,7 @@ $\Lambda$上の2項関係$\to_\alpha \subset \Lambda \times \Lambda$を次のよ
 \begin{center}
     $\to_\alpha \coloneq \{(\lambda x.M, \lambda y.(M \langle x \mapsto y\rangle)) \mid x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)\}$
 \end{center}
-$\to_\alpha$を\textbf{$\alpha$ステップ}($\alpha$-step)と呼ぶ.\ つまり$x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)$に対して
+$\to_\alpha$を\term[alpha-step]{あるふぁすてっぷ}{$\alpha$ステップ}{$\alpha$-step}と呼ぶ.\ つまり$x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)$に対して
 \begin{center}
     $\lambda x.M \to_\alpha \lambda y.(M \langle x \mapsto y\rangle)$
 \end{center}
@@ -115,7 +115,7 @@ $\equiv_\alpha \subset \Lambda \times \Lambda$を次の条件を満たす最小�
     \item $\equiv_\alpha$は同値関係
     \item ${^{\forall}}z \in V, {^{\forall}}M,M',N \in \Lambda, (M \equiv_\alpha M' \implies (M N \equiv_\alpha M' N) \land (N M \equiv_\alpha N M') \land (\lambda z.M \equiv_\alpha \lambda z.M'))$
 \end{itemize}
-$\equiv_\alpha$を\textbf{$\alpha$変換}($\alpha$-conversion)という.
+$\equiv_\alpha$を\term[alpha-conversion]{あるふぁへんかん}{$\alpha$変換}{$\alpha$-conversion}という.
 \end{definition}
 
 \begin{example}
@@ -127,7 +127,7 @@ $\Lambda$上の2項関係$\to_\beta \subset \Lambda \times \Lambda$を次のよ�
 \begin{center}
     $\to_\beta \coloneq \{((\lambda x.M)N, M \lbrack x \coloneq N \rbrack) \mid x \in V, M, N \in \Lambda\}$
 \end{center}
-$\to_\beta$を\textbf{1ステップ$\beta$簡約}(one-step $\beta$-reduction)という.
+$\to_\beta$を\term[one-step beta-reduction]{いちすてっぷべーたかんやく}{1ステップ$\beta$簡約}{one-step $\beta$-reduction}という.
 \end{definition}
 
 \begin{definition}
@@ -137,7 +137,7 @@ $\twoheadrightarrow_\beta \subset \Lambda \times \Lambda$を次の条件を満�
     \item $\twoheadleftarrow$は反射的かつ推移的.
 \end{itemize}
 
-$\twoheadrightarrow_\beta$を\textbf{$\beta$簡約}($\beta$-reduction)という.
+$\twoheadrightarrow_\beta$を\term[beta-reduction]{べーたかんやく}{$\beta$簡約}{$\beta$-reduction}という.
 \end{definition}
 
 \begin{definition}
@@ -146,7 +146,7 @@ $=_\beta \subset \Lambda \times \Lambda$を次の条件を満たす最小の$\la
     \item $\to_\beta \subset =_\beta$
     \item $=_\beta$は同値関係.
 \end{itemize}
-$=_\beta$を\textbf{$\beta$変換}($\beta$-conversion)という.
+$=_\beta$を\term[beta-conversion]{べーたへんかん}{$\beta$変換}{$\beta$-conversion}という.
 \end{definition}
 
 \begin{theorem} (Church-Rosser)

@@ -1,0 +1,30 @@
+%% upmendex style file for the 索引 every topic's main.tex \printindex prints.
+%% Named on the latexmk side, not in any .tex: .latexmkrc passes it as
+%%   upmendex -g -s ../index.ist
+%% and the -g there is what groups the Japanese headings by 行 (あ か さ …)
+%% rather than one heading per mora. A style file cannot set it.
+
+%% Kana before Latin. This is the whole of the "two halves" arrangement: one
+%% list, one \printindex, the 和文 entries first and the 欧文 entries after.
+%% Without it upmendex's default puts Latin first. S and N must stay adjacent.
+character_order "SNJL"
+
+%% Print the 頭文字 headings, in hiragana (letter_head 2) so the heading a term
+%% is filed under is the same script as the reading you typed for it.
+headings_flag 1
+letter_head 2
+lethead_prefix "\n  {\\bfseries "
+lethead_suffix "}\\nopagebreak\n"
+
+%% The page break and the TOC line live here rather than in main.tex, and that
+%% is what makes \printindex inert: upmendex writes this file only when the
+%% topic has at least one \term, so a topic with none gets no index page, no
+%% 索引 line in its table of contents, and nothing to remove. jlreq's theindex
+%% prints the 索引 heading itself and switches to two columns.
+%%
+%% The \clearpage is not redundant with that: jlreq's \twocolumn breaks the
+%% page *after* \phantomsection has already anchored, so without it the 索引
+%% line in the table of contents names the page before the index — 18 for an
+%% index on 19, in the topic this was measured on.
+preamble "\\clearpage\\phantomsection\\addcontentsline{toc}{section}{\\indexname}\\begin{theindex}\n"
+postamble "\n\n\\end{theindex}\n"

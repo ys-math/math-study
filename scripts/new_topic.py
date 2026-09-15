@@ -90,6 +90,8 @@ MAIN_TEMPLATE = r"""\documentclass{jlreq}
 \newpage
 \input{ch01.tex}
 
+\printindex
+
 \newpage
 \input{../colophon.tex}
 

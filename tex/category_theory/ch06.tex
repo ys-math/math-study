@@ -4,11 +4,11 @@
 \section{モナド}
 
 \begin{definition} \label{def: Endofunctor}
-$\mathscr{C}$を圏とする.\ 共変関手$F \colon \mathscr{C} \to \mathscr{C}$を\textbf{自己関手}(endofunctor)と呼ぶ.
+$\mathscr{C}$を圏とする.\ 共変関手$F \colon \mathscr{C} \to \mathscr{C}$を\term{じこかんしゅ}{自己関手}{endofunctor}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: EndofunctorCategory}
-$\mathscr{C}$を圏とする.\ $\End(\mathscr{C}) \coloneq \mathscr{C}^{\mathscr{C}}$としこれを\textbf{自己関手圏}(cateogory of endofunctors)という.
+$\mathscr{C}$を圏とする.\ $\End(\mathscr{C}) \coloneq \mathscr{C}^{\mathscr{C}}$としこれを\term{じこかんしゅけん}{自己関手圏}{cateogory of endofunctors}という.
 \end{definition}
 
 \begin{definition} \label{def: Monad}
@@ -27,7 +27,7 @@ $\mathscr{C}$を圏とし$T \in \End(\mathscr{C})$とする.\ 自然変換$\eta 
 	\arrow["\mu"', Rightarrow, nfold, from=2-1, to=2-2]
 	\arrow["\mu"', Rightarrow, nfold, from=2-4, to=2-5]
 \end{tikzcd}\]
-このとき組$(T, \eta, \mu)$を$\mathscr{C}$上の\textbf{モナド}(monad)といい$\eta$を\textbf{単位元}(unit),\ $\mu$を\textbf{乗法}(multiplication)と呼ぶ.
+このとき組$(T, \eta, \mu)$を$\mathscr{C}$上の\term{もなど}{モナド}{monad}といい$\eta$を\term{たんいげん}{単位元}{unit},\ $\mu$を\term{じょうほう}{乗法}{multiplication}と呼ぶ.
 \end{definition}
 
 \begin{proposition} \label{prop: monad_of_adjunction}
@@ -101,11 +101,11 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 	\arrow["f", from=2-1, to=2-2]
 \end{tikzcd}\]
 \end{itemize}
-この圏を$T$の\textbf{アイレンベルグムーア圏}(Eilenberg-Moore cateogry)という.
+この圏を$T$の\term{あいれんべるぐむーあけん}{アイレンベルグムーア圏}{Eilenberg-Moore cateogry}という.
 \end{definition}
 
 \begin{definition} \label{def: Algebra}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$の対象を\textbf{$T$-代数}($T$-algebra)と呼ぶ.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$の対象を\term[T-algebra]{てぃーだいすう}{$T$-代数}{$T$-algebra}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: forgetfulFunctor}
@@ -114,7 +114,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 	\item $(A, a) \in \mathscr{C}^T$に対して$U^T(A, a) \coloneq A$とする.
 	\item $f \in \Mor_{\mathscr{C}^T}((A,a), (B,b))$に対して$U^T(f) \coloneq f$とする.
 \end{itemize}
-この関手を\textbf{忘却関手}(forgetful functor)と呼ぶ.
+この関手を\term{ぼうきゃくかんしゅ}{忘却関手}{forgetful functor}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: freeFunctor}
@@ -123,11 +123,11 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 	\item $X \in \mathscr{C}$に対して$F^T(X) \coloneq (T(X), \mu_X)$とする.
 	\item $f \in \Mor({\mathscr{C}})$に対して$F^T(f) \coloneq T(f) \in \Mor_{\mathscr{C}^T}((T(\dom(f)), \mu_{\dom(f)}), (T(\cod(f)), \mu_{\cod(f)}))$とする.
 \end{itemize}
-この関手を\textbf{自由関手}(free functor)と呼ぶ.
+この関手を\term{じゆうかんしゅ}{自由関手}{free functor}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: freeAlgebra}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ $F^T$を自由関手としたとき$X \in \mathscr{C}$に対して$F^T(X)$を$X$によって定まる\textbf{自由$T$-代数}(free $T$-algebra)という.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ $F^T$を自由関手としたとき$X \in \mathscr{C}$に対して$F^T(X)$を$X$によって定まる\term[free T-algebra]{じゆうてぃーだいすう}{自由$T$-代数}{free $T$-algebra}という.
 \end{definition}
 
 \begin{proposition} \label{prop: free_adjoint_forgetful}
@@ -162,7 +162,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 		\item $X \in \Ob_{\mathscr{C}_T}$に対して$\id_X \coloneq \eta_X$とする.
 	\end{itemize}
 \end{itemize}
-この圏を\textbf{クライスリ圏}(kleisli category)と呼ぶ.
+この圏を\term{くらいすりけん}{クライスリ圏}{Kleisli category}と呼ぶ.
 \end{definition}
 
 \begin{proposition}
@@ -192,5 +192,5 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 	\arrow["{U'}", from=2-5, to=1-4]
 \end{tikzcd}\]
 \end{itemize}
-この圏をモナド$T$を生成する\textbf{随伴の圏}(category of adjunctions)と呼ぶ.
+この圏をモナド$T$を生成する\term{ずいはんのけん}{随伴の圏}{category of adjunctions}と呼ぶ.
 \end{definition}

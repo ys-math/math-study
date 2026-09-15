@@ -56,6 +56,50 @@
     }
 \ExplSyntaxOff
 
+%%% ---- Index ----
+% Every defined term in tex/*/ch0N.tex is written with one of these three, and
+% nothing else in a chapter is bold: \textbf is the term-defining markup here,
+% so the macro that typesets it is also the one that indexes it. The rules —
+% which macro, what a reading looks like — are docs/index-convention.md;
+% scripts/test_index_markup.py is what notices a chapter that forgot.
+%
+% All three typeset exactly the bytes the \textbf they replaced did. That is
+% the point: converting a chapter changes the index and nothing else, and the
+% check is that the PDF is unchanged apart from the new 索引 page.
+%
+% The reading is mandatory rather than optional because of how its absence
+% fails. upmendex sorts a kanji headword with no reading by code point and
+% files it in a clump at the end of the index, silently, with no warning in
+% the .ilg — so a forgotten reading is invisible in the log and visible only
+% to whoever reads the finished index looking for a term that is not where it
+% belongs. As a required argument it is a compile error on the line you are
+% writing instead.
+\usepackage{makeidx}
+\makeindex
+
+% \term{<よみ>}{<和文>}{<欧文>} — the ordinary case, and almost every term.
+% The optional argument is the sort key for the *English* entry, needed only
+% when the gloss carries mathematics: $\lambda$-term has to sort under L, and
+% upmendex would otherwise file it under the literal "$".
+\NewDocumentCommand{\term}{o m m m}{%
+  \textbf{#3}(#4)%
+  \index{#2@#3}%
+  \IfNoValueTF{#1}{\index{#4}}{\index{#1@#4}}%
+}
+
+% \termja{<よみ>}{<和文>} — a term the notes give no English gloss (対象, 射).
+% Separate from \term with an empty fourth argument on purpose: "this term has
+% no English" and "I forgot the English" must not look alike in the source.
+\NewDocumentCommand{\termja}{m m}{%
+  \textbf{#2}\index{#1@#2}%
+}
+
+% \termen{<欧文>} — a term the notes name only in Latin script (Nakayama's
+% lemma, Morita invariance). No reading: ICU sorts Latin without help.
+\NewDocumentCommand{\termen}{m}{%
+  \textbf{#1}\index{#1}%
+}
+
 \crefname{definition}{定義}{定義}
 \crefname{proposition}{命題}{命題}
 \crefname{lemma}{補題}{補題}
