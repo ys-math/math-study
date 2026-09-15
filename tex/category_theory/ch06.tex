@@ -166,5 +166,31 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{proposition}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\ 共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\ このとき$F_T \dashv U_T$が存在する.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$A \in \Ob(\mathscr{C})$に対して$F_T(A) = A$とし$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\ 共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\ このとき$F_T \dashv U_T$が存在する.
 \end{proposition}
+
+\begin{proof}
+任意の$A \in \mathscr{C}$に対して$U_T F_T(A) = U_T (A) = T(A)$であり任意の$f \in \Mor(\mathscr{C})$に対して$U_T F_T(f) = U_T(\eta_{\cod(f)} \circ f) = \mu_{\cod(f)} \circ T(\eta_{\cod(f)} \circ f) = \mu_{\cod(f)} \circ T(\eta_{\cod(f)}) \circ T(f) = (\mu \circ T \eta)_{\cod(f)} \circ T(f) = (\id_T)_{\cod(f)} \circ T(f) = T(f)$なので$U_T F_T = T$である.
+
+任意の$A \in \mathscr{C}$と$B \in \mathscr{C}_T$に対して$\Mor_{\mathscr{C}_T}(F_T(A),B) \cong \Mor_{\mathscr{C}}(A, T(B)) \cong \Mor_{\mathscr{C}}(A, U_T(B))$となるので\cref{prop: adjunction_iff_hom_natural_iso}により$F_T \dashv U_T$が存在する.
+\end{proof}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathbf{Adj}_T$を次のようにして定める.
+\begin{itemize}
+	\item 対象を随伴$F \dashv U$でモナド$(T, \eta, \mu)$を生成するものとする.
+	\item 射$K \colon F \dashv U \to F' \dashv U'$を共変関手$K \colon \cod(F) \to \cod(F')$で$KF = F'$かつ$U'K = U$を満たすものとする.
+% https://q.uiver.app/#q=WzAsNixbMSwwLCJcXG1hdGhybXtjb2R9KEYpIl0sWzEsMSwiXFxtYXRocm17Y29kfShGJykiXSxbMCwwLCJcXG1hdGhybXtkb219KEYpIl0sWzQsMCwiXFxtYXRocm17Y29kfShGKSJdLFs0LDEsIlxcbWF0aHJte2NvZH0oRicpIl0sWzMsMCwiXFxtYXRocm17ZG9tfShGKSJdLFsyLDAsIkYiXSxbMCwxLCJLIl0sWzIsMSwiRiciLDJdLFszLDUsIlUiLDJdLFszLDQsIksiXSxbNCw1LCJVJyJdXQ==
+\[\begin{tikzcd}
+	{\mathrm{dom}(F)} & {\mathrm{cod}(F)} && {\mathrm{dom}(F)} & {\mathrm{cod}(F)} \\
+	& {\mathrm{cod}(F')} &&& {\mathrm{cod}(F')}
+	\arrow["F", from=1-1, to=1-2]
+	\arrow["{F'}"', from=1-1, to=2-2]
+	\arrow["K", from=1-2, to=2-2]
+	\arrow["U"', from=1-5, to=1-4]
+	\arrow["K", from=1-5, to=2-5]
+	\arrow["{U'}", from=2-5, to=1-4]
+\end{tikzcd}\]
+\end{itemize}
+この圏をモナド$T$を生成する\textbf{随伴の圏}(category of adjunctions)と呼ぶ.
+\end{definition}
