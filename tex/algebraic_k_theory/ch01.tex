@@ -4,7 +4,7 @@
 \section{\texorpdfstring{$K_0$}{K₀}}
 
 \begin{definition} \label{def: IsProjective}
-$R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は\textbf{射影$R$加群}(projective module)であるという.
+$R$を環とし$P$を$R$加群とする.\ 任意の$R$加群$M,N$と任意の全射準同型$f \colon M \twoheadrightarrow N$と任意の準同型$g \colon P \to N$に対して次の図式が可換になる準同型$h \colon P \to M$が存在するとき$P$は\term{しゃえいあーるかぐん}{射影$R$加群}{projective module}であるという.
 % https://q.uiver.app/#q=WzAsMyxbMSwwLCJQIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMSwyLCJmIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMiwiZyJdLFswLDEsImgiLDJdXQ==
 \[\begin{tikzcd}
 	& P \\
@@ -66,7 +66,7 @@ $e_s(t) =
 $
 \end{center}
 \vspace{1em}
-で定める.\ $(e_s)_{s \in S}$を$R^{(S)}$の\textbf{標準基底}(standard basis)という.\ $R$加群$F$に対してある集合$S$と同型$\phi \colon R^{(S)} \stackrel{\sim}{\to} F$が存在するとき$F$は\textbf{自由$R$加群}(free module)であるといい$(\phi(e_s))_{s \in S}$を$F$の\textbf{基底}(basis)という.
+で定める.\ $(e_s)_{s \in S}$を$R^{(S)}$の\term{ひょうじゅんきてい}{標準基底}{standard basis}という.\ $R$加群$F$に対してある集合$S$と同型$\phi \colon R^{(S)} \stackrel{\sim}{\to} F$が存在するとき$F$は\term{じゆうあーるかぐん}{自由$R$加群}{free module}であるといい$(\phi(e_s))_{s \in S}$を$F$の\term{きてい}{基底}{basis}という.
 \end{definition}
 
 \begin{lemma} \label{lem: free_presentation_lemma}
@@ -123,7 +123,7 @@ $F$を自由$R$加群とし$(b_s)_{s \in S}$を$F$の基底とする.\ $M$を$R$
 \end{proof}
 
 \begin{definition} \label{def: IsRetract}
-$R$を環とし$P,M$を$R$加群とする.\ ある準同型$r \colon M \to P$と$s \colon P \to M$が存在して$r \circ s = \id_P$となるとき$P$は$M$の\textbf{レトラクト}(retract)であるという.
+$R$を環とし$P,M$を$R$加群とする.\ ある準同型$r \colon M \to P$と$s \colon P \to M$が存在して$r \circ s = \id_P$となるとき$P$は$M$の\term{れとらくと}{レトラクト}{retract}であるという.
 \end{definition}
 
 \begin{lemma} \label{lem: retract_iff_summand}
@@ -197,7 +197,7 @@ $P \oplus \{0\} = P$なので$[P] + [\{0\}] = [P]$である.
 \end{proof}
 
 \begin{definition} \label{def: grothendieckGroup}
-$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon S \to H$に対して群準同型$\theta \colon G \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\textbf{グロタンディーク群}(Grothendieck group)であるという.\ $G$を$G(S)$とも書く.
+$S$を可換モノイドとし$G$をアーベル群とする.\ モノイド準同型$\phi \colon S \to G$が存在し任意の群$H$と任意のモノイド準同型$\psi \colon S \to H$に対して群準同型$\theta \colon G \to H$で次の図式を可換にするものがただ一つ存在するとき$G$は$S$の\term{ぐろたんでぃーくぐん}{グロタンディーク群}{Grothendieck group}であるという.\ $G$を$G(S)$とも書く.
 
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJTIl0sWzEsMSwiSCJdLFsxLDAsIkciXSxbMCwyLCJcXHBoaSJdLFsyLDEsIlxcdGhldGEiXSxbMCwxLCJcXHBzaSIsMl1d
 \[\begin{tikzcd}
@@ -300,7 +300,7 @@ $(I, \ge)$を有向集合とし$J$を$I$の共終集合とする.\ $(X_i, f_{ij}
 $[x]_J \in \varinjlim_{j \in J} X_j$に対して$\Phi([x]_J) \coloneq [x]_I$と定める.\ $x_1 \in X_{j_1}, x_2 \in X_{j_2}$とし$[x_1]_J = [x_2]_J$と仮定する.\ $f_{j_1 k}(x_1) = f_{j_2 k}(x_2)$となる$k \in J \subset I$が存在し$[x_1]_I = [x_2]_I$となる.\ ゆえに$\Phi$はwell-definedである.
 \end{proof}
 
-\begin{theorem} (\textbf{Morita invariance})
+\begin{theorem} (\termen{Morita invariance})
 $R$を環とし$n \in \mathbb{N} \setminus \{0\}$とする.\ このとき$K_0(R) \cong K_0(\mathrm{M}_n(R))$である.\ ただし$\mathrm{M}_n(R) \coloneq \mathrm{M}(n,R)$である.
 \end{theorem}
 \begin{proof}
