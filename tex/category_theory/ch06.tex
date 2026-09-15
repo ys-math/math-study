@@ -70,11 +70,11 @@ $\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{
 したがって$(UF, \eta, U \varepsilon F)$は$\mathscr{C}$上のモナドである.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: monadOfAdjunction}
 \cref{prop: monad_of_adjunction}におけるモナド$(UF, \eta, U \varepsilon F)$を随伴$F \dashv U$によって生成されるモナドという.
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: EilenbergMooreCategory}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}^T$を次のようにして定める.
 \begin{itemize}
 	\item 対象を$A \in \mathscr{C},\ a \in \Mor_{\mathscr{C}}(T(A), A)$の組$(A, a)$で次の図式を可換にするものとする.
@@ -101,5 +101,70 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 	\arrow["f", from=2-1, to=2-2]
 \end{tikzcd}\]
 \end{itemize}
-この圏を$T$の\textbf{アイレンベルグムーア圏}(Eilenberg-Moore cateogry)または\textbf{$T$代数}($T$-algebra)の圏という.
+この圏を$T$の\textbf{アイレンベルグムーア圏}(Eilenberg-Moore cateogry)という.
 \end{definition}
+
+\begin{definition} \label{def: Algebra}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$の対象を\textbf{$T$-代数}($T$-algebra)と呼ぶ.
+\end{definition}
+
+\begin{definition} \label{def: forgetfulFunctor}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$U^T \colon \mathscr{C}^T \to \mathscr{C}$を次のようにして定める.
+\begin{itemize}
+	\item $(A, a) \in \mathscr{C}^T$に対して$U^T(A, a) \coloneq A$とする.
+	\item $f \in \Mor_{\mathscr{C}^T}((A,a), (B,b))$に対して$U^T(f) \coloneq f$とする.
+\end{itemize}
+この関手を\textbf{忘却関手}(forgetful functor)と呼ぶ.
+\end{definition}
+
+\begin{definition} \label{def: freeFunctor}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F^T \colon \mathscr{C} \to \mathscr{C}^T$を次のようにして定める.
+\begin{itemize}
+	\item $X \in \mathscr{C}$に対して$F^T(X) \coloneq (T(X), \mu_X)$とする.
+	\item $f \in \Mor({\mathscr{C}})$に対して$F^T(f) \coloneq T(f) \in \Mor_{\mathscr{C}^T}((T(\dom(f)), \mu_{\dom(f)}), (T(\cod(f)), \mu_{\cod(f)}))$とする.
+\end{itemize}
+この関手を\textbf{自由関手}(free functor)と呼ぶ.
+\end{definition}
+
+\begin{definition} \label{def: freeAlgebra}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ $F^T$を自由関手としたとき$X \in \mathscr{C}$に対して$F^T(X)$を$X$によって定まる\textbf{自由$T$-代数}(free $T$-algebra)という.
+\end{definition}
+
+\begin{proposition} \label{prop: free_adjoint_forgetful}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとすると随伴$F^T \dashv U^T$が存在する.
+\end{proposition}
+\begin{proof}
+任意の$X \in \mathscr{C}$に対して$U^T F^T(X) = U^T(T(X), \mu_X) = T(X)$であり任意の$f \in \Mor({\mathscr{C}})$に対して$U^T F^T(f) = U^T(T(f)) = T(f)$なので$U^T F^T = T$である.
+
+自然変換$\varepsilon \colon F^T U^T \Rightarrow \id_{\mathscr{C}^T}$を$\varepsilon_{(A,a)} \coloneq a \in \Mor_{\mathscr{C}^T}((T(A), \mu_A), (A, a))$で定める.\ 任意の$X \in \mathscr{C}$に対して$(\varepsilon F^T \circ F^T \eta)_X = (\varepsilon F^T)_X \circ (F^T \eta)_X = \varepsilon_{F^T(X)} \circ F^T(\eta_X) = \varepsilon_{(T(X), \mu_X)} \circ T(\eta_X) = \mu_X \circ T(\eta_X) = (\mu \circ T \eta)_X = (\id_T)_X = (\id_{F^T})_X$なので$\varepsilon F^T \circ F^T \eta = \id_{F^T}$である.
+
+任意の$(X, x) \in \mathscr{C}^T$に対して$(U^T \varepsilon \circ \eta U^T)_{(X, x)} = (U^T \varepsilon)(X, x) \circ (\eta U^T)_{(X,x)} = U^T(x) \circ \eta_X = x \circ \eta_X = \id_X = (\id_{U^T})_{(X,x)}$なので$U^T \varepsilon \circ \eta U^T = \id_{U^T}$である.
+
+したがって$\eta$を単位,\ $\varepsilon$を余単位として$F^T \dashv U^T$である.
+\end{proof}
+
+\begin{proposition}
+\cref{prop: free_adjoint_forgetful}における随伴$F^T \dashv U^T$によって生成されるモナドは$(T, \eta, \mu)$である.
+\end{proposition}
+\begin{proof}
+\cref{prop: free_adjoint_forgetful}の仮定の上で$U^T F^T = T$であり任意の$X \in \mathscr{C}$に対して$(U^T \varepsilon F^T)_X = U^T(\varepsilon_{(T(X), \mu_X)}) = U^T(\mu_X) = \mu_X$であるから\cref{prop: monad_of_adjunction}により$F^T \dashv U^T$によって生成されるモナドは$(T, \eta, \mu)$である.
+\end{proof}
+
+% 随伴が与えられればモナドが構成できる. モナドが与えられればそのモナドを構成する随伴が構成できる.
+
+\begin{definition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}_T$を次のようにして定める.
+\begin{itemize}
+	\item $\Ob(\mathscr{C}_T) \coloneq \Ob(\mathscr{C})$とする.
+	\item $f \in \Mor_{\mathscr{C}_T}(A, B) \coloneq \Mor_{\mathscr{C}}(A, T(B))$とする.\ 射の合成と単位射は次のようにして定める.
+	\begin{itemize}
+		\item $f \in \Mor_{\mathscr{C}_T}(A, B),\ g \in \Mor_{\mathscr{C}_T}(B, C)$に対して$g \circ_{\mathscr{C}_T} f = \mu_C \circ_{\mathscr{C}} T(g) \circ_{\mathscr{C}} f$とする.
+		\item $X \in \Ob_{\mathscr{C}_T}$に対して$\id_X \coloneq \eta_X$とする.
+	\end{itemize}
+\end{itemize}
+この圏を\textbf{クライスリ圏}(kleisli category)と呼ぶ.
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\ 共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\ このとき$F_T \dashv U_T$が存在する.
+\end{proposition}
