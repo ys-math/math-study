@@ -143,7 +143,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 したがって$\eta$を単位,\ $\varepsilon$を余単位として$F^T \dashv U^T$である.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition} \label{prop: monad_of_free_adjunction}
 \cref{prop: free_adjoint_forgetful}における随伴$F^T \dashv U^T$によって生成されるモナドは$(T, \eta, \mu)$である.
 \end{proposition}
 \begin{proof}
@@ -152,7 +152,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 
 % 随伴が与えられればモナドが構成できる. モナドが与えられればそのモナドを構成する随伴が構成できる.
 
-\begin{definition}
+\begin{definition} \label{def: KleisliCategory}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}_T$を次のようにして定める.
 \begin{itemize}
 	\item $\Ob(\mathscr{C}_T) \coloneq \Ob(\mathscr{C})$とする.
@@ -165,7 +165,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 この圏を\term{くらいすりけん}{クライスリ圏}{Kleisli category}と呼ぶ.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: kleisli_adjunction}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$A \in \Ob(\mathscr{C})$に対して$F_T(A) = A$とし$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\ 共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\ このとき$F_T \dashv U_T$が存在する.
 \end{proposition}
 
@@ -175,7 +175,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 任意の$A \in \mathscr{C}$と$B \in \mathscr{C}_T$に対して$\Mor_{\mathscr{C}_T}(F_T(A),B) \cong \Mor_{\mathscr{C}}(A, T(B)) \cong \Mor_{\mathscr{C}}(A, U_T(B))$となるので\cref{prop: adjunction_iff_hom_natural_iso}により$F_T \dashv U_T$が存在する.
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: CategoryOfAdjunctions}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathbf{Adj}_T$を次のようにして定める.
 \begin{itemize}
 	\item 対象を随伴$F \dashv U$でモナド$(T, \eta, \mu)$を生成するものとする.
@@ -195,6 +195,6 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 この圏をモナド$T$を生成する\term{ずいはんのけん}{随伴の圏}{category of adjunctions}と呼ぶ.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: kleisli_initial_eilenberg_moore_terminal}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ クライスリ圏$\mathscr{C}_T$は随伴の圏$\mathbf{Adj}_T$の始対象であり,\ アイレンベルグムーア圏$\mathscr{C}^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
 \end{proposition}
