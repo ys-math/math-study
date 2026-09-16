@@ -147,16 +147,19 @@ math-study/
 │   └── working-loop.ebnf
 ├── lean/
 │   ├── Math/
-│   │   └── Learn/
-│   │       ├── MIL/
-│   │       │   └── C02Basics.lean
-│   │       └── TPiL/
-│   │           ├── C02DependentTypeTheory.lean
-│   │           ├── C03PropositionsAndProofs.lean
-│   │           ├── C04QuantifiersAndEquality.lean
-│   │           ├── C05Tactics.lean
-│   │           ├── C06InteractingWithLean.lean
-│   │           └── C07InductiveTypes.lean
+│   │   ├── Learn/
+│   │   │   ├── MIL/
+│   │   │   │   └── C02Basics.lean
+│   │   │   └── TPiL/
+│   │   │       ├── C02DependentTypeTheory.lean
+│   │   │       ├── C03PropositionsAndProofs.lean
+│   │   │       ├── C04QuantifiersAndEquality.lean
+│   │   │       ├── C05Tactics.lean
+│   │   │       ├── C06InteractingWithLean.lean
+│   │   │       └── C07InductiveTypes.lean
+│   │   └── Study/
+│   │       └── CategoryTheory/
+│   │           └── C01.lean
 │   ├── Math.lean
 │   ├── lake-manifest.json
 │   ├── lakefile.toml
