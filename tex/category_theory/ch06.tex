@@ -195,6 +195,50 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 この圏をモナド$T$を生成する\term{ずいはんのけん}{随伴の圏}{category of adjunctions}と呼ぶ.
 \end{definition}
 
-\begin{proposition} \label{prop: kleisli_initial_eilenberg_moore_terminal}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ クライスリ圏$\mathscr{C}_T$は随伴の圏$\mathbf{Adj}_T$の始対象であり,\ アイレンベルグムーア圏$\mathscr{C}^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
+\begin{proposition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ クライスリ圏$\mathscr{C}_T$に対して定まる随伴$F_T \dashv U_T$は随伴の圏$\mathbf{Adj}_T$の始対象である.
+\end{proposition}
+
+\begin{proof}
+$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\ $F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\ 共変関手$K \colon \mathscr{C}_T \to \mathscr{D}$を次のようにして定める.
+\begin{itemize}
+	\item $A \in \Ob(\mathscr{C})$に対して$K(A) \coloneq F(A)$とする.
+	\item $f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$(\varepsilon F)_{B} \circ F(f)$とする.
+\end{itemize}
+実際,\ 任意の$A \in \Ob(\mathscr{C})$に対して$K(\eta_A) = (\varepsilon F)_{A} \circ F(\eta_A) = (\varepsilon F \circ F \eta)_A = (\id_F)_A = \id_{F(A)} = \id_{K(A)}$である.\ また任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$と$g \in \Mor_{\mathscr{C}}(B, T(C))$に対して$\mu = U \varepsilon F$より$K(g \circ_{\mathscr{C}_T} f) = K(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F((U \varepsilon F)_C \circ UF(g) \circ f)$である.\ $\varepsilon$は自然変換なので次の2つの図式が可換になる.
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJGVUZVRihDKSJdLFsxLDAsIkZVRihDKSJdLFswLDEsIkZVRihDKSJdLFsxLDEsIkYoQykiXSxbMywwLCJGVUYoQikiXSxbNCwwLCJGKEIpIl0sWzMsMSwiRlVGVUYoQykiXSxbNCwxLCJGVUYoQykiXSxbMCwxLCJcXHZhcmVwc2lsb25fe0ZVRihDKX0iXSxbMSwzLCJcXHZhcmVwc2lsb25fe0YoQyl9Il0sWzIsMywiXFx2YXJlcHNpbG9uX3tGKEMpfSJdLFswLDIsIkZVKFxcdmFyZXBzaWxvbl97RihDKX0pIiwyXSxbNCw1LCJcXHZhcmVwc2lsb25fe0YoZyl9Il0sWzQsNiwiRlUoRihnKSkiLDJdLFs1LDcsIkYoZykiXSxbNiw3LCJcXHZhcmVwc2lsb25fe0ZVRihDKX0iXV0=
+\[\begin{tikzcd}
+	{FUFUF(C)} & {FUF(C)} && {FUF(B)} & {F(B)} \\
+	{FUF(C)} & {F(C)} && {FUFUF(C)} & {FUF(C)}
+	\arrow["{\varepsilon_{FUF(C)}}", from=1-1, to=1-2]
+	\arrow["{FU(\varepsilon_{F(C)})}"', from=1-1, to=2-1]
+	\arrow["{\varepsilon_{F(C)}}", from=1-2, to=2-2]
+	\arrow["{\varepsilon_{F(g)}}", from=1-4, to=1-5]
+	\arrow["{FU(F(g))}"', from=1-4, to=2-4]
+	\arrow["{F(g)}", from=1-5, to=2-5]
+	\arrow["{\varepsilon_{F(C)}}", from=2-1, to=2-2]
+	\arrow["{\varepsilon_{FUF(C)}}", from=2-4, to=2-5]
+\end{tikzcd}\]
+よって$(\varepsilon F)_C \circ F((U \varepsilon F)_C \circ UF(g) \circ f) = \varepsilon_{F(C)} \circ \varepsilon_{FUF(C)} \circ FUF(g) \circ F(f) = \varepsilon_{F(C)} \circ F(g) \circ \varepsilon_{F(g)} \circ F(f) = K(g) \circ K(f)$となるので$K \colon \mathscr{C}_T \to \mathscr{D}$は共変関手になる.
+
+任意の$A \in \Ob(\mathscr{C})$に対して$K	F_T(A) = K(A) = F(A)$であり任意の$f \in \Mor_{\mathscr{C}}(A,B)$に対して$KF_T(f) = \varepsilon_{F(B)} \circ F(\eta_B) \circ F(f) = (\varepsilon F \circ F \eta)_B \circ F(f) = F(f)$なので$KF_T = F$である.\ また任意の$A \in \Ob(\mathscr{C})$に対して$UK(A) = U(F(A)) = T(A) = U_T(A)$であり任意の$f \Mor_\mathscr{C}(A, T(B))$に対して$UK(f) = U((\varepsilon F)_{B} \circ F(f)) = \mu_B \circ T(f) = U_T(f)$なので$UK = U_T$である.\ よって次の2つの図式が可換になる.
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMSwwLCJcXG1hdGhzY3J7Q31fVCJdLFsxLDEsIlxcbWF0aHNjcntEfSJdLFszLDAsIlxcbWF0aHNjcntDfSJdLFs0LDAsIlxcbWF0aHNjcntDfV9UIl0sWzQsMSwiXFxtYXRoc2Nye0R9Il0sWzEsMiwiSyJdLFswLDEsIkZfVCJdLFswLDIsIkYiLDJdLFs0LDUsIksiXSxbNCwzLCJVX1QiLDJdLFs1LDMsIlUiXV0=
+\[\begin{tikzcd}
+	{\mathscr{C}} & {\mathscr{C}_T} && {\mathscr{C}} & {\mathscr{C}_T} \\
+	& {\mathscr{D}} &&& {\mathscr{D}}
+	\arrow["{F_T}", from=1-1, to=1-2]
+	\arrow["F"', from=1-1, to=2-2]
+	\arrow["K", from=1-2, to=2-2]
+	\arrow["{U_T}"', from=1-5, to=1-4]
+	\arrow["K", from=1-5, to=2-5]
+	\arrow["U", from=2-5, to=1-4]
+\end{tikzcd}\]
+よって$K$は随伴の圏$\mathbf{Adj}_T$の射である.
+
+
+$K' \colon \mathscr{C}_T \to \mathscr{D}$を$K'F_T = F$かつ$UK' = U_T$を満たす共変関手とすると任意の$A \in \Ob(\mathscr{C})$に対して$K'(A) = K'(F_T(A)) = F = K(F_T(A)) = K(A)$である.\ 任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$K'(f) \in \Mor_{\mathscr{D}}(F(A), F(B))$であり$UK'(f) \circ \eta_A = U_T(f) \circ \eta_A = \mu_B \circ T(f) \eta_A = \mu_B \circ \eta_{B} \circ f = f$である.\ 同様に$UK(f) \circ \eta_A = f$であり\cref{prop: adjunction_iff_hom_natural_iso}により$f \mapsto U(f) \circ \eta_A$は全単射なので$K'(f) = K(f)$である.\ ゆえに$K' = K$である.
+\end{proof}
+
+\begin{proposition}
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$に対して定まる随伴$F^T \dashv U^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
 \end{proposition}
