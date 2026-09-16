@@ -10,6 +10,7 @@ import Math.Learn.TPiL.C04QuantifiersAndEquality
 import Math.Learn.TPiL.C05Tactics
 import Math.Learn.TPiL.C06InteractingWithLean
 import Math.Learn.TPiL.C07InductiveTypes
+import Math.Study.CategoryTheory.C01
 
 /-!
 # Math
