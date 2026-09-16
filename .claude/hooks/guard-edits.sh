@@ -36,9 +36,9 @@ if [[ $rel == lean/*.lean && $rel != lean/.lake/* ]]; then
     block "$rel is missing its licence header. The root LICENSE is the MIT one, so an unmarked Lean file reads as MIT by default while everything it imports is Apache 2.0. Add as lines 1-5:
 
 /-
-Copyright (c) <year> @ys-math. All rights reserved.
+Copyright (c) <year> ys-math. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE-APACHE-2.0.
-Authors: @ys-math
+Authors: ys-math
 -/
 
 See docs/lean-convention.md."
