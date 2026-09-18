@@ -50,7 +50,7 @@ Read the diff yourself. You are about to vouch for it.
 gh pr checks <n>
 ```
 
-`validate.yml` runs on `pull_request`: it compiles all 9 topics and runs the
+`validate.yml` runs on `pull_request`: it compiles all 10 topics and runs the
 script tests.
 
 - **Red** — report which check failed and **stop**. Do not offer to merge
@@ -74,7 +74,7 @@ Then, by category:
 
 | PR touches | Gate |
 | --- | --- |
-| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 9 topics — `docs/git-strategy.md` `## Gates` |
+| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 10 topics — `docs/git-strategy.md` `## Gates` |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 | `.github/**` only | nothing local to run — say so explicitly |

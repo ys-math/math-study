@@ -29,7 +29,7 @@ way, and this command copies them rather than rephrasing them.
   issues (an empty worklist is a fact worth seeing).
 - **No arguments** — every topic that has at least one open issue. Say which
   topics were skipped for having none; do not write empty files for all
-  9 topics.
+  10 topics.
 - **Unknown slug** — say so, list the topics, and stop.
 
 ## 1. Fetch
