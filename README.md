@@ -11,6 +11,7 @@
 * [可換環論](./pdf/commutative_ring_theory.pdf)
 * [微分幾何学](./pdf/differential_geometry.pdf)
 * [ガロア理論](./pdf/galois_theory.pdf)
+* [ホモロジー代数](./pdf/homological_algebra.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
 * [多様体論](./pdf/manifold.pdf)
 * [シンプレクティック多様体](./pdf/symplectic_manifold.pdf)
@@ -30,6 +31,7 @@ topology                 ▏░░░░░░░░░░░░░░░░░�
 manifold                 ▏░░░░░░░░░░░░░░░░░░░    0.7%     573
 galois_theory            ▏░░░░░░░░░░░░░░░░░░░    0.1%     109
 differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%       0
+homological_algebra      ░░░░░░░░░░░░░░░░░░░░    0.0%       0
 symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%       0
                                                        ------
 total                                                  85,341
@@ -202,6 +204,9 @@ math-study/
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── galois_theory/
+│   │   ├── ch01.tex
+│   │   └── main.tex
+│   ├── homological_algebra/
 │   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── lambda_calculus/
