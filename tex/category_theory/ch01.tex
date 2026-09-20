@@ -26,6 +26,10 @@
 $\mathscr{C}$を圏とする.\ 対象を$\Ob(\mathscr{C})$とし$A, B \in \Ob(\mathscr{C})$に対して$\Mor_{\mathscr{C}^{\op}}(A, B) \coloneq \Mor_\mathscr{C}(B, A)$とする.\ $f \in \Mor_{\mathscr{C}^{\op}}(A, B)$と$g \in \Mor_{\mathscr{C}^{\op}}(B, C)$の$\mathscr{C}^{\op}$における合成$g \circ^{\op} f$を$\mathscr{C}$における合成$f \circ g \in \Mor_\mathscr{C}(C, A)$とすることで圏$\mathscr{C}^{\op}$が定まる.\ これを$\mathscr{C}$の\term{はんたいけん}{反対圏}{opposite category}という.
 \end{definition}
 
+\begin{definition} \label{def: OppositeFunctor}
+$\mathscr{C}, \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\ $A \in \Ob(\mathscr{C}^{\op}),\ f \in \Mor(\mathscr{C}^{\op})$に対して$F^{\op}(A) \coloneq F(A),\ F^{\op}(f) \coloneq F(f)$と定めると共変関手$F^{\op} \colon \mathscr{C}^{\op} \to \mathscr{D}^{\op}$が定まる.\ これを$F$の\term{はんたいかんしゅ}{反対関手}{opposite functor}という.
+\end{definition}
+
 \begin{definition} \label{def: Functor}
 $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\term{きょうへんかんしゅ}{共変関手}{covariant functor}であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
 \begin{itemize}
