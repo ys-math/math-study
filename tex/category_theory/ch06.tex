@@ -195,7 +195,7 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 この圏をモナド$T$を生成する\term{ずいはんのけん}{随伴の圏}{category of adjunctions}と呼ぶ.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: kleisli_adjunction_is_initial}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ クライスリ圏$\mathscr{C}_T$に対して定まる随伴$F_T \dashv U_T$は随伴の圏$\mathbf{Adj}_T$の始対象である.
 \end{proposition}
 
@@ -239,7 +239,7 @@ $\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \col
 $K' \colon \mathscr{C}_T \to \mathscr{D}$を$K'F_T = F$かつ$UK' = U_T$を満たす共変関手とすると任意の$A \in \Ob(\mathscr{C})$に対して$K'(A) = K'(F_T(A)) = F = K(F_T(A)) = K(A)$である.\ 任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$K'(f) \in \Mor_{\mathscr{D}}(F(A), F(B))$であり$UK'(f) \circ \eta_A = U_T(f) \circ \eta_A = \mu_B \circ T(f) \eta_A = \mu_B \circ \eta_{B} \circ f = f$である.\ 同様に$UK(f) \circ \eta_A = f$であり\cref{prop: adjunction_iff_hom_natural_iso}により$f \mapsto U(f) \circ \eta_A$は全単射なので$K'(f) = K(f)$である.\ ゆえに$K' = K$である.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition} \label{prop: eilenberg_moore_adjunction_is_terminal}
 $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$に対して定まる随伴$F^T \dashv U^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
 \end{proposition}
 
