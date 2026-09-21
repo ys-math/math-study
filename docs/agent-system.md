@@ -1,7 +1,7 @@
 # The agent system
 
 A map of everything in this repo that tells Claude what to do, or stops it doing
-something. It exists because that machinery is spread across seven directories
+something. It exists because that machinery is spread across eight directories
 and nothing else shows it in one place.
 
 **This file is a map, not a specification.** It says who owns each rule and where
@@ -61,8 +61,9 @@ Loaded **on demand**, by a command that names them:
   code is the topic slug, in `scripts/new_topic.py`.
 - **`docs/lean-convention.md`** — everything under `lean/`: the layout, the
   shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
-  the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
-  `/delete-topic` and `/git` each depend on one part of it.
+  the statement/proof split, the read-back and its audit stamps, the Apache
+  header, the Mathlib pin. `/formalize` and `/read-back` execute it, and
+  `/label`, `/delete-topic` and `/git` each depend on one part of it.
 - **`docs/repo-structure.md`** — the companion map: the two halves of the repo,
   the three things that join them, and what deliberately does not. Nothing
   executes it; read it when a change would couple `tex/` and `lean/` more
@@ -93,9 +94,10 @@ to touch**, which is what you actually need when choosing between them.
 | Command | Writes | Commits | Stops for confirmation | Output |
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
-| `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
+| `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` — a renamed declaration and its read-back stamp | no | always, before applying | English |
 | `/bib` | `tex/*/bibliography.tex`, `tex/*/main.tex`, `docs/bib-convention.md` | no | always, before writing | **Entries verbatim, English structure** |
-| `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
+| `/formalize` | `lean/Math/Study/<Topic>/C<NN>.lean`, `lean/Math.lean` | no | always, before writing | English |
+| `/read-back` | `lean/Math/Study/**/*.readback.tex`, through the `read-back` subagent and `scripts/lean_statements.py` | no | no — but sets `audited=yes` only when told | **English TeX** |
 | `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
@@ -122,16 +124,22 @@ Worth knowing without looking them up:
   would be closing on *absence* of evidence, which loses real defects silently,
   and `/verify-issues` closes on *presence* of counter-evidence it must name.
   `docs/issue-convention.md` `## Verification` is the specification.
-- **`/formalize` writes statements and never a proof.** Half of that is a
-  declaration: its `allowed-tools` name `lean/Math/Study/**` and the import list
-  in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. That
-  is the reach it intends, not a bound on it; the paragraph below this table
-  says why. The other half is `guard-edits.sh`, which refuses a write under
-  `lean/Math/Study/**` whose tactic blocks are not exactly `sorry` — so this is
-  the one command whose central rule is mechanical rather than kept. What stays
-  advisory is narrower and worse: never repair an understated statement while
-  translating it. See `docs/lean-convention.md`,
+- **`/formalize` writes statements and never a proof.** Its `allowed-tools`
+  name `lean/Math/Study/**` and the import list in `lean/Math.lean`, and nothing
+  else — not `tex/`, not `Math/Learn/**`. That is the reach it intends, not a
+  bound on it; the paragraph below this table says why. What binds is
+  mechanical twice over: `permissions.deny` refuses every write under
+  `lean/Math/Proof/**`, where the owner's proofs live, and `guard-edits.sh`
+  refuses a write under `lean/Math/Study/**` whose tactic blocks are not exactly
+  `sorry`. What stays advisory is narrower and worse: never repair an
+  understated statement while translating it. See `docs/lean-convention.md`,
   `## What Claude may write here`.
+- **`/read-back` is blind by construction, not by instruction.** The reading is
+  done by the `read-back` subagent below, which sees none of the conversation
+  and has only `Write`; what it is shown is a dump of elaborated statements with
+  theorem names hidden. The command itself never compares the reading with the
+  notes and never sets `audited=yes` unless the owner names the blocks —
+  `docs/lean-convention.md` `## Read-back` is the specification.
 - **`/bib` can leave the test suite red, and that is the design.**
   `scripts/test_new_topic.py` asserts `MAIN_TEMPLATE` reproduces certain topics'
   `main.tex` byte for byte, so wiring a `bibliography.tex` into one of them
@@ -176,6 +184,22 @@ tool, and `/tutor` is the only command here that uses one. So every other
 command's "cannot" holds only where a hook or a `permissions` rule carries it —
 everywhere else it is prose, on the same terms as the rest of this file.
 
+## Subagents
+
+They live in `.claude/agents/`. A subagent starts with none of the invoking
+conversation, and its `tools:` line — unlike a command's `allowed-tools` — is
+the whole of what it can call. That is why one exists here: it is the only way
+to guarantee a reader has *not* seen something.
+
+| Subagent | Launched by | Tools | Sees |
+| --- | --- | --- | --- |
+| `read-back` | `/read-back` | `Write`, for its handoff file only | the anonymized dump in its prompt, nothing else |
+
+A subagent cannot have zero tools — one with none fails to launch — so the
+reader keeps `Write`, which carries nothing *in*. It answers into
+`lean/.lake/readback/`, gitignored, and `scripts/lean_statements.py assemble`
+files it.
+
 ## Enforcement
 
 `.claude/settings.json` wires up two hooks and a permission list.
@@ -183,10 +207,11 @@ everywhere else it is prose, on the same terms as the rest of this file.
 | Hook | Event | Refuses |
 | --- | --- | --- |
 | `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .` / `git add ./`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run; `git restore` whose pathspec is `.`, `./` or `:/` |
-| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` or `tex/*/bibliography.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` with a generator marker destroyed |
+| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` or `tex/*/bibliography.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; any write under `lean/Math/Proof/**`, as the backstop to `permissions.deny`; a `README.md` with a generator marker destroyed |
 
-Permissions additionally deny writes to `pdf/**` and allow about twenty
-routine commands through without a prompt.
+Permissions additionally deny writes to `pdf/**` and to `lean/Math/Proof/**` —
+the owner's proofs — and allow about twenty routine commands through without a
+prompt.
 
 Not everything enforced is a hook. `scripts/check_bibliography.py` holds every
 `tex/*/bibliography.tex` to `docs/bib-convention.md`, and runs through
@@ -210,7 +235,8 @@ Two properties to preserve if you touch these:
 Every table in this file enumerates something on disk, and a stale enumeration
 reads exactly like a correct one. `scripts/test_agent_docs.py` is what notices:
 it holds the command tables here and in `README.md` to `.claude/commands/`, the
-hook and workflow and `docs/` names to their directories, the hooks to being
+subagent table to `.claude/agents/`, the hook and workflow and `docs/` names to
+their directories, the hooks to being
 registered and executable, and every count written in digits to what it counts.
 
 It runs wherever the `scripts/` tests already run — `/git`'s gate and the

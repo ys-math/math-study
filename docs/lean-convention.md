@@ -2,7 +2,8 @@
 
 The `lean/` half of this repo is a Lake package where the owner learns Lean 4 by
 writing proofs. This document is the single copy of the rules that govern it:
-`/formalize`, `/label` and `/tutor` all point here and none of them restate it.
+`/formalize`, `/read-back`, `/label` and `/tutor` all point here and none of
+them restate it.
 
 The prose half — `tex/` — is notes about mathematics. This half is mathematics
 the kernel has checked. They are deliberately not the same artifact, and the
@@ -22,17 +23,27 @@ lean/
     ├── Learn/           ← working through a curriculum
     │   ├── MIL/         ← Mathematics in Lean
     │   └── TPiL/        ← Theorem Proving in Lean 4
-    └── Study/           ← formalising the notes in tex/
+    ├── Study/           ← formalising the notes in tex/: statements only
+    │   └── <Topic>/
+    │       ├── C03.lean            ← chapter 3's statements, all `sorry`
+    │       └── C03.readback.tex    ← their blind English read-back
+    └── Proof/           ← the owner's proofs of those statements
+        └── <Topic>/
+            └── C03.lean
 ```
 
 `Learn/` and `Study/` split on **lifetime**, which is why they are separate and
 not one flat namespace. A `Learn/` file is worked through once and then frozen;
-a `Study/` file grows for as long as the topic it mirrors does.
+a `Study/` directory grows for as long as the topic it mirrors does, one module
+per chapter, `C03.lean` beside `tex/<topic>/ch03.tex`.
+
+`Study/` and `Proof/` split on **authorship**, and that is the subject of
+`## Statements and proofs` below.
 
 **`docs/naming-convention.md` owns what the files are called** — the
 `UpperCamelCase` rule, the `C<NN><ChapterTitle>` form for curriculum files, and
 the slug-to-module transformation that makes `tex/algebraic_k_theory/` into
-`Math/Study/AlgebraicKTheory.lean`. It covers both halves of the repo in one
+`Math/Study/AlgebraicKTheory/`. It covers both halves of the repo in one
 place, which is the point of it; this document does not restate any of it.
 
 **`Math.lean` is maintained by hand.** A file with no `import` line there still
@@ -88,7 +99,7 @@ before proposing one, and the rename is one edit covering the `\label{}`, every
 Stating a theorem and proving it are separate units of work, and the first is a
 real commit — often the more valuable one, since translating 命題 1.4 into a
 Lean statement is where the note's unstated hypotheses surface. `sorry` is how
-the second unit stays open.
+the second unit stays open, and `Proof/` is where it is closed.
 
 Lean reports `sorry` as a warning, so `lake build` succeeds and `lean.yml` stays
 green. Nothing counts them, fails on them or nags about them. CI is checking one
@@ -97,6 +108,89 @@ thing: that every file still elaborates.
 This is why `lean.yml` passes no `--wfail`. Adding it would fail the build on
 unused variables and deprecation notices too, which is a much blunter rule than
 the one intended.
+
+## Statements and proofs
+
+A statement and its proof live in **different files**, as on prove2.me: the
+statement in `Study/<Topic>/C<NN>.lean`, where every declaration is proved by
+`sorry`, and the proof in `Proof/<Topic>/C<NN>.lean`, pinned to it by type:
+
+```lean
+-- lean/Math/Proof/AlgebraicKTheory/C03.lean
+import Math.Study.AlgebraicKTheory.C03
+
+theorem projective_of_free.proof : type_of% @projective_of_free := by
+  ...
+```
+
+`type_of% @projective_of_free` elaborates to the statement's type exactly, so
+the proof is of *that* statement or it does not build. A proof may use other
+statements, proved or not — prove2.me's proof-sketch — and
+`#print axioms projective_of_free.proof` names the `sorry` still underneath it.
+
+The split makes three things structural that were conventions:
+
+- **A statement changes only through `/formalize`.** The owner never edits the
+  statement file to make a proof go through — there is nowhere in `Proof/` to
+  weaken it, because `type_of%` fixes the type. Stuck on a missing hypothesis
+  means the note is wrong, which is the finding; the fix is in the note, then a
+  `/formalize … modify`.
+- **An audited read-back stays valid while the owner proves.** Proving touches
+  only `Proof/`, which the read-back never reads.
+- **The fence is a path.** Claude writes `Study/**` and nothing under
+  `Proof/**` — see `## What Claude may write here`.
+
+A statement changed by `/formalize` breaks every proof pinned to it, loudly, in
+`lake build`. That is the design: the proof was of the old statement.
+
+`Math.lean` imports both trees. A `Proof/` module imports its own chapter's
+`Study/` module and any other it uses, never the reverse: statements must not
+depend on proofs.
+
+## Read-back
+
+A statement file is audited by reading it back into English **without the
+notes**, and comparing the English with the chapter by eye — prove2.me's
+"compare math to math, not code". `/read-back` runs it; the rules are here.
+
+- **The reader is blind by construction.** `.claude/agents/read-back.md` is a
+  subagent that starts with no conversation and whose one tool is `Write`, so
+  it cannot have seen `tex/`. It is shown not the source but a dump from
+  `scripts/lean_statements.py` of what Lean *elaborated* — auto-bound
+  variables, coercions and instance arguments visible — with theorem names
+  replaced by `T<n>`, because a theorem's name is its `\label{}` body. It
+  writes literally: every hypothesis Lean has appears in the English, and
+  anything odd on the Lean's own terms becomes a *Reader note*.
+- **The read-back is committed**, as `Study/<Topic>/C<NN>.readback.tex`: a
+  standalone English `article` with only `amsmath` and `amssymb`, none of the
+  notes' macros. `/read-back` compiles it into `lean/.lake/readback/` as a
+  check; the PDF is never committed. Being a `.tex`, committing one wakes
+  `build-pdf.yml`'s `**.tex` filter, which finds no topic under `tex/` changed
+  and rebuilds nothing.
+- **Every block carries a stamp**:
+  `% readback: <declaration> sha=<hash> audited=no`. The hash is of the
+  declaration as elaborated, folded with the hashes of the same chapter's
+  definitions it mentions, so redefining `IsFoo` stales every theorem stated
+  in terms of it. A renamed declaration keeps its hash; a proof never affects
+  one.
+- **`audited=yes` is the owner's word, and only the owner's.** It is set by
+  hand, or by Claude on an explicit instruction naming the blocks — never on
+  Claude's initiative, and never after Claude compared anything to the notes.
+- **A stale block loses its audit.** When the hash no longer matches,
+  `/read-back` reads that declaration again and files it as `audited=no`.
+  Unchanged blocks are kept byte for byte.
+
+A block that does not match the note is a finding for one side or the other:
+the note is wrong (`/review-notes`), or the Lean is (`/formalize` with the row
+named as `modify`). Deciding which is the owner's.
+
+Nothing checks audits. No workflow fails on `audited=no` or on a stale block,
+for the reason `docs/repo-structure.md` declines a coverage check: a study repo
+is not a backlog. `python scripts/lean_statements.py status` reports them.
+
+`scripts/lean_statements.py` reads nothing under `tex/` and the reader sees
+nothing of it, so none of this joins the halves by machinery; the only join is
+still the shared name, and the comparison.
 
 ## Licensing
 
@@ -182,13 +276,20 @@ filtered to `lean/**`. It commits nothing.
 
 ## What Claude may write here
 
-**Statements, never proofs.** Claude writes the licence header, the imports, and
+**Statements, never proofs.** Claude writes the licence header, the imports,
+`set_option autoImplicit false`, and
 
 ```lean
 theorem projective_of_free ... := by sorry
 ```
 
-Everything after `by` is the owner's. Translating a proposition into a Lean
+into `Study/`, and the read-back beside it. Everything after `by` is the
+owner's, and so is every file under `Proof/`.
+
+Every statement file sets `autoImplicit` off, just after its imports. Lean's
+default is on and `lakefile.toml` leaves it so — `Learn/` follows books that
+rely on it — but in a statement it turns a misspelled variable into a new
+universally quantified argument, silently. Translating a proposition into a Lean
 statement is a Mathlib API question — which definition, which typeclass
 assumptions — and Claude is useful there. Producing the proof is the thing being
 learned, and an agent that does it removes the entire point of the exercise.
@@ -201,11 +302,14 @@ writing the tactic block into the file.
 
 ### What holds it
 
-`.claude/hooks/guard-edits.sh` refuses a Write or Edit under
-`lean/Math/Study/**` whose tactic blocks are not exactly `sorry`. It reads only
+`.claude/settings.json` denies every Write and Edit under `lean/Math/Proof/**`
+before it happens, and `.claude/hooks/guard-edits.sh` repeats that as a
+backstop. The same hook refuses a Write or Edit under `lean/Math/Study/**`
+whose tactic blocks are not exactly `sorry`. It reads only
 the text that call wrote — `.content` for Write, `.new_string` for Edit — never
-the file on disk, so proofs the owner already typed there are never what trips
-it. A whole-file overwrite of those proofs *is* caught, which is the point.
+the file on disk. Statement files written before the split may still hold
+proofs the owner typed there, and those are never what trips it; a whole-file
+overwrite of them *is* caught, which is the point.
 
 It is a `PostToolUse` hook, so the write has already landed when it blocks: the
 message goes back to Claude, and removing what was written is Claude's next
@@ -231,6 +335,11 @@ typechecks and proves, notes that stay wrong, and a shared name certifying the
 two agree; the build passes, `sorry` is honest, CI is green, and the defect is
 now carved into a verified artifact. Mirroring the statement as written fails
 loudly instead, which is the entire reason to formalise your own notes.
+
+The read-back narrows this gap without closing it. A hypothesis `/formalize`
+added shows up in the blind English as a clause the note does not have — but
+only to an owner who reads the two side by side, which is why `audited=yes` is
+theirs to set.
 
 This is the layer-2 half, in `docs/agent-system.md`'s terms, and it is the one
 worth reading twice.

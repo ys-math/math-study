@@ -16,7 +16,7 @@ Claude rather than the machinery that builds anything.
 | | `tex/` | `lean/` |
 | --- | --- | --- |
 | product | PDFs of study notes, in Japanese, one per topic | one Lake library of formalised mathematics |
-| unit | a topic — one directory, one `main.tex`, its `ch0N.tex` chapters | a module under `Math/Learn/` or `Math/Study/` |
+| unit | a topic — one directory, one `main.tex`, its `ch0N.tex` chapters | a module under `Math/Learn/`, or a chapter's statements under `Math/Study/` and its proofs under `Math/Proof/` |
 | built by | LuaLaTeX via `latexmk` | `lake`, against a pinned Mathlib |
 | licence | CC BY-NC-ND 4.0 | Apache 2.0 |
 | CI | `build-pdf.yml`, `validate.yml` | `lean.yml` |
@@ -61,6 +61,13 @@ sample.
 
 That is the entire coupling. Everything else — toolchains, gates, workflows,
 licences, routing rules — is per half.
+
+`/read-back` is deliberately not on the list. It reads only `lean/`: its reader
+is blind to `tex/` by construction, and `scripts/lean_statements.py` never
+opens it. What it produces is compared with the notes by the owner, by eye —
+the join is a person reading two documents, not a program reading both. A read-back
+that consulted the notes would be worthless as an audit, and would be the
+extraction step declined below, run in reverse.
 
 ## What deliberately does not join them
 

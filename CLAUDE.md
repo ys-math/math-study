@@ -31,20 +31,24 @@ work.
 
 The same fence runs through `lean/`, in a different place: **statements yes,
 proofs never.** You may write the header, the imports and
-`theorem foo : ... := by sorry`; everything after `by` is the owner's, and
-`Math/Learn/**` is theirs entirely. Naming a Mathlib lemma that would close a
-goal is help; typing the tactic block is taking the exercise away.
+`theorem foo : ... := by sorry` into `Math/Study/**`; everything after `by` is
+the owner's, and so are `Math/Proof/**` — where their proofs live, pinned to
+each statement by `type_of%` — and `Math/Learn/**`, entirely. Naming a Mathlib
+lemma that would close a goal is help; typing the tactic block is taking the
+exercise away.
 
-`guard-edits.sh` enforces this under `lean/Math/Study/**` — every tactic block
-must be exactly `sorry` — but only there, and only syntactically. `Math/Learn/**`
-is unguarded, and a term-mode proof would pass. Both gaps are real; neither is
-permission.
+`permissions.deny` refuses every write under `lean/Math/Proof/**`.
+`guard-edits.sh` holds `lean/Math/Study/**` to tactic blocks that are exactly
+`sorry` — only syntactically, so a term-mode proof would pass — and
+`Math/Learn/**` is unguarded. Both gaps are real; neither is permission.
 
 And the rule the hook cannot reach at all: **never repair a statement while
 translating it.** A hypothesis the prose omits is a finding about the notes, not
 something to add in passing — adding it produces Lean that proves, notes that
 stay wrong, and a shared name certifying they agree. That one reads green
-everywhere.
+everywhere. `/read-back` is the instrument that can see it, and only because
+its reader is blind: never tell it about the notes, never edit what it wrote,
+and never set `audited=yes` unless the owner names the block.
 
 ## Licensing
 
@@ -161,7 +165,9 @@ guess from outside:
 
 **A `\label{}` is now two names, not one.** The label body doubles as the Lean
 declaration name that formalises it, so renaming one is a rename of the
-`\label{}`, every `\cref{}` site *and* the declaration in `lean/Math/Study/`.
+`\label{}`, every `\cref{}` site, the declaration in `lean/Math/Study/` *and*
+its read-back stamp — plus the owner's `type_of% @…` in `lean/Math/Proof/`, which
+is theirs to change.
 `docs/lean-convention.md` `## The shared name` has the rule, including when the
 two deliberately diverge.
 
@@ -171,9 +177,10 @@ two deliberately diverge.
 2. `git rm pdf/<topic>.pdf` — the build only ever copies PDFs into `pdf/`, so an
    orphan lingers forever otherwise.
 3. Update `\TexRepo` inside the moved `main.tex`; it embeds the directory name.
-4. `git mv` the mirror at `lean/Math/Study/<Topic>.lean` if it exists, and fix
-   its `import` in `lean/Math.lean`. A stale import fails `lake build` outright,
-   so this one at least tells you.
+4. `git mv` the mirrors at `lean/Math/Study/<Topic>/` and
+   `lean/Math/Proof/<Topic>/` if they exist, and fix every `import` of them —
+   in `lean/Math.lean` and inside the `Proof/` files. A stale import fails
+   `lake build` outright, so this one at least tells you.
 
 ## Git
 

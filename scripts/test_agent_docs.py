@@ -5,8 +5,8 @@ Run from the repo root:
     python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 
 `README.md` and `docs/agent-system.md` enumerate things that live on disk: the
-commands in `.claude/commands/`, the hooks, the workflows, the documents in
-`docs/`. A hand-written enumeration goes stale the moment the disk changes, and
+commands in `.claude/commands/`, the subagents in `.claude/agents/`, the hooks,
+the workflows, the documents in `docs/`. A hand-written enumeration goes stale the moment the disk changes, and
 nothing about a stale one looks wrong from the inside — `CLAUDE.md` described
 "the six commands" for four days after the seventh was added, in a file whose
 own preamble is about not letting copies drift.
@@ -47,6 +47,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 COMMAND_DIR = ROOT / ".claude" / "commands"
+AGENT_DIR = ROOT / ".claude" / "agents"
 HOOK_DIR = ROOT / ".claude" / "hooks"
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
 DOC_DIR = ROOT / "docs"
@@ -198,6 +199,41 @@ class TestCommandFrontmatter(unittest.TestCase):
                 end = lines.index("---", 1)
                 keys = {line.split(":", 1)[0] for line in lines[1:end] if ":" in line}
                 self.assertLessEqual({"description", "argument-hint", "allowed-tools"}, keys)
+
+
+def frontmatter(path: Path) -> dict[str, str]:
+    lines = path.read_text().splitlines()
+    if not lines or lines[0] != "---":
+        return {}
+    end = lines.index("---", 1)
+    return {k.strip(): v.strip() for k, v in (line.split(":", 1) for line in lines[1:end] if ":" in line)}
+
+
+class TestSubagents(unittest.TestCase):
+    """`docs/agent-system.md` `## Subagents` lists every file in `.claude/agents/`.
+
+    A subagent's `tools:` line is the whole of what it can call, which is the
+    reason one exists here — `read-back` is blind because it has nothing to read
+    with. So a missing `tools:` is not an omission but a reader that inherits
+    every tool in the session, and is checked for as such.
+    """
+
+    def agents(self) -> dict[str, dict[str, str]]:
+        return {path.stem: frontmatter(path) for path in AGENT_DIR.glob("*.md")}
+
+    def test_agent_system_lists_every_subagent(self):
+        """Both ways, and only in its own section: `read-back` is a command too."""
+        text = AGENT_SYSTEM.read_text()
+        section = text.split("\n## Subagents\n", 1)[1].split("\n## ", 1)[0]
+        tabled = {m.group(1) for key in table_keys(section) if (m := re.fullmatch(r"`([a-z][a-z0-9-]*)`", key))}
+        self.assertEqual(set(self.agents()), tabled)
+
+    def test_frontmatter_names_itself_and_bounds_its_tools(self):
+        for stem, fields in sorted(self.agents().items()):
+            with self.subTest(agent=stem):
+                self.assertEqual(fields.get("name"), stem, "name: must equal the filename stem")
+                self.assertTrue(fields.get("description"), "description: is missing")
+                self.assertTrue(fields.get("tools"), "tools: is missing, so it inherits every tool")
 
 
 class TestHooks(unittest.TestCase):

@@ -41,9 +41,12 @@ label defined in `ch01.tex` — a rename that does not see it breaks the build.
 3. The topic's `main.tex` — which chapters are `\input`, in what order.
 4. Every `ch0N.tex` in that order.
 
-5. `lean/Math/Study/<Topic>.lean`, if it exists — the label body doubles as the
-   Lean declaration name that formalises it, so a rename has a consumer outside
-   `tex/` entirely. `docs/lean-convention.md` `## The shared name` is the rule.
+5. `lean/Math/Study/<Topic>/C*.lean` and `C*.readback.tex`, if they exist — the
+   label body doubles as the Lean declaration name that formalises it, and as
+   the name on its read-back stamp, so a rename has consumers outside `tex/`
+   entirely. `docs/lean-convention.md` `## The shared name` is the rule.
+6. `lean/Math/Proof/<Topic>/C*.lean`, if they exist — **read only**. A proof
+   pinned with `type_of% @<body>` is a consumer this command may not edit.
 
 Collect, before proposing anything:
 
@@ -52,6 +55,7 @@ Collect, before proposing anything:
 - every `\cref{}` site, keyed by the label it names
 - every Lean declaration whose name equals a label body, found with
   `grep -rn '<body>' lean/Math/Study/`
+- every proof pinned to one, found with `grep -rn '<body>' lean/Math/Proof/`
 
 ## What to propose
 
@@ -117,11 +121,18 @@ Only the rows the user named.
 
 - **New label** — insert on the `\begin{env}` line, one space after it, as the
   convention specifies.
-- **Rename** — change the `\label{}`, every `\cref{}` site naming it, and the
-  Lean declaration carrying the same body, in the same batch of edits. Never one
-  without the others. Renaming a declaration is the only edit this command may
-  make under `lean/`; it never writes a statement or a proof, which is
-  `/formalize`'s job and the owner's respectively.
+- **Rename** — change the `\label{}`, every `\cref{}` site naming it, the
+  Lean declaration carrying the same body, and the name on its read-back stamp
+  (`% readback: <body> sha=… audited=…` — change the name only; the hash does
+  not depend on it, so the audit survives), in the same batch of edits. Never
+  one without the others. Renaming a declaration and its stamp is the only edit
+  this command may make under `lean/`; it never writes a statement or a proof,
+  which is `/formalize`'s job and the owner's respectively.
+- **A rename pinned by a proof** is one this command can only half do:
+  `lean/Math/Proof/**` is the owner's and every write there is denied. Mark the
+  row `+ proof` in the table, and when it is applied, list the owner's lines to
+  change — `theorem <old>.proof : type_of% @<old>` — and say that `lake build`
+  stays red until they do. Offer to leave the row out instead.
 
 If any row is a rename, **compile the topic before touching anything**:
 
@@ -142,7 +153,8 @@ silently proceed to edit a document that does not build.
 After the edits, in this order:
 
 1. **Static gate** — for each renamed label, `grep -rn 'cref{<old>}' tex/<topic>/`
-   returns nothing, and `grep -rn '<old body>' lean/Math/Study/` returns nothing;
+   returns nothing, and `grep -rn '<old body>' lean/Math/Study/` returns nothing
+   (`lean/Math/Proof/` may still name it, if the owner has a proof to rename);
    no two labels in the topic are equal. This is instant and catches the actual
    failure mode.
 2. **Compile** — the same `latexmk` line. Read the log for undefined references
@@ -151,6 +163,8 @@ After the edits, in this order:
 3. **Build Lean**, only if a declaration was renamed — the invocation is in
    `docs/git-strategy.md` `## Gates`. A rename that misses a use site fails
    outright here, unlike the LaTeX side where it prints `??` and carries on.
+   A failure in `Proof/` on a `+ proof` row is the expected one — report it as
+   the owner's to fix, not as this command's.
 
 Aux files and `main.pdf` are gitignored — leave them, do not run `latexmk -c`.
 

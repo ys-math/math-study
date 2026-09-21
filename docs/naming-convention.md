@@ -34,7 +34,7 @@ places that each want something different:
 | a regex fragment | `.github/workflows/build-pdf.yml` |
 | a filename | `pdf/<slug>.pdf` |
 | a URL segment | `\TexRepo` in the topic's `main.tex` |
-| a Lean module name, transformed | `lean/Math/Study/<Topic>.lean` |
+| a Lean directory name, transformed | `lean/Math/Study/<Topic>/`, `lean/Math/Proof/<Topic>/` |
 
 `pdf`, `scripts` and `latex_out` are reserved and refused: each would read as a
 twin of something that already exists.
@@ -75,7 +75,8 @@ that has opted out of the language's one free signal.
 ```
 lean/Math/Learn/MIL/C02Basics.lean
 lean/Math/Learn/TPiL/C02DependentTypeTheory.lean
-lean/Math/Study/AlgebraicKTheory.lean
+lean/Math/Study/AlgebraicKTheory/C03.lean
+lean/Math/Proof/AlgebraicKTheory/C03.lean
 ```
 
 ### Curriculum files
@@ -105,8 +106,18 @@ an acronym re-cased is an acronym nobody recognises.
 ### Topic mirrors
 
 ```
-Math/Study/<Topic>.lean
+Math/Study/<Topic>/C<NN>.lean            statements
+Math/Study/<Topic>/C<NN>.readback.tex    their read-back
+Math/Proof/<Topic>/C<NN>.lean            the owner's proofs of them
 ```
+
+One module per chapter, `C` and the chapter's two digits: `C03` mirrors
+`tex/<topic>/ch03.tex`, and the same name in `Proof/` holds its proofs. There is
+no title after the number, unlike a curriculum file — a chapter's subject moves
+as it is written (`## Inside a topic`), and the title it has is Japanese, with
+no `UpperCamelCase` spelling to give it. The read-back keeps its module's stem
+and says what it is in a second extension, so the three files of a chapter are
+one `ls` apart.
 
 `<Topic>` is the `tex/` slug converted to `UpperCamelCase`: split on
 underscores, capitalise each part, join.
@@ -122,9 +133,10 @@ Note `algebraic_k_theory → AlgebraicKTheory`: the single-letter part becomes a
 single capital, so there is no `AlgebraicKTheory` / `AlgebraicKtheory` question
 to get wrong twice.
 
-Nothing computes this transformation — no script, no test. It is applied by hand
-in `/formalize` and `/delete-topic`, which is why it is written down here rather
-than left to look obvious.
+`scripts/lean_statements.py` computes this transformation (`topic_module`),
+and `scripts/test_lean_statements.py` holds it to the examples above. Everywhere
+else — `/formalize`, `/label`, `/delete-topic` — it is still applied by hand,
+which is why it is written down here rather than left to look obvious.
 
 ## Root files
 
@@ -135,6 +147,7 @@ than left to look obvious.
 | a document's source data | `docs/<kebab-case>.<ext>`, the stem being what it describes (`docs/working-loop.ebnf`) |
 | images | `docs/images/<kebab-case>.<ext>`, the stem matching the source it was rendered from |
 | commands | `.claude/commands/<kebab-case>.md`, the stem being the slash command |
+| subagents | `.claude/agents/<kebab-case>.md`, the stem being the agent's `name:` |
 | hooks | `.claude/hooks/<kebab-case>.sh` |
 | workflows | `.github/workflows/<kebab-case>.yml` |
 
@@ -165,6 +178,7 @@ each rename costs:
 | a topic slug | four things, none automated — the recipe is in `CLAUDE.md` | an orphan PDF forever; `\TexRepo` links to a directory that does not exist; `lake build` fails outright |
 | a chapter file | the `\input{}` line in `main.tex` | the chapter silently vanishes from the PDF |
 | a Lean module | its `import` in `lean/Math.lean` | `lake build` fails — the loud one |
+| a statement file | its `Proof/` twin and the `import` inside it, and its `.readback.tex` | the proof file stops building; the read-back stops being found and reads as unread |
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
 | a command file | the tables in `README.md` and `docs/agent-system.md` | the same test fails |
 

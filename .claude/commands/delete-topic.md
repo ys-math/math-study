@@ -16,11 +16,17 @@ leaves the README on its own after the push — but `pdf/<topic>.pdf` is only ev
 written to, never pruned, and an orphan there lingers forever. That is the whole
 reason this command exists.
 
-The Lean mirror is the same shape of problem with a louder failure. If
-`lean/Math/Study/<Topic>.lean` exists, `lean/Math.lean` imports it, and removing
-the file without removing the import breaks `lake build` for **every** proof in
-the repo — a topic deletion that reds `main` for a reason nobody will connect to
-it. Both go in the same commit.
+The Lean mirror is the same shape of problem with a louder failure. It is two
+directories — `lean/Math/Study/<Topic>/`, the statements and their read-backs,
+and `lean/Math/Proof/<Topic>/`, the owner's proofs — and `lean/Math.lean`
+imports every module in both. Removing the files without the imports breaks
+`lake build` for **every** proof in the repo — a topic deletion that reds `main`
+for a reason nobody will connect to it. All of it goes in the same commit.
+
+`Proof/<Topic>/` is the owner's own work, as much as the chapters are, and it
+is recoverable from history on exactly the same terms. Show it in the survey
+with its proof count, so that nobody deletes proofs without having seen that
+there were some.
 
 The same is true off-disk. `topic:<topic>` issues and the label itself outlive
 the files, and an issue about a chapter that no longer exists can be neither
@@ -63,9 +69,10 @@ turns the final `git push` into a rejection *after* the destructive step.
 Gather, for the chosen topic:
 
 ```bash
-git ls-files tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic>.lean
+git ls-files tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic> lean/Math/Proof/<Topic>
 wc -l tex/<topic>/*.tex
-grep -n "Math.Study.<Topic>" lean/Math.lean
+grep -n "Math\.\(Study\|Proof\)\.<Topic>\." lean/Math.lean
+grep -c "type_of% @" lean/Math/Proof/<Topic>/*.lean
 git log --oneline -n 1 -- tex/<topic>
 git status --porcelain tex/<topic>
 gh issue list --label "topic:<topic>" --state open --json number,title
@@ -108,8 +115,10 @@ Delete topology (位相幾何学)?
   tex/topology/main.tex        18 lines
   tex/topology/ch01.tex       242 lines
   pdf/topology.pdf            (tracked)
-  lean/Math/Study/Topology.lean   31 lines, 6 declarations (4 sorry)
-  lean/Math.lean               import Math.Study.Topology  → removed
+  lean/Math/Study/Topology/    C01.lean, C01.readback.tex   6 statements
+  lean/Math/Proof/Topology/    C01.lean   YOUR PROOFS: 2 of the 6
+  lean/Math.lean               import Math.Study.Topology.C01
+                               import Math.Proof.Topology.C01  → removed
   tex/topology/               ignored build artifacts (main.aux, main.pdf, latex_out/)
   issues/topology.md          local worklist
 
@@ -122,22 +131,26 @@ Delete topology (位相幾何学)?
   push:   main
 
   recoverable afterwards with:
-    git checkout a1b2c3d -- tex/topology
+    git checkout a1b2c3d -- tex/topology lean/Math/Study/Topology lean/Math/Proof/Topology
 
 Proceed?
 ```
 
 Show the recovery command with the *real* SHA of the last commit touching the
 topic — that commit still has the files, so it is `git checkout <sha> --
-tex/<topic>`, no `^` needed. The escape hatch belongs on screen at the moment of
+tex/<topic>`, no `^` needed. When the topic has a Lean mirror, take the SHA from
+`git log -n 1 -- tex/<topic> lean/Math/Study/<Topic> lean/Math/Proof/<Topic>`
+instead and add those paths, so a proof committed after the last chapter edit is
+recovered too. The escape hatch belongs on screen at the moment of
 deciding, not in the report afterwards.
 
 ## 6. Execute
 
 ```bash
-git rm -r tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic>.lean
+git rm -r tex/<topic> pdf/<topic>.pdf lean/Math/Study/<Topic> lean/Math/Proof/<Topic>
 git clean -xdf tex/<topic> issues/<topic>.md
-# delete the `import Math.Study.<Topic>` line from lean/Math.lean, then:
+# delete every `import Math.Study.<Topic>.…` and `import Math.Proof.<Topic>.…`
+# line from lean/Math.lean, then:
 git add lean/Math.lean
 git commit -m "chore: remove the <topic> topic"
 git push origin main
@@ -148,11 +161,11 @@ of ignored build junk. `git clean -xdf` sweeps that and the now-empty directory,
 and the stale `issues/<topic>.md` with it — a worklist for notes that no longer
 exist. Both paths are pathspecs: a pathspec matching nothing is a silent no-op,
 so a topic with no worklist and no build artifacts needs no special case. The
-same is true of the Lean path in the `git rm` line — but only when it was never
-tracked. Include it only if the survey found it, because `git rm` aborts
+same is true of the Lean paths in the `git rm` line — but only when they were never
+tracked. Include each only if the survey found it, because `git rm` aborts
 wholesale on a path it cannot match, exactly as with the PDF.
 
-The import line is the one deletion git cannot do for you, and it must be in
+The import lines are the one deletion git cannot do for you, and it must be in
 this commit: `lean/Math.lean` importing a file that no longer exists fails
 `lake build` for every proof in the repo. Build before committing — the
 invocation is in `docs/git-strategy.md` `## Gates` — whenever a mirror was

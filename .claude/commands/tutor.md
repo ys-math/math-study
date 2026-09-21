@@ -76,7 +76,7 @@ around it. Beyond that, climb a rung only when the question needs it:
 | --- | --- | --- |
 | `tex/preamble.tex` | the notation looks wrong | the theorem environments and the shared macros live there; without it a house convention reads as an inconsistency |
 | the topic's open issues | whenever the topic is known | `gh issue list --label "topic:<topic>" --state open --json number,title,body` |
-| the Lean mirror | the anchor carries a `\label{}` | `lean/Math/Study/<Topic>.lean` — the declaration sharing the label body, per `docs/lean-convention.md` `## The shared name` |
+| the Lean mirror | the anchor carries a `\label{}` | `lean/Math/Study/<Topic>/C<NN>.lean` — the declaration sharing the label body, per `docs/lean-convention.md` `## The shared name` — with its read-back beside it and the owner's proof, if any, in `lean/Math/Proof/<Topic>/C<NN>.lean` |
 | a `docs/*-convention.md` | the question is about form | the one that owns it; `docs/agent-system.md` says which |
 
 **The issues rung is the cheap one that changes the answer.** If

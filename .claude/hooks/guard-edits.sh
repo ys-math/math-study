@@ -49,6 +49,11 @@ fi
 #    is in CLAUDE.md and docs/lean-convention.md; this is the half of it a hook
 #    can hold, and the owner is learning Lean, so it is the half that matters.
 #
+#    The owner's proofs live in lean/Math/Proof/, pinned to these statements by
+#    `type_of%`, and Claude writes nothing there at all. That is a path rule, so
+#    it is `permissions.deny` in settings.json, which refuses before the write;
+#    rule 3a below is the backstop for a session that runs without it.
+#
 #    The test is syntactic and deliberately narrow: every `by` must be followed
 #    by `sorry`. Term-mode definitions keep working, which /formalize needs when
 #    a notion has no Mathlib counterpart, and a term-mode *proof* slips through —
@@ -76,6 +81,16 @@ The proof is the repo owner's; they are learning Lean, and a proof written here 
 
 See docs/lean-convention.md, ## What Claude may write here."
   fi
+fi
+
+# 3a. The backstop. PostToolUse, so the write has landed: undoing it is the next
+#     action, and `git diff lean/Math/Proof/` shows what to undo.
+if [[ $rel == lean/Math/Proof/* ]]; then
+  block "$rel is the owner's proof file. Claude writes nothing under lean/Math/Proof/ — undo this write now, restoring the file exactly as it was (git diff shows the change).
+
+Proofs are the part of the Lean half the owner is learning by doing. Explaining a goal or naming the Mathlib lemma that closes it is help; writing into this file is not.
+
+See docs/lean-convention.md, ## What Claude may write here."
 fi
 
 # 4. Losing a README marker does not fail any build — the generator simply stops
