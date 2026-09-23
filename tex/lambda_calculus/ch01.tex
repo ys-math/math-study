@@ -4,7 +4,8 @@
 \section{$\lambda$計算}
 
 \begin{definition}
-$V$を可算集合とし$V$の元を\term{へんすう}{変数}{variable}と呼ぶことにする.\ $\Lambda$を次の条件を満たす最小の集合とする.
+$V$を可算集合とし$V$の元を\term{へんすう}{変数}{variable}と呼ぶことにする.\
+$\Lambda$を次の条件を満たす最小の集合とする.
 \begin{itemize}
     \item $V \subset \Lambda$
     \item ${^{\forall}}M, N \in \Lambda, (M N) \in \Lambda$
@@ -13,7 +14,8 @@ $V$を可算集合とし$V$の元を\term{へんすう}{変数}{variable}と呼�
 $\Lambda$の元を\term[lambda-term]{らむだこう}{$\lambda$項}{$\lambda$-term}と呼ぶ.
 \end{definition}
 
-BNF記法を用いて$\lambda$項$e$は次のように定義できる.\ ただし$x$は変数である.
+BNF記法を用いて$\lambda$項$e$は次のように定義できる.\
+ただし$x$は変数である.
 \begin{center}
 $e ::= x \mid \lambda x. e \mid e e$
 \end{center}
@@ -87,7 +89,8 @@ $M, N \in \Lambda$に対して$M \lbrack x \coloneq N \rbrack \in \Lambda$を次
 \end{definition}
 
 \begin{definition}
-$M \in \Lambda$とし$x, z \in V, y \notin \textrm{Var}(M)$とする.\ $M \langle x \mapsto y\rangle$を次のようにして帰納的に定める.
+$M \in \Lambda$とし$x, z \in V, y \notin \textrm{Var}(M)$とする.\
+$M \langle x \mapsto y\rangle$を次のようにして帰納的に定める.
 \begin{itemize}
     \item $x \langle x \mapsto y \rangle \equiv y$
     \item $x \not\equiv z \implies z \langle x \mapsto y \rangle \equiv z$
@@ -101,7 +104,8 @@ $\Lambda$上の2項関係$\to_\alpha \subset \Lambda \times \Lambda$を次のよ
 \begin{center}
     $\to_\alpha \coloneq \{(\lambda x.M, \lambda y.(M \langle x \mapsto y\rangle)) \mid x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)\}$
 \end{center}
-$\to_\alpha$を\term[alpha-step]{あるふぁすてっぷ}{$\alpha$ステップ}{$\alpha$-step}と呼ぶ.\ つまり$x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)$に対して
+$\to_\alpha$を\term[alpha-step]{あるふぁすてっぷ}{$\alpha$ステップ}{$\alpha$-step}と呼ぶ.\
+つまり$x,y \in V, M \in \Lambda, y \notin \textrm{Ver}(M)$に対して
 \begin{center}
     $\lambda x.M \to_\alpha \lambda y.(M \langle x \mapsto y\rangle)$
 \end{center}
