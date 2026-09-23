@@ -7,13 +7,17 @@
 \end{remark}
 
 \begin{definition} \label{def: Module}
-$(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \colon R \times M \to M$を写像とする.\ 次が成り立つとき$(M, +, \cdot)$を$R$\term[R-module]{かぐん}{加群}{$R$-module}という.
+$(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\
+$\cdot \colon R \times M \to M$を写像とする.\
+次が成り立つとき$(M, +, \cdot)$を$R$\term[R-module]{かぐん}{加群}{$R$-module}という.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
 \begin{enumerate}
     \item 任意の$r \in R$に対して$r \cdot \in \Map(M,M)$は群準同型.
     \item $1_R \cdot \in \Map(M,M)$は恒等写像.
-    \item 任意の$r, s \in R$に対して$(r \cdot) \circ (s \cdot) = (r \cdot_R s) \cdot$である.\ つまり下の1つ目の図式が可換になる.
-    \item 任意の$r, s \in R$に対して$+ \circ ((r \cdot) \times (s \cdot)) = (r +_R s) \cdot$である.\ つまり下の2つ目の図式が可換になる.
+    \item 任意の$r, s \in R$に対して$(r \cdot) \circ (s \cdot) = (r \cdot_R s) \cdot$である.\
+    つまり下の1つ目の図式が可換になる.
+    \item 任意の$r, s \in R$に対して$+ \circ ((r \cdot) \times (s \cdot)) = (r +_R s) \cdot$である.\
+    つまり下の2つ目の図式が可換になる.
 \end{enumerate}
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJNIl0sWzEsMCwiTSJdLFsxLDEsIk0iXSxbMywwLCJNIl0sWzQsMCwiTSBcXHRpbWVzIE0iXSxbNCwxLCJNIl0sWzAsMSwic1xcY2RvdCJdLFsxLDIsInJcXGNkb3QiXSxbMCwyLCIociBcXGNkb3RfUiBzKSBcXGNkb3QiLDJdLFszLDQsIihyXFxjZG90KVxcdGltZXMoc1xcY2RvdCkiXSxbNCw1LCIrIl0sWzMsNSwiKHIgK19SIHMpXFxjZG90IiwyXV0=
 \[\begin{tikzcd}
@@ -29,11 +33,14 @@ $(R, +_R, \cdot_R)$を環とし$(M, +)$をアーベル群とする.\ $\cdot \col
 \end{definition}
 
 \begin{definition} \label{def: IsLinearMap}
-$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加群とする.\ 写像$f \colon M \to N$が次を満たすとき$f$は$R$\term[R-linear map]{せんけいしゃぞう}{線形写像}{$R$-linear map}であるという.
+$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加群とする.\
+写像$f \colon M \to N$が次を満たすとき$f$は$R$\term[R-linear map]{せんけいしゃぞう}{線形写像}{$R$-linear map}であるという.
 \def\labelenumi{(\theenumi)\hspace{.5\zw}}
 \begin{enumerate}
-    \item $f \colon M \to N$は群準同型.\ つまり下の1つ目の図式が可換になる.
-    \item 任意の$r \in R$に対して$f \circ (r \cdot_M) = (r \cdot_N) \circ f$である.\ つまり下の2つ目の図式が可換になる.
+    \item $f \colon M \to N$は群準同型.\
+    つまり下の1つ目の図式が可換になる.
+    \item 任意の$r \in R$に対して$f \circ (r \cdot_M) = (r \cdot_N) \circ f$である.\
+    つまり下の2つ目の図式が可換になる.
 \end{enumerate}
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJNIFxcdGltZXMgTSJdLFsxLDAsIk4gXFx0aW1lcyBOIl0sWzAsMSwiTSJdLFsxLDEsIk4iXSxbMywwLCJNIl0sWzQsMCwiTiJdLFszLDEsIk0iXSxbNCwxLCJOIl0sWzAsMSwiZiBcXHRpbWVzIGYiXSxbMCwyLCIrX00iLDJdLFsxLDMsIitfTiJdLFsyLDMsImYiXSxbNCw1LCJmIl0sWzYsNywiZiJdLFs0LDYsInJcXGNkb3RfTSIsMl0sWzUsNywiclxcY2RvdF9OIl1d
 \[\begin{tikzcd}
@@ -51,7 +58,10 @@ $(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M), (N, +_N, \cdot_N)$を$R$加�
 \end{definition}
 
 \begin{definition} \label{def: Submodule}
-$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M)$を$R$加群とする.\ $N \subset M$とし$\iota_N \colon N \hookrightarrow M$を包含写像とする.\ $+_M(N \times N) \subset N$かつ$\cdot_M(R \times M) \subset M$が成り立つとする.\ $+ \colon N \times N \to N$を次の図式を可換にするただ一つの写像とする.
+$(R, +_R, \cdot_R)$を環とし$(M, +_M, \cdot_M)$を$R$加群とする.\
+$N \subset M$とし$\iota_N \colon N \hookrightarrow M$を包含写像とする.\
+$+_M(N \times N) \subset N$かつ$\cdot_M(R \times M) \subset M$が成り立つとする.\
+$+ \colon N \times N \to N$を次の図式を可換にするただ一つの写像とする.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJOIFxcdGltZXMgTiJdLFsxLDAsIk4iXSxbMCwxLCJNIFxcdGltZXMgTSJdLFsxLDEsIk0iXSxbMiwzLCIrX00iXSxbMCwyLCJcXGlvdGEgXFx0aW1lcyBcXGlvdGEiLDJdLFswLDEsIisiXSxbMSwzLCJcXGlvdGEiXV0=
 \[\begin{tikzcd}
 	{N \times N} & N \\
@@ -79,11 +89,13 @@ $(R, +_R, \cdot_R)$を環とすると$(R, +_R, \cdot_R)$は$R$加群となる.
 \end{example}
 
 \begin{remark} \label{rem: abbreviated_notation}
-以降,\ 環$(R, +_R, \cdot_R)$を$R$.\ $R$部分加群$(M, +_M, \cdot_M)$を$M$と書くこともある.
+以降,\ 環$(R, +_R, \cdot_R)$を$R$.\
+$R$部分加群$(M, +_M, \cdot_M)$を$M$と書くこともある.
 \end{remark}
 
 \begin{definition} \label{def: Ideal}
-$R$を環とする.\ $R$加群$R$の部分$R$加群を$R$の\term{いである}{イデアル}{ideal}という.
+$R$を環とする.\
+$R$加群$R$の部分$R$加群を$R$の\term{いである}{イデアル}{ideal}という.
 \end{definition}
 
 \begin{example} \label{ex: ring_is_ideal}
@@ -91,47 +103,67 @@ $R$は$R$のイデアルである.
 \end{example}
 
 \begin{definition} \label{def: IsProper}
-$R$を零環でない環とし$I$を$R$のイデアルとする.\ $I \neq R$のとき$I$は\term{しんのいである}{真のイデアル}{proper ideal}であるという.
+$R$を零環でない環とし$I$を$R$のイデアルとする.\
+$I \neq R$のとき$I$は\term{しんのいである}{真のイデアル}{proper ideal}であるという.
 \end{definition}
 
 \begin{definition} \label{def: IsPrime}
-$R$を環とし$\mathfrak{p}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{p}$が整域であるとき$\mathfrak{p}$は$R$の\term{そいである}{素イデアル}{prime ideal}であるという.
+$R$を環とし$\mathfrak{p}$を$R$のイデアルとする.\
+剰余環$R/\mathfrak{p}$が整域であるとき$\mathfrak{p}$は$R$の\term{そいである}{素イデアル}{prime ideal}であるという.
 \end{definition}
 
 \begin{definition}
-$R$を環とする.\ $R$の素イデアル全体の集合を$\Spec(R)$と書く.
+$R$を環とする.\
+$R$の素イデアル全体の集合を$\Spec(R)$と書く.
 \end{definition}
 
 \begin{definition} \label{def: IsMaximal}
-$R$を環とし$\mathfrak{m}$を$R$のイデアルとする.\ 剰余環$R/\mathfrak{m}$が体であるとき$\mathfrak{m}$は$R$の\term{きょくだいいである}{極大イデアル}{maximal ideal}であるという.
+$R$を環とし$\mathfrak{m}$を$R$のイデアルとする.\
+剰余環$R/\mathfrak{m}$が体であるとき$\mathfrak{m}$は$R$の\term{きょくだいいである}{極大イデアル}{maximal ideal}であるという.
 \end{definition}
 
 \begin{lemma} \label{lem: determinant_trick}
-$R$を環とし$M$を有限生成$R$加群とする.\ $\phi \in \Hom_R(M, M)$とし$I$を$R$のイデアルで$\phi(M) \subset IM$であるとする.\ このとき次が成り立つ.
+$R$を環とし$M$を有限生成$R$加群とする.\
+$\phi \in \Hom_R(M, M)$とし$I$を$R$のイデアルで$\phi(M) \subset IM$であるとする.\
+このとき次が成り立つ.
 \begin{center}
     ${^{\forall}i} \in n+1 \setminus 1,\ a_i \in I^i \; \land \; \phi^n + a_1\phi^{n-1} + \cdots + a_{n-1}\phi + a_n = 0$
 \end{center}
 \end{lemma}
 \begin{proof}
-$M = Rx_1 + \cdots + Rx_n$とする.\ $\phi(x_i) \in \phi(M) \subset IM$より$\phi(x_i) = \sigma_{j=1}^n c_{ij}x_j$となる$a_{ij} \in I$が存在する.\ $\sigma_{j=1}^n (\delta_{ij} \phi - c_{ij})x_j = 0$となる.\ $R$上の自己準同型環の可換な部分環$R[\phi]$に成分をもつ$n \times n$行列$A$を$A_{ij} \coloneq \delta_{ij} \phi - c_{ij}$で定める.\ $A(x_i)_{1 \le i \le n} = 0$であるが$\tilde{A}$を$A$の余因子行列とすると$\tilde{A}A = (\det A)E_n$となる.\ $(\det A)E_n (x_i)_{1 \le i \le n} = \tilde{A}A (x_i)_{1 \le i \le n} = \tilde{A} 0 = 0$となるので任意の$1 \le i \le n$に対して$(\det A) x_i = 0$となる.\ よって自己準同型として$\det A = 0$となる.\ $C \coloneq (c_{ij})_{1 \le i,j \le n}$とすると$\det A = \det (\phi E_n - C)$であるため$\phi^n + a_1\phi^{n-1} + \cdots + a_{n-1}\phi + a_n = 0$となる$a_i \in I^i$が存在する.
+$M = Rx_1 + \cdots + Rx_n$とする.\
+$\phi(x_i) \in \phi(M) \subset IM$より$\phi(x_i) = \sigma_{j=1}^n c_{ij}x_j$となる$a_{ij} \in I$が存在する.\
+$\sigma_{j=1}^n (\delta_{ij} \phi - c_{ij})x_j = 0$となる.\
+$R$上の自己準同型環の可換な部分環$R[\phi]$に成分をもつ$n \times n$行列$A$を$A_{ij} \coloneq \delta_{ij} \phi - c_{ij}$で定める.\
+$A(x_i)_{1 \le i \le n} = 0$であるが$\tilde{A}$を$A$の余因子行列とすると$\tilde{A}A = (\det A)E_n$となる.\
+$(\det A)E_n (x_i)_{1 \le i \le n} = \tilde{A}A (x_i)_{1 \le i \le n} = \tilde{A} 0 = 0$となるので任意の$1 \le i \le n$に対して$(\det A) x_i = 0$となる.\
+よって自己準同型として$\det A = 0$となる.\
+$C \coloneq (c_{ij})_{1 \le i,j \le n}$とすると$\det A = \det (\phi E_n - C)$であるため$\phi^n + a_1\phi^{n-1} + \cdots + a_{n-1}\phi + a_n = 0$となる$a_i \in I^i$が存在する.
 \end{proof}
 
 \begin{theorem}(\termen{Nakayama's lemma}) \label{thm: nakayama_lemma}
-$R$を環とし$M$を有限生成$R$加群とする.\ $I$を$R$のイデアルとすると次が成り立つ.
+$R$を環とし$M$を有限生成$R$加群とする.\
+$I$を$R$のイデアルとすると次が成り立つ.
 \begin{center}
     $IM = M \implies {^{\exists}x} \in 1 + I,\ xM = 0$
 \end{center}
 \end{theorem}
 \begin{proof}
-\cref{lem: determinant_trick}において$\phi \coloneq \id_M$とすると$\id_M(M) = M$なので$\id(M) \subset IM$であるから$a_i \in I^i$が存在して$(\id_M)^n + a_1(\id_M)^{n-1} + \cdots + a_{n-1}(\id_M) + a_n = 0$となる.\ これは$(1 + a_1 + \cdots + a_n)(\id_M) = 0$と同値である.\ $a \coloneq a_1 + \cdots a_n$とすると$a \in I$であるから$1 + a \in 1 + I$である.\ $x \coloneq 1 + a$とすれば任意の$m \in M$に対して$xm = 0$なので$xM = 0$である.
+\cref{lem: determinant_trick}において$\phi \coloneq \id_M$とすると$\id_M(M) = M$なので$\id(M) \subset IM$であるから$a_i \in I^i$が存在して$(\id_M)^n + a_1(\id_M)^{n-1} + \cdots + a_{n-1}(\id_M) + a_n = 0$となる.\
+これは$(1 + a_1 + \cdots + a_n)(\id_M) = 0$と同値である.\
+$a \coloneq a_1 + \cdots a_n$とすると$a \in I$であるから$1 + a \in 1 + I$である.\
+$x \coloneq 1 + a$とすれば任意の$m \in M$に対して$xm = 0$なので$xM = 0$である.
 \end{proof}
 
 \begin{definition}
-$R$を環とし$I$を$R$のイデアルとする.\ $\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\ これを$I$の\term{こんき}{根基}{radical}という.
+$R$を環とし$I$を$R$のイデアルとする.\
+$\sqrt{I} \coloneq \{r \in R \mid {^{\exists}n} \in \mathbb{N} \setminus 1,\ r^n \in I\}$とすると$\sqrt{I}$は$R$のイデアルになる.\
+これを$I$の\term{こんき}{根基}{radical}という.
 \end{definition}
 
 \begin{lemma}
-$R$を環,\ $S \subset R$を積閉集合,\ $I$を$R$のイデアルとする.\ このとき次が成り立つ.
+$R$を環,\ $S \subset R$を積閉集合,\ $I$を$R$のイデアルとする.\
+このとき次が成り立つ.
 \begin{center}
 	$S \cap I = \emptyset \implies I \subset {^{\exists} \mathfrak{p}} \in \Spec(R),\  S \cap \mathfrak{p} = \emptyset$
 \end{center}
@@ -148,7 +180,8 @@ $R$を環とし$I$を$R$のイデアルとすると次が成り立つ.
 \end{proposition}
 
 \begin{proof}
-$x \in \sqrt{I}$とするとある$n \in \mathbb{N} \setminus 1$が存在して$x^n \in I$となる.\ 任意の$I \subset \mathfrak{p} \in \Spec(R)$に対して$x^n \in \mathfrak{p}$となるが$\mathfrak{p}$は素イデアルなので$x \in \mathfrak{p}$となるので$x \in \bigcap_{I \subset \mathfrak{p} \in \Spec(R)} \mathfrak{p}$である.
+$x \in \sqrt{I}$とするとある$n \in \mathbb{N} \setminus 1$が存在して$x^n \in I$となる.\
+任意の$I \subset \mathfrak{p} \in \Spec(R)$に対して$x^n \in \mathfrak{p}$となるが$\mathfrak{p}$は素イデアルなので$x \in \mathfrak{p}$となるので$x \in \bigcap_{I \subset \mathfrak{p} \in \Spec(R)} \mathfrak{p}$である.
 
 $x \not\in \sqrt{I}$とすると$S_x \coloneq \{x^n \mid n \in \mathbb{N}\}$としたとき$S_x \cap I = \emptyset$なので$I \subset \mathfrak{p}$かつ$S_x \cap \mathfrak{p} = \emptyset$を満たす$\mathfrak{p} \in \Spec(R)$が存在する.
 \end{proof}
