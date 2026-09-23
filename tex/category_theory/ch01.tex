@@ -6,13 +6,18 @@
 \term{けん}{圏}{category}$\mathscr{C}$は以下のデータから成る.
 \begin{itemize}
     \item \termja{たいしょう}{対象}の集まり$\Ob(\mathscr{C})$.
-    \item \termja{しゃ}{射}の集まり$\Mor(\mathscr{C})$.\ 射は次を満たす.
+    \item \termja{しゃ}{射}の集まり$\Mor(\mathscr{C})$.\
+    射は次を満たす.
     \begin{itemize}
-    \item 任意の$f \in \Mor(\mathscr{C})$は\term{しいき}{始域}{domain}$\dom(f) \eqcolon A \in \Ob(\mathscr{C})$と\term{しゅういき}{終域}{codomain}$\cod(f) \eqcolon B \in \Ob(\mathscr{C})$を持ち$f \colon A \to B$と表す.\ 始域が$A$,\ 終域が$B$であるような射の集まりを$\Mor_\mathscr{C}(A,B)$と書く.
-    \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\term{ごうせい}{合成}{composition}$g \circ f \in \Mor(\mathscr{C})$が定まり$\dom(g \circ f) = \dom(f)$,\ $\cod(g \circ f) = \cod(g)$である.\ 合成は次を満たす.
+    \item 任意の$f \in \Mor(\mathscr{C})$は\term{しいき}{始域}{domain}$\dom(f) \eqcolon A \in \Ob(\mathscr{C})$と\term{しゅういき}{終域}{codomain}$\cod(f) \eqcolon B \in \Ob(\mathscr{C})$を持ち$f \colon A \to B$と表す.\
+    始域が$A$,\ 終域が$B$であるような射の集まりを$\Mor_\mathscr{C}(A,B)$と書く.
+    \item 任意の$f, g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$のとき$f$と$g$の\term{ごうせい}{合成}{composition}$g \circ f \in \Mor(\mathscr{C})$が定まり$\dom(g \circ f) = \dom(f)$,\ $\cod(g \circ f) = \cod(g)$である.\
+    合成は次を満たす.
         \begin{itemize}
-        \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\ この条件を\term{けつごうりつ}{結合律}{associativity}という.
-        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_X \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_X \circ f = f$かつ$g \circ \id_X = g$が成り立つ.\ $\id_X$を$X$の\term{こうとうしゃ}{恒等射}{identity}という.
+        \item 任意の$f,g,h \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g)$かつ$\cod(g) = \dom(h)$のとき$(h \circ g) \circ f = h \circ (g \circ f)$が成り立つ.\
+        この条件を\term{けつごうりつ}{結合律}{associativity}という.
+        \item 任意の$X \in \Ob(\mathscr{C})$に対して$\id_X \colon X \to X$が存在し任意の$f,g \in \Mor(\mathscr{C})$に対して$\cod(f) = \dom(g) = X$のとき$\id_X \circ f = f$かつ$g \circ \id_X = g$が成り立つ.\
+        $\id_X$を$X$の\term{こうとうしゃ}{恒等射}{identity}という.
         \end{itemize}
     \end{itemize}
 \end{itemize}
@@ -23,15 +28,21 @@
 \end{example}
 
 \begin{definition} \label{def: OppositeCategory}
-$\mathscr{C}$を圏とする.\ 対象を$\Ob(\mathscr{C})$とし$A, B \in \Ob(\mathscr{C})$に対して$\Mor_{\mathscr{C}^{\op}}(A, B) \coloneq \Mor_\mathscr{C}(B, A)$とする.\ $f \in \Mor_{\mathscr{C}^{\op}}(A, B)$と$g \in \Mor_{\mathscr{C}^{\op}}(B, C)$の$\mathscr{C}^{\op}$における合成$g \circ^{\op} f$を$\mathscr{C}$における合成$f \circ g \in \Mor_\mathscr{C}(C, A)$とすることで圏$\mathscr{C}^{\op}$が定まる.\ これを$\mathscr{C}$の\term{はんたいけん}{反対圏}{opposite category}という.
+$\mathscr{C}$を圏とする.\
+対象を$\Ob(\mathscr{C})$とし$A, B \in \Ob(\mathscr{C})$に対して$\Mor_{\mathscr{C}^{\op}}(A, B) \coloneq \Mor_\mathscr{C}(B, A)$とする.\
+$f \in \Mor_{\mathscr{C}^{\op}}(A, B)$と$g \in \Mor_{\mathscr{C}^{\op}}(B, C)$の$\mathscr{C}^{\op}$における合成$g \circ^{\op} f$を$\mathscr{C}$における合成$f \circ g \in \Mor_\mathscr{C}(C, A)$とすることで圏$\mathscr{C}^{\op}$が定まる.\
+これを$\mathscr{C}$の\term{はんたいけん}{反対圏}{opposite category}という.
 \end{definition}
 
 \begin{definition} \label{def: OppositeFunctor}
-$\mathscr{C}, \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\ $A \in \Ob(\mathscr{C}^{\op}),\ f \in \Mor(\mathscr{C}^{\op})$に対して$F^{\op}(A) \coloneq F(A),\ F^{\op}(f) \coloneq F(f)$と定めると共変関手$F^{\op} \colon \mathscr{C}^{\op} \to \mathscr{D}^{\op}$が定まる.\ これを$F$の\term{はんたいかんしゅ}{反対関手}{opposite functor}という.
+$\mathscr{C}, \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+$A \in \Ob(\mathscr{C}^{\op}),\ f \in \Mor(\mathscr{C}^{\op})$に対して$F^{\op}(A) \coloneq F(A),\ F^{\op}(f) \coloneq F(f)$と定めると共変関手$F^{\op} \colon \mathscr{C}^{\op} \to \mathscr{D}^{\op}$が定まる.\
+これを$F$の\term{はんたいかんしゅ}{反対関手}{opposite functor}という.
 \end{definition}
 
 \begin{definition} \label{def: Functor}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\term{きょうへんかんしゅ}{共変関手}{covariant functor}であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
+$\mathscr{C}, \mathscr{D}$を圏とする.\
+$F$が次を満たすとき$F$は$\mathscr{C}$から$\mathscr{D}$への\term{きょうへんかんしゅ}{共変関手}{covariant functor}であるといい$F \colon \mathscr{C} \to \mathscr{D}$と書く.
 \begin{itemize}
     \item 任意の$A \in \Ob(\mathscr{C})$に対して$F(A) \in \Ob(\mathscr{D})$である.
     \item 任意の$f \in \Mor(\mathscr{C})$に対して$F(f) \in \Mor_\mathscr{D}(F(\dom(f)), F(\cod(f)))$であり以下が成り立つ.
@@ -55,11 +66,14 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\ $F$が次を満たすとき$F$は$\m
 \end{definition}
 
 \begin{definition} \label{def: ContravariantFunctor}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ 共変関手$F \colon \mathscr{C}^{\op} \to \mathscr{D}$を\term{はんぺんかんしゅ}{反変関手}{contravariant functor}$F \colon \mathscr{C} \to \mathscr{D}$という.
+$\mathscr{C}, \mathscr{D}$を圏とする.\
+共変関手$F \colon \mathscr{C}^{\op} \to \mathscr{D}$を\term{はんぺんかんしゅ}{反変関手}{contravariant functor}$F \colon \mathscr{C} \to \mathscr{D}$という.
 \end{definition}
 
 \begin{definition} \label{def: constantFunctor}
-$\mathscr{J}, \mathscr{C}$を圏とする.\ $A \in \Ob(\mathscr{C})$として共変関手$C_A \colon \mathscr{J} \to \mathscr{C}$を$X \in \Ob(\mathscr{J}),\ f \in \Mor(\mathscr{J})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\ このとき$C_A$を\term{ていかんしゅ}{定関手}{constant functor}と呼ぶ.
+$\mathscr{J}, \mathscr{C}$を圏とする.\
+$A \in \Ob(\mathscr{C})$として共変関手$C_A \colon \mathscr{J} \to \mathscr{C}$を$X \in \Ob(\mathscr{J}),\ f \in \Mor(\mathscr{J})$に対して$C_A(X) \coloneq A,\ C_A(f) \coloneq \id_A$と定める.\
+このとき$C_A$を\term{ていかんしゅ}{定関手}{constant functor}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: constantDiagramFunctor}
@@ -72,21 +86,29 @@ $\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \t
 \end{definition}
 
 \begin{definition} \label{def: IsSmall}
-$\mathscr{C}$を圏とする.\ $\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\Mor(\mathscr{C}) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\term{ちいさいけん}{小さい圏}{small category},\ または\termja{しょうけん}{小圏}であるという.
+$\mathscr{C}$を圏とする.\
+$\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\Mor(\mathscr{C}) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\term{ちいさいけん}{小さい圏}{small category},\ または\termja{しょうけん}{小圏}であるという.
 
 任意の$A, B \in \Ob(\mathscr{C})$に対して$\Mor_\mathscr{C}(A, B) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\term{きょくしょてきにちいさいけん}{局所的に小さい圏}{locally small category},\ または\termja{きょくしょしょうけん}{局所小圏}であるという.
 \end{definition}
 
 \begin{example} \label{ex: hom_functor}
-$\mathscr{C}$を局所小圏とし$A \in \Ob(\mathscr{C})$とする.\ $X \in \Ob(\mathscr{C})$に対して$h^A(X) \coloneq \Mor_\mathscr{C}(A, X)$とし$f \in \Mor(\mathscr{C})$に対して$h^A(f) \colon h^A(\dom(f)) \to h^A(\cod(f))$を$h^A(f)(g) \coloneq f \circ g$で定めると$h^A \colon \mathscr{C} \to \mathbf{Set}$は共変関手となる.
+$\mathscr{C}$を局所小圏とし$A \in \Ob(\mathscr{C})$とする.\
+$X \in \Ob(\mathscr{C})$に対して$h^A(X) \coloneq \Mor_\mathscr{C}(A, X)$とし$f \in \Mor(\mathscr{C})$に対して$h^A(f) \colon h^A(\dom(f)) \to h^A(\cod(f))$を$h^A(f)(g) \coloneq f \circ g$で定めると$h^A \colon \mathscr{C} \to \mathbf{Set}$は共変関手となる.
 \end{example}
 
 \begin{definition} \label{def: IsIsomorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ $g \in \Mor(\mathscr{C})$が存在して$\dom(f) = \cod(g)$かつ$\cod(f) = \dom(g)$となるとする.\ $f \circ g = \id_{\dom(g)}$かつ$g \circ f = \id_{\dom(f)}$となるとき$f$は\term{どうけいしゃ}{同型射}{isomorphism}であるという.\ $A,B \in \mathscr{C}$に対して同型射$f \colon A \to B$が存在するとき$A$と$B$は\term{どうけい}{同型}{isomorphic}であるといい$A \cong B$と書く.
+$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
+$g \in \Mor(\mathscr{C})$が存在して$\dom(f) = \cod(g)$かつ$\cod(f) = \dom(g)$となるとする.\
+$f \circ g = \id_{\dom(g)}$かつ$g \circ f = \id_{\dom(f)}$となるとき$f$は\term{どうけいしゃ}{同型射}{isomorphism}であるという.\
+$A,B \in \mathscr{C}$に対して同型射$f \colon A \to B$が存在するとき$A$と$B$は\term{どうけい}{同型}{isomorphic}であるといい$A \cong B$と書く.
 \end{definition}
 
 \begin{definition} \label{def: NaturalTransformation}
-$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\mathscr{D}$の射の族$\eta \coloneq (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\term{しぜんへんかん}{自然変換}{natural transformation}であるといい$\eta \colon F \Rightarrow G$と書く.\ 特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が同型射であるとき$\eta$は$F$から$G$への\term{しぜんどうけい}{自然同型}{natural isomorphism}であるという.\ $F$から$G$への自然変換全体の集まりを$\Nat(F, G)$と書く.
+$F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\
+$\mathscr{D}$の射の族$\eta \coloneq (\eta_X \colon F(X) \to G(X))_{X \in \Ob(\mathscr{C})}$は任意の$f \in \Mor(\mathscr{C})$に対して次の図式を可換にするとき\term{しぜんへんかん}{自然変換}{natural transformation}であるといい$\eta \colon F \Rightarrow G$と書く.\
+特に$\eta$が自然変換で任意の$X \in \Ob(\mathscr{C})$に対して$\eta_X$が同型射であるとき$\eta$は$F$から$G$への\term{しぜんどうけい}{自然同型}{natural isomorphism}であるという.\
+$F$から$G$への自然変換全体の集まりを$\Nat(F, G)$と書く.
 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGKFxcbWF0aHJte2RvbX0oZikpIl0sWzEsMCwiRyhcXG1hdGhybXtkb219KGYpKSJdLFswLDEsIkYoXFxtYXRocm17Y29kfShmKSkiXSxbMSwxLCJHKFxcbWF0aHJte2NvZH0oZikpIl0sWzAsMSwiXFxldGFfe1xcbWF0aHJte2RvbX0oZil9Il0sWzAsMiwiRihmKSIsMl0sWzIsMywiXFxldGFfe1xcbWF0aHJte2NvZH0oZil9Il0sWzEsMywiRyhmKSJdXQ==
 \[\begin{tikzcd}
@@ -100,11 +122,16 @@ $F,G$を圏$\mathscr{C}$から圏$\mathscr{D}$への共変関手とする.\ $\ma
 \end{definition}
 
 \begin{definition} \label{def: FunctorCategory}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ 対象を共変関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\ $\eta \colon F \Rightarrow G$と$\theta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C})$に対して$(\theta \circ \eta)_X \coloneq \theta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\ これを\term{かんしゅけん}{関手圏}{functor category}という.
+$\mathscr{C}, \mathscr{D}$を圏とする.\
+対象を共変関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\
+$\eta \colon F \Rightarrow G$と$\theta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C})$に対して$(\theta \circ \eta)_X \coloneq \theta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\
+これを\term{かんしゅけん}{関手圏}{functor category}という.
 \end{definition}
 
 \begin{definition} \label{def: evaluationFunctor}
-$\mathscr{C}, \mathscr{D}$を圏とする.\ $X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{\mathscr{C}} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\ これを\term{ひょうかかんしゅ}{評価関手}{evaluation functor}という.
+$\mathscr{C}, \mathscr{D}$を圏とする.\
+$X \in \mathscr{C}$に対して共変関手$\ev_X \colon \mathscr{D}^{\mathscr{C}} \to \mathscr{D}$を$F \in \Ob(\mathscr{D}^{\mathscr{C}})$に対して$\ev_X(F) \coloneq F(X)$,\ $\eta \in \Mor_{\mathscr{D}^{\mathscr{C}}}$に対して$\ev_X(\eta) \coloneq \eta_X$で定める.\
+これを\term{ひょうかかんしゅ}{評価関手}{evaluation functor}という.
 \end{definition}
 
 % https://q.uiver.app/#q=WzAsNixbMywwLCJGKFgpIl0sWzQsMCwiRyhYKSJdLFs0LDEsIkgoWCkiXSxbMCwwLCJGIl0sWzEsMCwiRyJdLFsxLDEsIkgiXSxbMCwxLCJcXGV0YV9YIl0sWzEsMiwiXFx0aGV0YV9YIl0sWzAsMiwiKFxcdGhldGEgXFxjaXJjIFxcZXRhKV9YIiwyXSxbNCw1LCJcXHRoZXRhIiwwLHsibGV2ZWwiOjJ9XSxbMyw1LCJcXHRoZXRhIFxcY2lyYyBcXGV0YSIsMix7ImxldmVsIjoyfV0sWzMsNCwiXFxldGEiLDAseyJsZXZlbCI6Mn1dLFs5LDgsIlxcbWF0aHJte2V2fV9YIiwwLHsibGFiZWxfcG9zaXRpb24iOjQwLCJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6NDB9LCJsZXZlbCI6MSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==

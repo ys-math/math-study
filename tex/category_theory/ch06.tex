@@ -4,15 +4,18 @@
 \section{モナド}
 
 \begin{definition} \label{def: Endofunctor}
-$\mathscr{C}$を圏とする.\ 共変関手$F \colon \mathscr{C} \to \mathscr{C}$を\term{じこかんしゅ}{自己関手}{endofunctor}と呼ぶ.
+$\mathscr{C}$を圏とする.\
+共変関手$F \colon \mathscr{C} \to \mathscr{C}$を\term{じこかんしゅ}{自己関手}{endofunctor}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: EndofunctorCategory}
-$\mathscr{C}$を圏とする.\ $\End(\mathscr{C}) \coloneq \mathscr{C}^{\mathscr{C}}$としこれを\term{じこかんしゅけん}{自己関手圏}{cateogory of endofunctors}という.
+$\mathscr{C}$を圏とする.\
+$\End(\mathscr{C}) \coloneq \mathscr{C}^{\mathscr{C}}$としこれを\term{じこかんしゅけん}{自己関手圏}{cateogory of endofunctors}という.
 \end{definition}
 
 \begin{definition} \label{def: Monad}
-$\mathscr{C}$を圏とし$T \in \End(\mathscr{C})$とする.\ 自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow T$と$\mu \colon T^2 \Rightarrow T$が次の2つの図式を可換にするとする.
+$\mathscr{C}$を圏とし$T \in \End(\mathscr{C})$とする.\
+自然変換$\eta \colon \id_{\mathscr{C}} \Rightarrow T$と$\mu \colon T^2 \Rightarrow T$が次の2つの図式を可換にするとする.
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJUXjMiXSxbMSwwLCJUXjIiXSxbMCwxLCJUXjIiXSxbMSwxLCJUIl0sWzMsMCwiVCJdLFs0LDAsIlReMiJdLFs0LDEsIlQiXSxbMywxLCJUXjIiXSxbMCwxLCJUXFxtdSIsMCx7ImxldmVsIjoyfV0sWzAsMiwiXFxtdSBUIiwyLHsibGV2ZWwiOjJ9XSxbMiwzLCJcXG11IiwyLHsibGV2ZWwiOjJ9XSxbMSwzLCJcXG11IiwwLHsibGV2ZWwiOjJ9XSxbNSw2LCJcXG11IiwwLHsibGV2ZWwiOjJ9XSxbNyw2LCJcXG11IiwyLHsibGV2ZWwiOjJ9XSxbNCw1LCJcXGV0YSBUIiwwLHsibGV2ZWwiOjJ9XSxbNCw3LCJUIFxcZXRhIiwyLHsibGV2ZWwiOjJ9XSxbNCw2LCJcXG1hdGhybXtpZH1fVCIsMSx7ImxldmVsIjoyfV1d
 \[\begin{tikzcd}
 	{T^3} & {T^2} && T & {T^2} \\
@@ -31,7 +34,8 @@ $\mathscr{C}$を圏とし$T \in \End(\mathscr{C})$とする.\ 自然変換$\eta 
 \end{definition}
 
 \begin{proposition} \label{prop: monad_of_adjunction}
-$\mathscr{C}, \mathscr{D}$を圏とし$F \in \mathscr{D}^{\mathscr{C}},\ U \in \mathscr{C}^{\mathscr{D}}$とする.\ 随伴$F \dashv U$が存在するとき$(\eta, \varepsilon) \coloneq F \dashv U$とすると$(UF, \eta, U \varepsilon F)$は$\mathscr{C}$上のモナドになる.
+$\mathscr{C}, \mathscr{D}$を圏とし$F \in \mathscr{D}^{\mathscr{C}},\ U \in \mathscr{C}^{\mathscr{D}}$とする.\
+随伴$F \dashv U$が存在するとき$(\eta, \varepsilon) \coloneq F \dashv U$とすると$(UF, \eta, U \varepsilon F)$は$\mathscr{C}$上のモナドになる.
 \end{proposition}
 \begin{proof}
 $\varepsilon F \circ F \eta = \id_F$より$U \varepsilon F \circ UF \eta = \id_{UF}$が成り立ち$U \varepsilon \circ \eta U = \id_U$より$U \varepsilon F \circ \eta UF = \id_{UF}$が成り立つので次の図式が可換になる.
@@ -46,7 +50,9 @@ $\varepsilon F \circ F \eta = \id_F$より$U \varepsilon F \circ UF \eta = \id_{
 	\arrow["{U \varepsilon F}"', Rightarrow, nfold, from=2-1, to=2-2]
 \end{tikzcd}\]
 
-$((U \varepsilon F) \circ (U \varepsilon FUF))_X = (U \varepsilon F)_X \circ (U \varepsilon FUF)_X = U(\varepsilon_{F(X)}) \circ U(\varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)})$である.\ また$((U \varepsilon F) \circ (UFU \varepsilon F))_X = (U \varepsilon F)_X \circ (UFU \varepsilon F)_X = U(\varepsilon_{F(X)}) \circ UFU(\varepsilon_{F(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\ $\varepsilon$は自然変換なので任意の$f \in \Mor_{\mathscr{D}}(FUF(X), F(X))$に対して次の図式が可換になる.
+$((U \varepsilon F) \circ (U \varepsilon FUF))_X = (U \varepsilon F)_X \circ (U \varepsilon FUF)_X = U(\varepsilon_{F(X)}) \circ U(\varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)})$である.\
+また$((U \varepsilon F) \circ (UFU \varepsilon F))_X = (U \varepsilon F)_X \circ (UFU \varepsilon F)_X = U(\varepsilon_{F(X)}) \circ UFU(\varepsilon_{F(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\
+$\varepsilon$は自然変換なので任意の$f \in \Mor_{\mathscr{D}}(FUF(X), F(X))$に対して次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJGVUYoWCkiXSxbMSwxLCJGKFgpIl0sWzAsMCwiRlUoRlVGKFgpKSJdLFswLDEsIkZVKEYoWCkpIl0sWzAsMSwiZiJdLFsyLDMsIkZVKGYpIiwyXSxbMiwwLCJcXHZhcmVwc2lsb25fe0ZVRihYKX0iXSxbMywxLCJcXHZhcmVwc2lsb25fe0YoWCl9Il1d
 \[\begin{tikzcd}
 	{FU(FUF(X))} & {FUF(X)} \\
@@ -56,7 +62,8 @@ $((U \varepsilon F) \circ (U \varepsilon FUF))_X = (U \varepsilon F)_X \circ (U 
 	\arrow["f", from=1-2, to=2-2]
 	\arrow["{\varepsilon_{F(X)}}", from=2-1, to=2-2]
 \end{tikzcd}\]
-$\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)} = \varepsilon_{F(X)} \circ FU(\varepsilon_{F(X)})$が成り立ち$U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\ よって次の図式が可換になる.
+$\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)} = \varepsilon_{F(X)} \circ FU(\varepsilon_{F(X)})$が成り立ち$U(\varepsilon_{F(X)} \circ \varepsilon_{FUF(X)}) = U(\varepsilon_{F(X)} \circ FU \varepsilon_{F(X)})$である.\
+よって次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJVRlVGVUYiXSxbMSwwLCJVRlVGIl0sWzEsMSwiVUYiXSxbMCwxLCJVRlVGIl0sWzAsMSwiVSBcXHZhcmVwc2lsb24gRlVGIiwwLHsibGV2ZWwiOjJ9XSxbMSwyLCJVIFxcdmFyZXBzaWxvbiBGIiwwLHsibGV2ZWwiOjJ9XSxbMywyLCJVIFxcdmFyZXBzaWxvbiBGIiwwLHsibGV2ZWwiOjJ9XSxbMCwzLCJVRlUgXFx2YXJlcHNpbG9uIEYiLDIseyJsZXZlbCI6Mn1dXQ==
 \[\begin{tikzcd}
 	UFUFUF & UFUF \\
@@ -75,7 +82,8 @@ $\varepsilon_{F(X)} \in \Mor_{\mathscr{D}}(FUF(X), F(X))$なので$\varepsilon_{
 \end{definition}
 
 \begin{definition} \label{def: EilenbergMooreCategory}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}^T$を次のようにして定める.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+圏$\mathscr{C}^T$を次のようにして定める.
 \begin{itemize}
 	\item 対象を$A \in \mathscr{C},\ a \in \Mor_{\mathscr{C}}(T(A), A)$の組$(A, a)$で次の図式を可換にするものとする.
 % https://q.uiver.app/#q=WzAsNyxbMCwwLCJBIl0sWzEsMCwiVChBKSJdLFsxLDEsIkEiXSxbMywwLCJUXjIoQSkiXSxbNCwwLCJUKEEpIl0sWzQsMSwiQSJdLFszLDEsIlQoQSkiXSxbMCwxLCJcXGV0YV9BIl0sWzEsMiwiYSJdLFswLDIsIlxcbWF0aHJte2lkfV9BIiwyXSxbMyw0LCJcXG11X0EiXSxbNCw1LCJhIl0sWzMsNiwiVChhKSIsMl0sWzYsNSwiYSIsMl1d
@@ -105,11 +113,13 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{definition} \label{def: Algebra}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$の対象を\term[T-algebra]{てぃーだいすう}{$T$-代数}{$T$-algebra}と呼ぶ.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+アイレンベルグムーア圏$\mathscr{C}^T$の対象を\term[T-algebra]{てぃーだいすう}{$T$-代数}{$T$-algebra}と呼ぶ.
 \end{definition}
 
 \begin{definition} \label{def: forgetfulFunctor}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$U^T \colon \mathscr{C}^T \to \mathscr{C}$を次のようにして定める.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+共変関手$U^T \colon \mathscr{C}^T \to \mathscr{C}$を次のようにして定める.
 \begin{itemize}
 	\item $(A, a) \in \mathscr{C}^T$に対して$U^T(A, a) \coloneq A$とする.
 	\item $f \in \Mor_{\mathscr{C}^T}((A,a), (B,b))$に対して$U^T(f) \coloneq f$とする.
@@ -118,7 +128,8 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{definition} \label{def: freeFunctor}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F^T \colon \mathscr{C} \to \mathscr{C}^T$を次のようにして定める.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+共変関手$F^T \colon \mathscr{C} \to \mathscr{C}^T$を次のようにして定める.
 \begin{itemize}
 	\item $X \in \mathscr{C}$に対して$F^T(X) \coloneq (T(X), \mu_X)$とする.
 	\item $f \in \Mor({\mathscr{C}})$に対して$F^T(f) \coloneq T(f) \in \Mor_{\mathscr{C}^T}((T(\dom(f)), \mu_{\dom(f)}), (T(\cod(f)), \mu_{\cod(f)}))$とする.
@@ -127,7 +138,8 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{definition} \label{def: freeAlgebra}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ $F^T$を自由関手としたとき$X \in \mathscr{C}$に対して$F^T(X)$を$X$によって定まる\term[free T-algebra]{じゆうてぃーだいすう}{自由$T$-代数}{free $T$-algebra}という.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+$F^T$を自由関手としたとき$X \in \mathscr{C}$に対して$F^T(X)$を$X$によって定まる\term[free T-algebra]{じゆうてぃーだいすう}{自由$T$-代数}{free $T$-algebra}という.
 \end{definition}
 
 \begin{proposition} \label{prop: free_adjoint_forgetful}
@@ -136,7 +148,8 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \begin{proof}
 任意の$X \in \mathscr{C}$に対して$U^T F^T(X) = U^T(T(X), \mu_X) = T(X)$であり任意の$f \in \Mor({\mathscr{C}})$に対して$U^T F^T(f) = U^T(T(f)) = T(f)$なので$U^T F^T = T$である.
 
-自然変換$\varepsilon \colon F^T U^T \Rightarrow \id_{\mathscr{C}^T}$を$\varepsilon_{(A,a)} \coloneq a \in \Mor_{\mathscr{C}^T}((T(A), \mu_A), (A, a))$で定める.\ 任意の$X \in \mathscr{C}$に対して$(\varepsilon F^T \circ F^T \eta)_X = (\varepsilon F^T)_X \circ (F^T \eta)_X = \varepsilon_{F^T(X)} \circ F^T(\eta_X) = \varepsilon_{(T(X), \mu_X)} \circ T(\eta_X) = \mu_X \circ T(\eta_X) = (\mu \circ T \eta)_X = (\id_T)_X = (\id_{F^T})_X$なので$\varepsilon F^T \circ F^T \eta = \id_{F^T}$である.
+自然変換$\varepsilon \colon F^T U^T \Rightarrow \id_{\mathscr{C}^T}$を$\varepsilon_{(A,a)} \coloneq a \in \Mor_{\mathscr{C}^T}((T(A), \mu_A), (A, a))$で定める.\
+任意の$X \in \mathscr{C}$に対して$(\varepsilon F^T \circ F^T \eta)_X = (\varepsilon F^T)_X \circ (F^T \eta)_X = \varepsilon_{F^T(X)} \circ F^T(\eta_X) = \varepsilon_{(T(X), \mu_X)} \circ T(\eta_X) = \mu_X \circ T(\eta_X) = (\mu \circ T \eta)_X = (\id_T)_X = (\id_{F^T})_X$なので$\varepsilon F^T \circ F^T \eta = \id_{F^T}$である.
 
 任意の$(X, x) \in \mathscr{C}^T$に対して$(U^T \varepsilon \circ \eta U^T)_{(X, x)} = (U^T \varepsilon)(X, x) \circ (\eta U^T)_{(X,x)} = U^T(x) \circ \eta_X = x \circ \eta_X = \id_X = (\id_{U^T})_{(X,x)}$なので$U^T \varepsilon \circ \eta U^T = \id_{U^T}$である.
 
@@ -153,10 +166,12 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 % 随伴が与えられればモナドが構成できる. モナドが与えられればそのモナドを構成する随伴が構成できる.
 
 \begin{definition} \label{def: KleisliCategory}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathscr{C}_T$を次のようにして定める.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+圏$\mathscr{C}_T$を次のようにして定める.
 \begin{itemize}
 	\item $\Ob(\mathscr{C}_T) \coloneq \Ob(\mathscr{C})$とする.
-	\item $f \in \Mor_{\mathscr{C}_T}(A, B) \coloneq \Mor_{\mathscr{C}}(A, T(B))$とする.\ 射の合成と単位射は次のようにして定める.
+	\item $f \in \Mor_{\mathscr{C}_T}(A, B) \coloneq \Mor_{\mathscr{C}}(A, T(B))$とする.\
+	射の合成と単位射は次のようにして定める.
 	\begin{itemize}
 		\item $f \in \Mor_{\mathscr{C}_T}(A, B),\ g \in \Mor_{\mathscr{C}_T}(B, C)$に対して$g \circ_{\mathscr{C}_T} f = \mu_C \circ_{\mathscr{C}} T(g) \circ_{\mathscr{C}} f$とする.
 		\item $X \in \Ob_{\mathscr{C}_T}$に対して$\id_X \coloneq \eta_X$とする.
@@ -166,7 +181,10 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{proposition} \label{prop: kleisli_adjunction}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$A \in \Ob(\mathscr{C})$に対して$F_T(A) = A$とし$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\ 共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\ このとき$F_T \dashv U_T$が存在する.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+共変関手$F_T \colon \mathscr{C} \to \mathscr{C}_T$を$A \in \Ob(\mathscr{C})$に対して$F_T(A) = A$とし$f \in \Mor(\mathscr{C})$に対して$F_T(f) \coloneq \eta_{\cod(f)} \circ f$で定める.\
+共変関手$U_T \colon \mathscr{C}_T \to \mathscr{C}$を$A \in \Ob(\mathscr{C})$に対して$U_T(A) \coloneq T(A)$とし$g \in \Mor_{\mathscr{C}}(A, T(B))$に対して$U_T(g) \coloneq \mu_B \circ T(g)$とする.\
+このとき$F_T \dashv U_T$が存在する.
 \end{proposition}
 
 \begin{proof}
@@ -176,7 +194,8 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{proof}
 
 \begin{definition} \label{def: CategoryOfAdjunctions}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ 圏$\mathbf{Adj}_T$を次のようにして定める.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+圏$\mathbf{Adj}_T$を次のようにして定める.
 \begin{itemize}
 	\item 対象を随伴$F \dashv U$でモナド$(T, \eta, \mu)$を生成するものとする.
 	\item 射$K \colon F \dashv U \to F' \dashv U'$を共変関手$K \colon \cod(F) \to \cod(F')$で$KF = F'$かつ$U'K = U$を満たすものとする.
@@ -196,16 +215,21 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{definition}
 
 \begin{proposition} \label{prop: kleisli_adjunction_is_initial}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ クライスリ圏$\mathscr{C}_T$に対して定まる随伴$F_T \dashv U_T$は随伴の圏$\mathbf{Adj}_T$の始対象である.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+クライスリ圏$\mathscr{C}_T$に対して定まる随伴$F_T \dashv U_T$は随伴の圏$\mathbf{Adj}_T$の始対象である.
 \end{proposition}
 
 \begin{proof}
-$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\ $F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\ 共変関手$K \colon \mathscr{C}_T \to \mathscr{D}$を次のようにして定める.
+$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\
+$F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\
+共変関手$K \colon \mathscr{C}_T \to \mathscr{D}$を次のようにして定める.
 \begin{itemize}
 	\item $A \in \Ob(\mathscr{C})$に対して$K(A) \coloneq F(A)$とする.
 	\item $f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$(\varepsilon F)_{B} \circ F(f)$とする.
 \end{itemize}
-実際,\ 任意の$A \in \Ob(\mathscr{C})$に対して$K(\eta_A) = (\varepsilon F)_{A} \circ F(\eta_A) = (\varepsilon F \circ F \eta)_A = (\id_F)_A = \id_{F(A)} = \id_{K(A)}$である.\ また任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$と$g \in \Mor_{\mathscr{C}}(B, T(C))$に対して$\mu = U \varepsilon F$より$K(g \circ_{\mathscr{C}_T} f) = K(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F((U \varepsilon F)_C \circ UF(g) \circ f)$である.\ $\varepsilon$は自然変換なので次の2つの図式が可換になる.
+実際,\ 任意の$A \in \Ob(\mathscr{C})$に対して$K(\eta_A) = (\varepsilon F)_{A} \circ F(\eta_A) = (\varepsilon F \circ F \eta)_A = (\id_F)_A = \id_{F(A)} = \id_{K(A)}$である.\
+また任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$と$g \in \Mor_{\mathscr{C}}(B, T(C))$に対して$\mu = U \varepsilon F$より$K(g \circ_{\mathscr{C}_T} f) = K(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F(\mu_C \circ T(g) \circ f) = (\varepsilon F)_C \circ F((U \varepsilon F)_C \circ UF(g) \circ f)$である.\
+$\varepsilon$は自然変換なので次の2つの図式が可換になる.
 % https://q.uiver.app/#q=WzAsOCxbMCwwLCJGVUZVRihDKSJdLFsxLDAsIkZVRihDKSJdLFswLDEsIkZVRihDKSJdLFsxLDEsIkYoQykiXSxbMywwLCJGVUYoQikiXSxbNCwwLCJGKEIpIl0sWzMsMSwiRlVGVUYoQykiXSxbNCwxLCJGVUYoQykiXSxbMCwxLCJcXHZhcmVwc2lsb25fe0ZVRihDKX0iXSxbMSwzLCJcXHZhcmVwc2lsb25fe0YoQyl9Il0sWzIsMywiXFx2YXJlcHNpbG9uX3tGKEMpfSJdLFswLDIsIkZVKFxcdmFyZXBzaWxvbl97RihDKX0pIiwyXSxbNCw1LCJcXHZhcmVwc2lsb25fe0YoZyl9Il0sWzQsNiwiRlUoRihnKSkiLDJdLFs1LDcsIkYoZykiXSxbNiw3LCJcXHZhcmVwc2lsb25fe0ZVRihDKX0iXV0=
 \[\begin{tikzcd}
 	{FUFUF(C)} & {FUF(C)} && {FUF(B)} & {F(B)} \\
@@ -221,7 +245,9 @@ $\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \col
 \end{tikzcd}\]
 よって$(\varepsilon F)_C \circ F((U \varepsilon F)_C \circ UF(g) \circ f) = \varepsilon_{F(C)} \circ \varepsilon_{FUF(C)} \circ FUF(g) \circ F(f) = \varepsilon_{F(C)} \circ F(g) \circ \varepsilon_{F(g)} \circ F(f) = K(g) \circ K(f)$となるので$K \colon \mathscr{C}_T \to \mathscr{D}$は共変関手になる.
 
-任意の$A \in \Ob(\mathscr{C})$に対して$K	F_T(A) = K(A) = F(A)$であり任意の$f \in \Mor_{\mathscr{C}}(A,B)$に対して$KF_T(f) = \varepsilon_{F(B)} \circ F(\eta_B) \circ F(f) = (\varepsilon F \circ F \eta)_B \circ F(f) = F(f)$なので$KF_T = F$である.\ また任意の$A \in \Ob(\mathscr{C})$に対して$UK(A) = U(F(A)) = T(A) = U_T(A)$であり任意の$f \Mor_\mathscr{C}(A, T(B))$に対して$UK(f) = U((\varepsilon F)_{B} \circ F(f)) = \mu_B \circ T(f) = U_T(f)$なので$UK = U_T$である.\ よって次の2つの図式が可換になる.
+任意の$A \in \Ob(\mathscr{C})$に対して$K	F_T(A) = K(A) = F(A)$であり任意の$f \in \Mor_{\mathscr{C}}(A,B)$に対して$KF_T(f) = \varepsilon_{F(B)} \circ F(\eta_B) \circ F(f) = (\varepsilon F \circ F \eta)_B \circ F(f) = F(f)$なので$KF_T = F$である.\
+また任意の$A \in \Ob(\mathscr{C})$に対して$UK(A) = U(F(A)) = T(A) = U_T(A)$であり任意の$f \Mor_\mathscr{C}(A, T(B))$に対して$UK(f) = U((\varepsilon F)_{B} \circ F(f)) = \mu_B \circ T(f) = U_T(f)$なので$UK = U_T$である.\
+よって次の2つの図式が可換になる.
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMSwwLCJcXG1hdGhzY3J7Q31fVCJdLFsxLDEsIlxcbWF0aHNjcntEfSJdLFszLDAsIlxcbWF0aHNjcntDfSJdLFs0LDAsIlxcbWF0aHNjcntDfV9UIl0sWzQsMSwiXFxtYXRoc2Nye0R9Il0sWzEsMiwiSyJdLFswLDEsIkZfVCJdLFswLDIsIkYiLDJdLFs0LDUsIksiXSxbNCwzLCJVX1QiLDJdLFs1LDMsIlUiXV0=
 \[\begin{tikzcd}
 	{\mathscr{C}} & {\mathscr{C}_T} && {\mathscr{C}} & {\mathscr{C}_T} \\
@@ -236,20 +262,29 @@ $\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \col
 よって$K$は随伴の圏$\mathbf{Adj}_T$の射である.
 
 
-$K' \colon \mathscr{C}_T \to \mathscr{D}$を$K'F_T = F$かつ$UK' = U_T$を満たす共変関手とすると任意の$A \in \Ob(\mathscr{C})$に対して$K'(A) = K'(F_T(A)) = F = K(F_T(A)) = K(A)$である.\ 任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$K'(f) \in \Mor_{\mathscr{D}}(F(A), F(B))$であり$UK'(f) \circ \eta_A = U_T(f) \circ \eta_A = \mu_B \circ T(f) \eta_A = \mu_B \circ \eta_{B} \circ f = f$である.\ 同様に$UK(f) \circ \eta_A = f$であり\cref{prop: adjunction_iff_hom_natural_iso}により$f \mapsto U(f) \circ \eta_A$は全単射なので$K'(f) = K(f)$である.\ ゆえに$K' = K$である.
+$K' \colon \mathscr{C}_T \to \mathscr{D}$を$K'F_T = F$かつ$UK' = U_T$を満たす共変関手とすると任意の$A \in \Ob(\mathscr{C})$に対して$K'(A) = K'(F_T(A)) = F = K(F_T(A)) = K(A)$である.\
+任意の$f \in \Mor_{\mathscr{C}}(A, T(B))$に対して$K'(f) \in \Mor_{\mathscr{D}}(F(A), F(B))$であり$UK'(f) \circ \eta_A = U_T(f) \circ \eta_A = \mu_B \circ T(f) \eta_A = \mu_B \circ \eta_{B} \circ f = f$である.\
+同様に$UK(f) \circ \eta_A = f$であり\cref{prop: adjunction_iff_hom_natural_iso}により$f \mapsto U(f) \circ \eta_A$は全単射なので$K'(f) = K(f)$である.\
+ゆえに$K' = K$である.
 \end{proof}
 
 \begin{proposition} \label{prop: eilenberg_moore_adjunction_is_terminal}
-$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\ アイレンベルグムーア圏$\mathscr{C}^T$に対して定まる随伴$F^T \dashv U^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
+$\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとする.\
+アイレンベルグムーア圏$\mathscr{C}^T$に対して定まる随伴$F^T \dashv U^T$は随伴の圏$\mathbf{Adj}_T$の終対象である.
 \end{proposition}
 
 \begin{proof}
-$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\ $F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\ 共変関手$L \colon \mathscr{D} \to \mathscr{C}^T$を次のように定める.
+$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\
+$F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\
+共変関手$L \colon \mathscr{D} \to \mathscr{C}^T$を次のように定める.
 \begin{itemize}
 	\item $A \in \Ob(\mathscr{D})$に対して$L(A) \coloneq (U(A), (U \varepsilon)_A)$とする.
 	\item $f \in \Mor(\mathscr{D})$に対して$L(f) \coloneq U(f)$とする.
 \end{itemize}
-$L$が共変関手であることを示す.\ まず$L(A)$は$T$-代数であることを示す.\ $F \dashv U$なので$UF = T$であり$U \varepsilon \circ \eta U = \id_U$である.\ よって$U(\varepsilon_A) \circ \eta_{U(A)} = \id_{U(A)}$であるから次の図式が可換になる.
+$L$が共変関手であることを示す.\
+まず$L(A)$は$T$-代数であることを示す.\
+$F \dashv U$なので$UF = T$であり$U \varepsilon \circ \eta U = \id_U$である.\
+よって$U(\varepsilon_A) \circ \eta_{U(A)} = \id_{U(A)}$であるから次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJVKEEpIl0sWzEsMCwiVChVKEEpKSJdLFsxLDEsIlUoQSkiXSxbMCwxLCJcXGV0YV97VShBKX0iXSxbMSwyLCJVX3tcXHZhcmVwc2lsb24oQSl9Il0sWzAsMiwiXFxtYXRocm17aWR9X3tVKEEpfSIsMl1d
 \[\begin{tikzcd}
 	{U(A)} & {T(U(A))} \\
@@ -269,7 +304,8 @@ $(U \varepsilon)_A \circ (TU \varepsilon)_A = U(\varepsilon_A \circ FU\varepsilo
 	\arrow["{\varepsilon_A}", from=1-2, to=2-2]
 	\arrow["{\varepsilon_A}", from=2-1, to=2-2]
 \end{tikzcd}\]
-$F \dashv U \in \mathbf{Adj}_T$なので$\mu = U \varepsilon F$であり$U(\varepsilon_A \circ \varepsilon_{FU(A)}) = U(\varepsilon_A) \circ \mu_{U(A)}$となる.\ したがって次の図式が可換になる.
+$F \dashv U \in \mathbf{Adj}_T$なので$\mu = U \varepsilon F$であり$U(\varepsilon_A \circ \varepsilon_{FU(A)}) = U(\varepsilon_A) \circ \mu_{U(A)}$となる.\
+したがって次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJUXjIoVShBKSkiXSxbMSwwLCJUKFUoQSkpIl0sWzEsMSwiVShBKSJdLFswLDEsIlQoVShBKSkiXSxbMCwxLCJcXG11X3tVKEEpfSJdLFsxLDIsIihVXFx2YXJlcHNpbG9uKV9BIl0sWzAsMywiVCgoVVxcdmFyZXBzaWxvbilfQSkiLDJdLFszLDIsIihVXFx2YXJlcHNpbG9uKV9BIl1d
 \[\begin{tikzcd}
 	{T^2(U(A))} & {T(U(A))} \\
@@ -281,7 +317,9 @@ $F \dashv U \in \mathbf{Adj}_T$なので$\mu = U \varepsilon F$であり$U(\vare
 \end{tikzcd}\]
 よって$L(A)$は$T$-代数である.
 
-$L(f)$は$\mathscr{C}^T$の射であることを示す.\ 任意の$A,B \in \Ob(\mathscr{D})$と$f \in \Mor_{\mathscr{D}}(A,B)$に対して$(U \varepsilon)_B \circ TU(f) = U(\varepsilon_B \circ FU(f))$となる.\ $\varepsilon$は自然変換なので次の図式が可換となり$U(\varepsilon_B \circ FU(f)) = U(f \circ \varepsilon_A) = U(f) \circ (U \varepsilon)_A$となる.
+$L(f)$は$\mathscr{C}^T$の射であることを示す.\
+任意の$A,B \in \Ob(\mathscr{D})$と$f \in \Mor_{\mathscr{D}}(A,B)$に対して$(U \varepsilon)_B \circ TU(f) = U(\varepsilon_B \circ FU(f))$となる.\
+$\varepsilon$は自然変換なので次の図式が可換となり$U(\varepsilon_B \circ FU(f)) = U(f \circ \varepsilon_A) = U(f) \circ (U \varepsilon)_A$となる.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGVShBKSJdLFsxLDAsIkEiXSxbMSwxLCJCIl0sWzAsMSwiRlUoQikiXSxbMCwxLCJcXHZhcmVwc2lsb25fQSJdLFsxLDIsImYiXSxbMCwzLCJGVShmKSIsMl0sWzMsMiwiXFx2YXJlcHNpbG9uX0IiXV0=
 \[\begin{tikzcd}
 	{FU(A)} & A \\
@@ -301,11 +339,16 @@ $L(f)$は$\mathscr{C}^T$の射であることを示す.\ 任意の$A,B \in \Ob(\
 	\arrow["{(U \varepsilon)_B}", from=1-2, to=2-2]
 	\arrow["{U(f)}", from=2-1, to=2-2]
 \end{tikzcd}\]
-ゆえに$L(f)$は$\mathscr{C}^T$の射である.\ 以上により$L$は共変関手である.
+ゆえに$L(f)$は$\mathscr{C}^T$の射である.\
+以上により$L$は共変関手である.
 
-任意の$A \in \Ob(\mathscr{D})$に対して$U^T L(A) = U^T (U(A), (U \varepsilon)_A) = U(A)$であり,\ 任意の$f \in \Mor(\mathscr{D})$に対して$U^T L(f) = U^T (U(f)) = U(f)$であるから$U^T L = U$である.\ また任意の$A \in \Ob(\mathscr{C})$に対して$LF(A) = (U(F(A)), (U \varepsilon)_{F(A)}) = (T(A), \mu_A) = F^T(A)$であり,\ 任意の$f \in \Mor(\mathscr{C})$に対して$LF(f) = U(F(f)) = T(f) = F^T(f)$であるから$LF = F^T$である.\ よって$L$は随伴の圏$\mathbf{Adj}_T$の射である.
+任意の$A \in \Ob(\mathscr{D})$に対して$U^T L(A) = U^T (U(A), (U \varepsilon)_A) = U(A)$であり,\ 任意の$f \in \Mor(\mathscr{D})$に対して$U^T L(f) = U^T (U(f)) = U(f)$であるから$U^T L = U$である.\
+また任意の$A \in \Ob(\mathscr{C})$に対して$LF(A) = (U(F(A)), (U \varepsilon)_{F(A)}) = (T(A), \mu_A) = F^T(A)$であり,\ 任意の$f \in \Mor(\mathscr{C})$に対して$LF(f) = U(F(f)) = T(f) = F^T(f)$であるから$LF = F^T$である.\
+よって$L$は随伴の圏$\mathbf{Adj}_T$の射である.
 
-$L' \colon \mathscr{D} \to \mathscr{C}^T$を$L'F = F^T$かつ$U^T L' = U$を満たす共変関手とすると$L'(f) = U(f)$であり,\ ある自然変換$\beta \colon TU \Rightarrow U$を用いて任意の$A \in \Ob(\mathscr{D})$に対して$L'(A) = (U(A), \beta_A)$と表せる.\ $\beta_A = \beta_A \circ T((U \varepsilon)_A \circ (\eta U)_A) = \beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A$である.\ $L'(\varepsilon_A) = (U\varepsilon)_A$はアイレンベルグムーア圏$\mathscr{C}^T$の射なので次の図式が可換になる.
+$L' \colon \mathscr{D} \to \mathscr{C}^T$を$L'F = F^T$かつ$U^T L' = U$を満たす共変関手とすると$L'(f) = U(f)$であり,\ ある自然変換$\beta \colon TU \Rightarrow U$を用いて任意の$A \in \Ob(\mathscr{D})$に対して$L'(A) = (U(A), \beta_A)$と表せる.\
+$\beta_A = \beta_A \circ T((U \varepsilon)_A \circ (\eta U)_A) = \beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A$である.\
+$L'(\varepsilon_A) = (U\varepsilon)_A$はアイレンベルグムーア圏$\mathscr{C}^T$の射なので次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJUKFRVKEEpKSJdLFsxLDAsIlQoVShBKSkiXSxbMCwxLCJUVShBKSJdLFsxLDEsIlUoQSkiXSxbMCwxLCJUKChVXFx2YXJlcHNpbG9uKV9BKSJdLFsxLDMsIlxcYmV0YV9BIl0sWzAsMiwiXFxtdV97VShBKX0iLDJdLFsyLDMsIihVXFx2YXJlcHNpbG9uKV9BIl1d
 \[\begin{tikzcd}
 	{T(TU(A))} & {T(U(A))} \\
@@ -315,5 +358,6 @@ $L' \colon \mathscr{D} \to \mathscr{C}^T$を$L'F = F^T$かつ$U^T L' = U$を満�
 	\arrow["{\beta_A}", from=1-2, to=2-2]
 	\arrow["{(U\varepsilon)_A}", from=2-1, to=2-2]
 \end{tikzcd}\]
-したがって$\beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A = (U\varepsilon)_A \circ \mu_{U(A)} \circ (T\eta U)_A = (U\varepsilon)_A$となる.\ ゆえに$\beta_A = (U\varepsilon)_A$であり$L' = L$である.
+したがって$\beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A = (U\varepsilon)_A \circ \mu_{U(A)} \circ (T\eta U)_A = (U\varepsilon)_A$となる.\
+ゆえに$\beta_A = (U\varepsilon)_A$であり$L' = L$である.
 \end{proof}
