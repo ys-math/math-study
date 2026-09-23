@@ -3,7 +3,9 @@
 
 \section{複体}
 \begin{definition} \label{def: CochainComplex}
-$\mathcal{A}$をアーベル圏とする.\ $n \in \mathbb{Z}$に対して$M^n \in \Ob(\mathcal{A}),\ d^n \in \Mor_{\mathcal{A}}(M^n, M^{n+1})$とする.\ 族$(M^{\bullet}, d^{\bullet}) \coloneq (M^{n}, d^n)_{n \in \mathbb{Z}}$は次の条件が成り立つとき$\mathcal{A}$における\term{よさふくたい}{余鎖複体}{cochain complex}であるという.
+$\mathcal{A}$をアーベル圏とする.\
+$n \in \mathbb{Z}$に対して$M^n \in \Ob(\mathcal{A}),\ d^n \in \Mor_{\mathcal{A}}(M^n, M^{n+1})$とする.\
+族$(M^{\bullet}, d^{\bullet}) \coloneq (M^{n}, d^n)_{n \in \mathbb{Z}}$は次の条件が成り立つとき$\mathcal{A}$における\term{よさふくたい}{余鎖複体}{cochain complex}であるという.
 \begin{center}
     ${^{\forall}n} \in \mathbb{Z},\ d^{n+1} \circ d^{n} = 0_{M^n, M^{n+2}}$
 \end{center}
@@ -30,11 +32,13 @@ $\mathcal{A}$がアーベル圏なら$\mathcal{A}^{\op}$もアーベル圏であ
 \end{remark}
 
 \begin{definition} \label{def: ChainComplex}
-$\mathcal{A}$をアーベル圏とする.\ $\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
+$\mathcal{A}$をアーベル圏とする.\
+$\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
 \end{definition}
 
 \begin{definition}
-$\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\ $\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は$(M^\bullet, d^\bullet)$から$(M'^\bullet, d'^\bullet)$への射であるという.
+$\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\
+$\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は余鎖複体$(M^\bullet, d^\bullet)$から余鎖複体$(M'^\bullet, d'^\bullet)$への射であるという.
 % https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV57bi0xfSJdLFswLDAsIlxcY2RvdHMiXSxbMiwwLCJNXm4iXSxbMywwLCJNXntuKzF9Il0sWzQsMCwiXFxjZG90cyJdLFsxLDEsIk0nXntuLTF9Il0sWzAsMSwiXFxjZG90cyJdLFsyLDEsIk0nXm4iXSxbMywxLCJNJ157bisxfSJdLFs0LDEsIlxcY2RvdHMiXSxbMSwwLCJkXntuLTJ9Il0sWzAsMiwiZF57bi0xfSJdLFsyLDMsImRebiJdLFszLDQsImRee24rMX0iXSxbNiw1LCJkJ157bi0yfSJdLFs1LDcsImQnXntuLTF9Il0sWzcsOCwiZCdebiJdLFs4LDksImQnXntuKzF9Il0sWzAsNSwiZl57bi0xfSJdLFsyLDcsImZebiJdLFszLDgsImZee24rMX0iXV0=
 \[\begin{tikzcd}
 	\cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots \\
@@ -51,3 +55,9 @@ $\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \col
 	\arrow["{d'^n}", from=2-3, to=2-4]
 	\arrow["{d'^{n+1}}", from=2-4, to=2-5]
 \end{tikzcd}\]
+\end{definition}
+
+\begin{definition}
+$\mathcal{A}$をアーベル圏とする.\
+対象を余鎖複体とし射を余鎖複体から余鎖複体への射とすることで$\mathcal{A}$上の余鎖複体の圏$\Ch^\bullet(\mathcal{A})$が定まる.\
+\end{definition}
