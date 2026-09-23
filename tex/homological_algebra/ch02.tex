@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
+
+\section{複体}
+\begin{definition} \label{def: CochainComplex}
+$\mathcal{A}$をアーベル圏とする.\ $n \in \mathbb{Z}$に対して$M^n \in \Ob(\mathcal{A}),\ d^n \in \Mor_{\mathcal{A}}(M^n, M^{n+1})$とする.\ 族$(M^{\bullet}, d^{\bullet}) \coloneq (M^{n}, d^n)_{n \in \mathbb{Z}}$は次の条件が成り立つとき$\mathcal{A}$における\term{よさふくたい}{余鎖複体}{cochain complex}であるという.
+\begin{center}
+    ${^{\forall}n} \in \mathbb{Z},\ d^{n+1} \circ d^{n} = 0_{M^n, M^{n+2}}$
+\end{center}
+つまり次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNyxbMiwwLCJNXntuLTF9Il0sWzMsMCwiTV5uIl0sWzQsMCwiTV57bisxfSJdLFsxLDAsIlxcY2RvdHMiXSxbNSwwLCJcXGNkb3RzIl0sWzAsMF0sWzYsMF0sWzMsMCwiZF57bi0yfSJdLFswLDEsImRee24tMX0iXSxbMSwyLCJkXm4iXSxbMiw0LCJkXntuKzF9Il0sWzAsMiwiMF97TV57bi0xfSxNXntuKzF9fSIsMix7ImN1cnZlIjoyfV0sWzMsMSwiMF97TV57bi0yfSxNXm59IiwyLHsiY3VydmUiOjJ9XSxbMSw0LCIwX3tNXm4sTV57bisyfX0iLDIseyJjdXJ2ZSI6Mn1dLFs1LDAsIiIsMix7ImN1cnZlIjoyLCJzaG9ydGVuIjp7InNvdXJjZSI6NTB9fV0sWzIsNiwiIiwyLHsiY3VydmUiOjIsInNob3J0ZW4iOnsidGFyZ2V0Ijo1MH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\[\begin{tikzcd}
+	{} & \cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots & {}
+	\arrow[curve={height=12pt}, between={0.5}{1}, from=1-1, to=1-3]
+	\arrow["{d^{n-2}}", from=1-2, to=1-3]
+	\arrow["{0_{M^{n-2},M^n}}"', curve={height=12pt}, from=1-2, to=1-4]
+	\arrow["{d^{n-1}}", from=1-3, to=1-4]
+	\arrow["{0_{M^{n-1},M^{n+1}}}"', curve={height=12pt}, from=1-3, to=1-5]
+	\arrow["{d^n}", from=1-4, to=1-5]
+	\arrow["{0_{M^n,M^{n+2}}}"', curve={height=12pt}, from=1-4, to=1-6]
+	\arrow["{d^{n+1}}", from=1-5, to=1-6]
+	\arrow[curve={height=12pt}, between={0}{0.5}, no head, from=1-5, to=1-7]
+\end{tikzcd}\]
+
+$M^n$を次数$n$の\term{こう}{項}{term}という.
+\end{definition}
+
+\begin{remark} \label{rem: opposite_abelian}
+$\mathcal{A}$がアーベル圏なら$\mathcal{A}^{\op}$もアーベル圏である.
+\end{remark}
+
+\begin{definition} \label{def: ChainComplex}
+$\mathcal{A}$をアーベル圏とする.\ $\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
+\end{definition}
+
+\begin{definition}
+$\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\ $\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は$(M^\bullet, d^\bullet)$から$(M'^\bullet, d'^\bullet)$への射であるという.
+% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV57bi0xfSJdLFswLDAsIlxcY2RvdHMiXSxbMiwwLCJNXm4iXSxbMywwLCJNXntuKzF9Il0sWzQsMCwiXFxjZG90cyJdLFsxLDEsIk0nXntuLTF9Il0sWzAsMSwiXFxjZG90cyJdLFsyLDEsIk0nXm4iXSxbMywxLCJNJ157bisxfSJdLFs0LDEsIlxcY2RvdHMiXSxbMSwwLCJkXntuLTJ9Il0sWzAsMiwiZF57bi0xfSJdLFsyLDMsImRebiJdLFszLDQsImRee24rMX0iXSxbNiw1LCJkJ157bi0yfSJdLFs1LDcsImQnXntuLTF9Il0sWzcsOCwiZCdebiJdLFs4LDksImQnXntuKzF9Il0sWzAsNSwiZl57bi0xfSJdLFsyLDcsImZebiJdLFszLDgsImZee24rMX0iXV0=
+\[\begin{tikzcd}
+	\cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots \\
+	\cdots & {M'^{n-1}} & {M'^n} & {M'^{n+1}} & \cdots
+	\arrow["{d^{n-2}}", from=1-1, to=1-2]
+	\arrow["{d^{n-1}}", from=1-2, to=1-3]
+	\arrow["{f^{n-1}}", from=1-2, to=2-2]
+	\arrow["{d^n}", from=1-3, to=1-4]
+	\arrow["{f^n}", from=1-3, to=2-3]
+	\arrow["{d^{n+1}}", from=1-4, to=1-5]
+	\arrow["{f^{n+1}}", from=1-4, to=2-4]
+	\arrow["{d'^{n-2}}", from=2-1, to=2-2]
+	\arrow["{d'^{n-1}}", from=2-2, to=2-3]
+	\arrow["{d'^n}", from=2-3, to=2-4]
+	\arrow["{d'^{n+1}}", from=2-4, to=2-5]
+\end{tikzcd}\]

@@ -107,7 +107,7 @@ $K_f$の極限$(L_{K_f}, (L_{K_f}, \pi_{K_f}))$を$f$の\term{かく}{核}{kerne
 \end{tikzcd}\]
 \end{definition}
 
-\begin{remark}
+\begin{remark} \label{rem: kernel_cone_zero_leg}
 \cref{def: kernel}の仮定のもと任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して$\eta_1 = 0_{\dom(f), \cod(f)} \circ f = 0_{X, \cod(f)}$である.
 \end{remark}
 
@@ -116,7 +116,7 @@ $K_f$の余極限$(Q_{K_f}, (Q_{K_f}, \iota_{K_f}))$を$f$の\term{よかく}{�
 \end{definition}
 
 \begin{definition} \label{def: IsMonomorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$X \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(X, \dom(f))$に対して次の条件が成り立つとき$f$は\term{ものしゃ}{モノ射}{monomorphism}であるといい$f \colon \dom(f) \rightarrowtail \cod(f)$と書く.
+$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$X \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(X, \dom(f))$に対して次の条件が成り立つとき$f$は\term{ものしゃ}{モノ射}{monomorphism}であるといい$f \colon \dom(f) \hookrightarrow \cod(f)$と書く.
 \begin{center}
     $f \circ g = f \circ h \implies g = h$
 \end{center}
@@ -130,10 +130,14 @@ $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$Y \in \O
 \end{definition}
 
 \begin{definition} \label{def: IsAbelian}
-加法圏$\mathscr{C}$は次の条件を満たすとき\term{あーべるけん}{アーベル圏}{Abelian category}であるという.
+加法圏$\mathcal{A}$は次の条件を満たすとき\term{あーべるけん}{アーベル圏}{Abelian category}であるという.
 \begin{itemize}
     \item 任意の$f \in \Mor(\mathrm{C})$に対して$f$の核と余核が存在する.
     \item 任意のモノ射$f \in \Mor({\mathscr{C}})$に対してある$g \in \Mor_{\mathscr{C}}$が存在して$f = k_g$となる.
     \item 任意のエピ射$f \in \Mor({\mathscr{C}})$に対してある$g \in \Mor_{\mathscr{C}}$が存在して$f = c_g$となる.
 \end{itemize}
+\end{definition}
+
+\begin{definition} \label{def: image}
+$\mathscr{C}$を核と余核をもつ加法圏とし$f \in \Mor({\mathscr{C}})$とする.\ $\im(f) \coloneq \ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\ 組$(\im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
 \end{definition}
