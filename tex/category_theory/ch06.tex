@@ -244,5 +244,76 @@ $\mathscr{C}$を圏とし$(T, \eta, \mu)$を$\mathscr{C}$上のモナドとす�
 \end{proposition}
 
 \begin{proof}
+$\mathscr{D}$を圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon U$を共変関手とする.\ $F \dashv U \in \mathbf{Adj}_T$とし$\varepsilon \colon FU \Rightarrow \id_{\mathscr{D}}$を$F \dashv U$の余単位,\ $\eta \colon \id_{\mathscr{C}} \to UF$を$F \dashv U$の単位とする.\ 共変関手$L \colon \mathscr{D} \to \mathscr{C}^T$を次のように定める.
+\begin{itemize}
+	\item $A \in \Ob(\mathscr{D})$に対して$L(A) \coloneq (U(A), (U \varepsilon)_A)$とする.
+	\item $f \in \Mor(\mathscr{D})$に対して$L(f) \coloneq U(f)$とする.
+\end{itemize}
+$L$が共変関手であることを示す.\ まず$L(A)$は$T$-代数であることを示す.\ $F \dashv U$なので$UF = T$であり$U \varepsilon \circ \eta U = \id_U$である.\ よって$U(\varepsilon_A) \circ \eta_{U(A)} = \id_{U(A)}$であるから次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJVKEEpIl0sWzEsMCwiVChVKEEpKSJdLFsxLDEsIlUoQSkiXSxbMCwxLCJcXGV0YV97VShBKX0iXSxbMSwyLCJVX3tcXHZhcmVwc2lsb24oQSl9Il0sWzAsMiwiXFxtYXRocm17aWR9X3tVKEEpfSIsMl1d
+\[\begin{tikzcd}
+	{U(A)} & {T(U(A))} \\
+	& {U(A)}
+	\arrow["{\eta_{U(A)}}", from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_{U(A)}}"', from=1-1, to=2-2]
+	\arrow["{U_{\varepsilon(A)}}", from=1-2, to=2-2]
+\end{tikzcd}\]
 
+$(U \varepsilon)_A \circ (TU \varepsilon)_A = U(\varepsilon_A \circ FU\varepsilon_A)$であるが$\varepsilon$は自然変換なので次の図式が可換となり$U(\varepsilon_A \circ FU\varepsilon_A) = U(\varepsilon_A \circ \varepsilon_{FU(A)})$となる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGVShGVShBKSkiXSxbMSwwLCJGVShBKSJdLFswLDEsIkZVKEEpIl0sWzEsMSwiQSJdLFswLDEsIlxcdmFyZXBzaWxvbl97RlUoQSl9Il0sWzEsMywiXFx2YXJlcHNpbG9uX0EiXSxbMCwyLCJGVShcXHZhcmVwc2lsb25fQSkiLDJdLFsyLDMsIlxcdmFyZXBzaWxvbl9BIl1d
+\[\begin{tikzcd}
+	{FU(FU(A))} & {FU(A)} \\
+	{FU(A)} & A
+	\arrow["{\varepsilon_{FU(A)}}", from=1-1, to=1-2]
+	\arrow["{FU(\varepsilon_A)}"', from=1-1, to=2-1]
+	\arrow["{\varepsilon_A}", from=1-2, to=2-2]
+	\arrow["{\varepsilon_A}", from=2-1, to=2-2]
+\end{tikzcd}\]
+$F \dashv U \in \mathbf{Adj}_T$なので$\mu = U \varepsilon F$であり$U(\varepsilon_A \circ \varepsilon_{FU(A)}) = U(\varepsilon_A) \circ \mu_{U(A)}$となる.\ したがって次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUXjIoVShBKSkiXSxbMSwwLCJUKFUoQSkpIl0sWzEsMSwiVShBKSJdLFswLDEsIlQoVShBKSkiXSxbMCwxLCJcXG11X3tVKEEpfSJdLFsxLDIsIihVXFx2YXJlcHNpbG9uKV9BIl0sWzAsMywiVCgoVVxcdmFyZXBzaWxvbilfQSkiLDJdLFszLDIsIihVXFx2YXJlcHNpbG9uKV9BIl1d
+\[\begin{tikzcd}
+	{T^2(U(A))} & {T(U(A))} \\
+	{T(U(A))} & {U(A)}
+	\arrow["{\mu_{U(A)}}", from=1-1, to=1-2]
+	\arrow["{T((U\varepsilon)_A)}"', from=1-1, to=2-1]
+	\arrow["{(U\varepsilon)_A}", from=1-2, to=2-2]
+	\arrow["{(U\varepsilon)_A}", from=2-1, to=2-2]
+\end{tikzcd}\]
+よって$L(A)$は$T$-代数である.
+
+$L(f)$は$\mathscr{C}^T$の射であることを示す.\ 任意の$A,B \in \Ob(\mathscr{D})$と$f \in \Mor_{\mathscr{D}}(A,B)$に対して$(U \varepsilon)_B \circ TU(f) = U(\varepsilon_B \circ FU(f))$となる.\ $\varepsilon$は自然変換なので次の図式が可換となり$U(\varepsilon_B \circ FU(f)) = U(f \circ \varepsilon_A) = U(f) \circ (U \varepsilon)_A$となる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGVShBKSJdLFsxLDAsIkEiXSxbMSwxLCJCIl0sWzAsMSwiRlUoQikiXSxbMCwxLCJcXHZhcmVwc2lsb25fQSJdLFsxLDIsImYiXSxbMCwzLCJGVShmKSIsMl0sWzMsMiwiXFx2YXJlcHNpbG9uX0IiXV0=
+\[\begin{tikzcd}
+	{FU(A)} & A \\
+	{FU(B)} & B
+	\arrow["{\varepsilon_A}", from=1-1, to=1-2]
+	\arrow["{FU(f)}"', from=1-1, to=2-1]
+	\arrow["f", from=1-2, to=2-2]
+	\arrow["{\varepsilon_B}", from=2-1, to=2-2]
+\end{tikzcd}\]
+したがって$(U \varepsilon)_B \circ TU(f) = U(f) \circ (U \varepsilon)_A$なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUKFUoQSkpIl0sWzEsMCwiVChVKEIpKSJdLFswLDEsIlUoQSkiXSxbMSwxLCJVKEIpIl0sWzAsMSwiVChVKGYpKSJdLFsxLDMsIihVIFxcdmFyZXBzaWxvbilfQiJdLFswLDIsIihVIFxcdmFyZXBzaWxvbilfQSIsMl0sWzIsMywiVShmKSJdXQ==
+\[\begin{tikzcd}
+	{T(U(A))} & {T(U(B))} \\
+	{U(A)} & {U(B)}
+	\arrow["{T(U(f))}", from=1-1, to=1-2]
+	\arrow["{(U \varepsilon)_A}"', from=1-1, to=2-1]
+	\arrow["{(U \varepsilon)_B}", from=1-2, to=2-2]
+	\arrow["{U(f)}", from=2-1, to=2-2]
+\end{tikzcd}\]
+ゆえに$L(f)$は$\mathscr{C}^T$の射である.\ 以上により$L$は共変関手である.
+
+任意の$A \in \Ob(\mathscr{D})$に対して$U^T L(A) = U^T (U(A), (U \varepsilon)_A) = U(A)$であり,\ 任意の$f \in \Mor(\mathscr{D})$に対して$U^T L(f) = U^T (U(f)) = U(f)$であるから$U^T L = U$である.\ また任意の$A \in \Ob(\mathscr{C})$に対して$LF(A) = (U(F(A)), (U \varepsilon)_{F(A)}) = (T(A), \mu_A) = F^T(A)$であり,\ 任意の$f \in \Mor(\mathscr{C})$に対して$LF(f) = U(F(f)) = T(f) = F^T(f)$であるから$LF = F^T$である.\ よって$L$は随伴の圏$\mathbf{Adj}_T$の射である.
+
+$L' \colon \mathscr{D} \to \mathscr{C}^T$を$L'F = F^T$かつ$U^T L' = U$を満たす共変関手とすると$L'(f) = U(f)$であり,\ ある自然変換$\beta \colon TU \Rightarrow U$を用いて任意の$A \in \Ob(\mathscr{D})$に対して$L'(A) = (U(A), \beta_A)$と表せる.\ $\beta_A = \beta_A \circ T((U \varepsilon)_A \circ (\eta U)_A) = \beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A$である.\ $L'(\varepsilon_A) = (U\varepsilon)_A$はアイレンベルグムーア圏$\mathscr{C}^T$の射なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJUKFRVKEEpKSJdLFsxLDAsIlQoVShBKSkiXSxbMCwxLCJUVShBKSJdLFsxLDEsIlUoQSkiXSxbMCwxLCJUKChVXFx2YXJlcHNpbG9uKV9BKSJdLFsxLDMsIlxcYmV0YV9BIl0sWzAsMiwiXFxtdV97VShBKX0iLDJdLFsyLDMsIihVXFx2YXJlcHNpbG9uKV9BIl1d
+\[\begin{tikzcd}
+	{T(TU(A))} & {T(U(A))} \\
+	{TU(A)} & {U(A)}
+	\arrow["{T((U\varepsilon)_A)}", from=1-1, to=1-2]
+	\arrow["{\mu_{U(A)}}"', from=1-1, to=2-1]
+	\arrow["{\beta_A}", from=1-2, to=2-2]
+	\arrow["{(U\varepsilon)_A}", from=2-1, to=2-2]
+\end{tikzcd}\]
+したがって$\beta_A \circ (TU\varepsilon)_A \circ (T\eta U)_A = (U\varepsilon)_A \circ \mu_{U(A)} \circ (T\eta U)_A = (U\varepsilon)_A$となる.\ ゆえに$\beta_A = (U\varepsilon)_A$であり$L' = L$である.
 \end{proof}
