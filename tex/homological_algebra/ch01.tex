@@ -6,7 +6,8 @@
 \begin{definition} \label{def: IsPreadditive}
 局所小圏$\mathscr{C}$は次の条件を満たすとき\term{ぜんかほうけん}{前加法圏}{preadditive category}であるという.
 \begin{itemize}
-    \item 任意の$A, B \in \Ob(\mathscr{C})$に対して写像$\sigma_{(A,B)} \colon \Mor_{\mathscr{C}}(A, B) \times \Mor_{\mathscr{C}}(A, B) \to \Mor_{\mathscr{C}}(A, B)$が定まり次の条件を満たす.\ ただし任意の$f, g \in \Mor_{\mathscr{C}}(A, B)$に対して$f + g \coloneq \sigma_{(A,B)}(f,g)$とする.
+    \item 任意の$A, B \in \Ob(\mathscr{C})$に対して写像$\sigma_{(A,B)} \colon \Mor_{\mathscr{C}}(A, B) \times \Mor_{\mathscr{C}}(A, B) \to \Mor_{\mathscr{C}}(A, B)$が定まり次の条件を満たす.\
+    ただし任意の$f, g \in \Mor_{\mathscr{C}}(A, B)$に対して$f + g \coloneq \sigma_{(A,B)}(f,g)$とする.
     \begin{itemize}
     \item ある$0_{A,B}^{+} \in \Mor_{\mathscr{C}}(A,B)$が存在して$(\Mor_{\mathscr{C}}(A,B), \sigma_{(A,B)}, 0_{A,B} )$はアーベル群.
     \item 任意の$A, B, C \in \Ob(\mathscr{C})$と$f,g \in \Mor_{\mathscr{C}}(A, B),\ h \in \Mor_{\mathscr{C}}(B, C)$に対して$h \circ (f + g) = h \circ f + f \circ g$成り立つ.
@@ -16,11 +17,14 @@
 \end{definition}
 
 \begin{definition} \label{def: zeroMorphism}
-$\mathscr{C}$を零対象$Z$を持つ局所小圏とし$A, B \in \Ob({\mathscr{C}})$とする.\ $\iexcl_B \in \Mor_{\mathscr{C}}(Z, B)$と$!_A \in \Mor_{\mathscr{C}}(A, Z)$をそれぞれただ1つ存在する射とする.\ このとき$0_{A,B} \coloneq !_A \circ \iexcl_B$を\term{れいしゃ}{零射}{zero morphism}という.
+$\mathscr{C}$を零対象$Z$を持つ局所小圏とし$A, B \in \Ob({\mathscr{C}})$とする.\
+$\iexcl_B \in \Mor_{\mathscr{C}}(Z, B)$と$!_A \in \Mor_{\mathscr{C}}(A, Z)$をそれぞれただ1つ存在する射とする.\
+このとき$0_{A,B} \coloneq !_A \circ \iexcl_B$を\term{れいしゃ}{零射}{zero morphism}という.
 \end{definition}
 
 \begin{lemma} \label{lem: additive_zero_comp}
-$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\ 任意の$A, B, C \in \Ob(\mathscr{C})$と$g \in \Mor_{\mathscr{C}}(B, C),\ h \in \Mor_{\mathscr{C}}(C, A)$に対して次の図式が可換になる.
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+任意の$A, B, C \in \Ob(\mathscr{C})$と$g \in \Mor_{\mathscr{C}}(B, C),\ h \in \Mor_{\mathscr{C}}(C, A)$に対して次の図式が可換になる.
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJCIl0sWzEsMCwiQSJdLFsxLDEsIkMiXSxbMywwLCJCIl0sWzQsMCwiQSJdLFs0LDEsIkMiXSxbMSwwLCIwX3tBLEJ9XnsrfSIsMl0sWzAsMiwiZyIsMl0sWzEsMiwiMF97QSxDfV57K30iXSxbNSwzLCIwX3tDLEJ9XnsrfSJdLFs0LDMsIjBfe0EsIEJ9XnsrfSIsMl0sWzUsNCwiaCIsMl1d
 \[\begin{tikzcd}
 	B & A && B & A \\
@@ -35,18 +39,21 @@ $\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\ 任意の$A, B, C \
 \end{lemma}
 
 \begin{proof}
-$g \circ 0_{A,B}^{+} = g \circ (0_{A,B}^{+} + 0_{A,B}^{+}) = g \circ 0_{A,B}^{+} + g \circ 0_{A,B}^{+}$であり両辺$g \circ 0_{A,B}^{+}$を引けば$0_{A,C}^{+} = g \circ 0_{A,B}^{+}$となる.\ 同様に$0_{A,B}^{+} \circ h = 0_{C,B}^{+}$となる.
+$g \circ 0_{A,B}^{+} = g \circ (0_{A,B}^{+} + 0_{A,B}^{+}) = g \circ 0_{A,B}^{+} + g \circ 0_{A,B}^{+}$であり両辺$g \circ 0_{A,B}^{+}$を引けば$0_{A,C}^{+} = g \circ 0_{A,B}^{+}$となる.\
+同様に$0_{A,B}^{+} \circ h = 0_{C,B}^{+}$となる.
 \end{proof}
 
 \begin{proposition} \label{prop: additive_zero_eq_zero_morphism}
-$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\ 任意の$A,B \in \Ob(\mathscr{C})$に対して次が成り立つ.
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+任意の$A,B \in \Ob(\mathscr{C})$に対して次が成り立つ.
 \begin{center}
     $0_{A,B}^{+} = 0_{A,B}$
 \end{center}
 \end{proposition}
 
 \begin{proof}
-$\Mor_{\mathscr{C}}(Z, B)$はシングルトンなので$\iexcl_B = 0_{Z,B}^{+}$である.\ \cref{lem: additive_zero_comp}により$0_{A,B} = !_A \circ 0_{Z,B}^{+} = 0_{A,B}^{+}$となる.
+$\Mor_{\mathscr{C}}(Z, B)$はシングルトンなので$\iexcl_B = 0_{Z,B}^{+}$である.\
+\cref{lem: additive_zero_comp}により$0_{A,B} = !_A \circ 0_{Z,B}^{+} = 0_{A,B}^{+}$となる.
 \end{proof}
 
 \begin{definition} \label{def: WalkingPairCategory}
@@ -54,7 +61,8 @@ $\Mor_{\mathscr{C}}(Z, B)$はシングルトンなので$\iexcl_B = 0_{Z,B}^{+}$
 \end{definition}
 
 \begin{definition} \label{def: pairDiagramFunctor}
-$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\ 共変関手$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$を次のようにして定める.
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+共変関手$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$を次のようにして定める.
 \begin{itemize}
     \item $D_{A,B}(0) \coloneq A,\ D_{A,B}(1) \coloneq B$とする.
     \item 任意の$j \in 2$に対して$D_{A,B}(\id_j) \coloneq \id_{D_{A,B}(j)}$とする.
@@ -62,7 +70,9 @@ $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\ 共変�
 \end{definition}
 
 \begin{definition} \label{def: binaryProduct}
-$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\ $(L,(L, \pi))$を$D_{A,B}$の極限とする.\ このとき$A \times B \coloneq L$を\term{にこうせき}{2項積}{binary product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$(L,(L, \pi))$を$D_{A,B}$の極限とする.\
+このとき$A \times B \coloneq L$を\term{にこうせき}{2項積}{binary product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.
 \end{definition}
 
 \begin{definition} \label{def: IsAdditive}
@@ -74,7 +84,10 @@ $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\ $(L,(L, 
 \end{definition}
 
 \begin{definition} \label{def: WalkingParallelPairCategory}
-圏$\mathbf{P}$を$\Ob(\mathbf{P}) \coloneq 2$とし$\Mor{\mathscr{C}} \coloneq \{\id_0, \id_1, u, v\}$として定める.\ ただし$|\Mor_{\mathbf{P}}(0, 1)| \coloneq 2$である.\ これを\term{へいこうついのけん}{平行対の圏}{walking parallel pair category}という.\ 平行対の圏を$\bullet \rightrightarrows \bullet$と書くこともある.
+圏$\mathbf{P}$を$\Ob(\mathbf{P}) \coloneq 2$とし$\Mor{\mathscr{C}} \coloneq \{\id_0, \id_1, u, v\}$として定める.\
+ただし$|\Mor_{\mathbf{P}}(0, 1)| \coloneq 2$である.\
+これを\term{へいこうついのけん}{平行対の圏}{walking parallel pair category}という.\
+平行対の圏を$\bullet \rightrightarrows \bullet$と書くこともある.
 % https://q.uiver.app/#q=WzAsMixbMCwwLCIwIl0sWzEsMCwiMSJdLFswLDEsInUiLDAseyJjdXJ2ZSI6LTF9XSxbMCwwLCJcXG1hdGhybXtpZH1fMCIsMCx7ImFuZ2xlIjotOTB9XSxbMSwxLCJcXG1hdGhybXtpZH1fMSIsMCx7ImFuZ2xlIjo5MH1dLFswLDEsInYiLDIseyJjdXJ2ZSI6MX1dXQ==
 \[\begin{tikzcd}
 	0 & 1
@@ -86,12 +99,14 @@ $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\ $(L,(L, 
 \end{definition}
 
 \begin{definition} \label{def: kernel}
-$\mathscr{C}$を加法圏とし$f \in \Mor({\mathscr{C}})$とする.\ $\mathbf{P}$を平行対の圏とし共変関手$K_f \colon \mathbf{P} \to \mathscr{C}$を次のようにして定める.
+$\mathscr{C}$を加法圏とし$f \in \Mor({\mathscr{C}})$とする.\
+$\mathbf{P}$を平行対の圏とし共変関手$K_f \colon \mathbf{P} \to \mathscr{C}$を次のようにして定める.
 \begin{itemize}
     \item $K_f(0) \coloneq \dom(f),\ K_f(1) \coloneq \cod(f)$とする.
     \item $K_f(u) \coloneq f,\ K_f(v) \coloneq 0_{\dom(f), \cod(f)}$とする.
 \end{itemize}
-$K_f$の極限$(L_{K_f}, (L_{K_f}, \pi_{K_f}))$を$f$の\term{かく}{核}{kernel}といい$\ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \ker(f) \to \dom(f)$とする.\ つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \ker(f)$がただ1つ存在する.
+$K_f$の極限$(L_{K_f}, (L_{K_f}, \pi_{K_f}))$を$f$の\term{かく}{核}{kernel}といい$\ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \ker(f) \to \dom(f)$とする.\
+つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \ker(f)$がただ1つ存在する.
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtLZXJ9KGYpIl0sWzAsMiwiXFxtYXRocm17ZG9tfShmKSJdLFsyLDIsIlxcbWF0aHJte2NvZH0oZikiXSxbMSwwLCJYIl0sWzAsMSwia19mIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzEsMiwiZiIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCIoXFxwaV97S19mfSlfMSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMH1dLFsxLDIsIjBfe1xcbWF0aHJte2RvbX0oZiksXFxtYXRocm17Y29kfShmKX0iLDIseyJvZmZzZXQiOjF9XSxbMywxLCJcXGV0YV8wIiwyLHsiY3VydmUiOjN9XSxbMywyLCJcXGV0YV8xIiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiZyIsMl1d
 \[\begin{tikzcd}
 	& X & \\
@@ -116,14 +131,16 @@ $K_f$の余極限$(Q_{K_f}, (Q_{K_f}, \iota_{K_f}))$を$f$の\term{よかく}{�
 \end{definition}
 
 \begin{definition} \label{def: IsMonomorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$X \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(X, \dom(f))$に対して次の条件が成り立つとき$f$は\term{ものしゃ}{モノ射}{monomorphism}であるといい$f \colon \dom(f) \hookrightarrow \cod(f)$と書く.
+$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
+任意の$X \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(X, \dom(f))$に対して次の条件が成り立つとき$f$は\term{ものしゃ}{モノ射}{monomorphism}であるといい$f \colon \dom(f) \hookrightarrow \cod(f)$と書く.
 \begin{center}
     $f \circ g = f \circ h \implies g = h$
 \end{center}
 \end{definition}
 
 \begin{definition} \label{def: IsEpimorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$Y \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(\cod(f), Y)$に対して次の条件が成り立つとき$f$は\term{えぴしゃ}{エピ射}{epimorphism}であるといい$f \colon \dom(f) \twoheadrightarrow \cod(f)$と書く.
+$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
+任意の$Y \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(\cod(f), Y)$に対して次の条件が成り立つとき$f$は\term{えぴしゃ}{エピ射}{epimorphism}であるといい$f \colon \dom(f) \twoheadrightarrow \cod(f)$と書く.
 \begin{center}
     $g \circ f = h \circ f \implies g = h$
 \end{center}
@@ -139,5 +156,7 @@ $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\ 任意の$Y \in \O
 \end{definition}
 
 \begin{definition} \label{def: image}
-$\mathscr{C}$を核と余核をもつ加法圏とし$f \in \Mor({\mathscr{C}})$とする.\ $\im(f) \coloneq \ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\ 組$(\im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
+$\mathscr{C}$を核と余核をもつ加法圏とし$f \in \Mor({\mathscr{C}})$とする.\
+$\im(f) \coloneq \ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\
+組$(\im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
 \end{definition}
