@@ -187,7 +187,8 @@ math-study/
 │   ├── test_generate_tree.py
 │   ├── test_index_markup.py
 │   ├── test_latex_unicode.py
-│   └── test_new_topic.py
+│   ├── test_new_topic.py
+│   └── test_readme_block.py
 ├── tex/
 │   ├── algebraic_k_theory/
 │   │   ├── bibliography.tex
