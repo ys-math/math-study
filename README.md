@@ -1,9 +1,13 @@
-# 数学勉強ノート
+# Math Study Notes
 
-このレポの目的は数学のノート作りを軸として, LaTeX, Lean, Git, Claudeやワークフローの構造などを実際に手を動かして学ぶことです。
-ノート作りの過程で必要に応じて新しい機能の追加や既存のシステムの修正を行います。
+English | [日本語](./README.ja.md)
 
-各トピックのPDFは以下から閲覧できます。
+This repo is for learning, hands-on, around one axis: writing mathematics notes.
+Along the way it is a place to learn LaTeX, Lean, Git, Claude, and how a
+workflow is put together, and new features are added or the existing system is
+reworked as the note-taking calls for it.
+
+The PDF for each topic is linked below.
 
 <!-- BEGIN PDF LINKS -->
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
@@ -18,8 +22,9 @@
 * [位相幾何学](./pdf/topology.pdf)
 <!-- END PDF LINKS -->
 
-各トピックに書かれた文章量の割合です。
-章のソース `tex/*/ch*.tex` の文字数で, コメント行は数えていません。
+How much has been written in each topic, as a share of the whole.
+It counts the characters of the chapter sources `tex/*/ch*.tex`, not counting
+comment lines.
 
 <!-- BEGIN TEXT METER -->
 ```
@@ -85,7 +90,7 @@ Run everything from the repo root.
 | `cd lean && lake build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. `cd`, not `lake --dir=lean`: elan reads the toolchain from the working directory, so from the repo root it silently uses the wrong Lean. See `docs/git-strategy.md`, `## Gates` |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
 | `python scripts/check_bibliography.py [<topic>]` | Checks `tex/*/bibliography.tex` against `docs/bib-convention.md` — the SPDX header, the key shape, the three-line grammar, the title markup, the ordering and the label width. Structure only: it cannot tell whether a year or a publisher is right |
-| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py`<br>`python scripts/generate_text_meter.py` | Rewrite the generated README blocks. CI normally does this, so you rarely need to |
+| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py`<br>`python scripts/generate_text_meter.py` | Rewrite the generated blocks in both READMEs. CI normally does this, so you rarely need to |
 
 Claude Code slash commands:
 
@@ -121,10 +126,12 @@ on line 1 — `docs/lean-convention.md` has the text.
 
 Once you push to `main`, CI takes over: `build-pdf.yml` commits
 `pdf/<topic>.pdf`, `update-readme.yml` regenerates the PDF list, the text meter
-and the directory tree below, and `lean.yml` builds `lean/` if you touched it.
-The lists are generated — edit the `.tex` sources, not them. The tree lists
-`lean/Math/` in full, so a new chapter under `Learn/MIL/` or `Learn/TPiL/` shows
-up in it.
+and the directory tree below — in this file and in `README.ja.md` — and
+`lean.yml` builds `lean/` if you touched it.
+The lists are generated — edit the `.tex` sources, not them. The prose around
+them is not: the two READMEs are translations of each other, so a change to one
+is made to both in the same commit. The tree lists `lean/Math/` in full, so a
+new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
 
 ## Directory structure
 <!-- BEGIN TREE -->
@@ -231,9 +238,38 @@ math-study/
 ├── LICENSE
 ├── LICENSE-APACHE-2.0
 ├── LICENSE-CC-BY-NC-ND-4.0
+├── README.ja.md
 └── README.md
 ```
 <!-- END TREE -->
+
+## AI usage
+
+This repo is written with [Claude Code](https://claude.com/claude-code), and the
+line between what it writes and what the author writes is drawn on purpose.
+
+- **The mathematics is the author's.** The prose in `tex/*/ch*.tex` — every
+  definition, theorem, proof and example in the PDFs — is written by the author.
+  Claude does not write or rewrite it. `/review-notes` reads the notes and files
+  what it finds as GitHub issues; which of those get fixed, and how, is the
+  author's call.
+- **So are the Lean proofs.** `/formalize` may transcribe a labelled statement
+  into `lean/Math/Study/` with `sorry` as its proof; everything after `by` is
+  the author's, and so is all of `lean/Math/Learn/`. `guard-edits.sh` enforces
+  the first half under `lean/Math/Study/`.
+- **The tooling is mostly Claude's.** `scripts/`, `.github/`, `docs/`,
+  `.claude/`, both READMEs, and the shared `tex/preamble.tex`,
+  `tex/colophon.tex` and `tex/index.ist` are largely written by Claude.
+- **`git log` shows which is which, at commit granularity.** A commit containing
+  Claude's work carries a `Co-Authored-By: Claude` trailer. A pull request is
+  squash-merged into one commit, which carries the trailer if any part of it
+  did. Four commits that touch chapter files carry it, and none of them for
+  writing mathematics: `d47c1ab` moved every source under `tex/`, `446572b`
+  switched the build to LuaLaTeX and jlreq, `eada0b3` added `\term` index
+  markup, and `1b34b3a` (#55) is a squash whose chapter prose came from a
+  commit without the trailer.
+
+The rules behind this are in `CLAUDE.md`, which is what Claude reads first.
 
 ## License
 [![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]

@@ -3,7 +3,7 @@
 Mathematics study notes written in LaTeX. One topic is one directory under
 `tex/`, holding a `main.tex` and its `ch0N.tex` chapters; every topic `\input`s
 the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and three blocks of
-`README.md` are build artifacts, not sources.
+each README are build artifacts, not sources.
 
 `lean/` is the other half: a Lake package where the owner learns Lean 4 by
 formalising those notes. **`docs/lean-convention.md` owns everything about it**
@@ -70,9 +70,9 @@ as MIT and the other two are the ones that have to be marked:
 
 - `pdf/*.pdf` — committed by `.github/workflows/build-pdf.yml`.
 - The `<!-- BEGIN PDF LINKS -->`, `<!-- BEGIN TEXT METER -->` and
-  `<!-- BEGIN TREE -->` blocks in `README.md` — rewritten by
-  `.github/workflows/update-readme.yml`. Prose outside the markers is yours to
-  edit.
+  `<!-- BEGIN TREE -->` blocks in `README.md` and `README.ja.md` — rewritten
+  by `.github/workflows/update-readme.yml`. Prose outside the markers is yours
+  to edit.
 
 Change the `.tex` sources and let CI regenerate. All three generators read
 `git ls-files`, so a new topic is invisible to them until it is tracked.
@@ -101,11 +101,15 @@ These are the changes that break silently, days later:
   compiles in your editor, is skipped by `lake build`, and rots behind a green
   CI run. Nothing checks this.
 - **Adding a command, hook, workflow or `docs/` file** means listing it in
-  `docs/agent-system.md` in the same commit — and a command in `README.md`'s
-  table as well. `scripts/test_agent_docs.py` compares those tables against the
-  directories and fails otherwise. It also checks every count written in
+  `docs/agent-system.md` in the same commit — and a command in the tables of
+  both `README.md` and `README.ja.md` as well. `scripts/test_agent_docs.py`
+  compares those tables against the directories and fails otherwise. It also checks every count written in
   digits, which is why "all 10 topics" is spelled that way and why nothing says
   how many commands there are: a table two lines below already does.
+- **Editing README prose** means editing `README.md` and `README.ja.md` in the
+  same commit; they are translations of each other. `scripts/test_agent_docs.py`
+  holds both command tables and every count to the disk, but nothing compares
+  the rest, so a paragraph changed in one language drifts green in the other.
 - **Adding or deleting a topic** means updating every `<n> topics` count in the
   prose in the same commit — they sit in `CLAUDE.md`, `docs/` and
   `.claude/commands/`. `scripts/test_agent_docs.py` holds every one of them to
@@ -190,12 +194,12 @@ it — read it before doing anything by hand. What binds regardless:
 - **Never force-push and never rewrite pushed history.** Correct a bad commit on
   `main` with a follow-up commit.
 - **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
-  `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`,
+  `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`,
   `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, and
   `lean/`'s build configuration — and **never on `tex/<topic>/**` or
   `lean/Math/**`**. A statement `/formalize` typed is still the owner's
   mathematics, only transported; the proof under it will be theirs outright.
 
 CI pushes to `main` after every push of yours, so `git pull --rebase` first. It
-cannot conflict: the bots only touch `pdf/*.pdf` and the generated `README.md`
-blocks.
+cannot conflict: the bots only touch `pdf/*.pdf` and the generated blocks of
+the two READMEs.

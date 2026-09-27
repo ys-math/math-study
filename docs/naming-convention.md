@@ -152,8 +152,8 @@ lookup apart.
 
 A command's filename **is** its slash command — `.claude/commands/formalize.md`
 is `/formalize` — and `scripts/test_agent_docs.py` holds the tables in
-`README.md` and `docs/agent-system.md` to the directory on that basis. A command
-file renamed is a command renamed, and two tables go stale in the same commit.
+both READMEs and `docs/agent-system.md` to the directory on that basis. A command
+file renamed is a command renamed, and three tables go stale in the same commit.
 
 ## Renaming
 
@@ -166,7 +166,7 @@ each rename costs:
 | a chapter file | the `\input{}` line in `main.tex` | the chapter silently vanishes from the PDF |
 | a Lean module | its `import` in `lean/Math.lean` | `lake build` fails — the loud one |
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
-| a command file | the tables in `README.md` and `docs/agent-system.md` | the same test fails |
+| a command file | the tables in both READMEs and `docs/agent-system.md` | the same test fails |
 
 Two of these are caught by `test_agent_docs.py`, the `docs/` file and the
 command file; a renamed Lean module by `lake build`, which fails outright on a

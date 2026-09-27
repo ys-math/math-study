@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Regenerate the directory-structure tree in README.md.
+"""Regenerate the directory-structure tree in both READMEs.
 
 Reads the set of git-tracked files, applies a prune rule, renders a
 box-drawing tree, and rewrites the block between the marker comments in
-README.md. Idempotent: running it twice with no repo change leaves the
-file byte-identical.
+README.md and README.ja.md. Idempotent: running it twice with no repo change
+leaves both files byte-identical.
 
 Run from the repo root:  python scripts/generate_tree.py
 """
@@ -14,12 +14,11 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
-from readme_block import update_readme
+from readme_block import update_readmes
 
 ROOT_LABEL = "math-study/"
 BEGIN_MARKER = "<!-- BEGIN TREE -->"
 END_MARKER = "<!-- END TREE -->"
-README = Path("README.md")
 
 # Top-level directories pruned entirely from the tree.
 PRUNED_DIRS = {"pdf", ".github"}
@@ -89,7 +88,7 @@ def build_body() -> str:
 
 
 def main() -> int:
-    update_readme(README, BEGIN_MARKER, END_MARKER, build_body(), "tree")
+    update_readmes(BEGIN_MARKER, END_MARKER, build_body(), "tree")
     return 0
 
 

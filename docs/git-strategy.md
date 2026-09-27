@@ -40,7 +40,7 @@ could see. The three routes do not change. The grammar is
 | --- | --- | --- |
 | `tex/<topic>/**` | straight to `main` | Blast radius is one document. |
 | `lean/Math/**` | straight to `main` | Blast radius is one module. |
-| `README.md`, `CLAUDE.md`, `docs/**` | straight to `main` | Prose; nothing compiles it. |
+| `README.md`, `README.ja.md`, `CLAUDE.md`, `docs/**` | straight to `main` | Prose; nothing compiles it. |
 | `.claude/**` | straight to `main` | Changes how Claude behaves, not what builds. |
 | `scripts/**` | branch + PR | A break here silently stops the README from regenerating. |
 | `.github/**` | branch + PR | A break here is only observable on `main`. |
@@ -151,7 +151,7 @@ shape for free.
 ### Attribution
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
-whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, `README.md`, `CLAUDE.md`, the shared
+whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`, the shared
 build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, and
 `lean/`'s build configuration.
 
@@ -169,8 +169,8 @@ git config rebase.autoStash true
 Then `git pull` before you commit, always — or let `/git` do it, which it does
 unconditionally as its first step.
 
-**The rebase can never conflict.** CI only ever writes `pdf/*.pdf` and the two
-marker-delimited blocks in `README.md`, and neither is hand-edited. So the
+**The rebase can never conflict.** CI only ever writes `pdf/*.pdf` and the
+marker-delimited blocks in `README.md` and `README.ja.md`, and neither is hand-edited. So the
 sync is pure ceremony, which is precisely why it should be automated rather
 than remembered.
 
@@ -204,7 +204,7 @@ identity.
 - **`git add -A` or `git add .`** Path-scoped adds only. The working tree may
   hold someone else's in-progress work, and a blanket add ships it.
 - **Hand-edit generated artifacts.** `pdf/*.pdf` and the `<!-- BEGIN … -->`
-  blocks in `README.md` belong to CI; change the `.tex` sources instead.
+  blocks in both READMEs belong to CI; change the `.tex` sources instead.
 - **Merge a PR without reading it.** `/git-merge` stops for confirmation for
   this reason.
 
@@ -258,11 +258,11 @@ Before any commit, the relevant checks run locally:
 | --- | --- | --- |
 | `tex/<topic>/**` | compile that topic | ~1.5 s |
 | `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 10 topics | ~12 s |
-| `scripts/**`, `.claude/**`, `docs/**`, `README.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
+| `scripts/**`, `.claude/**`, `docs/**`, `README.md`, `README.ja.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
 | `lean/**` | build the Lean library | ~3 s warm |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`
-is one of them: it holds the command tables in `README.md` and
+is one of them: it holds the command tables in both READMEs and
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
 count written in digits — "all 10 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as

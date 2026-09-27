@@ -46,7 +46,7 @@ git status --porcelain=v2 --branch
 moving HEAD as a side effect of a delete command is worse than one round trip.
 
 If `main` is behind, `git pull --rebase --autostash origin main`. This cannot
-conflict — CI only writes `pdf/*.pdf` and the marker blocks in `README.md`. It
+conflict — CI only writes `pdf/*.pdf` and the marker blocks in the READMEs. It
 is not optional either: CI pushes after every push of yours, so a stale `main`
 turns the final `git push` into a rejection *after* the destructive step.
 

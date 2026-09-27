@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
-"""Rewrite a marker-delimited block inside a Markdown file.
+"""Rewrite a marker-delimited block inside the READMEs.
 
 Shared by the README generators (scripts/generate_tree.py,
-scripts/generate_pdf_links.py). Each generator owns one pair of HTML-comment
-markers and hands over the body it wants between them; writing is idempotent, so
-running a generator twice with no repo change leaves the file byte-identical.
+scripts/generate_pdf_links.py, scripts/generate_text_meter.py). Each generator
+owns one pair of HTML-comment markers and hands over the body it wants between
+them; writing is idempotent, so running a generator twice with no repo change
+leaves every file byte-identical.
+
+There are two READMEs, one per language, and each carries every block: the
+bodies are language-neutral (the PDF labels are the Japanese \\DocTitle either
+way), so both get the same bytes. `update_readmes` checks every file for its
+markers before writing any, so a README that lost one fails the run without
+leaving the other half-updated.
 """
 
 from __future__ import annotations
@@ -12,7 +19,9 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-__all__ = ["replace_block", "update_readme"]
+__all__ = ["READMES", "replace_block", "update_readmes"]
+
+READMES = (Path("README.md"), Path("README.ja.md"))
 
 
 def replace_block(text: str, begin: str, end: str, body: str) -> str:
@@ -29,21 +38,32 @@ def replace_block(text: str, begin: str, end: str, body: str) -> str:
     return text[:start] + f"{begin}\n{body}\n{end}" + text[stop:]
 
 
-def update_readme(path: Path, begin: str, end: str, body: str, label: str) -> bool:
-    """Rewrite the block in `path`, only touching the file if it changed.
+def update_readmes(
+    begin: str, end: str, body: str, label: str, paths: tuple[Path, ...] = READMES
+) -> list[Path]:
+    """Rewrite the block in every file of `paths`, touching only those that change.
 
-    `label` names the block in the status line, e.g. "tree". Returns True if the
-    file was written.
+    `label` names the block in the status lines, e.g. "tree". Returns the files
+    that were written.
     """
-    if not path.exists():
-        sys.exit(f"{path} not found; run from the repo root.")
+    for path in paths:
+        if not path.exists():
+            sys.exit(f"{path} not found; run from the repo root.")
 
-    text = path.read_text(encoding="utf-8")
-    new_text = replace_block(text, begin, end, body)
-    if new_text == text:
-        print(f"{path} {label} already up to date.")
-        return False
+    rewritten = {}
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        try:
+            rewritten[path] = (text, replace_block(text, begin, end, body))
+        except SystemExit as exc:
+            sys.exit(f"{path}: {exc}")
 
-    path.write_text(new_text, encoding="utf-8")
-    print(f"{path} {label} updated.")
-    return True
+    written = []
+    for path, (text, new_text) in rewritten.items():
+        if new_text == text:
+            print(f"{path} {label} already up to date.")
+            continue
+        path.write_text(new_text, encoding="utf-8")
+        print(f"{path} {label} updated.")
+        written.append(path)
+    return written
