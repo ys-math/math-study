@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write         # needed so the workflow can commit the README back
+  contents: write         # needed so the workflow can commit the READMEs back
 
 jobs:
   update:
@@ -20,20 +20,20 @@ jobs:
       - name: Run the script tests
         run: python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 
-      - name: Regenerate the directory tree in README.md
+      - name: Regenerate the directory tree in both READMEs
         run: python scripts/generate_tree.py
 
-      - name: Regenerate the PDF links in README.md
+      - name: Regenerate the PDF links in both READMEs
         run: python scripts/generate_pdf_links.py
 
-      - name: Regenerate the text meter in README.md
+      - name: Regenerate the text meter in both READMEs
         run: python scripts/generate_text_meter.py
 
-      - name: Commit the updated README back to the repo
+      - name: Commit the updated READMEs back to the repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
+          git add README.md README.ja.md
           if git diff --cached --quiet; then
             echo "No README changes to commit."
           else

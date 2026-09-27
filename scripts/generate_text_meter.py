@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-r"""Regenerate the per-topic text meter in README.md.
+r"""Regenerate the per-topic text meter in both READMEs.
 
 One topic is one directory in tex/; its size is the number of characters in its
 chapter sources, and its share is that size over the sum across every topic. The
@@ -17,8 +17,8 @@ What is counted, and why it is only this:
   chapter carries does not read as content. A topic with no prose measures 0.
 - LaTeX markup is *not* stripped. In these notes the mathematics is written in
   math mode, so discounting `$\cod(g \circ f)$` would systematically undercount
-  the densest chapters. The caption in README.md says "characters of source" for
-  exactly this reason -- the number is honest about being a source measurement.
+  the densest chapters. The caption in each README says "characters of source"
+  for exactly this reason -- the number is honest about being a source measurement.
 
 Bars carry eighth-block resolution and a floor of one eighth for any nonzero
 topic, so an empty bar means "nothing written" and nothing else. That
@@ -41,11 +41,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-from readme_block import update_readme
+from readme_block import update_readmes
 
 BEGIN_MARKER = "<!-- BEGIN TEXT METER -->"
 END_MARKER = "<!-- END TEXT METER -->"
-README = Path("README.md")
 TEX_DIR = Path("tex")
 
 BAR_WIDTH = 20
@@ -171,7 +170,7 @@ def main() -> int:
     if not sizes:
         sys.exit(f"No {TEX_DIR}/*/main.tex found; run from the repo root.")
 
-    update_readme(README, BEGIN_MARKER, END_MARKER, build_body(sizes), "text meter")
+    update_readmes(BEGIN_MARKER, END_MARKER, build_body(sizes), "text meter")
     return 0
 
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Regenerate the list of PDF links in README.md.
+"""Regenerate the list of PDF links in both READMEs.
 
 One topic is one directory in tex/ owning a main.tex; its display name is the
 `\\DocTitle` declared in that file, rendered to Markdown-safe text, and its link
 target is the artifact pdf/<topic>.pdf that .github/workflows/build-pdf.yml
-compiles. Idempotent: running it twice with no repo change leaves the file
+compiles. Idempotent: running it twice with no repo change leaves both READMEs
 byte-identical.
 
 The list is derived from the .tex sources rather than from the contents of pdf/,
@@ -22,11 +22,10 @@ import sys
 from pathlib import Path
 
 from latex_unicode import UnsupportedLatex, render
-from readme_block import update_readme
+from readme_block import update_readmes
 
 BEGIN_MARKER = "<!-- BEGIN PDF LINKS -->"
 END_MARKER = "<!-- END PDF LINKS -->"
-README = Path("README.md")
 PDF_DIR = Path("pdf")
 TEX_DIR = Path("tex")
 TITLE_MACRO = r"\newcommand{\DocTitle}"
@@ -134,7 +133,7 @@ def main() -> int:
 
     body = build_body(paths)
     warn_about_pdfs([topic_name(path) for path in paths])
-    update_readme(README, BEGIN_MARKER, END_MARKER, body, "PDF links")
+    update_readmes(BEGIN_MARKER, END_MARKER, body, "PDF links")
     return 0
 
 

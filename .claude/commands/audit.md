@@ -1,13 +1,13 @@
 ---
 description: Audit the commands, instructions and hooks for contradictions, stale claims and dead steps
 argument-hint: "[file ...]  (omit — audits the whole system)"
-allowed-tools: Read, Glob, Grep, Bash(python -m unittest:*), Bash(git rev-parse:*), Bash(git diff:*), Bash(git restore:*), Bash(date:*), Bash(printf:*), Bash(.claude/hooks/guard-bash.sh:*), Bash(.claude/hooks/guard-edits.sh:*), Write(.claude/audits/**), Edit(.claude/audits/**), Edit(CLAUDE.md), Edit(README.md), Edit(docs/**), Edit(.claude/commands/**), Edit(.claude/settings.json), Edit(.claude/hooks/**), Edit(.github/workflows/**)
+allowed-tools: Read, Glob, Grep, Bash(python -m unittest:*), Bash(git rev-parse:*), Bash(git diff:*), Bash(git restore:*), Bash(date:*), Bash(printf:*), Bash(.claude/hooks/guard-bash.sh:*), Bash(.claude/hooks/guard-edits.sh:*), Write(.claude/audits/**), Edit(.claude/audits/**), Edit(CLAUDE.md), Edit(README.md), Edit(README.ja.md), Edit(docs/**), Edit(.claude/commands/**), Edit(.claude/settings.json), Edit(.claude/hooks/**), Edit(.github/workflows/**)
 ---
 
 Audit the machinery that tells Claude what to do — `CLAUDE.md`, `docs/*.md`,
 `.claude/commands/*.md`, `.claude/settings.json`, `.claude/hooks/`,
-`.github/workflows/*.yml`, and the prose in `README.md` outside the generated
-markers — and write a report to `.claude/audits/audit.md`. That directory is
+`.github/workflows/*.yml`, and the prose in `README.md` and `README.ja.md` outside the
+generated markers — and write a report to `.claude/audits/audit.md`. That directory is
 gitignored: the report is scaffolding, not a record. It sits inside `.claude/`
 because what it describes does; the mathematics belongs to `/review-notes`,
 which files its findings as GitHub issues rather than writing a report at all.

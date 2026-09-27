@@ -4,7 +4,8 @@
 Run from the repo root:
     python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 
-`README.md` and `docs/agent-system.md` enumerate things that live on disk: the
+`README.md`, its Japanese twin `README.ja.md` and `docs/agent-system.md`
+enumerate things that live on disk: the
 commands in `.claude/commands/`, the hooks, the workflows, the documents in
 `docs/`. A hand-written enumeration goes stale the moment the disk changes, and
 nothing about a stale one looks wrong from the inside — `CLAUDE.md` described
@@ -52,12 +53,13 @@ WORKFLOW_DIR = ROOT / ".github" / "workflows"
 DOC_DIR = ROOT / "docs"
 SETTINGS = ROOT / ".claude" / "settings.json"
 README = ROOT / "README.md"
+README_JA = ROOT / "README.ja.md"
 AGENT_SYSTEM = DOC_DIR / "agent-system.md"
 
 
 def prose_files() -> list[Path]:
     """Every hand-written file that describes the system."""
-    return [README, ROOT / "CLAUDE.md", *sorted(DOC_DIR.glob("*.md")), *sorted(COMMAND_DIR.glob("*.md"))]
+    return [README, README_JA, ROOT / "CLAUDE.md", *sorted(DOC_DIR.glob("*.md")), *sorted(COMMAND_DIR.glob("*.md"))]
 
 
 def rel(path: Path) -> str:
@@ -98,10 +100,17 @@ def topic_count() -> int:
 
 
 class TestCommandTables(unittest.TestCase):
-    """The two tables that promise to list every slash command."""
+    """The three tables that promise to list every slash command.
+
+    The Japanese README is a translation of the English one, and its command
+    table is the part of a translation most likely to be left behind.
+    """
 
     def test_readme_lists_every_command(self):
         self.assertEqual(command_names(), tabled_commands(README.read_text()))
+
+    def test_japanese_readme_lists_every_command(self):
+        self.assertEqual(command_names(), tabled_commands(README_JA.read_text()))
 
     def test_agent_system_lists_every_command(self):
         self.assertEqual(command_names(), tabled_commands(AGENT_SYSTEM.read_text()))
@@ -111,7 +120,7 @@ class TestCommandTables(unittest.TestCase):
 
         `docs/git-strategy.md` tables only `/git` and `/git-merge` on purpose,
         so membership is checked one way here — every tabled command is real —
-        and both ways only for the two tables above.
+        and both ways only for the three tables above.
         """
         for path in prose_files():
             for name in tabled_commands(path.read_text()):
@@ -271,9 +280,11 @@ class TestCountsInProse(unittest.TestCase):
 
     def test_topic_counts(self):
         self.assert_count(r"(\d+) topics", topic_count())
+        self.assert_count(r"(\d+) ?(?:個の)?トピック", topic_count())
 
     def test_command_counts(self):
         self.assert_count(r"(\d+) commands", len(command_names()))
+        self.assert_count(r"(\d+) ?(?:個の)?コマンド", len(command_names()))
 
 
 if __name__ == "__main__":
