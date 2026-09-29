@@ -25,7 +25,7 @@
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          ███████████░░░░░░░░░   54.7%  54,226
+category_theory          ███████████░░░░░░░░░   54.7%  54,199
 algebraic_k_theory       ███▋░░░░░░░░░░░░░░░░   17.9%  17,748
 lambda_calculus          ██░░░░░░░░░░░░░░░░░░   10.3%  10,191
 homological_algebra      █▉░░░░░░░░░░░░░░░░░░    9.3%   9,207
@@ -36,7 +36,7 @@ galois_theory            ▏░░░░░░░░░░░░░░░░░�
 differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%       0
 symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%       0
                                                        ------
-total                                                  99,068
+total                                                  99,041
 ```
 <!-- END TEXT METER -->
 
