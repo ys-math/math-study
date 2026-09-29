@@ -4,5 +4,35 @@
 \section{Kan拡張}
 
 \begin{definition}
+$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とし$F \colon \mathscr{C} \to \mathscr{E},\ K \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+共変関手$\Lan_K(F) \colon \mathscr{D} \to \mathscr{E}$と自然変換$\eta \colon F \Rightarrow \Lan_K(F)K$の組$(\Lan_K(F), \eta)$は条件(LK)が成り立つとき$F$の$K$に沿った\term{ひだりかんかくちょう}{左Kan拡張}{left Kan extension}であるという.\
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNiwwLCJcXG1hdGhzY3J7Q30iXSxbNywwLCJcXG1hdGhzY3J7RX0iXSxbMCwxLCJLIiwyXSxbMSwyLCJcXG1hdGhybXtMYW59X0soRikiXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzEsMiwiRyIsMix7ImN1cnZlIjo0fV0sWzMsNCwiRiIsMCx7ImN1cnZlIjotMn1dLFszLDQsIkdLIiwyLHsiY3VydmUiOjJ9XSxbNywxLCJcXGV0YSIsMix7InNob3J0ZW4iOnsic291cmNlIjoyMH19XSxbNiw4LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs5LDEwLCJcXGdhbW1hIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\[\begin{tikzcd}
+	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} && {\mathscr{C}} & {\mathscr{E}}
+	\arrow["K"', from=1-1, to=1-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\mathrm{Lan}_K(F)}", from=1-3, to=1-5]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "G"', curve={height=24pt}, from=1-3, to=1-5]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-7, to=1-8]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-7, to=1-8]
+	\arrow["\eta"', between={0.2}{1}, Rightarrow, nfold, from=0, to=1-3]
+	\arrow["\alpha", between={0.2}{0.8}, Rightarrow, nfold, from=1, to=2]
+	\arrow["\gamma", between={0.2}{0.8}, Rightarrow, nfold, from=3, to=4]
+\end{tikzcd}\]
 
+(LK)\ 任意の共変関手$G \colon \mathscr{D} \to \mathscr{E}$と自然変換$\gamma \colon F \Rightarrow GK$に対して$\Lan_K(F)$から$G$への自然変換$\alpha \colon \Lan_K(F) \Rightarrow G$で$\gamma = (\alpha K) \circ \eta$を満たすものがただ1つ存在する.
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNSwwLCJcXG1hdGhzY3J7Q30iXSxbNiwwLCJcXG1hdGhzY3J7RX0iXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzAsMSwiSyJdLFsxLDIsIlxcbWF0aHJte0xhbn1fSyhGKSJdLFswLDIsIkdLIiwyLHsiY3VydmUiOjV9XSxbMyw0LCJGIiwwLHsiY3VydmUiOi0yfV0sWzMsNCwiR0siLDIseyJjdXJ2ZSI6Mn1dLFsyLDMsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0IjoxMH0sImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsMSwiXFxldGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzEsOCwiXFxhbHBoYSBLIiwyLHsic2hvcnRlbiI6eyJ0YXJnZXQiOjIwfX1dLFs5LDEwLCJcXGdhbW1hIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjEwLCJ0YXJnZXQiOjEwfX1dXQ==
+\[\begin{tikzcd}
+	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} & {\mathscr{C}} & {\mathscr{E}}
+	\arrow["K", from=1-1, to=1-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "GK"', curve={height=30pt}, from=1-1, to=1-5]
+	\arrow["{\mathrm{Lan}_K(F)}", from=1-3, to=1-5]
+	\arrow[between={0.1}{0.9}, equals, nfold, from=1-5, to=1-6]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-6, to=1-7]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-6, to=1-7]
+	\arrow["\eta"', between={0.2}{1}, Rightarrow, nfold, from=0, to=1-3]
+	\arrow["{\alpha K}"', between={0}{0.8}, Rightarrow, nfold, from=1-3, to=1]
+	\arrow["\gamma", between={0.1}{0.9}, Rightarrow, nfold, from=2, to=3]
+\end{tikzcd}\]
 \end{definition}
