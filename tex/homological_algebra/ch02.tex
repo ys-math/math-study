@@ -36,7 +36,7 @@ $\mathcal{A}$をアーベル圏とする.\
 $\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: CochainComplexHom}
 $\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\
 $\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は余鎖複体$(M^\bullet, d^\bullet)$から余鎖複体$(M'^\bullet, d'^\bullet)$への射であるという.
 % https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV57bi0xfSJdLFswLDAsIlxcY2RvdHMiXSxbMiwwLCJNXm4iXSxbMywwLCJNXntuKzF9Il0sWzQsMCwiXFxjZG90cyJdLFsxLDEsIk0nXntuLTF9Il0sWzAsMSwiXFxjZG90cyJdLFsyLDEsIk0nXm4iXSxbMywxLCJNJ157bisxfSJdLFs0LDEsIlxcY2RvdHMiXSxbMSwwLCJkXntuLTJ9Il0sWzAsMiwiZF57bi0xfSJdLFsyLDMsImRebiJdLFszLDQsImRee24rMX0iXSxbNiw1LCJkJ157bi0yfSJdLFs1LDcsImQnXntuLTF9Il0sWzcsOCwiZCdebiJdLFs4LDksImQnXntuKzF9Il0sWzAsNSwiZl57bi0xfSJdLFsyLDcsImZebiJdLFszLDgsImZee24rMX0iXV0=
@@ -57,7 +57,52 @@ $\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \m
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: CochainComplexCategory}
 $\mathcal{A}$をアーベル圏とする.\
 対象を余鎖複体とし射を余鎖複体から余鎖複体への射とすることで$\mathcal{A}$上の余鎖複体の圏$\Ch^\bullet(\mathcal{A})$が定まる.\
 \end{definition}
+
+\begin{remark} \label{rem: limit_universal_property}
+$\mathscr{J}$を小圏とし$\mathscr{C}$を局所小圏とする.\
+$F \colon \mathscr{J} \to \mathscr{C}$を共変関手とする.\
+$A \in \Ob(\mathscr{C})$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A,\eta)$を錐という.\
+錐$(L, \pi)$が$F$の極限であることは以下の条件と同値である.\
+\begin{center}
+${^{\forall}(A,\eta)} \in \Cone(A, F),\ {^{\exists!}h \colon A \to L},\ {^{\forall}j \in \Ob(\mathscr{J}), \pi_j \circ h = \eta_j}$
+\end{center}
+つまり任意の$\mathscr{J}$の射$f \colon X \to Y$に対して次の図式を可換にするただ1つの$\mathscr{C}$の射$h \colon A \to L$が存在する.
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJMIl0sWzEsMCwiQSJdLFswLDIsIkYoWCkiXSxbMiwyLCJGKFkpIl0sWzIsMywiRihmKSJdLFswLDIsIlxccGlfWCIsMl0sWzAsMywiXFxwaV9ZIl0sWzEsMiwiXFxldGFfWCIsMix7ImN1cnZlIjoyfV0sWzEsMywiXFxldGFfWSIsMCx7ImN1cnZlIjotMn1dLFsxLDAsImgiLDJdXQ==
+\[\begin{tikzcd}
+	& A & \\
+	& L \\
+	{F(X)} && {F(Y)}
+	\arrow["h"', from=1-2, to=2-2]
+	\arrow["{\eta_X}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\eta_Y}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\pi_X}"', from=2-2, to=3-1]
+	\arrow["{\pi_Y}", from=2-2, to=3-3]
+	\arrow["{F(f)}", from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{remark}
+
+\begin{lemma} \label{lem: kernel_and_mono_iff_zero_leg}
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とする.\
+このとき次が成り立つ.\
+\begin{center}
+	$(K, \kappa)$は$K_f$の極限で$f$はモノ射$\iff$$\kappa_0 = 0_{K,X}$
+\end{center}
+\end{lemma}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{lemma} \label{lem: cokernel_and_epi_iff_zero_leg}
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とする.\
+このとき次が成り立つ.\
+\begin{center}
+	$(Q, \iota)$は$K_f$の余極限で$f$はエピ射$\iff$$\iota_1 = 0_{Y,Q}$ 
+\end{center}
+\end{lemma}
