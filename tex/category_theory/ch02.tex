@@ -3,10 +3,6 @@
 
 \section{米田の補題と普遍性}
 
-\begin{remark} \label{rem: set_iso_is_bijection}
-$\mathbf{Set}$の射$f$が同型射であることと$f$が全単射であることは同値である.
-\end{remark}
-
 \begin{theorem} \label{thm: yoneda_lemma} (\term{よねだのほだい}{米田の補題}{Yoneda lemma})
 $\mathscr{C}$を局所小圏とし$F \colon \mathscr{C} \to \mathbf{Set}$を共変関手とする.\
 任意の$A \in \Ob(\mathscr{C})$に対して$\Nat(h^A, F) \cong F(A)$となる.
@@ -92,7 +88,7 @@ $(A, \psi(u))$は$F$の表現$\iff$$(A, u)$は$F$の普遍対
 \end{proposition}
 
 \begin{proof}
-$\psi(u)$が自然同型であるとき\cref{rem: set_iso_is_bijection}より任意の$X \in \Ob(\mathscr{C})$に対して$\psi(u)_X$は全単射である.\
+	$\psi(u)$が自然同型であるとき任意の$X \in \Ob(\mathscr{C})$に対して$\psi(u)_X$は全単射である.\
 $B \in \Ob(\mathscr{C}), x \in F(B)$とする.\
 $f \coloneq \psi(u)_B^{-1}(x)$とすると$F(f)(u) = \psi(u)_B(f) = \psi(u)_B(\psi(u)_B^{-1}(x)) = x$となり$\psi(u)_B$は$f$はただ1つだから$u$は$F$の普遍元である.
 
