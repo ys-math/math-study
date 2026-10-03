@@ -61,7 +61,7 @@ English for this term, and `\term{たいしょう}{対象}{}` would be indisting
 from a gloss someone meant to fill in.
 
 **Bold in a chapter is always one of these three.** `\textbf` does not appear in
-`tex/*/ch0N.tex` at all, and `scripts/test_index_markup.py` fails if it does.
+`tex/*/ch*.tex` at all, and `scripts/test_index_markup.py` fails if it does.
 The rule is worth its strictness: a term written `\textbf{…}` out of habit
 typesets identically and is silently absent from the index, which is the one
 error the finished PDF does not show you. Bold *as emphasis* is not available in

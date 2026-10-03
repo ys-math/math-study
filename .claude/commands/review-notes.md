@@ -69,7 +69,7 @@ Read in this order, always:
    tell a real notation inconsistency from a house convention, and you will
    file `\mathrm{id}` vs `\id` findings backwards.
 2. The topic's `main.tex` — which chapters are `\input`, and in what order.
-3. Every `ch0N.tex`, in that order. Definitions in earlier chapters bind the
+3. Every chapter `\input` by `main.tex`, in that order. Definitions in earlier chapters bind the
    notation used in later ones.
 
 Then compile the topic, from the repo root:

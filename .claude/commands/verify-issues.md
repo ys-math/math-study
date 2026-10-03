@@ -62,7 +62,7 @@ Read before opening a single issue body, in this order:
 
 1. `tex/preamble.tex` — the theorem environments and the shared macros.
 2. The topic's `main.tex` — which chapters are `\input`, and in what order.
-3. Every `ch0N.tex`, in that order.
+3. Every chapter `\input` by `main.tex`, in that order.
 
 **The whole topic, every time, even for one issue.** Most findings are claims of
 absence — "$\cong$ が定義されずに使われている", "反対圏が定義されていない" — and

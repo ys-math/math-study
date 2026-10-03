@@ -132,7 +132,7 @@ SHA keeps pointing at what was actually reviewed however the file changes
 afterwards.
 
 ```
-https://github.com/ys-math/math-study/blob/<sha>/tex/<topic>/ch0N.tex#L<n>
+https://github.com/ys-math/math-study/blob/<sha>/tex/<topic>/<file>.tex#L<n>
 ```
 
 **When the topic's files are dirty, there is no such SHA.** The content reviewed

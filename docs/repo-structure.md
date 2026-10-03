@@ -16,7 +16,7 @@ Claude rather than the machinery that builds anything.
 | | `tex/` | `lean/` |
 | --- | --- | --- |
 | product | PDFs of study notes, in Japanese, one per topic | one Lake library of formalised mathematics |
-| unit | a topic — one directory, one `main.tex`, its `ch0N.tex` chapters | a module under `Math/Learn/` or `Math/Study/` |
+| unit | a topic — one directory, one `main.tex`, its `ch*.tex` chapters | a module under `Math/Learn/` or `Math/Study/` |
 | built by | LuaLaTeX via `latexmk` | `lake`, against a pinned Mathlib |
 | licence | CC BY-NC-ND 4.0 | Apache 2.0 |
 | CI | `build-pdf.yml`, `validate.yml` | `lean.yml` |

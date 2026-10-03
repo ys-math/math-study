@@ -1,6 +1,6 @@
 # Label convention
 
-Every numbered environment in `tex/*/ch0N.tex` — `definition`, `proposition`,
+Every numbered environment in `tex/*/ch*.tex` — `definition`, `proposition`,
 `lemma`, `theorem`, `corollary`, `remark`, `example` — can carry a `\label{}`,
 and `\cref{}` is how the notes point back at it. This document fixes what goes
 inside the braces.

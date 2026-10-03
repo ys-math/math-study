@@ -39,7 +39,7 @@ label defined in `ch01.tex` — a rename that does not see it breaks the build.
    `\crefname`s, so the environment list is read off the source and not from
    memory.
 3. The topic's `main.tex` — which chapters are `\input`, in what order.
-4. Every `ch0N.tex` in that order.
+4. Every chapter `\input` by `main.tex`, in that order.
 
 5. `lean/Math/Study/<Topic>.lean`, if it exists — the label body doubles as the
    Lean declaration name that formalises it, so a rename has a consumer outside

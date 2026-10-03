@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 Mathematics study notes written in LaTeX. One topic is one directory under
-`tex/`, holding a `main.tex` and its `ch0N.tex` chapters; every topic `\input`s
+`tex/`, holding a `main.tex` and its `ch*.tex` chapters; every topic `\input`s
 the shared `tex/preamble.tex` and `tex/colophon.tex`. `pdf/` and three blocks of
 each README are build artifacts, not sources.
 
@@ -25,7 +25,7 @@ second copy is a copy that drifts.
 
 ## The mathematics is not yours to write
 
-The prose in `tex/*/ch0N.tex` is authored by the repo owner. Edit it only when
+The prose in `tex/*/ch*.tex` is authored by the repo owner. Edit it only when
 asked to, and never rewrite, reformat or "fix" it in passing while doing tooling
 work.
 
