@@ -1,3 +1,62 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
+\section{直積と直和}
+
+\begin{definition}
+	$I \in \Ob(\mathbf{Set})$とし圏$\mathbf{Disc}(I)$を次のように定める.
+	\begin{itemize}
+		\item $\Ob(\mathbf{Disc}(I)) \coloneq I$
+		\item $\Mor(\mathbf{Disc}(I)) \coloneq \{\id_i \mid i \in I\}$
+	\end{itemize}
+	この圏を\term{りさんけん}{離散圏}{discrete category}と呼ぶ.
+\end{definition}
+
+\begin{remark}
+	$\mathbf{Disc}(I)$は小圏である.
+\end{remark}
+
+\begin{definition}
+	$I \in \Ob(\mathbf{Set})$とし$\mathscr{C}$を局所小圏とする.\
+	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
+	共変関手$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を次のようにして定める.
+	\begin{itemize}
+		\item $i \in I$に対して$D_A(i) \coloneq A_i$とする.
+		\item $i \in I$に対して$D_A(\id_i) \coloneq \id_{A_i}$
+	\end{itemize}
+	これを\term{りさんずしき}{離散図式}{discrete diagram}と呼ぶ.
+\end{definition}
+
+\begin{definition}
+	$\mathscr{C}$を局所小圏とし$I \in \Ob(\mathbf{Set})$とする.\
+	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+	$D_A$の極限を$(\prod_{i \in I} A_i, \pi )$としてこれを$A$の\term{ちょくせき}{直積}{direct product}と呼ぶ.
+\end{definition}
+
+\begin{definition}
+	$\mathscr{C}$を局所小圏とし$I \in \Ob(\mathbf{Set})$とする.\
+	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+	$D_A$の余極限を$(\coprod_{i \in I} A_i, \iota)$としてこれを$A$の\term{ちょくわ}{直和}{direct sum}と呼ぶ.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
+$(A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
+$i,j \in I$に対して$\delta_{ii} \coloneq \id_{A_i}$とし$i \neq j$のとき$\delta_{ij} \coloneq 0_{A_i,A_j}$とする.\
+$\delta$を\term{くろねっかーのでるた}{クロネッカーのデルタ}{Kronecker delta}と呼ぶ.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+$X \in \mathscr{C}$と自然変換$\pi \colon C_X \Rightarrow D_A,\ \iota \colon D_A \Rightarrow C_X$の組$(X, \pi, \iota)$は次の条件を満たすとき$A$の\term{そうすい}{双錐}{bicone}であるという.
+\begin{center}
+	${^{\forall}i,j} \in I,\ \pi_i \circ \iota_j = \delta_{ij}$
+\end{center}
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+$A$の双錐$(\bigoplus_{i \in I} A_i, \pi, \iota)$は$(\bigoplus_{i \in I} A_i, \pi)$が$A$の直積で$(\bigoplus_{i \in I} A_i, \iota)$が$A$の直和であるとき$A$の\term{そうせき}{双積}{biproduct}であるという.
+\end{definition}
