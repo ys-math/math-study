@@ -69,6 +69,13 @@
 % topic's PDF does not depend on another's sources. \str_set:Nn turns the slug
 % into catcode-12 characters, for the same underscore reason as \DocSlug above;
 % that is also what lets it be typeset as text.
+%
+% The whole URL is built as a str and only then handed to \href, never written
+% inside \href's argument. Under \ExplSyntaxOn `:' is a letter, so an `https:'
+% typed here is not a scheme to hyperref; it then reads an address ending in
+% .pdf as a local file and emits a GoToR action instead of a URI — a link that
+% compiles, looks right and does nothing when clicked. \str_set:Ne gives every
+% character, the colon included, catcode 12.
 \ExplSyntaxOn
 \bool_new:N \g_mathstudy_assumes_bool
 \NewDocumentCommand { \Assumes } { m }
@@ -79,8 +86,10 @@
                 \section* { 前提知識 }
             }
         \str_set:Nn \l_tmpa_str { #1 }
+        \str_set:Ne \l_tmpb_str
+            { https://github.com/ys-math/math-study/blob/main/pdf/ \l_tmpa_str .pdf }
         \par \noindent \textbullet \nobreakspace
-        \href { https://github.com/ys-math/math-study/blob/main/pdf/ \l_tmpa_str .pdf } { \l_tmpa_str .pdf }
+        \exp_args:NV \href \l_tmpb_str { \l_tmpa_str .pdf }
     }
 \ExplSyntaxOff
 
