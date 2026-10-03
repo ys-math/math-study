@@ -178,7 +178,7 @@ two deliberately diverge.
 4. `git mv` the mirror at `lean/Math/Study/<Topic>.lean` if it exists, and fix
    its `import` in `lean/Math.lean`. A stale import fails `lake build` outright,
    so this one at least tells you.
-5. Fix every `\Assumes{<old>}{…}` in the other topics' `main.tex`.
+5. Fix every `\Assumes{<old>}` in the other topics' `main.tex`.
    `scripts/test_assumes.py` fails on a stale one, but in `update-readme.yml`
    as much as in your gate.
 
