@@ -182,6 +182,7 @@ math-study/
 │   ├── new_topic.py
 │   ├── readme_block.py
 │   ├── test_agent_docs.py
+│   ├── test_assumes.py
 │   ├── test_check_bibliography.py
 │   ├── test_generate_text_meter.py
 │   ├── test_generate_tree.py
