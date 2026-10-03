@@ -91,6 +91,12 @@ for good is a topic that has never reached it.
 **Uncommitted prose — stop.** Untracked chapters, or modified ones. Show the
 paths, and tell the user to commit via `/git` first, then re-run.
 
+**Another topic assumes this one — stop.** Grep `tex/*/main.tex` for
+`\Assumes{<topic>}`. Any hit is a 前提知識 link that would point at a deleted
+PDF, and `scripts/test_assumes.py` would fail on it — in `update-readme.yml`,
+after the push, keeping the README bot red. Show the lines and tell the user to
+remove them first; you cannot edit another topic's `main.tex`.
+
 **The exception**: untracked *and* every chapter file empty. That is the
 wrong-slug-from-`/new-topic` case — a skeleton created minutes ago with nothing
 in it. Delete it plainly with `git clean -xdf tex/<topic>`; there is nothing to
