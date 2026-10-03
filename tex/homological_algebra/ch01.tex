@@ -69,23 +69,178 @@ $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
 \end{itemize}
 \end{definition}
 
-\begin{definition} \label{def: binaryProduct}
+\begin{remark} \label{rem: limit_universal_property}
+$\mathscr{J}$を小圏とし$\mathscr{C}$を局所小圏とする.\
+$F \colon \mathscr{J} \to \mathscr{C}$を共変関手とする.\
+$A \in \Ob(\mathscr{C})$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A,\eta)$を錐という.\
+錐$(L, \pi)$が$F$の極限であることは以下の条件と同値である.\
+\begin{center}
+${^{\forall}(A,\eta)} \in \Cone(A, F),\ {^{\exists!}h \colon A \to L},\ {^{\forall}j \in \Ob(\mathscr{J}), \pi_j \circ h = \eta_j}$
+\end{center}
+つまり任意の$\mathscr{J}$の射$f \colon X \to Y$に対して次の図式を可換にするただ1つの$\mathscr{C}$の射$h \colon A \to L$が存在する.
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJMIl0sWzEsMCwiQSJdLFswLDIsIkYoWCkiXSxbMiwyLCJGKFkpIl0sWzIsMywiRihmKSJdLFswLDIsIlxccGlfWCIsMl0sWzAsMywiXFxwaV9ZIl0sWzEsMiwiXFxldGFfWCIsMix7ImN1cnZlIjoyfV0sWzEsMywiXFxldGFfWSIsMCx7ImN1cnZlIjotMn1dLFsxLDAsImgiLDJdXQ==
+\[\begin{tikzcd}
+	& A & \\
+	& L \\
+	{F(X)} && {F(Y)}
+	\arrow["h"', from=1-2, to=2-2]
+	\arrow["{\eta_X}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\eta_Y}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\pi_X}"', from=2-2, to=3-1]
+	\arrow["{\pi_Y}", from=2-2, to=3-3]
+	\arrow["{F(f)}", from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{remark}
+
+\begin{definition} \label{def: directProduct}
 $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
-$(L,(L, \pi))$を$D_{A,B}$の極限とする.\
-このとき$A \times B \coloneq L$を\term{にこうせき}{2項積}{binary product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.
+$(L, \pi)$を$D_{A,B}$の極限とする.\
+このとき$A \times B \coloneq L$を\term{ちょくせき}{直積}{direct product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.\
+任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(X, A),\ g \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にするただ1つの射$X \to A \times B$を$\langle f, g \rangle$と書く.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFswLDIsImYiLDIseyJjdXJ2ZSI6MX1dLFswLDMsImciLDAseyJjdXJ2ZSI6LTF9XSxbMCwxLCJcXGxhbmdsZSBmLCBnIFxccmFuZ2xlIiwxXSxbMSwyLCJcXHBpXzAiXSxbMSwzLCJcXHBpXzEiLDJdXQ==
+\[\begin{tikzcd}
+	X && \\
+	& {A \times B} & B \\
+	& A
+	\arrow["{\langle f, g \rangle}"{description}, from=1-1, to=2-2]
+	\arrow["g", curve={height=-6pt}, from=1-1, to=2-3]
+	\arrow["f"', curve={height=6pt}, from=1-1, to=3-2]
+	\arrow["{\pi_1}"', from=2-2, to=2-3]
+	\arrow["{\pi_0}", from=2-2, to=3-2]
+\end{tikzcd}\]
 \end{definition}
+
+\begin{definition} \label{def: directSum}
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$(Q, \iota)$を$D_{A,B}$の余極限とする.\
+このとき$A \amalg B \coloneq Q$を\term{ちょくわ}{直和}{direct sum}といい$\iota_0, \iota_1$を\term{にゅうしゃ}{入射}{injection}という.\
+任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にするただ1つの射$A \amalg B \to X$を$\lbrack f, g \rbrack$と書く.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXGFtYWxnIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFsyLDAsImYiLDAseyJjdXJ2ZSI6LTF9XSxbMywwLCJnIiwyLHsiY3VydmUiOjF9XSxbMSwwLCJcXGxicmFjayBmLCBnIFxccmJyYWNrIiwxXSxbMiwxLCJcXGlvdGFfMCIsMl0sWzMsMSwiXFxpb3RhXzEiXV0=
+\[\begin{tikzcd}
+	X && \\
+	& {A \amalg B} & B \\
+	& A
+	\arrow["{\lbrack f, g \rbrack}"{description}, from=2-2, to=1-1]
+	\arrow["g"', curve={height=6pt}, from=2-3, to=1-1]
+	\arrow["{\iota_1}", from=2-3, to=2-2]
+	\arrow["f", curve={height=-6pt}, from=3-2, to=1-1]
+	\arrow["{\iota_0}"', from=3-2, to=2-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition} \label{def: IsBiproduct}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\ 
+$A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \pi_1 \in \Mor_{\mathscr{C}}(A \oplus B, B),\ \iota_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \iota_1 \in \Mor_{\mathscr{C}}(B,A \oplus B)$の組$(A \oplus B, \pi_0, \pi_1, \iota_0, \iota_1)$は次の図式を可換にし$\iota_0 \circ \pi_0 + \iota_1 \circ \pi_1 = \id_{A \oplus B}$を満たすとき$A$と$B$の\term{そうせき}{双積}{biproduct}であるという.
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJCIl0sWzEsMCwiQSJdLFsxLDEsIkEgXFxvcGx1cyBCIl0sWzEsMiwiQiJdLFsyLDEsIkEiXSxbNCwyLCJcXGlvdGFfMCIsMl0sWzIsMSwiXFxwaV8wIl0sWzQsMSwiXFxtYXRocm17aWR9X0EiLDIseyJjdXJ2ZSI6Mn1dLFswLDIsIlxcaW90YV8xIiwyXSxbMiwzLCJcXHBpXzEiXSxbMCwzLCJcXG1hdGhybXtpZH1fQiIsMix7ImN1cnZlIjoyfV0sWzAsMSwiMF97QixBfSIsMCx7ImN1cnZlIjotMn1dLFs0LDMsIjBfe0EsQn0iLDAseyJjdXJ2ZSI6LTJ9XV0=
+\[\begin{tikzcd}
+	& A & \\
+	B & {A \oplus B} & A \\
+	& B
+	\arrow["{0_{B,A}}", curve={height=-12pt}, from=2-1, to=1-2]
+	\arrow["{\iota_1}"', from=2-1, to=2-2]
+	\arrow["{\mathrm{id}_B}"', curve={height=12pt}, from=2-1, to=3-2]
+	\arrow["{\pi_0}", from=2-2, to=1-2]
+	\arrow["{\pi_1}", from=2-2, to=3-2]
+	\arrow["{\mathrm{id}_A}"', curve={height=12pt}, from=2-3, to=1-2]
+	\arrow["{\iota_0}"', from=2-3, to=2-2]
+	\arrow["{0_{A,B}}", curve={height=-12pt}, from=2-3, to=3-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{proposition} \label{prop: direct_product_and_direct_sum_of_biproduct}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \oplus B, \pi_0, \pi_1, \iota_0, \iota_1)$が$A$と$B$の双積であるとき$(A \oplus B, \pi)$は\cref{def: pairDiagramFunctor}で定めた$D_{A,B}$の極限であり$(A \oplus B, \iota)$は$D_{A,B}$の余極限である.
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X, A),\ g \in \Mor_{\mathscr{C}}(X, B)$とする.\
+$h \coloneq \iota_0 \circ f + \iota_1 \circ g$とすると
+\begin{align*}
+\pi_0 \circ h &= \pi_0 \circ \iota_0 \circ f + \pi_0 \circ \iota_1 \circ g \\
+	      &= \id_{A} \circ f + 0_{B, A} \circ g \\
+	      &= f + 0_{X, A} \\
+	      &= f
+\end{align*}
+となり同様に$\pi_1 \circ h = g$となる.
+
+$\pi_0 \circ h' = f$かつ$\pi_1 \circ h = g$とすると
+\begin{align*}
+h' &= \id_{A \oplus B} \circ h' \\
+   &= (\iota_0 \circ  \pi_0 + \iota_1 \circ \pi_1) \circ h' \\
+   &= \iota_0 \circ f + \iota_1 \circ g \\
+   &= h
+\end{align*}
+となるので$(A \oplus B, \pi)$は$D_{A,B}$の極限である.\
+
+$X \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$とする.\
+$h \coloneq f \circ \pi_0 + g \circ \pi_1$とすると
+\begin{align*}
+h \circ \iota_0 &= f \circ \pi_0 \circ \iota_0 + g \circ \pi_1 \circ \iota_0 \\
+		&= f \circ \id_{A} + g \circ 0_{A, B} \\
+		&= f + 0_{A, X} \\
+		&= f
+\end{align*}
+となり同様に$h \circ \iota_1 = g$となる.
+
+$h' \circ \iota_0 = f$かつ$h' \circ \iota_1 = g$とすると
+\begin{align*}
+h' &= h' \circ \id_{A \oplus B} \\
+   &= h' \circ (\iota_0 \circ \pi_0 + \iota_1 \circ \pi_1) \\
+   &= f \circ \pi_0 + g \circ \pi_1 \\
+   &= h
+\end{align*}
+となるので$(A \oplus B, \iota)$は$D_{A,B}$の余極限である.
+\end{proof}
+
+\begin{proposition} \label{prop: biproduct_of_direct_product}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \times B, \pi)$を$D_{A,B}$の極限とする.\
+このとき$\iota_0 \coloneq \langle \id_A, 0_{A, B} \rangle$とし$\iota_1 \coloneq \langle 0_{B, A}, \id_B \rangle$とすると$(A \times B, \pi_0, \pi_1, \iota_0, \iota_1)$は双積となる.
+\end{proposition}
+
+\begin{proof}
+$\langle -,- \rangle$の定義(\cref{def: directProduct})から次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJCIl0sWzIsMCwiQSJdLFsyLDEsIkEgXFx0aW1lcyBCIl0sWzIsMiwiQiJdLFs0LDEsIkEiXSxbNCwyLCJcXGxhbmdsZSBcXG1hdGhybXtpZH1fQSwgMF97QSwgQn0gXFxyYW5nbGUiLDJdLFsyLDEsIlxccGlfMCJdLFs0LDEsIlxcbWF0aHJte2lkfV9BIiwyLHsiY3VydmUiOjJ9XSxbMCwyLCJcXGxhbmdsZSAwX3tCLCBBfSwgXFxtYXRocm17aWR9X0IgXFxyYW5nbGUiLDJdLFsyLDMsIlxccGlfMSJdLFswLDMsIlxcbWF0aHJte2lkfV9CIiwyLHsiY3VydmUiOjJ9XSxbMCwxLCIwX3tCLEF9IiwwLHsiY3VydmUiOi0yfV0sWzQsMywiMF97QSxCfSIsMCx7ImN1cnZlIjotMn1dXQ==
+\[\begin{tikzcd}
+	&& A && \\
+	B && {A \times B} && A \\
+	&& B
+	\arrow["{0_{B,A}}", curve={height=-12pt}, from=2-1, to=1-3]
+	\arrow["{\langle 0_{B, A}, \mathrm{id}_B \rangle}"', from=2-1, to=2-3]
+	\arrow["{\mathrm{id}_B}"', curve={height=12pt}, from=2-1, to=3-3]
+	\arrow["{\pi_0}", from=2-3, to=1-3]
+	\arrow["{\pi_1}", from=2-3, to=3-3]
+	\arrow["{\mathrm{id}_A}"', curve={height=12pt}, from=2-5, to=1-3]
+	\arrow["{\langle \mathrm{id}_A, 0_{A, B} \rangle}"', from=2-5, to=2-3]
+	\arrow["{0_{A,B}}", curve={height=-12pt}, from=2-5, to=3-3]
+\end{tikzcd}\]
+
+$e \coloneq \iota_0 \circ \pi_0 + \iota_1 \circ \pi_1$とする.\
+$\pi_0 \circ e = \pi_0 \circ \iota_0 \circ \pi_0 + \pi_0 \circ \iota_1 \circ \pi_1 = \pi_0$であり同様に$\pi_1 \circ e = \pi_1$となる.\
+$\pi_0 \circ \id_{A \times B} = \pi_0$かつ$\pi_1 \circ \id_{A \times B} = \pi_1$なので一意性から$e = \id_{A \times B}$である.
+\end{proof}
+
+\begin{proposition} \label{prop: biproduct_of_direct_sum}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \amalg B, \iota)$を$D_{A,B}$の余極限とする.\
+このとき$\pi_0 \coloneq \lbrack \id_A, 0_{A, B} \rbrack$とし$\pi_1 \coloneq \lbrack 0_{B, A}, \id_B \rbrack$とすると$(A \amalg B, \pi_0, \pi_1, \iota_0, \iota_1)$は双積となる.
+\end{proposition}
+
+\begin{proof}
+\cref{prop: biproduct_of_direct_product}の双対である.
+\end{proof}
 
 \begin{definition} \label{def: IsAdditive}
 前加法圏$\mathscr{C}$は次の条件を満たすとき\term{かほうけん}{加法圏}{additive category}であるという.
 \begin{itemize}
     \item 零対象$Z \in \Ob(\mathscr{C})$が存在.
-    \item 任意の$A, B \in \Ob(\mathscr{C})$に対して$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$の極限$(A \times B, (A \times B, \pi))$が存在.
+    \item 任意の$A, B \in \Ob(\mathscr{C})$に対して$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$の極限$(A \times B, \pi)$が存在.
 \end{itemize}
 \end{definition}
 
 \begin{definition} \label{def: WalkingParallelPairCategory}
 圏$\mathbf{P}$を$\Ob(\mathbf{P}) \coloneq 2$とし$\Mor{\mathscr{C}} \coloneq \{\id_0, \id_1, u, v\}$として定める.\
-ただし$|\Mor_{\mathbf{P}}(0, 1)| \coloneq 2$である.\
+ただし$|\Mor_{\mathbf{P}}(0, 1)| = 2$である.\
 これを\term{へいこうついのけん}{平行対の圏}{walking parallel pair category}という.\
 平行対の圏を$\bullet \rightrightarrows \bullet$と書くこともある.
 % https://q.uiver.app/#q=WzAsMixbMCwwLCIwIl0sWzEsMCwiMSJdLFswLDEsInUiLDAseyJjdXJ2ZSI6LTF9XSxbMCwwLCJcXG1hdGhybXtpZH1fMCIsMCx7ImFuZ2xlIjotOTB9XSxbMSwxLCJcXG1hdGhybXtpZH1fMSIsMCx7ImFuZ2xlIjo5MH1dLFswLDEsInYiLDIseyJjdXJ2ZSI6MX1dXQ==
@@ -105,7 +260,7 @@ $\mathbf{P}$を平行対の圏とし共変関手$K_f \colon \mathbf{P} \to \math
     \item $K_f(0) \coloneq \dom(f),\ K_f(1) \coloneq \cod(f)$とする.
     \item $K_f(u) \coloneq f,\ K_f(v) \coloneq 0_{\dom(f), \cod(f)}$とする.
 \end{itemize}
-$K_f$の極限$(L_{K_f}, (L_{K_f}, \pi_{K_f}))$を$f$の\term{かく}{核}{kernel}といい$\ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \ker(f) \to \dom(f)$とする.\
+$K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい$\ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \ker(f) \to \dom(f)$とする.\
 つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \ker(f)$がただ1つ存在する.
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtLZXJ9KGYpIl0sWzAsMiwiXFxtYXRocm17ZG9tfShmKSJdLFsyLDIsIlxcbWF0aHJte2NvZH0oZikiXSxbMSwwLCJYIl0sWzAsMSwia19mIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzEsMiwiZiIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCIoXFxwaV97S19mfSlfMSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMH1dLFsxLDIsIjBfe1xcbWF0aHJte2RvbX0oZiksXFxtYXRocm17Y29kfShmKX0iLDIseyJvZmZzZXQiOjF9XSxbMywxLCJcXGV0YV8wIiwyLHsiY3VydmUiOjN9XSxbMywyLCJcXGV0YV8xIiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiZyIsMl1d
 \[\begin{tikzcd}
@@ -127,7 +282,7 @@ $K_f$の極限$(L_{K_f}, (L_{K_f}, \pi_{K_f}))$を$f$の\term{かく}{核}{kerne
 \end{remark}
 
 \begin{definition} \label{def: cokernel}
-$K_f$の余極限$(Q_{K_f}, (Q_{K_f}, \iota_{K_f}))$を$f$の\term{よかく}{余核}{cokernel}といい$\coker(f) \coloneq Q_{K_f},\ c_f \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \coker(f)$とする.
+	$K_f$の余極限$(Q_{K_f}, \iota_{K_f})$を$f$の\term{よかく}{余核}{cokernel}といい$\coker(f) \coloneq Q_{K_f},\ c_f \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \coker(f)$とする.
 \end{definition}
 
 \begin{definition} \label{def: IsMonomorphism}
