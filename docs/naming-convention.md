@@ -81,13 +81,15 @@ directly above `\tableofcontents`:
 
 ```latex
 \newpage
-\Assumes{category_theory}{圏論}
+\Assumes{category_theory}
 \tableofcontents
 ```
 
-The first argument is the prerequisite's slug and the second its `\DocTitle`,
-copied exactly. The macro, in `tex/preamble.tex`, prints a 前提知識 block at the
-top of the 目次 page and links each title to `pdf/<slug>.pdf`. It declares a
+The argument is the prerequisite's slug. The macro, in `tex/preamble.tex`,
+prints a 前提知識 block at the top of the 目次 page, one entry per call, each
+reading `<slug>.pdf` and linking to that file in `pdf/`. The entry is the file
+name rather than the other topic's `\DocTitle` because that title lives in
+another `main.tex`, and no topic's build reads another's sources. It declares a
 whole topic, never a chapter or a theorem: pointing into another PDF's
 numbering would make one topic's build read another's `.aux`, and
 `build-pdf.yml` builds each topic on its own. It lives in the body, where it
@@ -95,10 +97,9 @@ prints, rather than beside `\DocTitle` as a declaration, so that a topic
 without prerequisites is untouched and the skeleton does not change; a topic
 that gains one has grown past the skeleton.
 
-The title is a second copy, and `scripts/test_assumes.py` holds it to the
-original: the slug must name a topic on disk, the title must equal that
-topic's `\DocTitle` byte for byte, and a topic may not assume itself. So
-renaming or retitling a topic means fixing every `\Assumes` that names it, and
+`scripts/test_assumes.py` holds every slug to the disk: it must name a topic
+that exists, and a topic may not assume itself. So renaming a topic means
+fixing every `\Assumes` that names it, and
 deleting one that another assumes fails the test — `/delete-topic` refuses
 that case rather than leave a link to a PDF that is gone.
 
