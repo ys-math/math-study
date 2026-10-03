@@ -56,6 +56,36 @@
     }
 \ExplSyntaxOff
 
+%%% ---- Prerequisites ----
+% \Assumes{<slug>}{<title>} — this text assumes the topic tex/<slug>/, whose
+% \DocTitle is <title>. Written in main.tex's body directly above
+% \tableofcontents, one call per prerequisite topic, so the block lands at the
+% top of the 目次 page; the first call prints the 前提知識 heading. The rules
+% are docs/naming-convention.md `## Inside a topic`, and
+% scripts/test_assumes.py is what notices a slug that no longer exists or a
+% title that no longer matches.
+%
+% The title is a second copy rather than a lookup because every other topic's
+% \DocTitle lives in its own main.tex, which this build never reads — one
+% topic's PDF does not depend on another's sources. \str_set:Nn turns the slug
+% into catcode-12 characters before it reaches the URL, for the same underscore
+% reason as \DocSlug above.
+\ExplSyntaxOn
+\bool_new:N \g_mathstudy_assumes_bool
+\NewDocumentCommand { \Assumes } { m m }
+    {
+        \bool_if:NF \g_mathstudy_assumes_bool
+            {
+                \bool_gset_true:N \g_mathstudy_assumes_bool
+                \section* { 前提知識 }
+                \noindent 本テキストは以下の内容を仮定する.
+            }
+        \str_set:Nn \l_tmpa_str { #1 }
+        \par \noindent \textbullet \nobreakspace
+        \href { https://github.com/ys-math/math-study/blob/main/pdf/ \l_tmpa_str .pdf } { #2 }
+    }
+\ExplSyntaxOff
+
 %%% ---- Index ----
 % Every defined term in tex/*/ch0N.tex is written with one of these three, and
 % nothing else in a chapter is bold: \textbf is the term-defining markup here,
