@@ -28,7 +28,7 @@ comment lines.
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          ██████████▊░░░░░░░░░   53.6%   61,346
+category_theory          ██████████▊░░░░░░░░░   53.6%   61,312
 algebraic_k_theory       ███▏░░░░░░░░░░░░░░░░   15.5%   17,748
 homological_algebra      ███░░░░░░░░░░░░░░░░░   15.0%   17,204
 lambda_calculus          █▊░░░░░░░░░░░░░░░░░░    8.9%   10,191
@@ -39,7 +39,7 @@ galois_theory            ▏░░░░░░░░░░░░░░░░░�
 differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%        0
 symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%        0
                                                        -------
-total                                                  114,390
+total                                                  114,356
 ```
 <!-- END TEXT METER -->
 
