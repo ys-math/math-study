@@ -218,6 +218,7 @@ math-study/
 │   ├── homological_algebra/
 │   │   ├── ch01.tex
 │   │   ├── ch02.tex
+│   │   ├── chA.tex
 │   │   └── main.tex
 │   ├── lambda_calculus/
 │   │   ├── ch01.tex
