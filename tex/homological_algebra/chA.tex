@@ -4,22 +4,31 @@
 \section{行列}
 
 \begin{definition}
-	$I \in \Ob(\mathbf{Set})$とし圏$\mathbf{Disc}(I)$を次のように定める.
+	$I \in \Ob(\mathbf{Set})$とし圏$\Disc(I)$を次のように定める.
 	\begin{itemize}
-		\item $\Ob(\mathbf{Disc}(I)) \coloneq I$
-		\item $\Mor(\mathbf{Disc}(I)) \coloneq \{\id_i \mid i \in I\}$
+		\item $\Ob(\Disc(I)) \coloneq I$
+		\item $\Mor(\Disc(I)) \coloneq \{\id_i \mid i \in I\}$
 	\end{itemize}
 	この圏を\term{りさんけん}{離散圏}{discrete category}と呼ぶ.
 \end{definition}
 
 \begin{remark}
-	$\mathbf{Disc}(I)$は小圏である.
+	$\Disc(I)$は小圏である.
 \end{remark}
+
+\begin{definition}
+$I, J \in \Ob(\mathbf{Set})$とし$u \in \Mor_{\mathbf{Set}}(I, J)$とする.\
+共変関手$\Disc(u) \colon \Disc(I) \to \Disc(J)$を次のように定める.\
+\begin{itemize}
+	\item $i \in I$に対して$\Disc(u)(i) \coloneq u(i)$とする.
+	\item $i \in I$に対して$\Disc(u)(\id_i) \coloneq \id_{u(i)}$とする.
+\end{itemize}
+\end{definition}
 
 \begin{definition}
 	$I \in \Ob(\mathbf{Set})$とし$\mathscr{C}$を局所小圏とする.\
 	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
-	共変関手$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を次のようにして定める.
+	共変関手$D_A \colon \Disc(I) \to \mathscr{C}$を次のようにして定める.
 	\begin{itemize}
 		\item $i \in I$に対して$D_A(i) \coloneq A_i$とする.
 		\item $i \in I$に対して$D_A(\id_i) \coloneq \id_{A_i}$
@@ -29,13 +38,13 @@
 
 \begin{definition}
 	$\mathscr{C}$を局所小圏とし$I \in \Ob(\mathbf{Set})$とする.\
-	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 	$D_A$の極限を$(\prod_{i \in I} A_i, \pi )$としてこれを$A$の\term{ちょくせき}{直積}{direct product}と呼ぶ.
 \end{definition}
 
 \begin{definition}
 	$\mathscr{C}$を局所小圏とし$I \in \Ob(\mathbf{Set})$とする.\
-	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 	$D_A$の余極限を$(\coprod_{i \in I} A_i, \iota)$としてこれを$A$の\term{ちょくわ}{直和}{direct sum}と呼ぶ.
 \end{definition}
 
@@ -48,7 +57,7 @@ $\delta$を\term{くろねっかーのでるた}{クロネッカーのデルタ}
 
 \begin{definition}
 $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
-$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 $X \in \mathscr{C}$と自然変換$\pi \colon C_X \Rightarrow D_A,\ \iota \colon D_A \Rightarrow C_X$の組$(X, \pi, \iota)$は次の条件を満たすとき$A$の\term{そうすい}{双錐}{bicone}であるという.
 \begin{center}
 	${^{\forall}i,j} \in I,\ \pi_i \circ \iota_j = \delta_{ij}$
@@ -57,7 +66,7 @@ $X \in \mathscr{C}$と自然変換$\pi \colon C_X \Rightarrow D_A,\ \iota \colon
 
 \begin{definition}
 $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
-$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 $A$の双錐$(\bigoplus_{i \in I} A_i, \pi, \iota)$は$(\bigoplus_{i \in I} A_i, \pi)$が$A$の直積で$(\bigoplus_{i \in I} A_i, \iota)$が$A$の直和であるとき$A$の\term{そうせき}{双積}{biproduct}であるという.
 \end{definition}
 
@@ -66,15 +75,15 @@ $A$の双錐$(\bigoplus_{i \in I} A_i, \pi, \iota)$は$(\bigoplus_{i \in I} A_i,
 \end{remark}
 
 \begin{remark}
-$n \in \mathbb{N}$に対して$\mathbf{n} \coloneq \mathbf{Disc}(n)$とする.
+$n \in \mathbb{N}$に対して$\mathbf{n} \coloneq \Disc(n)$とする.
 \end{remark}
 
 \begin{definition}
 $I, J \in \Ob(\mathbf{Set})$とし$\mathscr{C}$を局所小圏とする.\
 $A \coloneq (A_i)_{i \in I}$と$B \coloneq (B_j)_{j \in J}$を$\mathscr{C}$の対象の族とする.\ 
-$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)} \colon \mathbf{2} \to \mathbf{Cat}$を離散図式とする.\
-ただし$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}(0) \coloneq \mathbf{Disc}(I),\ D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}(1) \coloneq \mathbf{Disc}(J)$である.
-$(L, \pi)$を$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}$の極限として$P_I \coloneq \pi_0,\ P_J \coloneq \pi_1$と定める.
+$D_{\Disc(I), \Disc(J)} \colon \mathbf{2} \to \mathbf{Cat}$を離散図式とする.\
+ただし$D_{\Disc(I), \Disc(J)}(0) \coloneq \Disc(I),\ D_{\Disc(I), \Disc(J)}(1) \coloneq \Disc(J)$である.
+$(L, \pi)$を$D_{\Disc(I), \Disc(J)}$の極限として$P_I \coloneq \pi_0,\ P_J \coloneq \pi_1$と定める.
 $A$から$B$への$I \times J$\term{ぎょうれつ}{行列}{matrix}を$D_A P_I$から$D_B P_J$への自然変換として定める.
 \begin{center}
 $m \colon D_A P_I \Rightarrow D_B P_J$
