@@ -35,7 +35,7 @@ $0 \longrightarrow L \stackrel{i}{\longrightarrow} M \stackrel{p}{\longrightarro
 \begin{proof}
 (1)$\Rightarrow$(4): ある準同型$s \colon N \to M$が存在して$p \circ s = \id_N$となるとする.\
 $\psi \colon L \oplus N \to M$を$\psi(l, n) \coloneq i(l) + s(n)$で定める.\
-任意の$m \in M$に対して$p(m - s(p(m))) = p(m) - p(m) = 0$となるので$m - s(p(m)) \in \ker(p) = \im(i)$となる.\
+任意の$m \in M$に対して$p(m - s(p(m))) = p(m) - p(m) = 0$となるので$m - s(p(m)) \in \Ker(p) = \Im(i)$となる.\
 よって$m - s(p(m)) = i(l)$となる$l \in L$が存在する.\
 したがって$m = \psi(l, p(m))$となるので$\psi$は全射である.
 
@@ -55,7 +55,7 @@ $m' \coloneq m + i(l - r(m))$とすると$p(m') = p(m) = n$となり$r(m') = r(m
 よって$\phi(m') = (l, n)$なので$\phi$は全射である.
 
 $m \in M$とし$(r(m), p(m)) = (0,0)$であると仮定する.\
-$m \in \ker(p) = \im(i)$なので$i(l) = m$となる$l \in L$が存在する.\
+$m \in \Ker(p) = \Im(i)$なので$i(l) = m$となる$l \in L$が存在する.\
 $0 = r(m) = r(i(l)) = l$より$m = i(0) = 0$である.\
 よって$\phi$は単射である.
 
@@ -75,7 +75,7 @@ $0 = r(m) = r(i(l)) = l$より$m = i(0) = 0$である.\
 (3)$\Rightarrow$(1): $M = i(L) \oplus C$となる$M$の$R$部分加群$C$が存在するとする.\
 制限$p \vert_{C} \colon C \to N$を考える.\
 $N = p(M) = p(i(L)) + p(C) = p(C)$より$p \vert_{C}$は全射である.\
-また$\ker(p \vert_{C}) = C \cap \ker(p) = C \cap \im(i) = C \cap i(L) = \{0\}$であるから$p \vert_{C}$は単射である.\
+また$\Ker(p \vert_{C}) = C \cap \Ker(p) = C \cap \Im(i) = C \cap i(L) = \{0\}$であるから$p \vert_{C}$は単射である.\
 $\iota \colon C \hookrightarrow M$を包含とし$s \coloneq \iota \circ (p \vert_{C})^{-1}$とすると$s \colon N \to M$であり,\ 任意の$n \in N$に対して$p(s(n)) = p(\iota((p \vert_{C})^{-1}(n))) = p \vert_{C}((p \vert_{C})^{-1}(n)) = n$となり$p \circ s = \id_N$である.
 \end{proof}
 
@@ -99,15 +99,15 @@ $R$加群$F$に対してある集合$S$と同型$\phi \colon R^{(S)} \stackrel{\
 
 \begin{lemma} \label{lem: free_presentation_lemma}
 $R$を環,\ $P$を$R$加群とし$S \subset P$を$P$の生成元の集合とする.\
-準同型$\alpha \colon R^{(S)} \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定め$\kappa \colon \ker(\alpha) \hookrightarrow R^{(S)}$を包含とする.\
-このとき$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
+準同型$\alpha \colon R^{(S)} \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定め$\kappa \colon \Ker(\alpha) \hookrightarrow R^{(S)}$を包含とする.\
+このとき$0 \longrightarrow \Ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
 \end{lemma}
 
 \begin{proof}
 自由加群の普遍性により$\alpha$はただ一つ存在する.\
 $\alpha(R^{(S)})$は$S$を含む$P$の$R$部分加群なので$\alpha(R^{(S)}) = P$である.\
 よって$\alpha$は全射である.\
-$\kappa$は単射であり$\im(\kappa) = \ker(\alpha)$なので$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
+$\kappa$は単射であり$\Im(\kappa) = \Ker(\alpha)$なので$0 \longrightarrow \Ker(\alpha) \stackrel{\kappa}{\longrightarrow} R^{(S)} \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$は短完全列である.
 \end{proof}
 
 \begin{proposition} \label{prop: projective_iff_epi_splits}
@@ -203,7 +203,7 @@ $R$を環とし$G$を射影$R$加群とする.\
 \end{lemma}
 \begin{proof}
 $P$が$G$のレトラクトであるとするとある準同型$r \colon G \to P$と$s \colon P \to G$が存在して$r \circ s = \id_P$となる.\
-$Q \coloneq \ker(r)$とし$M$を$R$加群,\ $\alpha \colon M \twoheadrightarrow P$を全射準同型とする.\
+$Q \coloneq \Ker(r)$とし$M$を$R$加群,\ $\alpha \colon M \twoheadrightarrow P$を全射準同型とする.\
 準同型$\theta \colon M \oplus Q \to G$を$\theta(m,q) \coloneq s(\alpha(m)) + q$で定める.
 
 任意の$g \in G$に対して$r(g - s(r(g))) = r(g) - r(s(r(g))) = r(g) - r(g) = 0$となるので$g - s(r(g)) \in Q$である.\
@@ -245,9 +245,9 @@ $R$を環とし$P$を$R$加群とする.\
 \begin{proof}
 (1)$\Rightarrow$(2): $P$を射影$R$加群とする.\
 $S \subset P$を$P$の生成元の集合とし$F \coloneq R^{(S)}$とする.\
-準同型$\alpha \colon F \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定めれば\cref{lem: free_presentation_lemma}より$\kappa \colon \ker(\alpha) \hookrightarrow F$を包含として短完全列$0 \longrightarrow \ker(\alpha) \stackrel{\kappa}{\longrightarrow} F \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$を得る.\
+準同型$\alpha \colon F \to P$を$^{\forall}s \in S, \alpha(e_s) = s$を満たすように定めれば\cref{lem: free_presentation_lemma}より$\kappa \colon \Ker(\alpha) \hookrightarrow F$を包含として短完全列$0 \longrightarrow \Ker(\alpha) \stackrel{\kappa}{\longrightarrow} F \stackrel{\alpha}{\longrightarrow} P \longrightarrow 0$を得る.\
 $\alpha \colon F \to P$は全射であり$P$は射影$R$加群なので\cref{prop: projective_iff_epi_splits} (1)$\Rightarrow$(2)より準同型$s \colon P \to F$で$\alpha \circ s = \id_P$を満たすものが存在する.\
-したがって\cref{lem: splitting_lemma} (1)$\Rightarrow$(4)より同型$\phi \colon F \stackrel{\sim}{\to} \ker(\alpha) \oplus P$が存在する.
+したがって\cref{lem: splitting_lemma} (1)$\Rightarrow$(4)より同型$\phi \colon F \stackrel{\sim}{\to} \Ker(\alpha) \oplus P$が存在する.
 
 \vskip\baselineskip
 (2)$\Rightarrow$(1): $P$は自由$R$加群$F$の直和因子と同型であるとする.\
@@ -379,21 +379,21 @@ $R$を環とし$\mathrm{M}(n,R)$を$R$上の$n \times n$行列全体の集合,\ 
 $R$を環とし$\mathrm{Idem}(R) \colon \{P \in \mathrm{M}(R) \mid P^2 = P\}$とする.\
 $\mathrm{Idem}(R)$上の同値関係$\sim$を$P, Q \in \mathrm{Idem}(R)$に対して$P \sim Q \Leftrightarrow {^{\exists}U} \in \GL(R), P = UQU^{-1}$で定める.\
 $\mathrm{Idem}(R)/\GL(R) \coloneq \mathrm{Idem}(R)/\sim$とし$P \in \mathrm{Idem}(R)$に対する同値類を$[P] \in \mathrm{Idem}(R)/\GL(R)$とする.\
-このとき$\Phi \colon \mathrm{Idem}(R)/\GL(R) \to \Proj(R)$を$\Phi([P]) \coloneq [\im(P)]$で定めると$\Phi$は全単射である.
+このとき$\Phi \colon \mathrm{Idem}(R)/\GL(R) \to \Proj(R)$を$\Phi([P]) \coloneq [\Im(P)]$で定めると$\Phi$は全単射である.
 
 $\mathrm{Idem}(R)/\GL(R)$上の二項演算を$[P] + [Q] \coloneq [P \oplus Q]$で定めると$(\mathrm{Idem}(R)/\GL(R), +, [0])$は可換モノイドとなる.\
 そして$K_0(R)$は可換モノイド$\mathrm{Idem}(R)/\GL(R)$のグロタンディーク群と同型である.
 \end{theorem}
 \begin{proof}
 $\mathcal{O} \coloneq \mathrm{Idem}(R)/\GL(R)$とする.\
-冪等行列の像は有限生成射影加群なので\cref{lem: idempotent_iso_iff_conjugate}により$[\im(P)] = [\im(Q)] \iff \im(P) \cong \im(Q) \iff [P] = [Q]$であるから$\Phi \colon \mathcal{O} \to \Proj(R)$はwell-defineかつ単射である.\
+冪等行列の像は有限生成射影加群なので\cref{lem: idempotent_iso_iff_conjugate}により$[\Im(P)] = [\Im(Q)] \iff \Im(P) \cong \Im(Q) \iff [P] = [Q]$であるから$\Phi \colon \mathcal{O} \to \Proj(R)$はwell-defineかつ単射である.\
 $P$を有限生成射影$R$加群とするとある$R$加群$Q$が存在して$R^n \cong P \oplus Q$となる.\
 $P$への射影$\pi_P \colon R^n \to R^n$の表現行列$p$は冪等行列であるから$p \in \mathrm{Idem}(R)$である.\
-$\Phi([p]) = [\im(p)] = [P]$なので$\Phi$は全射である.
+$\Phi([p]) = [\Im(p)] = [P]$なので$\Phi$は全射である.
 
 $P \sim P', Q \sim Q'$とすると$UPU^{-1} = P', VQV^{-1} = Q'$となる$U, V \in \GL(R)$が存在する.\
 $(U \oplus V)(P \oplus Q)(U \oplus V)^{-1} = P' \oplus Q'$となるので$[P] + [Q] = [P \oplus Q] = [P' \oplus Q'] = [P'] + [Q']$となり$+$はwell-definedである.\
-$\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\im(P \oplus Q)] = [\im(P) \oplus \im(Q)] = [\im(P)] + [\im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\
+$\Phi([P] + [Q]) = \Phi([P \oplus Q]) = [\Im(P \oplus Q)] = [\Im(P) \oplus \Im(Q)] = [\Im(P)] + [\Im(Q)] = \Phi([P]) + \Phi([Q])$となるので$\Phi$はモノイド同型である.\
 したがって$K_0(R)$は$\mathcal{O}$のグロタンディーク群と同型である.
 \end{proof}
 
