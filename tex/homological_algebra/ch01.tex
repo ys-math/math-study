@@ -260,8 +260,8 @@ $\mathbf{P}$を平行対の圏とし共変関手$K_f \colon \mathbf{P} \to \math
     \item $K_f(0) \coloneq \dom(f),\ K_f(1) \coloneq \cod(f)$とする.
     \item $K_f(u) \coloneq f,\ K_f(v) \coloneq 0_{\dom(f), \cod(f)}$とする.
 \end{itemize}
-$K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい$\ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \ker(f) \to \dom(f)$とする.\
-つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \ker(f)$がただ1つ存在する.
+$K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい$\Ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \Ker(f) \to \dom(f)$とする.\
+つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \Ker(f)$がただ1つ存在する.
 % https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtLZXJ9KGYpIl0sWzAsMiwiXFxtYXRocm17ZG9tfShmKSJdLFsyLDIsIlxcbWF0aHJte2NvZH0oZikiXSxbMSwwLCJYIl0sWzAsMSwia19mIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzEsMiwiZiIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCIoXFxwaV97S19mfSlfMSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMH1dLFsxLDIsIjBfe1xcbWF0aHJte2RvbX0oZiksXFxtYXRocm17Y29kfShmKX0iLDIseyJvZmZzZXQiOjF9XSxbMywxLCJcXGV0YV8wIiwyLHsiY3VydmUiOjN9XSxbMywyLCJcXGV0YV8xIiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiZyIsMl1d
 \[\begin{tikzcd}
 	& X & \\
@@ -282,7 +282,7 @@ $K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい
 \end{remark}
 
 \begin{definition} \label{def: cokernel}
-	$K_f$の余極限$(Q_{K_f}, \iota_{K_f})$を$f$の\term{よかく}{余核}{cokernel}といい$\coker(f) \coloneq Q_{K_f},\ c_f \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \coker(f)$とする.
+	$K_f$の余極限$(Q_{K_f}, \iota_{K_f})$を$f$の\term{よかく}{余核}{cokernel}といい$\Coker(f) \coloneq Q_{K_f},\ c_f \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \Coker(f)$とする.
 \end{definition}
 
 \begin{definition} \label{def: IsMonomorphism}
@@ -312,6 +312,6 @@ $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
 
 \begin{definition} \label{def: image}
 $\mathscr{C}$を核と余核をもつ加法圏とし$f \in \Mor({\mathscr{C}})$とする.\
-$\im(f) \coloneq \ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\
-組$(\im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
+$\Im(f) \coloneq \Ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\
+組$(\Im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
 \end{definition}
