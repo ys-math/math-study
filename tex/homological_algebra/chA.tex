@@ -1,7 +1,7 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{直積と直和}
+\section{行列}
 
 \begin{definition}
 	$I \in \Ob(\mathbf{Set})$とし圏$\mathbf{Disc}(I)$を次のように定める.
@@ -60,3 +60,26 @@ $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
 $A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \mathbf{Disc}(I) \to \mathscr{C}$を離散図式とする.\
 $A$の双錐$(\bigoplus_{i \in I} A_i, \pi, \iota)$は$(\bigoplus_{i \in I} A_i, \pi)$が$A$の直積で$(\bigoplus_{i \in I} A_i, \iota)$が$A$の直和であるとき$A$の\term{そうせき}{双積}{biproduct}であるという.
 \end{definition}
+
+\begin{remark}
+	$\mathbf{Cat}$を対象を小圏,\ 射を関手,\ 射の合成を関手の合成とする圏とする.
+\end{remark}
+
+\begin{remark}
+$n \in \mathbb{N}$に対して$\mathbf{n} \coloneq \mathbf{Disc}(n)$とする.
+\end{remark}
+
+\begin{definition}
+$I, J \in \Ob(\mathbf{Set})$とし$\mathscr{C}$を局所小圏とする.\
+$A \coloneq (A_i)_{i \in I}$と$B \coloneq (B_j)_{j \in J}$を$\mathscr{C}$の対象の族とする.\ 
+$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)} \colon \mathbf{2} \to \mathbf{Cat}$を離散図式とする.\
+ただし$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}(0) \coloneq \mathbf{Disc}(I),\ D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}(1) \coloneq \mathbf{Disc}(J)$である.
+$(L, \pi)$を$D_{\mathbf{Disc}(I), \mathbf{Disc}(J)}$の極限として$P_I \coloneq \pi_0,\ P_J \coloneq \pi_1$と定める.
+$A$から$B$への$I \times J$\term{ぎょうれつ}{行列}{matrix}を$D_A P_I$から$D_B P_J$への自然変換として定める.
+\begin{center}
+$m \colon D_A P_I \Rightarrow D_B P_J$
+\end{center}
+$(i,j) \in I \times J$に対して$m_{ij} \coloneq m_{(i,j)}$とする.\
+$\Mat(A,B) \coloneq \Nat(D_A P_I, D_B P_J)$とする.
+\end{definition}
+
