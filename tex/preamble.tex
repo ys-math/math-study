@@ -202,10 +202,14 @@
 \DeclareMathOperator{\res}{res}       % residue, if you want lowercase too
 
 %%% ---- Kernels, images, cokernels ----
-\renewcommand{\ker}{\operatorname{Ker}}  % \ker is predefined -> renew
-\DeclareMathOperator{\coker}{Coker}
-\DeclareMathOperator{\im}{Im}          % NOT \Im: that's Fraktur ℑ
-\DeclareMathOperator{\coim}{Coim}
+%%% Capitalised and lowercase pairs: \Ker -> Ker, \ker -> ker, and so on.
+\DeclareMathOperator{\Ker}{Ker}       % \ker is LaTeX's own lowercase ker
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\coker}{coker}
+\renewcommand{\Im}{\operatorname{Im}}  % \Im is predefined (Fraktur ℑ) -> renew
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Coim}{Coim}
+\DeclareMathOperator{\coim}{coim}
 
 %%% ---- Linear algebra ----
 \DeclareMathOperator{\rank}{rank}
