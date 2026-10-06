@@ -25,6 +25,14 @@ $I, J \in \Ob(\mathbf{Set})$とし$u \in \Mor_{\mathbf{Set}}(I, J)$とする.\
 \end{itemize}
 \end{definition}
 
+\begin{remark}
+	$\mathbf{Cat}$を対象を小圏,\ 射を関手,\ 射の合成を関手の合成とする圏とする.
+\end{remark}
+
+\begin{remark}
+$\Disc \colon \mathbf{Set} \to \mathbf{Cat}$は共変関手になる.
+\end{remark}
+
 \begin{definition}
 	$I \in \Ob(\mathbf{Set})$とし$\mathscr{C}$を局所小圏とする.\
 	$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
@@ -35,6 +43,22 @@ $I, J \in \Ob(\mathbf{Set})$とし$u \in \Mor_{\mathbf{Set}}(I, J)$とする.\
 	\end{itemize}
 	これを\term{りさんずしき}{離散図式}{discrete diagram}と呼ぶ.
 \end{definition}
+
+\begin{remark}
+$\Ob \colon \mathbf{Cat} \to \mathbf{Set}$は$F \in \Mor_{\mathbf{Cat}}(\mathscr{C}, \mathscr{D})$に対して$\Ob(F)(A) \coloneq F(A)$と定めることで共変関手になる.
+\end{remark}
+
+\begin{proposition}
+$\Disc \dashv \Ob$である.
+\end{proposition}
+
+\begin{proof}
+任意の小圏$\mathscr{C}$と$I \in \Ob(\mathbf{Set})$に対して全単射$\phi \colon \Mor_{\mathbf{Cat}}(\Disc(I), \mathscr{C}) \to \Mor_{\mathbf{Set}}(I, \Ob(\mathscr{C}))$が存在することを示す.\
+共変関手$F \colon \Disc(I) \to \mathscr{C}$に対して$\phi(F) \coloneq (F(i))_{i \in I}$で定める.\
+$\psi \colon \Mor_{\mathbf{Set}}(I, \Ob(\mathscr{C})) \to \Mor_{\mathbf{Cat}}(\Disc(I), \mathscr{C})$を$A \coloneq (A_i)_{i \in I} \in \Mor_{\mathbf{Set}}(I, \Ob(\mathscr{C}))$に対して$\psi(A) \coloneq D_A$で定める.\
+
+任意の共変関手$F \colon \Disc(I) \to \mathscr{C}$に対して$(\psi \circ \phi)(F) =\psi((F(i))_{i \in I}) = D_{(F(i))_{i \in I}} = F$であり任意の$A \coloneq (A_i)_{i \in I} \in \Mor_{\mathbf{Set}}(I, \Ob(\mathscr{C}))$に対して$(\phi \circ \psi)(A) = \phi(D_A) = (D_A(i))_{i \in I} = (A_i)_{i \in I} = A$なので$\phi$と$\psi$は互いに逆写像である.
+\end{proof}
 
 \begin{definition}
 	$\mathscr{C}$を局所小圏とし$I \in \Ob(\mathbf{Set})$とする.\
@@ -51,7 +75,7 @@ $I, J \in \Ob(\mathbf{Set})$とし$u \in \Mor_{\mathbf{Set}}(I, J)$とする.\
 \begin{definition}
 $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
 $(A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
-$i,j \in I$に対して$\delta_{ii} \coloneq \id_{A_i}$とし$i \neq j$のとき$\delta_{ij} \coloneq 0_{A_i,A_j}$とする.\
+$i,j \in I$に対して$\delta_{ii}^A \coloneq \id_{A_i}$とし$i \neq j$のとき$\delta_{ij}^A \coloneq 0_{A_i,A_j}$とする.\
 $\delta$を\term{くろねっかーのでるた}{クロネッカーのデルタ}{Kronecker delta}と呼ぶ.
 \end{definition}
 
@@ -60,7 +84,7 @@ $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
 $A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 $X \in \mathscr{C}$と自然変換$\pi \colon C_X \Rightarrow D_A,\ \iota \colon D_A \Rightarrow C_X$の組$(X, \pi, \iota)$は次の条件を満たすとき$A$の\term{そうすい}{双錐}{bicone}であるという.
 \begin{center}
-	${^{\forall}i,j} \in I,\ \pi_i \circ \iota_j = \delta_{ij}$
+	${^{\forall}i,j} \in I,\ \pi_i \circ \iota_j = \delta_{ij}^A$
 \end{center}
 \end{definition}
 
@@ -69,10 +93,6 @@ $\mathscr{C}$を零射を持つ圏とし$I \in \Ob(\mathbf{Set})$とする.\
 $A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$D_A \colon \Disc(I) \to \mathscr{C}$を離散図式とする.\
 $A$の双錐$(\bigoplus_{i \in I} A_i, \pi, \iota)$は$(\bigoplus_{i \in I} A_i, \pi)$が$A$の直積で$(\bigoplus_{i \in I} A_i, \iota)$が$A$の直和であるとき$A$の\term{そうせき}{双積}{biproduct}であるという.
 \end{definition}
-
-\begin{remark}
-	$\mathbf{Cat}$を対象を小圏,\ 射を関手,\ 射の合成を関手の合成とする圏とする.
-\end{remark}
 
 \begin{remark}
 $n \in \mathbb{N}$に対して$\mathbf{n} \coloneq \Disc(n)$とする.
@@ -92,3 +112,105 @@ $(i,j) \in I \times J$に対して$m_{ij} \coloneq m_{(i,j)}$とする.\
 $\Mat(A,B) \coloneq \Nat(D_A P_I, D_B P_J)$とする.
 \end{definition}
 
+\begin{proposition}
+$\mathscr{C}$を局所小圏とし$I,J \in \Ob(\mathbf{Set})$とする.\
+$A \coloneq (A_i)_{i \in I},\ B \coloneq (B_j)_{j \in J}$を$\mathscr{C}$の対象の族とする.\
+写像$\Phi \colon \Mat(A,B) \to \prod_{(i,j) \in I \times J} \Mor_{\mathscr{C}}(A_i,B_j)$は$\Phi(m) \coloneq (m_{ij})_{(i,j) \in I \times J}$と定めると全単射である.
+\end{proposition}
+
+\begin{proof}
+直積と行列の定義から明らか.
+\end{proof}
+
+\begin{proposition}
+$\mathscr{C}$を前加法圏とし$I,J \in \Ob(\mathbf{Set})$とする.\
+$A \coloneq (A_i)_{i \in I},\ B \coloneq (B_j)_{j \in J}$を$\mathscr{C}$の対象の族とする.\
+$m, m' \in \Mat(A,B)$と$(i,j) \in I \times J$に対して$(m + m')_{ij} \coloneq m_{ij} + m'_{ij}$と定めると$\Mat(A,B)$は$(0_{A_i,B_j})_{(i,j) \in I \times J}$を単位元としてアーベル群になる.
+\end{proposition}
+
+\begin{proof}
+$\mathscr{C}$は前加法圏なので任意の$(i,j) \in I \times J$に対して$\Mor_{\mathscr{C}}(A_i, B_j)$はアーベル群である.\
+よって$m \in \Mat(A,B)$に対して$m' \coloneq (-m_{ij})_{(i,j) \in I \times J}$で定めれば$(m + m')_{ij} = m_{ij} + (-m{ij}) = 0_{A_i, B_j}$である.\
+結合律と可換性も$\mathscr{C}$が前加法圏であることから成り立つ.
+\end{proof}
+
+\begin{remark}
+$\mathbf{FinSet}$は対象が有限集合であるような$\mathbf{Set}$の充満部分圏である.
+\end{remark}
+
+\begin{lemma}
+$\mathscr{C}$を前加法圏とし$I \in \Ob(\mathbf{FinSet})$とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とする.\
+$X \in \Ob(\mathscr{C})$とし$\pi \colon C_X \Rightarrow D_A$と$\iota \colon D_A \Rightarrow C_X$を任意の$i,j \in I$に対して$\pi_i \circ \iota_j = \delta_{ij}^A$を満たす自然変換とする.\
+このとき次の同値が成り立つ.
+\begin{center}
+$(X,\pi,\iota)$は$A$の双積$\iff$$\displaystyle \sum_{i \in I}\iota_i \circ \pi_i = \id_X$
+\end{center}
+\end{lemma}
+
+\begin{proof}
+$(X, \pi, \iota)$は$A$の双積であると仮定する.\
+$e \coloneq \sum_{i \in I} \iota_i \circ \pi_i$とする.\
+任意の$j \in I$に対して$\pi_j \circ e = \sum_{i \in I} \pi_j \circ \iota_i \circ \pi_i = \sum_{i \in I} \delta_{ji} \circ \pi_i = \pi_j = \pi_j \circ \id_X$が成り立つ.\
+$(X, \pi)$は$D_A$の極限なので一意性より$e = \id_X$が成り立つ.
+
+$\sum_{i \in I} \iota_i \circ \pi_i = \id_X$であると仮定する.\
+$Y \in \Ob(\mathscr{C})$として$\eta \colon C_Y \Rightarrow D_A$を自然変換とし$h \coloneq \sum_{i \in I} \iota_i \circ \eta_i$とする.\
+任意の$j \in I$に対して$\pi_j \circ h = \eta_j$である.\
+$h' \in \Mor_{\mathscr{C}}(Y,X)$が任意の$j \in I$に対して$\pi_j \circ h' = \eta_j$を満たすとすると$h' = \id_X \circ h' = (\sum_{i \in I} \iota_i \circ \pi_i) \circ h' = \sum_{i \in I} \iota_i \circ \eta_i = h$である.\
+よって$(X, \pi)$は$D_A$の極限である.\ 双対性により$(X, \iota)$は$D_A$の余極限である.
+\end{proof}
+
+\begin{definition}
+$\mathscr{C}$を前加法圏とする.\
+$\mathscr{C}$上の\term{ぎょうれつのけん}{行列の圏}{category of matrices}\ $\Mat(\mathscr{C})$を次のように定める.
+\begin{itemize}
+	\item $I \in \Ob(\mathbf{FinSet})$と$\mathscr{C}$の対象の族$(A_i)_{i \in I}$の組$(I,A)$を対象とする.
+	\item $\Mor_{\Mat(\mathscr{C})}((I,A), (J,B)) \coloneq \Mat(A,B)$とする.
+	\item $(K,C) \in \Ob(\Mat(\mathscr{C}))$とし$m \in \Mat(A,B),\ n \in \Mat(B,C)$としたとき$(n \circ m)_{ik} \coloneq \sum_{j \in J} n_{jk} \circ m_{ij}$で定める.
+	\item $(I,A) \in \Ob(\Mat(\mathscr{C}))$に対して$\id_{(I,A)} \coloneq \delta^A$とする.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C}$を前加法圏とする.\ $\mathscr{C}$上の行列の圏$\Mat(\mathscr{C})$は局所的に小さい前加法圏である.
+\end{proposition}
+
+\begin{proof}
+$p \in \Mor_{\Mat(\mathscr{C})}((I,A), (J,B)),\ m \in \Mor_{\Mat(\mathscr{C})}((J,B), (K,C)),\ n \in \Mor_{\Mat(\mathscr{C})}((K,C), (L,D))$とする.\
+$(i,l) \in I \times L$に対して$(n \circ (m \circ p))_{il} = \sum_{k \in K}\sum_{j \in J} n_{kl} \circ m_{jk} \circ p_{ij}) = ((n \circ m) \circ p)_{il}$である.\
+
+$(m \circ \delta^A)_{ij} = \sum_{i' \in I} m_{i'j} \delta^A_{ii'} = m_{ij}$であり同様に$\delta^B \circ m = m$でもある.\
+
+$\Mat(A, B)$は集合の直積なので集合である.\ よって$\mathscr{C}$は局所的に小さい.
+\end{proof}
+
+\begin{definition}
+$C$を前加法圏とする.\
+共変関手$E \colon \mathscr{C} \to \Mat(\mathscr{C})$を$E(X) \coloneq (1, (X)_{i \in 1}),\ E(f) \coloneq (f)_{(i,j) \in 1 \times 1}$で定める.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}$を加法圏とし$I \in \Ob(\mathbf{FinSet})$とする.\
+$A \coloneq (A_i)_{i \in I}$を$\mathscr{C}$の対象の族とし$(\bigoplus_{i \in I} A_i, \pi, \iota)$を$A$の双積とする.\ 共変関手$\psi \colon \Mat(\mathscr{C}) \to \mathscr{C}$を次のように定める.
+\begin{center}
+$\displaystyle \Psi(I,A) \coloneq \bigoplus_{i \in I}A_i,\qquad \Psi(m) \coloneq \sum_{i,j \in I} \iota_j \circ m_{ij} \circ \pi_i$
+\end{center}
+このとき$\Psi$は圏同値を定める.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C}$を前加法圏とし$n,m \in \mathbb{N}$とする.\
+$(A_i)_{i \in n},\ (B_j)_{j \in m}$を$\mathscr{C}$の対象の族とする.\
+このとき$x \in \Mat(A,B)$を次のように表す.
+\begin{center}
+\[
+\begin{pmatrix} 
+  x_{00} & x_{01} & \dots  & x_{0,m-1} \\
+  x_{10} & x_{11} & \dots  & x_{1,m-1} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  x_{n-1,0} & x_{n-1,1} & \dots  & x_{n-1,m-1}
+\end{pmatrix}
+\]
+\end{center}
+\end{definition}
