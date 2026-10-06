@@ -196,6 +196,7 @@ math-study/
 │   │   ├── ch07.tex
 │   │   ├── ch08.tex
 │   │   ├── ch09.tex
+│   │   ├── ch10.tex
 │   │   └── main.tex
 │   ├── commutative_ring_theory/
 │   │   ├── bibliography.tex
