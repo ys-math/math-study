@@ -1,72 +1,73 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{Kan拡張}
+\section{コンマ圏}
 
-\begin{definition}
-$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とし$F \colon \mathscr{C} \to \mathscr{E},\ K \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
-共変関手$\Lan_K(F) \colon \mathscr{D} \to \mathscr{E}$と自然変換$\eta \colon F \Rightarrow \Lan_K(F)K$の組$(\Lan_K(F), \eta)$は条件(LK)が成り立つとき$F$の$K$に沿った\term{ひだりかんかくちょう}{左Kan拡張}{left Kan extension}であるという.\
-% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNiwwLCJcXG1hdGhzY3J7Q30iXSxbNywwLCJcXG1hdGhzY3J7RX0iXSxbMCwxLCJLIiwyXSxbMSwyLCJcXG1hdGhybXtMYW59X0soRikiXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzEsMiwiRyIsMix7ImN1cnZlIjo0fV0sWzMsNCwiRiIsMCx7ImN1cnZlIjotMn1dLFszLDQsIkdLIiwyLHsiY3VydmUiOjJ9XSxbNywxLCJcXGV0YSIsMix7InNob3J0ZW4iOnsic291cmNlIjoyMH19XSxbNiw4LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs5LDEwLCJcXGdhbW1hIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\begin{definition} \label{def: CommaCategory}
+$\mathscr{A},\ \mathscr{B},\ \mathscr{C}$を圏とし$S \colon \mathscr{A} \to \mathscr{C},\ T \colon \mathscr{B} \to \mathscr{C}$を共変関手とする.\
+次のようにして\term{こんまけん}{コンマ圏}{comma category}\ $S \downarrow T$が定まる.
+\begin{itemize}
+	\item 対象を$A \in \Ob(\mathscr{A}),\ B \in \Ob(\mathscr{B}),\ h \in \Mor_{\mathscr{C}}(S(A), T(B))$の組$(A, B, h)$とする.
+	\item 射$(A, B, h) \to (A', B', h')$を$f \in \Mor_{\mathscr{A}}(A, A')$と$g \in \Mor_{\mathscr{B}}(B, B')$の組$(f, g)$で次の図式を可換にするものとする.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJTKEEpIl0sWzEsMCwiVChCKSJdLFswLDEsIlMoQScpIl0sWzEsMSwiVChCJykiXSxbMCwxLCJoIl0sWzEsMywiVChnKSJdLFswLDIsIlMoZikiLDJdLFsyLDMsImgnIl1d
 \[\begin{tikzcd}
-	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} && {\mathscr{C}} & {\mathscr{E}}
-	\arrow["K"', from=1-1, to=1-3]
-	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "{\mathrm{Lan}_K(F)}", from=1-3, to=1-5]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "G"', curve={height=24pt}, from=1-3, to=1-5]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-7, to=1-8]
-	\arrow[""{name=4, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-7, to=1-8]
-	\arrow["\eta"', between={0.2}{1}, Rightarrow, nfold, from=0, to=1-3]
-	\arrow["\alpha", between={0.2}{0.8}, Rightarrow, nfold, from=1, to=2]
-	\arrow["\gamma", between={0.2}{0.8}, Rightarrow, nfold, from=3, to=4]
+	{S(A)} & {T(B)} \\
+	{S(A')} & {T(B')}
+	\arrow["h", from=1-1, to=1-2]
+	\arrow["{S(f)}"', from=1-1, to=2-1]
+	\arrow["{T(g)}", from=1-2, to=2-2]
+	\arrow["{h'}", from=2-1, to=2-2]
 \end{tikzcd}\]
-
-(LK)\ 任意の共変関手$G \colon \mathscr{D} \to \mathscr{E}$と自然変換$\gamma \colon F \Rightarrow GK$に対して$\Lan_K(F)$から$G$への自然変換$\alpha \colon \Lan_K(F) \Rightarrow G$で$\gamma = (\alpha K) \circ \eta$を満たすものがただ1つ存在する.
-% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNSwwLCJcXG1hdGhzY3J7Q30iXSxbNiwwLCJcXG1hdGhzY3J7RX0iXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzAsMSwiSyJdLFsxLDIsIlxcbWF0aHJte0xhbn1fSyhGKSJdLFswLDIsIkdLIiwyLHsiY3VydmUiOjV9XSxbMyw0LCJGIiwwLHsiY3VydmUiOi0yfV0sWzMsNCwiR0siLDIseyJjdXJ2ZSI6Mn1dLFsyLDMsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0IjoxMH0sImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsMSwiXFxldGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzEsOCwiXFxhbHBoYSBLIiwyLHsic2hvcnRlbiI6eyJ0YXJnZXQiOjIwfX1dLFs5LDEwLCJcXGdhbW1hIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjEwLCJ0YXJnZXQiOjEwfX1dXQ==
-\[\begin{tikzcd}
-	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} & {\mathscr{C}} & {\mathscr{E}}
-	\arrow["K", from=1-1, to=1-3]
-	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "GK"', curve={height=30pt}, from=1-1, to=1-5]
-	\arrow["{\mathrm{Lan}_K(F)}", from=1-3, to=1-5]
-	\arrow[between={0.1}{0.9}, equals, nfold, from=1-5, to=1-6]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-6, to=1-7]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-6, to=1-7]
-	\arrow["\eta"', between={0.2}{1}, Rightarrow, nfold, from=0, to=1-3]
-	\arrow["{\alpha K}"', between={0}{0.8}, Rightarrow, nfold, from=1-3, to=1]
-	\arrow["\gamma", between={0.1}{0.9}, Rightarrow, nfold, from=2, to=3]
-\end{tikzcd}\]
+	\begin{itemize}
+		\item 射$(f,g)$と$(f',g')$の合成は$(f,g) \circ (f',g') \coloneq (f' \circ f, g' \circ g)$で定める.
+		\item 恒等射は$\id_{(A,B,h)} \coloneq (\id_{A}, \id_{B})$で定める.
+	\end{itemize}
+\end{itemize}
 \end{definition}
 
-\begin{definition}
-$\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とし$F \colon \mathscr{C} \to \mathscr{E},\ K \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
-共変関手$\Ran_K(F) \colon \mathscr{D} \to \mathscr{E}$と自然変換$\varepsilon \colon \Ran_K(F)K \Rightarrow F$の組$(\Ran_K(F), \varepsilon)$は条件(RK)が成り立つとき$F$の$K$に沿った\term{みぎかんかくちょう}{右Kan拡張}{right Kan extension}であるという.\
-% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNiwwLCJcXG1hdGhzY3J7Q30iXSxbNywwLCJcXG1hdGhzY3J7RX0iXSxbMCwxLCJLIiwyXSxbMSwyLCJcXG1hdGhybXtSYW59X0soRikiXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzEsMiwiRyIsMix7ImN1cnZlIjo0fV0sWzMsNCwiRiIsMCx7ImN1cnZlIjotMn1dLFszLDQsIkdLIiwyLHsiY3VydmUiOjJ9XSxbMSw3LCJcXHZhcmVwc2lsb24iLDAseyJsYWJlbF9wb3NpdGlvbiI6NDAsInNob3J0ZW4iOnsidGFyZ2V0IjoyMH19XSxbOCw2LCJcXGJldGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV0sWzEwLDksIlxcZGVsdGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
-\[\begin{tikzcd}
-	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} && {\mathscr{C}} & {\mathscr{E}}
-	\arrow["K"', from=1-1, to=1-3]
-	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "{\mathrm{Ran}_K(F)}", from=1-3, to=1-5]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "G"', curve={height=24pt}, from=1-3, to=1-5]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-7, to=1-8]
-	\arrow[""{name=4, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-7, to=1-8]
-	\arrow["\varepsilon"{pos=0.4}, between={0}{0.8}, Rightarrow, nfold, from=1-3, to=0]
-	\arrow["\beta"', between={0.2}{0.8}, Rightarrow, nfold, from=2, to=1]
-	\arrow["\delta"', between={0.2}{0.8}, Rightarrow, nfold, from=4, to=3]
-\end{tikzcd}\]
-
-(RK)\ 任意の共変関手$G \colon \mathscr{D} \to \mathscr{E}$と自然変換$\delta \colon GK \Rightarrow F$に対して$G$から$\Ran_K(F)$への自然変換$\beta \colon G \Rightarrow \Ran_K(F)$で$\delta = \varepsilon \circ (\beta K)$を満たすものがただ1つ存在する.
-% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7Q30iXSxbMiwwLCJcXG1hdGhzY3J7RH0iXSxbNCwwLCJcXG1hdGhzY3J7RX0iXSxbNSwwLCJcXG1hdGhzY3J7Q30iXSxbNiwwLCJcXG1hdGhzY3J7RX0iXSxbMCwyLCJGIiwwLHsiY3VydmUiOi01fV0sWzAsMSwiSyJdLFsxLDIsIlxcbWF0aHJte1Jhbn1fSyhGKSJdLFswLDIsIkdLIiwyLHsiY3VydmUiOjV9XSxbMyw0LCJGIiwwLHsiY3VydmUiOi0yfV0sWzMsNCwiR0siLDIseyJjdXJ2ZSI6Mn1dLFsyLDMsIiIsMCx7InNob3J0ZW4iOnsic291cmNlIjoxMCwidGFyZ2V0IjoxMH0sImxldmVsIjoyLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsNSwiXFx2YXJlcHNpbG9uIiwwLHsibGFiZWxfcG9zaXRpb24iOjQwLCJzaG9ydGVuIjp7InRhcmdldCI6MjB9fV0sWzgsMSwiXFxiZXRhIEsiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzEwLDksIlxcZGVsdGEiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
-\[\begin{tikzcd}
-	{\mathscr{C}} && {\mathscr{D}} && {\mathscr{E}} & {\mathscr{C}} & {\mathscr{E}}
-	\arrow["K", from=1-1, to=1-3]
-	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-5]
-	\arrow[""{name=1, anchor=center, inner sep=0}, "GK"', curve={height=30pt}, from=1-1, to=1-5]
-	\arrow["{\mathrm{Ran}_K(F)}", from=1-3, to=1-5]
-	\arrow[between={0.1}{0.9}, equals, nfold, from=1-5, to=1-6]
-	\arrow[""{name=2, anchor=center, inner sep=0}, "F", curve={height=-12pt}, from=1-6, to=1-7]
-	\arrow[""{name=3, anchor=center, inner sep=0}, "GK"', curve={height=12pt}, from=1-6, to=1-7]
-	\arrow["{\beta K}", between={0.2}{1}, Rightarrow, nfold, from=1, to=1-3]
-	\arrow["\varepsilon"{pos=0.4}, between={0}{0.8}, Rightarrow, nfold, from=1-3, to=0]
-	\arrow["\delta"', between={0.2}{0.8}, Rightarrow, nfold, from=3, to=2]
-\end{tikzcd}\]
+\begin{definition} \label{def: projectionFunctor}
+$\mathscr{A},\ \mathscr{B},\ \mathscr{C}$を圏とし$S \colon \mathscr{A} \to \mathscr{C},\ T \colon \mathscr{B} \to \mathscr{C}$を共変関手とする.\
+\term{しゃえいかんしゅ}{射影関手}{projection functor}\ $P \colon (S \downarrow T) \to \mathscr{A}),\ Q \colon (S \downarrow T) \to \mathscr{B}$を次のようにして定める.
+\begin{center}
+$P(A,B,h) \coloneq A,\quad P(f,g) \coloneq f,\quad Q(A,B,h) \coloneq B,\quad Q(f,g) \coloneq g$
+\end{center}
 \end{definition}
+
+\begin{proposition} \label{prop: comma_nat_trans}
+$\mathscr{A},\ \mathscr{B},\ \mathscr{C}$を圏とし$S \colon \mathscr{A} \to \mathscr{C},\ T \colon \mathscr{B} \to \mathscr{C}$を共変関手とする.\
+$(A,B,h) \in \Ob(S \downarrow T)$に対して$\theta_{(A,B,h)} \coloneq h$とすると$\theta \colon SP \Rightarrow TQ$は自然変換になる.
+\end{proposition}
+
+\begin{proof}
+$(f,g) \in \Mor_{S \downarrow T}((A,B,h), (A',B',h'))$に対して$\theta_{(A',B',h')} \circ SP(f,g) = h' \circ S(f)$となるがコンマ圏の定義より$h' \circ S(f) = T(g) \circ h$であり,\
+$T(g) \circ h = TQ(f,g) \circ \theta_{(A,B,h)}$なので次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJTUChBLEIsaCkiXSxbMSwwLCJUUShBLEIsaCkiXSxbMCwxLCJTUChBJyxCJyxoJykiXSxbMSwxLCJUUShBJyxCJyxoJykiXSxbMCwxLCJcXHRoZXRhX3soQSxCLGgpfSJdLFsxLDMsIlRRKGYsZykiXSxbMCwyLCJTUChmLGcpIiwyXSxbMiwzLCJcXHRoZXRhX3soQScsQicsaCcpfSJdXQ==
+\[\begin{tikzcd}
+	{SP(A,B,h)} & {TQ(A,B,h)} \\
+	{SP(A',B',h')} & {TQ(A',B',h')}
+	\arrow["{\theta_{(A,B,h)}}", from=1-1, to=1-2]
+	\arrow["{SP(f,g)}"', from=1-1, to=2-1]
+	\arrow["{TQ(f,g)}", from=1-2, to=2-2]
+	\arrow["{\theta_{(A',B',h')}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+したがって$\theta \colon SP \Rightarrow  TQ$は自然変換である.
+\end{proof}
+
+\begin{proposition} \label{prop: comma_universal_property}
+	$\mathscr{A},\ \mathscr{B},\ \mathscr{C},\ \mathscr{X}$を圏とし$S \colon \mathscr{A} \to \mathscr{C},\ T \colon \mathscr{B} \to \mathscr{C},\ P' \colon \mathscr{X} \to \mathscr{A},\ Q' \colon \mathscr{X} \to \mathscr{B}$を共変関手とする.\
+$\theta' \colon SP' \Rightarrow TQ'$を自然変換とする.\
+このとき次の図式を可換し$\theta' = \theta R$を満たす共変関手$R \colon \mathscr{X} \to (S \downarrow T)$がただ1つ存在する.
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhzY3J7WH0iXSxbMSwxLCJTIFxcZG93bmFycm93IFQiXSxbMiwxLCJcXG1hdGhzY3J7Qn0iXSxbMSwyLCJcXG1hdGhzY3J7QX0iXSxbMiwyLCJcXG1hdGhzY3J7Q30iXSxbMSwyLCJRIl0sWzIsNCwiVCJdLFsxLDMsIlAiLDJdLFszLDQsIlMiXSxbMCwxLCJSIl0sWzAsMiwiUSciLDAseyJjdXJ2ZSI6LTJ9XSxbMCwzLCJQJyIsMix7ImN1cnZlIjoyfV1d
+\[\begin{tikzcd}
+	{\mathscr{X}} && \\
+	& {S \downarrow T} & {\mathscr{B}} \\
+	& {\mathscr{A}} & {\mathscr{C}}
+	\arrow["R", from=1-1, to=2-2]
+	\arrow["{Q'}", curve={height=-12pt}, from=1-1, to=2-3]
+	\arrow["{P'}"', curve={height=12pt}, from=1-1, to=3-2]
+	\arrow["Q", from=2-2, to=2-3]
+	\arrow["P"', from=2-2, to=3-2]
+	\arrow["T", from=2-3, to=3-3]
+	\arrow["S", from=3-2, to=3-3]
+\end{tikzcd}\]
+\end{proposition}
