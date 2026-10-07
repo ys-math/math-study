@@ -1,3 +1,30 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
+\section{モノイダル圏}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$\otimes \colon \mathscr{C} \times \mathscr{C} \to \mathscr{C}$を共変関手とする.\
+$\alpha \colon \otimes \circ (\otimes \circ \id_{\mathscr{C}}) \Rightarrow \otimes \circ (\id_{\mathscr{C}} \circ \otimes)$を自然同型とする.\
+$I \in \Ob(\mathscr{C})$として$\lambda \colon I \otimes - \Rightarrow \id_{\mathscr{C}},\ \rho \colon - \otimes I \Rightarrow \id_{\mathscr{C}}$を自然同型とする.
+次の2つの図式が可換になるとき組$(\mathscr{C}, \otimes, I, \lambda, \rho)$を\term{ものいだるけん}{モノイダル圏}{monoidal category}と呼ぶ.
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCIoKEEgXFxvdGltZXMgQikgXFxvdGltZXMgQykgXFxvdGltZXMgRCJdLFswLDIsIihBIFxcb3RpbWVzIChCIFxcb3RpbWVzIEMpKSBcXG90aW1lcyBEIl0sWzIsMiwiQSBcXG90aW1lcyAoKEIgXFxvdGltZXMgQykgXFxvdGltZXMgRCkiXSxbMSwwLCIoQSBcXG90aW1lcyBCKSBcXG90aW1lcyAoQyBcXG90aW1lcyBEKSJdLFsyLDEsIkEgXFxvdGltZXMgKEIgXFxvdGltZXMgKEMgXFxvdGltZXMgRCkpIl0sWzEsMiwiXFxhbHBoYV97QSwgQiBcXG90aW1lcyBDLCBEfSJdLFswLDMsIlxcYWxwaGFfe0EgXFxvdGltZXMgQiwgQywgRH0iXSxbMyw0LCJcXGFscGhhX3tBLCBCLCBDIFxcb3RpbWVzIER9Il0sWzIsNCwiXFxtYXRocm17aWR9X0EgXFxvdGltZXMgXFxhbHBoYV97QixDLER9Il0sWzAsMSwiXFxhbHBoYV97QSwgQiwgQ30gXFxvdGltZXMgXFxtYXRocm17aWR9X0QiXV0=
+\[\begin{tikzcd}
+	& {(A \otimes B) \otimes (C \otimes D)} & \\
+	{((A \otimes B) \otimes C) \otimes D} && {A \otimes (B \otimes (C \otimes D))} \\
+	{(A \otimes (B \otimes C)) \otimes D} && {A \otimes ((B \otimes C) \otimes D)}
+	\arrow["{\alpha_{A, B, C \otimes D}}", from=1-2, to=2-3]
+	\arrow["{\alpha_{A \otimes B, C, D}}", from=2-1, to=1-2]
+	\arrow["{\alpha_{A, B, C} \otimes \mathrm{id}_D}", from=2-1, to=3-1]
+	\arrow["{\alpha_{A, B \otimes C, D}}", from=3-1, to=3-3]
+	\arrow["{\mathrm{id}_A \otimes \alpha_{B,C,D}}", from=3-3, to=2-3]
+\end{tikzcd}\]
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCIoQSBcXG90aW1lcyBJKSBcXG90aW1lcyBCIl0sWzEsMCwiQSBcXG90aW1lcyAoSSBcXG90aW1lcyBCKSJdLFsxLDEsIkEgXFxvdGltZXMgQiJdLFswLDEsIlxcYWxwaGFfe0EsSSxCfSJdLFsxLDIsIlxcbWF0aHJte2lkfV9BIFxcb3RpbWVzIFxcbGFtYmRhX0IiXSxbMCwyLCJcXHJob19BIFxcb3RpbWVzIFxcbWF0aHJte2lkfV9CIiwyXV0=
+\[\begin{tikzcd}
+	{(A \otimes I) \otimes B} & {A \otimes (I \otimes B)} \\
+	& {A \otimes B}
+	\arrow["{\alpha_{A,I,B}}", from=1-1, to=1-2]
+	\arrow["{\rho_A \otimes \mathrm{id}_B}"', from=1-1, to=2-2]
+	\arrow["{\mathrm{id}_A \otimes \lambda_B}", from=1-2, to=2-2]
+\end{tikzcd}\]
+\end{definition}
