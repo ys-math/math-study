@@ -7,7 +7,7 @@
 $\mathscr{C}$を圏とし$\otimes \colon \mathscr{C} \times \mathscr{C} \to \mathscr{C}$を共変関手とする.\
 $\alpha \colon \otimes \circ (\otimes \circ \id_{\mathscr{C}}) \Rightarrow \otimes \circ (\id_{\mathscr{C}} \circ \otimes)$を自然同型とする.\
 $I \in \Ob(\mathscr{C})$として$\lambda \colon I \otimes - \Rightarrow \id_{\mathscr{C}},\ \rho \colon - \otimes I \Rightarrow \id_{\mathscr{C}}$を自然同型とする.
-次の2つの図式が可換になるとき組$(\mathscr{C}, \otimes, I, \lambda, \rho)$を\term{ものいだるけん}{モノイダル圏}{monoidal category}と呼ぶ.
+次の2つの図式が可換になるとき組$(\mathscr{C}, \otimes, I, \alpha, \lambda, \rho)$を\term{ものいだるけん}{モノイダル圏}{monoidal category}と呼ぶ.
 % https://q.uiver.app/#q=WzAsNSxbMCwxLCIoKEEgXFxvdGltZXMgQikgXFxvdGltZXMgQykgXFxvdGltZXMgRCJdLFswLDIsIihBIFxcb3RpbWVzIChCIFxcb3RpbWVzIEMpKSBcXG90aW1lcyBEIl0sWzIsMiwiQSBcXG90aW1lcyAoKEIgXFxvdGltZXMgQykgXFxvdGltZXMgRCkiXSxbMSwwLCIoQSBcXG90aW1lcyBCKSBcXG90aW1lcyAoQyBcXG90aW1lcyBEKSJdLFsyLDEsIkEgXFxvdGltZXMgKEIgXFxvdGltZXMgKEMgXFxvdGltZXMgRCkpIl0sWzEsMiwiXFxhbHBoYV97QSwgQiBcXG90aW1lcyBDLCBEfSJdLFswLDMsIlxcYWxwaGFfe0EgXFxvdGltZXMgQiwgQywgRH0iXSxbMyw0LCJcXGFscGhhX3tBLCBCLCBDIFxcb3RpbWVzIER9Il0sWzIsNCwiXFxtYXRocm17aWR9X0EgXFxvdGltZXMgXFxhbHBoYV97QixDLER9Il0sWzAsMSwiXFxhbHBoYV97QSwgQiwgQ30gXFxvdGltZXMgXFxtYXRocm17aWR9X0QiXV0=
 \[\begin{tikzcd}
 	& {(A \otimes B) \otimes (C \otimes D)} & \\
@@ -27,4 +27,9 @@ $I \in \Ob(\mathscr{C})$として$\lambda \colon I \otimes - \Rightarrow \id_{\m
 	\arrow["{\rho_A \otimes \mathrm{id}_B}"', from=1-1, to=2-2]
 	\arrow["{\mathrm{id}_A \otimes \lambda_B}", from=1-2, to=2-2]
 \end{tikzcd}\]
+\end{definition}
+
+\begin{definition}
+$(\mathscr{C}, \otimes, I, \alpha, \lambda, \rho)$をモノイダル圏とする.\
+$\alpha, \lambda, \rho$が自然同型であるとき$(\mathscr{C}, \otimes, I, \alpha, \lambda, \rho)$は\term{げんみつものいだるけん}{厳密モノイダル圏}{strict monoidal category}であるという.
 \end{definition}
