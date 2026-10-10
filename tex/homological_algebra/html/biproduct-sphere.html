@@ -1,0 +1,136 @@
+<!-- SPDX-License-Identifier: CC-BY-NC-ND-4.0 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Biproduct Sphere</title>
+<link rel="stylesheet" href="../../html-common/latin-modern.css">
+<link rel="stylesheet" href="../../html-common/diagram.css">
+<script src="../../html-common/diagram.js"></script>
+</head>
+<body>
+<script>
+// A regular octahedron (so every arc is symmetric), oriented like the figure in the notes: A0 / A1 top / bottom,
+// B0 / B1 left / right, A0 ⊔ A1 on the back and B0 × B1 on the front. The home view tips it slightly so
+// B0 × B1 sits down and to the right of centre, and A0 ⊔ A1 up and to the left, as in the notes.
+const col2 = (a, b) => `\\begin{pmatrix} ${a} \\\\ ${b} \\end{pmatrix}`;
+const row2 = (a, b) => `\\begin{pmatrix} ${a} & ${b} \\end{pmatrix}`;
+const MAT = '\\begin{pmatrix} x_{00} & x_{10} \\\\ x_{01} & x_{11} \\end{pmatrix}';
+const MIDDLE = { look: 'plane', tilt: [0, 0, -0.22] }; // tipped towards A0 ⊔ A1, so the poles don't overlap
+const PRODUCT_KEY = ['product cone π₀, π₁', 'unique arrow'];
+const COPRODUCT_KEY = ['coproduct cocone ι₀, ι₁', 'unique arrow'];
+
+Diagram.mount({
+  title: 'Biproduct Sphere',
+  description: 'Rotatable 3D commutative diagram of A0 coproduct A1 to B0 product B1.',
+  objects: {
+    A0: { at: [0, 1, 0], tex: 'A_0', plain: 'A₀' },
+    A1: { at: [0, -1, 0], tex: 'A_1', plain: 'A₁' },
+    B0: { at: [-1, 0, 0], tex: 'B_0', plain: 'B₀' },
+    B1: { at: [1, 0, 0], tex: 'B_1', plain: 'B₁' },
+    AS: { at: [0, 0, -1], tex: 'A_0 \\amalg A_1', plain: 'A₀ ⊔ A₁' },
+    BS: { at: [0, 0, 1], tex: 'B_0 \\times B_1', plain: 'B₀ × B₁' },
+  },
+  arrows: [
+    { id: 'x00', from: 'A0', to: 'B0', tex: 'x_{00}', plain: 'x₀₀' },
+    { id: 'x01', from: 'A0', to: 'B1', tex: 'x_{01}', plain: 'x₀₁' },
+    { id: 'x10', from: 'A1', to: 'B0', tex: 'x_{10}', plain: 'x₁₀' },
+    { id: 'x11', from: 'A1', to: 'B1', tex: 'x_{11}', plain: 'x₁₁' },
+    { id: 'i0', from: 'A0', to: 'AS', tex: '\\iota_0', plain: 'ι₀' },
+    { id: 'i1', from: 'A1', to: 'AS', tex: '\\iota_1', plain: 'ι₁' },
+    { id: 'c0', from: 'A0', to: 'BS', tex: col2('x_{00}', 'x_{01}'), plain: '(x₀₀; x₀₁)' },
+    { id: 'c1', from: 'A1', to: 'BS', tex: col2('x_{10}', 'x_{11}'), plain: '(x₁₀; x₁₁)' },
+    { id: 'r0', from: 'AS', to: 'B0', tex: row2('x_{00}', 'x_{10}'), plain: '(x₀₀ x₁₀)' },
+    { id: 'r1', from: 'AS', to: 'B1', tex: row2('x_{01}', 'x_{11}'), plain: '(x₀₁ x₁₁)' },
+    { id: 'p0', from: 'BS', to: 'B0', tex: '\\pi_0', plain: 'π₀' },
+    { id: 'p1', from: 'BS', to: 'B1', tex: '\\pi_1', plain: 'π₁' },
+    { id: 'M', from: 'AS', to: 'BS', tex: MAT, plain: '(x₀₀ x₁₀; x₀₁ x₁₁)', straight: true, labelAt: 0.42 },
+  ],
+  home: [{ axis: [1, 0, 0], deg: 14.5 }, { axis: [0, 1, 0], deg: 16 }], // B0 × B1 lands near (0.26, -0.24) of the radius
+  // the order the structure is built: injections, projections, the four entries,
+  // the induced columns and rows, and finally the matrix through the middle
+  intro: {
+    objects: { A0: 0, A1: 90, AS: 230, BS: 370, B0: 480, B1: 570 },
+    arrows: { i0: 680, i1: 760, p0: 900, p1: 980, x00: 1120, x01: 1180, x10: 1240, x11: 1300,
+              c0: 1460, c1: 1520, r0: 1580, r1: 1640, M: 1800 },
+  },
+  tabs: [
+    { label: 'Faces', groups: [
+      { title: 'Coproduct side', faces: [
+        { path: ['i0', 'r0'], direct: 'x00', objects: ['A0', 'AS', 'B0'], tex: `${row2('x_{00}', 'x_{10}')} \\circ \\iota_0 = x_{00}`, plain: '(x₀₀ x₁₀) ∘ ι₀ = x₀₀' },
+        { path: ['i0', 'r1'], direct: 'x01', objects: ['A0', 'AS', 'B1'], tex: `${row2('x_{01}', 'x_{11}')} \\circ \\iota_0 = x_{01}`, plain: '(x₀₁ x₁₁) ∘ ι₀ = x₀₁' },
+        { path: ['i1', 'r0'], direct: 'x10', objects: ['A1', 'AS', 'B0'], tex: `${row2('x_{00}', 'x_{10}')} \\circ \\iota_1 = x_{10}`, plain: '(x₀₀ x₁₀) ∘ ι₁ = x₁₀' },
+        { path: ['i1', 'r1'], direct: 'x11', objects: ['A1', 'AS', 'B1'], tex: `${row2('x_{01}', 'x_{11}')} \\circ \\iota_1 = x_{11}`, plain: '(x₀₁ x₁₁) ∘ ι₁ = x₁₁' },
+      ] },
+      { title: 'Product side', faces: [
+        { path: ['c0', 'p0'], direct: 'x00', objects: ['A0', 'BS', 'B0'], tex: `\\pi_0 \\circ ${col2('x_{00}', 'x_{01}')} = x_{00}`, plain: 'π₀ ∘ (x₀₀; x₀₁) = x₀₀' },
+        { path: ['c0', 'p1'], direct: 'x01', objects: ['A0', 'BS', 'B1'], tex: `\\pi_1 \\circ ${col2('x_{00}', 'x_{01}')} = x_{01}`, plain: 'π₁ ∘ (x₀₀; x₀₁) = x₀₁' },
+        { path: ['c1', 'p0'], direct: 'x10', objects: ['A1', 'BS', 'B0'], tex: `\\pi_0 \\circ ${col2('x_{10}', 'x_{11}')} = x_{10}`, plain: 'π₀ ∘ (x₁₀; x₁₁) = x₁₀' },
+        { path: ['c1', 'p1'], direct: 'x11', objects: ['A1', 'BS', 'B1'], tex: `\\pi_1 \\circ ${col2('x_{10}', 'x_{11}')} = x_{11}`, plain: 'π₁ ∘ (x₁₀; x₁₁) = x₁₁' },
+      ] },
+      { title: 'Through the middle', faces: [
+        { path: ['i0', 'M'], direct: 'c0', objects: ['A0', 'AS', 'BS'], ...MIDDLE, tex: `${MAT} \\circ \\iota_0 = ${col2('x_{00}', 'x_{01}')}`, plain: 'M ∘ ι₀ = (x₀₀; x₀₁)' },
+        { path: ['i1', 'M'], direct: 'c1', objects: ['A1', 'AS', 'BS'], ...MIDDLE, tex: `${MAT} \\circ \\iota_1 = ${col2('x_{10}', 'x_{11}')}`, plain: 'M ∘ ι₁ = (x₁₀; x₁₁)' },
+        { path: ['M', 'p0'], direct: 'r0', objects: ['AS', 'BS', 'B0'], ...MIDDLE, tex: `\\pi_0 \\circ ${MAT} = ${row2('x_{00}', 'x_{10}')}`, plain: 'π₀ ∘ M = (x₀₀ x₁₀)' },
+        { path: ['M', 'p1'], direct: 'r1', objects: ['AS', 'BS', 'B1'], ...MIDDLE, tex: `\\pi_1 \\circ ${MAT} = ${row2('x_{01}', 'x_{11}')}`, plain: 'π₁ ∘ M = (x₀₁ x₁₁)' },
+      ] },
+      // seen from between the path's two ends, off-centre, so the entry's label clears the matrix arrow
+      { title: 'Three-arrow paths', faces: [
+        { path: ['i0', 'M', 'p0'], direct: 'x00', objects: ['A0', 'AS', 'BS', 'B0'], view: [-0.65, 1.35, -0.15], tex: `\\pi_0 \\circ ${MAT} \\circ \\iota_0 = x_{00}`, plain: 'π₀ ∘ M ∘ ι₀ = x₀₀' },
+        { path: ['i0', 'M', 'p1'], direct: 'x01', objects: ['A0', 'AS', 'BS', 'B1'], view: [0.65, 1.35, -0.15], tex: `\\pi_1 \\circ ${MAT} \\circ \\iota_0 = x_{01}`, plain: 'π₁ ∘ M ∘ ι₀ = x₀₁' },
+        { path: ['i1', 'M', 'p0'], direct: 'x10', objects: ['A1', 'AS', 'BS', 'B0'], view: [-0.65, -1.35, -0.15], tex: `\\pi_0 \\circ ${MAT} \\circ \\iota_1 = x_{10}`, plain: 'π₀ ∘ M ∘ ι₁ = x₁₀' },
+        { path: ['i1', 'M', 'p1'], direct: 'x11', objects: ['A1', 'AS', 'BS', 'B1'], view: [0.65, -1.35, -0.15], tex: `\\pi_1 \\circ ${MAT} \\circ \\iota_1 = x_{11}`, plain: 'π₁ ∘ M ∘ ι₁ = x₁₁' },
+      ] },
+    ] },
+    // Each two-face diagram: cone in blue, the unique arrow in orange, the legs it factors in strong ink;
+    // everything else fades.
+    { label: 'Limits & colimits', groups: [
+      { title: 'Limit $B_0 \\times B_1$', note: 'k = 0, 1', faces: [
+        { path: ['p0', 'p1'], direct: ['c0'], legs: ['x00', 'x01'], objects: ['A0', 'BS', 'B0', 'B1'], view: [0.25, 1, 1], key: PRODUCT_KEY,
+          tex: `\\pi_k \\circ ${col2('x_{00}', 'x_{01}')} = x_{0k}`, plain: 'π_k ∘ (x₀₀; x₀₁) = x₀ₖ' },
+        { path: ['p0', 'p1'], direct: ['c1'], legs: ['x10', 'x11'], objects: ['A1', 'BS', 'B0', 'B1'], view: [0.25, -1, 1], up: [0, -1, 0], key: PRODUCT_KEY,
+          tex: `\\pi_k \\circ ${col2('x_{10}', 'x_{11}')} = x_{1k}`, plain: 'π_k ∘ (x₁₀; x₁₁) = x₁ₖ' },
+        { path: ['p0', 'p1'], direct: ['M'], legs: ['r0', 'r1'], objects: ['AS', 'BS', 'B0', 'B1'], view: [0.15, 1, -0.15], up: [0, 0, -1], key: PRODUCT_KEY,
+          tex: `\\pi_k \\circ ${MAT} = ${row2('x_{0k}', 'x_{1k}')}`, plain: 'π_k ∘ M = (x₀ₖ x₁ₖ)' },
+      ] },
+      { title: 'Colimit $A_0 \\amalg A_1$', note: 'k = 0, 1', faces: [
+        { path: ['i0', 'i1'], direct: ['r0'], legs: ['x00', 'x10'], objects: ['A0', 'A1', 'AS', 'B0'], view: [-1, 0.25, -1], key: COPRODUCT_KEY,
+          tex: `${row2('x_{00}', 'x_{10}')} \\circ \\iota_k = x_{k0}`, plain: '(x₀₀ x₁₀) ∘ ι_k = xₖ₀' },
+        { path: ['i0', 'i1'], direct: ['r1'], legs: ['x01', 'x11'], objects: ['A0', 'A1', 'AS', 'B1'], view: [1, 0.25, -1], key: COPRODUCT_KEY,
+          tex: `${row2('x_{01}', 'x_{11}')} \\circ \\iota_k = x_{k1}`, plain: '(x₀₁ x₁₁) ∘ ι_k = xₖ₁' },
+        { path: ['i0', 'i1'], direct: ['M'], legs: ['c0', 'c1'], objects: ['A0', 'A1', 'AS', 'BS'], view: [1, 0.15, -0.15], up: [0, 0, -1], key: COPRODUCT_KEY,
+          tex: `${MAT} \\circ \\iota_k = ${col2('x_{k0}', 'x_{k1}')}`, plain: 'M ∘ ι_k = (xₖ₀; xₖ₁)' },
+      ] },
+    ] },
+    // Definitions, following ys-math, "Homological Algebra" (section on Abelian categories).
+    { label: 'Definitions',
+      intro: 'Throughout, $\\mathscr{C}$ is a locally small category and $x = (x_{ij} \\colon A_i \\to B_j)_{(i,j) \\in 2 \\times 2}$ a family of morphisms. $D_{A,B} \\colon 2 \\to \\mathscr{C}$ is the diagram $0 \\mapsto A$, $1 \\mapsto B$ on the discrete category $2$. A cone $(L, \\pi)$ is a limit when every cone $(X, \\eta)$ factors as $\\eta_j = \\pi_j \\circ h$ for a unique $h \\colon X \\to L$; colimits are dual.',
+      definitions: [
+        { sym: 'A_i, \\; B_j', text: 'Objects of $\\mathscr{C}$, for $i, j \\in 2 = \\{0, 1\\}$.',
+          path: [], direct: [], objects: ['A0', 'A1', 'B0', 'B1'] },
+        { sym: 'B_0 \\times B_1', text: 'The direct product: the limit $(L, \\pi)$ of $D_{B_0, B_1}$, with $B_0 \\times B_1 := L$.',
+          path: ['p0', 'p1'], direct: [], objects: ['BS', 'B0', 'B1'] },
+        { sym: 'A_0 \\amalg A_1', text: 'The direct sum (coproduct): the colimit $(Q, \\iota)$ of $D_{A_0, A_1}$, with $A_0 \\amalg A_1 := Q$.',
+          path: ['i0', 'i1'], direct: [], objects: ['AS', 'A0', 'A1'] },
+        { sym: 'x_{ij} \\colon A_i \\to B_j', text: 'The given morphisms, one for each $(i, j) \\in 2 \\times 2$.',
+          path: [], direct: ['x00', 'x01', 'x10', 'x11'], objects: ['A0', 'A1', 'B0', 'B1'] },
+        { sym: '\\pi_j \\colon B_0 \\times B_1 \\to B_j', text: 'The projections: the components of the limit cone $\\pi$.',
+          path: ['p0', 'p1'], direct: [], objects: ['BS', 'B0', 'B1'] },
+        { sym: '\\iota_i \\colon A_i \\to A_0 \\amalg A_1', text: 'The injections: the components of the colimit cocone $\\iota$.',
+          path: ['i0', 'i1'], direct: [], objects: ['AS', 'A0', 'A1'] },
+        { sym: `${col2('x_{i0}', 'x_{i1}')} = \\langle x_{i0}, x_{i1} \\rangle`,
+          text: 'The unique morphism $A_i \\to B_0 \\times B_1$ with $\\pi_0 \\circ \\langle x_{i0}, x_{i1} \\rangle = x_{i0}$ and $\\pi_1 \\circ \\langle x_{i0}, x_{i1} \\rangle = x_{i1}$.',
+          path: ['p0', 'p1'], direct: ['c0', 'c1'], objects: ['A0', 'A1', 'BS', 'B0', 'B1'] },
+        { sym: `${row2('x_{0j}', 'x_{1j}')} = [x_{0j}, x_{1j}]`,
+          text: 'The unique morphism $A_0 \\amalg A_1 \\to B_j$ with $[x_{0j}, x_{1j}] \\circ \\iota_0 = x_{0j}$ and $[x_{0j}, x_{1j}] \\circ \\iota_1 = x_{1j}$.',
+          path: ['i0', 'i1'], direct: ['r0', 'r1'], objects: ['AS', 'A0', 'A1', 'B0', 'B1'] },
+        { sym: MAT,
+          text: 'The morphism $M \\colon A_0 \\amalg A_1 \\to B_0 \\times B_1$ given by $[\\langle x_{00}, x_{01} \\rangle, \\langle x_{10}, x_{11} \\rangle] = \\langle [x_{00}, x_{10}], [x_{01}, x_{11}] \\rangle$. It satisfies $\\pi_j \\circ M \\circ \\iota_i = x_{ij}$; the notes abbreviate it as $\\begin{pmatrix} x_{00} & x_{01} \\\\ x_{10} & x_{11} \\end{pmatrix}$.',
+          path: [], direct: ['M'], objects: ['AS', 'BS'] },
+      ] },
+  ],
+});
+</script>
+</body>
+</html>

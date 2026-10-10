@@ -1,0 +1,125 @@
+% SPDX-License-Identifier: CC-BY-NC-ND-4.0
+% !TEX root = main.tex
+
+\section{複体}
+\begin{definition} \label{def: CochainComplex}
+$\mathcal{A}$をアーベル圏とする.\
+$n \in \mathbb{Z}$に対して$M^n \in \Ob(\mathcal{A}),\ d^n \in \Mor_{\mathcal{A}}(M^n, M^{n+1})$とする.\
+族$(M^{\bullet}, d^{\bullet}) \coloneq (M^{n}, d^n)_{n \in \mathbb{Z}}$は次の条件が成り立つとき$\mathcal{A}$における\term{よさふくたい}{余鎖複体}{cochain complex}であるという.
+\begin{center}
+    ${^{\forall}n} \in \mathbb{Z},\ d^{n+1} \circ d^{n} = 0_{M^n, M^{n+2}}$
+\end{center}
+つまり次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNyxbMiwwLCJNXntuLTF9Il0sWzMsMCwiTV5uIl0sWzQsMCwiTV57bisxfSJdLFsxLDAsIlxcY2RvdHMiXSxbNSwwLCJcXGNkb3RzIl0sWzAsMF0sWzYsMF0sWzMsMCwiZF57bi0yfSJdLFswLDEsImRee24tMX0iXSxbMSwyLCJkXm4iXSxbMiw0LCJkXntuKzF9Il0sWzAsMiwiMF97TV57bi0xfSxNXntuKzF9fSIsMix7ImN1cnZlIjoyfV0sWzMsMSwiMF97TV57bi0yfSxNXm59IiwyLHsiY3VydmUiOjJ9XSxbMSw0LCIwX3tNXm4sTV57bisyfX0iLDIseyJjdXJ2ZSI6Mn1dLFs1LDAsIiIsMix7ImN1cnZlIjoyLCJzaG9ydGVuIjp7InNvdXJjZSI6NTB9fV0sWzIsNiwiIiwyLHsiY3VydmUiOjIsInNob3J0ZW4iOnsidGFyZ2V0Ijo1MH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\[\begin{tikzcd}
+	{} & \cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots & {}
+	\arrow[curve={height=12pt}, between={0.5}{1}, from=1-1, to=1-3]
+	\arrow["{d^{n-2}}", from=1-2, to=1-3]
+	\arrow["{0_{M^{n-2},M^n}}"', curve={height=12pt}, from=1-2, to=1-4]
+	\arrow["{d^{n-1}}", from=1-3, to=1-4]
+	\arrow["{0_{M^{n-1},M^{n+1}}}"', curve={height=12pt}, from=1-3, to=1-5]
+	\arrow["{d^n}", from=1-4, to=1-5]
+	\arrow["{0_{M^n,M^{n+2}}}"', curve={height=12pt}, from=1-4, to=1-6]
+	\arrow["{d^{n+1}}", from=1-5, to=1-6]
+	\arrow[curve={height=12pt}, between={0}{0.5}, no head, from=1-5, to=1-7]
+\end{tikzcd}\]
+
+$M^n$を次数$n$の\term{こう}{項}{term}という.
+\end{definition}
+
+\begin{remark} \label{rem: opposite_abelian}
+$\mathcal{A}$がアーベル圏なら$\mathcal{A}^{\op}$もアーベル圏である.
+\end{remark}
+
+\begin{definition} \label{def: ChainComplex}
+$\mathcal{A}$をアーベル圏とする.\
+$\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
+\end{definition}
+
+\begin{definition} \label{def: CochainComplexHom}
+$\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\
+$\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は余鎖複体$(M^\bullet, d^\bullet)$から余鎖複体$(M'^\bullet, d'^\bullet)$への射であるという.
+% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV57bi0xfSJdLFswLDAsIlxcY2RvdHMiXSxbMiwwLCJNXm4iXSxbMywwLCJNXntuKzF9Il0sWzQsMCwiXFxjZG90cyJdLFsxLDEsIk0nXntuLTF9Il0sWzAsMSwiXFxjZG90cyJdLFsyLDEsIk0nXm4iXSxbMywxLCJNJ157bisxfSJdLFs0LDEsIlxcY2RvdHMiXSxbMSwwLCJkXntuLTJ9Il0sWzAsMiwiZF57bi0xfSJdLFsyLDMsImRebiJdLFszLDQsImRee24rMX0iXSxbNiw1LCJkJ157bi0yfSJdLFs1LDcsImQnXntuLTF9Il0sWzcsOCwiZCdebiJdLFs4LDksImQnXntuKzF9Il0sWzAsNSwiZl57bi0xfSJdLFsyLDcsImZebiJdLFszLDgsImZee24rMX0iXV0=
+\[\begin{tikzcd}
+	\cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots \\
+	\cdots & {M'^{n-1}} & {M'^n} & {M'^{n+1}} & \cdots
+	\arrow["{d^{n-2}}", from=1-1, to=1-2]
+	\arrow["{d^{n-1}}", from=1-2, to=1-3]
+	\arrow["{f^{n-1}}", from=1-2, to=2-2]
+	\arrow["{d^n}", from=1-3, to=1-4]
+	\arrow["{f^n}", from=1-3, to=2-3]
+	\arrow["{d^{n+1}}", from=1-4, to=1-5]
+	\arrow["{f^{n+1}}", from=1-4, to=2-4]
+	\arrow["{d'^{n-2}}", from=2-1, to=2-2]
+	\arrow["{d'^{n-1}}", from=2-2, to=2-3]
+	\arrow["{d'^n}", from=2-3, to=2-4]
+	\arrow["{d'^{n+1}}", from=2-4, to=2-5]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition} \label{def: CochainComplexCategory}
+$\mathcal{A}$をアーベル圏とする.\
+対象を余鎖複体とし射を余鎖複体から余鎖複体への射とすることで$\mathcal{A}$上の余鎖複体の圏$\Ch^\bullet(\mathcal{A})$が定まる.\
+\end{definition}
+
+\begin{lemma} \label{lem: kernel_and_mono_iff_zero_leg}
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とする.\
+$K_f$を\cref{def: kernel}で定めた共変関手とすると次が成り立つ.\
+\begin{center}
+	$(K, \kappa)$は$K_f$の極限で$f$はモノ射$\iff$$\kappa_0 = 0_{K,X}$
+\end{center}
+\end{lemma}
+
+\begin{proof}
+$(K, \kappa)$を$K_f$の極限で$f$をモノ射とする.\
+$f \circ \kappa_0 = 0_{K, Y} = f \circ 0_{K,X}$なので$\kappa_0 = 0_{K,X}$となる.\
+
+$\kappa_0 = 0_{K,X}$であるとする.\
+$A \in \Ob(\mathscr{C}),\ g, h \in \Mor_{\mathscr{C}}(A, X)$とすると$g,h$それぞれに対して次の図式を可換にする$!_g, !_h \in \Mor_{\mathscr{C}}(A,K)$が存在する.
+% https://q.uiver.app/#q=WzAsOCxbMSwwLCJBIl0sWzEsMSwiSyJdLFswLDIsIlgiXSxbMiwyLCJZIl0sWzUsMCwiQSJdLFs1LDEsIksiXSxbNCwyLCJYIl0sWzYsMiwiWSJdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiMF97SyxYfSIsMix7ImxhYmVsX3Bvc2l0aW9uIjoyMH1dLFsxLDMsIjBfe0ssWX0iLDAseyJsYWJlbF9wb3NpdGlvbiI6MjB9XSxbMCwxLCIhX2ciLDJdLFswLDIsImciLDIseyJjdXJ2ZSI6M31dLFswLDMsIjBfe0EsWX0iLDAseyJjdXJ2ZSI6LTN9XSxbMiwzLCIwX3tYLFl9IiwyLHsib2Zmc2V0IjoxfV0sWzYsNywiZiIsMCx7Im9mZnNldCI6LTF9XSxbNSw2LCIwX3tLLFh9IiwyLHsibGFiZWxfcG9zaXRpb24iOjIwfV0sWzUsNywiMF97SyxZfSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjoyMH1dLFs0LDUsIiFfaCIsMl0sWzQsNiwiaCIsMix7ImN1cnZlIjozfV0sWzQsNywiMF97QSxZfSIsMCx7ImN1cnZlIjotM31dLFs2LDcsIjBfe1gsWX0iLDIseyJvZmZzZXQiOjF9XV0=
+\[\begin{tikzcd}
+	& A &&&& A & \\
+	& K &&&& K \\
+	X && Y && X && Y
+	\arrow["{!_g}"', from=1-2, to=2-2]
+	\arrow["g"', curve={height=18pt}, from=1-2, to=3-1]
+	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-2, to=3-3]
+	\arrow["{!_h}"', from=1-6, to=2-6]
+	\arrow["h"', curve={height=18pt}, from=1-6, to=3-5]
+	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-6, to=3-7]
+	\arrow["{0_{K,X}}"'{pos=0.2}, from=2-2, to=3-1]
+	\arrow["{0_{K,Y}}"{pos=0.2}, from=2-2, to=3-3]
+	\arrow["{0_{K,X}}"'{pos=0.2}, from=2-6, to=3-5]
+	\arrow["{0_{K,Y}}"{pos=0.2}, from=2-6, to=3-7]
+	\arrow["f", shift left, from=3-1, to=3-3]
+	\arrow["{0_{X,Y}}"', shift right, from=3-1, to=3-3]
+	\arrow["f", shift left, from=3-5, to=3-7]
+	\arrow["{0_{X,Y}}"', shift right, from=3-5, to=3-7]
+\end{tikzcd}\]
+
+したがって$g = 0_{K,X} \circ !_g = 0_{A,X} = 0_{K,X} \circ !_h = h$となるので$f$はモノ射である.
+\end{proof}
+
+\begin{lemma} \label{lem: cokernel_and_epi_iff_zero_leg}
+$\mathscr{C}$を零対象$Z$を持つ前加法圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とする.\
+$K_f$を\cref{def: kernel}で定めた共変関手とすると次が成り立つ.\
+\begin{center}
+	$(Q, \iota)$は$K_f$の余極限で$f$はエピ射$\iff$$\iota_1 = 0_{Y,Q}$ 
+\end{center}
+\end{lemma}
+
+\begin{proof}
+	\cref{lem: kernel_and_mono_iff_zero_leg}の双対である.
+\end{proof}
+
+\begin{proposition}
+$\mathcal{A}$をアーベル圏とする.\ $\mathcal{A}$における余鎖複体の圏$\Ch^\bullet(\mathcal{A})$はアーベル圏である.
+\end{proposition}
+
+\begin{proof}
+$(M^\bullet, d^\bullet), (M'^\bullet, d'^\bullet) \in \Ob(\Ch^\bullet(\mathcal{A}))$とし$f^\bullet, g^\bullet \in \Mor_{\Ch^\bullet(\mathscr{A})}((M^\bullet, d^\bullet), (M'^\bullet, d'^\bullet))$とする.\
+$Z$を$\mathcal{A}$の零対象とすると$(Z, 0_{Z,Z})_{n \in \mathbb{Z}}$は$\Ch^\bullet(\mathcal{A})$の零対象である.\
+$f^\bullet + g^\bullet \coloneq f^\bullet \oplus g^\bullet$とすると
+\end{proof}

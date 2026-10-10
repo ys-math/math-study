@@ -1,7 +1,7 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{アーベル圏}
+\section{加法圏}
 
 \begin{definition} \label{def: IsPreadditive}
 局所小圏$\mathscr{C}$は次の条件を満たすとき\term{ぜんかほうけん}{前加法圏}{preadditive category}であるという.
@@ -193,6 +193,7 @@ $x \coloneq (x_{ij} \colon A_i \to B_j)_{(i,j) \in 2 \times 2}$を$\mathscr{C}$�
 \node[lab,desc] at (3.413,-0.650) {$\pi_1$};
 \node[lab,desc] at (0.074,-0.068) {$\begin{pmatrix} x_{00} & x_{10} \\ x_{01} & x_{11} \end{pmatrix}$};
 \end{tikzpicture}
+\Interactive{biproduct-sphere}
 \end{center}
 $\begin{pmatrix} {\begin{pmatrix} x_{00} \\ x_{10} \end{pmatrix}} & {\begin{pmatrix} x_{01} \\ x_{11} \end{pmatrix}} \end{pmatrix} = \begin{pmatrix} {\begin{pmatrix} x_{00} & x_{10} \end{pmatrix}} \\ {\begin{pmatrix} x_{01} & x_{11} \end{pmatrix}} \end{pmatrix}$でありこれを$\begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix}$と書く.\
 $\pi_j \circ \begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix} \circ \iota_i = x_{ij}$である.
@@ -242,68 +243,6 @@ $\mathscr{C}$を前加法圏とし$A_0, A_1, B_0, B_1 \in \Ob(\mathscr{C})$と�
 $f \colon A_0 \to B_0,\ g \colon A_1 \to B_1$を$\mathscr{C}$の射とする.\
 $f \oplus g \coloneq  \begin{pmatrix} f & 0_{A_0, B_1} \\ 0_{A_1,B_0} & g \end{pmatrix}$として$f \oplus g \colon A_0 \oplus B_0 \to A_1 \oplus B_1$を定める.\
 次の図式が可換になる.
-\begin{center}
-\begin{tikzpicture}[
-  arr/.style={line width=.5pt,-{cm to}},
-  halo/.style={white,line width=3.5pt},
-  lab/.style={font=\scriptsize},
-  desc/.style={fill=white,inner sep=1pt},
-  obj/.style={inner sep=1pt},
-]
-% objects
-\node[obj] (B1) at (0.000,3.800) {$B_1$};
-\node[obj] (B0) at (0.000,-3.800) {$B_0$};
-\node[obj] (A1) at (-3.800,0.000) {$A_1$};
-\node[obj] (A0) at (3.800,0.000) {$A_0$};
-\node[obj] (AS) at (-1.140,0.912) {$A_0 \oplus A_1$};
-\node[obj] (BS) at (1.140,-0.912) {$B_0 \oplus B_1$};
-% arrows drawn underneath
-\draw[halo] plot[smooth] coordinates {(-1.174,0.079) (-1.173,-0.151) (-1.168,-0.380) (-1.159,-0.608) (-1.146,-0.833) (-1.128,-1.055) (-1.106,-1.274) (-1.081,-1.488) (-1.051,-1.696) (-1.017,-1.899) (-0.980,-2.094) (-0.939,-2.282) (-0.895,-2.461) (-0.847,-2.631) (-0.797,-2.792) (-0.743,-2.943) (-0.687,-3.083) (-0.628,-3.211)};
-\draw[arr] plot[smooth] coordinates {(-1.163,0.536) (-1.170,0.308) (-1.174,0.079) (-1.173,-0.151) (-1.168,-0.380) (-1.159,-0.608) (-1.146,-0.833) (-1.128,-1.055) (-1.106,-1.274) (-1.081,-1.488) (-1.051,-1.696) (-1.005,-1.965) (-0.967,-2.157) (-0.925,-2.342) (-0.879,-2.519) (-0.831,-2.686) (-0.779,-2.844) (-0.724,-2.991) (-0.667,-3.127) (-0.608,-3.252) (-0.546,-3.364) (-0.482,-3.465) (-0.417,-3.553)};
-% back hemisphere
-\draw[halo] plot[smooth] coordinates {(-3.171,-0.527) (-3.034,-0.576) (-2.885,-0.622) (-2.725,-0.666) (-2.555,-0.708) (-2.374,-0.747) (-2.184,-0.782) (-1.985,-0.815) (-1.849,-0.835) (-1.637,-0.863) (-1.420,-0.887) (-1.197,-0.907) (-0.969,-0.924) (-0.738,-0.938) (-0.504,-0.948) (-0.267,-0.954)};
-\draw[arr] plot[smooth] coordinates {(-3.536,-0.350) (-3.442,-0.405) (-3.335,-0.458) (-3.214,-0.510) (-3.081,-0.560) (-2.936,-0.607) (-2.780,-0.652) (-2.613,-0.694) (-2.435,-0.734) (-2.248,-0.771) (-2.052,-0.805) (-1.849,-0.835) (-1.637,-0.863) (-1.420,-0.887) (-1.197,-0.907) (-0.969,-0.924) (-0.738,-0.938) (-0.504,-0.948) (-0.267,-0.954) (-0.030,-0.956) (0.207,-0.955)};
-\draw[halo] plot[smooth] coordinates {(3.156,-0.533) (3.064,-0.566) (2.966,-0.598) (2.863,-0.629) (2.792,-0.649) (2.681,-0.678) (2.565,-0.705) (2.444,-0.732)};
-\draw[arr] plot[smooth] coordinates {(3.529,-0.354) (3.467,-0.392) (3.398,-0.428) (3.323,-0.464) (3.242,-0.499) (3.156,-0.533) (3.064,-0.566) (2.966,-0.598) (2.863,-0.629) (2.755,-0.658) (2.642,-0.687) (2.525,-0.714) (2.403,-0.741) (2.276,-0.766) (2.146,-0.789) (2.012,-0.811)};
-\draw[halo] plot[smooth] coordinates {(1.050,-1.700) (1.026,-1.849) (1.000,-1.994) (0.971,-2.135) (0.941,-2.272) (0.909,-2.405) (0.875,-2.533) (0.840,-2.655) (0.803,-2.773) (0.764,-2.885) (0.724,-2.992) (0.682,-3.093) (0.639,-3.188)};
-\draw[arr] plot[smooth] coordinates {(1.105,-1.288) (1.086,-1.445) (1.065,-1.599) (1.042,-1.750) (1.017,-1.897) (0.991,-2.041) (0.962,-2.181) (0.931,-2.317) (0.898,-2.448) (0.864,-2.574) (0.815,-2.735) (0.777,-2.849) (0.737,-2.957) (0.696,-3.060) (0.654,-3.157) (0.610,-3.247) (0.565,-3.331) (0.519,-3.409) (0.472,-3.480) (0.424,-3.544)};
-% through the interior
-\draw[halo] (-0.421,0.337) -- (0.421,-0.337);
-\draw[arr] (-0.701,0.561) -- (0.701,-0.561);
-% front hemisphere and outline
-\draw[halo] plot[smooth] coordinates {(-3.703,0.855) (-3.653,1.047) (-3.593,1.237) (-3.523,1.424) (-3.444,1.606) (-3.355,1.784) (-3.257,1.957) (-3.150,2.125) (-3.035,2.287) (-2.911,2.443) (-2.779,2.592) (-2.640,2.733) (-2.493,2.868) (-2.340,2.994) (-2.180,3.113) (-2.014,3.223) (-1.842,3.324) (-1.666,3.415) (-1.485,3.498) (-1.300,3.571) (-1.111,3.634) (-0.919,3.687)};
-\draw[arr] plot[smooth] coordinates {(-3.779,0.397) (-3.753,0.594) (-3.717,0.790) (-3.671,0.984) (-3.614,1.174) (-3.548,1.362) (-3.471,1.546) (-3.386,1.725) (-3.291,1.900) (-3.187,2.070) (-3.074,2.234) (-2.953,2.391) (-2.824,2.543) (-2.733,2.640) (-2.592,2.779) (-2.443,2.911) (-2.287,3.035) (-2.125,3.150) (-1.957,3.257) (-1.784,3.355) (-1.606,3.444) (-1.424,3.523) (-1.237,3.593) (-1.047,3.653) (-0.855,3.703) (-0.660,3.742) (-0.463,3.772)};
-\draw[halo] plot[smooth] coordinates {(-3.703,-0.855) (-3.653,-1.047) (-3.593,-1.237) (-3.523,-1.424) (-3.444,-1.606) (-3.355,-1.784) (-3.257,-1.957) (-3.150,-2.125) (-3.035,-2.287) (-2.911,-2.443) (-2.779,-2.592) (-2.640,-2.733) (-2.493,-2.868) (-2.340,-2.994) (-2.180,-3.113) (-2.014,-3.223) (-1.842,-3.324) (-1.666,-3.415) (-1.485,-3.498) (-1.300,-3.571) (-1.111,-3.634) (-0.919,-3.687)};
-\draw[arr] plot[smooth] coordinates {(-3.779,-0.397) (-3.753,-0.594) (-3.717,-0.790) (-3.671,-0.984) (-3.614,-1.174) (-3.548,-1.362) (-3.471,-1.546) (-3.386,-1.725) (-3.291,-1.900) (-3.187,-2.070) (-3.074,-2.234) (-2.953,-2.391) (-2.824,-2.543) (-2.733,-2.640) (-2.592,-2.779) (-2.443,-2.911) (-2.287,-3.035) (-2.125,-3.150) (-1.957,-3.257) (-1.784,-3.355) (-1.606,-3.444) (-1.424,-3.523) (-1.237,-3.593) (-1.047,-3.653) (-0.855,-3.703) (-0.660,-3.742) (-0.463,-3.772)};
-\draw[halo] plot[smooth] coordinates {(3.703,0.855) (3.653,1.047) (3.593,1.237) (3.523,1.424) (3.444,1.606) (3.355,1.784) (3.257,1.957) (3.150,2.125) (3.035,2.287) (2.911,2.443) (2.779,2.592) (2.640,2.733) (2.493,2.868) (2.340,2.994) (2.180,3.113) (2.014,3.223) (1.842,3.324) (1.666,3.415) (1.485,3.498) (1.300,3.571) (1.111,3.634) (0.919,3.687)};
-\draw[arr] plot[smooth] coordinates {(3.779,0.397) (3.753,0.594) (3.717,0.790) (3.671,0.984) (3.614,1.174) (3.548,1.362) (3.471,1.546) (3.386,1.725) (3.291,1.900) (3.187,2.070) (3.074,2.234) (2.953,2.391) (2.824,2.543) (2.733,2.640) (2.592,2.779) (2.443,2.911) (2.287,3.035) (2.125,3.150) (1.957,3.257) (1.784,3.355) (1.606,3.444) (1.424,3.523) (1.237,3.593) (1.047,3.653) (0.855,3.703) (0.660,3.742) (0.463,3.772)};
-\draw[halo] plot[smooth] coordinates {(3.703,-0.855) (3.653,-1.047) (3.593,-1.237) (3.523,-1.424) (3.444,-1.606) (3.355,-1.784) (3.257,-1.957) (3.150,-2.125) (3.035,-2.287) (2.911,-2.443) (2.779,-2.592) (2.640,-2.733) (2.493,-2.868) (2.340,-2.994) (2.180,-3.113) (2.014,-3.223) (1.842,-3.324) (1.666,-3.415) (1.485,-3.498) (1.300,-3.571) (1.111,-3.634) (0.919,-3.687)};
-\draw[arr] plot[smooth] coordinates {(3.779,-0.397) (3.753,-0.594) (3.717,-0.790) (3.671,-0.984) (3.614,-1.174) (3.548,-1.362) (3.471,-1.546) (3.386,-1.725) (3.291,-1.900) (3.187,-2.070) (3.074,-2.234) (2.953,-2.391) (2.824,-2.543) (2.733,-2.640) (2.592,-2.779) (2.443,-2.911) (2.287,-3.035) (2.125,-3.150) (1.957,-3.257) (1.784,-3.355) (1.606,-3.444) (1.424,-3.523) (1.237,-3.593) (1.047,-3.653) (0.855,-3.703) (0.660,-3.742) (0.463,-3.772)};
-\draw[halo] plot[smooth] coordinates {(-3.156,0.533) (-3.064,0.566) (-2.966,0.598) (-2.863,0.629) (-2.792,0.649) (-2.681,0.678) (-2.565,0.705) (-2.444,0.732)};
-\draw[arr] plot[smooth] coordinates {(-3.529,0.354) (-3.467,0.392) (-3.398,0.428) (-3.323,0.464) (-3.242,0.499) (-3.156,0.533) (-3.064,0.566) (-2.966,0.598) (-2.863,0.629) (-2.755,0.658) (-2.642,0.687) (-2.525,0.714) (-2.403,0.741) (-2.276,0.766) (-2.146,0.789) (-2.012,0.811)};
-\draw[halo] plot[smooth] coordinates {(3.171,0.527) (3.034,0.576) (2.885,0.622) (2.725,0.666) (2.555,0.708) (2.374,0.747) (2.184,0.782) (1.985,0.815) (1.849,0.835) (1.637,0.863) (1.420,0.887) (1.197,0.907) (0.969,0.924) (0.738,0.938) (0.504,0.948) (0.267,0.954)};
-\draw[arr] plot[smooth] coordinates {(3.536,0.350) (3.442,0.405) (3.335,0.458) (3.214,0.510) (3.081,0.560) (2.936,0.607) (2.780,0.652) (2.613,0.694) (2.435,0.734) (2.248,0.771) (2.052,0.805) (1.849,0.835) (1.637,0.863) (1.420,0.887) (1.197,0.907) (0.969,0.924) (0.738,0.938) (0.504,0.948) (0.267,0.954) (0.030,0.956) (-0.207,0.955)};
-\draw[halo] plot[smooth] coordinates {(-1.050,1.700) (-1.026,1.849) (-1.000,1.994) (-0.971,2.135) (-0.941,2.272) (-0.909,2.405) (-0.875,2.533) (-0.840,2.655) (-0.803,2.773) (-0.764,2.885) (-0.724,2.992) (-0.682,3.093) (-0.639,3.188)};
-\draw[arr] plot[smooth] coordinates {(-1.105,1.288) (-1.086,1.445) (-1.065,1.599) (-1.042,1.750) (-1.017,1.897) (-0.991,2.041) (-0.962,2.181) (-0.931,2.317) (-0.898,2.448) (-0.864,2.574) (-0.815,2.735) (-0.777,2.849) (-0.737,2.957) (-0.696,3.060) (-0.654,3.157) (-0.610,3.247) (-0.565,3.331) (-0.519,3.409) (-0.472,3.480) (-0.424,3.544)};
-% arrows drawn on top
-\draw[halo] plot[smooth] coordinates {(1.174,-0.079) (1.173,0.151) (1.168,0.380) (1.159,0.608) (1.146,0.833) (1.128,1.055) (1.106,1.274) (1.081,1.488) (1.051,1.696) (1.017,1.899) (0.980,2.094) (0.939,2.282) (0.895,2.461) (0.847,2.631) (0.797,2.792) (0.743,2.943) (0.687,3.083) (0.628,3.211)};
-\draw[arr] plot[smooth] coordinates {(1.163,-0.536) (1.170,-0.308) (1.174,-0.079) (1.173,0.151) (1.168,0.380) (1.159,0.608) (1.146,0.833) (1.128,1.055) (1.106,1.274) (1.081,1.488) (1.051,1.696) (1.005,1.965) (0.967,2.157) (0.925,2.342) (0.879,2.519) (0.831,2.686) (0.779,2.844) (0.724,2.991) (0.667,3.127) (0.608,3.252) (0.546,3.364) (0.482,3.465) (0.417,3.553)};
-% labels
-\node[lab] at (-3.026,2.899) {$g$};
-\node[lab] at (-3.026,-2.899) {$0_{A_1,B_0}$};
-\node[lab] at (3.026,2.899) {$0_{A_0,B_1}$};
-\node[lab] at (3.026,-2.899) {$f$};
-\node[lab,above=2pt] at (-3.064,0.566) {$\iota_1$};
-\node[lab,desc] at (2.248,0.771) {$\iota_0$};
-\node[lab,desc] at (-2.248,-0.771) {$\langle 0_{A_1,B_0}, g\rangle$};
-\node[lab,desc] at (3.200,-0.516) {$\langle f, 0_{A_0,B_1}\rangle$};
-\node[lab,desc] at (-0.840,2.655) {$[0_{A_0,B_1}, g]$};
-\node[lab,desc] at (-0.713,-3.019) {$[f, 0_{A_1,B_0}]$};
-\node[lab,desc] at (0.730,2.976) {$\pi_1$};
-\node[lab,desc] at (0.724,-2.992) {$\pi_0$};
-\node[lab,desc] at (0.070,-0.056) {$f \oplus g$};
-\end{tikzpicture}
-\end{center}
 \end{definition}
 
 \begin{proposition} \label{prop: direct_product_and_direct_sum_of_biproduct}
@@ -395,82 +334,4 @@ $(A \amalg B, \iota)$を$D_{A,B}$の余極限とする.\
     \item 零対象$Z \in \Ob(\mathscr{C})$が存在.
     \item 任意の$A, B \in \Ob(\mathscr{C})$に対して$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$の極限$(A \times B, \pi)$が存在.
 \end{itemize}
-\end{definition}
-
-\begin{definition} \label{def: WalkingParallelPairCategory}
-圏$\mathbf{P}$を$\Ob(\mathbf{P}) \coloneq 2$とし$\Mor{\mathscr{C}} \coloneq \{\id_0, \id_1, u, v\}$として定める.\
-ただし$|\Mor_{\mathbf{P}}(0, 1)| = 2$である.\
-これを\term{へいこうついのけん}{平行対の圏}{walking parallel pair category}という.\
-平行対の圏を$\bullet \rightrightarrows \bullet$と書くこともある.
-% https://q.uiver.app/#q=WzAsMixbMCwwLCIwIl0sWzEsMCwiMSJdLFswLDEsInUiLDAseyJjdXJ2ZSI6LTF9XSxbMCwwLCJcXG1hdGhybXtpZH1fMCIsMCx7ImFuZ2xlIjotOTB9XSxbMSwxLCJcXG1hdGhybXtpZH1fMSIsMCx7ImFuZ2xlIjo5MH1dLFswLDEsInYiLDIseyJjdXJ2ZSI6MX1dXQ==
-\[\begin{tikzcd}
-	0 & 1
-	\arrow["{\mathrm{id}_0}", from=1-1, to=1-1, loop, in=145, out=215, distance=10mm]
-	\arrow["u", curve={height=-6pt}, from=1-1, to=1-2]
-	\arrow["v"', curve={height=6pt}, from=1-1, to=1-2]
-	\arrow["{\mathrm{id}_1}", from=1-2, to=1-2, loop, in=325, out=35, distance=10mm]
-\end{tikzcd}\]
-\end{definition}
-
-\begin{definition} \label{def: kernel}
-$\mathscr{C}$を加法圏とし$f \in \Mor({\mathscr{C}})$とする.\
-$\mathbf{P}$を平行対の圏とし共変関手$K_f \colon \mathbf{P} \to \mathscr{C}$を次のようにして定める.
-\begin{itemize}
-    \item $K_f(0) \coloneq \dom(f),\ K_f(1) \coloneq \cod(f)$とする.
-    \item $K_f(u) \coloneq f,\ K_f(v) \coloneq 0_{\dom(f), \cod(f)}$とする.
-\end{itemize}
-$K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい$\Ker(f) \coloneq L_{K_f},\ k_f \coloneq (\pi_{K_f})_0 \colon \Ker(f) \to \dom(f)$とする.\
-つまり任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して次の図式を可換にする$g \colon X \to \Ker(f)$がただ1つ存在する.
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXG1hdGhybXtLZXJ9KGYpIl0sWzAsMiwiXFxtYXRocm17ZG9tfShmKSJdLFsyLDIsIlxcbWF0aHJte2NvZH0oZikiXSxbMSwwLCJYIl0sWzAsMSwia19mIiwyLHsibGFiZWxfcG9zaXRpb24iOjQwfV0sWzEsMiwiZiIsMCx7Im9mZnNldCI6LTF9XSxbMCwyLCIoXFxwaV97S19mfSlfMSIsMCx7ImxhYmVsX3Bvc2l0aW9uIjozMH1dLFsxLDIsIjBfe1xcbWF0aHJte2RvbX0oZiksXFxtYXRocm17Y29kfShmKX0iLDIseyJvZmZzZXQiOjF9XSxbMywxLCJcXGV0YV8wIiwyLHsiY3VydmUiOjN9XSxbMywyLCJcXGV0YV8xIiwwLHsiY3VydmUiOi0zfV0sWzMsMCwiZyIsMl1d
-\[\begin{tikzcd}
-	& X & \\
-	& {\mathrm{Ker}(f)} \\
-	{\mathrm{dom}(f)} && {\mathrm{cod}(f)}
-	\arrow["g"', from=1-2, to=2-2]
-	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=3-1]
-	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=3-3]
-	\arrow["{k_f}"'{pos=0.4}, from=2-2, to=3-1]
-	\arrow["{(\pi_{K_f})_1}"{pos=0.3}, from=2-2, to=3-3]
-	\arrow["f", shift left, from=3-1, to=3-3]
-	\arrow["{0_{\mathrm{dom}(f),\mathrm{cod}(f)}}"', shift right, from=3-1, to=3-3]
-\end{tikzcd}\]
-\end{definition}
-
-\begin{remark} \label{rem: kernel_cone_zero_leg}
-\cref{def: kernel}の仮定のもと任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して$\eta_1 = 0_{\dom(f), \cod(f)} \circ \eta_0 = 0_{X, \cod(f)}$である.
-\end{remark}
-
-\begin{definition} \label{def: cokernel}
-	$K_f$の余極限$(Q_{K_f}, \iota_{K_f})$を$f$の\term{よかく}{余核}{cokernel}といい$\Coker(f) \coloneq Q_{K_f},\ c_f \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \Coker(f)$とする.
-\end{definition}
-
-\begin{definition} \label{def: IsMonomorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
-任意の$X \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(X, \dom(f))$に対して次の条件が成り立つとき$f$は\term{ものしゃ}{モノ射}{monomorphism}であるといい$f \colon \dom(f) \hookrightarrow \cod(f)$と書く.
-\begin{center}
-    $f \circ g = f \circ h \implies g = h$
-\end{center}
-\end{definition}
-
-\begin{definition} \label{def: IsEpimorphism}
-$\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
-任意の$Y \in \Ob(\mathscr{C})$と$g, h \in \Mor_{\mathscr{C}}(\cod(f), Y)$に対して次の条件が成り立つとき$f$は\term{えぴしゃ}{エピ射}{epimorphism}であるといい$f \colon \dom(f) \twoheadrightarrow \cod(f)$と書く.
-\begin{center}
-    $g \circ f = h \circ f \implies g = h$
-\end{center}
-\end{definition}
-
-\begin{definition} \label{def: IsAbelian}
-加法圏$\mathcal{A}$は次の条件を満たすとき\term{あーべるけん}{アーベル圏}{Abelian category}であるという.
-\begin{itemize}
-    \item 任意の$f \in \Mor(\mathrm{C})$に対して$f$の核と余核が存在する.
-    \item 任意のモノ射$f \in \Mor({\mathscr{C}})$に対してある$g \in \Mor_{\mathscr{C}}$が存在して$f = k_g$となる.
-    \item 任意のエピ射$f \in \Mor({\mathscr{C}})$に対してある$g \in \Mor_{\mathscr{C}}$が存在して$f = c_g$となる.
-\end{itemize}
-\end{definition}
-
-\begin{definition} \label{def: image}
-$\mathscr{C}$を核と余核をもつ加法圏とし$f \in \Mor({\mathscr{C}})$とする.\
-$\Im(f) \coloneq \Ker(c_f)$とし$i_f \coloneq k_{c_f}$とする.\
-組$(\Im(f), i_f)$を$f$の\term{ぞう}{像}{image}と呼ぶ.
 \end{definition}
