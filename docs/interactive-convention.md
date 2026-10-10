@@ -128,8 +128,9 @@ face but never turns the view.
 ```
 
 On its own line, directly after the figure, in a chapter of the same topic.
-It prints a centred "▶ interactive" link with the full URL in a footnote, so
-that a printed copy still carries the address. The chapter is the owner's
+It prints a centred "▶ interactive" link and nothing else. There is no
+footnote, so the address is only the link's target and does not appear in a
+printed copy. The chapter is the owner's
 prose: the owner writes this line.
 
 **A page and its `\Interactive` line land in the same commit.**
