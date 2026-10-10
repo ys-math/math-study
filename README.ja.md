@@ -137,6 +137,7 @@ math-study/
 │   ├── bib-convention.md
 │   ├── git-strategy.md
 │   ├── index-convention.md
+│   ├── interactive-convention.md
 │   ├── issue-convention.md
 │   ├── label-convention.md
 │   ├── lean-convention.md
@@ -177,6 +178,7 @@ math-study/
 │   ├── test_generate_text_meter.py
 │   ├── test_generate_tree.py
 │   ├── test_index_markup.py
+│   ├── test_interactive.py
 │   ├── test_latex_unicode.py
 │   ├── test_new_topic.py
 │   └── test_readme_block.py
@@ -213,6 +215,10 @@ math-study/
 │   │   ├── ch02.tex
 │   │   ├── chA.tex
 │   │   └── main.tex
+│   ├── html-common/
+│   │   ├── diagram.css
+│   │   ├── diagram.js
+│   │   └── latin-modern.css
 │   ├── lambda_calculus/
 │   │   ├── ch01.tex
 │   │   ├── ch02.tex
