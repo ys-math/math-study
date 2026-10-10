@@ -1,0 +1,69 @@
+# .github/workflows/pages.yml
+
+name: Pages
+
+# Publishes the interactive diagram pages to GitHub Pages, at
+# https://ys-math.github.io/math-study/<slug>/html/<name>.html — the address
+# \Interactive in tex/preamble.tex prints into the PDFs.
+#
+# The site mirrors the repo's tex/ tree exactly, keeping only the pages and the
+# engine they share. That is the whole design: a page loads the engine as
+# ../../html-common/diagram.js, and that relative path resolves the same way
+# opened from disk as it does on the site, so what you preview is what ships.
+# Rewriting paths here to shorten the URL would break that equivalence. The
+# rules are docs/interactive-convention.md.
+#
+# Deploying from a branch was not an option: Pages can serve a branch only from
+# its root or docs/, and docs/ holds the specifications.
+#
+# It commits nothing, so like lean.yml it cannot take part in the push cascade.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tex/*/html/**"
+      - "tex/html-common/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write            # to publish the site
+  id-token: write         # deploy-pages proves its identity with an OIDC token
+
+# One deploy at a time; a newer push supersedes a queued one, but never cancels
+# a deploy already under way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Stage the pages and the engine, at their repo paths under tex/
+        run: |
+          mkdir _site
+          cd tex
+          git ls-files -- 'html-common/*' '*/html/*.html' | while read -r file; do
+            mkdir -p "../_site/$(dirname "$file")"
+            cp "$file" "../_site/$file"
+          done
+          cd ..
+          find _site -type f | sort
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

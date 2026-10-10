@@ -63,6 +63,11 @@ Loaded **on demand**, by a command that names them:
   shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
   the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
   `/delete-topic` and `/git` each depend on one part of it.
+- **`docs/interactive-convention.md`** — the interactive diagram pages: where
+  they live under `tex/*/html/`, the engine in `tex/html-common/` they all
+  load, the config a page passes it, the `\Interactive` link from the PDF and
+  the Pages address. No command implements it; `scripts/test_interactive.py`
+  holds links and pages to each other.
 - **`docs/repo-structure.md`** — the companion map: the two halves of the repo,
   the three things that join them, and what deliberately does not. Nothing
   executes it; read it when a change would couple `tex/` and `lean/` more
@@ -257,6 +262,7 @@ The workflows in `.github/workflows/`:
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the blocks in both READMEs, commits |
 | `validate.yml` | `pull_request` | compiles all 10 topics, runs the script tests |
 | `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` or its own file | builds the Lean library through `lake` |
+| `pages.yml` | push to `main` touching `tex/*/html/**`, `tex/html-common/**` or its own file | publishes the interactive pages to GitHub Pages |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only
 thing that needs them — they set its polling interval. `/watch-ci` reads them
@@ -282,6 +288,7 @@ flowchart TD
     PUSH --> BP["build-pdf.yml"]
     PUSH --> UR["update-readme.yml"]
     PUSH --> LN["lean.yml"]
+    PUSH --> PG["pages.yml"]
     PRQ --> VAL["validate.yml"]
     PRQ --> LN
 
@@ -290,6 +297,7 @@ flowchart TD
 
     VAL --> NIL(["commits nothing"])
     LN --> NIL
+    PG --> NIL
 ```
 
 The dotted edges are the feedback loops. Two of the workflows push to `main`,
@@ -306,8 +314,8 @@ and both are worth preserving:
 Both also retry a rebase three times, because the fast workflow pushes while the
 slow one is still in TeX Live.
 
-`validate.yml` and `lean.yml` commit nothing at all, so neither can enter the
-cascade in the first place.
+`validate.yml`, `lean.yml` and `pages.yml` commit nothing at all, so none of
+them can enter the cascade in the first place.
 
 `/watch-ci` reports the result and stops; it is built to run under `/loop` and
 ends every run with a `watch-ci: done|pending|unknown` line for a loop to read.

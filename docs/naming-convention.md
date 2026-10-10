@@ -103,6 +103,12 @@ fixing every `\Assumes` that names it, and
 deleting one that another assumes fails the test — `/delete-topic` refuses
 that case rather than leave a link to a PDF that is gone.
 
+A figure with an interactive version has its page at
+`tex/<slug>/html/<kebab-case>.html`, and the engine every page loads sits at
+`tex/html-common/` — hyphenated so it can never be read as a topic slug.
+`docs/interactive-convention.md` owns both, and the `\Interactive{<name>}`
+line that links a page from a chapter.
+
 ## Lean
 
 Directories and modules are `UpperCamelCase`, throughout, without exception.
@@ -206,6 +212,7 @@ each rename costs:
 | a Lean module | its `import` in `lean/Math.lean` | `lake build` fails — the loud one |
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
 | a command file | the tables in both READMEs and `docs/agent-system.md` | the same test fails |
+| an interactive page | its `\Interactive{}` line, in the same commit | `scripts/test_interactive.py` fails; the published URL changes either way, and nothing redirects the old one |
 
 Two of these are caught by `test_agent_docs.py`, the `docs/` file and the
 command file; a renamed Lean module by `lake build`, which fails outright on a

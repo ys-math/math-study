@@ -285,11 +285,13 @@ on paths, so a file is covered whether or not it carries a header.
 
 | Path | License |
 | --- | --- |
-| `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
+| `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
 | `lean/**` | [Apache 2.0][apache] |
+| `tex/html-common/latin-modern.css` | [GUST Font License][gust] |
 | everything else | [MIT][mit] |
 
-The mathematics — the chapter sources and the PDFs built from them — is
+The mathematics — the chapter sources, the PDFs built from them and the
+interactive diagram pages — is
 [Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International][cc-by-nc-nd].
 
 The Lean library is [Apache 2.0][apache], matching the ecosystem it is written
@@ -301,8 +303,11 @@ use. Every `.lean` file carries the header, which names
 MIT text.
 
 Everything that builds it is MIT: `scripts/`, `.github/`, `.latexmkrc`, and the
-shared `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist` and every
-`tex/*/main.tex`, which `new_topic.py` generates. Reuse the build system freely.
+shared `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, the interactive
+engine in `tex/html-common/` and every `tex/*/main.tex`, which `new_topic.py`
+generates. Reuse the build system freely. The one exception is the Latin Modern
+fonts embedded in `tex/html-common/latin-modern.css`, which are third-party and
+keep their own licence.
 
 Full texts: [`LICENSE`](./LICENSE) (MIT),
 [`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0) and
@@ -311,6 +316,7 @@ Full texts: [`LICENSE`](./LICENSE) (MIT),
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-image]][cc-by-nc-nd]
 
 [mit]: https://opensource.org/licenses/MIT
+[gust]: https://www.gust.org.pl/projects/e-foundry/licenses
 [mit-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
 [apache]: https://www.apache.org/licenses/LICENSE-2.0
 [apache-shield]: https://img.shields.io/badge/License-Apache%202.0-blue.svg

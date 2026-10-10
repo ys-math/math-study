@@ -269,11 +269,12 @@ math-study/
 
 | パス | ライセンス |
 | --- | --- |
-| `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
+| `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
 | `lean/**` | [Apache 2.0][apache] |
+| `tex/html-common/latin-modern.css` | [GUST Font License][gust] |
 | それ以外すべて | [MIT][mit] |
 
-数学, つまり章のソースとそこからビルドされた PDF は [クリエイティブ・コモンズ 表示 - 非営利 - 改変禁止 4.0 国際][cc-by-nc-nd] です。
+数学, つまり章のソース, そこからビルドされた PDF, そしてインタラクティブな図式のページは [クリエイティブ・コモンズ 表示 - 非営利 - 改変禁止 4.0 国際][cc-by-nc-nd] です。
 
 Lean のライブラリは, 書く相手であるエコシステムに合わせて [Apache 2.0][apache] です。
 Mathlib, Mathematics in Lean, Theorem Proving in Lean 4 はいずれも Apache 2.0 で, Mathlib は貢献にもそれを求めます。
@@ -283,8 +284,9 @@ Mathlib, Mathematics in Lean, Theorem Proving in Lean 4 はいずれも Apache 2
 このレポの `LICENSE` は MIT の文面だからです。
 
 ビルドに関わるものはすべて MIT です。
-`scripts/`, `.github/`, `.latexmkrc`, 共有の `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, そして `new_topic.py` が生成するすべての `tex/*/main.tex` がそうです。
+`scripts/`, `.github/`, `.latexmkrc`, 共有の `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `tex/html-common/` のインタラクティブ用エンジン, そして `new_topic.py` が生成するすべての `tex/*/main.tex` がそうです。
 ビルドの仕組みは自由に再利用してください。
+唯一の例外は `tex/html-common/latin-modern.css` に埋め込まれた Latin Modern フォントで, これは第三者のものなので独自のライセンスに従います。
 
 全文: [`LICENSE`](./LICENSE) (MIT),
 [`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0),
@@ -293,6 +295,7 @@ Mathlib, Mathematics in Lean, Theorem Proving in Lean 4 はいずれも Apache 2
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-image]][cc-by-nc-nd]
 
 [mit]: https://opensource.org/licenses/MIT
+[gust]: https://www.gust.org.pl/projects/e-foundry/licenses
 [mit-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
 [apache]: https://www.apache.org/licenses/LICENSE-2.0
 [apache-shield]: https://img.shields.io/badge/License-Apache%202.0-blue.svg

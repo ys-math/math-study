@@ -1,0 +1,143 @@
+/* SPDX-License-Identifier: MIT
+ *
+ * The look of every interactive diagram page: layout, colours, controls and the
+ * opening animation's text. Shared by all topics, so a change here is a change
+ * to every page at once — branch + PR, like tex/preamble.tex. The fonts are in
+ * latin-modern.css, under their own licence. The page contract is
+ * docs/interactive-convention.md.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+/* Layout: one screen; centred title, then the sphere (as large as the height allows) beside a scrolling panel of faces */
+:root {
+  --bg: #FFFFFF;
+  --surface: #F3F4F6;
+  --ink: #000000;
+  --muted: #555D6B;
+  --line: #D6DBE3;
+  --path: #1F47C4;
+  --direct: #B0500A;
+  --font-display: "CM Roman", "Latin Modern Roman", "CMU Serif", "Computer Modern", Georgia, serif;
+  --font-ui: "CM Roman", "Latin Modern Roman", "CMU Serif", "Computer Modern", Georgia, serif;
+  --font-mono: "CM Mono", "Latin Modern Mono", "CMU Typewriter Text", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1218; --surface: #171B23; --ink: #E6E9EF; --muted: #9AA3B2; --line: #2B313D;
+    --path: #8AA8FF; --direct: #F0A65C; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1218; --surface: #171B23; --ink: #E6E9EF; --muted: #9AA3B2; --line: #2B313D;
+  --path: #8AA8FF; --direct: #F0A65C; color-scheme: dark;
+}
+/* the page's own Light / Dark switch wins over the system setting */
+html:root[data-mode="light"] {
+  --bg: #FFFFFF; --surface: #F3F4F6; --ink: #000000; --muted: #555D6B; --line: #D6DBE3;
+  --path: #1F47C4; --direct: #B0500A; color-scheme: light;
+}
+html:root[data-mode="dark"] {
+  --bg: #0F1218; --surface: #171B23; --ink: #E6E9EF; --muted: #9AA3B2; --line: #2B313D;
+  --path: #8AA8FF; --direct: #F0A65C; color-scheme: dark;
+}
+html, body { background: var(--bg); color: var(--ink); }
+body { font-family: var(--font-ui); font-size: 17px; line-height: 1.45; }
+/* one-screen app: header row, then the sphere + panel block centred beneath it */
+html, body { height: 100%; }
+.app {
+  height: 100%; box-sizing: border-box; display: grid; grid-template-rows: auto minmax(0, 1fr);
+  padding-inline: 24px; padding-block: 14px 18px; gap: 10px;
+}
+header { position: relative; text-align: center; padding-inline: 150px; }
+header h1 { font-family: var(--font-display); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 0; text-wrap: balance; }
+header .source { margin: 2px 0 0; font-size: 15px; color: var(--muted); }
+header .source a { color: var(--path); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+header .source a:hover { text-decoration-thickness: 2px; }
+.theme-switch { position: absolute; top: 4px; right: 0; display: flex; gap: 2px; }
+.plainbtn {
+  font: inherit; font-size: 15px; color: var(--muted); background: none; border: 0;
+  padding: 2px 6px; cursor: pointer; border-radius: 3px;
+}
+.plainbtn:hover { color: var(--ink); }
+.plainbtn[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.plainbtn:focus-visible, header .source a:focus-visible, .face:focus-visible { outline: 2px solid var(--path); outline-offset: 2px; }
+.layout { min-height: 0; display: flex; justify-content: center; align-items: stretch; gap: 28px; }
+.stage {
+  position: relative; height: 100%; aspect-ratio: 1; flex: 0 1 auto; min-width: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.square { position: relative; }
+#view { display: block; touch-action: none; cursor: grab; }
+#view.dragging { cursor: grabbing; }
+#view:focus-visible { outline: 2px solid var(--path); outline-offset: 2px; }
+.controls { position: absolute; left: 4px; bottom: 4px; display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+.controls .row { display: flex; flex-wrap: wrap; gap: 2px; }
+.controls .plainbtn { padding-inline: 4px; }
+.controls .plainbtn[aria-pressed="true"] { color: var(--path); text-decoration: none; }
+.hint { color: var(--muted); font-size: 14px; margin: 0 0 2px 4px; }
+.panel { position: relative; flex: 0 0 520px; height: 100%; min-width: 0; }
+.panel-scroll {
+  height: 100%; overflow-y: auto; padding-right: 8px; overscroll-behavior: contain;
+  display: flex; flex-direction: column; padding-block: 36px; box-sizing: border-box;
+}
+/* the equation list is centred in the panel, which is exactly as tall as the sphere's area,
+   so its middle lines up with the sphere's centre; the key hangs just above it */
+.panel-inner { margin-block: auto; position: relative; }
+.panel-inner .key { position: absolute; bottom: 100%; left: 0; right: 0; }
+/* the limit / colimit buttons hang just below the list, so the list itself stays centred on the sphere */
+/* the tab switch is pinned to the bottom of the panel (level with the bottom of the sphere), so it never moves */
+.tabs { position: absolute; bottom: 0; left: 0; right: 8px; display: flex; gap: 2px 10px; padding-top: 6px; border-top: 1px solid var(--line); background: var(--bg); }
+.tabs .plainbtn { font-size: 16px; padding-inline: 4px; }
+.tabs .plainbtn[aria-selected="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.group h3 .k-note { font-weight: 400; font-size: 15px; color: var(--muted); margin-left: 8px; }
+.face .face-text { font-style: normal; color: var(--muted); }
+/* definitions tab: symbol on the left, the definition in plain English on the right */
+.defs .def-intro { font-size: 14px; line-height: 1.4; color: var(--muted); margin: 0 0 6px; }
+.defs .face.def { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 12px; align-items: center; padding-block: 3px; min-height: 0; }
+.defs .def-sym { font-size: 14.5px; }
+.defs .def-text { font-size: 14.5px; line-height: 1.35; }
+.defs .face.def + .face.def { border-top: 1px solid var(--line); }
+.face:hover .face-text, .face[aria-pressed="true"] .face-text { color: var(--ink); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.key { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 15px; color: var(--muted); margin: 0 0 8px; }
+.key span { display: inline-flex; align-items: center; gap: 6px; }
+.key i { display: inline-block; width: 18px; height: 0; border-top: 2px solid; }
+.key .k-path { color: var(--path); }
+.key .k-direct { color: var(--direct); }
+.group { padding-block: 7px; }
+.group + .group { border-top: 1px solid var(--line); }
+.group h3 { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+/* two columns: rows follow the matrix, so x00 | x01 on top and x10 | x11 below */
+.face-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; }
+.face {
+  display: block; width: 100%; text-align: left; font: inherit; font-size: 15px; color: var(--ink);
+  background: none; border: 0; border-radius: 0; padding: 2px 8px; cursor: pointer; overflow-x: auto; min-height: 32px;
+}
+.face:hover { box-shadow: inset 2px 0 0 var(--line); }
+.face[aria-pressed="true"] { box-shadow: inset 2px 0 0 var(--path); }
+.face .plain { font-family: var(--font-display); font-style: italic; }
+/* narrow or short windows: stack and let the page scroll */
+@media (max-width: 900px), (max-height: 560px) {
+  html, body { height: auto; }
+  .app { height: auto; display: block; }
+  header { padding-inline: 0; padding-top: 34px; }
+  .theme-switch { left: 0; right: 0; justify-content: center; top: 0; }
+  .layout { flex-direction: column; align-items: center; gap: 12px; margin-top: 10px; }
+  .stage { height: auto; aspect-ratio: auto; width: 100%; }
+  .panel { flex: none; width: 100%; max-width: 560px; height: auto; }
+  .panel-scroll { height: auto; overflow: visible; padding-right: 0; padding-block: 0; display: block; }
+  .panel-inner .key, .tabs { position: static; }
+  .panel { display: flex; flex-direction: column; }
+  .tabs { order: -1; right: auto; border-top: 0; border-bottom: 1px solid var(--line); padding: 0 0 6px; margin: 0 0 10px; }
+  .square { height: auto !important; }
+  .controls { position: static; align-items: center; margin-top: 6px; }
+}
+@media (max-width: 540px) { .face-list { grid-template-columns: minmax(0, 1fr); } .defs .face.def { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+/* opening: the diagram assembles itself on the canvas; the text around it rises in step */
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+html.intro header, html.intro .panel-inner, html.intro .tabs, html.intro .controls { opacity: 0; }
+html.intro-go header { animation: rise 0.8s cubic-bezier(.2, .7, .2, 1) both; }
+html.intro-go .panel-inner .key { animation: fadein 0.6s 1.25s both; }
+html.intro-go .groups .group { animation: rise 0.7s cubic-bezier(.2, .7, .2, 1) both; }
+html.intro-go .tabs, html.intro-go .controls { animation: fadein 0.7s 2.1s both; }
