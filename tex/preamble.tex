@@ -93,6 +93,32 @@
     }
 \ExplSyntaxOff
 
+% \Interactive{<name>} — the figure just above has an interactive version, the
+% page tex/<slug>/html/<name>.html, served by GitHub Pages. Written in a chapter
+% on its own line directly after the figure; it typesets a centred
+% `interactive' link with the full URL in a footnote, so a printed copy still
+% carries the address. The rules are docs/interactive-convention.md, and
+% scripts/test_interactive.py is what notices a <name> with no page behind it.
+%
+% The slug is \DocSlug, never typed, so a renamed topic carries its links
+% along. The URL is built as a str before \href and \url see it, for the same
+% catcode reason as \Assumes above: an `https:' typed under \ExplSyntaxOn is
+% not a scheme to hyperref. This is the one place the Pages address is written.
+\ExplSyntaxOn
+\NewDocumentCommand { \Interactive } { m }
+    {
+        \str_set:Nn \l_tmpa_str { #1 }
+        \str_set:Ne \l_tmpb_str
+            { https://ys-math.github.io/math-study/ \DocSlug /html/ \l_tmpa_str .html }
+        \begin{center}
+            \small
+            \exp_args:NV \href \l_tmpb_str
+                { $ \blacktriangleright $ \nobreakspace interactive }
+            \footnote { \exp_args:NV \url \l_tmpb_str }
+        \end{center}
+    }
+\ExplSyntaxOff
+
 %%% ---- Index ----
 % Every defined term in tex/*/ch0N.tex is written with one of these three, and
 % nothing else in a chapter is bold: \textbf is the term-defining markup here,

@@ -15,15 +15,19 @@ Claude rather than the machinery that builds anything.
 
 | | `tex/` | `lean/` |
 | --- | --- | --- |
-| product | PDFs of study notes, in Japanese, one per topic | one Lake library of formalised mathematics |
+| product | PDFs of study notes, in Japanese, one per topic — and, for some figures, an interactive page on GitHub Pages | one Lake library of formalised mathematics |
 | unit | a topic — one directory, one `main.tex`, its `ch*.tex` chapters | a module under `Math/Learn/` or `Math/Study/` |
 | built by | LuaLaTeX via `latexmk` | `lake`, against a pinned Mathlib |
 | licence | CC BY-NC-ND 4.0 | Apache 2.0 |
-| CI | `build-pdf.yml`, `validate.yml` | `lean.yml` |
+| CI | `build-pdf.yml`, `validate.yml`, `pages.yml` | `lean.yml` |
 | owned by | `CLAUDE.md`, `README.md` | `docs/lean-convention.md` |
 
 Both are the repo owner's mathematics, and `CLAUDE.md` fences both off from
 Claude — in `tex/` at the prose, in `lean/` at the `by`.
+
+The interactive pages under `tex/*/html/` belong to the `tex/` half: a page
+extends one figure of one topic and is linked from that topic's PDF, and it
+reads nothing from `lean/`. `docs/interactive-convention.md` owns them.
 
 ## The supporting third
 
@@ -105,5 +109,6 @@ the thing to argue about, not the thing to assume.
 | What is this file or directory called? | `docs/naming-convention.md` |
 | What goes inside a `\label{}`? | `docs/label-convention.md` |
 | How does `lean/` work? | `docs/lean-convention.md` |
+| How does a figure get an interactive page? | `docs/interactive-convention.md` |
 | What does a review finding look like? | `docs/issue-convention.md` |
 | What does a `\bibitem{}` look like? | `docs/bib-convention.md` |

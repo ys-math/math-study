@@ -65,13 +65,13 @@ Sort every changed path into two buckets, per the table in
 `docs/git-strategy.md`:
 
 - **SHARED** — `scripts/**`, `.github/**`, `.latexmkrc`, `tex/preamble.tex`,
-  `tex/colophon.tex`, `tex/index.ist`, `lean/lakefile.toml`,
+  `tex/colophon.tex`, `tex/index.ist`, `tex/html-common/**`, `lean/lakefile.toml`,
   `lean/lean-toolchain`, `lean/lake-manifest.json`. Requires a branch and a PR.
 - **CONTENT** — everything else: `tex/<topic>/**`, `README.md` and `README.ja.md` prose,
   `CLAUDE.md`, `docs/**`, `.claude/**`. Goes straight to `main`.
 
-`tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist` are SHARED despite
-living under `tex/`; `tex/<topic>/**` is CONTENT however many topics it spans.
+`tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist` and `tex/html-common/**`
+are SHARED despite living under `tex/`; `tex/<topic>/**` is CONTENT however many topics it spans.
 
 ### Changes the user did not ask about
 
@@ -191,7 +191,7 @@ closes nothing until the PR merges, which is correct and needs no special case.
 
 Add `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — with your own
 model name — only to commits Claude authored — `scripts/`, `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`, `tex/preamble.tex`,
-`tex/colophon.tex`, `tex/index.ist`, and `lean/`'s build configuration. **Never on
+`tex/colophon.tex`, `tex/index.ist`, `tex/html-common/`, and `lean/`'s build configuration. **Never on
 `tex/<topic>/**` or `lean/Math/**`**: that mathematics is the repo
 owner's and this command only transported it.
 

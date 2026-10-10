@@ -48,16 +48,21 @@ everywhere.
 
 ## Licensing
 
-Three licences. `tex/*/ch*.tex`, `tex/*/bibliography.tex` and `pdf/*.pdf` are CC
-BY-NC-ND 4.0; `lean/**` is Apache 2.0; everything else is MIT — including the
-shared `tex/preamble.tex`, `tex/colophon.tex` and the generated
-`tex/*/main.tex`. The root `LICENSE` is the MIT one, so an unmarked file reads
+Three licences. `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`
+and `pdf/*.pdf` are CC BY-NC-ND 4.0; `lean/**` is Apache 2.0; everything else is MIT — including the
+shared `tex/preamble.tex`, `tex/colophon.tex`, the interactive engine in
+`tex/html-common/` and the generated `tex/*/main.tex`. The root `LICENSE` is the MIT one, so an unmarked file reads
 as MIT and the other two are the ones that have to be marked:
 
 - **A new chapter file needs `% SPDX-License-Identifier: CC-BY-NC-ND-4.0` on
   line 1.** `new_topic.py` stamps the `ch01.tex` it creates; a `ch02.tex` added
   by hand is on whoever adds it. **Only `guard-edits.sh` checks this** — no workflow
   step looks at the header, whether or not the file reaches a pull request.
+- **A new interactive page needs `<!-- SPDX-License-Identifier: CC-BY-NC-ND-4.0 -->`
+  on line 1** — it is the owner's diagram, so it takes the chapters' licence.
+  `scripts/test_interactive.py` checks it. The one file under none of the three
+  is `tex/html-common/latin-modern.css`, the embedded Latin Modern fonts, under
+  the GUST Font License; it holds nothing else so that stays true.
 - **A new `.lean` file needs the Apache header**, whose text is in
   `docs/lean-convention.md`. This one *is* checked, by `guard-edits.sh`. Note it
   names `LICENSE-APACHE-2.0`, not `LICENSE` as Mathlib's own wording does — the
@@ -96,6 +101,10 @@ These are the changes that break silently, days later:
   needs a second entry**, in that workflow's `paths:` filter — `**.tex` does not
   reach it, so without it the workflow does not run at all. `tex/index.ist`, the
   index's upmendex style file, is the one that exists and is in both.
+- **Adding an interactive page** means adding its `\Interactive{<name>}` line
+  to a chapter in the same commit, and the chapter is the owner's prose — they
+  write that line. `scripts/test_interactive.py` fails on either half alone,
+  and like `test_assumes.py` it fails in `update-readme.yml` too.
 - **Adding a `.lean` file** means adding its `import` to `lean/Math.lean` in the
   same commit. Lake builds what the root module reaches, so an unimported file
   compiles in your editor, is skipped by `lake build`, and rots behind a green
@@ -158,7 +167,9 @@ guess from outside:
   **`docs/label-convention.md` binds every `\label{}` you write**,
   **`docs/bib-convention.md` binds every `\bibitem{}` you write**,
   **`docs/index-convention.md` binds every `\term{}` you write**,
-  **`docs/lean-convention.md` binds every `.lean` file**, and
+  **`docs/lean-convention.md` binds every `.lean` file**,
+  **`docs/interactive-convention.md` binds every page under `tex/*/html/`** and
+  the engine in `tex/html-common/`, and
   **`docs/naming-convention.md` binds every path you create or rename**, in both
   halves of the repo — whether or not you got there through `/review-notes`,
   `/label`, `/bib` or `/formalize`.
@@ -188,7 +199,8 @@ two deliberately diverge.
 it — read it before doing anything by hand. What binds regardless:
 
 - **Shared paths go on a branch and through a PR** — `scripts/`, `.github/`,
-  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, and
+  `.latexmkrc`, `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`,
+  `tex/html-common/` (the interactive engine), and
   `lean/`'s build configuration (`lakefile.toml`, `lean-toolchain`, `lake-manifest.json`). They
   can break every topic, or every proof, at once. Everything else —
   `tex/<topic>/**` and `lean/Math/**` included — commits straight to `main`.
@@ -198,8 +210,8 @@ it — read it before doing anything by hand. What binds regardless:
   `main` with a follow-up commit.
 - **`Co-Authored-By: Claude` only on what Claude wrote** — `scripts/`,
   `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`,
-  `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, and
-  `lean/`'s build configuration — and **never on `tex/<topic>/**` or
+  `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `tex/html-common/`,
+  and `lean/`'s build configuration — and **never on `tex/<topic>/**` or
   `lean/Math/**`**. A statement `/formalize` typed is still the owner's
   mathematics, only transported; the proof under it will be theirs outright.
 

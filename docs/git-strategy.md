@@ -48,6 +48,7 @@ could see. The three routes do not change. The grammar is
 | `tex/preamble.tex` | branch + PR | `\input` by all 10 topics. |
 | `tex/colophon.tex` | branch + PR | `\input` by all 10 topics. |
 | `tex/index.ist` | branch + PR | The index style file every topic's 索引 is built with. |
+| `tex/html-common/**` | branch + PR | The engine every interactive page loads (`docs/interactive-convention.md`). |
 | `lean/lakefile.toml`, `lean/lean-toolchain`, `lean/lake-manifest.json` | branch + PR | A bad Mathlib bump breaks every proof at once. |
 | everything else | straight to `main` | Blast radius is nothing that builds. |
 
@@ -152,8 +153,8 @@ shape for free.
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
 whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`, the shared
-build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, and
-`lean/`'s build configuration.
+build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, the
+interactive engine `tex/html-common/`, and `lean/`'s build configuration.
 
 It never goes on `tex/<topic>/**` or `lean/Math/**`. The mathematics is the repo owner's, and
 `/git` frequently commits prose that Claude only transported. A trailer there

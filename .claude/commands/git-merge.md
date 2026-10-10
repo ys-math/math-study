@@ -14,8 +14,8 @@ or it stops.
 
 Under this repo's strategy, PRs exist only for changes that can break every
 topic at once — `scripts/`, `.github/`, `.latexmkrc`, `tex/preamble.tex`,
-`tex/colophon.tex`, `tex/index.ist`, and `lean/`'s build configuration
-(`lakefile.toml`,
+`tex/colophon.tex`, `tex/index.ist`, `tex/html-common/`, and `lean/`'s build
+configuration (`lakefile.toml`,
 `lean-toolchain`, `lake-manifest.json`). Every PR you are asked to merge is, by
 construction, one of the risky ones. Behave accordingly.
 
