@@ -28,18 +28,18 @@ comment lines.
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          █████████▍░░░░░░░░░░   46.7%   65,996
-homological_algebra      █████▋░░░░░░░░░░░░░░   28.0%   39,560
-algebraic_k_theory       ██▌░░░░░░░░░░░░░░░░░   12.6%   17,748
-lambda_calculus          █▌░░░░░░░░░░░░░░░░░░    7.2%   10,191
-commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.5%    6,325
+category_theory          █████████▏░░░░░░░░░░   45.4%   65,996
+homological_algebra      ██████░░░░░░░░░░░░░░   29.9%   43,505
+algebraic_k_theory       ██▌░░░░░░░░░░░░░░░░░   12.2%   17,748
+lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    7.0%   10,191
+commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.4%    6,325
 topology                 ▏░░░░░░░░░░░░░░░░░░░    0.5%      691
 manifold                 ▏░░░░░░░░░░░░░░░░░░░    0.4%      572
 galois_theory            ▏░░░░░░░░░░░░░░░░░░░    0.2%      313
 differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%        0
 symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%        0
                                                        -------
-total                                                  141,396
+total                                                  145,341
 ```
 <!-- END TEXT METER -->
 
