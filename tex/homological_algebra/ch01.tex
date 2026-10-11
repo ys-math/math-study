@@ -96,6 +96,7 @@ ${^{\forall}(A,\eta)} \in \Cone(A, F),\ {^{\exists!}h \colon A \to L},\ {^{\fora
 $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
 $(L, \pi)$を$D_{A,B}$の極限とする.\
 このとき$A \times B \coloneq L$を\term{ちょくせき}{直積}{direct product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.\
+$(A \times B, \pi)$を直積ということもある.
 任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(X, A),\ g \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にするただ1つの射$X \to A \times B$を$\langle f, g \rangle$,\ もしくは$\begin{pmatrix} f \\ g \end{pmatrix}$と書く.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFswLDIsImYiLDIseyJjdXJ2ZSI6MX1dLFswLDMsImciLDAseyJjdXJ2ZSI6LTF9XSxbMCwxLCJcXGxhbmdsZSBmLCBnIFxccmFuZ2xlIiwxXSxbMSwyLCJcXHBpXzAiXSxbMSwzLCJcXHBpXzEiLDJdXQ==
 \[\begin{tikzcd}
@@ -114,6 +115,7 @@ $(L, \pi)$を$D_{A,B}$の極限とする.\
 $\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
 $(Q, \iota)$を$D_{A,B}$の余極限とする.\
 このとき$A \amalg B \coloneq Q$を\term{ちょくわ}{直和}{direct sum}といい$\iota_0, \iota_1$を\term{にゅうしゃ}{入射}{injection}という.\
+$(A \amalg B, \iota)$を直和ということもある.
 任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にするただ1つの射$A \amalg B \to X$を$\lbrack f, g \rbrack$,\ もしくは$\begin{pmatrix} f & g \end{pmatrix}$と書く.
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXGFtYWxnIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFsyLDAsImYiLDAseyJjdXJ2ZSI6LTF9XSxbMywwLCJnIiwyLHsiY3VydmUiOjF9XSxbMSwwLCJcXGxicmFjayBmLCBnIFxccmJyYWNrIiwxXSxbMiwxLCJcXGlvdGFfMCIsMl0sWzMsMSwiXFxpb3RhXzEiXV0=
 \[\begin{tikzcd}
@@ -200,8 +202,8 @@ $\pi_j \circ \begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix} \c
 \end{definition}
 
 \begin{definition} \label{def: IsBiproduct}
-$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\ 
-$A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \pi_1 \in \Mor_{\mathscr{C}}(A \oplus B, B),\ \iota_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \iota_1 \in \Mor_{\mathscr{C}}(B,A \oplus B)$の組$(A \oplus B, \pi_0, \pi_1, \iota_0, \iota_1)$は次の図式を可換にし$\iota_0 \circ \pi_0 + \iota_1 \circ \pi_1 = \id_{A \oplus B}$を満たすとき$A$と$B$の\term{そうせき}{双積}{biproduct}であるという.\
+$\mathscr{C}$を零対象を持つ圏とし$A, B \in \Ob(\mathscr{C})$とする.\ 
+$A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A \oplus B, A),\ \pi_1 \in \Mor_{\mathscr{C}}(A \oplus B, B),\ \iota_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \iota_1 \in \Mor_{\mathscr{C}}(B, A \oplus B)$によって定まる組$(A \oplus B, \pi, \iota)$は$(A \oplus B, \pi)$が直積で$(A \oplus B, \iota)$が直和であり次の図式が可換になるとき$A$と$B$の\term{そうせき}{双積}{biproduct}であるという.\
 
 \begin{center}
 \begin{tikzpicture}[
@@ -238,16 +240,17 @@ $A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),
 \end{center}
 \end{definition}
 
+
+
 \begin{definition}
-$\mathscr{C}$を前加法圏とし$A_0, A_1, B_0, B_1 \in \Ob(\mathscr{C})$とする.\
+$\mathscr{C}$を零対象を持つ局所小圏とし$A_0, A_1, B_0, B_1 \in \Ob(\mathscr{C})$とする.\
 $f \colon A_0 \to B_0,\ g \colon A_1 \to B_1$を$\mathscr{C}$の射とする.\
 $f \oplus g \coloneq  \begin{pmatrix} f & 0_{A_0, B_1} \\ 0_{A_1,B_0} & g \end{pmatrix}$として$f \oplus g \colon A_0 \oplus B_0 \to A_1 \oplus B_1$を定める.\
-次の図式が可換になる.
 \end{definition}
 
 \begin{proposition} \label{prop: direct_product_and_direct_sum_of_biproduct}
 $\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
-$(A \oplus B, \pi_0, \pi_1, \iota_0, \iota_1)$が$A$と$B$の双積であるとき$(A \oplus B, \pi)$は\cref{def: pairDiagramFunctor}で定めた$D_{A,B}$の極限であり$(A \oplus B, \iota)$は$D_{A,B}$の余極限である.
+$(A \oplus B, \pi, \iota)$が\cref{def: IsBiproduct}の図式を満たし$\sum_{i \in 2} \iota_i \circ \pi_i = \id_{A \oplus B}$が成り立つことと$(A \oplus B, \pi, \iota)$が双積であることは同値である.\
 \end{proposition}
 
 \begin{proof}
@@ -261,14 +264,14 @@ $h \coloneq \iota_0 \circ f + \iota_1 \circ g$とすると
 \end{align*}
 となり同様に$\pi_1 \circ h = g$となる.
 
-$\pi_0 \circ h' = f$かつ$\pi_1 \circ h = g$とすると
+$\pi_0 \circ h' = f$かつ$\pi_1 \circ h' = g$とすると
 \begin{align*}
 h' &= \id_{A \oplus B} \circ h' \\
    &= (\iota_0 \circ  \pi_0 + \iota_1 \circ \pi_1) \circ h' \\
    &= \iota_0 \circ f + \iota_1 \circ g \\
    &= h
 \end{align*}
-となるので$(A \oplus B, \pi)$は$D_{A,B}$の極限である.\
+となるので$(A \oplus B, \pi)$は直積である.\
 
 $X \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$とする.\
 $h \coloneq f \circ \pi_0 + g \circ \pi_1$とすると
@@ -287,13 +290,15 @@ h' &= h' \circ \id_{A \oplus B} \\
    &= f \circ \pi_0 + g \circ \pi_1 \\
    &= h
 \end{align*}
-となるので$(A \oplus B, \iota)$は$D_{A,B}$の余極限である.
+となるので$(A \oplus B, \iota)$は直和である.\
+
+$(A \oplus B, \pi)$が直積で$(A \oplus B, \iota)$が直和のとき$e \coloneq \iota_0 \circ \pi_0 + \iota_1 \circ \pi_1$とすると$i \in 2$に対して$\pi_i \circ e = \pi_i$が成り立つので極限の一意性により$e = \id_{A \oplus B}$である.
 \end{proof}
 
 \begin{proposition} \label{prop: biproduct_of_direct_product}
 $\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
-$(A \times B, \pi)$を$D_{A,B}$の極限とする.\
-このとき$\iota_0 \coloneq \langle \id_A, 0_{A, B} \rangle$とし$\iota_1 \coloneq \langle 0_{B, A}, \id_B \rangle$とすると$(A \times B, \pi_0, \pi_1, \iota_0, \iota_1)$は双積となる.
+$(A \times B, \pi)$を直積とする.\
+このとき$\iota_0 \coloneq \langle \id_A, 0_{A, B} \rangle$とし$\iota_1 \coloneq \langle 0_{B, A}, \id_B \rangle$とすると$(A \times B, \pi, \iota)$は双積となる.
 \end{proposition}
 
 \begin{proof}
@@ -320,8 +325,8 @@ $\pi_0 \circ \id_{A \times B} = \pi_0$かつ$\pi_1 \circ \id_{A \times B} = \pi_
 
 \begin{proposition} \label{prop: biproduct_of_direct_sum}
 $\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
-$(A \amalg B, \iota)$を$D_{A,B}$の余極限とする.\
-このとき$\pi_0 \coloneq \lbrack \id_A, 0_{A, B} \rbrack$とし$\pi_1 \coloneq \lbrack 0_{B, A}, \id_B \rbrack$とすると$(A \amalg B, \pi_0, \pi_1, \iota_0, \iota_1)$は双積となる.
+$(A \amalg B, \iota)$を直和する.\
+このとき$\pi_0 \coloneq \lbrack \id_A, 0_{A, B} \rbrack$とし$\pi_1 \coloneq \lbrack 0_{B, A}, \id_B \rbrack$とすると$(A \amalg B, \pi, \iota)$は双積となる.
 \end{proposition}
 
 \begin{proof}

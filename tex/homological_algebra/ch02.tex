@@ -72,25 +72,170 @@ $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
 \end{center}
 \end{definition}
 
+\begin{proposition}
+$\mathscr{C}$を圏とし$f \in \Mor_{\mathscr{C}}(A, B)$を同型射とすると$f$はモノ射かつエピ射である.\
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathscr{C})$として$g, h \in \Mor_{\mathscr{C}}(X, A)$とする.\
+$f \circ g = f \circ h$と仮定する.\
+$g = f^{-1} \circ f \circ g =  f^{-1} \circ f \circ h = h$であるから$f$はモノ射である.\
+
+$Y \in \Ob(\mathscr{C})$として$g, h \in \Mor_{\mathscr{C}}(B, Y)$とする.\
+$g \circ f = h \circ f$と仮定する.\
+$g = g \circ f \circ f^{-1} = h \circ f \circ f^{-1} = h$であるから$f$はエピ射である.\
+\end{proof}
+
+\begin{lemma} \label{lem: kernel_and_mono_iff_zero_leg}
+$\mathscr{C}$を零対象を持つ圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とすると次が成り立つ.\
+\begin{center}
+	$f$はモノ射$\iff$$\ker(f) = 0_{\Ker(f),X}$
+\end{center}
+\end{lemma}
+
+\begin{proof}
+$f \circ \ker(f) = 0_{\Ker(f), Y} = f \circ 0_{\Ker(f),X}$なので$\ker(f) = 0_{\Ker(f),X}$となる.\
+
+$\ker(f) = 0_{\Ker(f),X}$であるとする.\
+$A \in \Ob(\mathscr{C}),\ g, h \in \Mor_{\mathscr{C}}(A, X)$とすると$g,h$それぞれに対して次の図式を可換にする$!_g, !_h \in \Mor_{\mathscr{C}}(A,\Ker(f))$が存在する.
+% https://q.uiver.app/#q=WzAsOCxbMSwwLCJBIl0sWzEsMSwiXFxtYXRocm17S2VyfShmKSJdLFswLDMsIlgiXSxbMiwzLCJZIl0sWzUsMCwiQSJdLFs1LDEsIlxcbWF0aHJte0tlcn0oZikiXSxbNCwzLCJYIl0sWzYsMywiWSJdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiMF97XFxtYXRocm17S2VyfShmKSxYfSIsMV0sWzEsMywiMF97XFxtYXRocm17S2VyfShmKSxZfSIsMV0sWzAsMSwiIV9nIiwyXSxbMCwyLCJnIiwyLHsiY3VydmUiOjN9XSxbMCwzLCIwX3tBLFl9IiwwLHsiY3VydmUiOi0zfV0sWzIsMywiMF97WCxZfSIsMix7Im9mZnNldCI6MX1dLFs2LDcsImYiLDAseyJvZmZzZXQiOi0xfV0sWzUsNiwiMF97XFxtYXRocm17S2VyfShmKSxYfSIsMV0sWzUsNywiMF97XFxtYXRocm17S2VyfShmKSxZfSIsMV0sWzQsNSwiIV9oIiwyXSxbNCw2LCJoIiwyLHsiY3VydmUiOjN9XSxbNCw3LCIwX3tBLFl9IiwwLHsiY3VydmUiOi0zfV0sWzYsNywiMF97WCxZfSIsMix7Im9mZnNldCI6MX1dXQ==
+\[\begin{tikzcd}
+	& A &&&& A & \\
+	& {\mathrm{Ker}(f)} &&&& {\mathrm{Ker}(f)} \\
+	\\
+	X && Y && X && Y
+	\arrow["{!_g}"', from=1-2, to=2-2]
+	\arrow["g"', curve={height=18pt}, from=1-2, to=4-1]
+	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-2, to=4-3]
+	\arrow["{!_h}"', from=1-6, to=2-6]
+	\arrow["h"', curve={height=18pt}, from=1-6, to=4-5]
+	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-6, to=4-7]
+	\arrow["{0_{\mathrm{Ker}(f),X}}"{description}, from=2-2, to=4-1]
+	\arrow["{0_{\mathrm{Ker}(f),Y}}"{description}, from=2-2, to=4-3]
+	\arrow["{0_{\mathrm{Ker}(f),X}}"{description}, from=2-6, to=4-5]
+	\arrow["{0_{\mathrm{Ker}(f),Y}}"{description}, from=2-6, to=4-7]
+	\arrow["f", shift left, from=4-1, to=4-3]
+	\arrow["{0_{X,Y}}"', shift right, from=4-1, to=4-3]
+	\arrow["f", shift left, from=4-5, to=4-7]
+	\arrow["{0_{X,Y}}"', shift right, from=4-5, to=4-7]
+\end{tikzcd}\]
+したがって$g = 0_{\Ker(f),X} \circ !_g = 0_{A,X} = 0_{\Ker(f),X} \circ !_h = h$となるので$f$はモノ射である.
+\end{proof}
+
+\begin{lemma} \label{lem: cokernel_and_epi_iff_zero_leg}
+$\mathscr{C}$を零対象を持つ圏とする.\
+$X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とすると次が成り立つ.\
+\begin{center}
+	$f$はエピ射$\iff$$\coker(f) = 0_{Y,\Coker(f)}$ 
+\end{center}
+\end{lemma}
+
+\begin{proof}
+	\cref{lem: kernel_and_mono_iff_zero_leg}の双対である.
+\end{proof}
+
+\begin{proposition}
+$\mathcal{A}$をアーベル圏とし$f \in \Mor_{\mathcal{A}}(A,B)$とする.\
+$f$がモノ射かつエピ射であるとき$f$は同型射となる.\
+\end{proposition}
+
 \begin{definition} \label{def: IsAbelian}
 圏$\mathcal{A}$は次の条件を満たすとき\term{あーべるけん}{アーベル圏}{Abelian category}であるという.
 \begin{itemize}
     \item 零対象$Z \in \Ob(\mathcal{A})$が存在する.
-    \item 任意の$A,B \in \Ob(\mathcal{A})$に対して$D_{A,B} \colon \mathbf{2} \to \mathcal{A}$の極限$(A \times B, \pi)$が存在する.
+    \item 任意の$A,B \in \Ob(\mathcal{A})$に対して直積$(A \times B, \pi)$が存在する.
     \item 任意の$f \in \Mor(\mathcal{A})$に対して$f$の核と余核が存在する.
     \item 任意のモノ射$f \in \Mor(\mathscr{C})$に対してある$g \in \Mor(\mathscr{C})$が存在して$f = \ker(g)$となる.
     \item 任意のエピ射$f \in \Mor(\mathscr{C})$に対してある$g \in \Mor(\mathscr{C})$が存在して$f = \coker(g)$となる.
 \end{itemize}
 \end{definition}
 
+\begin{proof}
+$f$はモノ射なのである$C \in \Ob(\mathcal{A})$と$h \in \Mor_{\mathcal{A}}(B, C)$が存在して$f = \ker(h)$となる.\
+よって$h \circ f = 0_{A,C} = 0_{B,C} \circ f$であり$f$はエピ射なので$h = 0_{B,C}$である.\
+$h \circ \id_B = 0_{B,C}$なので核の普遍性により$f \circ g = \id_B$を満たす$g \colon B \to A$がただ1つ存在する.\
+$f \circ g \circ f = \id_B \circ f = f = f \circ \id_A$であり$f$はモノ射なので$g \circ f = \id_A$である.\
+よって$f$は同型射である.\
+\end{proof}
+
+\begin{remark}
+以下断らない限りアーベル圏は局所的に小さいことを仮定する.
+\end{remark}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$X,Y \in \Ob(\mathscr{C})$とする.\
+$s \in \Mor(X, Y),\ r \in \Mor_{\mathscr{C}}(Y, X)$とする.\
+$r \circ s = \id_{X}$であるとき組$(r,s)$を\term{れとらくしょんせくしょんぺあ}{レトラクションセクションペア}{retraction-section pair}とよぶ.\
+またこのとき$r$を\term{れとらくしょん}{レトラクション}{retraction}もしくは\term{ぶんれつえぴしゃ}{分裂エピ射}{split epimorphism}と呼び$s$を\term{せくしょん}{セクション}{section}もしくは\term{ぶんれつものしゃ}{分裂モノ射}{split monomorphism}と呼ぶ.
+\end{definition}
+
 \begin{proposition}
-局所的に小さいアーベル圏は加法圏である.
+$\mathscr{C}$を圏とし$X,Y \in \Ob(\mathscr{C})$とする.\
+$s \in \Mor(X, Y),\ r \in \Mor(Y, X)$とし$(r,s)$をレトラクションセクションペアとする.\
+このとき$r$はエピ射であり$s$はモノ射である.
+\end{proposition}
+
+\begin{proof}
+$A \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(A, X)$とする.\
+$s \circ f = s \circ g$と仮定する.\
+$f = \id_X \circ f = r \circ s \circ f = r \circ s \circ g = \id_X \circ g = g$なので$s$はモノ射である.\
+
+$B \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(X, B)$とする.\
+$f \circ r = g \circ r$と仮定する.\
+$f = f \circ \id_X = f \circ r \circ s = g \circ r \circ s = g \circ \id_X = g$なので$r$はエピ射である.\
+\end{proof}
+
+\begin{proposition}
+$\mathcal{A}$をアーベル圏とし$A, B \in \Ob(\mathcal{A})$とする.\
+$(A \times B, \pi)$を直積とする.
+$\iota_0 \coloneq \begin{pmatrix} \id_A \\ 0_{A,B} \end{pmatrix},\ \iota_1 \coloneq \begin{pmatrix} 0_{B,A} \\ \id_B \end{pmatrix}$とすると$(A \times B, \pi, \iota)$は双積になる.
+\end{proposition}
+
+\begin{proof}
+$\pi_0 \circ \iota_0 = \id_A$なので$(\pi_0, \iota_0)$はレトラクションセクションペアである.\
+$X \in \Ob(\mathcal{A})$として$f \in \Mor_{\mathcal{A}}(X, A \times B)$とする.\
+$\pi_1 \circ f = 0_{A,B}$であると仮定する.\
+$\iota_0 \circ u = f$となる$u \in \Mor_{\mathcal{A}}(X, A)$が存在したとすると$\pi_0 \circ f = u$である.\
+そこで$u \coloneq \pi_0 \circ f$とすると$\pi_0 \circ (\iota_0 \circ u) = u = \pi_0 \circ f$であり$\pi_1 \circ (\iota_0 \circ u) = 0_{A,B} \circ u = 0_{A,B} = \pi_1 \circ f$である.\
+したがって直積の普遍性により$\iota_0 \circ u = f$である.\
+よって次の図式が可換になり$\Ker(\pi_1) = A,\ \ker(\pi_1) = \iota_0$である.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMiwiQSBcXHRpbWVzIEIiXSxbMiwyLCJCIl0sWzEsMSwiQSJdLFswLDEsImYiLDIseyJjdXJ2ZSI6Mn1dLFsxLDIsIlxccGlfMSIsMl0sWzAsMiwiMF97WCxCfSIsMCx7ImN1cnZlIjotMn1dLFswLDMsIlxccGlfMCBcXGNpcmMgZiIsMV0sWzMsMSwiXFxpb3RhXzAiLDJdLFszLDIsIjBfe0EsQn0iLDFdXQ==
+\[\begin{tikzcd}
+	& X & \\
+	& A \\
+	{A \times B} && B
+	\arrow["{\pi_0 \circ f}"{description}, from=1-2, to=2-2]
+	\arrow["f"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{0_{X,B}}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\iota_0}"', from=2-2, to=3-1]
+	\arrow["{0_{A,B}}"{description}, from=2-2, to=3-3]
+	\arrow["{\pi_1}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+同様に$\Ker(\pi_0) = B,\ \ker(\pi_0) = \iota_1$である.\
+
+$\pi_1$は$レトラクション$であるからエピ射である.\
+よってある$Y \in \Ob(\mathcal{A})$と$g \in \Mor_{\mathcal{A}}(Y, A \times B)$が存在して$\pi_1 = \coker(g)$となる.\
+$X \in \Ob(\mathcal{A})$とし$f \in \Mor_{\mathcal{A}}(A \times B, X)$が$f \circ \iota_0 = 0_{A,X}$を満たすとする.\
+$\pi_1 = \coker(g)$なので$\pi_1 \circ g = 0_{Y,B}$である.\
+よって核の普遍性により$g = \iota_0 \circ v$となる$v \colon Y \to A$がただ1つ存在する.\
+$f \circ \iota_0 = 0_{A,X}$なので$f \circ g = f \circ \iota_0 \circ v = 0_{A,X} \circ v = 0_{Y,X}$となる.\
+したがって$\pi_1 = \coker(g)$なので余核の普遍性により$f = \pi_1 \circ u$となる$u \colon B \to X$がただ1つ存在する.\
+ゆえに$\pi_1 = \coker(\iota_0)$である.\
+同様に$\pi_0 = \coker(\iota_1)$となる.\
+
+\end{proof}
+
+\begin{proposition}
+アーベル圏は加法圏である.
 \end{proposition}
 
 \begin{proof}
 $\mathcal{A}$を局所的に小さいアーベル圏とする.\
 任意の$A,B \in \Ob(\mathcal{A})$に対して$\Mor_{\mathcal{A}}(A,B)$がアーベル群となることを示す.\
-$f,g \in \Mor_{\mathcal{A}}(A,B)$に対して$f + g \coloneq \begin{pmatrix} \id_B & \id_B \end{pmatrix} \circ (f \oplus g) \circ \begin{pmatrix} \id_A \\ \id_A \end{pmatrix}$とする.\ 次の図式が可換になるので$f + 0_{A, B} = f$である.\
+$(A \oplus A, \pi^A, \iota^A)$と$(B \oplus B, \pi^B, \iota^B)$をそれぞれ双積とする.\
+$f,g \in \Mor_{\mathcal{A}}(A,B)$に対して$f + g \coloneq \begin{pmatrix} \id_B & \id_B \end{pmatrix} \circ (f \oplus g) \circ \begin{pmatrix} \id_A \\ \id_A \end{pmatrix}$とする.\
+
 \begin{center}
 \begin{tikzpicture}[
     commutative diagrams/every diagram,
