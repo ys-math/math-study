@@ -131,7 +131,7 @@ function buildPage(cfg) {
 function mount(cfg) {
 const VERT = {}, NODE_TEX = {}, NODE_PLAIN = {};
 for (const [k, o] of Object.entries(cfg.objects)) { VERT[k] = o.at; NODE_TEX[k] = o.tex; NODE_PLAIN[k] = o.plain; }
-const EDGES = cfg.arrows.map(a => ({ id: a.id, s: a.from, t: a.to, tex: a.tex, plain: a.plain, straight: !!a.straight, lt: a.labelAt }));
+const EDGES = cfg.arrows.map(a => ({ id: a.id, s: a.from, t: a.to, tex: a.tex, plain: a.plain, straight: !!a.straight, lt: a.labelAt, off: a.offset || 0 }));
 
 // every highlightable entry, in panel order; a face's index here is its identity
 const FACES = [];
@@ -155,6 +155,28 @@ function along(e, u) {
 for (const e of EDGES) {
   e.pts3 = Array.from({ length: NS + 1 }, (_, i) => along(e, i / NS));
   e.lab3 = along(e, e.lt ?? 0.5);
+}
+
+// An arrow's `offset`, as tikz-cd's `shift left`: the projected curve moves sideways on screen by
+// `off` steps to the left of its direction of travel (negative: to the right), so a pair like
+// X ⇄ Y or two parallel arrows stay apart from every angle. The shift is in screen space because
+// a shift in 3D vanishes when the pair is seen edge-on. The label leaves the line and sits beside
+// it, on the side it moved to, clear of its partner.
+const OFFSET_PX = 4.5;
+function offsetOnScreen(P, lp, off, lw, lh) {
+  const a = P[0], b = P[P.length - 1];
+  const cx0 = b.x - a.x, cy0 = b.y - a.y, cl = Math.hypot(cx0, cy0);
+  if (cl < 1) return { P, lp }; // seen end-on: there is no sideways
+  const d = off * OFFSET_PX;
+  const out = P.map((p, i) => {
+    const u = P[Math.min(i + 1, P.length - 1)], v = P[Math.max(i - 1, 0)];
+    let tx = u.x - v.x, ty = u.y - v.y, tl = Math.hypot(tx, ty);
+    if (tl < 1e-6) { tx = cx0; ty = cy0; tl = cl; }
+    return { ...p, x: p.x + d * ty / tl, y: p.y - d * tx / tl };
+  });
+  const nx = cy0 / cl, ny = -cx0 / cl;
+  const away = d + Math.sign(off) * (Math.abs(nx) * lw / 2 + Math.abs(ny) * lh / 2 + 3);
+  return { P: out, lp: { ...lp, x: lp.x + nx * away, y: lp.y + ny * away } };
 }
 
 // trim a projected polyline where it enters the source/target boxes
@@ -462,10 +484,11 @@ function render() {
     if (F) role = F.path.includes(e.id) ? 'path' : F.direct.includes(e.id) ? 'direct' : F.legs.includes(e.id) ? 'leg' : (F.keep || []).includes(e.id) ? 'plain' : 'dim';
     const grow = edgeIn(e.id, T);
     if (grow <= 0) continue;
-    let pts = trimPolyline(e.pts3.map(proj), inBox(e.s), inBox(e.t));
-    if (pts && grow < 1) { pts = truncate(pts, grow); if (pts.length < 2) pts = null; }
-    const lp = proj(e.lab3);
+    let raw = e.pts3.map(proj), lp = proj(e.lab3);
     const [lw2, lh2] = labelSize(e.tex, e.plain, exE * lp.s);
+    if (e.off) ({ P: raw, lp } = offsetOnScreen(raw, lp, e.off, lw2, lh2));
+    let pts = trimPolyline(raw, inBox(e.s), inBox(e.t));
+    if (pts && grow < 1) { pts = truncate(pts, grow); if (pts.length < 2) pts = null; }
     const reach = Math.hypot(lw2, lh2) / 2 + 6;
     // the arrow breaks where its own label sits, so the label needs no box behind it
     const ownGap = [lp.x - lw2 / 2 - 3, lp.y - lh2 / 2 - 2, lp.x + lw2 / 2 + 3, lp.y + lh2 / 2 + 2];

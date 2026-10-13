@@ -93,7 +93,7 @@ uses every field.
 | `title` | the page heading, and the same text as `<title>` |
 | `description` | one sentence for screen readers, describing the diagram |
 | `objects` | `{ id: { at: [x, y, z], tex, plain } }`. The vertices, on the unit sphere. `tex` is typeset by MathJax, and `plain` is the fallback while it loads or if it fails |
-| `arrows` | `[{ id, from, to, tex, plain }]`, drawn as great-circle arcs. `straight: true` makes a chord through the middle instead, and `labelAt` (default `0.5`) is where along the arrow its label sits |
+| `arrows` | `[{ id, from, to, tex, plain }]`, drawn as great-circle arcs. `straight: true` makes a chord through the middle instead, and `labelAt` (default `0.5`) is where along the arrow its label sits. `offset` is tikz-cd's `shift left`: the arrow moves sideways on screen by that many steps to the left of its direction (negative: right), and its label sits beside it on that side. Give both arrows of a pair `X ⇄ Y` `offset: 1` and they part from every angle |
 | `home` | `[{ axis, deg }, …]`. The rotations, composed left to right, that give the home view: where Reset returns to and the opening animation ends |
 | `intro` | optional: `{ objects: { id: ms }, arrows: { id: ms } }`, the start time of each item in the opening animation. Without it, things appear in the order they are listed |
 | `tabs` | the equation panel, one entry per tab; see below |
