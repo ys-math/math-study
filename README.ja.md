@@ -172,6 +172,7 @@ math-study/
 │   ├── generate_tree.py
 │   ├── latex_unicode.py
 │   ├── new_topic.py
+│   ├── quiver.py
 │   ├── readme_block.py
 │   ├── test_agent_docs.py
 │   ├── test_assumes.py
@@ -182,6 +183,7 @@ math-study/
 │   ├── test_interactive.py
 │   ├── test_latex_unicode.py
 │   ├── test_new_topic.py
+│   ├── test_quiver.py
 │   └── test_readme_block.py
 ├── tex/
 │   ├── algebraic_k_theory/
