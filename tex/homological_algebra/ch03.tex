@@ -1,73 +1,41 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{複体}
-\begin{definition} \label{def: CochainComplex}
-$\mathcal{A}$をアーベル圏とする.\
-$n \in \mathbb{Z}$に対して$M^n \in \Ob(\mathcal{A}),\ d^n \in \Mor_{\mathcal{A}}(M^n, M^{n+1})$とする.\
-族$(M^{\bullet}, d^{\bullet}) \coloneq (M^{n}, d^n)_{n \in \mathbb{Z}}$は次の条件が成り立つとき$\mathcal{A}$における\term{よさふくたい}{余鎖複体}{cochain complex}であるという.
-\begin{center}
-    ${^{\forall}n} \in \mathbb{Z},\ d^{n+1} \circ d^{n} = 0_{M^n, M^{n+2}}$
-\end{center}
-つまり次の図式が可換になる.
-% https://q.uiver.app/#q=WzAsNyxbMiwwLCJNXntuLTF9Il0sWzMsMCwiTV5uIl0sWzQsMCwiTV57bisxfSJdLFsxLDAsIlxcY2RvdHMiXSxbNSwwLCJcXGNkb3RzIl0sWzAsMF0sWzYsMF0sWzMsMCwiZF57bi0yfSJdLFswLDEsImRee24tMX0iXSxbMSwyLCJkXm4iXSxbMiw0LCJkXntuKzF9Il0sWzAsMiwiMF97TV57bi0xfSxNXntuKzF9fSIsMix7ImN1cnZlIjoyfV0sWzMsMSwiMF97TV57bi0yfSxNXm59IiwyLHsiY3VydmUiOjJ9XSxbMSw0LCIwX3tNXm4sTV57bisyfX0iLDIseyJjdXJ2ZSI6Mn1dLFs1LDAsIiIsMix7ImN1cnZlIjoyLCJzaG9ydGVuIjp7InNvdXJjZSI6NTB9fV0sWzIsNiwiIiwyLHsiY3VydmUiOjIsInNob3J0ZW4iOnsidGFyZ2V0Ijo1MH0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+\section{等化子と余等化子}
+
+\begin{definition} \label{def: WalkingParallelPairCategory}
+圏$\mathbf{P}$を$\Ob(\mathbf{P}) \coloneq 2$とし$\Mor{\mathscr{C}} \coloneq \{\id_0, \id_1, u, v\}$として定める.\
+ただし$|\Mor_{\mathbf{P}}(0, 1)| = 2$である.\
+これを\term{へいこうついのけん}{平行対の圏}{walking parallel pair category}という.\
+平行対の圏を$\bullet \rightrightarrows \bullet$と書くこともある.
+% https://q.uiver.app/#q=WzAsMixbMCwwLCIwIl0sWzEsMCwiMSJdLFswLDEsInUiLDAseyJjdXJ2ZSI6LTF9XSxbMCwwLCJcXG1hdGhybXtpZH1fMCIsMCx7ImFuZ2xlIjotOTB9XSxbMSwxLCJcXG1hdGhybXtpZH1fMSIsMCx7ImFuZ2xlIjo5MH1dLFswLDEsInYiLDIseyJjdXJ2ZSI6MX1dXQ==
 \[\begin{tikzcd}
-	{} & \cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots & {}
-	\arrow[curve={height=12pt}, between={0.5}{1}, from=1-1, to=1-3]
-	\arrow["{d^{n-2}}", from=1-2, to=1-3]
-	\arrow["{0_{M^{n-2},M^n}}"', curve={height=12pt}, from=1-2, to=1-4]
-	\arrow["{d^{n-1}}", from=1-3, to=1-4]
-	\arrow["{0_{M^{n-1},M^{n+1}}}"', curve={height=12pt}, from=1-3, to=1-5]
-	\arrow["{d^n}", from=1-4, to=1-5]
-	\arrow["{0_{M^n,M^{n+2}}}"', curve={height=12pt}, from=1-4, to=1-6]
-	\arrow["{d^{n+1}}", from=1-5, to=1-6]
-	\arrow[curve={height=12pt}, between={0}{0.5}, no head, from=1-5, to=1-7]
-\end{tikzcd}\]
-
-$M^n$を次数$n$の\term{こう}{項}{term}という.
-\end{definition}
-
-\begin{remark} \label{rem: opposite_abelian}
-$\mathcal{A}$がアーベル圏なら$\mathcal{A}^{\op}$もアーベル圏である.
-\end{remark}
-
-\begin{definition} \label{def: ChainComplex}
-$\mathcal{A}$をアーベル圏とする.\
-$\mathcal{A}^{\op}$における余鎖複体$(M^{\bullet}, d^{\bullet})$を\term{さふくたい}{鎖複体}{chain complex}と呼び$(M_{\bullet}, d_{\bullet}) \coloneq (M^{\bullet}, d^{\bullet})$と書く.\
-\end{definition}
-
-\begin{definition} \label{def: CochainComplexHom}
-$\mathcal{A}$アーベル圏とし$M \coloneq (M^\bullet, d^\bullet)$と$M' \coloneq (M'^\bullet , d'^\bullet)$を$\mathcal{A}$上の余鎖複体とする.\
-$\mathcal{A}$の射の族$f^\bullet \coloneq (f^n \colon M^n \to M'^n)_{n \in \mathbb{Z}}$が${^{\forall}n} \in \mathbb{Z},\ d'^n \circ f^n = f^{n+1} \circ d^n$を満たすとき$f^\bullet$は余鎖複体$(M^\bullet, d^\bullet)$から余鎖複体$(M'^\bullet, d'^\bullet)$への射であるという.
-% https://q.uiver.app/#q=WzAsMTAsWzEsMCwiTV57bi0xfSJdLFswLDAsIlxcY2RvdHMiXSxbMiwwLCJNXm4iXSxbMywwLCJNXntuKzF9Il0sWzQsMCwiXFxjZG90cyJdLFsxLDEsIk0nXntuLTF9Il0sWzAsMSwiXFxjZG90cyJdLFsyLDEsIk0nXm4iXSxbMywxLCJNJ157bisxfSJdLFs0LDEsIlxcY2RvdHMiXSxbMSwwLCJkXntuLTJ9Il0sWzAsMiwiZF57bi0xfSJdLFsyLDMsImRebiJdLFszLDQsImRee24rMX0iXSxbNiw1LCJkJ157bi0yfSJdLFs1LDcsImQnXntuLTF9Il0sWzcsOCwiZCdebiJdLFs4LDksImQnXntuKzF9Il0sWzAsNSwiZl57bi0xfSJdLFsyLDcsImZebiJdLFszLDgsImZee24rMX0iXV0=
-\[\begin{tikzcd}
-	\cdots & {M^{n-1}} & {M^n} & {M^{n+1}} & \cdots \\
-	\cdots & {M'^{n-1}} & {M'^n} & {M'^{n+1}} & \cdots
-	\arrow["{d^{n-2}}", from=1-1, to=1-2]
-	\arrow["{d^{n-1}}", from=1-2, to=1-3]
-	\arrow["{f^{n-1}}", from=1-2, to=2-2]
-	\arrow["{d^n}", from=1-3, to=1-4]
-	\arrow["{f^n}", from=1-3, to=2-3]
-	\arrow["{d^{n+1}}", from=1-4, to=1-5]
-	\arrow["{f^{n+1}}", from=1-4, to=2-4]
-	\arrow["{d'^{n-2}}", from=2-1, to=2-2]
-	\arrow["{d'^{n-1}}", from=2-2, to=2-3]
-	\arrow["{d'^n}", from=2-3, to=2-4]
-	\arrow["{d'^{n+1}}", from=2-4, to=2-5]
+	0 & 1
+	\arrow["{\mathrm{id}_0}", from=1-1, to=1-1, loop, in=145, out=215, distance=10mm]
+	\arrow["u", curve={height=-6pt}, from=1-1, to=1-2]
+	\arrow["v"', curve={height=6pt}, from=1-1, to=1-2]
+	\arrow["{\mathrm{id}_1}", from=1-2, to=1-2, loop, in=325, out=35, distance=10mm]
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition} \label{def: CochainComplexCategory}
-$\mathcal{A}$をアーベル圏とする.\
-対象を余鎖複体とし射を余鎖複体から余鎖複体への射とすることで$\mathcal{A}$上の余鎖複体の圏$\Ch^\bullet(\mathcal{A})$が定まる.\
+\begin{definition}
+$\mathscr{C}$を圏とし$\mathbf{P}$を平行対の圏とする.\
+$f, g \in \Mor_{\mathscr{C}}(A, B)$とし共変関手$E_{f,g} \colon \mathbf{P} \to \mathscr{C}$を$E_{f,g}(0) \coloneq A,\ E_{f,g}(1) \coloneq B,\ E_{f,g}(u) \coloneq f,\ E_{f,g}(v) \coloneq g$と定める.\
+このときの$E_{f,g}$の極限$(\Eq(f,g), \eq(f,g))$を\term{とうかし}{等化子}{equalizer}もしくは\term{さかく}{差核}{difference kernel}と呼ぶ.\
+つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(X, A),\ \eta_1 \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にする$\mathscr{C}$の射$! \colon X \to \Eq(f,g)$がただ1つ存在する.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
+\[\begin{tikzcd}
+	& X & \\
+	& {\mathrm{Eq}(f,g)} \\
+	A && B
+	\arrow["{!}"', from=1-2, to=2-2]
+	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=3-1]
+	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=3-3]
+	\arrow["{\mathrm{eq}(f,g)_0}"{description}, from=2-2, to=3-1]
+	\arrow["{\mathrm{eq}(f,g)_1}"{description}, from=2-2, to=3-3]
+	\arrow["f", shift left, from=3-1, to=3-3]
+	\arrow["g"', shift right, from=3-1, to=3-3]
+\end{tikzcd}\]
+
+$(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
 \end{definition}
-
-\begin{proposition}
-$\mathcal{A}$をアーベル圏とする.\ $\mathcal{A}$における余鎖複体の圏$\Ch^\bullet(\mathcal{A})$はアーベル圏である.
-\end{proposition}
-
-\begin{proof}
-$(M^\bullet, d^\bullet), (M'^\bullet, d'^\bullet) \in \Ob(\Ch^\bullet(\mathcal{A}))$とし$f^\bullet, g^\bullet \in \Mor_{\Ch^\bullet(\mathscr{A})}((M^\bullet, d^\bullet), (M'^\bullet, d'^\bullet))$とする.\
-$Z$を$\mathcal{A}$の零対象とすると$(Z, 0_{Z,Z})_{n \in \mathbb{Z}}$は$\Ch^\bullet(\mathcal{A})$の零対象である.\
-$f^\bullet + g^\bullet \coloneq f^\bullet \oplus g^\bullet$とすると
-\end{proof}
