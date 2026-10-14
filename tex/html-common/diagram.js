@@ -25,6 +25,9 @@ const MODE_KEY = 'diagram-mode';
 const CAM_D = 1000; // camera distance in sphere radii; this far away the view is effectively orthographic, like the notes
 const DEFAULT_KEY = ['composite path', 'arrow it equals'];
 const DEFAULT_DEF_KEY = ['structure maps', 'defined here'];
+// `?tikz` in the address adds a Copy TikZ button: the current view as a tikzpicture for the chapter.
+// It is for the author, so readers, who arrive without it, never see the button.
+const TIKZ_MODE = new URLSearchParams(location.search).has('tikz');
 
 // ---------- vector + quaternion helpers ----------
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -104,7 +107,8 @@ function buildPage(cfg) {
   const btn = (id, label, pressed) => el('button', { class: 'plainbtn', id, type: 'button', ...(pressed == null ? {} : { 'aria-pressed': String(pressed) }), text: label });
   const controls = el('div', { class: 'controls' },
     el('p', { class: 'hint', text: 'Drag to turn · double-click to reset' }),
-    el('div', { class: 'row' }, btn('btn-reset', 'Reset view'), btn('btn-spin', 'Spin', false), btn('btn-depth', 'Depth shading', true)));
+    el('div', { class: 'row' }, btn('btn-reset', 'Reset view'), btn('btn-spin', 'Spin', false), btn('btn-depth', 'Depth shading', true),
+      ...(TIKZ_MODE ? [btn('btn-tikz', 'Copy TikZ')] : [])));
   const square = el('div', { class: 'square', id: 'square' }, canvas, controls);
   const stage = el('section', { class: 'stage', id: 'stage', 'aria-label': '3D diagram' }, square);
 
@@ -648,6 +652,123 @@ const depthBtn = document.getElementById('btn-depth');
 document.getElementById('btn-reset').addEventListener('click', () => goTo(HOME));
 spinBtn.addEventListener('click', () => { spinning = !spinning; spinBtn.setAttribute('aria-pressed', String(spinning)); });
 depthBtn.addEventListener('click', () => { shading = !shading; depthBtn.setAttribute('aria-pressed', String(shading)); need = true; });
+
+// ---------- TikZ export (?tikz) ----------
+// The view on screen as a tikzpicture, in the style of the figure in homological_algebra/ch05.tex:
+// objects as nodes, each arrow a smooth plot of its projected arc over a white halo, back arrows
+// first so the ones in front cut them, and the labels on top. The projection, the trimming at the
+// object boxes and the offsets are the canvas's own, so the figure in the PDF is the page's view.
+const TIKZ_R = 4.3;          // the sphere's radius, in cm
+const TIKZ_EX_NODE = 0.151;  // 1ex of the body font (10pt Latin Modern), in cm
+const TIKZ_EX_LABEL = 0.106; // 1ex of \scriptsize, which the arrow labels use
+const TIKZ_STEP = 0.22;      // spacing of the plot points along an arc, in cm
+const TIKZ_SHIFT = 0.085;    // one step of `offset`, in cm: tikz-cd's `shift left`, 0.56ex
+const TIKZ_NEAR = 0.3;       // no halo this close to an object, so it never erases a tip arriving there
+const TIKZ_STYLES = String.raw`  arr/.style={line width=.5pt,-{cm to}},
+  halo/.style={white,line width=3.5pt},
+  lab/.style={font=\scriptsize,execute at begin node={\setlength{\arraycolsep}{2pt}\renewcommand{\arraystretch}{.9}}},
+  desc/.style={fill=white,inner sep=1pt},
+  obj/.style={inner sep=1pt},`;
+function tikzSize(tex, plain, exCm) {
+  const L = texCache.get(tex);
+  if (L) return [L.wEx * exCm, L.hEx * exCm];
+  return [plain.length * 1.1 * exCm, 2.2 * exCm]; // MathJax not ready: a rough guess from the plain text
+}
+const tikzProj = v => { const p = qrot(q, v); return { x: p[0] * TIKZ_R, y: p[1] * TIKZ_R, z: p[2] }; };
+const tikzNum = v => (Math.abs(v) < 0.0005 ? 0 : v).toFixed(3);
+const tikzPt = p => `(${tikzNum(p.x)},${tikzNum(p.y)})`;
+// as offsetOnScreen, in TikZ's coordinates, where y points up
+function tikzOffset(P, lp, off, lw, lh) {
+  const a = P[0], b = P[P.length - 1];
+  const cx0 = b.x - a.x, cy0 = b.y - a.y, cl = Math.hypot(cx0, cy0);
+  if (cl < 0.02) return { P, lp };
+  const d = off * TIKZ_SHIFT;
+  const out = P.map((p, i) => {
+    const u = P[Math.min(i + 1, P.length - 1)], v = P[Math.max(i - 1, 0)];
+    let tx = u.x - v.x, ty = u.y - v.y, tl = Math.hypot(tx, ty);
+    if (tl < 1e-6) { tx = cx0; ty = cy0; tl = cl; }
+    return { ...p, x: p.x - d * ty / tl, y: p.y + d * tx / tl };
+  });
+  const nx = -cy0 / cl, ny = cx0 / cl;
+  const away = d + Math.sign(off) * (Math.abs(nx) * lw / 2 + Math.abs(ny) * lh / 2 + 0.05);
+  return { P: out, lp: { ...lp, x: lp.x + nx * away, y: lp.y + ny * away } };
+}
+// a polyline resampled at even spacing, ends kept
+function tikzResample(P) {
+  const d = [0];
+  for (let i = 1; i < P.length; i++) d.push(d[i - 1] + Math.hypot(P[i].x - P[i - 1].x, P[i].y - P[i - 1].y));
+  const len = d[d.length - 1], n = Math.max(2, Math.round(len / TIKZ_STEP));
+  const out = [];
+  for (let k = 0, j = 1; k <= n; k++) {
+    const t = len * k / n;
+    while (j < P.length - 1 && d[j] < t) j++;
+    const u = Math.min(1, (t - d[j - 1]) / ((d[j] - d[j - 1]) || 1));
+    out.push({ x: P[j - 1].x + (P[j].x - P[j - 1].x) * u, y: P[j - 1].y + (P[j].y - P[j - 1].y) * u, z: P[j - 1].z + (P[j].z - P[j - 1].z) * u });
+  }
+  return out;
+}
+function tikz() {
+  const box = {};
+  for (const k in VERT) {
+    const [w, h] = tikzSize(NODE_TEX[k], NODE_PLAIN[k], TIKZ_EX_NODE);
+    box[k] = { ...tikzProj(VERT[k]), hw: w / 2 + 0.12, hh: h / 2 + 0.1 };
+  }
+  const inBox = (k, m = 0) => p => Math.abs(p.x - box[k].x) < box[k].hw + m && Math.abs(p.y - box[k].y) < box[k].hh + m;
+  const nearNode = p => Object.keys(box).some(k => inBox(k, TIKZ_NEAR)(p));
+  const line = (P, style, straight) => straight
+    ? `\\draw[${style}] ${tikzPt(P[0])} -- ${tikzPt(P[P.length - 1])};`
+    : `\\draw[${style}] plot[smooth] coordinates {${P.map(tikzPt).join(' ')}};`;
+  const arrows = [], labels = [];
+  for (const e of EDGES) {
+    let P = e.pts3.map(tikzProj), lp = tikzProj(e.lab3);
+    const [lw, lh] = tikzSize(e.tex, e.plain, TIKZ_EX_LABEL);
+    if (e.off) ({ P, lp } = tikzOffset(P, lp, e.off, lw, lh));
+    P = trimPolyline(P, inBox(e.s), inBox(e.t));
+    if (!P) continue; // the two objects overlap in this view
+    P = tikzResample(P);
+    const out = [];
+    let run = [];
+    for (let i = 0; i <= P.length; i++) {
+      if (i === P.length || nearNode(P[i])) { if (run.length > 1) out.push(line(run, 'halo', e.straight)); run = []; }
+      else run.push(P[i]);
+    }
+    out.push(line(P, 'arr', e.straight));
+    arrows.push({ z: P.reduce((s, p) => s + p.z, 0) / P.length, out });
+    // an offset arrow's label sits beside it; any other breaks the arrow where it sits, as on the canvas
+    labels.push(`\\node[lab${e.off ? '' : ',desc'}] at ${tikzPt(lp)} {$${e.tex}$};`);
+  }
+  arrows.sort((a, b) => a.z - b.z);
+  const file = decodeURIComponent(location.pathname.split('/').pop() || 'the interactive page');
+  return [
+    `% exported from ${file} (?tikz); the arrows run back to front`,
+    '\\begin{tikzpicture}[', TIKZ_STYLES, ']',
+    '% objects',
+    ...Object.keys(VERT).map(k => `\\node[obj] (${k}) at ${tikzPt(box[k])} {$${NODE_TEX[k]}$};`),
+    '% arrows',
+    ...arrows.flatMap(a => a.out),
+    '% labels',
+    ...labels,
+    '\\end{tikzpicture}',
+  ].join('\n') + '\n';
+}
+const tikzBtn = document.getElementById('btn-tikz');
+if (tikzBtn) tikzBtn.addEventListener('click', async () => {
+  if (intro) { finishIntro(); q = HOME.slice(); need = true; }
+  const text = tikz();
+  const done = msg => { tikzBtn.textContent = msg; setTimeout(() => { tikzBtn.textContent = 'Copy TikZ'; }, 1800); };
+  try {
+    await navigator.clipboard.writeText(text);
+    done(texCache.size ? 'Copied' : 'Copied (sizes estimated)');
+  } catch (err) {
+    // no clipboard (some browsers over file://): show it selected, to copy by hand
+    const box = el('textarea', { class: 'tikz-out', readonly: '', 'aria-label': 'TikZ export' });
+    box.value = text;
+    box.addEventListener('blur', () => box.remove());
+    box.addEventListener('keydown', ev => { if (ev.key === 'Escape') box.remove(); });
+    document.body.append(box);
+    box.focus(); box.select();
+  }
+});
 
 // ---------- equation panel (one tab per cfg.tabs entry) ----------
 const faceBtns = [];
