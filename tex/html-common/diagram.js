@@ -246,7 +246,13 @@ function setMode(mode) {
   modeBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
   try { localStorage.setItem(MODE_KEY, mode); } catch (err) { /* storage unavailable */ }
 }
-modeBtns.forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+// cross-fade the whole page, canvas included, rather than easing each colour:
+// labels are tinted per colour, so an eased colour would re-tint every frame
+function switchMode(mode) {
+  if (!document.startViewTransition || reduceMotion.matches) { setMode(mode); return; }
+  document.startViewTransition(() => { setMode(mode); readColors(); render(); need = false; });
+}
+modeBtns.forEach(b => b.addEventListener('click', () => switchMode(b.dataset.mode)));
 try { setMode(localStorage.getItem(MODE_KEY) || 'auto'); } catch (err) { setMode('auto'); }
 
 // ---------- typeset labels (MathJax SVG -> image -> tinted canvas) ----------

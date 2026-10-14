@@ -41,6 +41,8 @@ html:root[data-mode="dark"] {
   --path: #8AA8FF; --direct: #F0A65C; color-scheme: dark;
 }
 html, body { background: var(--bg); color: var(--ink); }
+/* the Light / Dark switch cross-fades the page (diagram.js, switchMode) */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
 body { font-family: var(--font-ui); font-size: 17px; line-height: 1.45; }
 /* one-screen app: header row, then the sphere + panel block centred beneath it */
 html, body { height: 100%; }
