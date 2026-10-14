@@ -86,7 +86,7 @@ checks that a page loads the shared engine, so a page that inlines one fails.
 ### The config
 
 `tex/homological_algebra/html/biproduct-sphere.html` is the worked example, and
-uses every field.
+uses every field but two: an arrow's `offset` and the definitions tab.
 
 | field | meaning |
 | --- | --- |
