@@ -48,6 +48,9 @@ body { font-family: var(--font-ui); font-size: 17px; line-height: 1.45; }
 html, body { height: 100%; }
 .app {
   height: 100%; box-sizing: border-box; display: grid; grid-template-rows: auto minmax(0, 1fr);
+  /* capped at the window, so a wide-and-short window shrinks the sphere instead of
+     scrolling sideways (which also skewed the Light / Dark cross-fade) */
+  grid-template-columns: minmax(0, 1fr);
   padding-inline: 24px; padding-block: 14px 18px; gap: 10px;
 }
 header { position: relative; text-align: center; padding-inline: 150px; }
