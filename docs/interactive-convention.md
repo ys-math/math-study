@@ -164,6 +164,29 @@ classic relative loads, which work over `file://`. MathJax needs the network.
 Choose reduced motion in the OS settings to skip the opening animation while
 iterating.
 
+## The figure in the PDF
+
+The figure above `\Interactive` is a projection of the page, exported by the
+engine. Open the page with `?tikz` on the address
+(`biproduct-sphere.html?tikz`) and a **Copy TikZ** button joins the controls.
+It copies the view on screen as a `tikzpicture` in the style of
+`homological_algebra/ch05.tex`: the objects as nodes, each arrow a smooth plot
+of its projected arc over a white halo, the back arrows first so the ones in
+front cut them, and the labels on top. Readers arrive without `?tikz`, so they
+never see the button.
+
+The export uses the canvas's own projection, trimming at the object boxes and
+offsets, so the figure shows the page's view by construction. Rotate first if
+a view other than home reads better on paper. Copy after MathJax has
+typeset the labels: before then the object boxes are guessed from `plain`, and
+the button says so. Where the browser refuses the clipboard, which some do over
+`file://`, the text opens in a box to copy by hand.
+
+The figure keeps the quiver URL comment of its draft above it. That comment is
+the source of the objects and arrows; `python scripts/quiver.py
+tex/<slug>/chNN.tex:<line>` decodes it. The chapter is the owner's prose, so
+the owner pastes the figure.
+
 ## Renaming and deleting
 
 - **A page** renamed is its `\Interactive{}` line renamed in the same commit.

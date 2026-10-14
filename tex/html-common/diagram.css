@@ -155,3 +155,9 @@ html.intro-go header { animation: rise 0.8s cubic-bezier(.2, .7, .2, 1) both; }
 html.intro-go .panel-inner .key { animation: fadein 0.6s 1.25s both; }
 html.intro-go .groups .group { animation: rise 0.7s cubic-bezier(.2, .7, .2, 1) both; }
 html.intro-go .tabs, html.intro-go .controls { animation: fadein 0.7s 2.1s both; }
+/* the ?tikz export, shown for copying by hand when the clipboard is unavailable (diagram.js) */
+.tikz-out {
+  position: fixed; inset: 8vh 8vw; z-index: 10; padding: 12px;
+  font-family: var(--font-mono); font-size: 12px; line-height: 1.4;
+  color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+}

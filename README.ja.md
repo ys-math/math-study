@@ -84,6 +84,7 @@ CI は何かが push されるまで動かないので, 出口は `/git` だけ�
 | `cd lean && lake build` | `lean/` の Lean ライブラリをビルドします。キャッシュが温まっていれば約3秒です。`sorry` は許されており, ビルドは失敗しません。`lake --dir=lean` ではなく `cd` を使ってください。elan はツールチェーンを作業ディレクトリから読むので, レポのルートからだと気づかないうちに違う Lean を使います。`docs/git-strategy.md` の `## Gates` を参照してください |
 | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | `scripts/` のテストです。`scripts/` に何かをコミットする前に実行してください |
 | `python scripts/check_bibliography.py [<topic>]` | `tex/*/bibliography.tex` を `docs/bib-convention.md` に照らして検査します。SPDX ヘッダ, キーの形, 三行の文法, タイトルのマークアップ, 並び順, ラベル幅を見ます。構造だけを見るので, 年や出版社が正しいかどうかは分かりません |
+| `python scripts/quiver.py <file>:<line>` | 章のその行にある quiver の URL を, 対象と射の JSON に復号します。インタラクティブなページはこの下書きから作ります。`docs/interactive-convention.md` を参照してください |
 | `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py`<br>`python scripts/generate_text_meter.py` | 両方の README の生成ブロックを書き直します。普段は CI が行うので, 手で実行することはまずありません |
 
 Claude Code のスラッシュコマンド:
