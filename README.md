@@ -13,13 +13,8 @@ The PDF for each topic is linked below.
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
 * [圏論](./pdf/category_theory.pdf)
 * [可換環論](./pdf/commutative_ring_theory.pdf)
-* [微分幾何学](./pdf/differential_geometry.pdf)
-* [ガロア理論](./pdf/galois_theory.pdf)
 * [ホモロジー代数](./pdf/homological_algebra.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
-* [多様体論](./pdf/manifold.pdf)
-* [シンプレクティック多様体](./pdf/symplectic_manifold.pdf)
-* [位相幾何学](./pdf/topology.pdf)
 <!-- END PDF LINKS -->
 
 How much has been written in each topic, as a share of the whole.
@@ -28,18 +23,13 @@ comment lines.
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          █████████░░░░░░░░░░░   44.9%   65,996
-homological_algebra      ██████▏░░░░░░░░░░░░░   30.7%   45,022
-algebraic_k_theory       ██▍░░░░░░░░░░░░░░░░░   12.1%   17,748
-lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    6.9%   10,191
-commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.3%    6,325
-topology                 ▏░░░░░░░░░░░░░░░░░░░    0.5%      691
-manifold                 ▏░░░░░░░░░░░░░░░░░░░    0.4%      572
-galois_theory            ▏░░░░░░░░░░░░░░░░░░░    0.2%      313
-differential_geometry    ░░░░░░░░░░░░░░░░░░░░    0.0%        0
-symplectic_manifold      ░░░░░░░░░░░░░░░░░░░░    0.0%        0
+category_theory          █████████▏░░░░░░░░░░   45.4%   65,996
+homological_algebra      ██████▎░░░░░░░░░░░░░   31.0%   45,022
+algebraic_k_theory       ██▌░░░░░░░░░░░░░░░░░   12.2%   17,748
+lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    7.0%   10,191
+commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.4%    6,325
                                                        -------
-total                                                  146,858
+total                                                  145,282
 ```
 <!-- END TEXT METER -->
 
@@ -217,12 +207,6 @@ math-study/
 │   │   ├── bibliography.tex
 │   │   ├── ch01.tex
 │   │   └── main.tex
-│   ├── differential_geometry/
-│   │   ├── ch01.tex
-│   │   └── main.tex
-│   ├── galois_theory/
-│   │   ├── ch01.tex
-│   │   └── main.tex
 │   ├── homological_algebra/
 │   │   ├── html/
 │   │   │   └── biproduct-sphere.html
@@ -244,15 +228,6 @@ math-study/
 │   │   ├── ch01.tex
 │   │   ├── ch02.tex
 │   │   ├── ch03.tex
-│   │   └── main.tex
-│   ├── manifold/
-│   │   ├── ch01.tex
-│   │   └── main.tex
-│   ├── symplectic_manifold/
-│   │   ├── ch01.tex
-│   │   └── main.tex
-│   ├── topology/
-│   │   ├── ch01.tex
 │   │   └── main.tex
 │   ├── colophon.tex
 │   ├── index.ist
