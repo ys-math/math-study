@@ -111,7 +111,7 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | Changed | Gate |
 | --- | --- |
 | `tex/<topic>/**` | `latexmk -cd -g tex/<topic>/main.tex` for each touched topic |
-| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | the same, for all 10 topics |
+| `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | the same, for all 5 topics |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md`, `README.ja.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 
@@ -123,7 +123,7 @@ commit to amend.
 
 `-g` is not optional: latexmk caches a previous failure and reports "Nothing to
 do" for a file that does not compile. A single topic takes about 1.5 s and all
-10 topics about 15 s, so there is never a reason to skip this.
+5 topics about 8 s, so there is never a reason to skip this.
 
 Aux files and `main.pdf` are gitignored. Leave them; do not run `latexmk -c`.
 

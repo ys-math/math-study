@@ -137,15 +137,6 @@ Worth knowing without looking them up:
   advisory is narrower and worse: never repair an understated statement while
   translating it. See `docs/lean-convention.md`,
   `## What Claude may write here`.
-- **`/bib` can leave the test suite red, and that is the design.**
-  `scripts/test_new_topic.py` asserts `MAIN_TEMPLATE` reproduces certain topics'
-  `main.tex` byte for byte, so wiring a `bibliography.tex` into one of them
-  breaks it — which is the guard noticing a topic has grown past the skeleton,
-  exactly as its docstring says it should. `/bib` runs the suite, reports the
-  failure and stops there: `Edit(scripts/**)` is absent from its
-  `allowed-tools`, and clearing the guard is a shared-path change, so it takes a
-  branch and a pull request. Without that report the next `/git` fails its gate
-  on an error that looks unrelated to adding a reference.
 - **`/bib` is the only command that reaches the network.** Its `allowed-tools`
   pins `WebFetch` to `ndlsearch.ndl.go.jp`, `openlibrary.org`,
   `api.crossref.org` and `export.arxiv.org`, and there is no `WebSearch` in this
@@ -226,7 +217,7 @@ the README bot stays red until it is fixed.
 
 Two conventions keep it able to see, and both are load-bearing:
 
-- **Counts go in digits, or go away.** "all 10 topics" is checked. "Seven, in
+- **Counts go in digits, or go away.** "all 5 topics" is checked. "Seven, in
   `.claude/commands/`" was not, and was wrong within a week — as was "the six
   commands" in `CLAUDE.md`. Where a table already enumerates the things, do not
   also say how many.
@@ -260,7 +251,7 @@ The workflows in `.github/workflows/`:
 | --- | --- | --- |
 | `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` or its own file | compiles affected topics, commits `pdf/*.pdf` |
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the blocks in both READMEs, commits |
-| `validate.yml` | `pull_request` | compiles all 10 topics, runs the script tests |
+| `validate.yml` | `pull_request` | compiles all 5 topics, runs the script tests |
 | `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` or its own file | builds the Lean library through `lake` |
 | `pages.yml` | push to `main` touching `tex/*/html/**`, `tex/html-common/**` or its own file | publishes the interactive pages to GitHub Pages |
 

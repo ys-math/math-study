@@ -88,12 +88,10 @@ These are the changes that break silently, days later:
 
 - **Editing the topic skeleton** means editing `MAIN_TEMPLATE` in
   `scripts/new_topic.py` *and* every existing `tex/*/main.tex` in the same
-  commit. `scripts/test_new_topic.py` asserts the template reproduces 2 of them
-  byte for byte — `topology` and `manifold` — so a partial update passes; check
-  the rest by hand. A topic drops out of that list when its `main.tex` grows
-  past the skeleton, which is what `lambda_calculus`, `algebraic_k_theory`,
-  `category_theory` and `commutative_ring_theory` have already done and what
-  `/bib` does to a topic when it wires in a `bibliography.tex`.
+  commit. `scripts/test_new_topic.py` checks that every `main.tex` still holds
+  the template's lines in order, so a template line missing from a topic fails
+  it. A line added to every topic but not to the template passes — topics may
+  grow past the skeleton — so check that direction by hand.
 - **Adding a shared file that all topics depend on** means adding it to the
   `SHARED` regex in `.github/workflows/build-pdf.yml`. That regex is how the
   workflow decides to rebuild everything; miss it and touching the new file
@@ -113,7 +111,7 @@ These are the changes that break silently, days later:
   `docs/agent-system.md` in the same commit — and a command in the tables of
   both `README.md` and `README.ja.md` as well. `scripts/test_agent_docs.py`
   compares those tables against the directories and fails otherwise. It also checks every count written in
-  digits, which is why "all 10 topics" is spelled that way and why nothing says
+  digits, which is why "all 5 topics" is spelled that way and why nothing says
   how many commands there are: a table two lines below already does.
 - **Editing README prose** means editing `README.md` and `README.ja.md` in the
   same commit; they are translations of each other. `scripts/test_agent_docs.py`

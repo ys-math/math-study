@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 r"""Create the directory for a new topic: tex/<topic>/main.tex and its ch01.tex.
 
-Every topic in this repo has the same two-file skeleton, and its main.tex is
-byte-identical to every other one apart from \DocTitle and the tail of
-\TexRepo. Copying an existing topic by hand is easy but easy to get subtly
+Every topic in this repo starts from the same two-file skeleton, and its
+main.tex starts byte-identical to every other one apart from \DocTitle and the
+tail of \TexRepo. Copying an existing topic by hand is easy but easy to get subtly
 wrong, and two of the mistakes are only caught much later:
 
 * The topic name is interpolated into a regex in .github/workflows/build-pdf.yml,
