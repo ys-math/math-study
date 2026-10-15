@@ -286,37 +286,6 @@ in a way that looks nothing like its cause.
   from `tex/index.ist`, which is why it is the one line there with no
   `\newpage` of its own — do not add one.
 
-## The skeleton guard
-
-**Only when `main.tex` was edited.** `scripts/test_new_topic.py` asserts that
-`MAIN_TEMPLATE` in `scripts/new_topic.py` reproduces certain topics' `main.tex`
-**byte for byte**, and adding an `\input` line to one of those breaks it.
-
-Read which topics those are rather than remembering them:
-
-```bash
-grep -n 'assert_reproduces' scripts/test_new_topic.py
-```
-
-The test's own docstring says a topic is dropped from that list once its
-`main.tex` "has grown past the skeleton" — so the topic you just edited leaving
-the guard is the designed outcome, not damage. What is not this command's to do
-is perform it: `scripts/` is a shared path under `docs/git-strategy.md`, and
-`Edit(scripts/**)` is absent from `allowed-tools`.
-
-So: run the suite, and report the failure as a finding with its fix.
-
-```bash
-python -m unittest discover -s scripts -t scripts -p 'test_*.py'
-```
-
-This matters because of what the user will do next. `tex/<topic>/**` commits
-straight to `main`, so the natural move is `/git` — whose gate runs this same
-suite and will stop with an error that looks unrelated to adding a reference.
-Say plainly: the topic left the skeleton guard, `scripts/test_new_topic.py`
-must drop it, and that is a `scripts/` change, so it takes a branch and a pull
-request.
-
 ## Verifying
 
 After the edits, in this order:
@@ -335,7 +304,10 @@ After the edits, in this order:
 2. **Compile** — the same `latexmk` line. Suppress Overfull/Underfull `\hbox`
    warnings; Japanese in `jlreq` emits them constantly and they bury everything
    else.
-3. **The suite**, if `main.tex` changed — `## The skeleton guard`.
+3. **The suite**, if `main.tex` changed —
+   `python -m unittest discover -s scripts -t scripts -p 'test_*.py'`.
+   `scripts/test_new_topic.py` fails if the edit lost or reordered a line of
+   the topic skeleton.
 
 If the compile fails, say so with the `-file-line-error` lines and stop. Do not
 attempt a second round of fixes on top of a broken build.

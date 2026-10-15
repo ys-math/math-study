@@ -7,6 +7,7 @@ Run from the repo root:
 
 from __future__ import annotations
 
+import re
 import unittest
 from pathlib import Path
 
@@ -28,30 +29,32 @@ def topic_names() -> list[str]:
 
 
 class TestTemplateMatchesRepo(unittest.TestCase):
-    r"""The template must reproduce the main.tex files already in the repo.
+    r"""Every main.tex in the repo must still be the template, plus lines.
 
     This is the drift guard: if the shared conventions change (\input lines, the
     preamble path, the colophon), a hand-edited topic and a generated one would
-    silently diverge, and these are the tests that say so.
+    silently diverge, and this is the test that says so.
 
-    Three topics are deliberately not covered, for the same reason: their
-    main.tex has grown past the skeleton, which is what a topic grows into and
-    not what it is created as. lambda_calculus \input{}s three chapters;
-    algebraic_k_theory \input{}s a bibliography.tex alongside its chapter;
-    category_theory \input{}s two.
-
-    algebraic_k_theory was the only topic whose \DocTitle contains math, so
-    dropping it from the byte-identity guard would have left \texorpdfstring
-    untested. test_title_containing_math covers that path directly instead.
+    It used to demand byte-identity with the topics that had not grown, but
+    every remaining topic has: more chapters, a bibliography.tex, an
+    \Assumes{}, an appendix. Growth only ever adds lines, so the check is that
+    the template's lines appear in each main.tex in order — a topic may add
+    anything, but may not lose or reorder a line of the skeleton.
     """
 
-    def assert_reproduces(self, topic: str, title: str) -> None:
-        expected = (TEX / topic / "main.tex").read_text(encoding="utf-8")
-        self.assertEqual(render_main(topic, title), expected)
+    def test_every_topic_extends_the_skeleton(self):
+        for main in sorted(TEX.glob("*/main.tex")):
+            with self.subTest(topic=main.parent.name):
+                text = main.read_text(encoding="utf-8")
+                title = re.search(r"\\newcommand\{\\DocTitle\}\{(.*)\}\n", text).group(1)
+                lines = iter(text.splitlines())
+                # `in` on an iterator consumes it, so this is a subsequence test.
+                missing = [ln for ln in render_main(main.parent.name, title).splitlines() if ln not in lines]
+                self.assertEqual(missing, [], f"{main.parent.name}/main.tex lost skeleton lines")
 
-    def test_plain_title(self):
-        self.assert_reproduces("topology", "位相幾何学")
-        self.assert_reproduces("manifold", "多様体論")
+    def test_there_are_topics_to_check(self):
+        """Guards the glob: a moved tex/ would silently check nothing."""
+        self.assertTrue(list(TEX.glob("*/main.tex")))
 
     def test_title_containing_math(self):
         # Not asserted against a topic in the repo: algebraic_k_theory is the
@@ -146,7 +149,7 @@ class TestValidateTopic(unittest.TestCase):
 
     def test_rejects_taken_names(self):
         with self.assertRaises(InvalidTopic):
-            validate_topic("topology", topic_names())
+            validate_topic("category_theory", topic_names())
 
 
 class TestValidateTitle(unittest.TestCase):
