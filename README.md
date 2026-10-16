@@ -41,30 +41,9 @@ math-study/
 │   ├── interactive-convention.md
 │   ├── issue-convention.md
 │   ├── label-convention.md
-│   ├── lean-convention.md
 │   ├── naming-convention.md
-│   ├── repo-structure.md
 │   ├── routing-rule.ebnf
 │   └── working-loop.ebnf
-├── lean/
-│   ├── Math/
-│   │   ├── Learn/
-│   │   │   ├── MIL/
-│   │   │   │   └── C02Basics.lean
-│   │   │   └── TPiL/
-│   │   │       ├── C02DependentTypeTheory.lean
-│   │   │       ├── C03PropositionsAndProofs.lean
-│   │   │       ├── C04QuantifiersAndEquality.lean
-│   │   │       ├── C05Tactics.lean
-│   │   │       ├── C06InteractingWithLean.lean
-│   │   │       └── C07InductiveTypes.lean
-│   │   └── Study/
-│   │       └── CategoryTheory/
-│   │           └── C01.lean
-│   ├── Math.lean
-│   ├── lake-manifest.json
-│   ├── lakefile.toml
-│   └── lean-toolchain
 ├── scripts/
 │   ├── check_bibliography.py
 │   ├── generate_pdf_links.py
@@ -73,6 +52,7 @@ math-study/
 │   ├── latex_unicode.py
 │   ├── new_topic.py
 │   ├── quiver.py
+│   ├── quiver_macros.py
 │   ├── readme_block.py
 │   ├── test_agent_docs.py
 │   ├── test_assumes.py
@@ -84,6 +64,7 @@ math-study/
 │   ├── test_latex_unicode.py
 │   ├── test_new_topic.py
 │   ├── test_quiver.py
+│   ├── test_quiver_macros.py
 │   └── test_readme_block.py
 ├── tex/
 │   ├── algebraic_k_theory/
@@ -134,7 +115,6 @@ math-study/
 │   └── preamble.tex
 ├── CLAUDE.md
 ├── LICENSE
-├── LICENSE-APACHE-2.0
 ├── LICENSE-CC-BY-NC-ND-4.0
 ├── README.ja.md
 └── README.md
