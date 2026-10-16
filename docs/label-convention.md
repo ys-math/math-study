@@ -9,9 +9,7 @@ The day-to-day version is the `/label` command, which implements this document;
 read on when you are naming a label by hand, or when you want the reasoning.
 
 **Names of files and directories are `docs/naming-convention.md`**, not this
-document. The two meet at one point: a label body doubles as the name of the
-Lean declaration formalising it, and that declaration lives in a file whose name
-the other document fixes.
+document.
 
 Two facts drive the whole thing:
 
@@ -119,7 +117,7 @@ description like `characterization_of_projective_modules` does not.
 
 ## The body — remarks and examples
 
-Neither is a Lean declaration, so neither casing nor the connectives apply.
+Neither names a definition or a statement, so neither casing nor the connectives apply.
 Plain `snake_case` describing the subject:
 
 ```

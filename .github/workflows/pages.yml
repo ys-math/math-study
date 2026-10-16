@@ -16,7 +16,7 @@ name: Pages
 # Deploying from a branch was not an option: Pages can serve a branch only from
 # its root or docs/, and docs/ holds the specifications.
 #
-# It commits nothing, so like lean.yml it cannot take part in the push cascade.
+# It commits nothing, so it cannot take part in the push cascade.
 on:
   push:
     branches: [main]

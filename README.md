@@ -2,12 +2,7 @@
 
 English | [日本語](./README.ja.md)
 
-This repo is for learning, hands-on, around one axis: writing mathematics notes.
-Along the way it is a place to learn LaTeX, Lean, Git, Claude, and how a
-workflow is put together, and new features are added or the existing system is
-reworked as the note-taking calls for it.
-
-The PDF for each topic is linked below.
+## PDF
 
 <!-- BEGIN PDF LINKS -->
 * [代数的K理論](./pdf/algebraic_k_theory.pdf)
@@ -16,10 +11,6 @@ The PDF for each topic is linked below.
 * [ホモロジー代数](./pdf/homological_algebra.pdf)
 * [λ計算](./pdf/lambda_calculus.pdf)
 <!-- END PDF LINKS -->
-
-How much has been written in each topic, as a share of the whole.
-It counts the characters of the chapter sources `tex/*/ch*.tex`, not counting
-comment lines.
 
 <!-- BEGIN TEXT METER -->
 ```
@@ -32,97 +23,6 @@ commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░�
 total                                                  146,110
 ```
 <!-- END TEXT METER -->
-
-## Prerequisites
-
-Nothing here has a lockfile, so this is the list.
-
-| Need | For | Notes |
-| --- | --- | --- |
-| A TeX Live distribution with LuaLaTeX and `latexmk` | building any PDF | `.latexmkrc` sets `$pdf_mode = 4`, so LuaLaTeX writes the PDF with no DVI step |
-| Python 3 | `scripts/` | Standard library only — there is no `requirements.txt` and nothing to install |
-| [`elan`](https://github.com/leanprover/elan) | `lean/` | It reads `lean/lean-toolchain` and fetches the pinned `leanprover/lean4:v4.32.2` itself |
-| [`gh`](https://cli.github.com/), authenticated | `/review-notes`, `/verify-issues`, `/issues`, `/tutor`, `/formalize`, `/git`, `/git-merge`, `/delete-topic`, `/watch-ci` | Findings live as GitHub issues; the local `issues/` worklist is gitignored |
-
-Run `cd lean && lake exe cache get` before your first `cd lean && lake build`.
-Mathlib is pinned to a release tag rather than `master` precisely so that the
-prebuilt cache always hits — without it you compile Mathlib from source, which
-takes hours instead of seconds.
-
-## The working loop
-
-A sitting in this repo, as a grammar. Blue boxes are slash commands; amber ones
-are the parts no command does for you, which is where the time actually goes.
-
-![The working loop](./docs/images/working-loop.svg)
-
-Read it as: do any amount of work in any order, then land it. The loop repeats
-because a chapter is rarely finished in one pass — write, review, fix, write
-again — and `/git` is the only way out because CI does not run until something
-is pushed.
-
-The grammar is `docs/working-loop.ebnf`, rendered with
-[syntax-diagram-generator](https://github.com/ys-math/syntax-diagram-generator).
-Edit the grammar, re-render, and commit both.
-`scripts/test_agent_docs.py` fails if it names a command that does not exist.
-
-Two commands are deliberately not on the diagram: `/delete-topic` is an exit
-rather than a step, and `/tutor` is an interruption rather than one.
-`/delete-topic` is also the only command that commits and pushes on its own.
-
-## Commands
-Run everything from the repo root.
-
-| Command | What it does |
-| --- | --- |
-| `python scripts/new_topic.py <topic> --title <title>` | Creates `tex/<topic>/` with a `main.tex` and a `ch01.tex` holding just its CC BY-NC-ND SPDX header. The slug form is in `docs/naming-convention.md` and the script enforces it; the title is the `\DocTitle`, which becomes the link label in the PDF list above |
-| `latexmk -cd -g tex/<topic>/main.tex` | Compiles the topic's PDF locally. `-cd` enters the topic directory so `\input{../preamble.tex}` resolves; `-g` forces a rebuild past latexmk's cache. See `docs/git-strategy.md`, `## Gates` |
-| `cd lean && lake build` | Builds the Lean library in `lean/`. About 3 seconds warm; `sorry` is allowed and does not fail it. `cd`, not `lake --dir=lean`: elan reads the toolchain from the working directory, so from the repo root it silently uses the wrong Lean. See `docs/git-strategy.md`, `## Gates` |
-| `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | Tests for `scripts/`; run before committing anything there |
-| `python scripts/check_bibliography.py [<topic>]` | Checks `tex/*/bibliography.tex` against `docs/bib-convention.md` — the SPDX header, the key shape, the three-line grammar, the title markup, the ordering and the label width. Structure only: it cannot tell whether a year or a publisher is right |
-| `python scripts/quiver.py <file>:<line>` | Decodes the quiver URL on that line of a chapter into its objects and arrows, as JSON: the draft an interactive page starts from. See `docs/interactive-convention.md` |
-| `python scripts/generate_pdf_links.py`<br>`python scripts/generate_tree.py`<br>`python scripts/generate_text_meter.py` | Rewrite the generated blocks in both READMEs. CI normally does this, so you rarely need to |
-
-Claude Code slash commands:
-
-| Command | What it does |
-| --- | --- |
-| `/new-topic <topic> <title>` | Creates a topic by running `new_topic.py` above |
-| `/delete-topic <topic>` | Deletes a topic — `tex/<topic>/`, `pdf/<topic>.pdf`, its Lean mirror and that mirror's `import`, its open review issues and its local artifacts — then commits and pushes the removal. Renaming is still by hand |
-| `/label [topic ...]` | Proposes `\label{}` names for a topic's theorem environments per `docs/label-convention.md`, and applies the ones you pick |
-| `/bib <topic> <citation>` | Files a reference you supply into `tex/<topic>/bibliography.tex` per `docs/bib-convention.md`, creating that file and `\input`ing it from `main.tex` before the colophon when the topic has none. It inserts no `\cite{}` — the citation is yours, and so is the sentence that cites it |
-| `/formalize <topic> [label ...]` | Mirrors a topic's labelled theorems into `lean/Math/Study/<Topic>.lean` as Lean statements proved by `sorry`, reusing the label body as the declaration name. It never writes a proof |
-| `/tutor <question>` | Answers a question about the mathematics, the LaTeX or the Lean, grounded in the passage it is about: finds the anchor and says where it is reading, asks at most two clarifying questions, then answers in full. It cannot write — `disallowed-tools` removes `Write` and `Edit` — so every fix is yours to type |
-| `/review-notes [topic ...]` | Reviews a topic's notes for mathematical correctness, typos and LaTeX health, then files the findings you pick as GitHub issues per `docs/issue-convention.md`. Skips what an open issue already covers; closes nothing |
-| `/issues [topic ...]` | Renders a topic's open review issues as `issues/<topic>.md` (gitignored, overwritten on every run) with links that open your working copy at the line |
-| `/verify-issues [topic \| #N ...]` | Checks whether a topic's open review issues are actually true, re-reading the sources before the issue's own reasoning. Closes the ones that are not — `--reason "not planned"`, with the refuting line in the comment — fixes a body that misdescribes a real defect, and leaves everything else alone |
-| `/audit [file ...]` | The same, for the machinery rather than the mathematics: checks the commands, instructions and hooks for contradictions, stale claims and dead steps, writing `.claude/audits/audit.md` (gitignored, overwritten on every run). Then applies the fixes you name — and only those, leaving the commit to `/git` |
-| `/git [description]` | Syncs, commits and pushes per `docs/git-strategy.md` |
-| `/git-merge [PR number]` | Re-runs a pull request's gates, then squash-merges it |
-| `/watch-ci [sha]` | Reports the CI runs for a commit and stops. Built to run under `/loop` |
-
-`docs/agent-system.md` maps the whole setup — these commands, the instruction
-files, the hooks that enforce the repo's rules, and how the CI cascade
-terminates.
-
-To add a chapter, create `ch02.tex` and add `\input{ch02.tex}` to that topic's
-`main.tex` by hand; nothing does this automatically. Copy the
-`% SPDX-License-Identifier: CC-BY-NC-ND-4.0` line from `ch01.tex` while you are
-there — only the generated `ch01.tex` gets it for free.
-
-To add a Lean file, create it under `lean/Math/` and add its `import` to
-`lean/Math.lean` in the same commit; nothing does this automatically either, and
-a module nobody imports is invisible to `lake build`. It needs the Apache header
-on line 1 — `docs/lean-convention.md` has the text.
-
-Once you push to `main`, CI takes over: `build-pdf.yml` commits
-`pdf/<topic>.pdf`, `update-readme.yml` regenerates the PDF list, the text meter
-and the directory tree below — in this file and in `README.ja.md` — and
-`lean.yml` builds `lean/` if you touched it.
-The lists are generated — edit the `.tex` sources, not them. The prose around
-them is not: the two READMEs are translations of each other, so a change to one
-is made to both in the same commit. The tree lists `lean/Math/` in full, so a
-new chapter under `Learn/MIL/` or `Learn/TPiL/` shows up in it.
 
 ## Directory structure
 <!-- BEGIN TREE -->
@@ -272,34 +172,12 @@ The rules behind this are in `CLAUDE.md`, which is what Claude reads first.
 ## License
 [![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]
 
-This repository is triple-licensed. The table below is authoritative: it matches
-on paths, so a file is covered whether or not it carries a header.
-
 | Path | License |
 | --- | --- |
 | `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
 | `lean/**` | [Apache 2.0][apache] |
 | `tex/html-common/latin-modern.css` | [GUST Font License][gust] |
 | everything else | [MIT][mit] |
-
-The mathematics — the chapter sources, the PDFs built from them and the
-interactive diagram pages — is
-[Creative Commons Attribution-NonCommercial-NoDerivs 4.0 International][cc-by-nc-nd].
-
-The Lean library is [Apache 2.0][apache], matching the ecosystem it is written
-against: Mathlib, Mathematics in Lean and Theorem Proving in Lean 4 are all
-Apache 2.0, and Mathlib requires it of contributions. The CC terms would not
-work here anyway — NoDerivs on source nobody may modify is source nobody may
-use. Every `.lean` file carries the header, which names
-`LICENSE-APACHE-2.0` rather than `LICENSE`, because this repo's `LICENSE` is the
-MIT text.
-
-Everything that builds it is MIT: `scripts/`, `.github/`, `.latexmkrc`, and the
-shared `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, the interactive
-engine in `tex/html-common/` and every `tex/*/main.tex`, which `new_topic.py`
-generates. Reuse the build system freely. The one exception is the Latin Modern
-fonts embedded in `tex/html-common/latin-modern.css`, which are third-party and
-keep their own licence.
 
 Full texts: [`LICENSE`](./LICENSE) (MIT),
 [`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0) and

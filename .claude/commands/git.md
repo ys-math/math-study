@@ -116,7 +116,7 @@ leaves nothing to undo. Abort on the first failure and report it verbatim.
 | `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 
 The doc paths are in that row because `scripts/test_agent_docs.py` checks them:
-it compares the command tables in both READMEs and `docs/agent-system.md`
+it compares the command table in `docs/agent-system.md`
 against `.claude/commands/`, and every count written in digits against what it
 counts. Adding a command without listing it fails here, before there is a
 commit to amend.

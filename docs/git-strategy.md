@@ -263,7 +263,7 @@ Before any commit, the relevant checks run locally:
 | `lean/**` | build the Lean library | ~3 s warm |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`
-is one of them: it holds the command tables in both READMEs and
+is one of them: it holds the command table in
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
 count written in digits — "all 5 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as

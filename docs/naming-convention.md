@@ -196,9 +196,9 @@ SPDX identifier's own spelling, so that a header saying
 lookup apart.
 
 A command's filename **is** its slash command — `.claude/commands/formalize.md`
-is `/formalize` — and `scripts/test_agent_docs.py` holds the tables in
-both READMEs and `docs/agent-system.md` to the directory on that basis. A command
-file renamed is a command renamed, and three tables go stale in the same commit.
+is `/formalize` — and `scripts/test_agent_docs.py` holds the table in
+`docs/agent-system.md` to the directory on that basis. A command file renamed is
+a command renamed, and that table goes stale in the same commit.
 
 ## Renaming
 
@@ -211,7 +211,7 @@ each rename costs:
 | a chapter file | the `\input{}` line in `main.tex` | the chapter silently vanishes from the PDF |
 | a Lean module | its `import` in `lean/Math.lean` | `lake build` fails — the loud one |
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
-| a command file | the tables in both READMEs and `docs/agent-system.md` | the same test fails |
+| a command file | the table in `docs/agent-system.md` | the same test fails |
 | an interactive page | its `\Interactive{}` line, in the same commit | `scripts/test_interactive.py` fails; the published URL changes either way, and nothing redirects the old one |
 
 Two of these are caught by `test_agent_docs.py`, the `docs/` file and the
