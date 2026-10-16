@@ -14,13 +14,13 @@
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          █████████░░░░░░░░░░░   45.2%   65,996
-homological_algebra      ██████▎░░░░░░░░░░░░░   31.4%   45,850
-algebraic_k_theory       ██▍░░░░░░░░░░░░░░░░░   12.1%   17,748
-lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    7.0%   10,191
+category_theory          ████████▉░░░░░░░░░░░   44.6%   65,996
+homological_algebra      ██████▌░░░░░░░░░░░░░   32.3%   47,835
+algebraic_k_theory       ██▍░░░░░░░░░░░░░░░░░   12.0%   17,748
+lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    6.9%   10,191
 commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.3%    6,325
                                                        -------
-total                                                  146,110
+total                                                  148,095
 ```
 <!-- END TEXT METER -->
 
@@ -31,8 +31,7 @@ math-study/
 ├── docs/
 │   ├── images/
 │   │   ├── audit-workflow.svg
-│   │   ├── routing-rule.svg
-│   │   └── working-loop.svg
+│   │   └── routing-rule.svg
 │   ├── agent-system.md
 │   ├── audit-workflow.ebnf
 │   ├── bib-convention.md
@@ -42,8 +41,7 @@ math-study/
 │   ├── issue-convention.md
 │   ├── label-convention.md
 │   ├── naming-convention.md
-│   ├── routing-rule.ebnf
-│   └── working-loop.ebnf
+│   └── routing-rule.ebnf
 ├── scripts/
 │   ├── check_bibliography.py
 │   ├── generate_pdf_links.py
@@ -90,7 +88,8 @@ math-study/
 │   │   └── main.tex
 │   ├── homological_algebra/
 │   │   ├── html/
-│   │   │   └── biproduct-sphere.html
+│   │   │   ├── matrix-sphere.html
+│   │   │   └── pullback.html
 │   │   ├── ch01.tex
 │   │   ├── ch02.tex
 │   │   ├── ch03.tex
@@ -99,6 +98,7 @@ math-study/
 │   │   ├── ch06.tex
 │   │   ├── ch07.tex
 │   │   ├── ch08.tex
+│   │   ├── ch09.tex
 │   │   ├── chA.tex
 │   │   └── main.tex
 │   ├── html-common/
