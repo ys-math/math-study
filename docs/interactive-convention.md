@@ -22,7 +22,7 @@ tex/
 
 **A page belongs to its topic.** It sits in `tex/<slug>/html/`, so it moves
 with the topic on a rename and goes with it on a delete. `<name>` is
-kebab-case (`biproduct-sphere`), the same as the other web-facing names in
+kebab-case (`matrix-sphere`), the same as the other web-facing names in
 `docs/naming-convention.md`.
 
 **`tex/html-common/` is not a topic.** The hyphen guarantees it: a topic slug
@@ -66,7 +66,7 @@ is in one file and nowhere else. The UI is in English.
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Biproduct Sphere</title>
+<title>Matrix Sphere</title>
 <link rel="stylesheet" href="../../html-common/latin-modern.css">
 <link rel="stylesheet" href="../../html-common/diagram.css">
 <script src="../../html-common/diagram.js"></script>
@@ -85,7 +85,7 @@ checks that a page loads the shared engine, so a page that inlines one fails.
 
 ### The config
 
-`tex/homological_algebra/html/biproduct-sphere.html` is the worked example, and
+`tex/homological_algebra/html/matrix-sphere.html` is the worked example, and
 uses every field but two: an arrow's `offset` and the definitions tab.
 
 | field | meaning |
@@ -124,7 +124,7 @@ face but never turns the view.
 
 ```latex
 \begin{tikzpicture} … \end{tikzpicture}
-\Interactive{biproduct-sphere}
+\Interactive{matrix-sphere}
 ```
 
 On its own line, directly after the figure, in a chapter of the same topic.
@@ -168,7 +168,7 @@ iterating.
 
 The figure above `\Interactive` is a projection of the page, exported by the
 engine. Open the page with `?tikz` on the address
-(`biproduct-sphere.html?tikz`) and a **Copy TikZ** button joins the controls.
+(`matrix-sphere.html?tikz`) and a **Copy TikZ** button joins the controls.
 It copies the view on screen as a `tikzpicture` in the style of
 `homological_algebra/ch05.tex`: the objects as nodes, each arrow a smooth plot
 of its projected arc over a white halo, the back arrows first so the ones in
