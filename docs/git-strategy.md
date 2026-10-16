@@ -39,7 +39,6 @@ could see. The three routes do not change. The grammar is
 | Path | Where it goes | Why |
 | --- | --- | --- |
 | `tex/<topic>/**` | straight to `main` | Blast radius is one document. |
-| `lean/Math/**` | straight to `main` | Blast radius is one module. |
 | `README.md`, `README.ja.md`, `CLAUDE.md`, `docs/**` | straight to `main` | Prose; nothing compiles it. |
 | `.claude/**` | straight to `main` | Changes how Claude behaves, not what builds. |
 | `scripts/**` | branch + PR | A break here silently stops the README from regenerating. |
@@ -49,7 +48,6 @@ could see. The three routes do not change. The grammar is
 | `tex/colophon.tex` | branch + PR | `\input` by all 5 topics. |
 | `tex/index.ist` | branch + PR | The index style file every topic's 索引 is built with. |
 | `tex/html-common/**` | branch + PR | The engine every interactive page loads (`docs/interactive-convention.md`). |
-| `lean/lakefile.toml`, `lean/lean-toolchain`, `lean/lake-manifest.json` | branch + PR | A bad Mathlib bump breaks every proof at once. |
 | everything else | straight to `main` | Blast radius is nothing that builds. |
 
 The rule is a lookup, not a judgment call. That is deliberate: `/git` evaluates
@@ -153,10 +151,10 @@ shape for free.
 
 `Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>` — the model name being
 whichever model made the commit — goes on commits Claude actually authored — `scripts/`, `.github/`, `docs/`, `.claude/`, both READMEs, `CLAUDE.md`, the shared
-build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, the
-interactive engine `tex/html-common/`, and `lean/`'s build configuration.
+build files `tex/preamble.tex`, `tex/colophon.tex` and `tex/index.ist`, and the
+interactive engine `tex/html-common/`.
 
-It never goes on `tex/<topic>/**` or `lean/Math/**`. The mathematics is the repo owner's, and
+It never goes on `tex/<topic>/**`. The mathematics is the repo owner's, and
 `/git` frequently commits prose that Claude only transported. A trailer there
 would be false.
 
@@ -230,10 +228,6 @@ The other two commit nothing, so they stay out of that entirely. `validate.yml`
 runs on `pull_request`: it compiles all 5 topics and runs the script tests. It
 exists because branches are reserved for exactly the changes that can break
 every topic, and before it those changes were the only ones with no CI at all.
-`lean.yml` runs on both a push to `main` and a pull request, filtered to
-`lean/**` — Lean is the only half of the repo whose sources go straight to
-`main` while its build configuration goes through a branch, so it is the only
-one that needs watching on both paths.
 
 ## The commands
 
@@ -260,14 +254,13 @@ Before any commit, the relevant checks run locally:
 | `tex/<topic>/**` | compile that topic | ~1.5 s |
 | `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 5 topics | ~12 s |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md`, `README.ja.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` | ~1 s |
-| `lean/**` | build the Lean library | ~3 s warm |
 
 The documentation paths run the tests too, because `scripts/test_agent_docs.py`
 is one of them: it holds the command table in
 `docs/agent-system.md` to what is actually in `.claude/commands/`, and every
 count written in digits — "all 5 topics", above — to what it counts.
 **This is the authoritative spelling of that invocation**, on the same terms as
-the two below: `CLAUDE.md`, `README.md`, `/bib`, `/git`, `/git-merge` and
+the one below: `CLAUDE.md`, `README.md`, `/bib`, `/git`, `/git-merge` and
 `/audit` print it verbatim and change with it, and `validate.yml`,
 `update-readme.yml` and the `scripts/test_*.py` docstrings hold the literal
 string because they execute or document it.
@@ -303,46 +296,6 @@ supposed to be reading carefully, so leave `-r` off.
 
 Aux files and `main.pdf` are gitignored; leave them, and do not run
 `latexmk -c`. The next build reuses them.
-
-```bash
-cd lean && lake build
-```
-
-**This is the authoritative spelling of that invocation**, on the same terms as
-the one above; `CLAUDE.md`, `README.md` and `/tutor` print it verbatim and
-change with it, and `.claude/settings.json` holds it as an exact-match
-permission rule — as does the `allowed-tools` line of every command that runs
-the gate — so a change here that misses one turns the Lean gate into a
-permission prompt. `docs/lean-convention.md` and `/formalize` point here rather
-than restating it.
-
-**It is `cd lean`, not `lake --dir=lean`, and the difference is not cosmetic.**
-`--dir` tells Lake where the package is, but `lake` and `lean` are elan shims,
-and **elan chooses the toolchain from the working directory** — it looks for a
-`lean-toolchain` there and in its ancestors, never at `--dir`. The repo root has
-no `lean-toolchain`, so from the root elan falls back to its default `stable`
-and compiles the revisions pinned in `lake-manifest.json` with whatever Lean is
-current. That is not hypothetical: it is why `lake --dir=lean build` failed here
-with ten errors inside Batteries, Qq, ProofWidgets and Mathlib core, none of
-them anything to do with the file being gated, while `cd lean` — which puts
-`lean/lean-toolchain` on the search path — built the same tree green.
-
-So a failure in this gate that names an upstream package is the toolchain, not
-your proof. Check `lean --version` from inside `lean/` against
-`lean/lean-toolchain` before believing it.
-
-`lean.yml` is immune and needs no equivalent fix: `lean-action` takes
-`lake-package-directory: lean` and installs the toolchain named there, and a
-fresh runner has no stray default to fall back to. This is a local-gate problem
-only.
-
-There is no `-g` equivalent and none is wanted — Lean's incremental build is
-trustworthy, which is what keeps this gate at three seconds instead of an hour.
-
-The build is green with `sorry` in it, deliberately; `docs/lean-convention.md`
-owns that rule and the rest of what lives under `lean/`. `lean/.lake/` is
-gitignored and holds Mathlib — several gigabytes. Leave it, exactly as with the
-aux files: `lake clean` costs an afternoon to undo.
 
 ### The local gate is necessary, not sufficient
 

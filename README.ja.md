@@ -149,9 +149,6 @@ math-study/
   `tex/*/ch*.tex` の文章, つまり PDF に載っている定義, 定理, 証明, 例はすべて著者が書いています。
   Claude はそれを書くことも書き直すこともしません。
   `/review-notes` はノートを読んで見つけたことを GitHub の issue にするだけで, どれをどう直すかは著者が決めます。
-- **Lean の証明も著者のものです。**
-  `/formalize` はラベル付きの命題を `sorry` を証明として `lean/Math/Study/` に写すことがありますが, `by` より後ろはすべて著者のもので, `lean/Math/Learn/` は丸ごと著者のものです。
-  前者は `lean/Math/Study/` の下で `guard-edits.sh` が強制しています。
 - **ツール類はおもに Claude のものです。**
   `scripts/`, `.github/`, `docs/`, `.claude/`, 両方の README, 共有の `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist` は大部分を Claude が書いています。
 - **どちらが書いたかは `git log` でコミット単位で分かります。**
@@ -163,26 +160,22 @@ math-study/
 この背後にあるルールは, Claude が最初に読む `CLAUDE.md` にあります。
 
 ## ライセンス
-[![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]
+[![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
 
 | パス | ライセンス |
 | --- | --- |
 | `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
-| `lean/**` | [Apache 2.0][apache] |
 | `tex/html-common/latin-modern.css` | [GUST Font License][gust] |
 | それ以外すべて | [MIT][mit] |
 
 全文: [`LICENSE`](./LICENSE) (MIT),
-[`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0),
-[`LICENSE-APACHE-2.0`](./LICENSE-APACHE-2.0)
+[`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0)
 
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-image]][cc-by-nc-nd]
 
 [mit]: https://opensource.org/licenses/MIT
 [gust]: https://www.gust.org.pl/projects/e-foundry/licenses
 [mit-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
-[apache]: https://www.apache.org/licenses/LICENSE-2.0
-[apache-shield]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
 [cc-by-nc-nd]: http://creativecommons.org/licenses/by-nc-nd/4.0/
 [cc-by-nc-nd-image]: https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png
 [cc-by-nc-nd-shield]: https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg

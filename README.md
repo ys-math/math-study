@@ -151,10 +151,6 @@ line between what it writes and what the author writes is drawn on purpose.
   Claude does not write or rewrite it. `/review-notes` reads the notes and files
   what it finds as GitHub issues; which of those get fixed, and how, is the
   author's call.
-- **So are the Lean proofs.** `/formalize` may transcribe a labelled statement
-  into `lean/Math/Study/` with `sorry` as its proof; everything after `by` is
-  the author's, and so is all of `lean/Math/Learn/`. `guard-edits.sh` enforces
-  the first half under `lean/Math/Study/`.
 - **The tooling is mostly Claude's.** `scripts/`, `.github/`, `docs/`,
   `.claude/`, both READMEs, and the shared `tex/preamble.tex`,
   `tex/colophon.tex` and `tex/index.ist` are largely written by Claude.
@@ -170,26 +166,22 @@ line between what it writes and what the author writes is drawn on purpose.
 The rules behind this are in `CLAUDE.md`, which is what Claude reads first.
 
 ## License
-[![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd] [![Apache 2.0][apache-shield]][apache]
+[![MIT][mit-shield]][mit] [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
 
 | Path | License |
 | --- | --- |
 | `tex/*/ch*.tex`, `tex/*/bibliography.tex`, `tex/*/html/*.html`, `pdf/*.pdf` | [CC BY-NC-ND 4.0][cc-by-nc-nd] |
-| `lean/**` | [Apache 2.0][apache] |
 | `tex/html-common/latin-modern.css` | [GUST Font License][gust] |
 | everything else | [MIT][mit] |
 
-Full texts: [`LICENSE`](./LICENSE) (MIT),
-[`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0) and
-[`LICENSE-APACHE-2.0`](./LICENSE-APACHE-2.0).
+Full texts: [`LICENSE`](./LICENSE) (MIT) and
+[`LICENSE-CC-BY-NC-ND-4.0`](./LICENSE-CC-BY-NC-ND-4.0).
 
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-image]][cc-by-nc-nd]
 
 [mit]: https://opensource.org/licenses/MIT
 [gust]: https://www.gust.org.pl/projects/e-foundry/licenses
 [mit-shield]: https://img.shields.io/badge/License-MIT-yellow.svg
-[apache]: https://www.apache.org/licenses/LICENSE-2.0
-[apache-shield]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
 [cc-by-nc-nd]: http://creativecommons.org/licenses/by-nc-nd/4.0/
 [cc-by-nc-nd-image]: https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png
 [cc-by-nc-nd-shield]: https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg

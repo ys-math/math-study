@@ -73,7 +73,7 @@ In this order, because each layer makes claims about the ones after it:
 
    `guard-edits.sh` needs one thing more: it exits at its `[ -f "$path" ]` guard
    unless `file_path` names a file that exists, so stdin alone reports every
-   case as allowed — including a proof written into `lean/Math/Study/`. Write a
+   case as allowed — including a chapter missing its licence header. Write a
    fixture under `.claude/audits/fixtures/<rel path>` and pass that directory as
    `cwd`; then its rules are entered.
 6. `.github/workflows/*.yml` — what happens with nobody watching.

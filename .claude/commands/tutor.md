@@ -1,11 +1,11 @@
 ---
-description: Consult about the mathematics, the LaTeX or the Lean in this repo, grounded in the passage you are actually asking about
+description: Consult about the mathematics or the LaTeX in this repo, grounded in the passage you are actually asking about
 argument-hint: "<question>  (plain language — the anchor is inferred and shown)"
-allowed-tools: Read, Glob, Grep, Bash(gh issue list:*), Bash(latexmk:*), Bash(cd lean && lake build), Bash(git rev-parse:*)
+allowed-tools: Read, Glob, Grep, Bash(gh issue list:*), Bash(latexmk:*), Bash(git rev-parse:*)
 disallowed-tools: Write, Edit
 ---
 
-Answer a question about this repo's mathematics, its LaTeX or its Lean — after
+Answer a question about this repo's mathematics or its LaTeX — after
 finding the passage it is about, and after asking what the user already thinks.
 
 Arguments given: $ARGUMENTS
@@ -14,8 +14,7 @@ Arguments given: $ARGUMENTS
 and it is the only command here that uses that field; every other "never touches
 X" in `docs/agent-system.md` is prose the reader has to trust. It is mechanical
 here because the whole premise is that the user types the mathematics. A
-`/tutor` that could patch a proof would be a slower `/formalize` with the fence
-taken out.
+`/tutor` that could patch a chapter would take the writing out of their hands.
 
 English structure, Japanese mathematics, per `docs/issue-convention.md`
 `## Language`. The same rule `/review-notes` and `/issues` follow, for the same
@@ -25,7 +24,7 @@ language alone.
 
 ## What it is for
 
-Three domains: **the mathematics**, **the LaTeX**, **the Lean**.
+Two domains: **the mathematics** and **the LaTeX**.
 
 A question about the machinery — the git strategy, `scripts/`, CI, how to add a
 chapter — is not a tutor question. Answer it plainly in a line or two, name the
@@ -42,11 +41,11 @@ The question names the mathematics, not the file. Locate it before reading
 anything at length.
 
 ```bash
-grep -rn "<the distinctive term>" tex/ lean/
+grep -rn "<the distinctive term>" tex/
 ```
 
 Prefer terms that will not appear everywhere: a theorem name, a notation, a
-`\label{}` body, a Lean declaration, the literal text of an error message.
+`\label{}` body, the literal text of an error message.
 Japanese terms grep as well as English ones and are usually the more
 distinctive of the two in these notes.
 
@@ -76,7 +75,6 @@ around it. Beyond that, climb a rung only when the question needs it:
 | --- | --- | --- |
 | `tex/preamble.tex` | the notation looks wrong | the theorem environments and the shared macros live there; without it a house convention reads as an inconsistency |
 | the topic's open issues | whenever the topic is known | `gh issue list --label "topic:<topic>" --state open --json number,title,body` |
-| the Lean mirror | the anchor carries a `\label{}` | `lean/Math/Study/<Topic>.lean` — the declaration sharing the label body, per `docs/lean-convention.md` `## The shared name` |
 | a `docs/*-convention.md` | the question is about form | the one that owns it; `docs/agent-system.md` says which |
 
 **The issues rung is the cheap one that changes the answer.** If
@@ -97,19 +95,13 @@ than reasoning about the source.
 
 ```bash
 latexmk -cd -g tex/<topic>/main.tex
-cd lean && lake build
 ```
 
-Both are the repo's own gates — `docs/git-strategy.md` `## Gates` owns the
-flags and explains why `lake` is invoked through `cd` rather than `--dir`. They
-write only build artifacts and `.olean` files, which is why they are reachable
-from a command that cannot write.
+It is the repo's own gate — `docs/git-strategy.md` `## Gates` owns the flags.
+It writes only build artifacts, which is why it is reachable from a command that
+cannot write.
 
-**Warn before running `lake build` cold.** Against an unbuilt Mathlib it is
-minutes, not the three seconds `README.md` quotes for a warm tree, and a
-consultation that goes silent mid-question looks broken.
-
-Skip both when the source answers the question on its own. A mismatched brace
+Skip it when the source answers the question on its own. A mismatched brace
 does not need a compiler.
 
 ## 3. Ask, at most twice
@@ -148,15 +140,6 @@ no proposed course of study. The user asked one question.
 - **No words inside formulas** or inside set-builder conditions.
 - **Answer in the notes' own notation.** The anchor was read for this; an answer
   in different symbols makes the user do the translation.
-- **Name the Mathlib lemma** when the question is Lean, and give the tactic
-  block when that is what was asked.
-
-The last one deserves saying plainly, because `CLAUDE.md` reads the other way at
-a glance. Its fence — statements yes, proofs never — is about **files**:
-"everything after `by` is the owner's". This command cannot write a file at all,
-so it cannot cross that fence, and withholding in chat would only make it a
-worse `/teach-math`. **The exercise is preserved by who types it, not by what
-gets said.**
 
 ### These style rules are a deliberate copy
 
@@ -183,9 +166,7 @@ their own heading**, after the answer, and say which command files them:
 ```
 
 Never fold a defect into the answer by explaining the theorem the notes *should*
-have stated. That is the failure `CLAUDE.md` names for `/formalize` — repairing
-a statement while translating it — arriving through a different door: the user
-understands a corrected theorem, the notes stay wrong, and nothing anywhere
+have stated: the user understands a corrected theorem, the notes stay wrong, and nothing anywhere
 records the disagreement.
 
 **This command files nothing.** `gh issue create` is absent from `allowed-tools`

@@ -1,7 +1,7 @@
 ---
 description: Inspect an open pull request, re-run its gates, then squash-merge it
 argument-hint: "[PR number]  (omit — the current branch's PR)"
-allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(cd lean && lake build), Bash(python -m unittest:*)
+allowed-tools: Read, Grep, Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git branch:*), Bash(git fetch:*), Bash(git pull:*), Bash(git switch:*), Bash(git rev-parse:*), Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr list:*), Bash(gh pr merge:*), Bash(latexmk:*), Bash(python -m unittest:*)
 ---
 
 Merge a pull request following `docs/git-strategy.md`. Read that file first.
@@ -14,9 +14,7 @@ or it stops.
 
 Under this repo's strategy, PRs exist only for changes that can break every
 topic at once — `scripts/`, `.github/`, `.latexmkrc`, `tex/preamble.tex`,
-`tex/colophon.tex`, `tex/index.ist`, `tex/html-common/`, and `lean/`'s build
-configuration (`lakefile.toml`,
-`lean-toolchain`, `lake-manifest.json`). Every PR you are asked to merge is, by
+`tex/colophon.tex`, `tex/index.ist` and `tex/html-common/`. Every PR you are asked to merge is, by
 construction, one of the risky ones. Behave accordingly.
 
 All output is English.
@@ -76,7 +74,6 @@ Then, by category:
 | --- | --- |
 | `tex/preamble.tex`, `tex/colophon.tex`, `tex/index.ist`, `.latexmkrc` | compile all 5 topics — `docs/git-strategy.md` `## Gates` |
 | `scripts/**`, `.claude/**`, `docs/**`, `README.md`, `README.ja.md` | `python -m unittest discover -s scripts -t scripts -p 'test_*.py'` |
-| `lean/**` | build the Lean library — `docs/git-strategy.md` `## Gates` |
 | `.github/**` only | nothing local to run — say so explicitly |
 
 Any failure stops the merge and is reported verbatim.
