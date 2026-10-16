@@ -187,6 +187,13 @@ the source of the objects and arrows; `python scripts/quiver.py
 tex/<slug>/chNN.tex:<line>` decodes it. The chapter is the owner's prose, so
 the owner pastes the figure.
 
+quiver knows the preamble's macros through a public gist, which
+`python scripts/quiver_macros.py --push` overwrites from `tex/preamble.tex`.
+Start a draft from `python scripts/quiver_macros.py --draft` and every link
+quiver exports carries `&macro_url=`, so reopening the comment's URL renders
+`\Hom` again; `quiver.py` reads past it. The gist is a copy that nothing
+syncs: a macro added to the preamble is red in quiver until the next `--push`.
+
 ## Renaming and deleting
 
 - **A page** renamed is its `\Interactive{}` line renamed in the same commit.
