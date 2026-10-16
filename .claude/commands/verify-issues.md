@@ -18,7 +18,7 @@ without this command it stays open forever, clutters every worklist, and is read
 as "already tracked" by every later review.
 
 **This command cannot touch the filesystem.** Neither `Write` nor `Edit` is in
-`allowed-tools` above — not `tex/`, not `issues/`, not `lean/`. It reads the
+`allowed-tools` above — not `tex/`, not `issues/`. It reads the
 sources and writes only to GitHub.
 
 **It cannot file anything.** `gh issue create` is absent. It judges what is

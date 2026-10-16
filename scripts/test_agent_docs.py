@@ -4,8 +4,7 @@
 Run from the repo root:
     python -m unittest discover -s scripts -t scripts -p 'test_*.py'
 
-`README.md`, its Japanese twin `README.ja.md` and `docs/agent-system.md`
-enumerate things that live on disk: the
+`docs/agent-system.md` enumerates things that live on disk: the
 commands in `.claude/commands/`, the hooks, the workflows, the documents in
 `docs/`. A hand-written enumeration goes stale the moment the disk changes, and
 nothing about a stale one looks wrong from the inside — `CLAUDE.md` described
@@ -100,17 +99,7 @@ def topic_count() -> int:
 
 
 class TestCommandTables(unittest.TestCase):
-    """The three tables that promise to list every slash command.
-
-    The Japanese README is a translation of the English one, and its command
-    table is the part of a translation most likely to be left behind.
-    """
-
-    def test_readme_lists_every_command(self):
-        self.assertEqual(command_names(), tabled_commands(README.read_text()))
-
-    def test_japanese_readme_lists_every_command(self):
-        self.assertEqual(command_names(), tabled_commands(README_JA.read_text()))
+    """The one table that promises to list every slash command."""
 
     def test_agent_system_lists_every_command(self):
         self.assertEqual(command_names(), tabled_commands(AGENT_SYSTEM.read_text()))
@@ -120,7 +109,7 @@ class TestCommandTables(unittest.TestCase):
 
         `docs/git-strategy.md` tables only `/git` and `/git-merge` on purpose,
         so membership is checked one way here — every tabled command is real —
-        and both ways only for the three tables above.
+        and both ways only for the table above.
         """
         for path in prose_files():
             for name in tabled_commands(path.read_text()):

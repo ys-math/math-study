@@ -18,15 +18,14 @@
    below, it advances none of them, and it leaves nothing behind — a session
    that ran it ten times has the same shape as one that never did.
 
-   Special sequences (? … ?) are the parts that are not a command: writing,
-   fixing, proving. They are where most of the time actually goes. *)
+   Special sequences (? … ?) are the parts that are not a command: writing and
+   fixing. They are where most of the time actually goes. *)
 
 session =
     { "/new-topic"
     | ? write a chapter ? , { "/bib" } , [ "/label" ]
     | "/review-notes" , [ "/verify-issues" ] , [ "/issues" ] ,
       { ? fix a finding ? }
-    | "/formalize" , { ? replace a sorry ? }
     | ? edit the machinery ? , [ "/audit" ]
     } ,
     "/git" , [ "/watch-ci" ] , [ "/git-merge" ] ;

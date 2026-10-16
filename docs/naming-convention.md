@@ -1,14 +1,9 @@
 # Naming convention
 
-What every file and directory in this repo is called. Both halves — the LaTeX
-notes under `tex/` and the Lean library under `lean/` — are here, because the
-two are joined by a name and a rule that lives in one file cannot be checked
-against a rule that lives in another.
+What every file and directory in this repo is called.
 
-**Scope: paths only.** What goes *inside* the braces of a `\label{}`, and what a
-Lean declaration is called, are `docs/label-convention.md`; the Lean layout's
-*purpose* — why `Learn/` and `Study/` are separate — is
-`docs/lean-convention.md`. Neither restates what is here.
+**Scope: paths only.** What goes *inside* the braces of a `\label{}` is
+`docs/label-convention.md`, which does not restate what is here.
 
 The rule that matters most is the last section. Read it first if you are here
 because you are renaming something.
@@ -26,7 +21,7 @@ lowercase letters, digits and underscores, starting with a letter:
 
 `scripts/new_topic.py` enforces this — `TOPIC_PATTERN`, checked before anything
 is written — and it is the only naming rule in the repo enforced in code rather
-than by reading. It is that strict because the slug is interpolated into four
+than by reading. It is that strict because the slug is interpolated into three
 places that each want something different:
 
 | the slug becomes | in |
@@ -34,7 +29,6 @@ places that each want something different:
 | a regex fragment | `.github/workflows/build-pdf.yml` |
 | a filename | `pdf/<slug>.pdf` |
 | a URL segment | `\TexRepo` in the topic's `main.tex` |
-| a Lean module name, transformed | `lean/Math/Study/<Topic>.lean` |
 
 `pdf`, `scripts` and `latex_out` are reserved and refused: each would read as a
 twin of something that already exists.
@@ -109,73 +103,11 @@ A figure with an interactive version has its page at
 `docs/interactive-convention.md` owns both, and the `\Interactive{<name>}`
 line that links a page from a chapter.
 
-## Lean
-
-Directories and modules are `UpperCamelCase`, throughout, without exception.
-This is Lean's own convention and Mathlib's, and it is the same rule
-`docs/label-convention.md` already borrows for declaration names: in Lean,
-casing tells you what a thing is, so a path whose casing says nothing is a path
-that has opted out of the language's one free signal.
-
-```
-lean/Math/Learn/MIL/C02Basics.lean
-lean/Math/Learn/TPiL/C02DependentTypeTheory.lean
-lean/Math/Study/AlgebraicKTheory.lean
-```
-
-### Curriculum files
-
-```
-Math/Learn/<Book>/C<NN><ChapterTitle>.lean
-```
-
-One file per chapter of the book. `C`, the chapter number in two digits, then
-the book's own chapter title in `UpperCamelCase` with its spaces removed.
-
-The number is what makes a directory listing read in the order you work through
-it, which is the whole reason these files exist. The title is what makes the
-listing legible without the book open next to you.
-
-**This rule overrides both books' own layouts, on purpose.** Mathematics in Lean
-ships `MIL/C02_Basics/S01_Calculating.lean` — numbered, but with underscores and
-a section level. Theorem Proving in Lean 4 ships `TPiL/DependentTypeTheory.lean`
-— UpperCamelCase, but unnumbered. Following each upstream would put two
-different spellings of "chapter two" in sibling directories, which reads as
-meaningful and is not.
-
-`<Book>` is the book's acronym in the capitalisation the book itself uses:
-`MIL`, `TPiL`. It is the one place a name here is not `UpperCamelCase`, because
-an acronym re-cased is an acronym nobody recognises.
-
-### Topic mirrors
-
-```
-Math/Study/<Topic>.lean
-```
-
-`<Topic>` is the `tex/` slug converted to `UpperCamelCase`: split on
-underscores, capitalise each part, join.
-
-```
-algebraic_k_theory   →  AlgebraicKTheory
-galois_theory        →  GaloisTheory
-lambda_calculus      →  LambdaCalculus
-symplectic_manifold  →  SymplecticManifold
-```
-
-Note `algebraic_k_theory → AlgebraicKTheory`: the single-letter part becomes a
-single capital, so there is no `AlgebraicKTheory` / `AlgebraicKtheory` question
-to get wrong twice.
-
-Nothing computes this transformation — no script, no test. It is applied by hand
-in `/formalize` and `/delete-topic`, which is why it is written down here rather
-than left to look obvious.
-
 ## Root files
 
 | pattern | example |
 | --- | --- |
-| licence texts | `LICENSE` (MIT, the default), `LICENSE-CC-BY-NC-ND-4.0`, `LICENSE-APACHE-2.0` |
+| licence texts | `LICENSE` (MIT, the default), `LICENSE-CC-BY-NC-ND-4.0` |
 | documents | `docs/<kebab-case>.md` |
 | a document's source data | `docs/<kebab-case>.<ext>`, the stem being what it describes (`docs/working-loop.ebnf`) |
 | images | `docs/images/<kebab-case>.<ext>`, the stem matching the source it was rendered from |
@@ -195,10 +127,10 @@ SPDX identifier's own spelling, so that a header saying
 `SPDX-License-Identifier: CC-BY-NC-ND-4.0` and the file it refers to are one
 lookup apart.
 
-A command's filename **is** its slash command — `.claude/commands/formalize.md`
-is `/formalize` — and `scripts/test_agent_docs.py` holds the tables in
-both READMEs and `docs/agent-system.md` to the directory on that basis. A command
-file renamed is a command renamed, and three tables go stale in the same commit.
+A command's filename **is** its slash command — `.claude/commands/label.md`
+is `/label` — and `scripts/test_agent_docs.py` holds the table in
+`docs/agent-system.md` to the directory on that basis. A command file renamed is
+a command renamed, and that table goes stale in the same commit.
 
 ## Renaming
 
@@ -207,15 +139,13 @@ each rename costs:
 
 | renaming | also change | what happens if you miss it |
 | --- | --- | --- |
-| a topic slug | five things, none automated — the recipe is in `CLAUDE.md` | an orphan PDF forever; `\TexRepo` links to a directory that does not exist; `lake build` fails outright; `scripts/test_assumes.py` fails if another topic assumes it |
+| a topic slug | four things, none automated — the recipe is in `CLAUDE.md` | an orphan PDF forever; `\TexRepo` links to a directory that does not exist; `scripts/test_assumes.py` fails if another topic assumes it |
 | a chapter file | the `\input{}` line in `main.tex` | the chapter silently vanishes from the PDF |
-| a Lean module | its `import` in `lean/Math.lean` | `lake build` fails — the loud one |
 | a `docs/` file | the ownership list in `docs/agent-system.md` | `scripts/test_agent_docs.py` fails, before the commit exists |
-| a command file | the tables in both READMEs and `docs/agent-system.md` | the same test fails |
+| a command file | the table in `docs/agent-system.md` | the same test fails |
 | an interactive page | its `\Interactive{}` line, in the same commit | `scripts/test_interactive.py` fails; the published URL changes either way, and nothing redirects the old one |
 
 Two of these are caught by `test_agent_docs.py`, the `docs/` file and the
-command file; a renamed Lean module by `lake build`, which fails outright on a
-stale `import`, and a renamed topic slug by the same build but only for its
-Lean half. The orphan PDF, the broken `\TexRepo` and a renamed chapter file
+command file; a renamed topic slug by `scripts/test_assumes.py`, but only when
+another topic assumes it. The orphan PDF, the broken `\TexRepo` and a renamed chapter file
 are caught by nothing but having read this table.

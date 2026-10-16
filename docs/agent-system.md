@@ -55,23 +55,14 @@ Loaded **on demand**, by a command that names them:
   No command implements it: a term is written in the same keystroke as the
   definition it introduces, so the document is read by whoever writes the
   chapter. `scripts/test_index_markup.py` checks the mechanical half.
-- **`docs/naming-convention.md`** — what every file and directory is called, in
-  both halves of the repo: topic slugs, chapter files, Lean modules, and what
-  else has to move when one of them is renamed. The only naming rule enforced in
+- **`docs/naming-convention.md`** — what every file and directory is called:
+  topic slugs, chapter files, and what else has to move when one of them is renamed. The only naming rule enforced in
   code is the topic slug, in `scripts/new_topic.py`.
-- **`docs/lean-convention.md`** — everything under `lean/`: the layout, the
-  shared name that joins a Lean declaration to a `\label{}`, the `sorry` rule,
-  the Apache header, the Mathlib pin. `/formalize` executes it, and `/label`,
-  `/delete-topic` and `/git` each depend on one part of it.
 - **`docs/interactive-convention.md`** — the interactive diagram pages: where
   they live under `tex/*/html/`, the engine in `tex/html-common/` they all
   load, the config a page passes it, the `\Interactive` link from the PDF and
   the Pages address. No command implements it; `scripts/test_interactive.py`
   holds links and pages to each other.
-- **`docs/repo-structure.md`** — the companion map: the two halves of the repo,
-  the three things that join them, and what deliberately does not. Nothing
-  executes it; read it when a change would couple `tex/` and `lean/` more
-  tightly than a shared name.
 - **`docs/agent-system.md`** — this file.
 
 The grammars in `docs/` specify nothing, being data rather than prose:
@@ -98,9 +89,8 @@ to touch**, which is what you actually need when choosing between them.
 | Command | Writes | Commits | Stops for confirmation | Output |
 | --- | --- | --- | --- | --- |
 | `/new-topic` | `tex/<topic>/` via the script | no | when proposing a slug | English |
-| `/label` | `tex/*/ch*.tex`, `lean/Math/Study/**` | no | always, before applying | English |
+| `/label` | `tex/*/ch*.tex` | no | always, before applying | English |
 | `/bib` | `tex/*/bibliography.tex`, `tex/*/main.tex`, `docs/bib-convention.md` | no | always, before writing | **Entries verbatim, English structure** |
-| `/formalize` | `lean/Math/Study/**`, `lean/Math.lean` | no | always, before writing | English |
 | `/tutor` | **nothing — `disallowed-tools`** | no | to clarify, at most twice | **Japanese mathematics, English structure** |
 | `/review-notes` | GitHub issues | no | always, before filing | **Japanese findings, English structure** |
 | `/issues` | `issues/**` only | no | no | **Japanese findings, English structure** |
@@ -127,16 +117,6 @@ Worth knowing without looking them up:
   would be closing on *absence* of evidence, which loses real defects silently,
   and `/verify-issues` closes on *presence* of counter-evidence it must name.
   `docs/issue-convention.md` `## Verification` is the specification.
-- **`/formalize` writes statements and never a proof.** Half of that is a
-  declaration: its `allowed-tools` name `lean/Math/Study/**` and the import list
-  in `lean/Math.lean`, and nothing else — not `tex/`, not `Math/Learn/**`. That
-  is the reach it intends, not a bound on it; the paragraph below this table
-  says why. The other half is `guard-edits.sh`, which refuses a write under
-  `lean/Math/Study/**` whose tactic blocks are not exactly `sorry` — so this is
-  the one command whose central rule is mechanical rather than kept. What stays
-  advisory is narrower and worse: never repair an understated statement while
-  translating it. See `docs/lean-convention.md`,
-  `## What Claude may write here`.
 - **`/bib` is the only command that reaches the network.** Its `allowed-tools`
   pins `WebFetch` to `ndlsearch.ndl.go.jp`, `openlibrary.org`,
   `api.crossref.org` and `export.arxiv.org`, and there is no `WebSearch` in this
@@ -154,8 +134,8 @@ Worth knowing without looking them up:
   `disallowed-tools` removes `Write` and `Edit`, so the rule that the user types
   the mathematics is enforced rather than asked for — the one place in this
   table where that is true of a *command* rather than a hook. It reads `tex/`,
-  `lean/`, the topic's open issues and the conventions, runs `latexmk` and
-  `lake build` to see real errors, and answers in full. Defects it notices are
+  the topic's open issues and the conventions, runs `latexmk` to see real
+  errors, and answers in full. Defects it notices are
   reported and handed to `/review-notes`; `gh issue create` is absent from its
   `allowed-tools` so that `docs/issue-convention.md` keeps one filing channel.
 - **`/audit` does edit what it audits**, in a second phase the user has to ask
@@ -179,7 +159,7 @@ everywhere else it is prose, on the same terms as the rest of this file.
 | Hook | Event | Refuses |
 | --- | --- | --- |
 | `guard-bash.sh` | `PreToolUse(Bash)` | `git add -A` / `git add .` / `git add ./`; force-push including `--force-with-lease`; `git clean` with no pathspec, unless it is a dry run; `git restore` whose pathspec is `.`, `./` or `:/` |
-| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` or `tex/*/bibliography.tex` missing its SPDX header; a `lean/**.lean` missing its Apache header; a write under `lean/Math/Study/**` whose tactic blocks are not `sorry`; a `README.md` or `README.ja.md` with a generator marker destroyed |
+| `guard-edits.sh` | `PostToolUse(Write\|Edit)` | a `tex/*/ch*.tex` or `tex/*/bibliography.tex` missing its SPDX header; a `README.md` or `README.ja.md` with a generator marker destroyed |
 
 Permissions additionally deny writes to `pdf/**` and allow about twenty
 routine commands through without a prompt.
@@ -205,7 +185,7 @@ Two properties to preserve if you touch these:
 
 Every table in this file enumerates something on disk, and a stale enumeration
 reads exactly like a correct one. `scripts/test_agent_docs.py` is what notices:
-it holds the command tables here and in both READMEs to `.claude/commands/`, the
+it holds the command table here to `.claude/commands/`, the
 hook and workflow and `docs/` names to their directories, the hooks to being
 registered and executable, and every count written in digits to what it counts.
 
@@ -252,7 +232,6 @@ The workflows in `.github/workflows/`:
 | `build-pdf.yml` | push to `main` touching `**.tex`, `.latexmkrc` or its own file | compiles affected topics, commits `pdf/*.pdf` |
 | `update-readme.yml` | **every** push to `main` | runs the script tests, regenerates the blocks in both READMEs, commits |
 | `validate.yml` | `pull_request` | compiles all 5 topics, runs the script tests |
-| `lean.yml` | push to `main` **and** `pull_request`, both touching `lean/**` or its own file | builds the Lean library through `lake` |
 | `pages.yml` | push to `main` touching `tex/*/html/**`, `tex/html-common/**` or its own file | publishes the interactive pages to GitHub Pages |
 
 Measured run times live in `.claude/commands/watch-ci.md`, which is the only
@@ -261,13 +240,7 @@ but has no write tool, so nothing updates that table on its own: re-measure it
 by hand whenever the build changes.
 
 `validate.yml` runs only on pull requests, and `tex/<topic>/**` never goes
-through one — which is why the licence header is enforced by a hook instead. The
-same holds for `lean/Math/**`, and `lean.yml` does not rescue it: the workflow
-runs on the push, so it sees a missing Apache header only after the commit
-exists. Hence the second rule in `guard-edits.sh`.
-
-`lean.yml` is the one workflow with both triggers, because `lean/` is the one
-place a source path and its build configuration take different routes to `main`.
+through one — which is why the licence header is enforced by a hook instead.
 
 ### Why the push cascade terminates
 
@@ -278,16 +251,13 @@ flowchart TD
 
     PUSH --> BP["build-pdf.yml"]
     PUSH --> UR["update-readme.yml"]
-    PUSH --> LN["lean.yml"]
     PUSH --> PG["pages.yml"]
     PRQ --> VAL["validate.yml"]
-    PRQ --> LN
 
     BP -.->|"commits pdf/"| PUSH
     UR -.->|"commits README.md, README.ja.md"| PUSH
 
     VAL --> NIL(["commits nothing"])
-    LN --> NIL
     PG --> NIL
 ```
 
@@ -305,7 +275,7 @@ and both are worth preserving:
 Both also retry a rebase three times, because the fast workflow pushes while the
 slow one is still in TeX Live.
 
-`validate.yml`, `lean.yml` and `pages.yml` commit nothing at all, so none of
+`validate.yml` and `pages.yml` commit nothing at all, so none of
 them can enter the cascade in the first place.
 
 `/watch-ci` reports the result and stops; it is built to run under `/loop` and
