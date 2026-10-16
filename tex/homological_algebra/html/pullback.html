@@ -1,0 +1,80 @@
+<!-- SPDX-License-Identifier: CC-BY-NC-ND-4.0 -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pullback</title>
+<link rel="stylesheet" href="../../html-common/latin-modern.css">
+<link rel="stylesheet" href="../../html-common/diagram.css">
+<script src="../../html-common/diagram.js"></script>
+</head>
+<body>
+<script>
+// The figure in the notes, stood up in space: A ×_C B, A, B, C are the corners of a flat square, with A and C
+// in front and A ×_C B and B behind, and X stands a short way straight above A ×_C B. The home view looks
+// from the front left and a little above, so the square reads as the parallelogram of the tikzcd in ch02.
+// The coordinates are shifted so the centroid of the five objects is the origin, the point the diagram turns about.
+const P = 'A \\times_C B';
+const CONE_KEY = ['legs of the cone', 'the diagram F'];
+const KEEP = { look: 'none' }; // highlight without turning: the home view already shows every face
+
+Diagram.mount({
+  title: 'Pullback',
+  description: 'Rotatable 3D commutative diagram of the pullback of f: A to C and g: B to C, with a cone from X factoring uniquely through it.',
+  objects: {
+    X: { at: [-0.48, 0.6, -0.48], tex: 'X', plain: 'X' },
+    P: { at: [-0.48, -0.15, -0.48], tex: P, plain: 'A ×_C B' },
+    B: { at: [0.72, -0.15, -0.48], tex: 'B', plain: 'B' },
+    A: { at: [-0.48, -0.15, 0.72], tex: 'A', plain: 'A' },
+    C: { at: [0.72, -0.15, 0.72], tex: 'C', plain: 'C' },
+  },
+  arrows: [
+    { id: 'f', from: 'A', to: 'C', tex: 'f', plain: 'f', straight: true },
+    { id: 'g', from: 'B', to: 'C', tex: 'g', plain: 'g', straight: true },
+    { id: 'p0', from: 'P', to: 'C', tex: '\\pi_0', plain: 'π₀', straight: true },
+    { id: 'p1', from: 'P', to: 'A', tex: '\\pi_1', plain: 'π₁', straight: true },
+    { id: 'p2', from: 'P', to: 'B', tex: '\\pi_2', plain: 'π₂', straight: true },
+    { id: 'e0', from: 'X', to: 'C', tex: '\\eta_0', plain: 'η₀', straight: true },
+    { id: 'e1', from: 'X', to: 'A', tex: '\\eta_1', plain: 'η₁', straight: true },
+    { id: 'e2', from: 'X', to: 'B', tex: '\\eta_2', plain: 'η₂', straight: true },
+    { id: 'u', from: 'X', to: 'P', tex: '!', plain: '!', straight: true },
+  ],
+  home: [{ axis: [1, 0, 0], deg: 22 }, { axis: [0, 1, 0], deg: -28 }],
+  // the order the structure is built: the diagram F, its limit cone, a second cone, and the arrow between them
+  intro: {
+    objects: { A: 0, C: 90, B: 180, P: 380, X: 860 },
+    arrows: { f: 240, g: 300, p1: 500, p2: 560, p0: 620, e1: 980, e2: 1040, e0: 1100, u: 1300 },
+  },
+  tabs: [
+    { label: 'Faces', groups: [
+      { title: 'Limit cone $\\pi$', faces: [
+        { path: ['p1', 'f'], direct: 'p0', objects: ['P', 'A', 'C'], ...KEEP, tex: 'f \\circ \\pi_1 = \\pi_0', plain: 'f ∘ π₁ = π₀' },
+        { path: ['p2', 'g'], direct: 'p0', objects: ['P', 'B', 'C'], ...KEEP, tex: 'g \\circ \\pi_2 = \\pi_0', plain: 'g ∘ π₂ = π₀' },
+      ] },
+      { title: 'Cone $\\eta$', faces: [
+        { path: ['e1', 'f'], direct: 'e0', objects: ['X', 'A', 'C'], ...KEEP, tex: 'f \\circ \\eta_1 = \\eta_0', plain: 'f ∘ η₁ = η₀' },
+        { path: ['e2', 'g'], direct: 'e0', objects: ['X', 'B', 'C'], ...KEEP, tex: 'g \\circ \\eta_2 = \\eta_0', plain: 'g ∘ η₂ = η₀' },
+      ] },
+      { title: 'Through $!$', faces: [
+        { path: ['u', 'p1'], direct: 'e1', objects: ['X', 'P', 'A'], ...KEEP, tex: '\\pi_1 \\circ {!} = \\eta_1', plain: 'π₁ ∘ ! = η₁' },
+        { path: ['u', 'p2'], direct: 'e2', objects: ['X', 'P', 'B'], ...KEEP, tex: '\\pi_2 \\circ {!} = \\eta_2', plain: 'π₂ ∘ ! = η₂' },
+        { path: ['u', 'p0'], direct: 'e0', objects: ['X', 'P', 'C'], ...KEEP, tex: '\\pi_0 \\circ {!} = \\eta_0', plain: 'π₀ ∘ ! = η₀' },
+      ] },
+    ] },
+    // each cone over F = (A → C ← B): its legs in blue, f and g in orange, the rest faded
+    { label: 'Cones', groups: [
+      { title: 'Cone $\\eta$ from $X$', faces: [
+        { path: ['e0', 'e1', 'e2'], direct: ['f', 'g'], objects: ['X', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
+          tex: 'f \\circ \\eta_1 = \\eta_0 = g \\circ \\eta_2', plain: 'f ∘ η₁ = η₀ = g ∘ η₂' },
+      ] },
+      { title: 'Limit cone $\\pi$ from $A \\times_C B$', faces: [
+        { path: ['p0', 'p1', 'p2'], direct: ['f', 'g'], objects: ['P', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
+          tex: 'f \\circ \\pi_1 = \\pi_0 = g \\circ \\pi_2', plain: 'f ∘ π₁ = π₀ = g ∘ π₂' },
+      ] },
+    ] },
+  ],
+});
+</script>
+</body>
+</html>
