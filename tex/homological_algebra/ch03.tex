@@ -39,3 +39,23 @@ $f, g \in \Mor_{\mathscr{C}}(A, B)$とし共変関手$E_{f,g} \colon \mathbf{P} 
 
 $(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
 \end{definition}
+
+\begin{definition}
+$E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を\term{よとうかし}{余等化子}{coequalizer}もしくは\term{さよかく}{差余核}{difference cokernel}と呼ぶ.\
+つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\iexcl \colon \Coeq(f,g) \to X$がただ1つ存在する.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
+\[\begin{tikzcd}
+	& X & \\
+	& {\mathrm{Eq}(f,g)} \\
+	A && B
+	\arrow["{!}"', from=1-2, to=2-2]
+	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=3-1]
+	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=3-3]
+	\arrow["{\mathrm{eq}(f,g)_0}"{description}, from=2-2, to=3-1]
+	\arrow["{\mathrm{eq}(f,g)_1}"{description}, from=2-2, to=3-3]
+	\arrow["f", shift left, from=3-1, to=3-3]
+	\arrow["g"', shift right, from=3-1, to=3-3]
+\end{tikzcd}\]
+
+$(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
+\end{definition}
