@@ -109,14 +109,14 @@ line that links a page from a chapter.
 | --- | --- |
 | licence texts | `LICENSE` (MIT, the default), `LICENSE-CC-BY-NC-ND-4.0` |
 | documents | `docs/<kebab-case>.md` |
-| a document's source data | `docs/<kebab-case>.<ext>`, the stem being what it describes (`docs/working-loop.ebnf`) |
+| a document's source data | `docs/<kebab-case>.<ext>`, the stem being what it describes (`docs/routing-rule.ebnf`) |
 | images | `docs/images/<kebab-case>.<ext>`, the stem matching the source it was rendered from |
 | commands | `.claude/commands/<kebab-case>.md`, the stem being the slash command |
 | hooks | `.claude/hooks/<kebab-case>.sh` |
 | workflows | `.github/workflows/<kebab-case>.yml` |
 
 A rendered image shares its source's stem so the pair is one lookup apart:
-`docs/working-loop.ebnf` renders to `docs/images/working-loop.svg`, and a
+`docs/routing-rule.ebnf` renders to `docs/images/routing-rule.svg`, and a
 renamed grammar is an image renamed in the same commit. The pairing is checked:
 `scripts/test_agent_docs.py` derives the SVG's name from the grammar's and fails
 if it is missing. Which document embeds it is not checked, only that some

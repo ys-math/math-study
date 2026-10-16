@@ -79,12 +79,12 @@ def pages() -> list[Path]:
 
 class TestParser(unittest.TestCase):
     def test_plain(self):
-        self.assertEqual(parse_interactive(r"\Interactive{biproduct-sphere}"), "biproduct-sphere")
+        self.assertEqual(parse_interactive(r"\Interactive{matrix-sphere}"), "matrix-sphere")
 
     def test_malformed(self):
-        self.assertIsNone(parse_interactive(r"\Interactive{biproduct_sphere}"))
-        self.assertIsNone(parse_interactive(r"\Interactive{Biproduct-Sphere}"))
-        self.assertIsNone(parse_interactive(r"\Interactive{biproduct-sphere.html}"))
+        self.assertIsNone(parse_interactive(r"\Interactive{matrix_sphere}"))
+        self.assertIsNone(parse_interactive(r"\Interactive{Matrix-Sphere}"))
+        self.assertIsNone(parse_interactive(r"\Interactive{matrix-sphere.html}"))
         self.assertIsNone(parse_interactive(r"\Interactive{a} 続き"))
 
     def test_comments_are_ignored(self):

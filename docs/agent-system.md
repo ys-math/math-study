@@ -66,9 +66,8 @@ Loaded **on demand**, by a command that names them:
 - **`docs/agent-system.md`** — this file.
 
 The grammars in `docs/` specify nothing, being data rather than prose:
-**`docs/working-loop.ebnf`**, behind the working-loop diagram in `README.md`;
 **`docs/routing-rule.ebnf`**, behind the routing diagram in
-`docs/git-strategy.md`; and **`docs/audit-workflow.ebnf`**, behind the diagram
+`docs/git-strategy.md`, and **`docs/audit-workflow.ebnf`**, behind the diagram
 of `/audit`'s two gates under `### Keeping this map true`. Each renders to
 `docs/images/<same stem>.svg`.
 
