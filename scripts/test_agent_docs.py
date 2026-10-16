@@ -120,7 +120,7 @@ class TestDiagrams(unittest.TestCase):
     """The names inside the diagrams, which no reader of the pictures can check.
 
     Two notations, because the two subjects are different shapes. A railroad
-    diagram draws a grammar — the working loop, the routing rule — and comes
+    diagram draws a grammar — the routing rule, `/audit`'s two gates — and comes
     from an `.ebnf` rendered by an external browser tool, so the SVG is opaque
     here and the grammar behind it is what gets read. A ```mermaid block draws
     a graph — the CI cascade — and is already plain text, so it is read where
@@ -133,8 +133,7 @@ class TestDiagrams(unittest.TestCase):
     block the README from regenerating until somebody opened a browser.
 
     So: deleting a command or a workflow fails this loudly; adding one does
-    not. The diagrams are happy paths, not inventories — `/delete-topic` is
-    absent from the working loop on purpose, being an exit rather than a step.
+    not. The diagrams are happy paths, not inventories.
     """
 
     def grammars(self) -> list[Path]:
