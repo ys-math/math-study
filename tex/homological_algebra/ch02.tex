@@ -46,8 +46,10 @@ $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\m
 	\item $F(0) \coloneq C,\ F(1) \coloneq A,\ F(2) \coloneq B$
 	\item $F(h_1) \coloneq f,\ F(h_2) \coloneq g$
 \end{itemize}
-このとき$F$の極限$(A \times_C B, \pi)$を\term{ふぁいばーせき}{ファイバー積}{fiber product}もしくは\term{ひきもどし}{引き戻し}{pullback}という.\
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzX0MgQiJdLFszLDEsIkIiXSxbMCwyLCJBIl0sWzIsMiwiQyJdLFszLDQsImYiLDJdLFsyLDQsImciXSxbMSwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiLDJdLFsxLDQsIlxccGlfMCIsMV0sWzAsMSwiISIsMl0sWzAsMywiXFxldGFfMSIsMl0sWzAsMiwiXFxldGFfMiJdLFswLDQsIlxcZXRhXzAiXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+このとき$F$の極限$(f \pb g, \pi)$を$f$と$g$の\term{ふぁいばーせき}{ファイバー積}{fiber product}もしくは\term{ひきもどし}{引き戻し}{pullback}という.\
+$f \pb g$を$A \times_C B$と書くこともある.\
+
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzX0MgQiJdLFszLDEsIkIiXSxbMCwyLCJBIl0sWzIsMiwiQyJdLFszLDQsImYiLDJdLFsyLDQsImciXSxbMSwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiXSxbMSw0LCJcXHBpXzAiLDFdLFswLDEsIiEiLDJdLFswLDMsIlxcZXRhXzEiLDJdLFswLDIsIlxcZXRhXzIiXSxbMCw0LCJcXGV0YV8wIl1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X && \\
 	& {A \times_C B} && B \\
@@ -57,7 +59,7 @@ $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\m
 	\arrow["{\eta_1}"', from=1-2, to=3-1]
 	\arrow["{\eta_0}", from=1-2, to=3-3]
 	\arrow["{\pi_2}", from=2-2, to=2-4]
-	\arrow["{\pi_1}"', from=2-2, to=3-1]
+	\arrow["{\pi_1}", from=2-2, to=3-1]
 	\arrow["{\pi_0}"{description}, from=2-2, to=3-3]
 	\arrow["g", from=2-4, to=3-3]
 	\arrow["f"', from=3-1, to=3-3]
