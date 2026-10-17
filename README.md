@@ -15,12 +15,12 @@ English | [日本語](./README.ja.md)
 <!-- BEGIN TEXT METER -->
 ```
 category_theory          ████████▉░░░░░░░░░░░   44.6%   65,996
-homological_algebra      ██████▌░░░░░░░░░░░░░   32.3%   47,835
+homological_algebra      ██████▌░░░░░░░░░░░░░   32.3%   47,871
 algebraic_k_theory       ██▍░░░░░░░░░░░░░░░░░   12.0%   17,748
 lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    6.9%   10,191
 commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.3%    6,325
                                                        -------
-total                                                  148,095
+total                                                  148,131
 ```
 <!-- END TEXT METER -->
 
