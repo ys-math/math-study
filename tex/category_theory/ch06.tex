@@ -5,12 +5,28 @@
 
 \begin{definition} \label{def: Equivalence}
 $\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\
-自然同型$\eta \colon \id_{\mathscr{C}} \Rightarrow GF,\ \varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$が存在するとき$\mathscr{C}$と$\mathscr{D}$は\term{けんどうち}{圏同値}{equivalence of categories}であるといい組$(F,G,\eta,\varepsilon)$を$\mathscr{C}$と$\mathscr{D}$の間の圏同値と呼ぶ.\ $\mathscr{C}$と$\mathscr{D}$が圏同値であるとき$\mathscr{C} \simeq \mathscr{D}$と書く.
+自然同型$\eta \colon \id_{\mathscr{C}} \Rightarrow GF,\ \varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$が存在するとき$\mathscr{C}$と$\mathscr{D}$は\term{けんどうち}{圏同値}{equivalence of categories}であるといい組$(\eta,\varepsilon)$を$\mathscr{C}$と$\mathscr{D}$の間の圏同値と呼ぶ.\ $\mathscr{C}$と$\mathscr{D}$が圏同値であるとき$\mathscr{C} \simeq \mathscr{D}$と書く.
 \end{definition}
 
-\begin{definition} \label{def: IsAdjointEquivalence}
-$\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\
-随伴$F \dashv G$が存在し$F \dashv G \eqcolon (\eta, \varepsilon)$としたとき$\eta$と$\varepsilon$が自然同型なら随伴$F \dashv G$を\term{ずいはんどうち}{随伴同値}{adjoint equivalence}であるという.
+\begin{definition}
+$\mathscr{C},\ \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+$A, B \in \Ob(\mathscr{C})$に対して写像$F_{A,B} \colon \Mor_{\mathscr{C}}(A, B) \to \Mor_{\mathscr{D}}(F(A), F(B))$を$F_{A,B}(f) \coloneq F(f)$と定める.\
+この写像を$F$による\term{しゃへのさよう}{射への作用}{action on morphisms}という.
+\end{definition}
+
+\begin{definition}
+$\mathscr{C},\ \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+任意の$A, B \in \Ob(\mathscr{C})$に対して$F_{A,B}$が単射であるとき$F$は\term{ちゅうじつ}{忠実}{faithful}であるという.\
+\end{definition}
+
+\begin{definition}
+$\mathscr{C},\ \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+任意の$A, B \in \Ob(\mathscr{C})$に対して$F_{A,B}$が全射であるとき$F$は\term{じゅうまん}{充満}{full}であるという.\
+\end{definition}
+
+\begin{definition}
+$\mathscr{C},\ \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \to \mathscr{D}$を共変関手とする.\
+$F$が充満かつ忠実なとき$F$は\term{じゅうまんちゅうじつ}{充満忠実}{fully faithful}であるという.
 \end{definition}
 
 \begin{definition}
@@ -18,6 +34,54 @@ $\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G
 $\alpha \colon F \Rightarrow G$を自然同型とする.\
 このとき自然同型$\alpha^{-1} \colon G \Rightarrow F$を$X \in \Ob(\mathscr{C})$に対して$(\alpha^{-1})_X \coloneq (\alpha_X)^{-1}$で定める.
 \end{definition}
+
+\begin{proposition}
+$\mathscr{C},\ \mathscr{D}$を局所小圏とし$F \colon \mathscr{C} \rightleftarrows \mathscr{D} \colon G$を共変関手とする.\
+$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$を自然変換とする.\
+このとき次が成り立つ.
+\begin{center}
+$(\eta, \varepsilon)$は圏同値$\implies$$F$と$G$は充満忠実
+\end{center}
+\end{proposition}
+
+\begin{proof}
+任意の$A,B \in \Ob(\mathscr{C})$と$f,g \in \Mor_{\mathscr{C}}(A,B)$に対して$F(f) = F(g)$ならば$f = g$を示す.\
+$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$は自然変換なので次の図式が可換になる.\
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJBIl0sWzAsMSwiQiJdLFsxLDAsIkdGKEEpIl0sWzEsMSwiR0YoQikiXSxbMywxLCJCIl0sWzMsMCwiQSJdLFs0LDEsIkdGKEIpIl0sWzQsMCwiR0YoQSkiXSxbMCwxLCJmIiwyXSxbMiwzLCJHRihmKSJdLFswLDIsIlxcZXRhX0EiXSxbMSwzLCJcXGV0YV9CIl0sWzUsNCwiZyIsMl0sWzQsNiwiXFxldGFfQiJdLFs1LDcsIlxcZXRhX0EiXSxbNyw2LCJHRihnKSJdXQ==
+\[\begin{tikzcd}
+	A & {GF(A)} && A & {GF(A)} \\
+	B & {GF(B)} && B & {GF(B)}
+	\arrow["{\eta_A}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{GF(f)}", from=1-2, to=2-2]
+	\arrow["{\eta_A}", from=1-4, to=1-5]
+	\arrow["g"', from=1-4, to=2-4]
+	\arrow["{GF(g)}", from=1-5, to=2-5]
+	\arrow["{\eta_B}", from=2-1, to=2-2]
+	\arrow["{\eta_B}", from=2-4, to=2-5]
+\end{tikzcd}\]
+$F(f) = F(g)$と仮定すると$GF(f) = GF(g)$なので$\eta_B \circ f = GF(f) \circ \eta_A = GF(g) \circ \eta_A = \eta_B \circ g$となり$\eta_B$は同型射なので両辺左から$\eta_B^{-1}$を合成して$f = g$となる.\
+よって$F$は忠実である.\ 同様の議論を$\varepsilon$に対して行うことで$G$は忠実であることが分かる.\
+
+任意の$A, B \in \Ob(\mathscr{C})$と$h \in \Mor_{\mathscr{D}}(F(A), F(B))$に対して$F(f) = h$を満たす$f \in \Mor_{\mathscr{C}}(A,B)$が存在することを示す.\
+$f \coloneq \eta_B^{-1} \circ G(h) \circ \eta_A$とする.\
+$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$は自然変換なので次の図式が可換になる.\
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzAsMSwiQiJdLFsxLDAsIkdGKEEpIl0sWzEsMSwiR0YoQikiXSxbMCwxLCJmIiwyXSxbMiwzLCJHRihmKSJdLFswLDIsIlxcZXRhX0EiXSxbMSwzLCJcXGV0YV9CIl1d
+\[\begin{tikzcd}
+	A & {GF(A)} \\
+	B & {GF(B)}
+	\arrow["{\eta_A}", from=1-1, to=1-2]
+	\arrow["f"', from=1-1, to=2-1]
+	\arrow["{GF(f)}", from=1-2, to=2-2]
+	\arrow["{\eta_B}", from=2-1, to=2-2]
+\end{tikzcd}\]
+よって$G(h) \circ \eta_A = \eta_B \circ \eta_B^{-1} \circ G(h) \circ \eta_A = \eta_B \circ f = GF(f) \circ \eta_A$が成り立ち両辺$\eta_A^{-1}$を右から合成することで$G(h) = G(F(f))$を得る.\
+$G$は忠実なので$h = F(f)$となる.\
+よって$F$は充満である.\
+
+以上により$F$は充満忠実である.\ $G$も同様にして充満忠実であることが示せる.\
+
+\end{proof}
 
 \begin{lemma}
 $\mathscr{C},\ \mathscr{D},\ \mathscr{E}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G \colon \mathscr{C} \to \mathscr{D}, H \colon \mathscr{D} \to \mathscr{E}$を共変関手とする.\
@@ -31,8 +95,8 @@ $\alpha \colon F \Rightarrow G$を自然同型とする.\
 
 \begin{lemma}
 $\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\
-$(F,G,\eta,\varepsilon)$を圏同値とする.\
-任意の$A \in \Ob(\mathscr{C}),\ B \in \Ob(\mathscr{D})$に対して$GF(\eta_A) = \eta_{GF(A)}$かつ$FG(\varepsilon_B) = \varepsilon_{FG(b)}$が成り立つ.
+$(\eta,\varepsilon)$を圏同値とする.\
+任意の$A \in \Ob(\mathscr{C}),\ B \in \Ob(\mathscr{D})$に対して$GF(\eta_A) = \eta_{GF(A)}$かつ$FG(\varepsilon_B) = \varepsilon_{FG(B)}$が成り立つ.
 \end{lemma}
 
 \begin{proof}
@@ -46,18 +110,61 @@ $\eta \colon \id_{\mathscr{C}} \Rightarrow GF$は自然変換なので任意の$
 	\arrow["{GF(\eta_A)}", from=1-2, to=2-2]
 	\arrow["{\eta_{GF(A)}}", from=2-1, to=2-2]
 \end{tikzcd}\]
-$\eta_A$は全単射なので$GF(\eta_A) \circ \eta_A = \eta_{GF(A)} \circ \eta_A$の両辺右から$(\eta_A)^{-1}$を合成して$GF(\eta_A) = \eta_{GF(A)}$を得る.\ $FG(\varepsilon_V) = \varepsilon_{FG(B)}$も同様に示せる.
+$\eta_A$は全単射なので$GF(\eta_A) \circ \eta_A = \eta_{GF(A)} \circ \eta_A$の両辺右から$(\eta_A)^{-1}$を合成して$GF(\eta_A) = \eta_{GF(A)}$を得る.\ $FG(\varepsilon_B) = \varepsilon_{FG(B)}$も同様に示せる.
 \end{proof}
 
-\begin{proposition}
+\begin{definition} \label{def: IsAdjointEquivalence}
 $\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \to \mathscr{D},\ G \colon \mathscr{D} \to \mathscr{C}$を共変関手とする.\
-$(F,G,\eta,\varepsilon)$を圏同値とする.\
-$\varepsilon' \coloneq \varepsilon F(\eta^{-1}G) \circ \varepsilon^{-1}(FG)$とすると$F \dashv G \coloneq (\eta, \varepsilon')$は随伴同値である.
+随伴$F \dashv G$が存在し$F \dashv G \eqcolon (\eta, \varepsilon)$としたとき$\eta$と$\varepsilon$が自然同型なら随伴$F \dashv G$を\term{ずいはんどうち}{随伴同値}{adjoint equivalence}であるという.
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C},\ \mathscr{D}$を圏とし$F \colon \mathscr{C} \leftrightarrows \mathscr{D} \colon G$を共変関手とする.\
+$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$と$\varepsilon \colon FG \Rightarrow \id_{\mathscr{D}}$を自然変換とし$(\eta,\varepsilon)$を圏同値とする.\
+$\varepsilon' \coloneq \varepsilon \circ F \eta^{-1} G \circ \varepsilon^{-1} FG$とすると$F \dashv G \coloneq (\eta, \varepsilon')$は随伴同値である.
 \end{proposition}
 
 \begin{proof}
 $\varepsilon'$は自然同型の合成から成るので自然同型である.\
 
 $\varepsilon' F \circ F \eta = \id_F$を示す.\
-$A \in \Ob(\mathscr{C})$とする.\ 
+$A \in \Ob(\mathscr{C})$とする.\ $(\varepsilon' F \circ F \eta)_A = \varepsilon'_{F(A)} \circ F(\eta_A) = \varepsilon_{F(A)} \circ F(\eta_{GF(A)}^{-1}) \circ \varepsilon_{FGF(A)}^{-1} \circ F(\eta_A)$となる.\ $\varepsilon \colon GF \Rightarrow \id_{\mathscr{C}}$は自然変換なので次の図式が可換になる.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJGKEEpIl0sWzEsMSwiRkdGKEEpIl0sWzAsMCwiRkdGKEEpIl0sWzAsMSwiRkdGR0YoQSkiXSxbMCwxLCJGKFxcZXRhX0EpIl0sWzIsMCwiXFx2YXJlcHNpbG9uX3tGKEEpfSJdLFsyLDMsIkZHRihcXGV0YV9BKSIsMl0sWzMsMSwiXFx2YXJlcHNpbG9uX3tGR0YoQSl9Il1d
+\[\begin{tikzcd}
+	{FGF(A)} & {F(A)} \\
+	{FGFGF(A)} & {FGF(A)}
+	\arrow["{\varepsilon_{F(A)}}", from=1-1, to=1-2]
+	\arrow["{FGF(\eta_A)}"', from=1-1, to=2-1]
+	\arrow["{F(\eta_A)}", from=1-2, to=2-2]
+	\arrow["{\varepsilon_{FGF(A)}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+よって$F(\eta_A) \circ \varepsilon_{F(A)} = \varepsilon_{FGF(A)} \circ FGF(\eta_A)$であり両辺左から$\varepsilon_{FGF(A)}^{-1}$,\ 右から$\varepsilon_{F(A)}^{-1}$を合成して$\varepsilon_{FGF(A)}^{-1} \circ F(\eta_A) = FGF(\eta_A) \circ  \varepsilon_{F(A)}^{-1}$を得る.\
+したがって
+\begin{align*}
+	(\varepsilon'F \circ  F \eta)_A &= \varepsilon_{F(A)} \circ F(\eta_{GF(A)}^{-1}) \circ FGF(\eta_A) \circ \varepsilon_{F(A)}^{-1} \\
+					&= \varepsilon_{F(A)} \circ F(\eta_{GF(A)}^{-1} \circ  GF(\eta_A)) \circ \varepsilon_{F(A)}^{-1} \\
+					&= \varepsilon_{F(A)} \circ F(GF(\eta_A^{-1}) \circ GF(\eta_A)) \circ \varepsilon_{F(A)}^{-1} \\
+					&= \varepsilon_{F(A)} \circ \varepsilon_{F(A)}^{-1} \\
+					&= \id_{F(A)}
+\end{align*}
+となり$\varepsilon'F \circ  F \eta = \id_F$である.\
+
+$G \varepsilon' \circ  \eta G = \id_G$を示す.\
+$B \in \Ob(\mathscr{D})$とする.\
+$G(\varepsilon_B') = G(\varepsilon_B) \circ GF(\eta_{G(B)}^{-1}) \circ G(\varepsilon_{FG(B)}^{-1}) = G(\varepsilon_B) \circ GF(\eta_{G(B)}^{-1}) \circ GFG(\varepsilon_B^{-1})$である.\
+$\eta \colon \id_{\mathscr{C}} \Rightarrow GF$は自然変換なので次の図式が可換になる.\
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJHKEIpIl0sWzAsMSwiR0ZHKEIpIl0sWzEsMSwiR0ZHRkcoQikiXSxbMSwwLCJHRkcoQikiXSxbMCwzLCJcXGV0YV97RyhCKX0iXSxbMywyLCJHRkcoXFx2YXJlcHNpbG9uX0Jeey0xfSkiXSxbMCwxLCJHKFxcdmFyZXBzaWxvbl9CXnstMX0pIiwyXSxbMSwyLCJcXGV0YV97R0ZHKEIpfSJdXQ==
+\[\begin{tikzcd}
+	{G(B)} & {GFG(B)} \\
+	{GFG(B)} & {GFGFG(B)}
+	\arrow["{\eta_{G(B)}}", from=1-1, to=1-2]
+	\arrow["{G(\varepsilon_B^{-1})}"', from=1-1, to=2-1]
+	\arrow["{GFG(\varepsilon_B^{-1})}", from=1-2, to=2-2]
+	\arrow["{\eta_{GFG(B)}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+$\eta_{GFG(B)} \circ G(\varepsilon_B^{-1}) = GFG(\varepsilon_B^{-1}) \circ \eta_{G(B)}$の両辺に$\eta_{G(B)}^{-1}$を右から合成して$GFG(\varepsilon_B^{-1}) = \eta_{GFG(B)} \circ G(\varepsilon_B^{-1}) \circ \eta_{G(B)}^{-1}$を得る.\
+よって$G(\varepsilon_B') = G(\varepsilon_B) \circ GF(\eta_{G(B)}^{-1}) \circ \eta_{GFG(B)} \circ G(\varepsilon_B^{-1}) \circ \eta_{G(B)}^{-1} = G(\varepsilon_B) \circ GF(\eta_{G(B)}^{-1}) \circ GF(\eta_{G(B)}) \circ G(\varepsilon_B^{-1}) \circ \eta_{G(B)}^{-1} = G(\varepsilon_B) \circ G(\varepsilon_B^{-1}) \circ \eta_{G(B)}^{-1} = \eta_{G(B)}^{-1}$となる.\
+したがって$G(\varepsilon_B') \circ \eta_{G(B)} = \id_{G(B)}$なので$G\varepsilon' \circ \eta G = \id_G$である.\
+
+以上により$(\eta, \varepsilon')$は随伴同値である.\
 \end{proof}
