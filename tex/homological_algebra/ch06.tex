@@ -3,6 +3,45 @@
 
 \section{双積}
 
+\begin{definition} \label{def: IsBiproduct}
+$\mathscr{C}$を零対象を持つ圏とし$A, B \in \Ob(\mathscr{C})$とする.\ 
+$A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A \oplus B, A),\ \pi_1 \in \Mor_{\mathscr{C}}(A \oplus B, B),\ \iota_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \iota_1 \in \Mor_{\mathscr{C}}(B, A \oplus B)$によって定まる組$(A \oplus B, \pi, \iota)$は$(A \oplus B, \pi)$が直積で$(A \oplus B, \iota)$が直和であり次の図式が可換になるとき$A$と$B$の\term{そうせき}{双積}{biproduct}であるという.\
+
+\begin{center}
+\begin{tikzpicture}[
+  arr/.style={line width=.5pt,-{cm to}},
+  lab/.style={font=\scriptsize},
+]
+\def\R{1.5}   % radius of the circle
+\def\g{11}    % angular gap (degrees) left around each object on the circle
+ 
+% objects
+\node (T) at (90:\R)  {$A$};
+\node (L) at (180:\R) {$B$};
+\node (Rt) at (0:\R)  {$A$};
+\node (Bt) at (270:\R) {$B$};
+\node (C) at (0,0)    {$A \oplus B$};
+ 
+% arrows around the circle
+\draw[arr] (180-\g:\R) arc[start angle=180-\g, end angle=90+\g,  radius=\R];
+\draw[arr] (180+\g:\R) arc[start angle=180+\g, end angle=270-\g, radius=\R];
+\draw[arr] (\g:\R)     arc[start angle=\g,     end angle=90-\g,  radius=\R];
+\draw[arr] (-\g:\R)    arc[start angle=-\g,    end angle=-90+\g, radius=\R];
+ 
+\node[lab] at (135:\R+.32) {$0_{B,A}$};
+\node[lab] at (225:\R+.32) {$\mathrm{id}_B$};
+\node[lab] at (45:\R+.32)  {$\mathrm{id}_A$};
+\node[lab] at (-45:\R+.32) {$0_{A,B}$};
+ 
+% arrows through the centre
+\draw[arr] (L)  -- node[lab,below] {$\iota_1$} (C);
+\draw[arr] (Rt) -- node[lab,above] {$\iota_0$} (C);
+\draw[arr] (C)  -- node[lab,left]  {$\pi_0$}   (T);
+\draw[arr] (C)  -- node[lab,right] {$\pi_1$}   (Bt);
+\end{tikzpicture}
+\end{center}
+\end{definition}
+
 \begin{definition}
 $\mathscr{C}$を局所小圏とし$A_0, A_1, B_0, B_1 \in \Ob(\mathscr{C})$とする.\
 $x \coloneq (x_{ij} \colon A_i \to B_j)_{(i,j) \in 2 \times 2}$を$\mathscr{C}$の射の族とする.\
@@ -73,46 +112,6 @@ $x \coloneq (x_{ij} \colon A_i \to B_j)_{(i,j) \in 2 \times 2}$を$\mathscr{C}$�
 $\begin{pmatrix} {\begin{pmatrix} x_{00} \\ x_{10} \end{pmatrix}} & {\begin{pmatrix} x_{01} \\ x_{11} \end{pmatrix}} \end{pmatrix} = \begin{pmatrix} {\begin{pmatrix} x_{00} & x_{10} \end{pmatrix}} \\ {\begin{pmatrix} x_{01} & x_{11} \end{pmatrix}} \end{pmatrix}$でありこれを$\begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix}$と書く.\
 $\pi_j \circ \begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix} \circ \iota_i = x_{ij}$である.
 \end{definition}
-
-\begin{definition} \label{def: IsBiproduct}
-$\mathscr{C}$を零対象を持つ圏とし$A, B \in \Ob(\mathscr{C})$とする.\ 
-$A \oplus B \in \Ob(\mathscr{C})$と$\pi_0 \in \Mor_{\mathscr{C}}(A \oplus B, A),\ \pi_1 \in \Mor_{\mathscr{C}}(A \oplus B, B),\ \iota_0 \in \Mor_{\mathscr{C}}(A,A \oplus B),\ \iota_1 \in \Mor_{\mathscr{C}}(B, A \oplus B)$によって定まる組$(A \oplus B, \pi, \iota)$は$(A \oplus B, \pi)$が直積で$(A \oplus B, \iota)$が直和であり次の図式が可換になるとき$A$と$B$の\term{そうせき}{双積}{biproduct}であるという.\
-
-\begin{center}
-\begin{tikzpicture}[
-  arr/.style={line width=.5pt,-{cm to}},
-  lab/.style={font=\scriptsize},
-]
-\def\R{1.5}   % radius of the circle
-\def\g{11}    % angular gap (degrees) left around each object on the circle
- 
-% objects
-\node (T) at (90:\R)  {$A$};
-\node (L) at (180:\R) {$B$};
-\node (Rt) at (0:\R)  {$A$};
-\node (Bt) at (270:\R) {$B$};
-\node (C) at (0,0)    {$A \oplus B$};
- 
-% arrows around the circle
-\draw[arr] (180-\g:\R) arc[start angle=180-\g, end angle=90+\g,  radius=\R];
-\draw[arr] (180+\g:\R) arc[start angle=180+\g, end angle=270-\g, radius=\R];
-\draw[arr] (\g:\R)     arc[start angle=\g,     end angle=90-\g,  radius=\R];
-\draw[arr] (-\g:\R)    arc[start angle=-\g,    end angle=-90+\g, radius=\R];
- 
-\node[lab] at (135:\R+.32) {$0_{B,A}$};
-\node[lab] at (225:\R+.32) {$\mathrm{id}_B$};
-\node[lab] at (45:\R+.32)  {$\mathrm{id}_A$};
-\node[lab] at (-45:\R+.32) {$0_{A,B}$};
- 
-% arrows through the centre
-\draw[arr] (L)  -- node[lab,below] {$\iota_1$} (C);
-\draw[arr] (Rt) -- node[lab,above] {$\iota_0$} (C);
-\draw[arr] (C)  -- node[lab,left]  {$\pi_0$}   (T);
-\draw[arr] (C)  -- node[lab,right] {$\pi_1$}   (Bt);
-\end{tikzpicture}
-\end{center}
-\end{definition}
-
 
 
 \begin{definition}
