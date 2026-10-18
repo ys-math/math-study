@@ -11,11 +11,11 @@
 </head>
 <body>
 <script>
-// The figure in the notes, stood up in space: A ×_C B, A, B, C are the corners of a flat square, with A and C
-// in front and A ×_C B and B behind, and X stands a short way straight above A ×_C B. The home view looks
+// The figure in the notes, stood up in space: f ⌟ g, A, B, C are the corners of a flat square, with A and C
+// in front and f ⌟ g and B behind, and X stands a short way straight above f ⌟ g. The home view looks
 // from the front left and a little above, so the square reads as the parallelogram of the tikzcd in ch02.
 // The coordinates are shifted so the centroid of the five objects is the origin, the point the diagram turns about.
-const P = 'A \\times_C B';
+const P = 'f \\mathbin{\\lrcorner} g'; // the preamble's f \pb g; MathJax does not know \pb
 const CONE_KEY = ['legs of the cone', 'the diagram F'];
 const KEEP = { look: 'none' }; // highlight without turning: the home view already shows every face
 
@@ -24,7 +24,7 @@ Diagram.mount({
   description: 'Rotatable 3D commutative diagram of the pullback of f: A to C and g: B to C, with a cone from X factoring uniquely through it.',
   objects: {
     X: { at: [-0.48, 0.6, -0.48], tex: 'X', plain: 'X' },
-    P: { at: [-0.48, -0.15, -0.48], tex: P, plain: 'A ×_C B' },
+    P: { at: [-0.48, -0.15, -0.48], tex: P, plain: 'f ⌟ g' },
     B: { at: [0.72, -0.15, -0.48], tex: 'B', plain: 'B' },
     A: { at: [-0.48, -0.15, 0.72], tex: 'A', plain: 'A' },
     C: { at: [0.72, -0.15, 0.72], tex: 'C', plain: 'C' },
@@ -68,7 +68,7 @@ Diagram.mount({
         { path: ['e0', 'e1', 'e2'], direct: ['f', 'g'], objects: ['X', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
           tex: 'f \\circ \\eta_1 = \\eta_0 = g \\circ \\eta_2', plain: 'f ∘ η₁ = η₀ = g ∘ η₂' },
       ] },
-      { title: 'Limit cone $\\pi$ from $A \\times_C B$', faces: [
+      { title: `Limit cone $\\pi$ from $${P}$`, faces: [
         { path: ['p0', 'p1', 'p2'], direct: ['f', 'g'], objects: ['P', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
           tex: 'f \\circ \\pi_1 = \\pi_0 = g \\circ \\pi_2', plain: 'f ∘ π₁ = π₀ = g ∘ π₂' },
       ] },

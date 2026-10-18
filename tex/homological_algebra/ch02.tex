@@ -22,24 +22,6 @@
 \end{definition}
 
 \begin{definition}
-圏$\invbigstar_2$を次のようにして定める.\
-\begin{itemize}
-	\item $\Ob(\invbigstar_2) \coloneq 3$
-	\item $\Mor(\invbigstar_2) \coloneq \{\id_0,\ \id_1,\ \id_2,\ h_1 \colon 0 \to 1,\ h_2 \colon 0 \to 2\}$
-\end{itemize}
-% https://q.uiver.app/#q=WzAsMyxbMSwwLCIwIl0sWzAsMSwiMSJdLFsyLDEsIjIiXSxbMCwxLCJoXzEiXSxbMCwyLCJoXzIiLDJdLFsxLDEsIlxcaWRfMSIsMCx7ImFuZ2xlIjotMTM1fV0sWzAsMCwiXFxpZF8wIl0sWzIsMiwiXFxpZF8yIiwwLHsiYW5nbGUiOjEzNX1dXQ==&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
-\[\begin{tikzcd}
-	& 0 & \\
-	1 && 2
-	\arrow["{\id_0}", from=1-2, to=1-2, loop, in=55, out=125, distance=10mm]
-	\arrow["{h_1}", from=1-2, to=2-1]
-	\arrow["{h_2}"', from=1-2, to=2-3]
-	\arrow["{\id_1}", from=2-1, to=2-1, loop, in=190, out=260, distance=10mm]
-	\arrow["{\id_2}", from=2-3, to=2-3, loop, in=280, out=350, distance=10mm]
-\end{tikzcd}\]
-\end{definition}
-
-\begin{definition}
 $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\mathscr{C}}(A, C),\ g \in \Mor_{\mathscr{C}}(B, C)$とする.\
 共変関手$F \colon \bigstar_2 \to \mathscr{C}$を次のように定める.\
 \begin{itemize}
@@ -49,10 +31,10 @@ $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\m
 このとき$F$の極限$(f \pb g, \pi)$を$f$と$g$の\term{ふぁいばーせき}{ファイバー積}{fiber product}もしくは\term{ひきもどし}{引き戻し}{pullback}という.\
 $f \pb g$を$A \times_C B$と書くこともある.\
 
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzX0MgQiJdLFszLDEsIkIiXSxbMCwyLCJBIl0sWzIsMiwiQyJdLFszLDQsImYiLDJdLFsyLDQsImciXSxbMSwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiXSxbMSw0LCJcXHBpXzAiLDFdLFswLDEsIiEiLDJdLFswLDMsIlxcZXRhXzEiLDJdLFswLDIsIlxcZXRhXzIiXSxbMCw0LCJcXGV0YV8wIl1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBiIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbMyw0LCJmIiwyXSxbMiw0LCJnIl0sWzEsMiwiXFxwaV8yIl0sWzEsMywiXFxwaV8xIl0sWzEsNCwiXFxwaV8wIiwxXSxbMCwxLCIhIiwyXSxbMCwzLCJcXGV0YV8xIiwyXSxbMCwyLCJcXGV0YV8yIl0sWzAsNCwiXFxldGFfMCJdXQ==&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X && \\
-	& {A \times_C B} && B \\
+	& {f \pb g} && B \\
 	A && C
 	\arrow["{!}"', from=1-2, to=2-2]
 	\arrow["{\eta_2}", from=1-2, to=2-4]
@@ -66,3 +48,25 @@ $f \pb g$を$A \times_C B$と書くこともある.\
 \end{tikzcd}\]
 \Interactive{pullback}
 \end{definition}
+
+\begin{definition}
+$F$の余極限$(f \po g, \iota)$を$f$と$g$の\term{ふぁいばーわ}{ファイバー和}{fiber sum}もしくは\term{おしだし}{押し出し}{pushout}という.\
+$f \po g$を$A \amalg_C B$と書くこともある.\
+
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBvIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbNCwzLCJmIl0sWzQsMiwiZyIsMl0sWzEsMiwiXFxpb3RhXzIiXSxbMywxLCJcXGlvdGFfMSIsMl0sWzQsMSwiXFxpb3RhXzAiLDFdLFswLDEsIlxcdGV4dHvCoX0iLDJdLFszLDAsIlxcZXRhXzEiXSxbMiwwLCJcXGV0YV8yIiwyXSxbNCwwLCJcXGV0YV8wIiwyXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+\[\begin{tikzcd}
+	& X && \\
+	& {f \po g} && B \\
+	A && C
+	\arrow["{\text{¡}}"', from=1-2, to=2-2]
+	\arrow["{\iota_2}", from=2-2, to=2-4]
+	\arrow["{\eta_2}"', from=2-4, to=1-2]
+	\arrow["{\eta_1}", from=3-1, to=1-2]
+	\arrow["{\iota_1}"', from=3-1, to=2-2]
+	\arrow["{\eta_0}"', from=3-3, to=1-2]
+	\arrow["{\iota_0}"{description}, from=3-3, to=2-2]
+	\arrow["g"', from=3-3, to=2-4]
+	\arrow["f", from=3-3, to=3-1]
+\end{tikzcd}\]
+\end{definition}
+
