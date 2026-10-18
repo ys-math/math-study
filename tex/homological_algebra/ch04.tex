@@ -21,7 +21,7 @@
 \begin{definition}
 $\mathscr{C}$を圏とし$\mathbf{P}$を平行対の圏とする.\
 $f, g \in \Mor_{\mathscr{C}}(A, B)$とし共変関手$E_{f,g} \colon \mathbf{P} \to \mathscr{C}$を$E_{f,g}(0) \coloneq A,\ E_{f,g}(1) \coloneq B,\ E_{f,g}(u) \coloneq f,\ E_{f,g}(v) \coloneq g$と定める.\
-このときの$E_{f,g}$の極限$(\Eq(f,g), \eq(f,g))$を\term{とうかし}{等化子}{equalizer}もしくは\term{さかく}{差核}{difference kernel}と呼ぶ.\
+このときの$E_{f,g}$の極限$(\Eq(f,g), \eq(f,g))$を$f$と$g$の\term{とうかし}{等化子}{equalizer}もしくは\term{さかく}{差核}{difference kernel}と呼ぶ.\
 つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(X, A),\ \eta_1 \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にする$\mathscr{C}$の射$! \colon X \to \Eq(f,g)$がただ1つ存在する.\
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
 \[\begin{tikzcd}
@@ -41,7 +41,7 @@ $(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\
 \end{definition}
 
 \begin{definition}
-$E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を\term{よとうかし}{余等化子}{coequalizer}もしくは\term{さよかく}{差余核}{difference cokernel}と呼ぶ.\
+$E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を$f$と$g$の\term{よとうかし}{余等化子}{coequalizer}もしくは\term{さよかく}{差余核}{difference cokernel}と呼ぶ.\
 つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\iexcl \colon \Coeq(f,g) \to X$がただ1つ存在する.\
 % https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
 \[\begin{tikzcd}

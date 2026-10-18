@@ -6,7 +6,7 @@
 \begin{definition} \label{def: zeroMorphism}
 $\mathscr{C}$を零対象$Z$を持つ局所小圏とし$A, B \in \Ob({\mathscr{C}})$とする.\
 $\iexcl_B \in \Mor_{\mathscr{C}}(Z, B)$と$!_A \in \Mor_{\mathscr{C}}(A, Z)$をそれぞれただ1つ存在する射とする.\
-このとき$0_{A,B} \coloneq \iexcl_B \circ !_A$を\term{れいしゃ}{零射}{zero morphism}という.
+このとき$0_{A,B} \coloneq \iexcl_B \ \circ \ !_A$を\term{れいしゃ}{零射}{zero morphism}という.
 \end{definition}
 
 \begin{definition} \label{def: kernel}
@@ -37,6 +37,10 @@ $K_f$の極限$(L_{K_f}, \pi_{K_f})$を$f$の\term{かく}{核}{kernel}といい
 \cref{def: kernel}の仮定のもと任意の$X \in \Ob(\mathscr{C})$と$(X, \eta) \in \Cone(X,K_f)$に対して$\eta_1 = 0_{\dom(f), \cod(f)} \circ \eta_0 = 0_{X, \cod(f)}$である.
 \end{remark}
 
+\begin{remark}
+$K_f = E_{f, 0_A,B}$である.\ つまり$f$の核は$f$と$0_{A,B}$等化子である.
+\end{remark}
+
 \begin{definition} \label{def: cokernel}
 	$K_f$の余極限$(Q_{K_f}, \iota_{K_f})$を$f$の\term{よかく}{余核}{cokernel}といい$\Coker(f) \coloneq Q_{K_f},\ \coker(f) \coloneq (\iota_{K_f})_0 \colon \cod(f) \to \Coker(f)$とする.
 \end{definition}
@@ -57,44 +61,19 @@ $\Coim(f) \coloneq \Coker(\ker(f))$とし$\coim(f) \coloneq \ker(\coker(f)$と�
 $\mathscr{C}$を零対象を持つ圏とする.\
 $X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とすると次が成り立つ.\
 \begin{center}
-	$f$はモノ射$\iff$$\ker(f) = 0_{\Ker(f),X}$
+	$f$はモノ射$\implies$$\ker(f) = 0_{\Ker(f),X}$
 \end{center}
 \end{lemma}
 
 \begin{proof}
-$f \circ \ker(f) = 0_{\Ker(f), Y} = f \circ 0_{\Ker(f),X}$なので$\ker(f) = 0_{\Ker(f),X}$となる.\
-
-$\ker(f) = 0_{\Ker(f),X}$であるとする.\
-$A \in \Ob(\mathscr{C}),\ g, h \in \Mor_{\mathscr{C}}(A, X)$とすると$g,h$それぞれに対して次の図式を可換にする$!_g, !_h \in \Mor_{\mathscr{C}}(A,\Ker(f))$が存在する.
-% https://q.uiver.app/#q=WzAsOCxbMSwwLCJBIl0sWzEsMSwiXFxtYXRocm17S2VyfShmKSJdLFswLDMsIlgiXSxbMiwzLCJZIl0sWzUsMCwiQSJdLFs1LDEsIlxcbWF0aHJte0tlcn0oZikiXSxbNCwzLCJYIl0sWzYsMywiWSJdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiMF97XFxtYXRocm17S2VyfShmKSxYfSIsMV0sWzEsMywiMF97XFxtYXRocm17S2VyfShmKSxZfSIsMV0sWzAsMSwiIV9nIiwyXSxbMCwyLCJnIiwyLHsiY3VydmUiOjN9XSxbMCwzLCIwX3tBLFl9IiwwLHsiY3VydmUiOi0zfV0sWzIsMywiMF97WCxZfSIsMix7Im9mZnNldCI6MX1dLFs2LDcsImYiLDAseyJvZmZzZXQiOi0xfV0sWzUsNiwiMF97XFxtYXRocm17S2VyfShmKSxYfSIsMV0sWzUsNywiMF97XFxtYXRocm17S2VyfShmKSxZfSIsMV0sWzQsNSwiIV9oIiwyXSxbNCw2LCJoIiwyLHsiY3VydmUiOjN9XSxbNCw3LCIwX3tBLFl9IiwwLHsiY3VydmUiOi0zfV0sWzYsNywiMF97WCxZfSIsMix7Im9mZnNldCI6MX1dXQ==
-\[\begin{tikzcd}
-	& A &&&& A & \\
-	& {\mathrm{Ker}(f)} &&&& {\mathrm{Ker}(f)} \\
-	\\
-	X && Y && X && Y
-	\arrow["{!_g}"', from=1-2, to=2-2]
-	\arrow["g"', curve={height=18pt}, from=1-2, to=4-1]
-	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-2, to=4-3]
-	\arrow["{!_h}"', from=1-6, to=2-6]
-	\arrow["h"', curve={height=18pt}, from=1-6, to=4-5]
-	\arrow["{0_{A,Y}}", curve={height=-18pt}, from=1-6, to=4-7]
-	\arrow["{0_{\mathrm{Ker}(f),X}}"{description}, from=2-2, to=4-1]
-	\arrow["{0_{\mathrm{Ker}(f),Y}}"{description}, from=2-2, to=4-3]
-	\arrow["{0_{\mathrm{Ker}(f),X}}"{description}, from=2-6, to=4-5]
-	\arrow["{0_{\mathrm{Ker}(f),Y}}"{description}, from=2-6, to=4-7]
-	\arrow["f", shift left, from=4-1, to=4-3]
-	\arrow["{0_{X,Y}}"', shift right, from=4-1, to=4-3]
-	\arrow["f", shift left, from=4-5, to=4-7]
-	\arrow["{0_{X,Y}}"', shift right, from=4-5, to=4-7]
-\end{tikzcd}\]
-したがって$g = 0_{\Ker(f),X} \circ !_g = 0_{A,X} = 0_{\Ker(f),X} \circ !_h = h$となるので$f$はモノ射である.
+$f$がモノ射なら$f \circ \ker(f) = 0_{\Ker(f), Y} = f \circ 0_{\Ker(f),X}$なので$\ker(f) = 0_{\Ker(f),X}$となる.\
 \end{proof}
 
 \begin{lemma} \label{lem: cokernel_and_epi_iff_zero_leg}
 $\mathscr{C}$を零対象を持つ圏とする.\
 $X,Y \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X,Y)$とすると次が成り立つ.\
 \begin{center}
-	$f$はエピ射$\iff$$\coker(f) = 0_{Y,\Coker(f)}$ 
+	$f$はエピ射$\implies$$\coker(f) = 0_{Y,\Coker(f)}$ 
 \end{center}
 \end{lemma}
 
