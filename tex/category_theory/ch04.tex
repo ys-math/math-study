@@ -30,7 +30,7 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とすると関手圏$\math
 
 \begin{definition} \label{def: coneFunctor}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\
-共変関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
+反変関手$\Cone(-, F) \colon \mathscr{C} \to \mathbf{Set}$を次のように定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
     \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とし$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を対角関手とする.\
@@ -55,7 +55,7 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J}
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition} \label{def: limit}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\
-$\displaystyle \int_{\mathscr{C}^{\op}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\term{きょくげん}{極限}{limit}という.
+$\displaystyle \int_{\mathscr{C}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\term{きょくげん}{極限}{limit}という.
 \end{definition}
 
 \begin{definition} \label{def: colimit}
@@ -78,20 +78,20 @@ $\mathscr{J}$を小圏とし$\mathscr{C}$を$\mathscr{J}$完備な局所小圏�
 \end{itemize}
 
 $\varprojlim_{\mathscr{J}}$は共変関手になる.\
-実際$F,G,H \in \Ob(\mathscr{C}^{\mathscr{J}})$と$\eta \colon F \Rightarrow G,\ \theta \colon G \Rightarrow H$に対して$(L_F, (L_F, \eta \circ \pi_F)) \in {\displaystyle \int_{\mathscr{C}^{\op}}\Cone(-,F)}$かつ$(L_G, (L_G, \theta \circ \pi_G)) \in {\displaystyle \int_{\mathscr{C}^{\op}}\Cone(-,G)}$であり$\varprojlim_{\mathscr{J}}(\eta) \colon L_F \to L_G$と$\varprojlim_{\mathscr{J}}(\theta) \colon L_G \to L_H$は次の等式を満たす.
+実際$F,G,H \in \Ob(\mathscr{C}^{\mathscr{J}})$と$\eta \colon F \Rightarrow G,\ \theta \colon G \Rightarrow H$に対して$(L_F, (L_F, \eta \circ \pi_F)) \in {\displaystyle \int_{\mathscr{C}}\Cone(-,G)}$かつ$(L_G, (L_G, \theta \circ \pi_G)) \in {\displaystyle \int_{\mathscr{C}}\Cone(-,H)}$であり$\varprojlim_{\mathscr{J}}(\eta) \colon L_F \to L_G$と$\varprojlim_{\mathscr{J}}(\theta) \colon L_G \to L_H$は次の等式を満たす.
 \vspace{0.5em}
 \begin{center}
-$\Cone(\varprojlim_{\mathscr{J}}(\eta), F)(L_G, \pi_G) = (L_F, \eta \circ \pi_F)$
+$\Cone(\varprojlim_{\mathscr{J}}(\eta), G)(L_G, \pi_G) = (L_F, \eta \circ \pi_F)$
 
-$\Cone(\varprojlim_{\mathscr{J}}(\theta), G)(L_H, \pi_H) = (L_G, \theta \circ \pi_G)$
+$\Cone(\varprojlim_{\mathscr{J}}(\theta), H)(L_H, \pi_H) = (L_G, \theta \circ \pi_G)$
 \end{center}
 \vspace{0.5em}
 また錐関手の定義(\cref{def: coneFunctor})から次の等式が成り立つ.
 \vspace{0.5em}
 \begin{center}
-$\Cone(\varprojlim_{\mathscr{J}}(\eta), F)(L_G, \pi_G) = (L_F, \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)))$
+$\Cone(\varprojlim_{\mathscr{J}}(\eta), G)(L_G, \pi_G) = (L_F, \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)))$
 
-$\Cone(\varprojlim_{\mathscr{J}}(\theta), G)(L_H, \pi_H) = (L_G, \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)))$
+$\Cone(\varprojlim_{\mathscr{J}}(\theta), H)(L_H, \pi_H) = (L_G, \pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)))$
 \end{center}
 \vspace{0.5em}
 したがって次の図式が可換になる.
@@ -110,7 +110,7 @@ $\Cone(\varprojlim_{\mathscr{J}}(\theta), G)(L_H, \pi_H) = (L_G, \pi_G \circ \De
 	\arrow["{\pi_H}", Rightarrow, nfold, from=3-1, to=3-2]
 \end{tikzcd}\]
 
-$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$は共変関手なので$\pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta) \circ \varprojlim_{\mathscr{J}}(\eta)) = \pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)) \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)) = \theta \circ \pi_G \varprojlim_{\mathscr{J}}(\eta) = (\theta \circ \eta) \circ \pi_F$となる.\
+$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$は共変関手なので$\pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta) \circ \varprojlim_{\mathscr{J}}(\eta)) = \pi_H \circ \Delta(\varprojlim_{\mathscr{J}}(\theta)) \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)) = \theta \circ \pi_G \circ \Delta(\varprojlim_{\mathscr{J}}(\eta)) = (\theta \circ \eta) \circ \pi_F$となる.\
 $\varprojlim_{\mathscr{J}}(\theta \circ \eta)$は次の図式を満たすただ1つの射$(L_F, (L_F, (\theta \circ \eta) \circ\pi_F)) \to (L_H, (L_H, \pi_H))$である.
 
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDX3tMX0Z9Il0sWzEsMCwiRiJdLFswLDEsIkNfe0xfSH0iXSxbMSwxLCJIIl0sWzEsMywiXFx0aGV0YSBcXGNpcmMgXFxldGEiLDAseyJsZXZlbCI6Mn1dLFsyLDMsIlxccGlfSCIsMCx7ImxldmVsIjoyfV0sWzAsMiwiXFxEZWx0YShcXHZhcnByb2psaW1fe1xcbWF0aHNjcntKfX0oXFx0aGV0YSBcXGNpcmMgXFxldGEpKSIsMix7ImxldmVsIjoyfV0sWzAsMSwiXFxwaV9GIiwwLHsibGV2ZWwiOjJ9XV0=
