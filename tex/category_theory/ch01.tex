@@ -76,15 +76,6 @@ $A \in \Ob(\mathscr{C})$として共変関手$C_A \colon \mathscr{J} \to \mathsc
 このとき$C_A$を\term{ていかんしゅ}{定関手}{constant functor}と呼ぶ.
 \end{definition}
 
-\begin{definition} \label{def: diagonalFunctor}
-$\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
-\begin{itemize}
-    \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
-    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J \coloneq f$で定める.
-\end{itemize}
-これを\term{たいかくかんしゅ}{対角関手}{diagonal functor}という.
-\end{definition}
-
 \begin{definition} \label{def: IsSmall}
 $\mathscr{C}$を圏とする.\
 $\Ob(\mathscr{C}) \in \Ob(\mathbf{Set})$かつ$\Mor(\mathscr{C}) \in \Ob(\mathbf{Set})$であるとき$\mathscr{C}$は\term{ちいさいけん}{小さい圏}{small category},\ または\termja{しょうけん}{小圏}であるという.
@@ -126,6 +117,15 @@ $\mathscr{C}, \mathscr{D}$を圏とする.\
 対象を共変関手$F \colon \mathscr{C} \to \mathscr{D}$とし関手$F \colon \mathscr{C} \to \mathscr{D}$から関手$G \colon \mathscr{C} \to \mathscr{D}$への射を自然変換$\eta \colon F \Rightarrow G$とする.\
 $\eta \colon F \Rightarrow G$と$\theta \colon G \Rightarrow H$の合成を$X \in \Ob(\mathscr{C})$に対して$(\theta \circ \eta)_X \coloneq \theta_X \circ \eta_X$,\ $F$の恒等射$\id_F$を$X \in \Ob(\mathscr{C})$に対して$(\id_F)_X \coloneq \id_{F(X)}$で定めることで圏$\mathscr{D}^{\mathscr{C}}$が定まる.\
 これを\term{かんしゅけん}{関手圏}{functor category}という.
+\end{definition}
+
+\begin{definition} \label{def: diagonalFunctor}
+$\mathscr{C},\ \mathscr{J}$を圏とし共変関手$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を次のようにして定める.
+\begin{itemize}
+    \item $A \in \Ob(\mathscr{C})$に対して$\Delta(A) \coloneq C_A$とする.
+    \item $f \in \Mor(\mathscr{C})$に対して$\Delta(f) \colon C_{\dom(f)} \Rightarrow C_{\cod(f)}$を$J \in \Ob(\mathscr{J})$に対して$\Delta(f)_J \coloneq f$で定める.
+\end{itemize}
+これを\term{たいかくかんしゅ}{対角関手}{diagonal functor}という.
 \end{definition}
 
 \begin{definition} \label{def: evaluationFunctor}
