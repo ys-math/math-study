@@ -30,7 +30,7 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とすると関手圏$\math
 
 \begin{definition} \label{def: coneFunctor}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\
-反変関手$\Cone(-, F) \colon \mathscr{C} \to \mathbf{Set}$を次のように定める.
+共変関手$\Cone(-, F) \colon \mathscr{C}^{\op} \to \mathbf{Set}$を次のように定める.
 \begin{itemize}
     \item $A \in \Ob(\mathscr{C})$に対して$\Cone(A, F)$を$A$を頂点とする$F$への錐全体の集合とする.
     \item $f \in \Mor(\mathscr{C})$に対して$(\cod(f), \eta) \in \Cone(\cod(f), F)$とし$\Delta \colon \mathscr{C} \to \mathscr{C}^{\mathscr{J}}$を対角関手とする.\
@@ -49,13 +49,13 @@ $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J}
 	\arrow["{\eta_{\mathrm{cod}(g)}}"', from=2-2, to=3-3]
 	\arrow["{F(g)}"', from=3-1, to=3-3]
 \end{tikzcd}\]
-この関手を\term{すいかんしゅ}{錐関手}{cone functor}という.
+これを\term{すいかんしゅ}{錐関手}{cone functor}という.
 \end{definition}
 
 % 任意の錐から極限となる錐に対して一意な射が存在するため錐の圏の終対象として極限が定まる
 \begin{definition} \label{def: limit}
 $\mathscr{J}$を小圏,\ $\mathscr{C}$を局所小圏とし$F \colon \mathscr{J} \to \mathscr{C}$を形$\mathscr{J}$の図式とする.\
-$\displaystyle \int_{\mathscr{C}} \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\term{きょくげん}{極限}{limit}という.
+$\displaystyle \int \Cone(-, F)$の終対象$(L_F, (L_F, \pi_F))$を$F$の\term{きょくげん}{極限}{limit}という.
 \end{definition}
 
 \begin{definition} \label{def: colimit}
@@ -78,7 +78,7 @@ $\mathscr{J}$を小圏とし$\mathscr{C}$を$\mathscr{J}$完備な局所小圏�
 \end{itemize}
 
 $\varprojlim_{\mathscr{J}}$は共変関手になる.\
-実際$F,G,H \in \Ob(\mathscr{C}^{\mathscr{J}})$と$\eta \colon F \Rightarrow G,\ \theta \colon G \Rightarrow H$に対して$(L_F, (L_F, \eta \circ \pi_F)) \in {\displaystyle \int_{\mathscr{C}}\Cone(-,G)}$かつ$(L_G, (L_G, \theta \circ \pi_G)) \in {\displaystyle \int_{\mathscr{C}}\Cone(-,H)}$であり$\varprojlim_{\mathscr{J}}(\eta) \colon L_F \to L_G$と$\varprojlim_{\mathscr{J}}(\theta) \colon L_G \to L_H$は次の等式を満たす.
+実際$F,G,H \in \Ob(\mathscr{C}^{\mathscr{J}})$と$\eta \colon F \Rightarrow G,\ \theta \colon G \Rightarrow H$に対して$(L_F, (L_F, \eta \circ \pi_F)) \in {\displaystyle \int \Cone(-,G)}$かつ$(L_G, (L_G, \theta \circ \pi_G)) \in {\displaystyle \int \Cone(-,H)}$であり$\varprojlim_{\mathscr{J}}(\eta) \colon L_F \to L_G$と$\varprojlim_{\mathscr{J}}(\theta) \colon L_G \to L_H$は次の等式を満たす.
 \vspace{0.5em}
 \begin{center}
 $\Cone(\varprojlim_{\mathscr{J}}(\eta), G)(L_G, \pi_G) = (L_F, \eta \circ \pi_F)$
