@@ -48,14 +48,14 @@ $X \coloneq A,\ \eta_0 \coloneq \id_A$とすれば$\eq(f,g)_0$がセクション
 
 \begin{definition}
 $E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を$f$と$g$の\term{よとうかし}{余等化子}{coequalizer}もしくは\term{さよかく}{差余核}{difference cokernel}と呼ぶ.\
-つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\eta_0 / \coeq(f,g)_0 \colon \Coeq(f,g) \to X$がただ1つ存在する.\
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMiwiXFxDb2VxKGYsZykiXSxbMCwzLCJBIl0sWzIsMywiQiJdLFsyLDEsIlxcY29lcShmLGcpXzAiLDFdLFszLDEsIlxcY29lcShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFsyLDAsIlxcZXRhXzAiLDAseyJjdXJ2ZSI6LTN9XSxbMywwLCJcXGV0YV8xIiwyLHsiY3VydmUiOjN9XSxbMSwwLCJcXGV0YV8wIC8gXFxjb2VxKGYsZylfMCIsMV1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\eta_1 / \coeq(f,g)_1 \colon \Coeq(f,g) \to X$がただ1つ存在する.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMiwiXFxDb2VxKGYsZykiXSxbMCwzLCJBIl0sWzIsMywiQiJdLFsyLDEsIlxcY29lcShmLGcpXzAiLDFdLFszLDEsIlxcY29lcShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFsyLDAsIlxcZXRhXzAiLDAseyJjdXJ2ZSI6LTN9XSxbMywwLCJcXGV0YV8xIiwyLHsiY3VydmUiOjN9XSxbMSwwLCJcXGV0YV8xIC8gXFxjb2VxKGYsZylfMSIsMV1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X & \\
 	\\
 	& {\Coeq(f,g)} \\
 	A && B
-	\arrow["{\eta_0 / \coeq(f,g)_0}"{description}, from=3-2, to=1-2]
+	\arrow["{\eta_1 / \coeq(f,g)_1}"{description}, from=3-2, to=1-2]
 	\arrow["{\eta_0}", curve={height=-18pt}, from=4-1, to=1-2]
 	\arrow["{\coeq(f,g)_0}"{description}, from=4-1, to=3-2]
 	\arrow["f", shift left, from=4-1, to=4-3]
@@ -63,10 +63,10 @@ $E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を$f$と$g$の\term{よとうか
 	\arrow["{\eta_1}"', curve={height=18pt}, from=4-3, to=1-2]
 	\arrow["{\coeq(f,g)_1}"{description}, from=4-3, to=3-2]
 \end{tikzcd}\]
-$(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
+$(\Coeq(f,g), \coeq(f,g)_1)$を余等化子もしくは差余核と呼ぶこともある.\ $\coeq(f,g)_1$を$\coeq(f,g)$と書くこともある.\
 \end{definition}
 
 \begin{remark}
-$X \coloneq A,\ \eta_0 \coloneq \id_A$とすれば$\coeq(f,g)_0$がレトラクションであることが分かる.\
-つまり$\coeq(f,g)_0$はエピ射である.\
+$X \coloneq B,\ \eta_1 \coloneq \id_B$とすれば$\coeq(f,g)_1$がレトラクションであることが分かる.\
+つまり$\coeq(f,g)_1$はエピ射である.\
 \end{remark}
