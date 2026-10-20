@@ -1,77 +1,150 @@
 % SPDX-License-Identifier: CC-BY-NC-ND-4.0
 % !TEX root = main.tex
 
-\section{ファイバー積とファイバー和}
+\section{直積と直和}
 
-\begin{definition}
-圏$\bigstar_2$を次のようにして定める.\
+\begin{definition} \label{def: WalkingPairCategory}
+圏$\mathbf{2}$を$\Ob(\mathbf{2}) \coloneq 2,\ \Mor(\mathbf{2}) \coloneq \{\id_0, \id_1\}$として定める.
+\end{definition}
+
+\begin{definition} \label{def: pairDiagramFunctor}
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+共変関手$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$を次のようにして定める.
 \begin{itemize}
-	\item $\Ob(\bigstar_2) \coloneq 3$
-	\item $\Mor(\bigstar_2) \coloneq \{\id_0,\ \id_1,\ \id_2,\ h_0 \colon 0 \to 2,\ h_1 \colon 1 \to 2\}$
+    \item $D_{A,B}(0) \coloneq A,\ D_{A,B}(1) \coloneq B$とする.
+    \item 任意の$j \in 2$に対して$D_{A,B}(\id_j) \coloneq \id_{D_{A,B}(j)}$とする.
 \end{itemize}
-% https://q.uiver.app/#q=WzAsMyxbMSwxLCIyIl0sWzAsMCwiMCJdLFsyLDAsIjEiXSxbMSwwLCJoXzAiXSxbMiwwLCJoXzEiLDJdLFsxLDEsIlxcaWRfMCIsMCx7ImFuZ2xlIjotNDV9XSxbMCwwLCJcXGlkXzIiLDAseyJhbmdsZSI6MTgwfV0sWzIsMiwiXFxpZF8xIiwwLHsiYW5nbGUiOjQ1fV1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+これを\term{りさんずしき}{離散図式}{discrete diagram}と呼ぶ.
+\end{definition}
+
+\begin{remark} \label{rem: limit_universal_property}
+$\mathscr{J}$を小圏とし$\mathscr{C}$を局所小圏とする.\
+$F \colon \mathscr{J} \to \mathscr{C}$を共変関手とする.\
+$A \in \Ob(\mathscr{C})$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A,\eta)$を錐という.\
+錐$(L, \pi)$が$F$の極限であることは以下の条件と同値である.\
+\begin{center}
+${^{\forall}(A,\eta)} \in \Cone(A, F),\ {^{\exists!}h \colon A \to L},\ {^{\forall}j \in \Ob(\mathscr{J}), \pi_j \circ h = \eta_j}$
+\end{center}
+つまり任意の$\mathscr{J}$の射$f \colon X \to Y$に対して次の図式を可換にするただ1つの$\mathscr{C}$の射$h \colon A \to L$が存在する.
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJMIl0sWzEsMCwiQSJdLFswLDIsIkYoWCkiXSxbMiwyLCJGKFkpIl0sWzIsMywiRihmKSJdLFswLDIsIlxccGlfWCIsMl0sWzAsMywiXFxwaV9ZIl0sWzEsMiwiXFxldGFfWCIsMix7ImN1cnZlIjoyfV0sWzEsMywiXFxldGFfWSIsMCx7ImN1cnZlIjotMn1dLFsxLDAsImgiLDJdXQ==
 \[\begin{tikzcd}
-	0 && 1 \\
-	& 2
-	\arrow["{\id_0}", from=1-1, to=1-1, loop, in=100, out=170, distance=10mm]
-	\arrow["{h_0}", from=1-1, to=2-2]
-	\arrow["{\id_1}", from=1-3, to=1-3, loop, in=10, out=80, distance=10mm]
-	\arrow["{h_1}"', from=1-3, to=2-2]
-	\arrow["{\id_2}", from=2-2, to=2-2, loop, in=235, out=305, distance=10mm]
+	& A & \\
+	& L \\
+	{F(X)} && {F(Y)}
+	\arrow["h"', from=1-2, to=2-2]
+	\arrow["{\eta_X}"', curve={height=12pt}, from=1-2, to=3-1]
+	\arrow["{\eta_Y}", curve={height=-12pt}, from=1-2, to=3-3]
+	\arrow["{\pi_X}"', from=2-2, to=3-1]
+	\arrow["{\pi_Y}", from=2-2, to=3-3]
+	\arrow["{F(f)}", from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{remark}
+
+\begin{definition} \label{def: directProduct}
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$(L, \pi)$を$D_{A,B}$の極限とする.\
+このとき$A \times B \coloneq L$を\term{ちょくせき}{直積}{direct product}といい$\pi_0, \pi_1$を\term{しゃえい}{射影}{projection}という.\
+$(A \times B, \pi)$を直積ということもある.
+任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(X, A),\ g \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にするただ1つの射$X \to A \times B$を$\langle f, g \rangle$,\ もしくは$\begin{pmatrix} f \\ g \end{pmatrix}$と書く.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXHRpbWVzIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFswLDIsImYiLDIseyJjdXJ2ZSI6MX1dLFswLDMsImciLDAseyJjdXJ2ZSI6LTF9XSxbMCwxLCJcXGxhbmdsZSBmLCBnIFxccmFuZ2xlIiwxXSxbMSwyLCJcXHBpXzAiXSxbMSwzLCJcXHBpXzEiLDJdXQ==
+\[\begin{tikzcd}
+	X && \\
+	& {A \times B} & B \\
+	& A
+	\arrow["{\langle f, g \rangle}"{description}, from=1-1, to=2-2]
+	\arrow["g", curve={height=-6pt}, from=1-1, to=2-3]
+	\arrow["f"', curve={height=6pt}, from=1-1, to=3-2]
+	\arrow["{\pi_1}"', from=2-2, to=2-3]
+	\arrow["{\pi_0}", from=2-2, to=3-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{definition} \label{def: directSum}
+$\mathscr{C}$を局所小圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$(Q, \iota)$を$D_{A,B}$の余極限とする.\
+このとき$A \amalg B \coloneq Q$を\term{ちょくわ}{直和}{direct sum}といい$\iota_0, \iota_1$を\term{にゅうしゃ}{入射}{injection}という.\
+$(A \amalg B, \iota)$を直和ということもある.
+任意の$X \in \Ob(\mathscr{C})$と$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にするただ1つの射$A \amalg B \to X$を$\lbrack f, g \rbrack$,\ もしくは$\begin{pmatrix} f & g \end{pmatrix}$と書く.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMSwiQSBcXGFtYWxnIEIiXSxbMSwyLCJBIl0sWzIsMSwiQiJdLFsyLDAsImYiLDAseyJjdXJ2ZSI6LTF9XSxbMywwLCJnIiwyLHsiY3VydmUiOjF9XSxbMSwwLCJcXGxicmFjayBmLCBnIFxccmJyYWNrIiwxXSxbMiwxLCJcXGlvdGFfMCIsMl0sWzMsMSwiXFxpb3RhXzEiXV0=
+\[\begin{tikzcd}
+	X && \\
+	& {A \amalg B} & B \\
+	& A
+	\arrow["{\lbrack f, g \rbrack}"{description}, from=2-2, to=1-1]
+	\arrow["g"', curve={height=6pt}, from=2-3, to=1-1]
+	\arrow["{\iota_1}", from=2-3, to=2-2]
+	\arrow["f", curve={height=-6pt}, from=3-2, to=1-1]
+	\arrow["{\iota_0}"', from=3-2, to=2-2]
 \end{tikzcd}\]
 \end{definition}
 
 \begin{definition}
-$\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\mathscr{C}}(A, C),\ g \in \Mor_{\mathscr{C}}(B, C)$とする.\
-共変関手$F \colon \bigstar_2 \to \mathscr{C}$を次のように定める.\
-\begin{itemize}
-	\item $F(0) \coloneq A,\ F(1) \coloneq B,\ F(2) \coloneq C$
-	\item $F(h_0) \coloneq f,\ F(h_1) \coloneq g$
-\end{itemize}
-このとき$F$の極限$(f \pb g, \pi)$を$f$と$g$の\term{ふぁいばーせき}{ファイバー積}{fiber product}もしくは\term{ひきもどし}{引き戻し}{pullback}という.\
-$f \pb g$を$A \times_C B$と書くこともある.\
-
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBiIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbMyw0LCJmIiwyXSxbMiw0LCJnIl0sWzEsMiwiXFxwaV8xIl0sWzEsMywiXFxwaV8wIl0sWzEsNCwiXFxwaV8yIiwxXSxbMCwxLCIhIiwyXSxbMCwzLCJcXGV0YV8wIiwyXSxbMCwyLCJcXGV0YV8xIl0sWzAsNCwiXFxldGFfMiJdXQ==&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
-\[\begin{tikzcd}
-	& X && \\
-	& {f \pb g} && B \\
-	A && C
-	\arrow["{!}"', from=1-2, to=2-2]
-	\arrow["{\eta_1}", from=1-2, to=2-4]
-	\arrow["{\eta_0}"', from=1-2, to=3-1]
-	\arrow["{\eta_2}", from=1-2, to=3-3]
-	\arrow["{\pi_1}", from=2-2, to=2-4]
-	\arrow["{\pi_0}", from=2-2, to=3-1]
-	\arrow["{\pi_2}"{description}, from=2-2, to=3-3]
-	\arrow["g", from=2-4, to=3-3]
-	\arrow["f"', from=3-1, to=3-3]
-\end{tikzcd}\]
-\Interactive{pullback}
+$\mathscr{C}$を局所小圏とし$A_0, A_1, B_0, B_1 \in \Ob(\mathscr{C})$とする.\
+$x \coloneq (x_{ij} \colon A_i \to B_j)_{(i,j) \in 2 \times 2}$を$\mathscr{C}$の射の族とする.\
+次の図式が可換になる.
+\begin{center}
+\begin{tikzpicture}[
+  arr/.style={line width=.5pt,-{cm to}},
+  halo/.style={white,line width=3.5pt},
+  lab/.style={font=\scriptsize,execute at begin node={\setlength{\arraycolsep}{2pt}\renewcommand{\arraystretch}{.9}}},
+  desc/.style={fill=white,inner sep=1pt},
+  obj/.style={inner sep=1pt},
+]
+% objects
+\node[obj] (A0) at (0.000,4.300) {$A_0$};
+\node[obj] (A1) at (0.000,-4.300) {$A_1$};
+\node[obj] (B0) at (-4.300,0.000) {$B_0$};
+\node[obj] (B1) at (4.300,0.000) {$B_1$};
+\node[obj] (AS) at (-1.118,1.032) {$A_0 \amalg A_1$};
+\node[obj] (BS) at (1.118,-1.032) {$B_0 \times B_1$};
+% arrows drawn underneath
+\draw[halo] plot[smooth] coordinates {(-0.616,-3.634) (-0.673,-3.488) (-0.729,-3.330) (-0.781,-3.160) (-0.831,-2.978) (-0.877,-2.785) (-0.921,-2.582) (-0.961,-2.370) (-0.998,-2.148) (-1.041,-1.842) (-1.069,-1.604) (-1.093,-1.360) (-1.113,-1.111) (-1.129,-0.858) (-1.140,-0.602) (-1.148,-0.344) (-1.151,-0.084) (-1.151,0.176)};
+\draw[arr] plot[smooth] coordinates {(-0.430,-3.989) (-0.494,-3.885) (-0.556,-3.766) (-0.616,-3.634) (-0.673,-3.488) (-0.729,-3.330) (-0.781,-3.160) (-0.831,-2.978) (-0.877,-2.785) (-0.921,-2.582) (-0.961,-2.370) (-0.998,-2.148) (-1.031,-1.920) (-1.060,-1.684) (-1.085,-1.442) (-1.106,-1.194) (-1.124,-0.943) (-1.137,-0.687) (-1.146,-0.430) (-1.151,-0.171) (-1.151,0.089) (-1.148,0.349) (-1.140,0.607)};
+% back hemisphere
+\draw[halo] plot[smooth] coordinates {(-0.613,3.641) (-0.655,3.536) (-0.696,3.425) (-0.736,3.306) (-0.775,3.181) (-0.812,3.050) (-0.847,2.913) (-0.881,2.770) (-0.913,2.622) (-0.943,2.468) (-0.971,2.310) (-0.998,2.147) (-1.022,1.980) (-1.045,1.809)};
+\draw[arr] plot[smooth] coordinates {(-0.415,4.011) (-0.463,3.938) (-0.509,3.858) (-0.554,3.770) (-0.598,3.675) (-0.641,3.572) (-0.683,3.463) (-0.723,3.346) (-0.762,3.224) (-0.800,3.094) (-0.836,2.959) (-0.859,2.866) (-0.892,2.721) (-0.923,2.571) (-0.953,2.416) (-0.980,2.256) (-1.006,2.092) (-1.030,1.923) (-1.052,1.751) (-1.072,1.576) (-1.089,1.397)};
+\draw[halo] plot[smooth] coordinates {(-2.418,0.884) (-2.571,0.857) (-2.719,0.828) (-2.861,0.798) (-2.998,0.766) (-3.130,0.733) (-3.255,0.698) (-3.375,0.662) (-3.488,0.625) (-3.594,0.587) (-3.693,0.547)};
+\draw[arr] plot[smooth] coordinates {(-1.989,0.947) (-2.154,0.925) (-2.314,0.901) (-2.470,0.875) (-2.621,0.847) (-2.767,0.818) (-2.907,0.787) (-3.043,0.755) (-3.172,0.721) (-3.336,0.674) (-3.451,0.638) (-3.559,0.600) (-3.661,0.561) (-3.756,0.520) (-3.843,0.479) (-3.924,0.437) (-3.997,0.394) (-4.062,0.351)};
+\draw[halo] plot[smooth] coordinates {(0.271,1.067) (0.532,1.061) (0.792,1.050) (1.049,1.036) (1.302,1.019) (1.549,0.997) (1.792,0.972) (2.027,0.943) (2.255,0.910) (2.402,0.886) (2.616,0.848) (2.819,0.807) (3.012,0.763) (3.194,0.716) (3.364,0.666) (3.521,0.613) (3.666,0.559)};
+\draw[arr] plot[smooth] coordinates {(-0.167,1.068) (0.096,1.068) (0.358,1.065) (0.619,1.058) (0.878,1.046) (1.133,1.031) (1.385,1.012) (1.631,0.989) (1.871,0.962) (2.104,0.932) (2.329,0.898) (2.474,0.874) (2.685,0.835) (2.885,0.793) (3.074,0.747) (3.252,0.699) (3.418,0.649) (3.571,0.595) (3.711,0.540) (3.836,0.483) (3.948,0.424) (4.045,0.363)};
+% through the interior
+\draw[halo] (-0.443,0.409) -- (0.443,-0.409);
+\draw[arr] (-0.738,0.681) -- (0.738,-0.681);
+% front hemisphere and outline
+\draw[halo] plot[smooth] coordinates {(-0.894,4.206) (-1.113,4.153) (-1.329,4.090) (-1.541,4.014) (-1.749,3.928) (-1.952,3.831) (-2.150,3.724) (-2.342,3.606) (-2.527,3.479) (-2.706,3.342) (-2.877,3.196) (-3.093,2.987) (-3.245,2.821) (-3.388,2.647) (-3.522,2.466) (-3.647,2.279) (-3.761,2.085) (-3.865,1.885) (-3.958,1.680) (-4.041,1.471) (-4.112,1.257) (-4.172,1.040) (-4.221,0.820)};
+\draw[arr] plot[smooth] coordinates {(-0.449,4.276) (-0.673,4.247) (-0.894,4.206) (-1.113,4.153) (-1.329,4.090) (-1.541,4.014) (-1.749,3.928) (-1.952,3.831) (-2.150,3.724) (-2.342,3.606) (-2.527,3.479) (-2.706,3.342) (-2.877,3.196) (-3.093,2.987) (-3.245,2.821) (-3.388,2.647) (-3.522,2.466) (-3.647,2.279) (-3.761,2.085) (-3.865,1.885) (-3.958,1.680) (-4.041,1.471) (-4.112,1.257) (-4.172,1.040) (-4.221,0.820) (-4.258,0.598) (-4.284,0.375)};
+\draw[halo] plot[smooth] coordinates {(0.894,4.206) (1.113,4.153) (1.329,4.090) (1.541,4.014) (1.749,3.928) (1.952,3.831) (2.150,3.724) (2.342,3.606) (2.527,3.479) (2.706,3.342) (2.877,3.196) (3.093,2.987) (3.245,2.821) (3.388,2.647) (3.522,2.466) (3.647,2.279) (3.761,2.085) (3.865,1.885) (3.958,1.680) (4.041,1.471) (4.112,1.257) (4.172,1.040) (4.221,0.820)};
+\draw[arr] plot[smooth] coordinates {(0.449,4.276) (0.673,4.247) (0.894,4.206) (1.113,4.153) (1.329,4.090) (1.541,4.014) (1.749,3.928) (1.952,3.831) (2.150,3.724) (2.342,3.606) (2.527,3.479) (2.706,3.342) (2.877,3.196) (3.093,2.987) (3.245,2.821) (3.388,2.647) (3.522,2.466) (3.647,2.279) (3.761,2.085) (3.865,1.885) (3.958,1.680) (4.041,1.471) (4.112,1.257) (4.172,1.040) (4.221,0.820) (4.258,0.598) (4.284,0.375)};
+\draw[halo] plot[smooth] coordinates {(-0.894,-4.206) (-1.113,-4.153) (-1.329,-4.090) (-1.541,-4.014) (-1.749,-3.928) (-1.952,-3.831) (-2.150,-3.724) (-2.342,-3.606) (-2.527,-3.479) (-2.706,-3.342) (-2.877,-3.196) (-3.093,-2.987) (-3.245,-2.821) (-3.388,-2.647) (-3.522,-2.466) (-3.647,-2.279) (-3.761,-2.085) (-3.865,-1.885) (-3.958,-1.680) (-4.041,-1.471) (-4.112,-1.257) (-4.172,-1.040) (-4.221,-0.820)};
+\draw[arr] plot[smooth] coordinates {(-0.449,-4.276) (-0.673,-4.247) (-0.894,-4.206) (-1.113,-4.153) (-1.329,-4.090) (-1.541,-4.014) (-1.749,-3.928) (-1.952,-3.831) (-2.150,-3.724) (-2.342,-3.606) (-2.527,-3.479) (-2.706,-3.342) (-2.877,-3.196) (-3.093,-2.987) (-3.245,-2.821) (-3.388,-2.647) (-3.522,-2.466) (-3.647,-2.279) (-3.761,-2.085) (-3.865,-1.885) (-3.958,-1.680) (-4.041,-1.471) (-4.112,-1.257) (-4.172,-1.040) (-4.221,-0.820) (-4.258,-0.598) (-4.284,-0.375)};
+\draw[halo] plot[smooth] coordinates {(0.894,-4.206) (1.113,-4.153) (1.329,-4.090) (1.541,-4.014) (1.749,-3.928) (1.952,-3.831) (2.150,-3.724) (2.342,-3.606) (2.527,-3.479) (2.706,-3.342) (2.877,-3.196) (3.093,-2.987) (3.245,-2.821) (3.388,-2.647) (3.522,-2.466) (3.647,-2.279) (3.761,-2.085) (3.865,-1.885) (3.958,-1.680) (4.041,-1.471) (4.112,-1.257) (4.172,-1.040) (4.221,-0.820)};
+\draw[arr] plot[smooth] coordinates {(0.449,-4.276) (0.673,-4.247) (0.894,-4.206) (1.113,-4.153) (1.329,-4.090) (1.541,-4.014) (1.749,-3.928) (1.952,-3.831) (2.150,-3.724) (2.342,-3.606) (2.527,-3.479) (2.706,-3.342) (2.877,-3.196) (3.093,-2.987) (3.245,-2.821) (3.388,-2.647) (3.522,-2.466) (3.647,-2.279) (3.761,-2.085) (3.865,-1.885) (3.958,-1.680) (4.041,-1.471) (4.112,-1.257) (4.172,-1.040) (4.221,-0.820) (4.258,-0.598) (4.284,-0.375)};
+\draw[halo] plot[smooth] coordinates {(0.613,-3.641) (0.655,-3.536) (0.696,-3.425) (0.736,-3.306) (0.775,-3.181) (0.812,-3.050) (0.847,-2.913) (0.881,-2.770) (0.913,-2.622) (0.943,-2.468) (0.971,-2.310) (0.998,-2.147) (1.022,-1.980) (1.045,-1.809)};
+\draw[arr] plot[smooth] coordinates {(0.415,-4.011) (0.463,-3.938) (0.509,-3.858) (0.554,-3.770) (0.598,-3.675) (0.641,-3.572) (0.683,-3.463) (0.723,-3.346) (0.762,-3.224) (0.800,-3.094) (0.836,-2.959) (0.859,-2.866) (0.892,-2.721) (0.923,-2.571) (0.953,-2.416) (0.980,-2.256) (1.006,-2.092) (1.030,-1.923) (1.052,-1.751) (1.072,-1.576) (1.089,-1.397)};
+\draw[halo] plot[smooth] coordinates {(-0.271,-1.067) (-0.532,-1.061) (-0.792,-1.050) (-1.049,-1.036) (-1.302,-1.019) (-1.549,-0.997) (-1.792,-0.972) (-2.027,-0.943) (-2.255,-0.910) (-2.402,-0.886) (-2.616,-0.848) (-2.819,-0.807) (-3.012,-0.763) (-3.194,-0.716) (-3.364,-0.666) (-3.521,-0.613) (-3.666,-0.559)};
+\draw[arr] plot[smooth] coordinates {(0.167,-1.068) (-0.096,-1.068) (-0.358,-1.065) (-0.619,-1.058) (-0.878,-1.046) (-1.133,-1.031) (-1.385,-1.012) (-1.631,-0.989) (-1.871,-0.962) (-2.104,-0.932) (-2.329,-0.898) (-2.474,-0.874) (-2.685,-0.835) (-2.885,-0.793) (-3.074,-0.747) (-3.252,-0.699) (-3.418,-0.649) (-3.571,-0.595) (-3.711,-0.540) (-3.836,-0.483) (-3.948,-0.424) (-4.045,-0.363)};
+\draw[halo] plot[smooth] coordinates {(2.418,-0.884) (2.571,-0.857) (2.719,-0.828) (2.861,-0.798) (2.998,-0.766) (3.130,-0.733) (3.255,-0.698) (3.375,-0.662) (3.488,-0.625) (3.594,-0.587) (3.693,-0.547)};
+\draw[arr] plot[smooth] coordinates {(1.989,-0.947) (2.154,-0.925) (2.314,-0.901) (2.470,-0.875) (2.621,-0.847) (2.767,-0.818) (2.907,-0.787) (3.043,-0.755) (3.172,-0.721) (3.336,-0.674) (3.451,-0.638) (3.559,-0.600) (3.661,-0.561) (3.756,-0.520) (3.843,-0.479) (3.924,-0.437) (3.997,-0.394) (4.062,-0.351)};
+% arrows drawn on top
+\draw[halo] plot[smooth] coordinates {(0.616,3.634) (0.673,3.488) (0.729,3.330) (0.781,3.160) (0.831,2.978) (0.877,2.785) (0.921,2.582) (0.961,2.370) (0.998,2.148) (1.041,1.842) (1.069,1.604) (1.093,1.360) (1.113,1.111) (1.129,0.858) (1.140,0.602) (1.148,0.344) (1.151,0.084) (1.151,-0.176)};
+\draw[arr] plot[smooth] coordinates {(0.430,3.989) (0.494,3.885) (0.556,3.766) (0.616,3.634) (0.673,3.488) (0.729,3.330) (0.781,3.160) (0.831,2.978) (0.877,2.785) (0.921,2.582) (0.961,2.370) (0.998,2.148) (1.031,1.920) (1.060,1.684) (1.085,1.442) (1.106,1.194) (1.124,0.943) (1.137,0.687) (1.146,0.430) (1.151,0.171) (1.151,-0.089) (1.148,-0.349) (1.140,-0.607)};
+% labels
+\node[lab] at (-3.380,3.253) {$x_{00}$};
+\node[lab] at (3.380,3.253) {$x_{01}$};
+\node[lab] at (-3.380,-3.253) {$x_{10}$};
+\node[lab] at (3.380,-3.253) {$x_{11}$};
+\node[lab,desc] at (-0.710,3.386) {$\iota_0$};
+\node[lab,desc] at (-0.907,-2.651) {$\iota_1$};
+\node[lab,desc] at (0.907,2.651) {$\begin{pmatrix} x_{00} \\ x_{01} \end{pmatrix}$};
+\node[lab,desc] at (0.824,-3.005) {$\begin{pmatrix} x_{10} \\ x_{11} \end{pmatrix}$};
+\node[lab,above=2pt] at (-3.235,0.704) {$\begin{pmatrix} x_{00} & x_{10} \end{pmatrix}$};
+\node[lab,desc] at (2.616,0.848) {$\begin{pmatrix} x_{01} & x_{11} \end{pmatrix}$};
+\node[lab,desc] at (-2.616,-0.848) {$\pi_0$};
+\node[lab,desc] at (3.413,-0.650) {$\pi_1$};
+\node[lab,desc] at (0.074,-0.068) {$\begin{pmatrix} x_{00} & x_{10} \\ x_{01} & x_{11} \end{pmatrix}$};
+\end{tikzpicture}
+\Interactive{matrix-sphere}
+\end{center}
+$\begin{pmatrix} {\begin{pmatrix} x_{00} \\ x_{10} \end{pmatrix}} & {\begin{pmatrix} x_{01} \\ x_{11} \end{pmatrix}} \end{pmatrix} = \begin{pmatrix} {\begin{pmatrix} x_{00} & x_{10} \end{pmatrix}} \\ {\begin{pmatrix} x_{01} & x_{11} \end{pmatrix}} \end{pmatrix}$でありこれを$\begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix}$と書く.\
+$\pi_j \circ \begin{pmatrix} x_{00} & x_{01} \\ x_{10} & x_{11} \end{pmatrix} \circ \iota_i = x_{ij}$である.
 \end{definition}
-
-\begin{definition}
-$\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\mathscr{C}}(C, A),\ g \in \Mor_{\mathscr{C}}(C, B)$とする.\
-共変関手$F \colon \bigstar_2^{\op} \to \mathscr{C}$を次のように定める.\
-\begin{itemize}
-	\item $F(0) \coloneq A,\ F(1) \coloneq B,\ F(2) \coloneq C$
-	\item $F(h_0) \coloneq f,\ F(h_1) \coloneq g$
-\end{itemize}
-$F$の余極限$(f \po g, \iota)$を$f$と$g$の\term{ふぁいばーわ}{ファイバー和}{fiber sum}もしくは\term{おしだし}{押し出し}{pushout}という.\
-$f \po g$を$A \amalg_C B$と書くこともある.\
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBiIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbNCwzLCJmIl0sWzQsMiwiZyIsMl0sWzIsMSwiXFxpb3RhXzEiLDJdLFszLDEsIlxcaW90YV8wIiwyXSxbNCwxLCJcXGlvdGFfMiIsMV0sWzEsMCwiXFx0ZXh0e8KhfSJdLFszLDAsIlxcZXRhXzAiXSxbMiwwLCJcXGV0YV8xIiwyXSxbNCwwLCJcXGV0YV8yIiwyXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
-\[\begin{tikzcd}
-	& X && \\
-	& {f \pb g} && B \\
-	A && C
-	\arrow["{\text{¡}}", from=2-2, to=1-2]
-	\arrow["{\eta_1}"', from=2-4, to=1-2]
-	\arrow["{\iota_1}"', from=2-4, to=2-2]
-	\arrow["{\eta_0}", from=3-1, to=1-2]
-	\arrow["{\iota_0}"', from=3-1, to=2-2]
-	\arrow["{\eta_2}"', from=3-3, to=1-2]
-	\arrow["{\iota_2}"{description}, from=3-3, to=2-2]
-	\arrow["g"', from=3-3, to=2-4]
-	\arrow["f", from=3-3, to=3-1]
-\end{tikzcd}\]
-\end{definition}
-
