@@ -25,13 +25,13 @@ $A \in \Ob(\mathscr{C})$と自然変換$\eta \colon C_A \Rightarrow F$の組$(A,
 \begin{center}
 ${^{\forall}(A,\eta)} \in \Cone(A, F),\ {^{\exists!}h \colon A \to L},\ {^{\forall}j \in \Ob(\mathscr{J}), \pi_j \circ h = \eta_j}$
 \end{center}
-つまり任意の$\mathscr{J}$の射$f \colon X \to Y$に対して次の図式を可換にするただ1つの$\mathscr{C}$の射$h \colon A \to L$が存在する.
-% https://q.uiver.app/#q=WzAsNCxbMSwxLCJMIl0sWzEsMCwiQSJdLFswLDIsIkYoWCkiXSxbMiwyLCJGKFkpIl0sWzIsMywiRihmKSJdLFswLDIsIlxccGlfWCIsMl0sWzAsMywiXFxwaV9ZIl0sWzEsMiwiXFxldGFfWCIsMix7ImN1cnZlIjoyfV0sWzEsMywiXFxldGFfWSIsMCx7ImN1cnZlIjotMn1dLFsxLDAsImgiLDJdXQ==
+つまり任意の$\mathscr{J}$の射$f \colon X \to Y$に対して次の図式を可換にするただ1つの$\mathscr{C}$の射$\pi \backslash \eta \colon A \to L$が存在する.
+% https://q.uiver.app/#q=WzAsNCxbMSwxLCJMIl0sWzEsMCwiQSJdLFswLDIsIkYoWCkiXSxbMiwyLCJGKFkpIl0sWzIsMywiRihmKSJdLFswLDIsIlxccGlfWCIsMl0sWzAsMywiXFxwaV9ZIl0sWzEsMiwiXFxldGFfWCIsMix7ImN1cnZlIjoyfV0sWzEsMywiXFxldGFfWSIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlxccGkgXFxiYWNrc2xhc2ggXFxldGEiLDJdXQ==
 \[\begin{tikzcd}
 	& A & \\
 	& L \\
 	{F(X)} && {F(Y)}
-	\arrow["h"', from=1-2, to=2-2]
+	\arrow["{\pi \backslash \eta}"', from=1-2, to=2-2]
 	\arrow["{\eta_X}"', curve={height=12pt}, from=1-2, to=3-1]
 	\arrow["{\eta_Y}", curve={height=-12pt}, from=1-2, to=3-3]
 	\arrow["{\pi_X}"', from=2-2, to=3-1]

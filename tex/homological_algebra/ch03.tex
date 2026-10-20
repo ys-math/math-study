@@ -30,21 +30,21 @@ $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\m
 \end{itemize}
 このとき$F$の極限$(f \pb g, \pi)$を$f$と$g$の\term{ふぁいばーせき}{ファイバー積}{fiber product}もしくは\term{ひきもどし}{引き戻し}{pullback}という.\
 $f \pb g$を$A \times_C B$と書くこともある.\
-
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBiIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbMyw0LCJmIiwyXSxbMiw0LCJnIl0sWzEsMiwiXFxwaV8xIl0sWzEsMywiXFxwaV8wIl0sWzEsNCwiXFxwaV8yIiwxXSxbMCwxLCIhIiwyXSxbMCwzLCJcXGV0YV8wIiwyXSxbMCwyLCJcXGV0YV8xIl0sWzAsNCwiXFxldGFfMiJdXQ==&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMiwiZiBcXHBiIGciXSxbMywyLCJCIl0sWzAsMywiQSJdLFsyLDMsIkMiXSxbMyw0LCJmIiwyXSxbMiw0LCJnIl0sWzEsMiwiXFxwaV8xIl0sWzEsMywiXFxwaV8wIl0sWzEsNCwiXFxwaV8yIiwxXSxbMCwxLCJcXHBpIFxcYmFja3NsYXNoIFxcZXRhIiwxXSxbMCwzLCJcXGV0YV8wIiwyXSxbMCwyLCJcXGV0YV8xIl0sWzAsNCwiXFxldGFfMiJdXQ==&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X && \\
+	\\
 	& {f \pb g} && B \\
 	A && C
-	\arrow["{!}"', from=1-2, to=2-2]
-	\arrow["{\eta_1}", from=1-2, to=2-4]
-	\arrow["{\eta_0}"', from=1-2, to=3-1]
-	\arrow["{\eta_2}", from=1-2, to=3-3]
-	\arrow["{\pi_1}", from=2-2, to=2-4]
-	\arrow["{\pi_0}", from=2-2, to=3-1]
-	\arrow["{\pi_2}"{description}, from=2-2, to=3-3]
-	\arrow["g", from=2-4, to=3-3]
-	\arrow["f"', from=3-1, to=3-3]
+	\arrow["{\pi \backslash \eta}"{description}, from=1-2, to=3-2]
+	\arrow["{\eta_1}", from=1-2, to=3-4]
+	\arrow["{\eta_0}"', from=1-2, to=4-1]
+	\arrow["{\eta_2}", from=1-2, to=4-3]
+	\arrow["{\pi_1}", from=3-2, to=3-4]
+	\arrow["{\pi_0}", from=3-2, to=4-1]
+	\arrow["{\pi_2}"{description}, from=3-2, to=4-3]
+	\arrow["g", from=3-4, to=4-3]
+	\arrow["f"', from=4-1, to=4-3]
 \end{tikzcd}\]
 \Interactive{pullback}
 \end{definition}
@@ -58,20 +58,21 @@ $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\m
 \end{itemize}
 $F$の余極限$(f \po g, \iota)$を$f$と$g$の\term{ふぁいばーわ}{ファイバー和}{fiber sum}もしくは\term{おしだし}{押し出し}{pushout}という.\
 $f \po g$を$A \amalg_C B$と書くこともある.\
-% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMSwiZiBcXHBvIGciXSxbMywxLCJCIl0sWzAsMiwiQSJdLFsyLDIsIkMiXSxbNCwzLCJmIl0sWzQsMiwiZyIsMl0sWzIsMSwiXFxpb3RhXzEiLDJdLFszLDEsIlxcaW90YV8wIiwyXSxbNCwxLCJcXGlvdGFfMiIsMV0sWzEsMCwiXFx0ZXh0e8KhfSJdLFszLDAsIlxcZXRhXzAiXSxbMiwwLCJcXGV0YV8xIiwyXSxbNCwwLCJcXGV0YV8yIiwyXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYIl0sWzEsMiwiZiBcXHBvIGciXSxbMywyLCJCIl0sWzAsMywiQSJdLFsyLDMsIkMiXSxbNCwzLCJmIl0sWzQsMiwiZyIsMl0sWzIsMSwiXFxpb3RhXzEiLDJdLFszLDEsIlxcaW90YV8wIiwyXSxbNCwxLCJcXGlvdGFfMiIsMV0sWzEsMCwiXFxldGEgLyBcXGlvdGEiLDFdLFszLDAsIlxcZXRhXzAiXSxbMiwwLCJcXGV0YV8xIiwyXSxbNCwwLCJcXGV0YV8yIiwyXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X && \\
+	\\
 	& {f \po g} && B \\
 	A && C
-	\arrow["{\text{¡}}", from=2-2, to=1-2]
-	\arrow["{\eta_1}"', from=2-4, to=1-2]
-	\arrow["{\iota_1}"', from=2-4, to=2-2]
-	\arrow["{\eta_0}", from=3-1, to=1-2]
-	\arrow["{\iota_0}"', from=3-1, to=2-2]
-	\arrow["{\eta_2}"', from=3-3, to=1-2]
-	\arrow["{\iota_2}"{description}, from=3-3, to=2-2]
-	\arrow["g"', from=3-3, to=2-4]
-	\arrow["f", from=3-3, to=3-1]
+	\arrow["{\eta / \iota}"{description}, from=3-2, to=1-2]
+	\arrow["{\eta_1}"', from=3-4, to=1-2]
+	\arrow["{\iota_1}"', from=3-4, to=3-2]
+	\arrow["{\eta_0}", from=4-1, to=1-2]
+	\arrow["{\iota_0}"', from=4-1, to=3-2]
+	\arrow["{\eta_2}"', from=4-3, to=1-2]
+	\arrow["{\iota_2}"{description}, from=4-3, to=3-2]
+	\arrow["g"', from=4-3, to=3-4]
+	\arrow["f", from=4-3, to=4-1]
 \end{tikzcd}\]
 \end{definition}
 
