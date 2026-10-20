@@ -34,24 +34,64 @@ $g = g \circ f \circ f^{-1} = h \circ f \circ f^{-1} = h$であるから$f$は�
 \end{proof}
 
 \begin{definition}
-$\mathscr{C}$を圏とし$X,Y \in \Ob(\mathscr{C})$とする.\
-$s \in \Mor(X, Y),\ r \in \Mor_{\mathscr{C}}(Y, X)$とする.\
-$r \circ s = \id_{X}$であるとき組$(r,s)$を\term{れとらくしょんせくしょんぺあ}{レトラクションセクションペア}{retraction-section pair}とよぶ.\
+$\mathscr{C}$を圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$s \in \Mor(A, B),\ r \in \Mor_{\mathscr{C}}(B, A)$とする.\
+$r \circ s = \id_{A}$であるとき組$(r,s)$を\term{れとらくしょんせくしょんぺあ}{レトラクションセクションペア}{retraction-section pair}とよぶ.\
 またこのとき$r$を\term{れとらくしょん}{レトラクション}{retraction}もしくは\term{ぶんれつえぴしゃ}{分裂エピ射}{split epimorphism}と呼び$s$を\term{せくしょん}{セクション}{section}もしくは\term{ぶんれつものしゃ}{分裂モノ射}{split monomorphism}と呼ぶ.
 \end{definition}
 
 \begin{proposition}
-$\mathscr{C}$を圏とし$X,Y \in \Ob(\mathscr{C})$とする.\
-$s \in \Mor(X, Y),\ r \in \Mor(Y, X)$とし$(r,s)$をレトラクションセクションペアとする.\
+$\mathscr{C}$を圏とし$A,B \in \Ob(\mathscr{C})$とする.\
+$s \in \Mor(A, B),\ r \in \Mor(B, A)$とし$(r,s)$をレトラクションセクションペアとする.\
 このとき$r$はエピ射であり$s$はモノ射である.
 \end{proposition}
 
 \begin{proof}
-$A \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(A, X)$とする.\
+$X \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(X, A)$とする.\
 $s \circ f = s \circ g$と仮定する.\
-$f = \id_X \circ f = r \circ s \circ f = r \circ s \circ g = \id_X \circ g = g$なので$s$はモノ射である.\
+$f = \id_A \circ f = r \circ s \circ f = r \circ s \circ g = \id_A \circ g = g$なので$s$はモノ射である.\
 
-$B \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(X, B)$とする.\
+$Y \in \Ob(\mathscr{C})$とし$f,g \in \Mor_{\mathscr{C}}(A, Y)$とする.\
 $f \circ r = g \circ r$と仮定する.\
-$f = f \circ \id_X = f \circ r \circ s = g \circ r \circ s = g \circ \id_X = g$なので$r$はエピ射である.\
+$f = f \circ \id_A = f \circ r \circ s = g \circ r \circ s = g \circ \id_A = g$なので$r$はエピ射である.\
 \end{proof}
+
+\begin{proposition}
+$\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
+$m \in \Mor(B, C)$をモノ射とし$f \in \Mor(A, C)$とする.\
+このとき$m \circ g = f$を満たす$g \in \Mor_{\mathscr{C}}(A,B)$は存在するならば一意的である.\
+\end{proposition}
+
+\begin{proof}
+$g,g' \in \Mor_{\mathscr{C}}(A, B)$が$m \circ g = f$と$m \circ g' = f$を満たすと仮定する.\
+$m \circ g = f = m \circ g'$であり$m$はモノ射なので$g = g'$である.\
+\end{proof}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
+$m \in \Mor(B, C)$をモノ射とし$f \in \Mor(A, C)$とする.\
+$m \circ g = f$を満たす$g \in \Mor_{\mathscr{C}}(A, B)$が存在するとき$g$を$m \backslash f$と書く.\ つまり次の式が成り立つ.\
+\begin{center}
+$m \circ m \backslash f = f$
+\end{center}
+\end{definition}
+
+\begin{proposition}
+$\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
+$e \in \Mor(A, B)$をエピ射とし$f \in \Mor(A, C)$とする.\
+このとき$h \circ e = f$を満たす$h \in \Mor_{\mathscr{C}}(B,C)$は存在するならば一意的である.\
+\end{proposition}
+
+\begin{proof}
+$h,h' \in \Mor_{\mathscr{C}}(B,C)$が$h \circ e = f$と$h' \circ e = f$を満たすと仮定する.\
+$h \circ e = f = h' \circ e$であり$e$はエピ射なので$h = h'$である.\
+\end{proof}
+
+\begin{definition}
+$\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
+$e \in \Mor(A, B)$をエピ射とし$f \in \Mor(A, C)$とする.\
+$h \circ e = f$を満たす$h \in \Mor_{\mathscr{C}}(B, C)$が存在するとき$h$を$f / e$と書く.\ つまり次の式が成り立つ.\
+\begin{center}
+$f / e \circ e = f$
+\end{center}
+\end{definition}

@@ -22,40 +22,51 @@
 $\mathscr{C}$を圏とし$\mathbf{P}$を平行対の圏とする.\
 $f, g \in \Mor_{\mathscr{C}}(A, B)$とし共変関手$E_{f,g} \colon \mathbf{P} \to \mathscr{C}$を$E_{f,g}(0) \coloneq A,\ E_{f,g}(1) \coloneq B,\ E_{f,g}(u) \coloneq f,\ E_{f,g}(v) \coloneq g$と定める.\
 このときの$E_{f,g}$の極限$(\Eq(f,g), \eq(f,g))$を$f$と$g$の\term{とうかし}{等化子}{equalizer}もしくは\term{さかく}{差核}{difference kernel}と呼ぶ.\
-つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(X, A),\ \eta_1 \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にする$\mathscr{C}$の射$! \colon X \to \Eq(f,g)$がただ1つ存在する.\
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
+つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(X, A),\ \eta_1 \in \Mor_{\mathscr{C}}(X, B)$に対して次の図式を可換にする$\mathscr{C}$の射$\eq(f,g)_0 \backslash \eta_0 \colon X \to \Eq(f,g)$がただ1つ存在する.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMiwiXFxFcShmLGcpIl0sWzAsMywiQSJdLFsyLDMsIkIiXSxbMSwyLCJcXGVxKGYsZylfMCIsMV0sWzEsMywiXFxlcShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCJcXGVxKGYsZylfMCBcXGJhY2tzbGFzaCBcXGV0YV8wIiwxXV0=&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X & \\
-	& {\mathrm{Eq}(f,g)} \\
+	\\
+	& {\Eq(f,g)} \\
 	A && B
-	\arrow["{!}"', from=1-2, to=2-2]
-	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=3-1]
-	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=3-3]
-	\arrow["{\mathrm{eq}(f,g)_0}"{description}, from=2-2, to=3-1]
-	\arrow["{\mathrm{eq}(f,g)_1}"{description}, from=2-2, to=3-3]
-	\arrow["f", shift left, from=3-1, to=3-3]
-	\arrow["g"', shift right, from=3-1, to=3-3]
+	\arrow["{\eq(f,g)_0 \backslash \eta_0}"{description}, from=1-2, to=3-2]
+	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=4-1]
+	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=4-3]
+	\arrow["{\eq(f,g)_0}"{description}, from=3-2, to=4-1]
+	\arrow["{\eq(f,g)_1}"{description}, from=3-2, to=4-3]
+	\arrow["f", shift left, from=4-1, to=4-3]
+	\arrow["g"', shift right, from=4-1, to=4-3]
 \end{tikzcd}\]
 
 $(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
 \end{definition}
+
+\begin{remark}
+$X \coloneq A,\ \eta_0 \coloneq \id_A$とすれば$\eq(f,g)_0$がセクションであることが分かる.\
+つまり$\eq(f,g)_0$はモノ射である.\
+\end{remark}
 
 \begin{definition}
 $E_{f,g}$の余極限$(\Coeq(f,g), \coeq(f,g))$を$f$と$g$の\term{よとうかし}{余等化子}{coequalizer}もしくは\term{さよかく}{差余核}{difference cokernel}と呼ぶ.\
-つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\iexcl \colon \Coeq(f,g) \to X$がただ1つ存在する.\
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMSwiXFxtYXRocm17RXF9KGYsZykiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFsxLDIsIlxcbWF0aHJte2VxfShmLGcpXzAiLDFdLFsxLDMsIlxcbWF0aHJte2VxfShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFswLDIsIlxcZXRhXzAiLDIseyJjdXJ2ZSI6M31dLFswLDMsIlxcZXRhXzEiLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhIiwyXV0=
+つまり任意の$X \in \Ob(\mathscr{C})$と$\eta_0 \in \Mor_{\mathscr{C}}(A, X),\ \eta_1 \in \Mor_{\mathscr{C}}(B, X)$に対して次の図式を可換にする$\mathscr{C}$の射$\eta_0 / \coeq(f,g)_0 \colon \Coeq(f,g) \to X$がただ1つ存在する.\
+% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzEsMiwiXFxDb2VxKGYsZykiXSxbMCwzLCJBIl0sWzIsMywiQiJdLFsyLDEsIlxcY29lcShmLGcpXzAiLDFdLFszLDEsIlxcY29lcShmLGcpXzEiLDFdLFsyLDMsImYiLDAseyJvZmZzZXQiOi0xfV0sWzIsMywiZyIsMix7Im9mZnNldCI6MX1dLFsyLDAsIlxcZXRhXzAiLDAseyJjdXJ2ZSI6LTN9XSxbMywwLCJcXGV0YV8xIiwyLHsiY3VydmUiOjN9XSxbMSwwLCJcXGV0YV8wIC8gXFxjb2VxKGYsZylfMCIsMV1d&macro_url=https%3A%2F%2Fgist.githubusercontent.com%2Fys-math%2F3ce50ecce6044bd5f2629781f2a56d8e%2Fraw%2Fquiver-macros.tex
 \[\begin{tikzcd}
 	& X & \\
-	& {\mathrm{Eq}(f,g)} \\
+	\\
+	& {\Coeq(f,g)} \\
 	A && B
-	\arrow["{!}"', from=1-2, to=2-2]
-	\arrow["{\eta_0}"', curve={height=18pt}, from=1-2, to=3-1]
-	\arrow["{\eta_1}", curve={height=-18pt}, from=1-2, to=3-3]
-	\arrow["{\mathrm{eq}(f,g)_0}"{description}, from=2-2, to=3-1]
-	\arrow["{\mathrm{eq}(f,g)_1}"{description}, from=2-2, to=3-3]
-	\arrow["f", shift left, from=3-1, to=3-3]
-	\arrow["g"', shift right, from=3-1, to=3-3]
+	\arrow["{\eta_0 / \coeq(f,g)_0}"{description}, from=3-2, to=1-2]
+	\arrow["{\eta_0}", curve={height=-18pt}, from=4-1, to=1-2]
+	\arrow["{\coeq(f,g)_0}"{description}, from=4-1, to=3-2]
+	\arrow["f", shift left, from=4-1, to=4-3]
+	\arrow["g"', shift right, from=4-1, to=4-3]
+	\arrow["{\eta_1}"', curve={height=18pt}, from=4-3, to=1-2]
+	\arrow["{\coeq(f,g)_1}"{description}, from=4-3, to=3-2]
 \end{tikzcd}\]
-
 $(\Eq(f,g), \eq(f,g)_0)$を等化子もしくは差核と呼ぶこともある.\ $\eq(f,g)_0$を$\eq(f,g)$と書くこともある.\
 \end{definition}
+
+\begin{remark}
+$X \coloneq A,\ \eta_0 \coloneq \id_A$とすれば$\coeq(f,g)_0$がレトラクションであることが分かる.\
+つまり$\coeq(f,g)_0$はエピ射である.\
+\end{remark}
