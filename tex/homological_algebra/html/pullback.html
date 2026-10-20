@@ -32,45 +32,45 @@ Diagram.mount({
   arrows: [
     { id: 'f', from: 'A', to: 'C', tex: 'f', plain: 'f', straight: true },
     { id: 'g', from: 'B', to: 'C', tex: 'g', plain: 'g', straight: true },
-    { id: 'p0', from: 'P', to: 'C', tex: '\\pi_0', plain: 'π₀', straight: true },
-    { id: 'p1', from: 'P', to: 'A', tex: '\\pi_1', plain: 'π₁', straight: true },
-    { id: 'p2', from: 'P', to: 'B', tex: '\\pi_2', plain: 'π₂', straight: true },
-    { id: 'e0', from: 'X', to: 'C', tex: '\\eta_0', plain: 'η₀', straight: true },
-    { id: 'e1', from: 'X', to: 'A', tex: '\\eta_1', plain: 'η₁', straight: true },
-    { id: 'e2', from: 'X', to: 'B', tex: '\\eta_2', plain: 'η₂', straight: true },
+    { id: 'p0', from: 'P', to: 'A', tex: '\\pi_0', plain: 'π₀', straight: true },
+    { id: 'p1', from: 'P', to: 'B', tex: '\\pi_1', plain: 'π₁', straight: true },
+    { id: 'p2', from: 'P', to: 'C', tex: '\\pi_2', plain: 'π₂', straight: true },
+    { id: 'e0', from: 'X', to: 'A', tex: '\\eta_0', plain: 'η₀', straight: true },
+    { id: 'e1', from: 'X', to: 'B', tex: '\\eta_1', plain: 'η₁', straight: true },
+    { id: 'e2', from: 'X', to: 'C', tex: '\\eta_2', plain: 'η₂', straight: true },
     { id: 'u', from: 'X', to: 'P', tex: '!', plain: '!', straight: true },
   ],
   home: [{ axis: [1, 0, 0], deg: 22 }, { axis: [0, 1, 0], deg: -28 }],
   // the order the structure is built: the diagram F, its limit cone, a second cone, and the arrow between them
   intro: {
     objects: { A: 0, C: 90, B: 180, P: 380, X: 860 },
-    arrows: { f: 240, g: 300, p1: 500, p2: 560, p0: 620, e1: 980, e2: 1040, e0: 1100, u: 1300 },
+    arrows: { f: 240, g: 300, p0: 500, p1: 560, p2: 620, e0: 980, e1: 1040, e2: 1100, u: 1300 },
   },
   tabs: [
     { label: 'Faces', groups: [
       { title: 'Limit cone $\\pi$', faces: [
-        { path: ['p1', 'f'], direct: 'p0', objects: ['P', 'A', 'C'], ...KEEP, tex: 'f \\circ \\pi_1 = \\pi_0', plain: 'f ∘ π₁ = π₀' },
-        { path: ['p2', 'g'], direct: 'p0', objects: ['P', 'B', 'C'], ...KEEP, tex: 'g \\circ \\pi_2 = \\pi_0', plain: 'g ∘ π₂ = π₀' },
+        { path: ['p0', 'f'], direct: 'p2', objects: ['P', 'A', 'C'], ...KEEP, tex: 'f \\circ \\pi_0 = \\pi_2', plain: 'f ∘ π₀ = π₂' },
+        { path: ['p1', 'g'], direct: 'p2', objects: ['P', 'B', 'C'], ...KEEP, tex: 'g \\circ \\pi_1 = \\pi_2', plain: 'g ∘ π₁ = π₂' },
       ] },
       { title: 'Cone $\\eta$', faces: [
-        { path: ['e1', 'f'], direct: 'e0', objects: ['X', 'A', 'C'], ...KEEP, tex: 'f \\circ \\eta_1 = \\eta_0', plain: 'f ∘ η₁ = η₀' },
-        { path: ['e2', 'g'], direct: 'e0', objects: ['X', 'B', 'C'], ...KEEP, tex: 'g \\circ \\eta_2 = \\eta_0', plain: 'g ∘ η₂ = η₀' },
+        { path: ['e0', 'f'], direct: 'e2', objects: ['X', 'A', 'C'], ...KEEP, tex: 'f \\circ \\eta_0 = \\eta_2', plain: 'f ∘ η₀ = η₂' },
+        { path: ['e1', 'g'], direct: 'e2', objects: ['X', 'B', 'C'], ...KEEP, tex: 'g \\circ \\eta_1 = \\eta_2', plain: 'g ∘ η₁ = η₂' },
       ] },
       { title: 'Through $!$', faces: [
-        { path: ['u', 'p1'], direct: 'e1', objects: ['X', 'P', 'A'], ...KEEP, tex: '\\pi_1 \\circ {!} = \\eta_1', plain: 'π₁ ∘ ! = η₁' },
-        { path: ['u', 'p2'], direct: 'e2', objects: ['X', 'P', 'B'], ...KEEP, tex: '\\pi_2 \\circ {!} = \\eta_2', plain: 'π₂ ∘ ! = η₂' },
-        { path: ['u', 'p0'], direct: 'e0', objects: ['X', 'P', 'C'], ...KEEP, tex: '\\pi_0 \\circ {!} = \\eta_0', plain: 'π₀ ∘ ! = η₀' },
+        { path: ['u', 'p0'], direct: 'e0', objects: ['X', 'P', 'A'], ...KEEP, tex: '\\pi_0 \\circ {!} = \\eta_0', plain: 'π₀ ∘ ! = η₀' },
+        { path: ['u', 'p1'], direct: 'e1', objects: ['X', 'P', 'B'], ...KEEP, tex: '\\pi_1 \\circ {!} = \\eta_1', plain: 'π₁ ∘ ! = η₁' },
+        { path: ['u', 'p2'], direct: 'e2', objects: ['X', 'P', 'C'], ...KEEP, tex: '\\pi_2 \\circ {!} = \\eta_2', plain: 'π₂ ∘ ! = η₂' },
       ] },
     ] },
     // each cone over F = (A → C ← B): its legs in blue, f and g in orange, the rest faded
     { label: 'Cones', groups: [
       { title: 'Cone $\\eta$ from $X$', faces: [
         { path: ['e0', 'e1', 'e2'], direct: ['f', 'g'], objects: ['X', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
-          tex: 'f \\circ \\eta_1 = \\eta_0 = g \\circ \\eta_2', plain: 'f ∘ η₁ = η₀ = g ∘ η₂' },
+          tex: 'f \\circ \\eta_0 = \\eta_2 = g \\circ \\eta_1', plain: 'f ∘ η₀ = η₂ = g ∘ η₁' },
       ] },
       { title: `Limit cone $\\pi$ from $${P}$`, faces: [
         { path: ['p0', 'p1', 'p2'], direct: ['f', 'g'], objects: ['P', 'A', 'B', 'C'], ...KEEP, key: CONE_KEY,
-          tex: 'f \\circ \\pi_1 = \\pi_0 = g \\circ \\pi_2', plain: 'f ∘ π₁ = π₀ = g ∘ π₂' },
+          tex: 'f \\circ \\pi_0 = \\pi_2 = g \\circ \\pi_1', plain: 'f ∘ π₀ = π₂ = g ∘ π₁' },
       ] },
     ] },
   ],
