@@ -57,3 +57,88 @@ $\Mor_{\mathscr{C}}(Z, B)$はシングルトンなので$\iexcl_B = 0_{Z,B}^{+}$
     \item 任意の$A, B \in \Ob(\mathscr{C})$に対して$D_{A,B} \colon \mathbf{2} \to \mathscr{C}$の極限$(A \times B, \pi)$が存在.
 \end{itemize}
 \end{definition}
+
+\begin{proposition} \label{prop: direct_product_and_direct_sum_of_biproduct}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \oplus B, \pi, \iota)$が\cref{def: IsBiproduct}の図式を満たし$\sum_{i \in 2} \iota_i \circ \pi_i = \id_{A \oplus B}$が成り立つことと$(A \oplus B, \pi, \iota)$が双積であることは同値である.\
+\end{proposition}
+
+\begin{proof}
+$X \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(X, A),\ g \in \Mor_{\mathscr{C}}(X, B)$とする.\
+$h \coloneq \iota_0 \circ f + \iota_1 \circ g$とすると
+\begin{align*}
+\pi_0 \circ h &= \pi_0 \circ \iota_0 \circ f + \pi_0 \circ \iota_1 \circ g \\
+	      &= \id_{A} \circ f + 0_{B, A} \circ g \\
+	      &= f + 0_{X, A} \\
+	      &= f
+\end{align*}
+となり同様に$\pi_1 \circ h = g$となる.
+
+$\pi_0 \circ h' = f$かつ$\pi_1 \circ h' = g$とすると
+\begin{align*}
+h' &= \id_{A \oplus B} \circ h' \\
+   &= (\iota_0 \circ  \pi_0 + \iota_1 \circ \pi_1) \circ h' \\
+   &= \iota_0 \circ f + \iota_1 \circ g \\
+   &= h
+\end{align*}
+となるので$(A \oplus B, \pi)$は直積である.\
+
+$X \in \Ob(\mathscr{C})$とし$f \in \Mor_{\mathscr{C}}(A, X),\ g \in \Mor_{\mathscr{C}}(B, X)$とする.\
+$h \coloneq f \circ \pi_0 + g \circ \pi_1$とすると
+\begin{align*}
+h \circ \iota_0 &= f \circ \pi_0 \circ \iota_0 + g \circ \pi_1 \circ \iota_0 \\
+		&= f \circ \id_{A} + g \circ 0_{A, B} \\
+		&= f + 0_{A, X} \\
+		&= f
+\end{align*}
+となり同様に$h \circ \iota_1 = g$となる.
+
+$h' \circ \iota_0 = f$かつ$h' \circ \iota_1 = g$とすると
+\begin{align*}
+h' &= h' \circ \id_{A \oplus B} \\
+   &= h' \circ (\iota_0 \circ \pi_0 + \iota_1 \circ \pi_1) \\
+   &= f \circ \pi_0 + g \circ \pi_1 \\
+   &= h
+\end{align*}
+となるので$(A \oplus B, \iota)$は直和である.\
+
+$(A \oplus B, \pi)$が直積で$(A \oplus B, \iota)$が直和のとき$e \coloneq \iota_0 \circ \pi_0 + \iota_1 \circ \pi_1$とすると$i \in 2$に対して$\pi_i \circ e = \pi_i$が成り立つので極限の一意性により$e = \id_{A \oplus B}$である.
+\end{proof}
+
+\begin{proposition} \label{prop: biproduct_of_direct_product}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \times B, \pi)$を直積とする.\
+このとき$\iota_0 \coloneq \langle \id_A, 0_{A, B} \rangle$とし$\iota_1 \coloneq \langle 0_{B, A}, \id_B \rangle$とすると$(A \times B, \pi, \iota)$は双積となる.
+\end{proposition}
+
+\begin{proof}
+$\langle -,- \rangle$の定義(\cref{def: directProduct})から次の図式が可換になる.
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCJCIl0sWzIsMCwiQSJdLFsyLDEsIkEgXFx0aW1lcyBCIl0sWzIsMiwiQiJdLFs0LDEsIkEiXSxbNCwyLCJcXGxhbmdsZSBcXG1hdGhybXtpZH1fQSwgMF97QSwgQn0gXFxyYW5nbGUiLDJdLFsyLDEsIlxccGlfMCJdLFs0LDEsIlxcbWF0aHJte2lkfV9BIiwyLHsiY3VydmUiOjJ9XSxbMCwyLCJcXGxhbmdsZSAwX3tCLCBBfSwgXFxtYXRocm17aWR9X0IgXFxyYW5nbGUiLDJdLFsyLDMsIlxccGlfMSJdLFswLDMsIlxcbWF0aHJte2lkfV9CIiwyLHsiY3VydmUiOjJ9XSxbMCwxLCIwX3tCLEF9IiwwLHsiY3VydmUiOi0yfV0sWzQsMywiMF97QSxCfSIsMCx7ImN1cnZlIjotMn1dXQ==
+\[\begin{tikzcd}
+	&& A && \\
+	B && {A \times B} && A \\
+	&& B
+	\arrow["{0_{B,A}}", curve={height=-12pt}, from=2-1, to=1-3]
+	\arrow["{\langle 0_{B, A}, \mathrm{id}_B \rangle}"', from=2-1, to=2-3]
+	\arrow["{\mathrm{id}_B}"', curve={height=12pt}, from=2-1, to=3-3]
+	\arrow["{\pi_0}", from=2-3, to=1-3]
+	\arrow["{\pi_1}", from=2-3, to=3-3]
+	\arrow["{\mathrm{id}_A}"', curve={height=12pt}, from=2-5, to=1-3]
+	\arrow["{\langle \mathrm{id}_A, 0_{A, B} \rangle}"', from=2-5, to=2-3]
+	\arrow["{0_{A,B}}", curve={height=-12pt}, from=2-5, to=3-3]
+\end{tikzcd}\]
+
+$e \coloneq \iota_0 \circ \pi_0 + \iota_1 \circ \pi_1$とする.\
+$\pi_0 \circ e = \pi_0 \circ \iota_0 \circ \pi_0 + \pi_0 \circ \iota_1 \circ \pi_1 = \pi_0$であり同様に$\pi_1 \circ e = \pi_1$となる.\
+$\pi_0 \circ \id_{A \times B} = \pi_0$かつ$\pi_1 \circ \id_{A \times B} = \pi_1$なので一意性から$e = \id_{A \times B}$である.
+\end{proof}
+
+\begin{proposition} \label{prop: biproduct_of_direct_sum}
+$\mathscr{C}$を前加法圏とし$A, B \in \Ob(\mathscr{C})$とする.\
+$(A \amalg B, \iota)$を直和する.\
+このとき$\pi_0 \coloneq \lbrack \id_A, 0_{A, B} \rbrack$とし$\pi_1 \coloneq \lbrack 0_{B, A}, \id_B \rbrack$とすると$(A \amalg B, \pi, \iota)$は双積となる.
+\end{proposition}
+
+\begin{proof}
+\cref{prop: biproduct_of_direct_product}の双対である.
+\end{proof}

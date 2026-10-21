@@ -19,7 +19,7 @@ $\mathscr{C}$を圏とし$f \in \Mor(\mathscr{C})$とする.\
 \end{center}
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: mono_and_epi_of_iso}
 $\mathscr{C}$を圏とし$f \in \Mor_{\mathscr{C}}(A, B)$を同型射とすると$f$はモノ射かつエピ射である.\
 \end{proposition}
 
@@ -33,14 +33,14 @@ $g \circ f = h \circ f$と仮定する.\
 $g = g \circ f \circ f^{-1} = h \circ f \circ f^{-1} = h$であるから$f$はエピ射である.\
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: IsRetractionSectionPair}
 $\mathscr{C}$を圏とし$A,B \in \Ob(\mathscr{C})$とする.\
 $s \in \Mor(A, B),\ r \in \Mor_{\mathscr{C}}(B, A)$とする.\
 $r \circ s = \id_{A}$であるとき組$(r,s)$を\term{れとらくしょんせくしょんぺあ}{レトラクションセクションペア}{retraction-section pair}とよぶ.\
 またこのとき$r$を\term{れとらくしょん}{レトラクション}{retraction}もしくは\term{ぶんれつえぴしゃ}{分裂エピ射}{split epimorphism}と呼び$s$を\term{せくしょん}{セクション}{section}もしくは\term{ぶんれつものしゃ}{分裂モノ射}{split monomorphism}と呼ぶ.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: epi_and_mono_of_retraction_section_pair}
 $\mathscr{C}$を圏とし$A,B \in \Ob(\mathscr{C})$とする.\
 $s \in \Mor(A, B),\ r \in \Mor(B, A)$とし$(r,s)$をレトラクションセクションペアとする.\
 このとき$r$はエピ射であり$s$はモノ射である.
@@ -56,7 +56,7 @@ $f \circ r = g \circ r$と仮定する.\
 $f = f \circ \id_A = f \circ r \circ s = g \circ r \circ s = g \circ \id_A = g$なので$r$はエピ射である.\
 \end{proof}
 
-\begin{proposition}
+\begin{proposition} \label{prop: factorization_unique_of_mono}
 $\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
 $m \in \Mor(B, C)$をモノ射とし$f \in \Mor(A, C)$とする.\
 このとき$m \circ g = f$を満たす$g \in \Mor_{\mathscr{C}}(A,B)$は存在するならば一意的である.\
@@ -67,7 +67,7 @@ $g,g' \in \Mor_{\mathscr{C}}(A, B)$が$m \circ g = f$と$m \circ g' = f$を満�
 $m \circ g = f = m \circ g'$であり$m$はモノ射なので$g = g'$である.\
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: monoFactor}
 $\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
 $m \in \Mor(B, C)$をモノ射とし$f \in \Mor(A, C)$とする.\
 $m \circ g = f$を満たす$g \in \Mor_{\mathscr{C}}(A, B)$が存在するとき$g$を$m \backslash f$と書く.\ つまり次の式が成り立つ.\
@@ -76,7 +76,7 @@ $m \circ m \backslash f = f$
 \end{center}
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: factorization_unique_of_epi}
 $\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
 $e \in \Mor(A, B)$をエピ射とし$f \in \Mor(A, C)$とする.\
 このとき$h \circ e = f$を満たす$h \in \Mor_{\mathscr{C}}(B,C)$は存在するならば一意的である.\
@@ -87,7 +87,7 @@ $h,h' \in \Mor_{\mathscr{C}}(B,C)$が$h \circ e = f$と$h' \circ e = f$を満た
 $h \circ e = f = h' \circ e$であり$e$はエピ射なので$h = h'$である.\
 \end{proof}
 
-\begin{definition}
+\begin{definition} \label{def: epiFactor}
 $\mathscr{C}$を圏とし$A,B,C \in \Ob(\mathscr{C})$とする.\
 $e \in \Mor(A, B)$をエピ射とし$f \in \Mor(A, C)$とする.\
 $h \circ e = f$を満たす$h \in \Mor_{\mathscr{C}}(B, C)$が存在するとき$h$を$f / e$と書く.\ つまり次の式が成り立つ.\

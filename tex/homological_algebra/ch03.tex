@@ -3,7 +3,7 @@
 
 \section{ファイバー積とファイバー和}
 
-\begin{definition}
+\begin{definition} \label{def: WalkingCospanCategory}
 圏$\bigstar_2$を次のようにして定める.\
 \begin{itemize}
 	\item $\Ob(\bigstar_2) \coloneq 3$
@@ -21,7 +21,7 @@
 \end{tikzcd}\]
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: pullback}
 $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\mathscr{C}}(A, C),\ g \in \Mor_{\mathscr{C}}(B, C)$とする.\
 共変関手$F \colon \bigstar_2 \to \mathscr{C}$を次のように定める.\
 \begin{itemize}
@@ -49,7 +49,7 @@ $f \pb g$を$A \times_C B$と書くこともある.\
 \Interactive{pullback}
 \end{definition}
 
-\begin{definition}
+\begin{definition} \label{def: pushout}
 $\mathscr{C}$を局所小圏とし$A, B, C \in \Ob(\mathscr{C}),\ f \in \Mor_{\mathscr{C}}(C, A),\ g \in \Mor_{\mathscr{C}}(C, B)$とする.\
 共変関手$F \colon \bigstar_2^{\op} \to \mathscr{C}$を次のように定める.\
 \begin{itemize}
