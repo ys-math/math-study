@@ -14,13 +14,13 @@ English | [日本語](./README.ja.md)
 
 <!-- BEGIN TEXT METER -->
 ```
-category_theory          █████████▎░░░░░░░░░░   46.2%   71,438
-homological_algebra      ██████▍░░░░░░░░░░░░░   31.6%   48,935
-algebraic_k_theory       ██▎░░░░░░░░░░░░░░░░░   11.5%   17,748
+category_theory          █████████▍░░░░░░░░░░   46.6%   71,438
+homological_algebra      ██████▎░░░░░░░░░░░░░   31.1%   47,616
+algebraic_k_theory       ██▍░░░░░░░░░░░░░░░░░   11.6%   17,748
 lambda_calculus          █▍░░░░░░░░░░░░░░░░░░    6.6%   10,191
 commutative_ring_theory  ▉░░░░░░░░░░░░░░░░░░░    4.1%    6,325
                                                        -------
-total                                                  154,637
+total                                                  153,318
 ```
 <!-- END TEXT METER -->
 
