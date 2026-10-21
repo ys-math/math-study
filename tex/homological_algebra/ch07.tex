@@ -14,7 +14,7 @@
 \end{itemize}
 \end{definition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: iso_of_mono_of_epi}
 $\mathcal{A}$をアーベル圏とし$f \in \Mor_{\mathcal{A}}(A,B)$とする.\
 $f$がモノ射かつエピ射であるとき$f$は同型射となる.\
 \end{proposition}
@@ -27,98 +27,27 @@ $f \circ g \circ f = \id_B \circ f = f = f \circ \id_A$であり$f$はモノ射�
 よって$f$は同型射である.\
 \end{proof}
 
-\begin{remark}
-以下断らない限りアーベル圏は局所的に小さいことを仮定する.
+\begin{corollary} \label{cor: iso_iff_mono_and_epi}
+$\mathcal{A}$をアーベル圏とし$f \in \Mor_{\mathcal{A}}(A,B)$とする.\
+$f$がモノ射かつエピ射であることと$f$が同型射であることは同値である.\
+\end{corollary}
+
+\begin{proof}
+\cref{prop: mono_and_epi_of_iso}と\cref{prop: iso_of_mono_of_epi}による.\
+\end{proof}
+
+\begin{remark} \label{rem: abelian_locally_small}
+以下断らない限りアーベル圏は局所的に小さいことを仮定する.\
 \end{remark}
 
-\begin{proposition}
+\begin{proposition} \label{prop: image_iso_of_mono}
 $\mathcal{A}$をアーベル圏とし$f \in \Mor_{\mathcal{A}}(A, B)$をモノ射とする.\
 このとき$(A, f) \simeq (\Ker(\coker(f)), \ker(\coker(f)) = (\Im(f), \im(f))$である.\
 \end{proposition}
 
-\begin{proposition}
+\begin{proposition} \label{prop: Abelian.biproduct_of_direct_product}
 $\mathcal{A}$をアーベル圏とし$A, B \in \Ob(\mathcal{A})$とする.\
 $(A \times B, \pi)$を直積とする.
 $\iota_0 \coloneq \begin{pmatrix} \id_A \\ 0_{A,B} \end{pmatrix},\ \iota_1 \coloneq \begin{pmatrix} 0_{B,A} \\ \id_B \end{pmatrix}$とすると$(A \times B, \pi, \iota)$は双積になる.
 \end{proposition}
 
-\begin{proof}
-$\pi_0 \circ \iota_0 = \id_A$なので$(\pi_0, \iota_0)$はレトラクションセクションペアである.\
-$X \in \Ob(\mathcal{A})$として$f \in \Mor_{\mathcal{A}}(X, A \times B)$とする.\
-$\pi_1 \circ f = 0_{A,B}$であると仮定する.\
-$\iota_0 \circ u = f$となる$u \in \Mor_{\mathcal{A}}(X, A)$が存在したとすると$\pi_0 \circ f = u$である.\
-そこで$u \coloneq \pi_0 \circ f$とすると$\pi_0 \circ (\iota_0 \circ u) = u = \pi_0 \circ f$であり$\pi_1 \circ (\iota_0 \circ u) = 0_{A,B} \circ u = 0_{A,B} = \pi_1 \circ f$である.\
-したがって直積の普遍性により$\iota_0 \circ u = f$である.\
-よって次の図式が可換になり$\Ker(\pi_1) = A,\ \ker(\pi_1) = \iota_0$である.\
-% https://q.uiver.app/#q=WzAsNCxbMSwwLCJYIl0sWzAsMiwiQSBcXHRpbWVzIEIiXSxbMiwyLCJCIl0sWzEsMSwiQSJdLFswLDEsImYiLDIseyJjdXJ2ZSI6Mn1dLFsxLDIsIlxccGlfMSIsMl0sWzAsMiwiMF97WCxCfSIsMCx7ImN1cnZlIjotMn1dLFswLDMsIlxccGlfMCBcXGNpcmMgZiIsMV0sWzMsMSwiXFxpb3RhXzAiLDJdLFszLDIsIjBfe0EsQn0iLDFdXQ==
-\[\begin{tikzcd}
-	& X & \\
-	& A \\
-	{A \times B} && B
-	\arrow["{\pi_0 \circ f}"{description}, from=1-2, to=2-2]
-	\arrow["f"', curve={height=12pt}, from=1-2, to=3-1]
-	\arrow["{0_{X,B}}", curve={height=-12pt}, from=1-2, to=3-3]
-	\arrow["{\iota_0}"', from=2-2, to=3-1]
-	\arrow["{0_{A,B}}"{description}, from=2-2, to=3-3]
-	\arrow["{\pi_1}"', from=3-1, to=3-3]
-\end{tikzcd}\]
-同様に$\Ker(\pi_0) = B,\ \ker(\pi_0) = \iota_1$である.\
-
-$\pi_1$は$レトラクション$であるからエピ射である.\
-よってある$Y \in \Ob(\mathcal{A})$と$g \in \Mor_{\mathcal{A}}(Y, A \times B)$が存在して$\pi_1 = \coker(g)$となる.\
-$X \in \Ob(\mathcal{A})$とし$f \in \Mor_{\mathcal{A}}(A \times B, X)$が$f \circ \iota_0 = 0_{A,X}$を満たすとする.\
-$\pi_1 = \coker(g)$なので$\pi_1 \circ g = 0_{Y,B}$である.\
-よって核の普遍性により$g = \iota_0 \circ v$となる$v \colon Y \to A$がただ1つ存在する.\
-$f \circ \iota_0 = 0_{A,X}$なので$f \circ g = f \circ \iota_0 \circ v = 0_{A,X} \circ v = 0_{Y,X}$となる.\
-したがって$\pi_1 = \coker(g)$なので余核の普遍性により$f = \pi_1 \circ u$となる$u \colon B \to X$がただ1つ存在する.\
-ゆえに$\pi_1 = \coker(\iota_0)$である.\
-同様に$\pi_0 = \coker(\iota_1)$となる.\
-
-\end{proof}
-
-\begin{proposition}
-アーベル圏は加法圏である.
-\end{proposition}
-
-\begin{proof}
-$\mathcal{A}$を局所的に小さいアーベル圏とする.\
-任意の$A,B \in \Ob(\mathcal{A})$に対して$\Mor_{\mathcal{A}}(A,B)$がアーベル群となることを示す.\
-$(A \oplus A, \pi^A, \iota^A)$と$(B \oplus B, \pi^B, \iota^B)$をそれぞれ双積とする.\
-$f,g \in \Mor_{\mathcal{A}}(A,B)$に対して$f + g \coloneq \begin{pmatrix} \id_B & \id_B \end{pmatrix} \circ (f \oplus g) \circ \begin{pmatrix} \id_A \\ \id_A \end{pmatrix}$とする.\
-
-\begin{center}
-\begin{tikzpicture}[
-    commutative diagrams/every diagram,
-    x={(1cm,0cm)}, y={(0.7cm,0.5cm)}, z={(0cm,1cm)}
-  ]
-  % vertices
-  \node (BB) at (0,0,4.6)   {$B \oplus B$};
-  \node (BL) at (-5,0,0)    {$B$};
-  \node (BR) at (5,0,0)     {$B$};
-  \node (A0) at (0,-3.6,0)  {$A$};
-  \node (A1) at (0,3.6,0)   {$A$};
-  \node (AA) at (0,0,0)     {$A \oplus A$};
- 
-  \path[commutative diagrams/.cd, every arrow, every label]
-    % back corner of the base (drawn first: it passes behind the axis)
-    (A1) edge node[swap,pos=.75] {$0_{A,B}$} (BL)
-    (A1) edge node[swap,pos=.6] {$0_{A,B}$} (BR)
-    (A1) edge node[swap,pos=.5] {$\iota_1^A$} (AA)
-    % vertical axis
-    (AA) edge[commutative diagrams/crossing over]
-      node[commutative diagrams/description, pos=.50, font=\footnotesize]
-      {$\begin{pmatrix} \begin{pmatrix} f & 0_{A,B} \end{pmatrix} \\
-                        \begin{pmatrix} 0_{A,B} & 0_{A,B} \end{pmatrix} \end{pmatrix}$} (BB)
-    % product cone
-    (BB) edge node[swap] {$\pi_0^B$} (BL)
-    (BB) edge node {$\pi_1^B$} (BR)
-    % mediating maps out of the centre (labels on the near side of the base)
-    (AA) edge node[pos=.55] {$\begin{pmatrix} f & 0_{A,B} \end{pmatrix}$} (BL)
-    (AA) edge node[pos=.3] {$\begin{pmatrix} 0_{A,B} & 0_{A,B} \end{pmatrix}$} (BR)
-    % front corner of the base (labels on the outside)
-    (A0) edge node {$f$} (BL)
-    (A0) edge node[swap] {$0_{A,B}$} (BR)
-    (A0) edge node[swap,pos=.5] {$\iota_0^A$} (AA);
-\end{tikzpicture}
-\end{center}
-\end{proof}
